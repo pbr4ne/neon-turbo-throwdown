@@ -1,10 +1,8 @@
-import Ball from "../prefabs/Ball";
-
-
 /* START OF COMPILED CODE */
 
 import Phaser from "phaser";
 import UILayerPrefab from "../prefabs/UILayerPrefab";
+import Player from "../prefabs/Player";
 import GameplayScript from "../script-nodes/gameplay/GameplayScript";
 import TextureInfoScript from "../script-nodes/gameplay/TextureInfoScript";
 /* START-USER-IMPORTS */
@@ -42,17 +40,38 @@ export default class Level extends Phaser.Scene {
 		const uiLayer = new UILayerPrefab(this, 0, 0);
 		this.add.existing(uiLayer);
 
+		// player1
+		const player1 = new Player(this, 720, 459, "player1");
+		this.add.existing(player1);
+
+		// player2
+		const player2 = new Player(this, 950, 583, "player2");
+		this.add.existing(player2);
+
+		// player3
+		const player3 = new Player(this, 1211, 453, "player3");
+		this.add.existing(player3);
+
 		// gameplayScript
 		const gameplayScript = new GameplayScript(this);
 
-		// cyan
-		const cyan = new TextureInfoScript(gameplayScript.textures);
+		// yellow
 		const yellow = new TextureInfoScript(gameplayScript.textures);
-		const magenta = new TextureInfoScript(gameplayScript.textures);
 
-		cyan.texture = {"key":"ball-cyan"};
-		yellow.texture = {"key":"ball-yellow"};
-		magenta.texture = {"key":"ball-magenta"};
+		// orange
+		const orange = new TextureInfoScript(gameplayScript.textures);
+
+		// green
+		const green = new TextureInfoScript(gameplayScript.textures);
+
+		// yellow (prefab fields)
+		yellow.texture = {"key":"ball-cyan"};
+
+		// orange (prefab fields)
+		orange.texture = {"key":"ball-yellow"};
+
+		// green (prefab fields)
+		green.texture = {"key":"ball-magenta"};
 
 		this.events.emit("scene-awake");
 	}
@@ -62,7 +81,6 @@ export default class Level extends Phaser.Scene {
 	public id = 0;
 
 	create() {
-
 		this.id++;
 		this.editorCreate();
 	}

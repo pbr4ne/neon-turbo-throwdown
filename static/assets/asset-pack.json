@@ -2,77 +2,6 @@
     "section1": {
         "files": [
             {
-                "url": [
-                    "assets/audio/ball.mp3"
-                ],
-                "type": "audio",
-                "key": "ball"
-            },
-            {
-                "atlasURL": "assets/atlas/texture.json",
-                "textureURL": "assets/atlas/texture.png",
-                "type": "atlas",
-                "key": "buttons"
-            },
-            {
-                "url": "assets/images/welcome/item4.png",
-                "type": "image",
-                "key": "item4"
-            },
-            {
-                "url": "assets/images/welcome/decor.png",
-                "type": "image",
-                "key": "decor"
-            },
-            {
-                "textureURL": "assets/fonts/turbo.png",
-                "fontDataURL": "assets/fonts/turbo.xml",
-                "type": "bitmapFont",
-                "key": "turbo"
-            },
-            {
-                "url": "assets/images/welcome/item5.png",
-                "type": "image",
-                "key": "item5"
-            },
-            {
-                "url": "assets/images/welcome/item3.png",
-                "type": "image",
-                "key": "item3"
-            },
-            {
-                "url": [
-                    "assets/audio/neon-turbo-throwdown.mp3"
-                ],
-                "type": "audio",
-                "key": "music"
-            },
-            {
-                "url": "assets/images/welcome/item2.png",
-                "type": "image",
-                "key": "item2"
-            },
-            {
-                "url": "assets/images/welcome/item1.png",
-                "type": "image",
-                "key": "item1"
-            },
-            {
-                "url": "assets/images/items/ball-magenta.png",
-                "type": "image",
-                "key": "ball-magenta"
-            },
-            {
-                "url": "assets/images/items/ball-yellow.png",
-                "type": "image",
-                "key": "ball-yellow"
-            },
-            {
-                "url": "assets/images/items/ball-cyan.png",
-                "type": "image",
-                "key": "ball-cyan"
-            },
-            {
                 "url": "assets/images/level/background-1.png",
                 "type": "image",
                 "key": "background-1"
@@ -108,6 +37,76 @@
                 "key": "background-8"
             },
             {
+                "url": [
+                    "assets/audio/ball.mp3"
+                ],
+                "type": "audio",
+                "key": "ball"
+            },
+            {
+                "url": "assets/images/items/ball-cyan.png",
+                "type": "image",
+                "key": "ball-cyan"
+            },
+            {
+                "url": "assets/images/items/ball-magenta.png",
+                "type": "image",
+                "key": "ball-magenta"
+            },
+            {
+                "url": "assets/images/items/ball-yellow.png",
+                "type": "image",
+                "key": "ball-yellow"
+            },
+            {
+                "atlasURL": "assets/atlas/texture.json",
+                "textureURL": "assets/atlas/texture.png",
+                "type": "atlas",
+                "key": "buttons"
+            },
+            {
+                "url": "assets/images/cards/cardFront.png",
+                "type": "image",
+                "key": "cardFront"
+            },
+            {
+                "url": "assets/images/welcome/decor.png",
+                "type": "image",
+                "key": "decor"
+            },
+            {
+                "url": "assets/images/welcome/item1.png",
+                "type": "image",
+                "key": "item1"
+            },
+            {
+                "url": "assets/images/welcome/item2.png",
+                "type": "image",
+                "key": "item2"
+            },
+            {
+                "url": "assets/images/welcome/item3.png",
+                "type": "image",
+                "key": "item3"
+            },
+            {
+                "url": "assets/images/welcome/item4.png",
+                "type": "image",
+                "key": "item4"
+            },
+            {
+                "url": "assets/images/welcome/item5.png",
+                "type": "image",
+                "key": "item5"
+            },
+            {
+                "url": [
+                    "assets/audio/neon-turbo-throwdown.mp3"
+                ],
+                "type": "audio",
+                "key": "music"
+            },
+            {
                 "url": "assets/images/players/player1.png",
                 "type": "image",
                 "key": "player1"
@@ -116,12 +115,17 @@
                 "url": "assets/images/players/player2.png",
                 "type": "image",
                 "key": "player2"
-            }
-            ,
+            },
             {
                 "url": "assets/images/players/player3.png",
                 "type": "image",
                 "key": "player3"
+            },
+            {
+                "textureURL": "assets/fonts/turbo.png",
+                "fontDataURL": "assets/fonts/turbo.xml",
+                "type": "bitmapFont",
+                "key": "turbo"
             }
         ]
     },
