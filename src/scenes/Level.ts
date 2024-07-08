@@ -6,6 +6,8 @@ import Player from "../prefabs/Player";
 import Card from "../prefabs/Card";
 import GameplayScript from "../script-nodes/gameplay/GameplayScript";
 import TextureInfoScript from "../script-nodes/gameplay/TextureInfoScript";
+import Deck from "../prefabs/Deck";
+import Hand from "../prefabs/Hand";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -53,26 +55,6 @@ export default class Level extends Phaser.Scene {
 		const player3 = new Player(this, 1211, 453);
 		this.add.existing(player3);
 
-		// card
-		const card = new Card(this, 652, 923);
-		this.add.existing(card);
-
-		// card_1
-		const card_1 = new Card(this, 791, 896);
-		this.add.existing(card_1);
-
-		// card_2
-		const card_2 = new Card(this, 931, 919);
-		this.add.existing(card_2);
-
-		// card_3
-		const card_3 = new Card(this, 1070, 897);
-		this.add.existing(card_3);
-
-		// card_4
-		const card_4 = new Card(this, 1216, 923);
-		this.add.existing(card_4);
-
 		// gameplayScript
 		const gameplayScript = new GameplayScript(this);
 
@@ -100,10 +82,32 @@ export default class Level extends Phaser.Scene {
 	/* START-USER-CODE */
 
 	public id = 0;
+	private myDeck: Deck | undefined;
+    private myHand: Hand | undefined;
+    private enemyDeck: Deck | undefined;
+    private enemyHand: Hand | undefined;
+
+	preload() {
+        this.load.image("cardFront", "path/to/cardFront.png");
+    }
 
 	create() {
 		this.id++;
 		this.editorCreate();
+
+		this.myDeck = new Deck(this);
+        this.myHand = new Hand(this);
+        this.enemyDeck = new Deck(this);
+        this.enemyHand = new Hand(this);
+
+        this.myDeck.createDeck();
+        this.enemyDeck.createDeck();
+
+        this.myHand.drawHand(this.myDeck, 5);
+        //this.enemyHand.drawHand(this.enemyDeck, 5);
+
+		this.myDeck.drawDeck(100, 900); 
+        //this.enemyDeck.drawDeck(1500, 100);
 	}
 
 	/* END-USER-CODE */
