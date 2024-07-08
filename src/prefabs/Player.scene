@@ -15,9 +15,9 @@
         {
             "type": "Image",
             "id": "63e9c851-2b1f-4468-b68c-6fc61e70a08e",
-            "label": "player1",
+            "label": "player1a",
             "texture": {
-                "key": "player1"
+                "key": "player1a"
             },
             "x": 529,
             "y": 232

@@ -68,7 +68,10 @@
                 "x",
                 "y"
             ],
-            "label": "player1",
+            "label": "player1a",
+            "texture": {
+                "key": "player1a"
+            },
             "x": 720,
             "y": 459
         },
@@ -80,9 +83,9 @@
                 "y",
                 "texture"
             ],
-            "label": "player2",
+            "label": "player2a",
             "texture": {
-                "key": "player2"
+                "key": "player2a"
             },
             "x": 950,
             "y": 583
@@ -95,9 +98,9 @@
                 "y",
                 "texture"
             ],
-            "label": "player3",
+            "label": "player3a",
             "texture": {
-                "key": "player3"
+                "key": "player3a"
             },
             "x": 1211,
             "y": 453

@@ -43,15 +43,15 @@ export default class Game extends Phaser.Scene {
 		this.add.existing(uiLayer);
 
 		// player1
-		const player1 = new Player(this, 720, 459);
+		const player1 = new Player(this, 720, 459, "player1a");
 		this.add.existing(player1);
 
 		// player2
-		const player2 = new Player(this, 950, 583, "player2");
+		const player2 = new Player(this, 950, 583, "player2a");
 		this.add.existing(player2);
 
 		// player3
-		const player3 = new Player(this, 1211, 453, "player3");
+		const player3 = new Player(this, 1211, 453, "player3a");
 		this.add.existing(player3);
 
 		// gameplayScript

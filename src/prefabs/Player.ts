@@ -10,7 +10,7 @@ import Phaser from "phaser";
 export default class Player extends Phaser.GameObjects.Image {
 
 	constructor(scene: Phaser.Scene, x?: number, y?: number, texture?: string, frame?: number | string) {
-		super(scene, x ?? 529, y ?? 232, texture || "player1", frame);
+		super(scene, x ?? 529, y ?? 232, texture || "player1a", frame);
 
 		/* START-USER-CTR-CODE */
 		// Write your code here.

@@ -27,6 +27,11 @@
                 "key": "background-5"
             },
             {
+                "url": "assets/images/level/background-6.png",
+                "type": "image",
+                "key": "background-6"
+            },
+            {
                 "url": "assets/images/level/background-7.png",
                 "type": "image",
                 "key": "background-7"
@@ -112,19 +117,49 @@
                 "key": "music"
             },
             {
-                "url": "assets/images/players/player1.png",
+                "url": "assets/images/players/player1a.png",
                 "type": "image",
-                "key": "player1"
+                "key": "player1a"
             },
             {
-                "url": "assets/images/players/player2.png",
+                "url": "assets/images/players/player1b.png",
                 "type": "image",
-                "key": "player2"
+                "key": "player1b"
             },
             {
-                "url": "assets/images/players/player3.png",
+                "url": "assets/images/players/player1c.png",
                 "type": "image",
-                "key": "player3"
+                "key": "player1c"
+            },
+            {
+                "url": "assets/images/players/player2a.png",
+                "type": "image",
+                "key": "player2a"
+            },
+            {
+                "url": "assets/images/players/player2b.png",
+                "type": "image",
+                "key": "player2b"
+            },
+            {
+                "url": "assets/images/players/player2c.png",
+                "type": "image",
+                "key": "player2c"
+            },
+            {
+                "url": "assets/images/players/player3a.png",
+                "type": "image",
+                "key": "player3a"
+            },
+            {
+                "url": "assets/images/players/player3b.png",
+                "type": "image",
+                "key": "player3b"
+            },
+            {
+                "url": "assets/images/players/player3c.png",
+                "type": "image",
+                "key": "player3c"
             },
             {
                 "textureURL": "assets/fonts/turbo.png",
