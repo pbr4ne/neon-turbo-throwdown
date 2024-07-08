@@ -38,20 +38,6 @@ export default class Level extends Phaser.Scene {
 		const background_5 = this.add.image(0, 0, "background-5");
 		background_5.setOrigin(0, 0);
 
-		// background_7
-		const background_7 = this.add.image(0, 0, "background-7");
-		background_7.setOrigin(0, 0);
-
-		// background_8
-		const background_8 = this.add.image(0, 0, "background-8");
-		background_8.setOrigin(0, 0);
-
-		// background_4
-		const background_4 = this.add.image(0, 0, "background-4");
-		background_4.setOrigin(0, 0);
-		background_4.alphaBottomLeft = 0;
-		background_4.alphaBottomRight = 0;
-
 		// uiLayer
 		const uiLayer = new UILayerPrefab(this, 0, 0);
 		this.add.existing(uiLayer);
@@ -61,20 +47,11 @@ export default class Level extends Phaser.Scene {
 
 		// cyan
 		const cyan = new TextureInfoScript(gameplayScript.textures);
-
-		// yellow
 		const yellow = new TextureInfoScript(gameplayScript.textures);
-
-		// magenta
 		const magenta = new TextureInfoScript(gameplayScript.textures);
 
-		// cyan (prefab fields)
 		cyan.texture = {"key":"ball-cyan"};
-
-		// yellow (prefab fields)
 		yellow.texture = {"key":"ball-yellow"};
-
-		// magenta (prefab fields)
 		magenta.texture = {"key":"ball-magenta"};
 
 		this.events.emit("scene-awake");

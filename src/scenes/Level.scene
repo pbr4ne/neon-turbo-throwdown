@@ -53,38 +53,6 @@
             "originY": 0
         },
         {
-            "type": "Image",
-            "id": "47942e6e-432d-493e-b853-9e767d5f2c41",
-            "label": "background_7",
-            "texture": {
-                "key": "background-7"
-            },
-            "originX": 0,
-            "originY": 0
-        },
-        {
-            "type": "Image",
-            "id": "22345ce7-0cd7-4d42-b560-d290854b638b",
-            "label": "background_8",
-            "texture": {
-                "key": "background-8"
-            },
-            "originX": 0,
-            "originY": 0
-        },
-        {
-            "type": "Image",
-            "id": "1a6b6d3a-db8a-4589-b37a-5e35160c85b8",
-            "label": "background_4",
-            "texture": {
-                "key": "background-4"
-            },
-            "originX": 0,
-            "originY": 0,
-            "alphaBottomLeft": 0,
-            "alphaBottomRight": 0
-        },
-        {
             "prefabId": "41c20759-6986-420d-b99c-44f4d40b476c",
             "id": "642662fe-e52a-4881-abe5-0b8c437c53fa",
             "unlock": [
