@@ -1,0 +1,119 @@
+{
+    "section1": {
+        "files": [
+            {
+                "url": [
+                    "assets/audio/ball.mp3"
+                ],
+                "type": "audio",
+                "key": "ball"
+            },
+            {
+                "atlasURL": "assets/atlas/texture.json",
+                "textureURL": "assets/atlas/texture.png",
+                "type": "atlas",
+                "key": "buttons"
+            },
+            {
+                "url": "assets/images/welcome/item4.png",
+                "type": "image",
+                "key": "item4"
+            },
+            {
+                "url": "assets/images/welcome/decor.png",
+                "type": "image",
+                "key": "decor"
+            },
+            {
+                "textureURL": "assets/fonts/turbo.png",
+                "fontDataURL": "assets/fonts/turbo.xml",
+                "type": "bitmapFont",
+                "key": "turbo"
+            },
+            {
+                "url": "assets/images/welcome/item5.png",
+                "type": "image",
+                "key": "item5"
+            },
+            {
+                "url": "assets/images/welcome/item3.png",
+                "type": "image",
+                "key": "item3"
+            },
+            {
+                "url": [
+                    "assets/audio/neon-turbo-throwdown.mp3"
+                ],
+                "type": "audio",
+                "key": "music"
+            },
+            {
+                "url": "assets/images/welcome/item2.png",
+                "type": "image",
+                "key": "item2"
+            },
+            {
+                "url": "assets/images/welcome/item1.png",
+                "type": "image",
+                "key": "item1"
+            },
+            {
+                "url": "assets/images/items/ball-magenta.png",
+                "type": "image",
+                "key": "ball-magenta"
+            },
+            {
+                "url": "assets/images/items/ball-yellow.png",
+                "type": "image",
+                "key": "ball-yellow"
+            },
+            {
+                "url": "assets/images/items/ball-cyan.png",
+                "type": "image",
+                "key": "ball-cyan"
+            },
+            {
+                "url": "assets/images/level/background-1.png",
+                "type": "image",
+                "key": "background-1"
+            },
+            {
+                "url": "assets/images/level/background-2.png",
+                "type": "image",
+                "key": "background-2"
+            },
+            {
+                "url": "assets/images/level/background-3.png",
+                "type": "image",
+                "key": "background-3"
+            },
+            {
+                "url": "assets/images/level/background-4.png",
+                "type": "image",
+                "key": "background-4"
+            },
+            {
+                "url": "assets/images/level/background-5.png",
+                "type": "image",
+                "key": "background-5"
+            },
+            {
+                "url": "assets/images/level/background-7.png",
+                "type": "image",
+                "key": "background-7"
+            },
+            {
+                "url": "assets/images/level/background-8.png",
+                "type": "image",
+                "key": "background-8"
+            }
+        ]
+    },
+    "meta": {
+        "app": "Phaser Editor 2D - Asset Pack Editor",
+        "contentType": "phasereditor2d.pack.core.AssetContentType",
+        "url": "https://phasereditor2d.com",
+        "version": 2,
+        "showAllFilesInBlocks": false
+    }
+}

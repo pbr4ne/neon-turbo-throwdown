@@ -1,0 +1,145 @@
+{
+    "id": "d474bbbd-5959-4a77-9dc0-a5b8fa4a11fe",
+    "sceneType": "SCENE",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "preloadPackFiles": [],
+        "createMethodName": "editorCreate",
+        "sceneKey": "Level",
+        "compilerOutputLanguage": "TYPE_SCRIPT",
+        "borderWidth": 1920,
+        "borderHeight": 1080
+    },
+    "displayList": [
+        {
+            "type": "Image",
+            "id": "470ec990-0468-4835-89bc-cd0c3e622257",
+            "label": "background_1",
+            "texture": {
+                "key": "background-1"
+            },
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "7c94cb2a-50bf-404d-96f7-6fe1a8f2e70a",
+            "label": "background_2",
+            "texture": {
+                "key": "background-2"
+            },
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "7553619d-b7ca-4eee-9e71-74e85daca863",
+            "label": "background_3",
+            "texture": {
+                "key": "background-3"
+            },
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "80900b16-af4f-4b7c-899b-d2e20e295fb6",
+            "label": "background_5",
+            "texture": {
+                "key": "background-5"
+            },
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "47942e6e-432d-493e-b853-9e767d5f2c41",
+            "label": "background_7",
+            "texture": {
+                "key": "background-7"
+            },
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "22345ce7-0cd7-4d42-b560-d290854b638b",
+            "label": "background_8",
+            "texture": {
+                "key": "background-8"
+            },
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "1a6b6d3a-db8a-4589-b37a-5e35160c85b8",
+            "label": "background_4",
+            "texture": {
+                "key": "background-4"
+            },
+            "originX": 0,
+            "originY": 0,
+            "alphaBottomLeft": 0,
+            "alphaBottomRight": 0
+        },
+        {
+            "prefabId": "41c20759-6986-420d-b99c-44f4d40b476c",
+            "id": "642662fe-e52a-4881-abe5-0b8c437c53fa",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "uiLayer"
+        },
+        {
+            "prefabId": "d8801a27-29ff-4774-a8a6-1f4e9b14d6cc",
+            "id": "789d2f54-a153-406e-a5e6-cf5e700681e3",
+            "label": "gameplayScript",
+            "nestedPrefabs": [
+                {
+                    "prefabId": "6d1b76e2-9d92-41b8-a055-a3c984f170d9",
+                    "id": "97bff27a-2f63-4ba9-90b9-dbf5b2cb870c",
+                    "label": "textures",
+                    "list": [
+                        {
+                            "prefabId": "d220abfa-d1cb-4c05-9ac3-e95aa746651b",
+                            "id": "c876249a-a4e4-4f80-8aa2-944104907523",
+                            "unlock": [
+                                "texture"
+                            ],
+                            "label": "yellow",
+                            "texture": "{\"key\":\"ball-cyan\"}"
+                        },
+                        {
+                            "prefabId": "d220abfa-d1cb-4c05-9ac3-e95aa746651b",
+                            "id": "af1f0b0e-d90e-4c97-b4a5-f81a677d7233",
+                            "unlock": [
+                                "texture"
+                            ],
+                            "label": "orange",
+                            "texture": "{\"key\":\"ball-yellow\"}"
+                        },
+                        {
+                            "prefabId": "d220abfa-d1cb-4c05-9ac3-e95aa746651b",
+                            "id": "70000062-e4da-483a-9581-2d845ca86de2",
+                            "unlock": [
+                                "texture"
+                            ],
+                            "label": "green",
+                            "texture": "{\"key\":\"ball-magenta\"}"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 4
+    }
+}
