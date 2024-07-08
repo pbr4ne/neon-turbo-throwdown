@@ -33,6 +33,8 @@ export default class Hand {
         for (let i = 0; i < numberOfCards; i++) {
             const card = deck.drawCard();
             if (card) {
+                card.setTexture("cardFront"); // Set the texture to the front of the card
+                card.showName(true); // Show the name text for hand cards
                 this.addCard(card);
                 card.setPosition(startX + i * (cardWidth + cardSpacing), yPos);
                 this.scene.add.existing(card);

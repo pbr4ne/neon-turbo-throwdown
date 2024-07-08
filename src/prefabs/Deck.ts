@@ -31,23 +31,25 @@ export default class Deck {
     createDeck() {
         const cardTypes = ["BLOCK", "DODGE", "CATCH", "THROW"];
 
-        for (let i = 0; i < 20; i++) { 
+        for (let i = 0; i < 10; i++) {
             const cardType = cardTypes[Phaser.Math.Between(0, cardTypes.length - 1)];
             const card = new Card(this.scene, 0, 0, "cardFront");
             card.setType(cardType);
+            card.showName(false);
             this.addCard(card);
         }
 
         this.shuffle();
     }
 
-	drawDeck(x: number, y: number) {
-        const offset = 5; // Offset in pixels for overlapping effect
+    drawDeck(x: number, y: number) {
+        const offset = 10;
 
-        this.cards.forEach((card, index) => {
+        for (let index = this.cards.length - 1; index >= 0; index--) {
+            const card = this.cards[index];
             card.setTexture("cardBack");
-            card.setPosition(x + index * offset, y + index * offset);
+            card.setPosition(x + (this.cards.length - 1 - index) * offset, y + (this.cards.length - 1 - index) * offset);
             this.scene.add.existing(card);
-        });
+        }
     }
 }

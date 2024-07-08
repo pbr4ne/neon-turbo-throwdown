@@ -7,32 +7,44 @@ import Phaser from "phaser";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
-export default class Card extends Phaser.GameObjects.Image {
+export default class Card extends Phaser.GameObjects.Container {
+    public cardType: string;
+    private cardImage: Phaser.GameObjects.Image;
+    private nameText: Phaser.GameObjects.Text;
 
-	public cardType: string;
+    constructor(scene: Phaser.Scene, x?: number, y?: number, texture?: string, frame?: number | string, name?: string) {
+        super(scene, x ?? 0, y ?? 0);
+        
+        this.cardImage = new Phaser.GameObjects.Image(scene, 0, 0, texture || "cardFront", frame);
+        this.add(this.cardImage);
 
-	constructor(scene: Phaser.Scene, x?: number, y?: number, texture?: string, frame?: number | string) {
-		super(scene, x ?? 310, y ?? 107, texture || "cardFront", frame);
+        this.cardType = name || "Unknown";
 
-		this.cardType = ""; // Initialize with an empty string or a default type
+        this.nameText = new Phaser.GameObjects.Text(scene, 0, 40, this.cardType, {
+            fontSize: '16px',
+            color: '#000000',
+			stroke: '#000000',
+			strokeThickness: 1.25,
+            padding: { x: 5, y: 5 },
+            align: 'center'
+        });
+        this.nameText.setOrigin(0.5, 0.5);
+        this.add(this.nameText);
 
-        this.setInteractive();
+        this.setSize(this.cardImage.width, this.cardImage.height);
+        this.setInteractive(new Phaser.Geom.Rectangle(0, 0, this.cardImage.width, this.cardImage.height), Phaser.Geom.Rectangle.Contains);
     }
-
-	/* START-USER-CODE */
 
     setType(type: string) {
         this.cardType = type;
-        // You can add logic here to change the texture or frame based on the type
+        this.nameText.setText(this.cardType);
     }
 
-	
+    setTexture(texture: string) {
+        this.cardImage.setTexture(texture);
+    }
 
-	// Write your code here.
-
-	/* END-USER-CODE */
+	showName(visible: boolean) {
+        this.nameText.setVisible(visible);
+    }
 }
-
-/* END OF COMPILED CODE */
-
-// You can write more code here
