@@ -7,11 +7,13 @@ import Phaser from "phaser";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
+
 export default class Card extends Phaser.GameObjects.Container {
     public cardType: string;
     private cardImage: Phaser.GameObjects.Image;
     private nameText: Phaser.GameObjects.Text;
     private iconImage: Phaser.GameObjects.Image;
+    private isPoppedUp: boolean;
 
     constructor(scene: Phaser.Scene, x?: number, y?: number, texture?: string, frame?: number | string, name?: string) {
         super(scene, x ?? 0, y ?? 0);
@@ -34,6 +36,8 @@ export default class Card extends Phaser.GameObjects.Container {
 
         this.iconImage = new Phaser.GameObjects.Image(scene, 0, -40, ''); // Placeholder for icon
         this.add(this.iconImage);
+
+        this.isPoppedUp = false;
 
         this.setSize(this.cardImage.width, this.cardImage.height);
         this.setInteractive(new Phaser.Geom.Rectangle(0, 0, this.cardImage.width, this.cardImage.height), Phaser.Geom.Rectangle.Contains);
@@ -75,5 +79,14 @@ export default class Card extends Phaser.GameObjects.Container {
                 this.iconImage.setTexture('');
                 break;
         }
+    }
+
+    togglePopUp() {
+        if (this.isPoppedUp) {
+            this.y += 20; // Move the card back down
+        } else {
+            this.y -= 20; // Move the card up
+        }
+        this.isPoppedUp = !this.isPoppedUp;
     }
 }

@@ -12,11 +12,13 @@ export default class Hand {
     private scene: Phaser.Scene;
     private cards: Card[];
     private maxCards: number;
+    private poppedUpCard: Card | null;
 
     constructor(scene: Phaser.Scene, maxCards: number = 5) {
         this.scene = scene;
         this.cards = [];
         this.maxCards = maxCards;
+        this.poppedUpCard = null;
     }
 
     addCard(card: Card) {
@@ -26,6 +28,10 @@ export default class Hand {
             card.showIcon(true); // Show the icon for hand cards
             this.cards.push(card);
             this.updateHandPositions();
+
+            card.on("pointerdown", () => {
+                this.handleCardClick(card);
+            });
         }
     }
 
@@ -45,5 +51,17 @@ export default class Hand {
         this.cards.forEach((card, index) => {
             card.setPosition(startX + index * (cardWidth + cardSpacing), yPos);
         });
+    }
+
+    handleCardClick(card: Card) {
+        if (this.poppedUpCard) {
+            this.poppedUpCard.togglePopUp();
+            if (this.poppedUpCard === card) {
+                this.poppedUpCard = null;
+                return;
+            }
+        }
+        card.togglePopUp();
+        this.poppedUpCard = card;
     }
 }
