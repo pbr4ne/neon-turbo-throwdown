@@ -86,10 +86,6 @@ export default class Level extends Phaser.Scene {
     private enemyDeck: Deck | undefined;
     private enemyHand: Hand | undefined;
 
-	preload() {
-        this.load.image("cardFront", "path/to/cardFront.png");
-    }
-
 	create() {
 		this.id++;
 		this.editorCreate();

@@ -65,6 +65,11 @@
                 "key": "buttons"
             },
             {
+                "url": "assets/images/cards/cardBack.png",
+                "type": "image",
+                "key": "cardBack"
+            },
+            {
                 "url": "assets/images/cards/cardFront.png",
                 "type": "image",
                 "key": "cardFront"

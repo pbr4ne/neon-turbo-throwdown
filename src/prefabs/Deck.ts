@@ -45,6 +45,7 @@ export default class Deck {
         const offset = 5; // Offset in pixels for overlapping effect
 
         this.cards.forEach((card, index) => {
+            card.setTexture("cardBack");
             card.setPosition(x + index * offset, y + index * offset);
             this.scene.add.existing(card);
         });
