@@ -77,9 +77,13 @@
             "id": "df38be28-8966-4b78-be03-d9f3a6fa7cbb",
             "unlock": [
                 "x",
-                "y"
+                "y",
+                "texture"
             ],
             "label": "player2",
+            "texture": {
+                "key": "player2"
+            },
             "x": 950,
             "y": 583
         },
@@ -88,9 +92,13 @@
             "id": "0fa5ca54-1d3e-42b2-82f3-ba0f9a0c0ae2",
             "unlock": [
                 "x",
-                "y"
+                "y",
+                "texture"
             ],
             "label": "player3",
+            "texture": {
+                "key": "player3"
+            },
             "x": 1211,
             "y": 453
         },

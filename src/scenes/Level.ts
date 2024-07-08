@@ -6,9 +6,9 @@ import Player from "../prefabs/Player";
 import GameplayScript from "../script-nodes/gameplay/GameplayScript";
 import TextureInfoScript from "../script-nodes/gameplay/TextureInfoScript";
 /* START-USER-IMPORTS */
-/* END-USER-IMPORTS */
 import Deck from "../prefabs/Deck";
 import Hand from "../prefabs/Hand";
+/* END-USER-IMPORTS */
 
 export default class Level extends Phaser.Scene {
 
@@ -47,11 +47,11 @@ export default class Level extends Phaser.Scene {
 		this.add.existing(player1);
 
 		// player2
-		const player2 = new Player(this, 950, 583);
+		const player2 = new Player(this, 950, 583, "player2");
 		this.add.existing(player2);
 
 		// player3
-		const player3 = new Player(this, 1211, 453);
+		const player3 = new Player(this, 1211, 453, "player3");
 		this.add.existing(player3);
 
 		// gameplayScript
