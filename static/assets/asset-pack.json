@@ -106,6 +106,22 @@
                 "url": "assets/images/level/background-8.png",
                 "type": "image",
                 "key": "background-8"
+            },
+            {
+                "url": "assets/images/players/player1.png",
+                "type": "image",
+                "key": "player1"
+            },
+            {
+                "url": "assets/images/players/player2.png",
+                "type": "image",
+                "key": "player2"
+            }
+            ,
+            {
+                "url": "assets/images/players/player3.png",
+                "type": "image",
+                "key": "player3"
             }
         ]
     },
