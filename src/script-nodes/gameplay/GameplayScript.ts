@@ -72,9 +72,9 @@ export default class GameplayScript extends ScriptNode {
 
 	protected override awake(): void {
 
-		this.spawnBall();
+		//this.spawnBall();
 
-		this.nextDifficultyLevel();
+		//this.nextDifficultyLevel();
 	}
 
 	private nextDifficultyLevel() {
