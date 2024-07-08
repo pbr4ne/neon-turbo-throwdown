@@ -59,23 +59,23 @@ export default class Level extends Phaser.Scene {
 		// gameplayScript
 		const gameplayScript = new GameplayScript(this);
 
+		// cyan
+		const cyan = new TextureInfoScript(gameplayScript.textures);
+
 		// yellow
 		const yellow = new TextureInfoScript(gameplayScript.textures);
 
-		// orange
-		const orange = new TextureInfoScript(gameplayScript.textures);
+		// magenta
+		const magenta = new TextureInfoScript(gameplayScript.textures);
 
-		// green
-		const green = new TextureInfoScript(gameplayScript.textures);
+		// cyan (prefab fields)
+		cyan.texture = {"key":"ball-cyan"};
 
 		// yellow (prefab fields)
-		yellow.texture = {"key":"ball-cyan"};
+		yellow.texture = {"key":"ball-yellow"};
 
-		// orange (prefab fields)
-		orange.texture = {"key":"ball-yellow"};
-
-		// green (prefab fields)
-		green.texture = {"key":"ball-magenta"};
+		// magenta (prefab fields)
+		magenta.texture = {"key":"ball-magenta"};
 
 		this.events.emit("scene-awake");
 	}

@@ -25,7 +25,7 @@ export default class Preload extends Phaser.Scene {
 		const progressBar = this.add.rectangle(832.5, 541, 256, 20);
 		progressBar.setOrigin(0, 0);
 		progressBar.isFilled = true;
-		progressBar.fillColor = 14737632;
+		progressBar.fillColor = 0xff00ff;
 
 		// preloadUpdater
 		new PreloadBarUpdaterScript(progressBar);
@@ -33,13 +33,14 @@ export default class Preload extends Phaser.Scene {
 		// progressBarBg
 		const progressBarBg = this.add.rectangle(832.5, 541, 256, 20);
 		progressBarBg.setOrigin(0, 0);
-		progressBarBg.fillColor = 14737632;
+		progressBarBg.fillColor = 0x000000;
 		progressBarBg.isStroked = true;
+		progressBarBg.strokeColor = 0x000000;
 
 		// loadingText
 		const loadingText = this.add.text(831.5, 509, "", {});
-		loadingText.text = "Loading...";
-		loadingText.setStyle({ "color": "#e0e0e0", "fontFamily": "arial", "fontSize": "20px" });
+		loadingText.text = "Turbocharging...";
+		loadingText.setStyle({ "color": "#ff00ff", "fontFamily": "Courier", "fontSize": "25px", "strokeThickness": 2, "stroke": "#ff00ff" });
 
 		this.events.emit("scene-awake");
 	}
