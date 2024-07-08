@@ -11,6 +11,7 @@ export default class Card extends Phaser.GameObjects.Container {
     public cardType: string;
     private cardImage: Phaser.GameObjects.Image;
     private nameText: Phaser.GameObjects.Text;
+    private iconImage: Phaser.GameObjects.Image;
 
     constructor(scene: Phaser.Scene, x?: number, y?: number, texture?: string, frame?: number | string, name?: string) {
         super(scene, x ?? 0, y ?? 0);
@@ -28,8 +29,11 @@ export default class Card extends Phaser.GameObjects.Container {
             padding: { x: 5, y: 5 },
             align: 'center'
         });
-        this.nameText.setOrigin(0.5, 0.5);
+        this.nameText.setOrigin(0.5, 0.5); // Center the text
         this.add(this.nameText);
+
+        this.iconImage = new Phaser.GameObjects.Image(scene, 0, -40, ''); // Placeholder for icon
+        this.add(this.iconImage);
 
         this.setSize(this.cardImage.width, this.cardImage.height);
         this.setInteractive(new Phaser.Geom.Rectangle(0, 0, this.cardImage.width, this.cardImage.height), Phaser.Geom.Rectangle.Contains);
@@ -38,13 +42,38 @@ export default class Card extends Phaser.GameObjects.Container {
     setType(type: string) {
         this.cardType = type;
         this.nameText.setText(this.cardType);
+        this.updateIcon();
     }
 
     setTexture(texture: string) {
         this.cardImage.setTexture(texture);
     }
 
-	showName(visible: boolean) {
+    showName(visible: boolean) {
         this.nameText.setVisible(visible);
+    }
+
+    showIcon(visible: boolean) {
+        this.iconImage.setVisible(visible);
+    }
+
+    updateIcon() {
+        switch (this.cardType) {
+            case 'BLOCK':
+                this.iconImage.setTexture('block');
+                break;
+            case 'CATCH':
+                this.iconImage.setTexture('catch');
+                break;
+            case 'DODGE':
+                this.iconImage.setTexture('dodge');
+                break;
+            case 'THROW':
+                this.iconImage.setTexture('throw');
+                break;
+            default:
+                this.iconImage.setTexture('');
+                break;
+        }
     }
 }

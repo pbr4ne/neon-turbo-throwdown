@@ -22,7 +22,8 @@ export default class Hand {
     addCard(card: Card) {
         if (this.cards.length < this.maxCards) {
             card.setTexture("cardFront");
-            card.showName(true);
+            card.showName(true); // Show the name text for hand cards
+            card.showIcon(true); // Show the icon for hand cards
             this.cards.push(card);
             this.updateHandPositions();
         }

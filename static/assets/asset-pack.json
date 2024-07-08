@@ -64,6 +64,16 @@
                 "key": "ball-yellow"
             },
             {
+                "url": "assets/images/cards/block.png",
+                "type": "image",
+                "key": "block"
+            },
+            {
+                "url": "assets/images/cards/blockWhite.png",
+                "type": "image",
+                "key": "blockWhite"
+            },
+            {
                 "atlasURL": "assets/atlas/texture.json",
                 "textureURL": "assets/atlas/texture.png",
                 "type": "atlas",
@@ -80,9 +90,29 @@
                 "key": "cardFront"
             },
             {
+                "url": "assets/images/cards/catch.png",
+                "type": "image",
+                "key": "catch"
+            },
+            {
+                "url": "assets/images/cards/catchWhite.png",
+                "type": "image",
+                "key": "catchWhite"
+            },
+            {
                 "url": "assets/images/welcome/decor.png",
                 "type": "image",
                 "key": "decor"
+            },
+            {
+                "url": "assets/images/cards/dodge.png",
+                "type": "image",
+                "key": "dodge"
+            },
+            {
+                "url": "assets/images/cards/dodgeWhite.png",
+                "type": "image",
+                "key": "dodgeWhite"
             },
             {
                 "url": "assets/images/welcome/item1.png",
@@ -160,6 +190,16 @@
                 "url": "assets/images/players/player3c.png",
                 "type": "image",
                 "key": "player3c"
+            },
+            {
+                "url": "assets/images/cards/throw.png",
+                "type": "image",
+                "key": "throw"
+            },
+            {
+                "url": "assets/images/cards/throwWhite.png",
+                "type": "image",
+                "key": "throwWhite"
             },
             {
                 "textureURL": "assets/fonts/turbo.png",
