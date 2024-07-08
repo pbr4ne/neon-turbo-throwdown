@@ -3,13 +3,12 @@
 import Phaser from "phaser";
 import UILayerPrefab from "../prefabs/UILayerPrefab";
 import Player from "../prefabs/Player";
-import Card from "../prefabs/Card";
 import GameplayScript from "../script-nodes/gameplay/GameplayScript";
 import TextureInfoScript from "../script-nodes/gameplay/TextureInfoScript";
-import Deck from "../prefabs/Deck";
-import Hand from "../prefabs/Hand";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
+import Deck from "../prefabs/Deck";
+import Hand from "../prefabs/Hand";
 
 export default class Level extends Phaser.Scene {
 
