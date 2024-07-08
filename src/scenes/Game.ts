@@ -10,10 +10,10 @@ import Deck from "../prefabs/Deck";
 import Hand from "../prefabs/Hand";
 /* END-USER-IMPORTS */
 
-export default class Level extends Phaser.Scene {
+export default class Game extends Phaser.Scene {
 
 	constructor() {
-		super("Level");
+		super("Game");
 
 		/* START-USER-CTR-CODE */
 		// Write your code here.

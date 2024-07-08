@@ -74,10 +74,10 @@ export default class GameplayScript extends ScriptNode {
 
 		//this.spawnBall();
 
-		//this.nextDifficultyLevel();
+		//this.nextDifficultyGame();
 	}
 
-	private nextDifficultyLevel() {
+	private nextDifficultyGame() {
 
 		if (this._gameOver) {
 
@@ -89,7 +89,7 @@ export default class GameplayScript extends ScriptNode {
 
 		this.scene.time.addEvent({
 			delay: 5000,
-			callback: () => this.nextDifficultyLevel()
+			callback: () => this.nextDifficultyGame()
 		});
 	}
 

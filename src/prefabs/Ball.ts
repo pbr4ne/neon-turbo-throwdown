@@ -2,7 +2,7 @@
 
 import Phaser from "phaser";
 /* START-USER-IMPORTS */
-import Level from "../scenes/Level";
+import Game from "../scenes/Game";
 /* END-USER-IMPORTS */
 
 export default interface Ball {
@@ -30,7 +30,7 @@ export default class Ball extends Phaser.GameObjects.Image {
 
 	animatePickBall(callback: () => void) {
 
-		const scene = this.scene as Level;
+		const scene = this.scene as Game;
 
 		scene.add.tween({
 			targets: this,

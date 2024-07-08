@@ -126,7 +126,7 @@ export default class Welcome extends Phaser.Scene {
 		const startGame_1 = new ExecActionScript(onKeydown_ENTER);
 
 		// startGameAction (prefab fields)
-		startGameAction.sceneKey = "Level";
+		startGameAction.sceneKey = "Game";
 
 		// moveInSceneActionScript (prefab fields)
 		moveInSceneActionScript.from = "BOTTOM";

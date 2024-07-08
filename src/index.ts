@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import Level from "./scenes/Level";
+import Game from "./scenes/Game";
 import Preload from "./scenes/Preload";
 import Welcome from "./scenes/Welcome";
 
@@ -14,7 +14,7 @@ const game = new Phaser.Game({
     physics: {
         default: "arcade",
     },
-    scene: [Preload, Welcome, Level],
+    scene: [Preload, Welcome, Game],
 });
 
 game.scene.start("Preload");
