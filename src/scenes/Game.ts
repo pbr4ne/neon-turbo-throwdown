@@ -2,7 +2,6 @@
 
 import Phaser from "phaser";
 import UILayerPrefab from "../prefabs/UILayerPrefab";
-import Player from "../prefabs/Player";
 import GameplayScript from "../script-nodes/gameplay/GameplayScript";
 import TextureInfoScript from "../script-nodes/gameplay/TextureInfoScript";
 /* START-USER-IMPORTS */
@@ -33,10 +32,6 @@ export default class Game extends Phaser.Scene {
 		// background_3
 		const background_3 = this.add.image(0, 0, "background-3");
 		background_3.setOrigin(0, 0);
-
-		// background_5
-		const background_5 = this.add.image(0, 0, "_MISSING");
-		background_5.setOrigin(0, 0);
 
 		// uiLayer
 		const uiLayer = new UILayerPrefab(this, 0, 0);
