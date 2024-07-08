@@ -42,18 +42,6 @@ export default class Game extends Phaser.Scene {
 		const uiLayer = new UILayerPrefab(this, 0, 0);
 		this.add.existing(uiLayer);
 
-		// player1
-		const player1 = new Player(this, 720, 459, "player1a");
-		this.add.existing(player1);
-
-		// player2
-		const player2 = new Player(this, 950, 583, "player2a");
-		this.add.existing(player2);
-
-		// player3
-		const player3 = new Player(this, 1211, 453, "player3a");
-		this.add.existing(player3);
-
 		// gameplayScript
 		const gameplayScript = new GameplayScript(this);
 
@@ -100,6 +88,61 @@ export default class Game extends Phaser.Scene {
 
         // Initially draw the decks but no hand
         this.playerDeck.drawDeck(100, 840, this.onTopCardClick.bind(this));
+
+		this.createPlayerAnimations();
+        this.addPlayers();
+    }
+
+	createPlayerAnimations() {
+        // Create animations for player 1
+        this.anims.create({
+            key: 'player1_anim',
+            frames: [
+                { key: 'player1a' },
+                { key: 'player1b' },
+                { key: 'player1c' }
+            ],
+            frameRate: 3,
+            repeat: -1
+        });
+
+        // Create animations for player 2
+        this.anims.create({
+            key: 'player2_anim',
+            frames: [
+                { key: 'player2a' },
+                { key: 'player2b' },
+                { key: 'player2c' }
+            ],
+            frameRate: 3,
+            repeat: -1
+        });
+
+        // Create animations for player 3
+        this.anims.create({
+            key: 'player3_anim',
+            frames: [
+                { key: 'player3a' },
+                { key: 'player3b' },
+                { key: 'player3c' }
+            ],
+            frameRate: 3,
+            repeat: -1
+        });
+    }
+
+	addPlayers() {
+        // Add player 1
+        const player1 = this.add.sprite(720, 459, 'player1a');
+        player1.play('player1_anim');
+
+        // Add player 2
+        const player2 = this.add.sprite(950, 583, 'player2a');
+        player2.play('player2_anim');
+
+        // Add player 3
+        const player3 = this.add.sprite(1211, 453, 'player3a');
+        player3.play('player3_anim');
     }
 
 	onTopCardClick() {
