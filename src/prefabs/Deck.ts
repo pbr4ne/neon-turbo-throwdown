@@ -10,10 +10,12 @@ import Card from "./Card";
 export default class Deck {
     private scene: Phaser.Scene;
     private cards: Card[];
+    private isTopCardSelected: boolean;
 
     constructor(scene: Phaser.Scene) {
         this.scene = scene;
         this.cards = [];
+        this.isTopCardSelected = false;
     }
 
     addCard(card: Card) {
@@ -31,7 +33,7 @@ export default class Deck {
     createDeck() {
         const cardTypes = ["BLOCK", "DODGE", "CATCH", "THROW"];
 
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 15; i++) { 
             const cardType = cardTypes[Phaser.Math.Between(0, cardTypes.length - 1)];
             const card = new Card(this.scene, 0, 0, "cardFront");
             card.setType(cardType);
@@ -42,14 +44,36 @@ export default class Deck {
         this.shuffle();
     }
 
-    drawDeck(x: number, y: number) {
-        const offset = 10;
+    drawDeck(x: number, y: number, onTopCardClick: () => void) {
+        const offset = 8;
 
-        for (let index = this.cards.length - 1; index >= 0; index--) {
-            const card = this.cards[index];
+        this.cards.forEach((card, index) => {
             card.setTexture("cardBack");
-            card.setPosition(x + (this.cards.length - 1 - index) * offset, y + (this.cards.length - 1 - index) * offset);
+            card.setPosition(x + index * offset, y + index * offset);
             this.scene.add.existing(card);
+        });
+
+        // Add click handler to the top card
+        if (this.cards.length > 0) {
+            const topCard = this.cards[this.cards.length - 1];
+            topCard.setInteractive();
+            topCard.on("pointerdown", () => {
+                if (!this.isTopCardSelected) {
+                    this.isTopCardSelected = true;
+                    onTopCardClick();
+                }
+            });
+        }
+    }
+
+    getCards(): Card[] {
+        return this.cards;
+    }
+
+    removeCard(card: Card) {
+        const index = this.cards.indexOf(card);
+        if (index > -1) {
+            this.cards.splice(index, 1);
         }
     }
 }

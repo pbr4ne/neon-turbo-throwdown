@@ -11,39 +11,38 @@ import Deck from "./Deck";
 export default class Hand {
     private scene: Phaser.Scene;
     private cards: Card[];
+    private maxCards: number;
 
-    constructor(scene: Phaser.Scene) {
+    constructor(scene: Phaser.Scene, maxCards: number = 5) {
         this.scene = scene;
         this.cards = [];
+        this.maxCards = maxCards;
     }
 
     addCard(card: Card) {
-        this.cards.push(card);
+        if (this.cards.length < this.maxCards) {
+            card.setTexture("cardFront");
+            card.showName(true);
+            this.cards.push(card);
+            this.updateHandPositions();
+        }
     }
 
-    drawHand(deck: Deck, numberOfCards: number) {
+    getCards(): Card[] {
+        return this.cards;
+    }
+
+    updateHandPositions() {
         const screenWidth = this.scene.scale.width;
         const screenHeight = this.scene.scale.height;
         const cardSpacing = 20; // Space between cards
         const cardWidth = 100; // Assuming a fixed card width
-        const totalWidth = numberOfCards * cardWidth + (numberOfCards - 1) * cardSpacing;
+        const totalWidth = this.cards.length * cardWidth + (this.cards.length - 1) * cardSpacing;
         const startX = (screenWidth - totalWidth) / 2;
         const yPos = screenHeight - cardWidth - 50; // 50px margin from bottom
 
-        for (let i = 0; i < numberOfCards; i++) {
-            const card = deck.drawCard();
-            if (card) {
-                card.setTexture("cardFront"); // Set the texture to the front of the card
-                card.showName(true); // Show the name text for hand cards
-                this.addCard(card);
-                card.setPosition(startX + i * (cardWidth + cardSpacing), yPos);
-                this.scene.add.existing(card);
-
-                card.on("pointerdown", () => {
-                    console.log(`Card clicked: ${card.cardType}`);
-                    // Handle card click logic here
-                });
-            }
-        }
+        this.cards.forEach((card, index) => {
+            card.setPosition(startX + index * (cardWidth + cardSpacing), yPos);
+        });
     }
 }

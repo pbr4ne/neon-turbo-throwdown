@@ -81,29 +81,43 @@ export default class Game extends Phaser.Scene {
 	/* START-USER-CODE */
 
 	public id = 0;
-	private myDeck: Deck | undefined;
-    private myHand: Hand | undefined;
-    private enemyDeck: Deck | undefined;
-    private enemyHand: Hand | undefined;
+	private playerDeck!: Deck;
+    private playerHand!: Hand;
+    private enemyDeck!: Deck;
+    private enemyHand!: Hand;
 
 	create() {
 		this.id++;
 		this.editorCreate();
 
-		this.myDeck = new Deck(this);
-        this.myHand = new Hand(this);
+        this.playerDeck = new Deck(this);
+        this.playerHand = new Hand(this, 5);
         this.enemyDeck = new Deck(this);
-        this.enemyHand = new Hand(this);
+        this.enemyHand = new Hand(this, 5);
 
-        this.myDeck.createDeck();
+        this.playerDeck.createDeck();
         this.enemyDeck.createDeck();
 
-        this.myHand.drawHand(this.myDeck, 5);
-        //this.enemyHand.drawHand(this.enemyDeck, 5);
+        // Initially draw the decks but no hand
+        this.playerDeck.drawDeck(100, 840, this.onTopCardClick.bind(this));
+    }
 
-		this.myDeck.drawDeck(100, 900); 
-        //this.enemyDeck.drawDeck(1500, 100);
-	}
+	onTopCardClick() {
+        // Enable selection of cards for the player's hand
+        this.playerDeck.getCards().forEach((card) => {
+            card.setInteractive();
+            card.on("pointerdown", () => {
+                if (this.playerHand.getCards().length < 5) {
+                    this.playerDeck.removeCard(card);
+                    this.playerHand.addCard(card);
+                }
+                if (this.playerHand.getCards().length === 5) {
+                    // Once 5 cards are selected, disable further selection
+                    this.playerDeck.getCards().forEach(c => c.disableInteractive());
+                }
+            });
+        });
+    }
 
 	/* END-USER-CODE */
 }
