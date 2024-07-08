@@ -7,6 +7,7 @@ import TextureInfoScript from "../script-nodes/gameplay/TextureInfoScript";
 /* START-USER-IMPORTS */
 import Deck from "../prefabs/Deck";
 import Hand from "../prefabs/Hand";
+import Player from "../prefabs/Player";
 /* END-USER-IMPORTS */
 
 export default class Game extends Phaser.Scene {
@@ -68,6 +69,7 @@ export default class Game extends Phaser.Scene {
     private playerHand!: Hand;
     private enemyDeck!: Deck;
     private enemyHand!: Hand;
+    private players!: Player[];
 
 	create() {
 		this.id++;
@@ -77,11 +79,11 @@ export default class Game extends Phaser.Scene {
         this.playerHand = new Hand(this, 5);
         this.enemyDeck = new Deck(this);
         this.enemyHand = new Hand(this, 5);
+        this.players = [];
 
         this.playerDeck.createDeck();
         this.enemyDeck.createDeck();
 
-        // Initially draw the decks but no hand
         this.playerDeck.drawDeck(100, 840, this.onTopCardClick.bind(this));
 
 		this.createPlayerAnimations();
@@ -89,7 +91,6 @@ export default class Game extends Phaser.Scene {
     }
 
 	createPlayerAnimations() {
-        // Create animations for player 1
         this.anims.create({
             key: 'player1_anim',
             frames: [
@@ -101,7 +102,6 @@ export default class Game extends Phaser.Scene {
             repeat: -1
         });
 
-        // Create animations for player 2
         this.anims.create({
             key: 'player2_anim',
             frames: [
@@ -113,7 +113,6 @@ export default class Game extends Phaser.Scene {
             repeat: -1
         });
 
-        // Create animations for player 3
         this.anims.create({
             key: 'player3_anim',
             frames: [
@@ -127,21 +126,30 @@ export default class Game extends Phaser.Scene {
     }
 
 	addPlayers() {
-        // Add player 1
-        const player1 = this.add.sprite(720, 459, 'player1a');
-        player1.play('player1_anim');
+        const player1 = new Player(this, 720, 459, 'player1a');
+        this.add.existing(player1);
+        player1.sprite.play('player1_anim');
+        player1.on("pointerdown", () => this.handlePlayerClick(player1));
+        this.players.push(player1);
 
-        // Add player 2
-        const player2 = this.add.sprite(950, 583, 'player2a');
-        player2.play('player2_anim');
+        const player2 = new Player(this, 950, 583, 'player2a');
+        this.add.existing(player2);
+        player2.sprite.play('player2_anim');
+        player2.on("pointerdown", () => this.handlePlayerClick(player2));
+        this.players.push(player2);
 
-        // Add player 3
-        const player3 = this.add.sprite(1211, 453, 'player3a');
-        player3.play('player3_anim');
+        const player3 = new Player(this, 1211, 453, 'player3a');
+        this.add.existing(player3);
+        player3.sprite.play('player3_anim');
+        player3.on("pointerdown", () => this.handlePlayerClick(player3));
+        this.players.push(player3);
     }
 
-	onTopCardClick() {
-        // Enable selection of cards for the player's hand
+    handlePlayerClick(player: Player) {
+        this.playerHand.assignCardToPlayer(player);
+    }
+
+    onTopCardClick() {
         this.playerDeck.getCards().forEach((card) => {
             card.setInteractive();
             card.on("pointerdown", () => {
@@ -150,7 +158,6 @@ export default class Game extends Phaser.Scene {
                     this.playerHand.addCard(card);
                 }
                 if (this.playerHand.getCards().length === 5) {
-                    // Once 5 cards are selected, disable further selection
                     this.playerDeck.getCards().forEach(c => c.disableInteractive());
                 }
             });

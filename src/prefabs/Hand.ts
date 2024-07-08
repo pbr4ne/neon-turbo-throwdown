@@ -5,6 +5,7 @@
 
 import Card from "./Card";
 import Deck from "./Deck";
+import Player from "./Player";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -13,19 +14,21 @@ export default class Hand {
     private cards: Card[];
     private maxCards: number;
     private poppedUpCard: Card | null;
+    private selectedCard: Card | null;
 
     constructor(scene: Phaser.Scene, maxCards: number = 5) {
         this.scene = scene;
         this.cards = [];
         this.maxCards = maxCards;
         this.poppedUpCard = null;
+        this.selectedCard = null;
     }
 
     addCard(card: Card) {
         if (this.cards.length < this.maxCards) {
             card.setTexture("cardFront");
-            card.showName(true); // Show the name text for hand cards
-            card.showIcon(true); // Show the icon for hand cards
+            card.showName(true);
+            card.showIcon(true);
             this.cards.push(card);
             this.updateHandPositions();
 
@@ -42,11 +45,11 @@ export default class Hand {
     updateHandPositions() {
         const screenWidth = this.scene.scale.width;
         const screenHeight = this.scene.scale.height;
-        const cardSpacing = 20; // Space between cards
-        const cardWidth = 100; // Assuming a fixed card width
+        const cardSpacing = 20;
+        const cardWidth = 100;
         const totalWidth = this.cards.length * cardWidth + (this.cards.length - 1) * cardSpacing;
         const startX = (screenWidth - totalWidth) / 2;
-        const yPos = screenHeight - cardWidth - 50; // 50px margin from bottom
+        const yPos = screenHeight - cardWidth - 50;
 
         this.cards.forEach((card, index) => {
             card.setPosition(startX + index * (cardWidth + cardSpacing), yPos);
@@ -58,10 +61,24 @@ export default class Hand {
             this.poppedUpCard.togglePopUp();
             if (this.poppedUpCard === card) {
                 this.poppedUpCard = null;
+                this.selectedCard = null;
                 return;
             }
         }
         card.togglePopUp();
         this.poppedUpCard = card;
+        this.selectedCard = card;
+    }
+
+    assignCardToPlayer(player: Player) {
+        if (this.selectedCard) {
+            const cardType = this.selectedCard.getCardType();
+            const whiteIconTexture = this.selectedCard.getWhiteIconTexture();
+            player.assignCard(cardType, whiteIconTexture);
+            this.selectedCard.hide();
+            this.cards = this.cards.filter(card => card !== this.selectedCard);
+            this.selectedCard = null;
+            this.updateHandPositions();
+        }
     }
 }

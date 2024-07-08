@@ -31,10 +31,10 @@ export default class Card extends Phaser.GameObjects.Container {
             padding: { x: 5, y: 5 },
             align: 'center'
         });
-        this.nameText.setOrigin(0.5, 0.5); // Center the text
+        this.nameText.setOrigin(0.5, 0.5);
         this.add(this.nameText);
 
-        this.iconImage = new Phaser.GameObjects.Image(scene, 0, -40, ''); // Placeholder for icon
+        this.iconImage = new Phaser.GameObjects.Image(scene, 0, -40, '');
         this.add(this.iconImage);
 
         this.isPoppedUp = false;
@@ -83,10 +83,37 @@ export default class Card extends Phaser.GameObjects.Container {
 
     togglePopUp() {
         if (this.isPoppedUp) {
-            this.y += 20; // Move the card back down
+            this.y += 20;
         } else {
-            this.y -= 20; // Move the card up
+            this.y -= 20;
         }
         this.isPoppedUp = !this.isPoppedUp;
+    }
+
+    hide() {
+        this.setVisible(false);
+    }
+
+    getCardType(): string {
+        return this.cardType;
+    }
+
+    getIconTexture(): string {
+        return this.iconImage.texture.key;
+    }
+
+    getWhiteIconTexture(): string {
+        switch (this.cardType) {
+            case 'BLOCK':
+                return 'blockWhite';
+            case 'CATCH':
+                return 'catchWhite';
+            case 'DODGE':
+                return 'dodgeWhite';
+            case 'THROW':
+                return 'throwWhite';
+            default:
+                return '';
+        }
     }
 }

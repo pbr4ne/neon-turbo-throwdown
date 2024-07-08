@@ -33,12 +33,12 @@ export default class Deck {
     createDeck() {
         const cardTypes = ["BLOCK", "DODGE", "CATCH", "THROW"];
 
-        for (let i = 0; i < 20; i++) { // Example: create 20 cards
+        for (let i = 0; i < 10; i++) {
             const cardType = cardTypes[Phaser.Math.Between(0, cardTypes.length - 1)];
             const card = new Card(this.scene, 0, 0, "cardFront");
             card.setType(cardType);
-            card.showName(false); // Hide the name text for deck cards
-            card.showIcon(false); // Hide the icon for deck cards
+            card.showName(false);
+            card.showIcon(false); 
             this.addCard(card);
         }
 
@@ -46,15 +46,14 @@ export default class Deck {
     }
 
     drawDeck(x: number, y: number, onTopCardClick: () => void) {
-        const offset = 5; // Offset in pixels for overlapping effect
+        const offset = 5;
 
         this.cards.forEach((card, index) => {
-            card.setTexture("cardBack"); // Set the texture to the back of the card
+            card.setTexture("cardBack"); 
             card.setPosition(x + index * offset, y + index * offset);
             this.scene.add.existing(card);
         });
 
-        // Add click handler to the top card
         if (this.cards.length > 0) {
             const topCard = this.cards[this.cards.length - 1];
             topCard.setInteractive();
