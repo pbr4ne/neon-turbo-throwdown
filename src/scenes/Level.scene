@@ -46,9 +46,7 @@
             "type": "Image",
             "id": "80900b16-af4f-4b7c-899b-d2e20e295fb6",
             "label": "background_5",
-            "texture": {
-                "key": "background-5"
-            },
+            "texture": {},
             "originX": 0,
             "originY": 0
         },
@@ -95,6 +93,61 @@
             "label": "player3",
             "x": 1211,
             "y": 453
+        },
+        {
+            "prefabId": "7a19889f-7aaf-4c2e-a913-f32f47371f8b",
+            "id": "666b6fd7-3f3e-4fe5-aed1-0a99a12b0908",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "card",
+            "x": 652,
+            "y": 923
+        },
+        {
+            "prefabId": "7a19889f-7aaf-4c2e-a913-f32f47371f8b",
+            "id": "029168fc-55df-4141-b027-cfe3e1a86552",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "card_1",
+            "x": 791,
+            "y": 896
+        },
+        {
+            "prefabId": "7a19889f-7aaf-4c2e-a913-f32f47371f8b",
+            "id": "4848ab28-16a7-41ad-8088-29a5b197eed4",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "card_2",
+            "x": 931,
+            "y": 919
+        },
+        {
+            "prefabId": "7a19889f-7aaf-4c2e-a913-f32f47371f8b",
+            "id": "e8d0bad8-84c0-4740-a95e-25b3c07bc33b",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "card_3",
+            "x": 1070,
+            "y": 897
+        },
+        {
+            "prefabId": "7a19889f-7aaf-4c2e-a913-f32f47371f8b",
+            "id": "bb32ef29-aff5-4a32-a23d-d11811cd0973",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "card_4",
+            "x": 1216,
+            "y": 923
         },
         {
             "prefabId": "d8801a27-29ff-4774-a8a6-1f4e9b14d6cc",

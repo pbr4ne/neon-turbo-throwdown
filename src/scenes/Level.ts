@@ -3,6 +3,7 @@
 import Phaser from "phaser";
 import UILayerPrefab from "../prefabs/UILayerPrefab";
 import Player from "../prefabs/Player";
+import Card from "../prefabs/Card";
 import GameplayScript from "../script-nodes/gameplay/GameplayScript";
 import TextureInfoScript from "../script-nodes/gameplay/TextureInfoScript";
 /* START-USER-IMPORTS */
@@ -33,7 +34,7 @@ export default class Level extends Phaser.Scene {
 		background_3.setOrigin(0, 0);
 
 		// background_5
-		const background_5 = this.add.image(0, 0, "background-5");
+		const background_5 = this.add.image(0, 0, "_MISSING");
 		background_5.setOrigin(0, 0);
 
 		// uiLayer
@@ -41,16 +42,36 @@ export default class Level extends Phaser.Scene {
 		this.add.existing(uiLayer);
 
 		// player1
-		const player1 = new Player(this, 720, 459, "player1");
+		const player1 = new Player(this, 720, 459);
 		this.add.existing(player1);
 
 		// player2
-		const player2 = new Player(this, 950, 583, "player2");
+		const player2 = new Player(this, 950, 583);
 		this.add.existing(player2);
 
 		// player3
-		const player3 = new Player(this, 1211, 453, "player3");
+		const player3 = new Player(this, 1211, 453);
 		this.add.existing(player3);
+
+		// card
+		const card = new Card(this, 652, 923);
+		this.add.existing(card);
+
+		// card_1
+		const card_1 = new Card(this, 791, 896);
+		this.add.existing(card_1);
+
+		// card_2
+		const card_2 = new Card(this, 931, 919);
+		this.add.existing(card_2);
+
+		// card_3
+		const card_3 = new Card(this, 1070, 897);
+		this.add.existing(card_3);
+
+		// card_4
+		const card_4 = new Card(this, 1216, 923);
+		this.add.existing(card_4);
 
 		// gameplayScript
 		const gameplayScript = new GameplayScript(this);
