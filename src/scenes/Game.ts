@@ -83,7 +83,8 @@ export default class Game extends Phaser.Scene {
     }
 
 	showDialog() {
-        const dialog = new DialogBox(this, 960, 540, "Choose your dialogue option:", ["Option 1", "Option 2", "Option 3"]);
+        const dialog = new DialogBox(this, 960, 540);
+		dialog.generateDialog( "Choose your dialogue option:", ["Option 1", "Option 2", "Option 3"]);
 
         dialog.on('optionSelected', (option: string) => {
             console.log(`Selected option: ${option}`);
