@@ -64,9 +64,9 @@ export default class Player extends Phaser.GameObjects.Container {
             return;
         }
         const damageText = this.scene.add.text(this.x, this.y - this.sprite.height / 2, damage.toString(), {
-            fontSize: '36px',
-            color: '#ff0000',
-            stroke: '#000000',
+            fontSize: '48px',
+            color: '#ffffff',
+            stroke: '#ffffff',
             strokeThickness: 3
         }).setOrigin(0.5);
 
