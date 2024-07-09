@@ -115,6 +115,11 @@
                 "key": "dodgeWhite"
             },
             {
+                "url": "assets/images/players/enemy.png",
+                "type": "image",
+                "key": "enemy"
+            },
+            {
                 "url": "assets/images/players/enemy1a.png",
                 "type": "image",
                 "key": "enemy1a"
@@ -200,6 +205,11 @@
                 "url": "assets/images/level/opponentBorder.png",
                 "type": "image",
                 "key": "opponentBorder"
+            },
+            {
+                "url": "assets/images/players/player.png",
+                "type": "image",
+                "key": "player"
             },
             {
                 "url": "assets/images/players/player1a.png",

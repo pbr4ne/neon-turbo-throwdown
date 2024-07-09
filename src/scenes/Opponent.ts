@@ -7,6 +7,7 @@ import Phaser from "phaser";
 /* START-USER-IMPORTS */
 import Player from "../prefabs/Player";
 import Team from "./Team";
+import FloatingObjectScript from "../script-nodes/ui/FloatingObjectScript";
 /* END-USER-IMPORTS */
 
 export default class Opponent extends Team {
@@ -55,56 +56,22 @@ export default class Opponent extends Team {
         });
     }
 
-    createPlayerAnimations() {
-        this.anims.create({
-            key: 'enemy1_anim',
-            frames: [
-                { key: 'enemy1a' },
-                { key: 'enemy1b' },
-                { key: 'enemy1c' }
-            ],
-            frameRate: 3,
-            repeat: -1
-        });
-
-        this.anims.create({
-            key: 'enemy2_anim',
-            frames: [
-                { key: 'enemy2a' },
-                { key: 'enemy2b' },
-                { key: 'enemy2c' }
-            ],
-            frameRate: 3,
-            repeat: -1
-        });
-
-        this.anims.create({
-            key: 'enemy3_anim',
-            frames: [
-                { key: 'enemy3a' },
-                { key: 'enemy3b' },
-                { key: 'enemy3c' }
-            ],
-            frameRate: 3,
-            repeat: -1
-        });
-    }
-
     addPlayers() {
-        const enemy1 = new Player(this, 730, 259, 'enemy1a', false);
+        const enemy1 = new Player(this, 730, 259, 'enemy', false);
         this.add.existing(enemy1);
-        enemy1.sprite.play('enemy1_anim');
         this.players.push(enemy1);
 
-        const enemy2 = new Player(this, 950, 213, 'enemy2a', false);
+        const enemy2 = new Player(this, 950, 213, 'enemy', false);
         this.add.existing(enemy2);
-        enemy2.sprite.play('enemy2_anim');
         this.players.push(enemy2);
 
-        const enemy3 = new Player(this, 1180, 253, 'enemy3a', false);
+        const enemy3 = new Player(this, 1180, 253, 'enemy', false);
         this.add.existing(enemy3);
-        enemy3.sprite.play('enemy3_anim');
         this.players.push(enemy3);
+
+        const floatingObjectPlayer1 = new FloatingObjectScript(enemy1);
+        const floatingObjectPlayer2 = new FloatingObjectScript(enemy2);
+        const floatingObjectPlayer3 = new FloatingObjectScript(enemy3);
     }
 
 	/* END-USER-CODE */

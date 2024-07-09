@@ -36,7 +36,7 @@ export default class Player extends Phaser.GameObjects.Container {
         this.assignedCards.push(cardType);
 
         if (this.visibleMove)  {
-            const icon = new Phaser.GameObjects.Image(this.scene, 0, this.sprite.height + 20, whiteIconTexture);
+            const icon = new Phaser.GameObjects.Image(this.scene, 0, -20, whiteIconTexture);
             this.add(icon);
             this.cardIcons.push(icon);
         }

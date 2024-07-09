@@ -43,11 +43,8 @@ export default abstract class Team extends Phaser.Scene {
 
         this.deck.createDeck();
         
-        this.createPlayerAnimations();
         this.addPlayers();
 	}
-
-	abstract createPlayerAnimations(): void;
 
     abstract addPlayers(): void;
 
