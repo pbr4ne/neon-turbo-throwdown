@@ -30,6 +30,9 @@ export default class Player extends Phaser.GameObjects.Container {
         this.setSize(this.sprite.width, this.sprite.height);
 
         this.setInteractive(new Phaser.Geom.Rectangle(0, 0, this.sprite.width, this.sprite.height), Phaser.Geom.Rectangle.Contains);
+
+        this.on('pointerover', () => { this.scene.input.setDefaultCursor('pointer'); });
+        this.on('pointerout', () => { this.scene.input.setDefaultCursor('default'); });
     }
 
     assignCard(cardType: string, whiteIconTexture: string) {

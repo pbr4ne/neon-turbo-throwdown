@@ -41,6 +41,9 @@ export default class Card extends Phaser.GameObjects.Container {
 
         this.setSize(this.cardImage.width, this.cardImage.height);
         this.setInteractive(new Phaser.Geom.Rectangle(0, 0, this.cardImage.width, this.cardImage.height), Phaser.Geom.Rectangle.Contains);
+
+        this.on('pointerover', () => { this.scene.input.setDefaultCursor('pointer'); });
+        this.on('pointerout', () => { this.scene.input.setDefaultCursor('default'); });
     }
 
     setType(type: string) {

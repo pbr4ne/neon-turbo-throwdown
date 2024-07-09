@@ -61,6 +61,9 @@ export default class Deck {
         //deckArea.setStrokeStyle(2, 0x00ff00); // Set the border color to green for visibility
         //deckArea.setOrigin(0, 0); // Top-left corner origin
         deckArea.setInteractive();
+
+        deckArea.on('pointerover', () => { this.scene.input.setDefaultCursor('pointer'); });
+        deckArea.on('pointerout', () => { this.scene.input.setDefaultCursor('default'); });
         return deckArea;
     }
 
