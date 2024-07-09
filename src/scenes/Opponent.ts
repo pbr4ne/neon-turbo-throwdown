@@ -10,18 +10,36 @@ import Hand from "~/prefabs/Hand";
 import Player from "~/prefabs/Player";
 /* END-USER-IMPORTS */
 
-export default class OpponentScene extends Phaser.Scene {
-    private opponentDeck!: Deck;
+export default class Opponent extends Phaser.Scene {
+
+	constructor() {
+		super("Opponent");
+
+		/* START-USER-CTR-CODE */
+		// Write your code here.
+		/* END-USER-CTR-CODE */
+	}
+
+	editorCreate(): void {
+
+		// opponentBorder
+		this.add.image(1674, 274, "opponentBorder");
+
+		this.events.emit("scene-awake");
+	}
+
+	/* START-USER-CODE */
+
+	private opponentDeck!: Deck;
     private opponentHand!: Hand;
     private enemies!: Player[];
     private opponentImage!: Phaser.GameObjects.Image;
 
-    constructor() {
-        super({ key: "OpponentScene" });
-    }
+	create() {
 
-    create() {
-		console.log("OpponentScene created");
+		this.editorCreate();
+
+        console.log("OpponentScene created");
         // Initialize the opponent's deck and hand
         this.opponentDeck = new Deck(this);
         this.opponentHand = new Hand(this, 5);
@@ -37,9 +55,10 @@ export default class OpponentScene extends Phaser.Scene {
 
         // Display the opponent's image
         this.opponentImage = this.add.image(1720, 100, "opponent1").setOrigin(1, 0); // Top right corner
-    }
+    
+	}
 
-	addEnemies() {
+    addEnemies() {
         const enemy1 = new Player(this, 730, 259, 'enemy1a');
         this.add.existing(enemy1);
         enemy1.sprite.play('enemy1_anim');
@@ -90,4 +109,10 @@ export default class OpponentScene extends Phaser.Scene {
             repeat: -1
         });
     }
+
+	/* END-USER-CODE */
 }
+
+/* END OF COMPILED CODE */
+
+// You can write more code here
