@@ -30,7 +30,7 @@ export default abstract class Team extends Phaser.Scene {
 	protected deck!: Deck;
     protected hand!: Hand;
     public players!: Player[];
-    protected opponentPlayers!: Player[];
+    public opponentPlayers!: Player[];
 	protected visibleCards!: boolean;
 
 	create() {
@@ -43,7 +43,6 @@ export default abstract class Team extends Phaser.Scene {
 
         this.deck.createDeck();
         
-
         this.createPlayerAnimations();
         this.addPlayers();
 	}
@@ -51,6 +50,10 @@ export default abstract class Team extends Phaser.Scene {
 	abstract createPlayerAnimations(): void;
 
     abstract addPlayers(): void;
+
+    setOpponentPlayers(opponentPlayers: Player[]) {
+        this.opponentPlayers = opponentPlayers;
+    }
 
     handlePlayerClick(player: Player) {
         this.hand.assignCardToPlayer(player);
@@ -66,6 +69,35 @@ export default abstract class Team extends Phaser.Scene {
                 this.hand.addCard(topCard);
             }
         }
+    }
+
+    executeTurn() {
+        const thrower = this.selectRandomPlayerWithCard("THROW", this.players);
+        if (thrower) {
+            const target = this.selectRandomPlayer(this.opponentPlayers);
+            if (target) {
+                const damage = Phaser.Math.Between(1, 10);
+                target.hit(damage);
+                console.log(`Player ${thrower} hits ${target} for ${damage} damage`);
+            }
+        }
+    }
+
+    selectRandomPlayerWithCard(cardType: string, players: Player[]): Player | null {
+        const eligiblePlayers = players.filter(player => player.getAssignedCards().includes(cardType));
+        if (eligiblePlayers.length > 0) {
+            const randomIndex = Phaser.Math.Between(0, eligiblePlayers.length - 1);
+            return eligiblePlayers[randomIndex];
+        }
+        return null;
+    }
+
+    selectRandomPlayer(players: Player[]): Player | null {
+        if (players.length > 0) {
+            const randomIndex = Phaser.Math.Between(0, players.length - 1);
+            return players[randomIndex];
+        }
+        return null;
     }
 	/* END-USER-CODE */
 }

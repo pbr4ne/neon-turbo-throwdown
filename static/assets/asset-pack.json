@@ -252,6 +252,11 @@
                 "key": "throw"
             },
             {
+                "url": "assets/images/ui/throwdownButton.png",
+                "type": "image",
+                "key": "throwdownButton"
+            },
+            {
                 "url": "assets/images/cards/throwWhite.png",
                 "type": "image",
                 "key": "throwWhite"

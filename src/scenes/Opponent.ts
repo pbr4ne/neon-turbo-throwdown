@@ -28,13 +28,14 @@ export default class Opponent extends Team {
 
 	create() {
         super.create();
-        this.opponentPlayers = (this.scene.get('Character') as Team).players; // Access character players
 
         for (let i = 0; i < 5; i++) {
             this.onDeckClick();
         }
 
         this.assignRandomCardsToPlayers();
+
+        this.events.emit("opponentReady");
     }
 
     assignRandomCardsToPlayers() {

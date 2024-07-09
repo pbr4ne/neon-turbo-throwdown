@@ -26,13 +26,18 @@ export default class Character extends Team {
 
 	/* START-USER-CODE */
 
+    private throwdownButton!: Phaser.GameObjects.Image;
+
 	create() {
         super.create();
 
         const deckArea = this.deck.drawDeck(100, 840);
         deckArea.on("pointerdown", this.onDeckClick.bind(this));
 
-		this.opponentPlayers = (this.scene.get('Opponent') as Team).players; // Access opponent players
+        this.createEndTurnButton();
+        this.checkEndTurnButtonVisibility();
+
+        this.events.emit("characterReady");
     }
 
     createPlayerAnimations() {
@@ -88,6 +93,30 @@ export default class Character extends Team {
         player3.sprite.play('player3_anim');
         player3.on("pointerdown", () => this.handlePlayerClick(player3));
         this.players.push(player3);
+    }
+
+    handlePlayerClick(player: Player) {
+        super.handlePlayerClick(player);
+        this.checkEndTurnButtonVisibility();
+    }
+
+    createEndTurnButton() {
+        this.throwdownButton = this.add.image(1660, 940, 'throwdownButton')
+            .setOrigin(0.5)
+            .setInteractive()
+            .on('pointerdown', () => this.endTurn());
+
+        this.throwdownButton.setVisible(false);
+    }
+
+    checkEndTurnButtonVisibility() {
+        const allPlayersHaveCards = this.players.every(player => player.getAssignedCards().length > 0);
+        this.throwdownButton.setVisible(allPlayersHaveCards);
+    }
+
+    endTurn() {
+        this.throwdownButton.setVisible(false);
+        this.executeTurn();
     }
 
 	/* END-USER-CODE */

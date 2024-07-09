@@ -4,6 +4,7 @@ import Phaser from "phaser";
 import UILayerPrefab from "../prefabs/UILayerPrefab";
 import GameplayScript from "../script-nodes/gameplay/GameplayScript";
 import TextureInfoScript from "../script-nodes/gameplay/TextureInfoScript";
+import Team from "./Team";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -60,11 +61,37 @@ export default class Game extends Phaser.Scene {
 	}
 
 	/* START-USER-CODE */
+	private characterReady: boolean = false;
+    private opponentReady: boolean = false;
+
 	create() {
 		this.editorCreate();
 
         this.scene.launch("Character");
         this.scene.launch("Opponent");
+
+		this.scene.get('Character').events.on('characterReady', this.onCharacterReady, this);
+        this.scene.get('Opponent').events.on('opponentReady', this.onOpponentReady, this);
+    }
+
+	onCharacterReady() {
+        this.characterReady = true;
+        this.checkBothReady();
+    }
+
+    onOpponentReady() {
+        this.opponentReady = true;
+        this.checkBothReady();
+    }
+
+	//todo - this is stupid
+    checkBothReady() {
+        if (this.characterReady && this.opponentReady) {
+            const character = this.scene.get('Character') as Team;
+            const opponent = this.scene.get('Opponent') as Team;
+            character.opponentPlayers = opponent.players;
+            opponent.opponentPlayers = character.players;
+        }
     }
 
 	/* END-USER-CODE */
