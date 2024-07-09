@@ -38,6 +38,9 @@ export default class Game extends Phaser.Scene {
 		const uiLayer = new UILayerPrefab(this, 0, 0);
 		this.add.existing(uiLayer);
 
+		// opponentBorder
+		this.add.image(1630, 261, "opponentBorder");
+
 		// gameplayScript
 		const gameplayScript = new GameplayScript(this);
 

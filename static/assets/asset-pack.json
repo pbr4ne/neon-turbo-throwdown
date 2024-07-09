@@ -192,6 +192,16 @@
                 "key": "music"
             },
             {
+                "url": "assets/images/level/opponent1.png",
+                "type": "image",
+                "key": "opponent1"
+            },
+            {
+                "url": "assets/images/level/opponentBorder.png",
+                "type": "image",
+                "key": "opponentBorder"
+            },
+            {
                 "url": "assets/images/players/player1a.png",
                 "type": "image",
                 "key": "player1a"
