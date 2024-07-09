@@ -5,15 +5,14 @@
 
 import Phaser from "phaser";
 /* START-USER-IMPORTS */
-import Deck from "../prefabs/Deck";
-import Hand from "../prefabs/Hand";
 import Player from "../prefabs/Player";
+import Team from "./Team";
 /* END-USER-IMPORTS */
 
-export default class Character extends Phaser.Scene {
+export default class Character extends Team {
 
 	constructor() {
-		super("Character");
+		super("Character", true);
 
 		/* START-USER-CTR-CODE */
 		// Write your code here.
@@ -27,31 +26,16 @@ export default class Character extends Phaser.Scene {
 
 	/* START-USER-CODE */
 
-	// Write your code here
-
-	private playerDeck!: Deck;
-    private playerHand!: Hand;
-	private players!: Player[];
-	private drawCount: number = 0;
-
 	create() {
+        super.create();
 
-		this.editorCreate();
-
-		this.players = [];
-		this.playerDeck = new Deck(this);
-        this.playerHand = new Hand(this, 5);
-
-		this.playerDeck.createDeck();
-
-		const deckArea = this.playerDeck.drawDeck(100, 840);
+        const deckArea = this.deck.drawDeck(100, 840);
         deckArea.on("pointerdown", this.onDeckClick.bind(this));
 
-        this.createPlayerAnimations();
-        this.addPlayers();
-	}
+		this.opponentPlayers = (this.scene.get('Opponent') as Team).players; // Access opponent players
+    }
 
-	createPlayerAnimations() {
+    createPlayerAnimations() {
         this.anims.create({
             key: 'player1_anim',
             frames: [
@@ -86,7 +70,7 @@ export default class Character extends Phaser.Scene {
         });
     }
 
-	addPlayers() {
+    addPlayers() {
         const player1 = new Player(this, 720, 459, 'player1a', true);
         this.add.existing(player1);
         player1.sprite.play('player1_anim');
@@ -104,23 +88,6 @@ export default class Character extends Phaser.Scene {
         player3.sprite.play('player3_anim');
         player3.on("pointerdown", () => this.handlePlayerClick(player3));
         this.players.push(player3);
-    }
-
-    handlePlayerClick(player: Player) {
-        this.playerHand.assignCardToPlayer(player);
-    }
-
-    onDeckClick() {
-        if (this.drawCount < 5) {
-            const topCard = this.playerDeck.drawCard();
-            if (topCard) {
-                topCard.setTexture("cardFront");
-                topCard.showName(true);
-                topCard.showIcon(true);
-                this.playerHand.addCard(topCard);
-                this.drawCount++;
-            }
-        }
     }
 
 	/* END-USER-CODE */

@@ -12,6 +12,7 @@ export default class Player extends Phaser.GameObjects.Container {
     private assignedCards: string[];
     private cardIcons: Phaser.GameObjects.Image[];
     private visibleMove: boolean = true;
+    private hp: number;
 
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string, visibleMove: boolean) {
         super(scene, x, y);
@@ -22,6 +23,7 @@ export default class Player extends Phaser.GameObjects.Container {
 
         this.assignedCards = [];
         this.cardIcons = [];
+        this.hp = 30;
         this.setSize(this.sprite.width, this.sprite.height);
 
         this.setInteractive(new Phaser.Geom.Rectangle(0, 0, this.sprite.width, this.sprite.height), Phaser.Geom.Rectangle.Contains);
@@ -32,7 +34,7 @@ export default class Player extends Phaser.GameObjects.Container {
             return;
         }
         this.assignedCards.push(cardType);
-    
+
         if (this.visibleMove)  {
             const icon = new Phaser.GameObjects.Image(this.scene, 0, this.sprite.height + 20, whiteIconTexture);
             this.add(icon);
@@ -42,5 +44,21 @@ export default class Player extends Phaser.GameObjects.Container {
 
     getAssignedCards(): string[] {
         return this.assignedCards;
+    }
+
+    getHP(): number {
+        return this.hp;
+    }
+
+    hit(damage: number) {
+        this.hp -= damage;
+        if (this.hp <= 0) {
+            this.hp = 0;
+            this.destroyPlayer();
+        }
+    }
+
+    destroyPlayer() {
+        this.destroy(); 
     }
 }
