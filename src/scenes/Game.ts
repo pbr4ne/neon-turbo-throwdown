@@ -70,6 +70,7 @@ export default class Game extends Phaser.Scene {
     private enemyDeck!: Deck;
     private enemyHand!: Hand;
     private players!: Player[];
+    private drawCount: number = 0;
 
 	create() {
 		this.id++;
@@ -84,9 +85,10 @@ export default class Game extends Phaser.Scene {
         this.playerDeck.createDeck();
         this.enemyDeck.createDeck();
 
-        this.playerDeck.drawDeck(100, 840, this.onTopCardClick.bind(this));
+        const deckArea = this.playerDeck.drawDeck(100, 840);
+        deckArea.on("pointerdown", this.onDeckClick.bind(this));
 
-		this.createPlayerAnimations();
+        this.createPlayerAnimations();
         this.addPlayers();
     }
 
@@ -149,19 +151,17 @@ export default class Game extends Phaser.Scene {
         this.playerHand.assignCardToPlayer(player);
     }
 
-    onTopCardClick() {
-        this.playerDeck.getCards().forEach((card) => {
-            card.setInteractive();
-            card.on("pointerdown", () => {
-                if (this.playerHand.getCards().length < 5) {
-                    this.playerDeck.removeCard(card);
-                    this.playerHand.addCard(card);
-                }
-                if (this.playerHand.getCards().length === 5) {
-                    this.playerDeck.getCards().forEach(c => c.disableInteractive());
-                }
-            });
-        });
+    onDeckClick() {
+        if (this.drawCount < 5) {
+            const topCard = this.playerDeck.drawCard();
+            if (topCard) {
+                topCard.setTexture("cardFront");
+                topCard.showName(true);
+                topCard.showIcon(true);
+                this.playerHand.addCard(topCard);
+                this.drawCount++;
+            }
+        }
     }
 
 	/* END-USER-CODE */
