@@ -69,7 +69,8 @@ module.exports = {
                         // asset pack files are imported in code as modules
                         ignore: ["**/publicroot", "**/*-pack.json"]
                     }
-                }
+                },
+                { from: './static/favicon.ico' }
             ]
         }),
         new webpack.HotModuleReplacementPlugin(),
