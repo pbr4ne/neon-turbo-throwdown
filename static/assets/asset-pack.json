@@ -115,6 +115,51 @@
                 "key": "dodgeWhite"
             },
             {
+                "url": "assets/images/players/enemy1a.png",
+                "type": "image",
+                "key": "enemy1a"
+            },
+            {
+                "url": "assets/images/players/enemy1b.png",
+                "type": "image",
+                "key": "enemy1b"
+            },
+            {
+                "url": "assets/images/players/enemy1c.png",
+                "type": "image",
+                "key": "enemy1c"
+            },
+            {
+                "url": "assets/images/players/enemy2a.png",
+                "type": "image",
+                "key": "enemy2a"
+            },
+            {
+                "url": "assets/images/players/enemy2b.png",
+                "type": "image",
+                "key": "enemy2b"
+            },
+            {
+                "url": "assets/images/players/enemy2c.png",
+                "type": "image",
+                "key": "enemy2c"
+            },
+            {
+                "url": "assets/images/players/enemy3a.png",
+                "type": "image",
+                "key": "enemy3a"
+            },
+            {
+                "url": "assets/images/players/enemy3b.png",
+                "type": "image",
+                "key": "enemy3b"
+            },
+            {
+                "url": "assets/images/players/enemy3c.png",
+                "type": "image",
+                "key": "enemy3c"
+            },
+            {
                 "url": "assets/images/welcome/item1.png",
                 "type": "image",
                 "key": "item1"
