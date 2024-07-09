@@ -30,7 +30,7 @@ export default abstract class Team extends Phaser.Scene {
 	protected deck!: Deck;
     protected hand!: Hand;
     public players!: Player[];
-    public opponentPlayers!: Player[];
+    public opponent!: Team;
 	protected visibleCards!: boolean;
 
 	create() {
@@ -48,8 +48,8 @@ export default abstract class Team extends Phaser.Scene {
 
     abstract addPlayers(): void;
 
-    setOpponentPlayers(opponentPlayers: Player[]) {
-        this.opponentPlayers = opponentPlayers;
+    setOpponent(opponent: Team) {
+        this.opponent = opponent;
     }
 
     handlePlayerClick(player: Player) {
@@ -71,7 +71,7 @@ export default abstract class Team extends Phaser.Scene {
     executeTurn() {
         const thrower = this.selectRandomPlayerWithCard("THROW", this.players);
         if (thrower) {
-            const target = this.selectRandomPlayer(this.opponentPlayers);
+            const target = this.selectRandomPlayer(this.opponent.players);
             if (target) {
                 const damage = Phaser.Math.Between(1, 10);
                 target.hit(damage);
@@ -95,6 +95,10 @@ export default abstract class Team extends Phaser.Scene {
             return players[randomIndex];
         }
         return null;
+    }
+
+    removePlayer(player: Player) {
+        this.players = this.players.filter(p => p !== player);
     }
 	/* END-USER-CODE */
 }

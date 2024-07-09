@@ -43,17 +43,17 @@ export default class Character extends Team {
     }
 
     addPlayers() {
-        const player1 = new Player(this, 720, 459, 'player', true);
+        const player1 = new Player(this, 720, 459, 'player', true, this);
         this.add.existing(player1);
         player1.on("pointerdown", () => this.handlePlayerClick(player1));
         this.players.push(player1);
 
-        const player2 = new Player(this, 950, 583, 'player', true);
+        const player2 = new Player(this, 950, 583, 'player', true, this);
         this.add.existing(player2);
         player2.on("pointerdown", () => this.handlePlayerClick(player2));
         this.players.push(player2);
 
-        const player3 = new Player(this, 1211, 453, 'player', true);
+        const player3 = new Player(this, 1211, 453, 'player', true, this);
         this.add.existing(player3);
         player3.on("pointerdown", () => this.handlePlayerClick(player3));
         this.players.push(player3);

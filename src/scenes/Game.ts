@@ -89,17 +89,17 @@ export default class Game extends Phaser.Scene {
         if (this.characterReady && this.opponentReady) {
             const character = this.scene.get('Character') as Team;
             const opponent = this.scene.get('Opponent') as Team;
-            character.opponentPlayers = opponent.players;
-            opponent.opponentPlayers = character.players;
+            character.opponent = opponent;
+            opponent.opponent = character;
         }
     }
 
 	endTurn() {
-        const characterScene = this.scene.get('Character') as Team;
-        const opponentScene = this.scene.get('Opponent') as Team;
+        const character = this.scene.get('Character') as Team;
+        const opponent = this.scene.get('Opponent') as Team;
 
-		opponentScene.executeTurn();
-        characterScene.executeTurn();
+		opponent.executeTurn();
+        character.executeTurn();
     }
 
 	/* END-USER-CODE */

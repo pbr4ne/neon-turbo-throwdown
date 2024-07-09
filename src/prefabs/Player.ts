@@ -5,6 +5,7 @@
 
 import Phaser from "phaser";
 /* START-USER-IMPORTS */
+import Team from "../scenes/Team";
 /* END-USER-IMPORTS */
 
 export default class Player extends Phaser.GameObjects.Container {
@@ -13,8 +14,9 @@ export default class Player extends Phaser.GameObjects.Container {
     private cardIcons: Phaser.GameObjects.Image[];
     private visibleMove: boolean = true;
     private hp: number;
+    private team: Team;
 
-    constructor(scene: Phaser.Scene, x: number, y: number, texture: string, visibleMove: boolean) {
+    constructor(scene: Phaser.Scene, x: number, y: number, texture: string, visibleMove: boolean, team: Team) {
         super(scene, x, y);
 
         this.visibleMove = visibleMove;
@@ -24,6 +26,7 @@ export default class Player extends Phaser.GameObjects.Container {
         this.assignedCards = [];
         this.cardIcons = [];
         this.hp = 30;
+        this.team = team;
         this.setSize(this.sprite.width, this.sprite.height);
 
         this.setInteractive(new Phaser.Geom.Rectangle(0, 0, this.sprite.width, this.sprite.height), Phaser.Geom.Rectangle.Contains);
@@ -83,6 +86,7 @@ export default class Player extends Phaser.GameObjects.Container {
     }
 
     destroyPlayer() {
-        this.destroy(); // Remove player from the game
+        this.team.removePlayer(this);
+        this.destroy(); 
     }
 }
