@@ -54,16 +54,6 @@
             "y": 0
         },
         {
-            "type": "Image",
-            "id": "8a26c881-ba32-4a4f-8f13-e2c6bec3576a",
-            "label": "opponentBorder",
-            "texture": {
-                "key": "opponentBorder"
-            },
-            "x": 1630,
-            "y": 261
-        },
-        {
             "prefabId": "d8801a27-29ff-4774-a8a6-1f4e9b14d6cc",
             "id": "789d2f54-a153-406e-a5e6-cf5e700681e3",
             "label": "gameplayScript",
