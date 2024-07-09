@@ -71,14 +71,17 @@ export default class Hand {
     }
 
     assignCardToPlayer(player: Player) {
-        if (this.selectedCard) {
-            const cardType = this.selectedCard.getCardType();
-            const whiteIconTexture = this.selectedCard.getWhiteIconTexture();
-            player.assignCard(cardType, whiteIconTexture);
-            this.selectedCard.hide();
-            this.cards = this.cards.filter(card => card !== this.selectedCard);
-            this.selectedCard = null;
-            this.updateHandPositions();
+        if (this.poppedUpCard) {
+            if (player.getAssignedCards().length < 1) {
+                const cardType = this.poppedUpCard.getCardType();
+                const whiteIconTexture = this.poppedUpCard.getWhiteIconTexture();
+                player.assignCard(cardType, whiteIconTexture);
+                this.poppedUpCard.hide();
+                this.cards = this.cards.filter(card => card !== this.poppedUpCard);
+                this.updateHandPositions();
+            }
+            this.poppedUpCard.togglePopUp(); 
+            this.poppedUpCard = null;
         }
     }
 }
