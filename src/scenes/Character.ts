@@ -87,19 +87,19 @@ export default class Character extends Phaser.Scene {
     }
 
 	addPlayers() {
-        const player1 = new Player(this, 720, 459, 'player1a');
+        const player1 = new Player(this, 720, 459, 'player1a', true);
         this.add.existing(player1);
         player1.sprite.play('player1_anim');
         player1.on("pointerdown", () => this.handlePlayerClick(player1));
         this.players.push(player1);
 
-        const player2 = new Player(this, 950, 583, 'player2a');
+        const player2 = new Player(this, 950, 583, 'player2a', true);
         this.add.existing(player2);
         player2.sprite.play('player2_anim');
         player2.on("pointerdown", () => this.handlePlayerClick(player2));
         this.players.push(player2);
 
-        const player3 = new Player(this, 1211, 453, 'player3a');
+        const player3 = new Player(this, 1211, 453, 'player3a', true);
         this.add.existing(player3);
         player3.sprite.play('player3_anim');
         player3.on("pointerdown", () => this.handlePlayerClick(player3));

@@ -22,7 +22,6 @@ export default class Opponent extends Phaser.Scene {
 
 	editorCreate(): void {
 
-		// opponentBorder
 		this.add.image(1674, 274, "opponentBorder");
 
 		this.events.emit("scene-awake");
@@ -32,43 +31,69 @@ export default class Opponent extends Phaser.Scene {
 
 	private opponentDeck!: Deck;
     private opponentHand!: Hand;
-    private enemies!: Player[];
+    private opponentPlayers!: Player[];
     private opponentImage!: Phaser.GameObjects.Image;
 
 	create() {
 
 		this.editorCreate();
 
-        console.log("OpponentScene created");
         this.opponentDeck = new Deck(this);
         this.opponentHand = new Hand(this, 5);
-        this.enemies = [];
+        this.opponentPlayers = [];
 
         this.opponentDeck.createDeck();
-        //this.opponentDeck.drawDeck(100, 100); 
+
+        for (let i = 0; i < 5; i++) {
+            const card = this.opponentDeck.drawCard();
+            if (card) {
+                card.setTexture("cardBack");
+                card.showName(false);
+                card.showIcon(false);
+                this.opponentHand.addCard(card);
+            }
+        }
 
 		this.createEnemyAnimations();
         this.addEnemies();
+
+        this.assignRandomCardsToPlayers();
 
         this.opponentImage = this.add.image(1780, 140, "opponent1").setOrigin(1, 0); 
     
 	}
 
+    assignRandomCardsToPlayers() {
+        this.opponentPlayers.forEach(player => {
+            if (this.opponentHand.getCards().length > 0) {
+                const randomIndex = Phaser.Math.Between(0, this.opponentHand.getCards().length - 1);
+                const randomCard = this.opponentHand.getCards()[randomIndex];
+                const cardType = randomCard.getCardType();
+                const whiteIconTexture = randomCard.getWhiteIconTexture();
+
+                player.assignCard(cardType, whiteIconTexture);
+                console.log("Assigned card to player: " + cardType);
+
+                this.opponentHand.getCards().splice(randomIndex, 1);
+            }
+        });
+    }
+
     addEnemies() {
-        const enemy1 = new Player(this, 730, 259, 'enemy1a');
+        const enemy1 = new Player(this, 730, 259, 'enemy1a', false);
         this.add.existing(enemy1);
         enemy1.sprite.play('enemy1_anim');
-        this.enemies.push(enemy1);
+        this.opponentPlayers.push(enemy1);
 
-        const enemy2 = new Player(this, 950, 213, 'enemy2a');
+        const enemy2 = new Player(this, 950, 213, 'enemy2a', false);
         this.add.existing(enemy2);
         enemy2.sprite.play('enemy2_anim');
-        this.enemies.push(enemy2);
+        this.opponentPlayers.push(enemy2);
 
-        const enemy3 = new Player(this, 1180, 253, 'enemy3a');
+        const enemy3 = new Player(this, 1180, 253, 'enemy3a', false);
         this.add.existing(enemy3);
         enemy3.sprite.play('enemy3_anim');
-        this.enemies.push(enemy3);
+        this.opponentPlayers.push(enemy3);
     }
 
 	createEnemyAnimations() {

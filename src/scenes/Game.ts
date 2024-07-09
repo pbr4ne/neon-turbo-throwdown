@@ -5,9 +5,6 @@ import UILayerPrefab from "../prefabs/UILayerPrefab";
 import GameplayScript from "../script-nodes/gameplay/GameplayScript";
 import TextureInfoScript from "../script-nodes/gameplay/TextureInfoScript";
 /* START-USER-IMPORTS */
-import Deck from "../prefabs/Deck";
-import Hand from "../prefabs/Hand";
-import Player from "../prefabs/Player";
 /* END-USER-IMPORTS */
 
 export default class Game extends Phaser.Scene {
@@ -63,23 +60,8 @@ export default class Game extends Phaser.Scene {
 	}
 
 	/* START-USER-CODE */
-
-	public id = 0;
-
-    private enemyDeck!: Deck;
-    private enemyHand!: Hand;
-    
-    private enemies!: Player[];
-    
 	create() {
-		this.id++;
 		this.editorCreate();
-
-        this.enemyDeck = new Deck(this);
-        this.enemyHand = new Hand(this, 5);
-        this.enemies = [];
-
-        this.enemyDeck.createDeck();
 
         this.scene.launch("Character");
         this.scene.launch("Opponent");
