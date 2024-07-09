@@ -6,6 +6,7 @@ import GameplayScript from "../script-nodes/gameplay/GameplayScript";
 import TextureInfoScript from "../script-nodes/gameplay/TextureInfoScript";
 import Team from "./Team";
 /* START-USER-IMPORTS */
+import DialogBox from "../prefabs/DialogBox";
 /* END-USER-IMPORTS */
 
 export default class Game extends Phaser.Scene {
@@ -63,15 +64,32 @@ export default class Game extends Phaser.Scene {
 	/* START-USER-CODE */
 	private characterReady: boolean = false;
     private opponentReady: boolean = false;
+	private dialogLayer!: Phaser.GameObjects.Layer;
+	private playerLayer!: Phaser.GameObjects.Layer;
 
 	create() {
 		this.editorCreate();
 
-        this.scene.launch("Character");
-        this.scene.launch("Opponent");
+		this.playerLayer = this.add.layer();
+		this.dialogLayer = this.add.layer();
+
+        this.scene.launch("Character", { layer: this.playerLayer });
+        this.scene.launch("Opponent", { layer: this.playerLayer });
 
 		this.scene.get('Character').events.on('characterReady', this.onCharacterReady, this);
         this.scene.get('Opponent').events.on('opponentReady', this.onOpponentReady, this);
+
+		this.showDialog();
+    }
+
+	showDialog() {
+        const dialog = new DialogBox(this, 960, 540, "Choose your dialogue option:", ["Option 1", "Option 2", "Option 3"]);
+
+        dialog.on('optionSelected', (option: string) => {
+            console.log(`Selected option: ${option}`);
+        });
+
+        //this.dialogLayer.add(dialog);
     }
 
 	onCharacterReady() {

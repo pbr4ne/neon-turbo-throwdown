@@ -32,11 +32,12 @@ export default abstract class Team extends Phaser.Scene {
     public players!: Player[];
     public opponent!: Team;
 	protected visibleCards!: boolean;
+    public layer!: Phaser.GameObjects.Layer;
 
-	create() {
-
+	create(data: any) {
 		this.editorCreate();
 
+        this.layer = data.layer;
 		this.players = [];
         this.deck = new Deck(this);
         this.hand = new Hand(this, 5);

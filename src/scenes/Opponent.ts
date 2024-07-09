@@ -27,8 +27,8 @@ export default class Opponent extends Team {
 		this.events.emit("scene-awake");
 	}
 
-	create() {
-        super.create();
+	create(data: any) {
+        super.create(data);
 
         for (let i = 0; i < 5; i++) {
             this.onDeckClick();
@@ -58,15 +58,15 @@ export default class Opponent extends Team {
 
     addPlayers() {
         const enemy1 = new Player(this, 730, 259, 'enemy', false, this);
-        this.add.existing(enemy1);
+        this.layer.add(enemy1);
         this.players.push(enemy1);
 
         const enemy2 = new Player(this, 950, 213, 'enemy', false, this);
-        this.add.existing(enemy2);
+        this.layer.add(enemy2);
         this.players.push(enemy2);
 
         const enemy3 = new Player(this, 1180, 253, 'enemy', false, this);
-        this.add.existing(enemy3);
+        this.layer.add(enemy3);
         this.players.push(enemy3);
 
         const floatingObjectPlayer1 = new FloatingObjectScript(enemy1);
