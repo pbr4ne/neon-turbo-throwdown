@@ -93,7 +93,7 @@ export default class Game extends Phaser.Scene {
         this.createPlayerAnimations();
         this.addPlayers();
 
-        this.scene.launch("OpponentScene");
+        this.scene.launch("Opponent");
     }
 
 	createPlayerAnimations() {

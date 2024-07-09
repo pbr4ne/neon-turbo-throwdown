@@ -5,9 +5,9 @@
 
 import Phaser from "phaser";
 /* START-USER-IMPORTS */
-import Deck from "~/prefabs/Deck";
-import Hand from "~/prefabs/Hand";
-import Player from "~/prefabs/Player";
+import Deck from "../prefabs/Deck";
+import Hand from "../prefabs/Hand";
+import Player from "../prefabs/Player";
 /* END-USER-IMPORTS */
 
 export default class Opponent extends Phaser.Scene {
@@ -40,21 +40,17 @@ export default class Opponent extends Phaser.Scene {
 		this.editorCreate();
 
         console.log("OpponentScene created");
-        // Initialize the opponent's deck and hand
         this.opponentDeck = new Deck(this);
         this.opponentHand = new Hand(this, 5);
         this.enemies = [];
 
-		this.add.image(1630, 261, "opponentBorder");
-
         this.opponentDeck.createDeck();
-        this.opponentDeck.drawDeck(100, 100); // Example position for the deck
+        //this.opponentDeck.drawDeck(100, 100); 
 
 		this.createEnemyAnimations();
         this.addEnemies();
 
-        // Display the opponent's image
-        this.opponentImage = this.add.image(1720, 100, "opponent1").setOrigin(1, 0); // Top right corner
+        this.opponentImage = this.add.image(1780, 140, "opponent1").setOrigin(1, 0); 
     
 	}
 
