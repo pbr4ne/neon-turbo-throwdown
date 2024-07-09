@@ -38,9 +38,6 @@ export default class Game extends Phaser.Scene {
 		const uiLayer = new UILayerPrefab(this, 0, 0);
 		this.add.existing(uiLayer);
 
-		// opponentBorder
-		this.add.image(1630, 261, "opponentBorder");
-
 		// gameplayScript
 		const gameplayScript = new GameplayScript(this);
 
@@ -94,9 +91,9 @@ export default class Game extends Phaser.Scene {
         deckArea.on("pointerdown", this.onDeckClick.bind(this));
 
         this.createPlayerAnimations();
-        this.createEnemyAnimations();
         this.addPlayers();
-        this.addEnemies();
+
+        this.scene.launch("OpponentScene");
     }
 
 	createPlayerAnimations() {
@@ -134,41 +131,6 @@ export default class Game extends Phaser.Scene {
         });
     }
 
-    createEnemyAnimations() {
-        this.anims.create({
-            key: 'enemy1_anim',
-            frames: [
-                { key: 'enemy1a' },
-                { key: 'enemy1b' },
-                { key: 'enemy1c' }
-            ],
-            frameRate: 3,
-            repeat: -1
-        });
-
-        this.anims.create({
-            key: 'enemy2_anim',
-            frames: [
-                { key: 'enemy2a' },
-                { key: 'enemy2b' },
-                { key: 'enemy2c' }
-            ],
-            frameRate: 3,
-            repeat: -1
-        });
-
-        this.anims.create({
-            key: 'enemy3_anim',
-            frames: [
-                { key: 'enemy3a' },
-                { key: 'enemy3b' },
-                { key: 'enemy3c' }
-            ],
-            frameRate: 3,
-            repeat: -1
-        });
-    }
-
 	addPlayers() {
         const player1 = new Player(this, 720, 459, 'player1a');
         this.add.existing(player1);
@@ -187,23 +149,6 @@ export default class Game extends Phaser.Scene {
         player3.sprite.play('player3_anim');
         player3.on("pointerdown", () => this.handlePlayerClick(player3));
         this.players.push(player3);
-    }
-
-    addEnemies() {
-        const enemy1 = new Player(this, 730, 259, 'enemy1a');
-        this.add.existing(enemy1);
-        enemy1.sprite.play('enemy1_anim');
-        this.enemies.push(enemy1);
-
-        const enemy2 = new Player(this, 950, 213, 'enemy2a');
-        this.add.existing(enemy2);
-        enemy2.sprite.play('enemy2_anim');
-        this.enemies.push(enemy2);
-
-        const enemy3 = new Player(this, 1180, 253, 'enemy3a');
-        this.add.existing(enemy3);
-        enemy3.sprite.play('enemy3_anim');
-        this.enemies.push(enemy3);
     }
 
     handlePlayerClick(player: Player) {
