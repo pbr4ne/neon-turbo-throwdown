@@ -8,6 +8,7 @@ import Phaser from "phaser";
 import Player from "../prefabs/Player";
 import Team from "./Team";
 import FloatingObjectScript from "../script-nodes/ui/FloatingObjectScript";
+import Game from "./Game";
 /* END-USER-IMPORTS */
 
 export default class Character extends Team {
@@ -71,7 +72,7 @@ export default class Character extends Team {
         this.throwdownButton = this.add.image(1660, 940, 'throwdownButton')
             .setOrigin(0.5)
             .setInteractive()
-            .on('pointerdown', () => this.endTurn());
+            .on('pointerdown', () => (this.scene.get('Game') as Game).endTurn());
 
         this.throwdownButton.setVisible(false);
     }
@@ -79,11 +80,6 @@ export default class Character extends Team {
     checkEndTurnButtonVisibility() {
         const allPlayersHaveCards = this.players.every(player => player.getAssignedCards().length > 0);
         this.throwdownButton.setVisible(allPlayersHaveCards);
-    }
-
-    endTurn() {
-        this.throwdownButton.setVisible(false);
-        this.executeTurn();
     }
 
 	/* END-USER-CODE */

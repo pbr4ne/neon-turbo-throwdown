@@ -94,6 +94,14 @@ export default class Game extends Phaser.Scene {
         }
     }
 
+	endTurn() {
+        const characterScene = this.scene.get('Character') as Team;
+        const opponentScene = this.scene.get('Opponent') as Team;
+
+		opponentScene.executeTurn();
+        characterScene.executeTurn();
+    }
+
 	/* END-USER-CODE */
 }
 

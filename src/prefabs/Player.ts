@@ -52,13 +52,37 @@ export default class Player extends Phaser.GameObjects.Container {
 
     hit(damage: number) {
         this.hp -= damage;
+        this.showFloatingDamage(damage);
         if (this.hp <= 0) {
             this.hp = 0;
             this.destroyPlayer();
         }
     }
 
+    showFloatingDamage(damage: number) {
+        if (!this.scene) {
+            return;
+        }
+        const damageText = this.scene.add.text(this.x, this.y - this.sprite.height / 2, damage.toString(), {
+            fontSize: '36px',
+            color: '#ff0000',
+            stroke: '#000000',
+            strokeThickness: 3
+        }).setOrigin(0.5);
+
+        this.scene.add.tween({
+            targets: damageText,
+            y: this.y - this.sprite.height / 2 - 50,
+            alpha: 0,
+            duration: 1000,
+            ease: 'Power1',
+            onComplete: () => {
+                damageText.destroy();
+            }
+        });
+    }
+
     destroyPlayer() {
-        this.destroy(); 
+        this.destroy(); // Remove player from the game
     }
 }
