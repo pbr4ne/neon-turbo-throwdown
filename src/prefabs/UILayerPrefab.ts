@@ -6,10 +6,6 @@
 import Phaser from "phaser";
 import FloatingObjectScript from "../script-nodes/ui/FloatingObjectScript";
 import OnPointerDownStartSceneScript from "../script-nodes/ui/OnPointerDownStartSceneScript";
-import { OnPointerDownScript } from "@phaserjs/editor-scripts-core";
-import { PushActionScript } from "@phaserjs/editor-scripts-simple-animations";
-import { EmitEventActionScript } from "@phaserjs/editor-scripts-core";
-import SwitchImageActionScript from "../script-nodes/ui/SwitchImageActionScript";
 import { OnEventScript } from "@phaserjs/editor-scripts-core";
 import UpdateTextAction from "../script-nodes/gameplay/UpdateTextAction";
 /* START-USER-IMPORTS */
@@ -21,7 +17,7 @@ export default class UILayerPrefab extends Phaser.GameObjects.Container {
 		super(scene, x ?? 0, y ?? 0);
 
 		// homeButton
-		const homeButton = scene.add.image(1782, 116, "buttons", "home.png");
+		const homeButton = scene.add.image(90, 231, "buttons", "home.png");
 		this.add(homeButton);
 
 		// floatingObjectScript_1
@@ -29,25 +25,6 @@ export default class UILayerPrefab extends Phaser.GameObjects.Container {
 
 		// onPointerDownStartSceneScript
 		const onPointerDownStartSceneScript = new OnPointerDownStartSceneScript(homeButton);
-
-		// pauseBtn
-		const pauseBtn = scene.add.image(1596, 118, "buttons", "pause.png");
-		this.add(pauseBtn);
-
-		// onPointerDownScript
-		const onPointerDownScript = new OnPointerDownScript(pauseBtn);
-
-		// pushActionScript_1
-		const pushActionScript_1 = new PushActionScript(onPointerDownScript);
-
-		// emitGamePausedEvent
-		const emitGamePausedEvent = new EmitEventActionScript(pushActionScript_1);
-
-		// pauseSwitchImageAction
-		const pauseSwitchImageAction = new SwitchImageActionScript(pushActionScript_1);
-
-		// floatingObjectScript
-		const floatingObjectScript = new FloatingObjectScript(pauseBtn);
 
 		// startsIcon
 		const startsIcon = scene.add.container(91, 72);
@@ -104,18 +81,6 @@ export default class UILayerPrefab extends Phaser.GameObjects.Container {
 
 		// onPointerDownStartSceneScript.startSceneActionScript (prefab fields)
 		onPointerDownStartSceneScript.startSceneActionScript.sceneKey = "Welcome";
-
-		// emitGamePausedEvent (prefab fields)
-		emitGamePausedEvent.eventName = "game-paused";
-		emitGamePausedEvent.eventEmitter = "scene.events";
-
-		// pauseSwitchImageAction (prefab fields)
-		pauseSwitchImageAction.onTexture = {"key":"buttons","frame":"pause.png"};
-		pauseSwitchImageAction.offTexture = {"key":"buttons","frame":"play.png"};
-		pauseSwitchImageAction.isOn = true;
-
-		// floatingObjectScript (prefab fields)
-		floatingObjectScript.offset = 5;
 
 		// floatingObjectScript_4 (prefab fields)
 		floatingObjectScript_4.offset = 10;

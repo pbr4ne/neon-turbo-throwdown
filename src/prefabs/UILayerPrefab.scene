@@ -25,8 +25,8 @@
                         "key": "buttons",
                         "frame": "home.png"
                     },
-                    "x": 1782,
-                    "y": 116,
+                    "x": 90,
+                    "y": 231,
                     "list": [
                         {
                             "prefabId": "1de438d1-5401-42d3-a8b0-adda8fc8c320",
@@ -65,74 +65,6 @@
                                     ]
                                 }
                             ]
-                        }
-                    ]
-                },
-                {
-                    "type": "Image",
-                    "id": "923a285a-f3ab-4b19-977e-00fcc0ff8222",
-                    "label": "pauseBtn",
-                    "texture": {
-                        "key": "buttons",
-                        "frame": "pause.png"
-                    },
-                    "x": 1596,
-                    "y": 118,
-                    "list": [
-                        {
-                            "prefabId": "a06ed60b-79f1-4444-bf35-89046f71f954",
-                            "id": "34855fbe-a9cc-4851-b916-09d12045d928",
-                            "unlock": [
-                                "x",
-                                "y"
-                            ],
-                            "label": "onPointerDownScript",
-                            "list": [
-                                {
-                                    "prefabId": "0e39177a-6e19-4b56-a7c2-2360a2e41505",
-                                    "id": "767497ef-18ab-4562-a714-1a6dff3e6482",
-                                    "label": "pushActionScript_1",
-                                    "list": [
-                                        {
-                                            "prefabId": "757fdd95-b5cc-4c5b-adef-a26b5965d851",
-                                            "id": "d0aa69cb-28bb-4131-9d80-ef974601a054",
-                                            "unlock": [
-                                                "eventName",
-                                                "eventEmitter"
-                                            ],
-                                            "label": "emitGamePausedEvent",
-                                            "eventName": "game-paused",
-                                            "eventEmitter": "scene.events"
-                                        },
-                                        {
-                                            "prefabId": "b61e7279-4e75-4f73-b26d-4f37ff949c85",
-                                            "id": "c15e52a2-7b03-4e47-9850-5b60a4b6e582",
-                                            "unlock": [
-                                                "isOn",
-                                                "onTexture",
-                                                "offTexture",
-                                                "x",
-                                                "y"
-                                            ],
-                                            "label": "pauseSwitchImageAction",
-                                            "onTexture": "{\"key\":\"buttons\",\"frame\":\"pause.png\"}",
-                                            "offTexture": "{\"key\":\"buttons\",\"frame\":\"play.png\"}",
-                                            "isOn": true
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "prefabId": "1de438d1-5401-42d3-a8b0-adda8fc8c320",
-                            "id": "44e2aa83-75ec-4013-8748-70ddb849b5a3",
-                            "unlock": [
-                                "offset",
-                                "x",
-                                "y"
-                            ],
-                            "label": "floatingObjectScript",
-                            "offset": 5
                         }
                     ]
                 },
