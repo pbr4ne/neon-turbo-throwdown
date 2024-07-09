@@ -35,6 +35,8 @@ export default class Opponent extends Team {
 
         this.assignRandomCardsToPlayers();
 
+        this.add.image(1780, 140, "opponent1").setOrigin(1, 0);
+
         this.events.emit("opponentReady");
     }
 
