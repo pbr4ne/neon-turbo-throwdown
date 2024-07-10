@@ -20,9 +20,7 @@ export default abstract class Team extends Phaser.GameObjects.Container {
 		this.members = [];
         this.deck = new Deck(scene);
         this.hand = new Hand(scene, 5);
-
-        this.deck.createDeck();
-        
+      
         this.addMembers();
 		/* END-USER-CTR-CODE */
 	}
@@ -53,6 +51,11 @@ export default abstract class Team extends Phaser.GameObjects.Container {
                 topCard.showName(this.visibleCards);
                 topCard.showIcon(this.visibleCards);
                 this.hand.addCard(topCard);
+                topCard.off("pointerdown");
+                this.deck.updateTopCardInteraction();
+                topCard.on("pointerdown", () => {
+                    this.hand.handleCardClick(topCard);
+                });
             }
         }
     }

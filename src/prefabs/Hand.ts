@@ -31,10 +31,6 @@ export default class Hand {
             card.showIcon(true);
             this.cards.push(card);
             this.updateHandPositions();
-
-            card.on("pointerdown", () => {
-                this.handleCardClick(card);
-            });
         }
     }
 

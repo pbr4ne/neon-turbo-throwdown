@@ -7,28 +7,13 @@
 import Card from "./Card";
 /* END-USER-IMPORTS */
 
-export default class Deck {
-    private scene: Phaser.Scene;
+export default class Deck extends Phaser.GameObjects.Container {
     private cards: Card[];
 
     constructor(scene: Phaser.Scene) {
-        this.scene = scene;
+        super(scene);
         this.cards = [];
-    }
 
-    addCard(card: Card) {
-        this.cards.push(card);
-    }
-
-    drawCard(): Card | undefined {
-        return this.cards.pop();
-    }
-
-    shuffle() {
-        Phaser.Utils.Array.Shuffle(this.cards);
-    }
-
-    createDeck() {
         const cardTypes = ["BLOCK", "DODGE", "CATCH", "THROW"];
 
         for (let i = 0; i < 10; i++) {
@@ -37,33 +22,42 @@ export default class Deck {
             card.setType(cardType);
             card.showName(false);
             card.showIcon(false);
-            this.addCard(card);
+            this.cards.push(card);
         }
 
         this.shuffle();
+        this.scene.add.existing(this);
     }
 
-    drawDeck(x: number, y: number) {
+    drawCard(): Card | undefined {
+        return this.cards.pop();
+    }
+
+    shuffle(): this {
+        Phaser.Utils.Array.Shuffle(this.cards);
+        return this;
+    }
+
+    renderDeck(x: number, y: number) {
         const offset = 5;
-        //todo - this is hacky
-        let cardWidth = 170; // Assuming card width
-        let cardHeight = 240; // Assuming card height
 
         this.cards.forEach((card, index) => {
             card.setTexture("cardBack");
             card.setPosition(x + index * offset, y + index * offset);
-            this.scene.add.existing(card);
+            this.add(card);
         });
 
-        // Draw a rectangle around the top card for debugging
-        const deckArea = this.scene.add.rectangle(x, y, cardWidth, cardHeight);
-        //deckArea.setStrokeStyle(2, 0x00ff00); // Set the border color to green for visibility
-        //deckArea.setOrigin(0, 0); // Top-left corner origin
-        deckArea.setInteractive();
+        this.updateTopCardInteraction();
+    }
 
-        deckArea.on('pointerover', () => { this.scene.input.setDefaultCursor('pointer'); });
-        deckArea.on('pointerout', () => { this.scene.input.setDefaultCursor('default'); });
-        return deckArea;
+    updateTopCardInteraction() {
+        if (this.cards.length > 0) {
+            const topCard = this.cards[this.cards.length - 1];
+            topCard.setInteractive();
+            topCard.on('pointerdown', () => {
+                this.emit('deckClicked');
+            });
+        }
     }
 
     getCards(): Card[] {

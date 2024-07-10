@@ -17,8 +17,9 @@ export default class Player extends Team {
 		super(scene, true);
 
 		/* START-USER-CTR-CODE */
-		const deckArea = this.deck.drawDeck(100, 840);
-        deckArea.on("pointerdown", this.onDeckClick.bind(this));
+        this.add(this.deck);
+		this.deck.renderDeck(100, 840);
+        this.deck.on("deckClicked", this.onDeckClick.bind(this));
 
         this.createEndTurnButton();
         this.checkEndTurnButtonVisibility();
@@ -65,8 +66,10 @@ export default class Player extends Team {
 
     checkEndTurnButtonVisibility() {
         const allMembersHaveCards = this.members.every(member => member.getAssignedCards().length > 0);
-        this.throwdownButton.setVisible(allMembersHaveCards);
+         this.throwdownButton.setVisible(allMembersHaveCards);
     }
+
+    
 	/* END-USER-CODE */
 }
 

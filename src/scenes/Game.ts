@@ -82,7 +82,7 @@ export default class Game extends Phaser.Scene {
 		this.playerLayer.add(this.player);
 		this.playerLayer.add(this.boss);
 
-		this.showDialog();
+		//this.showDialog();
     }
 
 	showDialog() {
@@ -93,7 +93,7 @@ export default class Game extends Phaser.Scene {
             console.log(`Selected option: ${option}`);
         });
 
-        //this.dialogLayer.add(dialog);
+        this.dialogLayer.add(dialog);
     }
 
 	endTurn() {
