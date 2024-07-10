@@ -17,10 +17,7 @@ export default class Boss extends Team {
         super(scene, false);
 
         /* START-USER-CTR-CODE */
-        const borderImage = new Phaser.GameObjects.Image(scene, 1674, 274, "opponentBorder");
-        this.add(borderImage);
-
-        const bossImage = new Phaser.GameObjects.Image(scene, 1780, 140, "opponent1").setOrigin(1, 0);
+        const bossImage = new Phaser.GameObjects.Image(scene, 1795, 80, "opponent1").setOrigin(1, 0);
         this.add(bossImage);
         /* END-USER-CTR-CODE */
     }
