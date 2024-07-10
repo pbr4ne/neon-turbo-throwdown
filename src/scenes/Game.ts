@@ -22,10 +22,6 @@ export default class Game extends Phaser.Scene {
 
 	editorCreate(): void {
 
-		// background_1
-		const background_1 = this.add.image(0, 0, "background-1");
-		background_1.setOrigin(0, 0);
-
 		// background_2
 		const background_2 = this.add.image(0, 0, "background-2");
 		background_2.setOrigin(0, 0);

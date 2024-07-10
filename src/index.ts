@@ -15,6 +15,7 @@ const game = new Phaser.Game({
         default: "arcade",
     },
     scene: [Preload, Welcome, Game],
+    transparent: true,
 });
 
 game.scene.start("Preload");

@@ -14,16 +14,6 @@
     "displayList": [
         {
             "type": "Image",
-            "id": "470ec990-0468-4835-89bc-cd0c3e622257",
-            "label": "background_1",
-            "texture": {
-                "key": "background-1"
-            },
-            "originX": 0,
-            "originY": 0
-        },
-        {
-            "type": "Image",
             "id": "7c94cb2a-50bf-404d-96f7-6fe1a8f2e70a",
             "label": "background_2",
             "texture": {
