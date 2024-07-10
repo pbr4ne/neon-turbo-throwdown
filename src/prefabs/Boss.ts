@@ -6,33 +6,34 @@
 import Phaser from "phaser";
 /* START-USER-IMPORTS */
 import Member from "./Member";
+import Player from "./Player";
 import Team from "./Team";
 import FloatingObjectScript from "../script-nodes/ui/FloatingObjectScript";
 /* END-USER-IMPORTS */
 
 export default class Boss extends Team {
 
-	constructor(scene: Phaser.Scene) {
-		super(scene, false);
+    constructor(scene: Phaser.Scene) {
+        super(scene, false);
 
-		/* START-USER-CTR-CODE */
-		const borderImage = new Phaser.GameObjects.Image(scene, 1674, 274, "opponentBorder");
-		this.add(borderImage);
+        /* START-USER-CTR-CODE */
+        const borderImage = new Phaser.GameObjects.Image(scene, 1674, 274, "opponentBorder");
+        this.add(borderImage);
 
-		for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 5; i++) {
             this.onDeckClick();
         }
 
         this.assignRandomCardsToMembers();
 
-		const bossImage = new Phaser.GameObjects.Image(scene, 1780, 140, "opponent1").setOrigin(1, 0);
+        const bossImage = new Phaser.GameObjects.Image(scene, 1780, 140, "opponent1").setOrigin(1, 0);
         this.add(bossImage);
-		/* END-USER-CTR-CODE */
-	}
+        /* END-USER-CTR-CODE */
+    }
 
-	/* START-USER-CODE */
-
-	assignRandomCardsToMembers() {
+    /* START-USER-CODE */
+    
+    assignRandomCardsToMembers() {
         this.members.forEach(member => {
             if (this.hand.getCards().length > 0) {
                 const randomIndex = Phaser.Math.Between(0, this.hand.getCards().length - 1);
@@ -60,16 +61,21 @@ export default class Boss extends Team {
         this.members.push(enemy2);
         this.members.push(enemy3);
 
-        enemy1.on("pointerdown", () => this.handleMemberClick(enemy1));
-        enemy2.on("pointerdown", () => this.handleMemberClick(enemy2));
-        enemy3.on("pointerdown", () => this.handleMemberClick(enemy3));
+        enemy1.on("pointerdown", () => this.handleEnemyClick(enemy1));
+        enemy2.on("pointerdown", () => this.handleEnemyClick(enemy2));
+        enemy3.on("pointerdown", () => this.handleEnemyClick(enemy3));
 
         const floatingObjectMember1 = new FloatingObjectScript(enemy1);
         const floatingObjectMember2 = new FloatingObjectScript(enemy2);
         const floatingObjectMember3 = new FloatingObjectScript(enemy3);
     }
 
-	/* END-USER-CODE */
+    handleEnemyClick(enemy: Member) {
+        const playerScene = this.opponent as Player;
+        playerScene.handleEnemyClick(enemy);
+    }
+
+    /* END-USER-CODE */
 }
 
 /* END OF COMPILED CODE */

@@ -28,6 +28,8 @@ export default class Player extends Team {
 
 	/* START-USER-CODE */
 	private throwdownButton!: Phaser.GameObjects.Image;
+    private selectedThrowMember: Member | null = null;
+    private intendedTarget: Member | null = null;
 
 	addMembers() {
         const member1 = new Member(this.scene, 720, 459, 'player', true, this);
@@ -54,6 +56,14 @@ export default class Player extends Team {
     handleMemberClick(member: Member) {
         this.hand.assignCardToMember(member);
         super.handleMemberClick(member);
+
+        // Check if the selected member has a THROW card
+        if (member.getAssignedCards().includes("THROW")) {
+            this.selectedThrowMember = member;
+        } else {
+            this.selectedThrowMember = null;
+        }
+
         this.checkEndTurnButtonVisibility();
     }
 
@@ -68,9 +78,30 @@ export default class Player extends Team {
 
     checkEndTurnButtonVisibility() {
         const allMembersHaveCards = this.members.every(member => member.getAssignedCards().length > 0);
-         this.throwdownButton.setVisible(allMembersHaveCards);
+        this.throwdownButton.setVisible(allMembersHaveCards);
     }
 
+    handleEnemyClick(enemy: Member) {
+        if (this.selectedThrowMember) {
+            this.intendedTarget = enemy;
+        }
+    }
+
+    performThrow(thrower: Member, target: Member) {
+        const damage = Phaser.Math.Between(1, 10);
+        target.hit(damage);
+        console.log(`Member ${thrower} throws at ${target} for ${damage} damage`);
+    }
+
+    executeTurn() {
+        if (this.selectedThrowMember && this.intendedTarget) {
+            this.performThrow(this.selectedThrowMember, this.intendedTarget);
+            this.selectedThrowMember = null;
+            this.intendedTarget = null;
+        } else {
+            super.executeTurn();
+        }
+    }
     
 	/* END-USER-CODE */
 }
