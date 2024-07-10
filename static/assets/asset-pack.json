@@ -100,6 +100,31 @@
                 "key": "catchWhite"
             },
             {
+                "url": "assets/images/game/coach-corner.png",
+                "type": "image",
+                "key": "coach-corner"
+            },
+            {
+                "url": "assets/images/game/court.png",
+                "type": "image",
+                "key": "court"
+            },
+            {
+                "url": "assets/images/game/difficulty-1.png",
+                "type": "image",
+                "key": "difficulty-1"
+            },
+            {
+                "url": "assets/images/game/difficulty-2.png",
+                "type": "image",
+                "key": "difficulty-2"
+            },
+            {
+                "url": "assets/images/game/difficulty-3.png",
+                "type": "image",
+                "key": "difficulty-3"
+            },
+            {
                 "url": "assets/images/cards/dodge.png",
                 "type": "image",
                 "key": "dodge"
@@ -113,6 +138,11 @@
                 "url": "assets/images/players/enemy.png",
                 "type": "image",
                 "key": "enemy"
+            },
+            {
+                "url": "assets/images/game/forfeit.png",
+                "type": "image",
+                "key": "forfeit"
             },
             {
                 "url": "assets/images/welcome/logo.png",
@@ -150,6 +180,11 @@
                 "url": "assets/images/players/player.png",
                 "type": "image",
                 "key": "player"
+            },
+            {
+                "url": "assets/images/game/score.png",
+                "type": "image",
+                "key": "score"
             },
             {
                 "url": "assets/images/welcome/sound2-off.png",

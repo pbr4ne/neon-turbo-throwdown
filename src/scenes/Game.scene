@@ -14,34 +14,53 @@
     "displayList": [
         {
             "type": "Image",
-            "id": "7c94cb2a-50bf-404d-96f7-6fe1a8f2e70a",
-            "label": "background_2",
+            "id": "31ccdba8-4937-4b9a-965d-6e474ab85b76",
+            "label": "court",
             "texture": {
-                "key": "background-2"
+                "key": "court"
             },
-            "originX": 0,
-            "originY": 0
+            "x": 953,
+            "y": 443
         },
         {
             "type": "Image",
-            "id": "7553619d-b7ca-4eee-9e71-74e85daca863",
-            "label": "background_3",
+            "id": "e4154305-4649-4707-a47f-7f86015c1877",
+            "label": "score",
             "texture": {
-                "key": "background-3"
+                "key": "score"
             },
-            "originX": 0,
-            "originY": 0
+            "x": 80,
+            "y": 110
         },
         {
-            "prefabId": "41c20759-6986-420d-b99c-44f4d40b476c",
-            "id": "642662fe-e52a-4881-abe5-0b8c437c53fa",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "uiLayer",
-            "x": 0,
-            "y": 0
+            "type": "Image",
+            "id": "280bcf8e-7729-4a1e-98f3-17759a3f231f",
+            "label": "forfeit",
+            "texture": {
+                "key": "forfeit"
+            },
+            "x": 77,
+            "y": 243
+        },
+        {
+            "type": "Image",
+            "id": "b9686e27-c93f-4567-83cc-876629ade0c7",
+            "label": "coach_corner",
+            "texture": {
+                "key": "coach-corner"
+            },
+            "x": 1625,
+            "y": 193
+        },
+        {
+            "type": "Image",
+            "id": "953092ef-68bb-496a-8e6a-5ed01bc211f1",
+            "label": "difficulty_1",
+            "texture": {
+                "key": "difficulty-1"
+            },
+            "x": 1747,
+            "y": 411
         },
         {
             "prefabId": "d8801a27-29ff-4774-a8a6-1f4e9b14d6cc",

@@ -1,7 +1,6 @@
 /* START OF COMPILED CODE */
 
 import Phaser from "phaser";
-import UILayerPrefab from "../prefabs/UILayerPrefab";
 import GameplayScript from "../script-nodes/gameplay/GameplayScript";
 import TextureInfoScript from "../script-nodes/gameplay/TextureInfoScript";
 /* START-USER-IMPORTS */
@@ -23,17 +22,20 @@ export default class Game extends Phaser.Scene {
 
 	editorCreate(): void {
 
-		// background_2
-		const background_2 = this.add.image(0, 0, "background-2");
-		background_2.setOrigin(0, 0);
+		// court
+		this.add.image(953, 443, "court");
 
-		// background_3
-		const background_3 = this.add.image(0, 0, "background-3");
-		background_3.setOrigin(0, 0);
+		// score
+		this.add.image(80, 110, "score");
 
-		// uiLayer
-		const uiLayer = new UILayerPrefab(this, 0, 0);
-		this.add.existing(uiLayer);
+		// forfeit
+		this.add.image(77, 243, "forfeit");
+
+		// coach_corner
+		this.add.image(1625, 193, "coach-corner");
+
+		// difficulty_1
+		this.add.image(1747, 411, "difficulty-1");
 
 		// gameplayScript
 		const gameplayScript = new GameplayScript(this);
