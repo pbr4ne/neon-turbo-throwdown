@@ -85,15 +85,15 @@ export default abstract class Team extends Phaser.GameObjects.Container {
     }
 
     executeTurn() {
-        const thrower = this.selectRandomMemberWithCard("THROW", this.members);
-        if (thrower) {
+        const throwers = this.members.filter(member => member.getAssignedCards().includes("THROW"));
+        throwers.forEach(thrower => {
             const target = this.selectRandomMember(this.opponent.members);
             if (target) {
                 const damage = Phaser.Math.Between(1, 10);
                 target.hit(damage);
                 console.log(`Member ${thrower} hits ${target} for ${damage} damage`);
             }
-        }
+        });
     }
 
     selectRandomMemberWithCard(cardType: string, members: Member[]): Member | null {
