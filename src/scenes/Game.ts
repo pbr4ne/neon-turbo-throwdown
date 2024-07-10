@@ -168,16 +168,25 @@ export default class Game extends Phaser.Scene {
 
     executeTurnActions() {
         console.log("on EXECUTE TURN ACTIONS step");
+        this.currentStep++;
         this.player.executeTurn();
         this.boss.executeTurn();
-
-        this.currentStep++;
         this.nextStep();
     }
 
     loopBack() {
+        console.log("on LOOP BACK step");
         this.player.clearMembers();
         this.boss.clearMembers();
+
+        if (this.player.deck.getCards().length < 5) {
+            this.player.deck.buildDeck();
+            this.player.deck.renderDeck(100, 840);
+        }
+        if (this.boss.deck.getCards().length < 5) {
+            this.boss.deck.buildDeck();
+        }
+
         this.currentStep = 0;
         this.nextStep();
     }
