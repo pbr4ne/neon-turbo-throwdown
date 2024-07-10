@@ -17,246 +17,43 @@
     "displayList": [
         {
             "type": "Image",
-            "id": "5398ecfd-79a7-4978-848f-2f92957bad6c",
-            "label": "item1",
+            "id": "24c49b7d-6fc2-4f94-859b-7bee5fea9325",
+            "label": "logo",
             "texture": {
-                "key": "item1"
+                "key": "logo"
             },
-            "originX": 0,
-            "originY": 0
+            "x": 1000,
+            "y": 360
         },
         {
             "type": "Image",
-            "id": "049b13a1-6d42-401e-af24-cdc281ea3b8f",
-            "label": "item2",
+            "id": "f069f1f1-b5f5-4db6-9f05-11ba4e3f0d44",
+            "label": "start_button",
             "texture": {
-                "key": "item2"
+                "key": "start-button"
             },
-            "originX": 0,
-            "originY": 0
+            "x": 1000,
+            "y": 680
         },
         {
             "type": "Image",
-            "id": "97250eae-adbe-42ea-8d66-5cfd097897ff",
-            "label": "item3",
+            "id": "3e739111-638d-4699-b4ca-26c3cd1c89a4",
+            "label": "music2_on",
             "texture": {
-                "key": "item3"
+                "key": "music2-on"
             },
-            "originX": 0,
-            "originY": 0
+            "x": 1720,
+            "y": 960
         },
         {
             "type": "Image",
-            "id": "643f59ec-9293-4f2b-8a41-1733bb4848d4",
-            "label": "item4",
+            "id": "b031b5e4-5b86-4042-9381-972bbeeeadc9",
+            "label": "sound2_on",
             "texture": {
-                "key": "item4"
+                "key": "sound2-on"
             },
-            "originX": 0,
-            "originY": 0
-        },
-        {
-            "type": "Image",
-            "id": "69959fa8-3a91-4950-a4b0-2471295dbbe1",
-            "label": "item5",
-            "texture": {
-                "key": "item5"
-            },
-            "originX": 0,
-            "originY": 0
-        },
-        {
-            "type": "Image",
-            "id": "d49f172a-ce7b-4bde-beda-7a3e89f25d2b",
-            "label": "decor",
-            "texture": {
-                "key": "decor"
-            },
-            "originX": 0,
-            "originY": 0
-        },
-        {
-            "type": "Image",
-            "id": "67b7ab9c-33e8-4056-ac60-60250b0a261e",
-            "label": "playBtn",
-            "texture": {
-                "key": "buttons",
-                "frame": "play.png"
-            },
-            "x": 960,
-            "y": 840,
-            "scaleX": 2,
-            "scaleY": 2,
-            "list": [
-                {
-                    "prefabId": "a06ed60b-79f1-4444-bf35-89046f71f954",
-                    "id": "4560296d-496e-4a49-8ba8-b93e21cc0d36",
-                    "label": "onPointerDownScript",
-                    "list": [
-                        {
-                            "prefabId": "0e39177a-6e19-4b56-a7c2-2360a2e41505",
-                            "id": "0d85541e-fe8c-40df-a851-668f3ed0b73c",
-                            "label": "pushActionScript_2",
-                            "list": [
-                                {
-                                    "prefabId": "2d3f9249-6fcd-4c7d-bd2f-77fa616af7e8",
-                                    "id": "77df73b2-86ce-46b9-85fc-3623c5639e46",
-                                    "unlock": [
-                                        "sceneKey"
-                                    ],
-                                    "label": "startGameAction",
-                                    "sceneKey": "Game"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "prefabId": "7028a0e2-cd14-44b7-b2a4-68dac16ece00",
-                    "id": "c5c97a6c-232e-4d3c-8ec8-d569941c0adc",
-                    "label": "onAwakeScript",
-                    "list": [
-                        {
-                            "prefabId": "3d337935-cdca-4937-9126-9f75bc2486de",
-                            "id": "a1325510-edb7-48d3-b04b-f1f5d8af2944",
-                            "unlock": [
-                                "from"
-                            ],
-                            "label": "moveInSceneActionScript",
-                            "from": "BOTTOM"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "type": "Image",
-            "id": "1d9b8817-cefb-4f7b-ae6f-e9f244735ff5",
-            "label": "musicBtn",
-            "scope": "CLASS",
-            "texture": {
-                "key": "buttons",
-                "frame": "music-on.png"
-            },
-            "x": 1560,
-            "y": 920,
-            "list": [
-                {
-                    "prefabId": "a06ed60b-79f1-4444-bf35-89046f71f954",
-                    "id": "d2a60310-574a-40d9-8bf3-1e70f1422733",
-                    "label": "onPointerDownScript_3",
-                    "list": [
-                        {
-                            "prefabId": "e29bc630-dabe-4a8c-97e0-45ccb875b877",
-                            "id": "91bdb37b-36f1-4052-addf-3817f7151675",
-                            "unlock": [
-                                "callback"
-                            ],
-                            "label": "toggleMusicAction",
-                            "callback": "() => GameSounds.toggleMusic()"
-                        },
-                        {
-                            "prefabId": "0e39177a-6e19-4b56-a7c2-2360a2e41505",
-                            "id": "7a4f6de8-eb27-445c-99d1-4123f4c9440a",
-                            "label": "pushActionScript_1",
-                            "list": [
-                                {
-                                    "prefabId": "b61e7279-4e75-4f73-b26d-4f37ff949c85",
-                                    "id": "94423b71-706f-4b10-9a96-a0437102f237",
-                                    "unlock": [
-                                        "onTexture",
-                                        "offTexture",
-                                        "isOn",
-                                        "mementoKey"
-                                    ],
-                                    "label": "musicSwitchImageAction",
-                                    "scope": "CLASS",
-                                    "onTexture": "{\"key\":\"buttons\",\"frame\":\"music-on.png\"}",
-                                    "offTexture": "{\"key\":\"buttons\",\"frame\":\"music-off.png\"}",
-                                    "isOn": true,
-                                    "mementoKey": "music"
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "type": "Image",
-            "id": "00450c48-8f1a-47e3-866c-853972027118",
-            "label": "soundBtn",
-            "scope": "PUBLIC",
-            "texture": {
-                "key": "buttons",
-                "frame": "sound-on.png"
-            },
-            "x": 1760,
-            "y": 920,
-            "list": [
-                {
-                    "prefabId": "a06ed60b-79f1-4444-bf35-89046f71f954",
-                    "id": "a038f658-630c-41b4-8c09-ceb828c6ed61",
-                    "label": "onPointerDownScript_2",
-                    "list": [
-                        {
-                            "prefabId": "e29bc630-dabe-4a8c-97e0-45ccb875b877",
-                            "id": "0be8f7ab-e8f4-464e-9d29-5fd5da2bcbd6",
-                            "unlock": [
-                                "callback"
-                            ],
-                            "label": "toggleEffectsAction",
-                            "callback": "() => GameSounds.toggleEffects()"
-                        },
-                        {
-                            "prefabId": "0e39177a-6e19-4b56-a7c2-2360a2e41505",
-                            "id": "80fb78a1-6f7d-400b-bbc3-b69183a02704",
-                            "label": "pushActionScript_3",
-                            "list": [
-                                {
-                                    "prefabId": "b61e7279-4e75-4f73-b26d-4f37ff949c85",
-                                    "id": "4c497f21-b699-4a22-adb6-71452c043ab2",
-                                    "unlock": [
-                                        "onTexture",
-                                        "offTexture",
-                                        "isOn",
-                                        "mementoKey"
-                                    ],
-                                    "label": "soundSwitchImageAction",
-                                    "scope": "CLASS",
-                                    "onTexture": "{\"key\":\"buttons\",\"frame\":\"sound-on.png\"}",
-                                    "offTexture": "{\"key\":\"buttons\",\"frame\":\"sound-off.png\"}",
-                                    "isOn": true,
-                                    "mementoKey": "effects"
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "type": "BitmapText",
-            "id": "fd1bd600-a05b-4e11-aeee-5ddda671b5ef",
-            "label": "bitmaptext",
-            "x": 960,
-            "y": 120,
-            "originX": 0.5,
-            "text": "NEON\nTURBO\nTHROWDOWN",
-            "font": "turbo",
-            "align": 1,
-            "fontSize": 150,
-            "list": [
-                {
-                    "prefabId": "1de438d1-5401-42d3-a8b0-adda8fc8c320",
-                    "id": "bd00c677-4ab8-45d1-9b43-777e47ec8840",
-                    "unlock": [
-                        "offset"
-                    ],
-                    "label": "floatingObjectScript",
-                    "offset": 10
-                }
-            ]
+            "x": 1840,
+            "y": 960
         },
         {
             "prefabId": "437c7d1d-12e5-4251-8d72-3ee5abae49d2",

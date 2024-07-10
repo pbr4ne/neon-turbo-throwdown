@@ -100,11 +100,6 @@
                 "key": "catchWhite"
             },
             {
-                "url": "assets/images/welcome/decor.png",
-                "type": "image",
-                "key": "decor"
-            },
-            {
                 "url": "assets/images/cards/dodge.png",
                 "type": "image",
                 "key": "dodge"
@@ -120,29 +115,9 @@
                 "key": "enemy"
             },
             {
-                "url": "assets/images/welcome/item1.png",
+                "url": "assets/images/welcome/logo.png",
                 "type": "image",
-                "key": "item1"
-            },
-            {
-                "url": "assets/images/welcome/item2.png",
-                "type": "image",
-                "key": "item2"
-            },
-            {
-                "url": "assets/images/welcome/item3.png",
-                "type": "image",
-                "key": "item3"
-            },
-            {
-                "url": "assets/images/welcome/item4.png",
-                "type": "image",
-                "key": "item4"
-            },
-            {
-                "url": "assets/images/welcome/item5.png",
-                "type": "image",
-                "key": "item5"
+                "key": "logo"
             },
             {
                 "url": [
@@ -150,6 +125,16 @@
                 ],
                 "type": "audio",
                 "key": "music"
+            },
+            {
+                "url": "assets/images/welcome/music2-off.png",
+                "type": "image",
+                "key": "music2-off"
+            },
+            {
+                "url": "assets/images/welcome/music2-on.png",
+                "type": "image",
+                "key": "music2-on"
             },
             {
                 "url": "assets/images/level/opponent1.png",
@@ -165,6 +150,21 @@
                 "url": "assets/images/players/player.png",
                 "type": "image",
                 "key": "player"
+            },
+            {
+                "url": "assets/images/welcome/sound2-off.png",
+                "type": "image",
+                "key": "sound2-off"
+            },
+            {
+                "url": "assets/images/welcome/sound2-on.png",
+                "type": "image",
+                "key": "sound2-on"
+            },
+            {
+                "url": "assets/images/welcome/start-button.png",
+                "type": "image",
+                "key": "start-button"
             },
             {
                 "url": "assets/images/cards/throw.png",
