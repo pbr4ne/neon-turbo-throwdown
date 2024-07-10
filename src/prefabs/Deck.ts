@@ -14,16 +14,24 @@ export default class Deck extends Phaser.GameObjects.Container {
         super(scene);
         this.cards = [];
 
-        const cardTypes = ["BLOCK", "DODGE", "CATCH", "THROW"];
+        // Define the specific makeup of the deck
+        const deckMakeup = [
+            { type: "THROW", count: 4 },
+            { type: "DODGE", count: 3 },
+            { type: "BLOCK", count: 2 },
+            { type: "CATCH", count: 1 },
+        ];
 
-        for (let i = 0; i < 10; i++) {
-            const cardType = cardTypes[Phaser.Math.Between(0, cardTypes.length - 1)];
-            const card = new Card(this.scene, 0, 0, "cardFront");
-            card.setType(cardType);
-            card.showName(false);
-            card.showIcon(false);
-            this.cards.push(card);
-        }
+        // Create the cards based on the deck makeup
+        deckMakeup.forEach(cardType => {
+            for (let i = 0; i < cardType.count; i++) {
+                const card = new Card(this.scene, 0, 0, "cardFront");
+                card.setType(cardType.type);
+                card.showName(false);
+                card.showIcon(false);
+                this.cards.push(card);
+            }
+        });
 
         this.shuffle();
         this.scene.add.existing(this);
