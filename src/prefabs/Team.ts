@@ -89,9 +89,9 @@ export default abstract class Team extends Phaser.GameObjects.Container {
         throwers.forEach(thrower => {
             const target = this.selectRandomMember(this.opponent.members);
             if (target) {
-                const damage = Phaser.Math.Between(1, 10);
+                const damage = 1;
                 target.hit(damage);
-                console.log(`Member ${thrower} hits ${target} for ${damage} damage`);
+                console.log(`${thrower} hits ${target} for ${damage} damage`);
             }
         });
     }

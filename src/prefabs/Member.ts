@@ -15,8 +15,10 @@ export default class Member extends Phaser.GameObjects.Container {
     private visibleMove: boolean = true;
     private hp: number;
     private team: Team;
+    private intendedTarget: Member | null = null;
+    private number: number;
 
-    constructor(scene: Phaser.Scene, x: number, y: number, texture: string, visibleMove: boolean, team: Team) {
+    constructor(scene: Phaser.Scene, x: number, y: number, texture: string, visibleMove: boolean, team: Team, number: number) {
         super(scene, x, y);
 
         this.visibleMove = visibleMove;
@@ -25,14 +27,23 @@ export default class Member extends Phaser.GameObjects.Container {
 
         this.assignedCards = [];
         this.cardIcons = [];
-        this.hp = 30;
+        this.hp = 3;
         this.team = team;
+        this.number = number;
         this.setSize(this.sprite.width, this.sprite.height);
 
         this.setInteractive(new Phaser.Geom.Rectangle(0, 0, this.sprite.width, this.sprite.height), Phaser.Geom.Rectangle.Contains);
 
         this.on('pointerover', () => { this.scene.input.setDefaultCursor('pointer'); });
         this.on('pointerout', () => { this.scene.input.setDefaultCursor('default'); });
+    }
+
+    setIntendedTarget(target: Member | null) {
+        this.intendedTarget = target;
+    }
+
+    getIntendedTarget(): Member | null {
+        return this.intendedTarget;
     }
 
     assignCard(cardType: string, whiteIconTexture: string) {
@@ -99,5 +110,9 @@ export default class Member extends Phaser.GameObjects.Container {
 
     disableGlow() {
         this.sprite.clearTint();
+    }
+
+    toString(): string {
+        return `Member ${this.number}`;
     }
 }

@@ -29,13 +29,12 @@ export default class Player extends Team {
 	/* START-USER-CODE */
 	private throwdownButton!: Phaser.GameObjects.Image;
     private selectedThrowMember: Member | null = null;
-    private intendedTarget: Member | null = null;
     private targetArc: Phaser.GameObjects.Graphics | null = null;
 
 	addMembers() {
-        const member1 = new Member(this.scene, 720, 459, 'player', true, this);
-        const member2 = new Member(this.scene, 950, 583, 'player', true, this);
-        const member3 = new Member(this.scene, 1211, 453, 'player', true, this);
+        const member1 = new Member(this.scene, 720, 459, 'player', true, this, 1);
+        const member2 = new Member(this.scene, 950, 583, 'player', true, this, 2);
+        const member3 = new Member(this.scene, 1211, 453, 'player', true, this, 3);
 
         this.add(member1);
         this.add(member2);
@@ -84,50 +83,47 @@ export default class Player extends Team {
 
     handleEnemyClick(enemy: Member) {
         if (this.selectedThrowMember) {
-            this.intendedTarget = enemy;
-            this.drawTargetArc();
+            this.selectedThrowMember.setIntendedTarget(enemy);
+            console.log(`${this.selectedThrowMember} targets ${enemy}`);
+            this.drawTargetArc(this.selectedThrowMember, enemy);
         }
     }
 
-    drawTargetArc() {
+    drawTargetArc(thrower: Member, target: Member) {
         if (this.targetArc) {
             this.targetArc.clear();
         } else {
             this.targetArc = this.scene.add.graphics();
         }
-    
-        if (this.selectedThrowMember && this.intendedTarget) {
-            const startX = this.selectedThrowMember.x;
-            const startY = this.selectedThrowMember.y;
-            const endX = this.intendedTarget.x;
-            const endY = this.intendedTarget.y;
-    
-            this.targetArc.lineStyle(3, 0xffff00, 1);
-            this.targetArc.beginPath();
-    
-            this.targetArc.moveTo(startX, startY);
-            this.targetArc.lineTo(endX, endY);
-            this.targetArc.strokePath();
-        }
+
+        const startX = thrower.x;
+        const startY = thrower.y;
+        const endX = target.x;
+        const endY = target.y;
+
+        this.targetArc.lineStyle(3, 0xffff00, 1);
+        this.targetArc.beginPath();
+
+        this.targetArc.moveTo(startX, startY);
+        this.targetArc.lineTo(endX, endY);
+        this.targetArc.strokePath();
     }
 
     performThrow(thrower: Member, target: Member) {
-        const damage = Phaser.Math.Between(1, 10);
+        const damage = 1;
         target.hit(damage);
-        console.log(`Member ${thrower} throws at ${target} for ${damage} damage`);
+        console.log(`${thrower} hits ${target} for ${damage} damage`);
     }
 
     executeTurn() {
-        if (this.selectedThrowMember && this.intendedTarget) {
-            this.performThrow(this.selectedThrowMember, this.intendedTarget);
-            this.selectedThrowMember = null;
-            this.intendedTarget = null;
-            if (this.targetArc) {
-                this.targetArc.clear();
+        this.members.forEach(member => {
+            const target = member.getIntendedTarget();
+            console.log(`${member} intends to target ${target}`);
+            if (target) {
+                this.performThrow(member, target);
+                member.setIntendedTarget(null); // Clear the target after the throw
             }
-        }else {
-            super.executeTurn();
-        }
+        });
     }
     
 	/* END-USER-CODE */
