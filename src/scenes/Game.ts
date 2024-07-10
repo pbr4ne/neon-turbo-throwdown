@@ -151,6 +151,9 @@ export default class Game extends Phaser.Scene {
         console.log("on TARGET MEMBERS step");
         this.currentStep++;
         this.boss.targetMembers();
+        if (this.player.checkAllThrowersHaveTargets()) {
+            this.nextStep();
+        }
         // wait for user to target
     }
 

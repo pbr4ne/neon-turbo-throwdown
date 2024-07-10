@@ -108,22 +108,22 @@ export default class Player extends Team {
     // }
 
     handleEnemyClick(enemy: Member) {
-        
         if (this.selectedThrowMember) {
             this.selectedThrowMember.setIntendedTarget(enemy);
             console.log(`${this.selectedThrowMember} targets ${enemy}`);
             this.drawTargetArc(this.selectedThrowMember, enemy);
 
-             // Check if all members with a THROW card have a selected target
-             const allThrowersHaveTargets = this.members
-             .filter(member => member.getAssignedCards().includes("THROW"))
-             .every(member => member.getIntendedTarget() !== null);
-
-            // If all THROW members have a target, proceed to the next step
-            if (allThrowersHaveTargets) {
+             if (this.checkAllThrowersHaveTargets()) {
                 (this.scene.scene.get('Game') as Game).nextStep();
-            }
+             }
         }
+    }
+
+    checkAllThrowersHaveTargets(): boolean {
+        // Check if all members with a THROW card have a selected target
+        return this.members
+        .filter(member => member.getAssignedCards().includes("THROW"))
+        .every(member => member.getIntendedTarget() !== null);
     }
 
     drawTargetArc(thrower: Member, target: Member) {
