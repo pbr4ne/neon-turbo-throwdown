@@ -78,6 +78,7 @@ export default class Welcome extends Phaser.Scene {
 		onKeydown_ENTER.eventName = "keydown-ENTER";
 		onKeydown_ENTER.eventEmitter = "scene.input.keyboard";
 
+		startGameAction.sceneKey = "Game";
 		// startGame_1 (prefab fields)
 		startGame_1.targetAction = startGameAction;
 
