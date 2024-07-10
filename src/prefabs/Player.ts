@@ -86,7 +86,6 @@ export default class Player extends Team {
             } else {
                 this.selectedThrowMember = null;
             }
-
            
         } else {
             console.log("can't click on member now");

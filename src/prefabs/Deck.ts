@@ -13,6 +13,11 @@ export default class Deck extends Phaser.GameObjects.Container {
     constructor(scene: Phaser.Scene) {
         super(scene);
         this.cards = [];
+        this.scene.add.existing(this);
+    }
+
+    buildDeck() {
+        this.cards = [];
 
         // Define the specific makeup of the deck
         const deckMakeup = [
@@ -34,7 +39,6 @@ export default class Deck extends Phaser.GameObjects.Container {
         });
 
         this.shuffle();
-        this.scene.add.existing(this);
     }
 
     drawCard(): Card | undefined {

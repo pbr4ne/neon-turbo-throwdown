@@ -20,15 +20,29 @@ export default class Boss extends Team {
         const borderImage = new Phaser.GameObjects.Image(scene, 1674, 274, "opponentBorder");
         this.add(borderImage);
 
-        for (let i = 0; i < 5; i++) {
-            this.onDeckClick();
-        }
-
-        this.assignRandomCardsToMembers();
-
         const bossImage = new Phaser.GameObjects.Image(scene, 1780, 140, "opponent1").setOrigin(1, 0);
         this.add(bossImage);
         /* END-USER-CTR-CODE */
+    }
+
+    drawCards() {
+        console.log("boss drawing cards");
+        for (let i = 0; i < 5; i++) {
+            this.onDeckClick();
+        }
+    }
+
+    assignCards() {
+        console.log("boss assigning cards");
+        this.assignRandomCardsToMembers();
+    }
+
+    targetMembers() {
+        const throwers = this.members.filter(member => member.getAssignedCards().includes("THROW"));
+        throwers.forEach(thrower => {
+            const target = this.selectRandomMember(this.opponent.members);
+            thrower.setIntendedTarget(target);
+        });
     }
 
     /* START-USER-CODE */
@@ -74,6 +88,35 @@ export default class Boss extends Team {
         console.log("Enemy clicked");
         const playerScene = this.opponent as Player;
         playerScene.handleEnemyClick(enemy);
+    }
+
+    executeTurn() {
+        const throwers = this.members.filter(member => member.getAssignedCards().includes("THROW"));
+        throwers.forEach(thrower => {
+            const target = this.selectRandomMember(this.opponent.members);
+            if (target) {
+                const damage = 1;
+                target.hit(damage);
+                console.log(`${thrower} hits ${target} for ${damage} damage`);
+            }
+        });
+    }
+
+    selectRandomMemberWithCard(cardType: string, members: Member[]): Member | null {
+        const eligibleMembers = members.filter(member => member.getAssignedCards().includes(cardType));
+        if (eligibleMembers.length > 0) {
+            const randomIndex = Phaser.Math.Between(0, eligibleMembers.length - 1);
+            return eligibleMembers[randomIndex];
+        }
+        return null;
+    }
+
+    selectRandomMember(members: Member[]): Member | null {
+        if (members.length > 0) {
+            const randomIndex = Phaser.Math.Between(0, members.length - 1);
+            return members[randomIndex];
+        }
+        return null;
     }
 
     /* END-USER-CODE */

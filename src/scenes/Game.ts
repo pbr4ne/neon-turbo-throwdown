@@ -95,8 +95,11 @@ export default class Game extends Phaser.Scene {
     }
 
 	setupInitialState() {
-        this.player.deck.shuffle();
+        this.player.deck.buildDeck();
         this.player.deck.renderDeck(100, 840);
+
+        this.boss.deck.buildDeck();
+
         this.player.createEndTurnButton();
     }
 
@@ -129,22 +132,29 @@ export default class Game extends Phaser.Scene {
 	drawCards() {
         console.log("on DRAW CARDS step");
         this.currentStep++;
+        this.boss.drawCards();
+        // wait for user to draw
     }
 
     assignCards() {
         console.log("on ASSIGN CARDS step");
         this.currentStep++;
+        this.boss.assignCards();
+        // wait for user to assign
     }
 
     targetMembers() {
         console.log("on TARGET MEMBERS step");
         this.currentStep++;
+        this.boss.targetMembers();
+        // wait for user to target
     }
 
     startTurn() {
         this.player.throwdownButton.setVisible(true);
         console.log("on START TURN step");
         this.currentStep++;
+        // wait for user to click throwdown buton
     }
 
     discardRemainingCards() {
