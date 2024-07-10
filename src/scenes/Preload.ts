@@ -7,6 +7,7 @@ import Phaser from "phaser";
 import PreloadBarUpdaterScript from "../script-nodes/ui/PreloadBarUpdaterScript";
 /* START-USER-IMPORTS */
 import assetPackUrl from "../../static/assets/asset-pack.json";
+import WebFont from 'webfontloader';
 /* END-USER-IMPORTS */
 
 export default class Preload extends Phaser.Scene {
@@ -40,7 +41,7 @@ export default class Preload extends Phaser.Scene {
 		// loadingText
 		const loadingText = this.add.text(831.5, 509, "", {});
 		loadingText.text = "Turbocharging...";
-		loadingText.setStyle({ "color": "#ff00ff", "fontFamily": "Courier", "fontSize": "25px", "strokeThickness": 2, "stroke": "#ff00ff" });
+		loadingText.setStyle({ "color": "#ff00ff", "fontFamily": '"Press Start 2P"', "fontSize": "25px", "strokeThickness": 2, "stroke": "#ff00ff" });
 
 		this.events.emit("scene-awake");
 	}
@@ -51,7 +52,16 @@ export default class Preload extends Phaser.Scene {
 
 	preload() {
 
+		this.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js');
+
+        WebFont.load({
+            google: {
+                families: ['Press Start 2P']
+            },
+            active: () => {
 		this.editorCreate();
+            }
+        }); 
 
 		this.load.pack("asset-pack", assetPackUrl);
 	}

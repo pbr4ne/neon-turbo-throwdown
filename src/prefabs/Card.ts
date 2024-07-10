@@ -22,11 +22,10 @@ export default class Card extends Phaser.GameObjects.Container {
 
         this.cardType = name || "Unknown";
 
-        this.nameText = new Phaser.GameObjects.Text(scene, 0, 40, this.cardType, {
-            fontSize: '16px',
-            color: '#ffffff',
-			stroke: '#ffffff',
-			strokeThickness: 1.25,
+        this.nameText = new Phaser.GameObjects.Text(scene, 0, 64, this.cardType, {
+            fontFamily: '"Press Start 2P"',
+            fontSize: '14px',
+            color: '#ffff00',
             padding: { x: 5, y: 5 },
             align: 'center'
         });
