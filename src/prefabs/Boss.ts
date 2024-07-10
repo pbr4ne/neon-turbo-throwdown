@@ -71,6 +71,7 @@ export default class Boss extends Team {
     }
 
     handleEnemyClick(enemy: Member) {
+        console.log("Enemy clicked");
         const playerScene = this.opponent as Player;
         playerScene.handleEnemyClick(enemy);
     }

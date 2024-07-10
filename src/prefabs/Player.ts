@@ -62,26 +62,35 @@ export default class Player extends Team {
 
     handleMemberClick(member: Member) {
         console.log((this.scene.scene.get('Game') as Game).getCurrentStep());
-        if ((this.scene.scene.get('Game') as Game).getCurrentStep() != 1) {
-            console.log("can't assign cards to members now");
-            return;
-        }
-        this.hand.assignCardToMember(member);
-        super.handleMemberClick(member);
 
-        // Check if the selected member has a THROW card
-        if (member.getAssignedCards().includes("THROW")) {
-            this.selectedThrowMember = member;
+        var currentStep = (this.scene.scene.get('Game') as Game).getCurrentStep();
+
+        if (currentStep == 1) {
+            super.handleMemberClick(member);
+
+            this.hand.assignCardToMember(member);
+
+            // Check if all members have at least one card assigned
+            const allMembersHaveCards = this.members.every(member => member.getAssignedCards().length > 0);
+
+            // If all members have a card assigned, proceed to the next step
+            if (allMembersHaveCards) {
+                (this.scene.scene.get('Game') as Game).nextStep();
+            }
+
+        } else if (currentStep == 2) {
+            super.handleMemberClick(member);
+
+            if (member.getAssignedCards().includes("THROW")) {
+                this.selectedThrowMember = member;
+            } else {
+                this.selectedThrowMember = null;
+            }
+
+           
         } else {
-            this.selectedThrowMember = null;
-        }
-
-        // Check if all members have at least one card assigned
-        const allMembersHaveCards = this.members.every(member => member.getAssignedCards().length > 0);
-
-        // If all members have a card assigned, proceed to the next step
-        if (allMembersHaveCards) {
-            (this.scene.scene.get('Game') as Game).nextStep();
+            console.log("can't click on member now");
+            return;
         }
     }
 
@@ -100,10 +109,21 @@ export default class Player extends Team {
     // }
 
     handleEnemyClick(enemy: Member) {
+        
         if (this.selectedThrowMember) {
             this.selectedThrowMember.setIntendedTarget(enemy);
             console.log(`${this.selectedThrowMember} targets ${enemy}`);
             this.drawTargetArc(this.selectedThrowMember, enemy);
+
+             // Check if all members with a THROW card have a selected target
+             const allThrowersHaveTargets = this.members
+             .filter(member => member.getAssignedCards().includes("THROW"))
+             .every(member => member.getIntendedTarget() !== null);
+
+            // If all THROW members have a target, proceed to the next step
+            if (allThrowersHaveTargets) {
+                (this.scene.scene.get('Game') as Game).nextStep();
+            }
         }
     }
 
