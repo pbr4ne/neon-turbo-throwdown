@@ -90,7 +90,12 @@ export default abstract class Team extends Phaser.GameObjects.Container {
         }
     }
 
-    
+    clearMembers() {
+        this.members.forEach(member => {
+            member.clearAssignedCards();
+            member.setIntendedTarget(null);
+        });
+    }
 
     removeMember(member: Member) {
         this.members = this.members.filter(p => p !== member);

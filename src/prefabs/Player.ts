@@ -162,6 +162,11 @@ export default class Player extends Team {
             }
         });
     }
+
+    clearMembers() {
+        super.clearMembers();
+        this.targetArc?.clear();
+    }
     
 	/* END-USER-CODE */
 }

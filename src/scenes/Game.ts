@@ -162,6 +162,7 @@ export default class Game extends Phaser.Scene {
         this.currentStep++;
         this.player.hand.clear();
         this.boss.hand.clear();
+        this.player.throwdownButton.setVisible(false);
         this.nextStep();
     }
 
@@ -175,6 +176,8 @@ export default class Game extends Phaser.Scene {
     }
 
     loopBack() {
+        this.player.clearMembers();
+        this.boss.clearMembers();
         this.currentStep = 0;
         this.nextStep();
     }
