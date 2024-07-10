@@ -77,7 +77,7 @@ export default abstract class Team extends Phaser.GameObjects.Container {
         if (this.hand.getCards().length < 5) {
             const topCard = this.deck.drawCard();
             if (topCard) {
-                topCard.setTexture("cardFront");
+                topCard.setTexture("front");
                 topCard.showName(this.visibleCards);
                 topCard.showIcon(this.visibleCards);
                 this.hand.addCard(topCard);

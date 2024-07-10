@@ -26,7 +26,7 @@ export default class Hand {
 
     addCard(card: Card) {
         if (this.cards.length < this.maxCards) {
-            card.setTexture("cardFront");
+            card.setTexture("front");
             card.showName(true);
             card.showIcon(true);
             this.cards.push(card);
@@ -48,13 +48,13 @@ export default class Hand {
         const screenWidth = this.scene.scale.width;
         const screenHeight = this.scene.scale.height;
         const cardSpacing = 20;
-        const cardWidth = 100;
+        const cardWidth = 182;
         const totalWidth = this.cards.length * cardWidth + (this.cards.length - 1) * cardSpacing;
         const startX = (screenWidth - totalWidth) / 2;
         const yPos = screenHeight - cardWidth - 50;
 
         this.cards.forEach((card, index) => {
-            card.setPosition(startX + index * (cardWidth + cardSpacing), yPos);
+            card.setPosition((startX + index * (cardWidth + cardSpacing)) + (cardWidth/2), yPos);
         });
     }
 

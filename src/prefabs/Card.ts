@@ -17,15 +17,15 @@ export default class Card extends Phaser.GameObjects.Container {
     constructor(scene: Phaser.Scene, x?: number, y?: number, texture?: string, frame?: number | string, name?: string) {
         super(scene, x ?? 0, y ?? 0);
         
-        this.cardImage = new Phaser.GameObjects.Image(scene, 0, 0, texture || "cardFront", frame);
+        this.cardImage = new Phaser.GameObjects.Image(scene, 0, 0, texture || "front", frame);
         this.add(this.cardImage);
 
         this.cardType = name || "Unknown";
 
         this.nameText = new Phaser.GameObjects.Text(scene, 0, 40, this.cardType, {
             fontSize: '16px',
-            color: '#000000',
-			stroke: '#000000',
+            color: '#ffffff',
+			stroke: '#ffffff',
 			strokeThickness: 1.25,
             padding: { x: 5, y: 5 },
             align: 'center'
@@ -66,16 +66,16 @@ export default class Card extends Phaser.GameObjects.Container {
     updateIcon() {
         switch (this.cardType) {
             case 'BLOCK':
-                this.iconImage.setTexture('block');
+                this.iconImage.setTexture('blockWhite');
                 break;
             case 'CATCH':
-                this.iconImage.setTexture('catch');
+                this.iconImage.setTexture('catchWhite');
                 break;
             case 'DODGE':
-                this.iconImage.setTexture('dodge');
+                this.iconImage.setTexture('dodgeWhite');
                 break;
             case 'THROW':
-                this.iconImage.setTexture('throw');
+                this.iconImage.setTexture('throwWhite');
                 break;
             default:
                 this.iconImage.setTexture('');

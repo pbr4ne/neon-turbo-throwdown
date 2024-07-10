@@ -30,7 +30,7 @@ export default class Deck extends Phaser.GameObjects.Container {
         // Create the cards based on the deck makeup
         deckMakeup.forEach(cardType => {
             for (let i = 0; i < cardType.count; i++) {
-                const card = new Card(this.scene, 0, 0, "cardFront");
+                const card = new Card(this.scene, 0, 0, "front");
                 card.setType(cardType.type);
                 card.showName(false);
                 card.showIcon(false);
@@ -39,6 +39,7 @@ export default class Deck extends Phaser.GameObjects.Container {
         });
 
         this.shuffle();
+        console.log("built deck");
     }
 
     drawCard(): Card | undefined {
@@ -54,7 +55,7 @@ export default class Deck extends Phaser.GameObjects.Container {
         const offset = 5;
 
         this.cards.forEach((card, index) => {
-            card.setTexture("cardBack");
+            card.setTexture("back");
             card.setPosition(x + index * offset, y + index * offset);
             this.add(card);
         });

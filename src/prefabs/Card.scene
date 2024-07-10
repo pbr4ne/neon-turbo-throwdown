@@ -15,9 +15,9 @@
         {
             "type": "Image",
             "id": "2c28072a-9ad8-4a97-a124-dd66aa4bbc02",
-            "label": "cardFront",
+            "label": "front",
             "texture": {
-                "key": "cardFront"
+                "key": "front"
             },
             "x": 310,
             "y": 107
