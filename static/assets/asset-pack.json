@@ -120,51 +120,6 @@
                 "key": "enemy"
             },
             {
-                "url": "assets/images/players/enemy1a.png",
-                "type": "image",
-                "key": "enemy1a"
-            },
-            {
-                "url": "assets/images/players/enemy1b.png",
-                "type": "image",
-                "key": "enemy1b"
-            },
-            {
-                "url": "assets/images/players/enemy1c.png",
-                "type": "image",
-                "key": "enemy1c"
-            },
-            {
-                "url": "assets/images/players/enemy2a.png",
-                "type": "image",
-                "key": "enemy2a"
-            },
-            {
-                "url": "assets/images/players/enemy2b.png",
-                "type": "image",
-                "key": "enemy2b"
-            },
-            {
-                "url": "assets/images/players/enemy2c.png",
-                "type": "image",
-                "key": "enemy2c"
-            },
-            {
-                "url": "assets/images/players/enemy3a.png",
-                "type": "image",
-                "key": "enemy3a"
-            },
-            {
-                "url": "assets/images/players/enemy3b.png",
-                "type": "image",
-                "key": "enemy3b"
-            },
-            {
-                "url": "assets/images/players/enemy3c.png",
-                "type": "image",
-                "key": "enemy3c"
-            },
-            {
                 "url": "assets/images/welcome/item1.png",
                 "type": "image",
                 "key": "item1"
@@ -210,51 +165,6 @@
                 "url": "assets/images/players/player.png",
                 "type": "image",
                 "key": "player"
-            },
-            {
-                "url": "assets/images/players/player1a.png",
-                "type": "image",
-                "key": "player1a"
-            },
-            {
-                "url": "assets/images/players/player1b.png",
-                "type": "image",
-                "key": "player1b"
-            },
-            {
-                "url": "assets/images/players/player1c.png",
-                "type": "image",
-                "key": "player1c"
-            },
-            {
-                "url": "assets/images/players/player2a.png",
-                "type": "image",
-                "key": "player2a"
-            },
-            {
-                "url": "assets/images/players/player2b.png",
-                "type": "image",
-                "key": "player2b"
-            },
-            {
-                "url": "assets/images/players/player2c.png",
-                "type": "image",
-                "key": "player2c"
-            },
-            {
-                "url": "assets/images/players/player3a.png",
-                "type": "image",
-                "key": "player3a"
-            },
-            {
-                "url": "assets/images/players/player3b.png",
-                "type": "image",
-                "key": "player3b"
-            },
-            {
-                "url": "assets/images/players/player3c.png",
-                "type": "image",
-                "key": "player3c"
             },
             {
                 "url": "assets/images/cards/throw.png",
