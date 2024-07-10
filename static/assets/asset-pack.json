@@ -2,46 +2,6 @@
     "section1": {
         "files": [
             {
-                "url": "assets/images/level/background-1.png",
-                "type": "image",
-                "key": "background-1"
-            },
-            {
-                "url": "assets/images/level/background-2.png",
-                "type": "image",
-                "key": "background-2"
-            },
-            {
-                "url": "assets/images/level/background-3.png",
-                "type": "image",
-                "key": "background-3"
-            },
-            {
-                "url": "assets/images/level/background-4.png",
-                "type": "image",
-                "key": "background-4"
-            },
-            {
-                "url": "assets/images/level/background-5.png",
-                "type": "image",
-                "key": "background-5"
-            },
-            {
-                "url": "assets/images/level/background-6.png",
-                "type": "image",
-                "key": "background-6"
-            },
-            {
-                "url": "assets/images/level/background-7.png",
-                "type": "image",
-                "key": "background-7"
-            },
-            {
-                "url": "assets/images/level/background-8.png",
-                "type": "image",
-                "key": "background-8"
-            },
-            {
                 "url": [
                     "assets/audio/ball.mp3"
                 ],
@@ -72,6 +32,26 @@
                 "url": "assets/images/cards/blockWhite.png",
                 "type": "image",
                 "key": "blockWhite"
+            },
+            {
+                "url": "assets/images/players/bracket-assigned.png",
+                "type": "image",
+                "key": "bracket-assigned"
+            },
+            {
+                "url": "assets/images/players/bracket-assigned-text-field.png",
+                "type": "image",
+                "key": "bracket-assigned-text-field"
+            },
+            {
+                "url": "assets/images/players/bracket-default.png",
+                "type": "image",
+                "key": "bracket-default"
+            },
+            {
+                "url": "assets/images/players/bracket-hover.png",
+                "type": "image",
+                "key": "bracket-hover"
             },
             {
                 "atlasURL": "assets/atlas/texture.json",
@@ -135,9 +115,19 @@
                 "key": "dodgeWhite"
             },
             {
-                "url": "assets/images/players/enemy.png",
+                "url": "assets/images/players/enemy1.png",
                 "type": "image",
-                "key": "enemy"
+                "key": "enemy1"
+            },
+            {
+                "url": "assets/images/players/enemy2.png",
+                "type": "image",
+                "key": "enemy2"
+            },
+            {
+                "url": "assets/images/players/enemy3.png",
+                "type": "image",
+                "key": "enemy3"
             },
             {
                 "url": "assets/images/game/forfeit.png",
@@ -177,9 +167,19 @@
                 "key": "opponentBorder"
             },
             {
-                "url": "assets/images/players/player.png",
+                "url": "assets/images/players/player1.png",
                 "type": "image",
-                "key": "player"
+                "key": "player1"
+            },
+            {
+                "url": "assets/images/players/player2.png",
+                "type": "image",
+                "key": "player2"
+            },
+            {
+                "url": "assets/images/players/player3.png",
+                "type": "image",
+                "key": "player3"
             },
             {
                 "url": "assets/images/game/score.png",

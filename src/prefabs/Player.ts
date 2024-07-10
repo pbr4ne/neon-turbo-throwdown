@@ -31,9 +31,9 @@ export default class Player extends Team {
     private targetArc: Phaser.GameObjects.Graphics | null = null;
 
 	addMembers() {
-        const member1 = new Member(this.scene, 720, 459, 'player', true, this, 1);
-        const member2 = new Member(this.scene, 950, 583, 'player', true, this, 2);
-        const member3 = new Member(this.scene, 1211, 453, 'player', true, this, 3);
+        const member1 = new Member(this.scene, 558, 404, 'player1', true, this, 1);
+        const member2 = new Member(this.scene, 947, 516, 'player2', true, this, 2);
+        const member3 = new Member(this.scene, 1325, 404, 'player3', true, this, 3, true);
 
         this.add(member1);
         this.add(member2);

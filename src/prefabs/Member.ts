@@ -18,12 +18,19 @@ export default class Member extends Phaser.GameObjects.Container {
     private intendedTarget: Member | null = null;
     private number: number;
 
-    constructor(scene: Phaser.Scene, x: number, y: number, texture: string, visibleMove: boolean, team: Team, number: number) {
+    constructor(scene: Phaser.Scene, x: number, y: number, texture: string, visibleMove: boolean, team: Team, number: number, flip: boolean = false) {
         super(scene, x, y);
 
         this.visibleMove = visibleMove;
         this.sprite = new Phaser.GameObjects.Sprite(scene, 0, 0, texture);
+        
         this.add(this.sprite);
+        if (flip) {
+            console.log("flipping");
+            this.sprite.toggleFlipX();
+        }
+
+        console.log("sprite properties: " + this.sprite.flipX);
 
         this.assignedCards = [];
         this.cardIcons = [];
