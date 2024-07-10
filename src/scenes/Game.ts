@@ -173,11 +173,11 @@ export default class Game extends Phaser.Scene {
         this.nextStep();
     }
 
-    executeTurnActions() {
+    async executeTurnActions() {
         console.log("on EXECUTE TURN ACTIONS step");
         this.currentStep++;
-        this.player.executeTurn();
-        this.boss.executeTurn();
+        await this.player.executeTurn();
+        await this.boss.executeTurn();
         this.nextStep();
     }
 

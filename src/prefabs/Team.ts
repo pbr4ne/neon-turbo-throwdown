@@ -97,15 +97,22 @@ export default abstract class Team extends Phaser.GameObjects.Container {
         });
     }
 
-    executeTurn() {
-        this.members.forEach(member => {
+    async executeTurn() {
+        for (const member of this.members) {
             const target = member.getIntendedTarget();
-            console.log(`${member} intends to target ${target}`);
+            
             if (target) {
+                console.log(`${member} intends to target ${target}`);
+                await this.pause(1000); 
                 this.performThrow(member, target);
                 member.setIntendedTarget(null); // Clear the target after the throw
             }
-        });
+        }
+        await this.pause(1000); 
+    }
+    
+    pause(ms: number) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
 
     removeMember(member: Member) {
