@@ -30,6 +30,7 @@ export default class Player extends Team {
 	private throwdownButton!: Phaser.GameObjects.Image;
     private selectedThrowMember: Member | null = null;
     private intendedTarget: Member | null = null;
+    private targetArc: Phaser.GameObjects.Graphics | null = null;
 
 	addMembers() {
         const member1 = new Member(this.scene, 720, 459, 'player', true, this);
@@ -84,6 +85,29 @@ export default class Player extends Team {
     handleEnemyClick(enemy: Member) {
         if (this.selectedThrowMember) {
             this.intendedTarget = enemy;
+            this.drawTargetArc();
+        }
+    }
+
+    drawTargetArc() {
+        if (this.targetArc) {
+            this.targetArc.clear();
+        } else {
+            this.targetArc = this.scene.add.graphics();
+        }
+    
+        if (this.selectedThrowMember && this.intendedTarget) {
+            const startX = this.selectedThrowMember.x;
+            const startY = this.selectedThrowMember.y;
+            const endX = this.intendedTarget.x;
+            const endY = this.intendedTarget.y;
+    
+            this.targetArc.lineStyle(3, 0xffff00, 1);
+            this.targetArc.beginPath();
+    
+            this.targetArc.moveTo(startX, startY);
+            this.targetArc.lineTo(endX, endY);
+            this.targetArc.strokePath();
         }
     }
 
@@ -98,7 +122,10 @@ export default class Player extends Team {
             this.performThrow(this.selectedThrowMember, this.intendedTarget);
             this.selectedThrowMember = null;
             this.intendedTarget = null;
-        } else {
+            if (this.targetArc) {
+                this.targetArc.clear();
+            }
+        }else {
             super.executeTurn();
         }
     }
