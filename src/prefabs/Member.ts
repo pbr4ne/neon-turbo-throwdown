@@ -73,20 +73,30 @@ export default class Member extends Phaser.GameObjects.Container {
         return this.hp;
     }
 
-    hit(damage: number) {
-        this.hp -= damage;
-        this.showFloatingDamage(damage);
-        if (this.hp <= 0) {
-            this.hp = 0;
-            this.destroyMember();
+    hit(damage: number, attacker: Member) {
+        if (this.assignedCards.includes("DODGE")) {
+            this.showFloatingAction("EVADED");
+        } else if (this.assignedCards.includes("BLOCK")) {
+            this.showFloatingAction("BLOCKED");
+            attacker.hit(1, this);
+        } else if (this.assignedCards.includes("CATCH")) {
+            this.showFloatingAction("CAUGHT");
+            attacker.hit(3, this);
+        } else {
+            this.hp -= damage;
+            this.showFloatingAction(damage.toString());
+            if (this.hp <= 0) {
+                this.hp = 0;
+                this.destroyMember();
+            }
         }
     }
 
-    showFloatingDamage(damage: number) {
+    showFloatingAction(action: string) {
         if (!this.scene) {
             return;
         }
-        const damageText = this.scene.add.text(this.x, this.y - this.sprite.height / 2, damage.toString(), {
+        const actionText = this.scene.add.text(this.x, this.y - this.sprite.height / 2, action, {
             fontSize: '48px',
             color: '#ffffff',
             stroke: '#ffffff',
@@ -94,13 +104,13 @@ export default class Member extends Phaser.GameObjects.Container {
         }).setOrigin(0.5);
 
         this.scene.add.tween({
-            targets: damageText,
+            targets: actionText,
             y: this.y - this.sprite.height / 2 - 50,
             alpha: 0,
             duration: 1000,
             ease: 'Power1',
             onComplete: () => {
-                damageText.destroy();
+                actionText.destroy();
             }
         });
     }

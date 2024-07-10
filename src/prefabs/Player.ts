@@ -102,11 +102,6 @@ export default class Player extends Team {
         this.add(this.throwdownButton);
     }
 
-    // checkEndTurnButtonVisibility() {
-    //     const allMembersHaveCards = this.members.every(member => member.getAssignedCards().length > 0);
-    //     this.throwdownButton.setVisible(allMembersHaveCards);
-    // }
-
     handleEnemyClick(enemy: Member) {
         if (this.selectedThrowMember) {
             this.selectedThrowMember.setIntendedTarget(enemy);
@@ -146,11 +141,7 @@ export default class Player extends Team {
         this.targetArc.strokePath();
     }
 
-    performThrow(thrower: Member, target: Member) {
-        const damage = 1;
-        target.hit(damage);
-        console.log(`${thrower} hits ${target} for ${damage} damage`);
-    }
+    
 
     executeTurn() {
         this.members.forEach(member => {

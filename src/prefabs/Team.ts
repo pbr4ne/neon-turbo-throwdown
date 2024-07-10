@@ -101,6 +101,12 @@ export default abstract class Team extends Phaser.GameObjects.Container {
         this.members = this.members.filter(p => p !== member);
     }
 
+    performThrow(thrower: Member, target: Member) {
+        const damage = 1;
+        target.hit(damage, thrower);
+        console.log(`${thrower} hits ${target} for ${damage} damage`);
+    }
+
 	/* END-USER-CODE */
 }
 

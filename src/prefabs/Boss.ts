@@ -95,9 +95,7 @@ export default class Boss extends Team {
         throwers.forEach(thrower => {
             const target = this.selectRandomMember(this.opponent.members);
             if (target) {
-                const damage = 1;
-                target.hit(damage);
-                console.log(`${thrower} hits ${target} for ${damage} damage`);
+                this.performThrow(thrower, target);
             }
         });
     }
