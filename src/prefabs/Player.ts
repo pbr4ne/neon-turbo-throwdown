@@ -18,16 +18,15 @@ export default class Player extends Team {
 
 		/* START-USER-CTR-CODE */
         this.add(this.deck);
-		this.deck.renderDeck(100, 840);
         this.deck.on("deckClicked", this.onDeckClick.bind(this));
 
         this.createEndTurnButton();
-        this.checkEndTurnButtonVisibility();
+        //this.checkEndTurnButtonVisibility();
 		/* END-USER-CTR-CODE */
 	}
 
 	/* START-USER-CODE */
-	private throwdownButton!: Phaser.GameObjects.Image;
+	public throwdownButton!: Phaser.GameObjects.Image;
     private selectedThrowMember: Member | null = null;
     private targetArc: Phaser.GameObjects.Graphics | null = null;
 
@@ -53,7 +52,20 @@ export default class Player extends Team {
         const floatingObjectMember3 = new FloatingObjectScript(member3);
     }
 
+    onDeckClick() {
+        super.onDeckClick();
+        if (this.hand.getCards().length == 5) {
+            console.log('go to next step');
+            (this.scene.scene.get('Game') as Game).nextStep();
+        }
+    }
+
     handleMemberClick(member: Member) {
+        console.log((this.scene.scene.get('Game') as Game).getCurrentStep());
+        if ((this.scene.scene.get('Game') as Game).getCurrentStep() != 1) {
+            console.log("can't assign cards to members now");
+            return;
+        }
         this.hand.assignCardToMember(member);
         super.handleMemberClick(member);
 
@@ -64,7 +76,13 @@ export default class Player extends Team {
             this.selectedThrowMember = null;
         }
 
-        this.checkEndTurnButtonVisibility();
+        // Check if all members have at least one card assigned
+        const allMembersHaveCards = this.members.every(member => member.getAssignedCards().length > 0);
+
+        // If all members have a card assigned, proceed to the next step
+        if (allMembersHaveCards) {
+            (this.scene.scene.get('Game') as Game).nextStep();
+        }
     }
 
     createEndTurnButton() {
@@ -72,14 +90,14 @@ export default class Player extends Team {
 			.setOrigin(0.5)
 			.setInteractive()
 			.setVisible(false)
-			.on('pointerdown', () => (this.scene.scene.get('Game') as Game).endTurn());
+			.on('pointerdown', () => (this.scene.scene.get('Game') as Game).nextStep());
         this.add(this.throwdownButton);
     }
 
-    checkEndTurnButtonVisibility() {
-        const allMembersHaveCards = this.members.every(member => member.getAssignedCards().length > 0);
-        this.throwdownButton.setVisible(allMembersHaveCards);
-    }
+    // checkEndTurnButtonVisibility() {
+    //     const allMembersHaveCards = this.members.every(member => member.getAssignedCards().length > 0);
+    //     this.throwdownButton.setVisible(allMembersHaveCards);
+    // }
 
     handleEnemyClick(enemy: Member) {
         if (this.selectedThrowMember) {

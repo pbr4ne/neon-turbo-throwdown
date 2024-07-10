@@ -63,6 +63,7 @@ export default class Game extends Phaser.Scene {
     private boss!: Boss;
 	private dialogLayer!: Phaser.GameObjects.Layer;
 	private playerLayer!: Phaser.GameObjects.Layer;
+	public currentStep: number = 0;
 
 	create() {
 		this.editorCreate();
@@ -78,7 +79,94 @@ export default class Game extends Phaser.Scene {
 		this.playerLayer.add(this.player);
 		this.playerLayer.add(this.boss);
 
+		this.setupInitialState();
+		this.startGameLoop();
+
 		//this.showDialog();
+    }
+
+    getCurrentStep(): number {
+        return this.currentStep - 1;
+    }
+
+	startGameLoop() {
+        this.currentStep = 0;
+        this.nextStep();
+    }
+
+	setupInitialState() {
+        this.player.deck.shuffle();
+        this.player.deck.renderDeck(100, 840);
+        this.player.createEndTurnButton();
+    }
+
+	nextStep() {
+        switch (this.currentStep) {
+            case 0:
+                this.drawCards();
+                break;
+            case 1:
+                this.assignCards();
+                break;
+            case 2:
+                this.targetMembers();
+                break;
+            case 3:
+                this.startTurn();
+                break;
+            case 4:
+                this.discardRemainingCards();
+                break;
+            case 5:
+                this.executeTurnActions();
+                break;
+            case 6:
+                this.loopBack();
+                break;
+        }
+    }
+
+	drawCards() {
+        console.log("on DRAW CARDS step");
+        this.currentStep++;
+    }
+
+    assignCards() {
+        console.log("on ASSIGN CARDS step");
+        this.currentStep++;
+    }
+
+    targetMembers() {
+        console.log("on TARGET MEMBERS step");
+        this.currentStep++;
+    }
+
+    startTurn() {
+        this.player.throwdownButton.setVisible(true);
+        console.log("on START TURN step");
+        this.currentStep++;
+    }
+
+    discardRemainingCards() {
+        console.log("on DISCARD REMAINING CARDS step");
+        this.currentStep++;
+        this.player.hand.clear();
+        this.boss.hand.clear();
+        this.nextStep();
+    }
+
+    executeTurnActions() {
+        console.log("on EXECUTE TURN ACTIONS step");
+        this.player.executeTurn();
+        this.boss.executeTurn();
+
+        this.currentStep++;
+        this.nextStep();
+    }
+
+    loopBack() {
+        this.currentStep = 0;
+        this.nextStep();
     }
 
 	showDialog() {
@@ -91,12 +179,6 @@ export default class Game extends Phaser.Scene {
 
         this.dialogLayer.add(dialog);
     }
-
-	endTurn() {
-		this.boss.executeTurn();
-        this.player.executeTurn();
-    }
-
 	/* END-USER-CODE */
 }
 

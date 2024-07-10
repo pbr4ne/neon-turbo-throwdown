@@ -5,9 +5,10 @@
 
 import Phaser from "phaser";
 /* START-USER-IMPORTS */
-import Deck from "../prefabs/Deck";
-import Hand from "../prefabs/Hand";
-import Member from "../prefabs/Member";
+import Deck from "./Deck";
+import Hand from "./Hand";
+import Member from "./Member";
+import Game from "../scenes/Game"
 /* END-USER-IMPORTS */
 
 export default abstract class Team extends Phaser.GameObjects.Container {
@@ -27,8 +28,8 @@ export default abstract class Team extends Phaser.GameObjects.Container {
 	}
 
 	/* START-USER-CODE */
-	protected deck!: Deck;
-    protected hand!: Hand;
+	public deck!: Deck;
+    public hand!: Hand;
     public members!: Member[];
     public opponent!: Team;
 	protected visibleCards!: boolean;
@@ -68,6 +69,11 @@ export default abstract class Team extends Phaser.GameObjects.Container {
     }
 
     onDeckClick() {
+        if ((this.scene.scene.get('Game') as Game).getCurrentStep() != 0) {
+            console.log("can't draw cards now");
+            return;
+        }
+
         if (this.hand.getCards().length < 5) {
             const topCard = this.deck.drawCard();
             if (topCard) {

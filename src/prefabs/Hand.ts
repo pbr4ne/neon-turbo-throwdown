@@ -34,6 +34,12 @@ export default class Hand {
         }
     }
 
+    clear() {
+        this.cards.forEach(card => card.destroy());
+        this.cards = [];
+        this.updateHandPositions();
+    }
+
     getCards(): Card[] {
         return this.cards;
     }
