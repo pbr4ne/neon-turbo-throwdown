@@ -58,6 +58,8 @@ export default class Boss extends Team {
                 member.assignCard(cardType, whiteIconTexture);
 
                 this.hand.getCards().splice(randomIndex, 1);
+
+                
             }
         });
     }
@@ -88,16 +90,6 @@ export default class Boss extends Team {
         console.log("Enemy clicked");
         const playerScene = this.opponent as Player;
         playerScene.handleEnemyClick(enemy);
-    }
-
-    executeTurn() {
-        const throwers = this.members.filter(member => member.getAssignedCards().includes("THROW"));
-        throwers.forEach(thrower => {
-            const target = this.selectRandomMember(this.opponent.members);
-            if (target) {
-                this.performThrow(thrower, target);
-            }
-        });
     }
 
     selectRandomMemberWithCard(cardType: string, members: Member[]): Member | null {

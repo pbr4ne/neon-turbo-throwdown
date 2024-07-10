@@ -54,15 +54,14 @@ export default class Player extends Team {
 
     onDeckClick() {
         super.onDeckClick();
-        if (this.hand.getCards().length == 5) {
+        var currentStep = (this.scene.scene.get('Game') as Game).getCurrentStep();
+        if (currentStep == 0 && this.hand.getCards().length == 5) {
             console.log('go to next step');
             (this.scene.scene.get('Game') as Game).nextStep();
         }
     }
 
     handleMemberClick(member: Member) {
-        console.log((this.scene.scene.get('Game') as Game).getCurrentStep());
-
         var currentStep = (this.scene.scene.get('Game') as Game).getCurrentStep();
 
         if (currentStep == 1) {
@@ -103,9 +102,15 @@ export default class Player extends Team {
     }
 
     handleEnemyClick(enemy: Member) {
+        var currentStep = (this.scene.scene.get('Game') as Game).getCurrentStep();
+
+        if (currentStep != 2) {
+            console.log("can't click on enemy now");
+            return;
+        }
         if (this.selectedThrowMember) {
             this.selectedThrowMember.setIntendedTarget(enemy);
-            console.log(`${this.selectedThrowMember} targets ${enemy}`);
+            
             this.drawTargetArc(this.selectedThrowMember, enemy);
 
              if (this.checkAllThrowersHaveTargets()) {
@@ -139,19 +144,6 @@ export default class Player extends Team {
         this.targetArc.moveTo(startX, startY);
         this.targetArc.lineTo(endX, endY);
         this.targetArc.strokePath();
-    }
-
-    
-
-    executeTurn() {
-        this.members.forEach(member => {
-            const target = member.getIntendedTarget();
-            console.log(`${member} intends to target ${target}`);
-            if (target) {
-                this.performThrow(member, target);
-                member.setIntendedTarget(null); // Clear the target after the throw
-            }
-        });
     }
 
     clearMembers() {

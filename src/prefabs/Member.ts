@@ -39,6 +39,9 @@ export default class Member extends Phaser.GameObjects.Container {
     }
 
     setIntendedTarget(target: Member | null) {
+        if (target) {
+            console.log(`${this} targets ${target}`);
+        }
         this.intendedTarget = target;
     }
 
@@ -51,6 +54,7 @@ export default class Member extends Phaser.GameObjects.Container {
             return;
         }
         this.assignedCards.push(cardType);
+        console.log("Assigned " + cardType + " to " + this);
 
         if (this.visibleMove)  {
             const icon = new Phaser.GameObjects.Image(this.scene, 0, -20, whiteIconTexture);
