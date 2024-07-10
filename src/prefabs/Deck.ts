@@ -3,10 +3,9 @@
 
 /* START OF COMPILED CODE */
 
-import Card from "./Card";
 /* START-USER-IMPORTS */
+import Card from "./Card";
 /* END-USER-IMPORTS */
-
 
 export default class Deck {
     private scene: Phaser.Scene;

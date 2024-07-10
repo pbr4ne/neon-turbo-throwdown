@@ -10,23 +10,24 @@ import Hand from "../prefabs/Hand";
 import Member from "../prefabs/Member";
 /* END-USER-IMPORTS */
 
-export default abstract class Team extends Phaser.Scene {
+export default abstract class Team extends Phaser.GameObjects.Container {
 
-	constructor(key: string, visibleCards: boolean) {
-		super(key);
+	constructor(scene: Phaser.Scene, visibleCards: boolean) {
+		super(scene);
 
 		/* START-USER-CTR-CODE */
 		this.visibleCards = visibleCards;
+		this.members = [];
+        this.deck = new Deck(scene);
+        this.hand = new Hand(scene, 5);
+
+        this.deck.createDeck();
+        
+        this.addMembers();
 		/* END-USER-CTR-CODE */
 	}
 
-	editorCreate(): void {
-
-		this.events.emit("scene-awake");
-	}
-
 	/* START-USER-CODE */
-
 	protected deck!: Deck;
     protected hand!: Hand;
     public members!: Member[];
@@ -34,20 +35,7 @@ export default abstract class Team extends Phaser.Scene {
 	protected visibleCards!: boolean;
     public layer!: Phaser.GameObjects.Layer;
 
-	create(data: any) {
-		this.editorCreate();
-
-        this.layer = data.layer;
-		this.members = [];
-        this.deck = new Deck(this);
-        this.hand = new Hand(this, 5);
-
-        this.deck.createDeck();
-        
-        this.addMembers();
-	}
-
-    abstract addMembers(): void;
+	abstract addMembers(): void;
 
     setOpponent(opponent: Team) {
         this.opponent = opponent;
@@ -101,6 +89,7 @@ export default abstract class Team extends Phaser.Scene {
     removeMember(member: Member) {
         this.members = this.members.filter(p => p !== member);
     }
+
 	/* END-USER-CODE */
 }
 

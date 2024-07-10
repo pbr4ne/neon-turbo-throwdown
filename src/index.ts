@@ -2,8 +2,6 @@ import Phaser from "phaser";
 import Game from "./scenes/Game";
 import Preload from "./scenes/Preload";
 import Welcome from "./scenes/Welcome";
-import Opponent from "./scenes/Opponent";
-import Character from "./scenes/Character";
 
 const game = new Phaser.Game({
     width: 1920,
@@ -16,7 +14,7 @@ const game = new Phaser.Game({
     physics: {
         default: "arcade",
     },
-    scene: [Preload, Welcome, Game, Opponent, Character],
+    scene: [Preload, Welcome, Game],
 });
 
 game.scene.start("Preload");

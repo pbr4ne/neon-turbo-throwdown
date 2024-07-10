@@ -4,9 +4,10 @@ import Phaser from "phaser";
 import UILayerPrefab from "../prefabs/UILayerPrefab";
 import GameplayScript from "../script-nodes/gameplay/GameplayScript";
 import TextureInfoScript from "../script-nodes/gameplay/TextureInfoScript";
-import Team from "./Team";
 /* START-USER-IMPORTS */
 import DialogBox from "../prefabs/DialogBox";
+import Boss from "../prefabs/Boss";
+import Player from "../prefabs/Player";
 /* END-USER-IMPORTS */
 
 export default class Game extends Phaser.Scene {
@@ -62,8 +63,8 @@ export default class Game extends Phaser.Scene {
 	}
 
 	/* START-USER-CODE */
-	private characterReady: boolean = false;
-    private opponentReady: boolean = false;
+	private player!: Player;
+    private boss!: Boss;
 	private dialogLayer!: Phaser.GameObjects.Layer;
 	private playerLayer!: Phaser.GameObjects.Layer;
 
@@ -73,11 +74,13 @@ export default class Game extends Phaser.Scene {
 		this.playerLayer = this.add.layer();
 		this.dialogLayer = this.add.layer();
 
-        this.scene.launch("Character", { layer: this.playerLayer });
-        this.scene.launch("Opponent", { layer: this.playerLayer });
+		this.player = new Player(this);
+		this.boss = new Boss(this);
+		this.player.opponent = this.boss;
+		this.boss.opponent = this.player;
 
-		this.scene.get('Character').events.on('characterReady', this.onCharacterReady, this);
-        this.scene.get('Opponent').events.on('opponentReady', this.onOpponentReady, this);
+		this.playerLayer.add(this.player);
+		this.playerLayer.add(this.boss);
 
 		this.showDialog();
     }
@@ -93,32 +96,9 @@ export default class Game extends Phaser.Scene {
         //this.dialogLayer.add(dialog);
     }
 
-	onCharacterReady() {
-        this.characterReady = true;
-        this.checkBothReady();
-    }
-
-    onOpponentReady() {
-        this.opponentReady = true;
-        this.checkBothReady();
-    }
-
-	//todo - this is stupid
-    checkBothReady() {
-        if (this.characterReady && this.opponentReady) {
-            const character = this.scene.get('Character') as Team;
-            const opponent = this.scene.get('Opponent') as Team;
-            character.opponent = opponent;
-            opponent.opponent = character;
-        }
-    }
-
 	endTurn() {
-        const character = this.scene.get('Character') as Team;
-        const opponent = this.scene.get('Opponent') as Team;
-
-		opponent.executeTurn();
-        character.executeTurn();
+		this.boss.executeTurn();
+        this.player.executeTurn();
     }
 
 	/* END-USER-CODE */

@@ -5,7 +5,7 @@
 
 import Phaser from "phaser";
 /* START-USER-IMPORTS */
-import Team from "../scenes/Team";
+import Team from "./Team";
 /* END-USER-IMPORTS */
 
 export default class Member extends Phaser.GameObjects.Container {

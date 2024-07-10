@@ -7,7 +7,6 @@ import Phaser from "phaser";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
-
 export default class Card extends Phaser.GameObjects.Container {
     public cardType: string;
     private cardImage: Phaser.GameObjects.Image;
