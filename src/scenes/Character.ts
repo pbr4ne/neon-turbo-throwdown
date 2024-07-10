@@ -5,7 +5,7 @@
 
 import Phaser from "phaser";
 /* START-USER-IMPORTS */
-import Player from "../prefabs/Player";
+import Member from "../prefabs/Member";
 import Team from "./Team";
 import FloatingObjectScript from "../script-nodes/ui/FloatingObjectScript";
 import Game from "./Game";
@@ -42,29 +42,29 @@ export default class Character extends Team {
         this.events.emit("characterReady");
     }
 
-    addPlayers() {
-        const player1 = new Player(this, 720, 459, 'player', true, this);
-        this.layer.add(player1);
-        player1.on("pointerdown", () => this.handlePlayerClick(player1));
-        this.players.push(player1);
+    addMembers() {
+        const member1 = new Member(this, 720, 459, 'player', true, this);
+        this.layer.add(member1);
+        member1.on("pointerdown", () => this.handleMemberClick(member1));
+        this.members.push(member1);
 
-        const player2 = new Player(this, 950, 583, 'player', true, this);
-        this.layer.add(player2);
-        player2.on("pointerdown", () => this.handlePlayerClick(player2));
-        this.players.push(player2);
+        const member2 = new Member(this, 950, 583, 'player', true, this);
+        this.layer.add(member2);
+        member2.on("pointerdown", () => this.handleMemberClick(member2));
+        this.members.push(member2);
 
-        const player3 = new Player(this, 1211, 453, 'player', true, this);
-        this.layer.add(player3);
-        player3.on("pointerdown", () => this.handlePlayerClick(player3));
-        this.players.push(player3);
+        const member3 = new Member(this, 1211, 453, 'player', true, this);
+        this.layer.add(member3);
+        member3.on("pointerdown", () => this.handleMemberClick(member3));
+        this.members.push(member3);
 
-        const floatingObjectPlayer1 = new FloatingObjectScript(player1);
-        const floatingObjectPlayer2 = new FloatingObjectScript(player2);
-        const floatingObjectPlayer3 = new FloatingObjectScript(player3);
+        const floatingObjectMember1 = new FloatingObjectScript(member1);
+        const floatingObjectMember2 = new FloatingObjectScript(member2);
+        const floatingObjectMember3 = new FloatingObjectScript(member3);
     }
 
-    handlePlayerClick(player: Player) {
-        super.handlePlayerClick(player);
+    handleMemberClick(member: Member) {
+        super.handleMemberClick(member);
         this.checkEndTurnButtonVisibility();
     }
 
@@ -78,8 +78,8 @@ export default class Character extends Team {
     }
 
     checkEndTurnButtonVisibility() {
-        const allPlayersHaveCards = this.players.every(player => player.getAssignedCards().length > 0);
-        this.throwdownButton.setVisible(allPlayersHaveCards);
+        const allMembersHaveCards = this.members.every(member => member.getAssignedCards().length > 0);
+        this.throwdownButton.setVisible(allMembersHaveCards);
     }
 
 	/* END-USER-CODE */

@@ -5,7 +5,7 @@
 
 import Card from "./Card";
 import Deck from "./Deck";
-import Player from "./Player";
+import Member from "./Member";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -70,12 +70,12 @@ export default class Hand {
         this.selectedCard = card;
     }
 
-    assignCardToPlayer(player: Player) {
+    assignCardToMember(member: Member) {
         if (this.poppedUpCard) {
-            if (player.getAssignedCards().length < 1) {
+            if (member.getAssignedCards().length < 1) {
                 const cardType = this.poppedUpCard.getCardType();
                 const whiteIconTexture = this.poppedUpCard.getWhiteIconTexture();
-                player.assignCard(cardType, whiteIconTexture);
+                member.assignCard(cardType, whiteIconTexture);
                 this.poppedUpCard.hide();
                 this.cards = this.cards.filter(card => card !== this.poppedUpCard);
                 this.updateHandPositions();

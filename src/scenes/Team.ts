@@ -7,7 +7,7 @@ import Phaser from "phaser";
 /* START-USER-IMPORTS */
 import Deck from "../prefabs/Deck";
 import Hand from "../prefabs/Hand";
-import Player from "../prefabs/Player";
+import Member from "../prefabs/Member";
 /* END-USER-IMPORTS */
 
 export default abstract class Team extends Phaser.Scene {
@@ -29,7 +29,7 @@ export default abstract class Team extends Phaser.Scene {
 
 	protected deck!: Deck;
     protected hand!: Hand;
-    public players!: Player[];
+    public members!: Member[];
     public opponent!: Team;
 	protected visibleCards!: boolean;
     public layer!: Phaser.GameObjects.Layer;
@@ -38,23 +38,23 @@ export default abstract class Team extends Phaser.Scene {
 		this.editorCreate();
 
         this.layer = data.layer;
-		this.players = [];
+		this.members = [];
         this.deck = new Deck(this);
         this.hand = new Hand(this, 5);
 
         this.deck.createDeck();
         
-        this.addPlayers();
+        this.addMembers();
 	}
 
-    abstract addPlayers(): void;
+    abstract addMembers(): void;
 
     setOpponent(opponent: Team) {
         this.opponent = opponent;
     }
 
-    handlePlayerClick(player: Player) {
-        this.hand.assignCardToPlayer(player);
+    handleMemberClick(member: Member) {
+        this.hand.assignCardToMember(member);
     }
 
     onDeckClick() {
@@ -70,36 +70,36 @@ export default abstract class Team extends Phaser.Scene {
     }
 
     executeTurn() {
-        const thrower = this.selectRandomPlayerWithCard("THROW", this.players);
+        const thrower = this.selectRandomMemberWithCard("THROW", this.members);
         if (thrower) {
-            const target = this.selectRandomPlayer(this.opponent.players);
+            const target = this.selectRandomMember(this.opponent.members);
             if (target) {
                 const damage = Phaser.Math.Between(1, 10);
                 target.hit(damage);
-                console.log(`Player ${thrower} hits ${target} for ${damage} damage`);
+                console.log(`Member ${thrower} hits ${target} for ${damage} damage`);
             }
         }
     }
 
-    selectRandomPlayerWithCard(cardType: string, players: Player[]): Player | null {
-        const eligiblePlayers = players.filter(player => player.getAssignedCards().includes(cardType));
-        if (eligiblePlayers.length > 0) {
-            const randomIndex = Phaser.Math.Between(0, eligiblePlayers.length - 1);
-            return eligiblePlayers[randomIndex];
+    selectRandomMemberWithCard(cardType: string, members: Member[]): Member | null {
+        const eligibleMembers = members.filter(member => member.getAssignedCards().includes(cardType));
+        if (eligibleMembers.length > 0) {
+            const randomIndex = Phaser.Math.Between(0, eligibleMembers.length - 1);
+            return eligibleMembers[randomIndex];
         }
         return null;
     }
 
-    selectRandomPlayer(players: Player[]): Player | null {
-        if (players.length > 0) {
-            const randomIndex = Phaser.Math.Between(0, players.length - 1);
-            return players[randomIndex];
+    selectRandomMember(members: Member[]): Member | null {
+        if (members.length > 0) {
+            const randomIndex = Phaser.Math.Between(0, members.length - 1);
+            return members[randomIndex];
         }
         return null;
     }
 
-    removePlayer(player: Player) {
-        this.players = this.players.filter(p => p !== player);
+    removeMember(member: Member) {
+        this.members = this.members.filter(p => p !== member);
     }
 	/* END-USER-CODE */
 }

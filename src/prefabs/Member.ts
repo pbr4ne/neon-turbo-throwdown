@@ -8,7 +8,7 @@ import Phaser from "phaser";
 import Team from "../scenes/Team";
 /* END-USER-IMPORTS */
 
-export default class Player extends Phaser.GameObjects.Container {
+export default class Member extends Phaser.GameObjects.Container {
     public sprite: Phaser.GameObjects.Sprite;
     private assignedCards: string[];
     private cardIcons: Phaser.GameObjects.Image[];
@@ -61,7 +61,7 @@ export default class Player extends Phaser.GameObjects.Container {
         this.showFloatingDamage(damage);
         if (this.hp <= 0) {
             this.hp = 0;
-            this.destroyPlayer();
+            this.destroyMember();
         }
     }
 
@@ -88,8 +88,8 @@ export default class Player extends Phaser.GameObjects.Container {
         });
     }
 
-    destroyPlayer() {
-        this.team.removePlayer(this);
+    destroyMember() {
+        this.team.removeMember(this);
         this.destroy(); 
     }
 }
