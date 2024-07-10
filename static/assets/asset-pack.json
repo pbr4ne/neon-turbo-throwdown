@@ -167,11 +167,6 @@
                 "key": "opponent1"
             },
             {
-                "url": "assets/images/level/opponentBorder.png",
-                "type": "image",
-                "key": "opponentBorder"
-            },
-            {
                 "url": "assets/images/players/player1.png",
                 "type": "image",
                 "key": "player1"
