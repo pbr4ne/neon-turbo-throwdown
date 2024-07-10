@@ -8,6 +8,7 @@ import TextureInfoScript from "../script-nodes/gameplay/TextureInfoScript";
 import DialogBox from "../prefabs/DialogBox";
 import Boss from "../prefabs/Boss";
 import Player from "../prefabs/Player";
+import GameoverPrefab from "../prefabs/GameoverPrefab";
 /* END-USER-IMPORTS */
 
 export default class Game extends Phaser.Scene {
@@ -124,6 +125,9 @@ export default class Game extends Phaser.Scene {
                 this.executeTurnActions();
                 break;
             case 6:
+                this.checkEndGameCondition();
+                break;
+            case 7:
                 this.loopBack();
                 break;
         }
@@ -171,6 +175,25 @@ export default class Game extends Phaser.Scene {
         this.currentStep++;
         this.player.executeTurn();
         this.boss.executeTurn();
+        this.nextStep();
+    }
+
+    checkEndGameCondition() {
+        console.log("on CHECK END GAME CONDITION step");
+        this.currentStep++;
+
+        if (this.player.members.length === 0) {
+            console.log("Game over");
+            const msg = new GameoverPrefab(this, "Failure!");
+		    this.add.existing(msg);
+		    this.events.emit("scene-awake");
+        } else if (this.boss.members.length === 0) {
+            console.log("You win!");
+            const msg = new GameoverPrefab(this, "Victory!");
+		    this.add.existing(msg);
+		    this.events.emit("scene-awake");
+        }
+
         this.nextStep();
     }
 

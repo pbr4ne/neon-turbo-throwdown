@@ -176,7 +176,7 @@ export default class GameplayScript extends ScriptNode {
 
 	private showGameOverMessage() {
 
-		const msg = new GameoverPrefab(this.scene);
+		const msg = new GameoverPrefab(this.scene, "Game Over!");
 
 		this.scene.add.existing(msg);
 

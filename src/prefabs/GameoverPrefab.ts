@@ -13,11 +13,11 @@ import { DurationConfigComp } from "@phaserjs/editor-scripts-simple-animations";
 
 export default class GameoverPrefab extends Phaser.GameObjects.BitmapText {
 
-	constructor(scene: Phaser.Scene, x?: number, y?: number, font?: string) {
+	constructor(scene: Phaser.Scene, message: string, x?: number, y?: number, font?: string) {
 		super(scene, x ?? 960, y ?? 540, font ?? "turbo");
 
 		this.setOrigin(0.5, 0.5);
-		this.text = "Game Over!";
+		this.text = message;
 		this.fontSize = 200;
 
 		// floatingObjectScript
