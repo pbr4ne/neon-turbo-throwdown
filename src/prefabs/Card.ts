@@ -64,16 +64,16 @@ export default class Card extends Phaser.GameObjects.Container {
 
     updateIcon() {
         switch (this.cardType) {
-            case 'BLOCK':
+            case 'block':
                 this.iconImage.setTexture('blockWhite');
                 break;
-            case 'CATCH':
+            case 'catch':
                 this.iconImage.setTexture('catchWhite');
                 break;
-            case 'DODGE':
+            case 'evade':
                 this.iconImage.setTexture('dodgeWhite');
                 break;
-            case 'THROW':
+            case 'throw':
                 this.iconImage.setTexture('throwWhite');
                 break;
             default:
@@ -105,13 +105,13 @@ export default class Card extends Phaser.GameObjects.Container {
 
     getWhiteIconTexture(): string {
         switch (this.cardType) {
-            case 'BLOCK':
+            case 'block':
                 return 'blockWhite';
-            case 'CATCH':
+            case 'catch':
                 return 'catchWhite';
-            case 'DODGE':
+            case 'evade':
                 return 'dodgeWhite';
-            case 'THROW':
+            case 'throw':
                 return 'throwWhite';
             default:
                 return '';

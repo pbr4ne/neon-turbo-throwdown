@@ -80,7 +80,7 @@ export default class Player extends Team {
         } else if (currentStep == 2) {
             super.handleMemberClick(member);
 
-            if (member.getAssignedCards().includes("THROW")) {
+            if (member.getAssignedCards().includes("throw")) {
                 this.selectedThrowMember = member;
             } else {
                 this.selectedThrowMember = null;
@@ -120,9 +120,9 @@ export default class Player extends Team {
     }
 
     checkAllThrowersHaveTargets(): boolean {
-        // Check if all members with a THROW card have a selected target
+        // Check if all members with a throw card have a selected target
         return this.members
-        .filter(member => member.getAssignedCards().includes("THROW"))
+        .filter(member => member.getAssignedCards().includes("throw"))
         .every(member => member.getIntendedTarget() !== null);
     }
 

@@ -21,10 +21,10 @@ export default class Deck extends Phaser.GameObjects.Container {
 
         // Define the specific makeup of the deck
         const deckMakeup = [
-            { type: "THROW", count: 4 },
-            { type: "DODGE", count: 3 },
-            { type: "BLOCK", count: 2 },
-            { type: "CATCH", count: 1 },
+            { type: "throw", count: 4 },
+            { type: "evade", count: 3 },
+            { type: "block", count: 2 },
+            { type: "catch", count: 1 },
         ];
 
         // Create the cards based on the deck makeup

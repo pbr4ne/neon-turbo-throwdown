@@ -85,13 +85,13 @@ export default class Member extends Phaser.GameObjects.Container {
     }
 
     hit(damage: number, attacker: Member) {
-        if (this.assignedCards.includes("DODGE")) {
-            this.showFloatingAction("EVADED");
-        } else if (this.assignedCards.includes("BLOCK")) {
-            this.showFloatingAction("BLOCKED");
+        if (this.assignedCards.includes("evade")) {
+            this.showFloatingAction("evaded");
+        } else if (this.assignedCards.includes("block")) {
+            this.showFloatingAction("blocked");
             attacker.hit(1, this);
-        } else if (this.assignedCards.includes("CATCH")) {
-            this.showFloatingAction("CAUGHT");
+        } else if (this.assignedCards.includes("catch")) {
+            this.showFloatingAction("caught");
             attacker.hit(3, this);
         } else {
             this.hp -= damage;

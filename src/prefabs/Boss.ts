@@ -35,7 +35,7 @@ export default class Boss extends Team {
     }
 
     targetMembers() {
-        const throwers = this.members.filter(member => member.getAssignedCards().includes("THROW"));
+        const throwers = this.members.filter(member => member.getAssignedCards().includes("throw"));
         throwers.forEach(thrower => {
             const target = this.selectRandomMember(this.opponent.members);
             thrower.setIntendedTarget(target);
