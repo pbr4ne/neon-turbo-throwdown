@@ -22,6 +22,7 @@ export default abstract class Team extends Phaser.GameObjects.Container {
         this.hand = new Hand(scene, 5);
       
         this.addMembers();
+        this.scene.input.on('pointerdown', this.handleGlobalClick, this);
 		/* END-USER-CTR-CODE */
 	}
 
@@ -32,6 +33,8 @@ export default abstract class Team extends Phaser.GameObjects.Container {
     public opponent!: Team;
 	protected visibleCards!: boolean;
     public layer!: Phaser.GameObjects.Layer;
+    private selectedMember: Member | null = null;
+    private memberClicked: boolean = false;
 
 	abstract addMembers(): void;
 
@@ -40,7 +43,28 @@ export default abstract class Team extends Phaser.GameObjects.Container {
     }
 
     handleMemberClick(member: Member) {
-        this.hand.assignCardToMember(member);
+        this.memberClicked = true;
+
+        if (this.selectedMember) {
+            this.selectedMember.disableGlow();
+        }
+
+        if (this.selectedMember === member) {
+            this.selectedMember = null;
+        } else {
+            this.selectedMember = member;
+            this.selectedMember.enableGlow();
+        }
+    }
+
+    handleGlobalClick(pointer: Phaser.Input.Pointer) {
+        
+        if (!this.memberClicked && this.selectedMember) {
+            this.selectedMember.disableGlow();
+            this.selectedMember = null;
+        }
+
+        this.memberClicked = false;
     }
 
     onDeckClick() {

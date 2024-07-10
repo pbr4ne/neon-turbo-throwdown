@@ -92,4 +92,12 @@ export default class Member extends Phaser.GameObjects.Container {
         this.team.removeMember(this);
         this.destroy(); 
     }
+
+    enableGlow() {
+        this.sprite.setTint(0xff00ff);
+    }
+
+    disableGlow() {
+        this.sprite.clearTint();
+    }
 }

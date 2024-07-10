@@ -49,16 +49,20 @@ export default class Boss extends Team {
 
     addMembers() {
         const enemy1 = new Member(this.scene, 730, 259, 'enemy', false, this);
-        this.add(enemy1);
-        this.members.push(enemy1);
-
         const enemy2 = new Member(this.scene, 950, 213, 'enemy', false, this);
-        this.add(enemy2);
-        this.members.push(enemy2);
-
         const enemy3 = new Member(this.scene, 1180, 253, 'enemy', false, this);
+
+        this.add(enemy1);
+        this.add(enemy2);
         this.add(enemy3);
+
+        this.members.push(enemy1);
+        this.members.push(enemy2);
         this.members.push(enemy3);
+
+        enemy1.on("pointerdown", () => this.handleMemberClick(enemy1));
+        enemy2.on("pointerdown", () => this.handleMemberClick(enemy2));
+        enemy3.on("pointerdown", () => this.handleMemberClick(enemy3));
 
         const floatingObjectMember1 = new FloatingObjectScript(enemy1);
         const floatingObjectMember2 = new FloatingObjectScript(enemy2);

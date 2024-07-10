@@ -31,18 +31,19 @@ export default class Player extends Team {
 
 	addMembers() {
         const member1 = new Member(this.scene, 720, 459, 'player', true, this);
-        this.add(member1);
-        member1.on("pointerdown", () => this.handleMemberClick(member1));
-        this.members.push(member1);
-
         const member2 = new Member(this.scene, 950, 583, 'player', true, this);
-        this.add(member2);
-        member2.on("pointerdown", () => this.handleMemberClick(member2));
-        this.members.push(member2);
-
         const member3 = new Member(this.scene, 1211, 453, 'player', true, this);
+
+        this.add(member1);
+        this.add(member2);
         this.add(member3);
+
+        member1.on("pointerdown", () => this.handleMemberClick(member1));
+        member2.on("pointerdown", () => this.handleMemberClick(member2));
         member3.on("pointerdown", () => this.handleMemberClick(member3));
+
+        this.members.push(member1);
+        this.members.push(member2);
         this.members.push(member3);
 
         const floatingObjectMember1 = new FloatingObjectScript(member1);
@@ -51,6 +52,7 @@ export default class Player extends Team {
     }
 
     handleMemberClick(member: Member) {
+        this.hand.assignCardToMember(member);
         super.handleMemberClick(member);
         this.checkEndTurnButtonVisibility();
     }
