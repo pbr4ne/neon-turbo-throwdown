@@ -54,6 +54,11 @@ export default class Card extends Phaser.GameObjects.Container {
         this.on('pointerout', () => { this.scene.input.setDefaultCursor('default'); });
     }
 
+    clearCard() {
+        this.ringSelectedImage.setVisible(false);
+        this.ringAssignedImage.setVisible(false);
+    }
+
     setType(type: string) {
         this.cardType = type;
         this.nameText.setText(this.cardType);

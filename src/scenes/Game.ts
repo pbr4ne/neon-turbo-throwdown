@@ -207,8 +207,7 @@ export default class Game extends Phaser.Scene {
     discardRemainingCards() {
         console.log("on DISCARD REMAINING CARDS step");
         this.currentStep++;
-        this.player.hand.clear();
-        this.boss.hand.clear();
+        
         this.player.throwdownButton.setVisible(false);
         this.nextStep();
     }
@@ -218,6 +217,7 @@ export default class Game extends Phaser.Scene {
         this.currentStep++;
         await this.player.executeTurn();
         await this.boss.executeTurn();
+        
         this.nextStep();
     }
 
@@ -244,6 +244,8 @@ export default class Game extends Phaser.Scene {
         console.log("on LOOP BACK step");
         this.player.clearMembers();
         this.boss.clearMembers();
+        this.player.hand.clear();
+        this.boss.hand.clear();
 
         if (this.player.deck.getCards().length < 5) {
             this.player.deck.buildDeck();

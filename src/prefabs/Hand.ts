@@ -13,6 +13,7 @@ import Member from "./Member";
 export default class Hand {
     private scene: Phaser.Scene;
     private cards: Card[];
+    private cardsInPlay: Card[];
     private maxCards: number;
     private poppedUpCard: Card | null;
     private selectedCard: Card | null;
@@ -20,6 +21,7 @@ export default class Hand {
     constructor(scene: Phaser.Scene, maxCards: number = 5) {
         this.scene = scene;
         this.cards = [];
+        this.cardsInPlay = [];
         this.maxCards = maxCards;
         this.poppedUpCard = null;
         this.selectedCard = null;
@@ -36,8 +38,12 @@ export default class Hand {
     }
 
     clear() {
+        console.log('clearing hand');
         this.cards.forEach(card => card.destroy());
+        this.cardsInPlay.forEach(card => card.destroy());
         this.cards = [];
+        this.cardsInPlay = [];
+        this.updateHandPositions();
     }
 
     getCards(): Card[] {
@@ -97,6 +103,7 @@ export default class Hand {
                 member.assignCard(this.poppedUpCard, whiteIconTexture);
                 //this.poppedUpCard.hide();
                 this.cards = this.cards.filter(card => card !== this.poppedUpCard);
+                this.cardsInPlay.push(this.poppedUpCard);
             }
             this.poppedUpCard.togglePopUp(); 
             this.poppedUpCard = null;
