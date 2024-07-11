@@ -5,12 +5,13 @@
 
 import Phaser from "phaser";
 /* START-USER-IMPORTS */
+import Card from "./Card";
 import Team from "./Team";
 /* END-USER-IMPORTS */
 
 export default class Member extends Phaser.GameObjects.Container {
     public sprite: Phaser.GameObjects.Sprite;
-    private assignedCards: string[];
+    private assignedCards: Card[];
     private cardIcons: Phaser.GameObjects.Image[];
     private visibleMove: boolean = true;
     private hp: number;
@@ -56,12 +57,12 @@ export default class Member extends Phaser.GameObjects.Container {
         return this.intendedTarget;
     }
 
-    assignCard(cardType: string, whiteIconTexture: string) {
+    assignCard(card: Card, whiteIconTexture: string) {
         if (this.assignedCards.length >= 1) {
             return;
         }
-        this.assignedCards.push(cardType);
-        console.log("Assigned " + cardType + " to " + this);
+        this.assignedCards.push(card);
+        console.log("Assigned " + card.cardType + " to " + this);
 
         if (this.visibleMove)  {
             const icon = new Phaser.GameObjects.Image(this.scene, 0, -20, whiteIconTexture);
@@ -70,7 +71,7 @@ export default class Member extends Phaser.GameObjects.Container {
         }
     }
 
-    getAssignedCards(): string[] {
+    getAssignedCards(): Card[] {
         return this.assignedCards;
     }
 
@@ -85,12 +86,14 @@ export default class Member extends Phaser.GameObjects.Container {
     }
 
     hit(damage: number, attacker: Member) {
-        if (this.assignedCards.includes("evade")) {
+        const cardTypes = this.assignedCards.map(card => card.cardType);
+
+        if (cardTypes.includes("evade")) {
             this.showFloatingAction("evaded");
-        } else if (this.assignedCards.includes("block")) {
+        } else if (cardTypes.includes("block")) {
             this.showFloatingAction("blocked");
             attacker.hit(1, this);
-        } else if (this.assignedCards.includes("catch")) {
+        } else if (cardTypes.includes("catch")) {
             this.showFloatingAction("caught");
             attacker.hit(3, this);
         } else {

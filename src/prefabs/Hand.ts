@@ -83,7 +83,7 @@ export default class Hand {
             if (member.getAssignedCards().length < 1) {
                 const cardType = this.poppedUpCard.getCardType();
                 const whiteIconTexture = this.poppedUpCard.getWhiteIconTexture();
-                member.assignCard(cardType, whiteIconTexture);
+                member.assignCard(this.poppedUpCard, whiteIconTexture);
                 this.poppedUpCard.hide();
                 this.cards = this.cards.filter(card => card !== this.poppedUpCard);
             }

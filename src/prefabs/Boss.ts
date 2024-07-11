@@ -35,7 +35,9 @@ export default class Boss extends Team {
     }
 
     targetMembers() {
-        const throwers = this.members.filter(member => member.getAssignedCards().includes("throw"));
+        const throwers = this.members.filter(member => 
+            member.getAssignedCards().some(card => card.cardType === "throw")
+        );
         throwers.forEach(thrower => {
             const target = this.selectRandomMember(this.opponent.members);
             thrower.setIntendedTarget(target);
@@ -52,7 +54,7 @@ export default class Boss extends Team {
                 const cardType = randomCard.getCardType();
                 const whiteIconTexture = randomCard.getWhiteIconTexture();
 
-                member.assignCard(cardType, whiteIconTexture);
+                member.assignCard(randomCard, whiteIconTexture);
 
                 this.hand.getCards().splice(randomIndex, 1);
 
@@ -90,7 +92,9 @@ export default class Boss extends Team {
     }
 
     selectRandomMemberWithCard(cardType: string, members: Member[]): Member | null {
-        const eligibleMembers = members.filter(member => member.getAssignedCards().includes(cardType));
+        const eligibleMembers = members.filter(member => 
+            member.getAssignedCards().some(card => card.cardType === cardType)
+        );
         if (eligibleMembers.length > 0) {
             const randomIndex = Phaser.Math.Between(0, eligibleMembers.length - 1);
             return eligibleMembers[randomIndex];
