@@ -74,6 +74,9 @@ export default class Game extends Phaser.Scene {
 	private playerLayer!: Phaser.GameObjects.Layer;
 	public currentStep: number = 0;
 
+    private drawCardsImage: Phaser.GameObjects.Image | null = null;
+    private assignCardsImage: Phaser.GameObjects.Image | null = null;
+
 	create() {
 		this.editorCreate();
 
@@ -144,6 +147,8 @@ export default class Game extends Phaser.Scene {
 	drawCards() {
         console.log("on DRAW CARDS step");
         this.currentStep++;
+
+        this.drawCardsImage = this.add.image(960, 1020, "draw-cards");
         this.boss.drawCards();
         // wait for user to draw
     }
@@ -151,6 +156,8 @@ export default class Game extends Phaser.Scene {
     assignCards() {
         console.log("on ASSIGN CARDS step");
         this.currentStep++;
+
+        this.drawCardsImage?.destroy();
         this.boss.assignCards();
         // wait for user to assign
     }
