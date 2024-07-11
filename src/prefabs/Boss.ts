@@ -8,7 +8,7 @@ import Phaser from "phaser";
 import Member from "./Member";
 import Player from "./Player";
 import Team from "./Team";
-import { CardTypes } from "../enums/CardTypes";
+import { CardType, getCardName } from "../enums/CardType";
 import FloatingObjectScript from "../script-nodes/ui/FloatingObjectScript";
 /* END-USER-IMPORTS */
 
@@ -37,7 +37,7 @@ export default class Boss extends Team {
 
     targetMembers() {
         const throwers = this.members.filter(member => 
-            member.getAssignedCards().some(card => card.cardType === CardTypes.throw)
+            member.getAssignedCards().some(card => card.cardType === CardType.throw)
         );
         throwers.forEach(thrower => {
             const target = this.selectRandomMember(this.opponent.members);
@@ -56,8 +56,8 @@ export default class Boss extends Team {
                 const whiteIconTexture = randomCard.getWhiteIconTexture();
 
                 member.assignCard(randomCard, whiteIconTexture, true);
-                member.assignedText?.setText(cardType.toString());
-                console.log(member.assignedText?.text);
+                member.assignedText?.setText(getCardName(cardType));
+                console.log("Assigned card to member: " + getCardName(cardType) + " " + member);
 
                 this.hand.getCards().splice(randomIndex, 1);
 
@@ -94,7 +94,7 @@ export default class Boss extends Team {
         playerScene.handleEnemyClick(enemy);
     }
 
-    selectRandomMemberWithCard(cardType: CardTypes, members: Member[]): Member | null {
+    selectRandomMemberWithCard(cardType: CardType, members: Member[]): Member | null {
         const eligibleMembers = members.filter(member => 
             member.getAssignedCards().some(card => card.cardType === cardType)
         );

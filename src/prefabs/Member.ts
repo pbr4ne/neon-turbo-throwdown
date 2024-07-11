@@ -9,7 +9,7 @@ import Card from "./Card";
 import Team from "./Team";
 import Game from "../scenes/Game";
 import { GameSteps } from "../enums/GameSteps";
-import { CardTypes } from "../enums/CardTypes";
+import { CardType, getCardName } from "../enums/CardType";
 /* END-USER-IMPORTS */
 
 export default class Member extends Phaser.GameObjects.Container {
@@ -90,11 +90,11 @@ export default class Member extends Phaser.GameObjects.Container {
         }
         this.assignedCards.push(card);
         card.showAssignedRing();
-        this.assignedText?.setText(card.cardType.toString());
+        this.assignedText?.setText(getCardName(card.cardType));
         if (isBoss) {
             return;
         }
-        if (card.cardType === CardTypes.throw) {
+        if (card.cardType === CardType.throw) {
             (this.scene.scene.get('Game') as Game).nextStep();
         } else {
             //if all members have a card, move to next step
@@ -124,12 +124,12 @@ export default class Member extends Phaser.GameObjects.Container {
     hit(damage: number, attacker: Member) {
         const cardTypes = this.assignedCards.map(card => card.cardType);
 
-        if (cardTypes.includes(CardTypes.evade)) {
+        if (cardTypes.includes(CardType.evade)) {
             this.showFloatingAction("evaded");
-        } else if (cardTypes.includes(CardTypes.block)) {
+        } else if (cardTypes.includes(CardType.block)) {
             this.showFloatingAction("blocked");
             attacker.hit(1, this);
-        } else if (cardTypes.includes(CardTypes.catch)) {
+        } else if (cardTypes.includes(CardType.catch)) {
             this.showFloatingAction("caught");
             attacker.hit(3, this);
         } else {

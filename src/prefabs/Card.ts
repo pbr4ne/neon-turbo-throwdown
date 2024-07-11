@@ -5,11 +5,11 @@
 
 import Phaser from "phaser";
 /* START-USER-IMPORTS */
-import { CardTypes } from "../enums/CardTypes";
+import { CardType, getCardName } from "../enums/CardType";
 /* END-USER-IMPORTS */
 
 export default class Card extends Phaser.GameObjects.Container {
-    public cardType: CardTypes;
+    public cardType: CardType;
     private cardImage: Phaser.GameObjects.Image;
     private ringSelectedImage: Phaser.GameObjects.Image;
     private ringAssignedImage: Phaser.GameObjects.Image;
@@ -31,9 +31,9 @@ export default class Card extends Phaser.GameObjects.Container {
         this.add(this.ringAssignedImage);
         this.ringAssignedImage.setVisible(false);
 
-        this.cardType = CardTypes.unknown;
+        this.cardType = CardType.unknown;
 
-        this.nameText = new Phaser.GameObjects.Text(scene, 0, 64, this.cardType.toString(), {
+        this.nameText = new Phaser.GameObjects.Text(scene, 0, 64, getCardName(this.cardType), {
             fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
             fontSize: '14px',
             color: '#ffff00',
@@ -60,9 +60,9 @@ export default class Card extends Phaser.GameObjects.Container {
         this.ringAssignedImage.setVisible(false);
     }
 
-    setType(type: CardTypes) {
+    setType(type: CardType) {
         this.cardType = type;
-        this.nameText.setText(this.cardType.toString());
+        this.nameText.setText(getCardName(this.cardType));
         this.updateIcon();
     }
 
@@ -84,16 +84,16 @@ export default class Card extends Phaser.GameObjects.Container {
 
     updateIcon() {
         switch (this.cardType) {
-            case CardTypes.block:
+            case CardType.block:
                 this.iconImage.setTexture('block');
                 break;
-            case CardTypes.catch:
+            case CardType.catch:
                 this.iconImage.setTexture('catch');
                 break;
-            case CardTypes.evade:
+            case CardType.evade:
                 this.iconImage.setTexture('dodge');
                 break;
-            case CardTypes.throw:
+            case CardType.throw:
                 this.iconImage.setTexture('throw');
                 break;
             default:
@@ -118,7 +118,7 @@ export default class Card extends Phaser.GameObjects.Container {
         this.setVisible(false);
     }
 
-    getCardType(): CardTypes {
+    getCardType(): CardType {
         return this.cardType;
     }
 
@@ -128,13 +128,13 @@ export default class Card extends Phaser.GameObjects.Container {
 
     getWhiteIconTexture(): string {
         switch (this.cardType) {
-            case CardTypes.block:
+            case CardType.block:
                 return 'block';
-            case CardTypes.catch:
+            case CardType.catch:
                 return 'catch';
-            case CardTypes.evade:
+            case CardType.evade:
                 return 'dodge';
-            case CardTypes.throw:
+            case CardType.throw:
                 return 'throw';
             default:
                 return '';
