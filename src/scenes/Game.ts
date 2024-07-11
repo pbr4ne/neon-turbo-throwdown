@@ -278,8 +278,6 @@ export default class Game extends Phaser.Scene {
         console.log("on SELECT CARD step");
         this.currentStep++;
 
-        this.boss.assignCards();
-        this.boss.targetMembers();
         this.showSelectCardImage();
         // wait for user to select card
     }
