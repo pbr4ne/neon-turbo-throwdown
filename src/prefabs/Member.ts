@@ -124,15 +124,32 @@ export default class Member extends Phaser.GameObjects.Container {
     hit(damage: number, attacker: Member) {
         const cardTypes = this.assignedCards.map(card => card.cardType);
 
+        var hit = true;
+
         if (cardTypes.includes(CardType.evade)) {
-            this.showFloatingAction("evaded");
-        } else if (cardTypes.includes(CardType.block)) {
-            this.showFloatingAction("blocked");
-            attacker.hit(1, this);
-        } else if (cardTypes.includes(CardType.catch)) {
-            this.showFloatingAction("caught");
-            attacker.hit(3, this);
-        } else {
+            if (Math.random() < 0.75) {
+                this.showFloatingAction("evaded");
+                hit = false;
+            }
+        }
+
+        if (cardTypes.includes(CardType.block)) {
+            if (Math.random() < 0.5) {
+                this.showFloatingAction("blocked");
+                attacker.hit(1, this);
+                hit = false
+            }            
+        }        
+        
+        if (cardTypes.includes(CardType.catch)) {
+            if (Math.random() < 0.5) {
+                this.showFloatingAction("caught");
+                attacker.hit(3, this);
+                hit = false;
+            }
+        } 
+        
+        if (hit) {
             this.hp -= damage;
             this.showFloatingAction(damage.toString());
             if (this.hp <= 0) {
