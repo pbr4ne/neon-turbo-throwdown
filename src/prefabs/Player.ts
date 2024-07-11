@@ -9,8 +9,8 @@ import Game from "../scenes/Game";
 import Member from "./Member";
 import Team from "./Team";
 import FloatingObjectScript from "../script-nodes/ui/FloatingObjectScript";
-import { GameSteps } from '../enums/GameSteps';
-import { CardType } from "../enums/CardType";
+import { GameSteps } from '../throwdown/GameSteps';
+import { CardType } from "../throwdown/CardType";
 /* END-USER-IMPORTS */
 
 export default class Player extends Team {

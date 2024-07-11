@@ -5,7 +5,7 @@
 
 /* START-USER-IMPORTS */
 import Card from "./Card";
-import { CardType } from "../enums/CardType";
+import { CardType } from "../throwdown/CardType";
 /* END-USER-IMPORTS */
 
 export default class Deck extends Phaser.GameObjects.Container {

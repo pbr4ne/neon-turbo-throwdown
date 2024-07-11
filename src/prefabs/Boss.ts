@@ -8,8 +8,8 @@ import Phaser from "phaser";
 import Member from "./Member";
 import Player from "./Player";
 import Team from "./Team";
-import { Coach } from "../dialogue/Coach";
-import { CardType, getCardName } from "../enums/CardType";
+import { Coach } from "../throwdown/Coach";
+import { CardType } from "../throwdown/CardType";
 import FloatingObjectScript from "../script-nodes/ui/FloatingObjectScript";
 /* END-USER-IMPORTS */
 
@@ -57,8 +57,8 @@ export default class Boss extends Team {
                 const whiteIconTexture = randomCard.getWhiteIconTexture();
 
                 member.assignCard(randomCard, whiteIconTexture, true);
-                member.assignedText?.setText(getCardName(cardType));
-                console.log("Assigned card to member: " + getCardName(cardType) + " " + member);
+                member.assignedText?.setText(cardType.getName());
+                console.log("Assigned card to member: " + cardType.getName() + " " + member);
 
                 this.hand.getCards().splice(randomIndex, 1);
 

@@ -1,5 +1,5 @@
 
-import { Coach } from './Coach'; 
+import { Coach } from '../throwdown/Coach'; 
 
 export class DialogueStep {
     private text: string | string[];

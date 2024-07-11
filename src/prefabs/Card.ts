@@ -5,7 +5,7 @@
 
 import Phaser from "phaser";
 /* START-USER-IMPORTS */
-import { CardType, getCardName } from "../enums/CardType";
+import { CardType } from "../throwdown/CardType";
 /* END-USER-IMPORTS */
 
 export default class Card extends Phaser.GameObjects.Container {
@@ -33,7 +33,7 @@ export default class Card extends Phaser.GameObjects.Container {
 
         this.cardType = CardType.unknown;
 
-        this.nameText = new Phaser.GameObjects.Text(scene, 0, 64, getCardName(this.cardType), {
+        this.nameText = new Phaser.GameObjects.Text(scene, 0, 64, this.cardType.getName(), {
             fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
             fontSize: '14px',
             color: '#ffff00',
@@ -62,7 +62,7 @@ export default class Card extends Phaser.GameObjects.Container {
 
     setType(type: CardType) {
         this.cardType = type;
-        this.nameText.setText(getCardName(this.cardType));
+        this.nameText.setText(this.cardType.getName());
         this.updateIcon();
     }
 

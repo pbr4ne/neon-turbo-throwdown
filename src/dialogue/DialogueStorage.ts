@@ -1,4 +1,4 @@
-import { Coach } from './Coach';
+import { Coach } from '../throwdown/Coach';
 import { DialogueConversation } from './Dialogue';
 
 export class DialogueStorage {

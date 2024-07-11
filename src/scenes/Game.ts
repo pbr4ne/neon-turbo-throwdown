@@ -4,12 +4,12 @@ import Phaser from "phaser";
 import GameplayScript from "../script-nodes/gameplay/GameplayScript";
 import TextureInfoScript from "../script-nodes/gameplay/TextureInfoScript";
 /* START-USER-IMPORTS */
-import { Coach } from "../dialogue/Coach";
+import { Coach } from "../throwdown/Coach";
 import DialogBox from "../dialogue/DialogBox";
 import Boss from "../prefabs/Boss";
 import Player from "../prefabs/Player";
 import GameoverPrefab from "../prefabs/GameoverPrefab";
-import { GameSteps } from '../enums/GameSteps';
+import { GameSteps } from '../throwdown/GameSteps';
 import { DialogueConversation } from "../dialogue/Dialogue";
 import { DialogueStorage } from "../dialogue/DialogueStorage";
 /* END-USER-IMPORTS */

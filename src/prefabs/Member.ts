@@ -8,8 +8,8 @@ import Phaser from "phaser";
 import Card from "./Card";
 import Team from "./Team";
 import Game from "../scenes/Game";
-import { GameSteps } from "../enums/GameSteps";
-import { CardType, getCardName } from "../enums/CardType";
+import { GameSteps } from "../throwdown/GameSteps";
+import { CardType } from "../throwdown/CardType";
 /* END-USER-IMPORTS */
 
 export default class Member extends Phaser.GameObjects.Container {
@@ -87,7 +87,7 @@ export default class Member extends Phaser.GameObjects.Container {
         }
         this.assignedCards.push(card);
         card.showAssignedRing();
-        this.assignedText?.setText(getCardName(card.cardType));
+        this.assignedText?.setText(card.cardType.getName());
         if (isBoss) {
             return;
         }
