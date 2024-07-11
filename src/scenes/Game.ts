@@ -89,6 +89,8 @@ export default class Game extends Phaser.Scene {
     private pointerImage2: Phaser.GameObjects.Image | null = null;
     private pointerImage3: Phaser.GameObjects.Image | null = null;
 
+    private gameOverPrefab!: GameoverPrefab;
+
     private dialogBox!: DialogBox;
     private dialogueStorage!: DialogueStorage;
 
@@ -102,17 +104,6 @@ export default class Game extends Phaser.Scene {
 		this.playerLayer = this.add.layer();
 		this.dialogLayer = this.add.layer();
 
-        this.courtImage.setVisible(true);
-        this.scoreImage.setVisible(false);
-        this.forfeitImage.setVisible(false);
-        this.coachCornerImage.setVisible(false);
-        this.difficultyImage.setVisible(false);
-        this.cardSlot1.setVisible(false);
-        this.cardSlot2.setVisible(false);
-        this.cardSlot3.setVisible(false);
-        this.cardSlot4.setVisible(false);
-        this.cardSlot5.setVisible(false);
-
         this.coachName = new Phaser.GameObjects.Text(this, 1720, 340, this.currentCoach.getName(), {
 			fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
 			fontSize: '16px',
@@ -124,7 +115,6 @@ export default class Game extends Phaser.Scene {
 		});
 		this.playerLayer.add(this.coachName);
 		this.coachName.setOrigin(0.5, 0.5);
-        this.coachName.setVisible(false);
 
         this.drawCardsImage = this.add.image(960, 1020, "draw-cards");
         this.selectCardImage = this.add.image(960, 1020, "select-card");
@@ -135,6 +125,7 @@ export default class Game extends Phaser.Scene {
         this.pointerImage2 = this.add.image(265, 875, "pointer");
         this.pointerImage3 = this.add.image(265, 875, "pointer");
 
+        this.clearAllGymStuff();
         this.clearAllInstructions();
 
         this.dialogueStorage = new DialogueStorage();
@@ -153,6 +144,19 @@ export default class Game extends Phaser.Scene {
         this.dialogBox.destroy();
         this.setupInitialState();
         this.startGameLoop();
+    }
+
+    clearAllGymStuff() {
+        this.scoreImage.setVisible(false);
+        this.forfeitImage.setVisible(false);
+        this.coachCornerImage.setVisible(false);
+        this.coachName.setVisible(false);
+        this.difficultyImage.setVisible(false);
+        this.cardSlot1.setVisible(false);
+        this.cardSlot2.setVisible(false);
+        this.cardSlot3.setVisible(false);
+        this.cardSlot4.setVisible(false);
+        this.cardSlot5.setVisible(false);
     }
 
     clearAllInstructions() {
@@ -247,6 +251,8 @@ export default class Game extends Phaser.Scene {
         this.cardSlot3.setVisible(true);
         this.cardSlot4.setVisible(true);
         this.cardSlot5.setVisible(true);
+
+        this.gameOverPrefab?.setVisible(false);
 
         this.player = new Player(this);
 		this.boss = new Boss(this, this.currentCoach);
@@ -378,18 +384,31 @@ export default class Game extends Phaser.Scene {
         if (this.player.members.length === 0) {
             this.clearAllInstructions();
             console.log("Game over");
-            const msg = new GameoverPrefab(this, "Failure!");
-		    this.add.existing(msg);
+            this.gameOverPrefab = new GameoverPrefab(this, "FAILURE!");
+            this.gameOverPrefab.setVisible(true);
+            this.add.existing(this.gameOverPrefab);
+
 		    this.events.emit("scene-awake");
         } else if (this.boss.members.length === 0) {
+            this.clearAllGymStuff();
             this.clearAllInstructions();
-            console.log("You win!");
-            const msg = new GameoverPrefab(this, "Victory!");
-		    this.add.existing(msg);
-		    this.events.emit("scene-awake");
-        }
+            this.player.clearMembers();
+            this.boss.clearMembers();
+            this.player.hand.clear();
+            this.boss.hand.clear();
+            this.boss.destroy();
 
-        this.nextStep();
+            console.log("You win!");
+            this.gameOverPrefab = new GameoverPrefab(this, "VICTORY!");
+            this.gameOverPrefab.setVisible(true);
+            this.add.existing(this.gameOverPrefab);
+
+		    this.events.emit("scene-awake");
+            
+            this.doDialogue(this.dialogueStorage.primoWinDialogue);
+        } else {
+            this.nextStep();
+        }
     }
 
     loopBack() {

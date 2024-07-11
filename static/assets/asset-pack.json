@@ -65,6 +65,11 @@
                 "key": "catch"
             },
             {
+                "url": "assets/images/level/coach.png",
+                "type": "image",
+                "key": "coach"
+            },
+            {
                 "url": "assets/images/game/coach-corner.png",
                 "type": "image",
                 "key": "coach-corner"
@@ -152,11 +157,6 @@
                 "key": "music2-on"
             },
             {
-                "url": "assets/images/level/primo.png",
-                "type": "image",
-                "key": "primo"
-            },
-            {
                 "url": "assets/images/players/player1.png",
                 "type": "image",
                 "key": "player1"
@@ -175,6 +175,11 @@
                 "url": "assets/images/instructions/pointer.png",
                 "type": "image",
                 "key": "pointer"
+            },
+            {
+                "url": "assets/images/level/primo.png",
+                "type": "image",
+                "key": "primo"
             },
             {
                 "url": "assets/images/cards/ring-assigned.png",
@@ -210,6 +215,11 @@
                 "url": "assets/images/welcome/sound2-on.png",
                 "type": "image",
                 "key": "sound2-on"
+            },
+            {
+                "url": "assets/images/level/sporticus.png",
+                "type": "image",
+                "key": "sporticus"
             },
             {
                 "url": "assets/images/welcome/start-button.png",

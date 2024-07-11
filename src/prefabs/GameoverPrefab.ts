@@ -11,14 +11,10 @@ import { DurationConfigComp } from "@phaserjs/editor-scripts-simple-animations";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
-export default class GameoverPrefab extends Phaser.GameObjects.BitmapText {
+export default class GameoverPrefab extends Phaser.GameObjects.Container {
 
 	constructor(scene: Phaser.Scene, message: string, x?: number, y?: number, font?: string) {
-		super(scene, x ?? 960, y ?? 540, font ?? "turbo");
-
-		this.setOrigin(0.5, 0.5);
-		this.text = message;
-		this.fontSize = 200;
+		super(scene);
 
 		// floatingObjectScript
 		new FloatingObjectScript(this);
@@ -34,7 +30,19 @@ export default class GameoverPrefab extends Phaser.GameObjects.BitmapText {
 
 		// fadeActionScript (components)
 		const fadeActionScriptDurationConfigComp = new DurationConfigComp(fadeActionScript);
-		fadeActionScriptDurationConfigComp.duration = 4000;
+		fadeActionScriptDurationConfigComp.duration = 14000;
+
+		this.gameOverText = new Phaser.GameObjects.Text(this.scene, 980, 500, message, {
+			fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
+			fontSize: '72px',
+			color: '#ff00ff',
+            stroke: '#00ffff',
+            strokeThickness: 5,
+			padding: { x: 5, y: 5 },
+			align: 'center'
+		});
+		this.add(this.gameOverText);
+		this.gameOverText.setOrigin(0.5, 0.5);
 
 		/* START-USER-CTR-CODE */
 		/* END-USER-CTR-CODE */
@@ -42,7 +50,7 @@ export default class GameoverPrefab extends Phaser.GameObjects.BitmapText {
 
 	/* START-USER-CODE */
 
-	// Write your code here.
+	private gameOverText!: Phaser.GameObjects.Text;
 
 	/* END-USER-CODE */
 }
