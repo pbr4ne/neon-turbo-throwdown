@@ -8,6 +8,7 @@ import DialogBox from "../prefabs/DialogBox";
 import Boss from "../prefabs/Boss";
 import Player from "../prefabs/Player";
 import GameoverPrefab from "../prefabs/GameoverPrefab";
+import { GameSteps } from './GameSteps';
 /* END-USER-IMPORTS */
 
 export default class Game extends Phaser.Scene {
@@ -79,6 +80,8 @@ export default class Game extends Phaser.Scene {
     private selectPlayerImage: Phaser.GameObjects.Image | null = null;
     private targetOpponentImage: Phaser.GameObjects.Image | null = null;
     private pointerImage: Phaser.GameObjects.Image | null = null;
+    private pointerImage2: Phaser.GameObjects.Image | null = null;
+    private pointerImage3: Phaser.GameObjects.Image | null = null;
 
 	create() {
 		this.editorCreate();
@@ -109,11 +112,49 @@ export default class Game extends Phaser.Scene {
         this.pointerImage = this.add.image(265, 875, "pointer");
         this.pointerImage.setVisible(false);
 
+        this.pointerImage2 = this.add.image(265, 875, "pointer");
+        this.pointerImage2.setVisible(false);
+
+        this.pointerImage3 = this.add.image(265, 875, "pointer");
+        this.pointerImage3.setVisible(false);
+
 
 		this.setupInitialState();
 		this.startGameLoop();
 
 		//this.showDialog();
+    }
+
+    showDrawCardsImage() {
+        this.drawCardsImage?.setVisible(true);
+        this.selectCardImage?.setVisible(false);
+        this.selectPlayerImage?.setVisible(false);
+        this.targetOpponentImage?.setVisible(false);
+        this.pointerImage?.setPosition(265, 875);
+    }
+
+    showSelectCardImage() {
+        this.drawCardsImage?.setVisible(false);
+        this.selectCardImage?.setVisible(true);
+        this.selectPlayerImage?.setVisible(false);
+        this.targetOpponentImage?.setVisible(false);
+        this.pointerImage?.setPosition(1500, 850);
+    }
+
+    showSelectPlayerImage() {
+        this.drawCardsImage?.setVisible(false);
+        this.selectCardImage?.setVisible(false);
+        this.selectPlayerImage?.setVisible(true);
+        this.targetOpponentImage?.setVisible(false);
+        this.pointerImage?.setPosition(1500, 850);
+    }
+
+    showTargetOpponentImage() {
+        this.drawCardsImage?.setVisible(false);
+        this.selectCardImage?.setVisible(false);
+        this.selectPlayerImage?.setVisible(false);
+        this.targetOpponentImage?.setVisible(true);
+        this.pointerImage?.setPosition(1500, 850);
     }
 
     getCurrentStep(): number {
@@ -136,28 +177,28 @@ export default class Game extends Phaser.Scene {
 
 	nextStep() {
         switch (this.currentStep) {
-            case 0:
+            case GameSteps.DRAW_CARDS:
                 this.drawCards();
                 break;
-            case 1:
+            case GameSteps.ASSIGN_CARDS:
                 this.assignCards();
                 break;
-            case 2:
+            case GameSteps.TARGET_MEMBERS:
                 this.targetMembers();
                 break;
-            case 3:
+            case GameSteps.START_TURN:
                 this.startTurn();
                 break;
-            case 4:
+            case GameSteps.DISCARD_REMAINING_CARDS:
                 this.discardRemainingCards();
                 break;
-            case 5:
+            case GameSteps.EXECUTE_TURN_ACTIONS:
                 this.executeTurnActions();
                 break;
-            case 6:
+            case GameSteps.CHECK_END_GAME_CONDITION:
                 this.checkEndGameCondition();
                 break;
-            case 7:
+            case GameSteps.LOOP_BACK:
                 this.loopBack();
                 break;
         }
@@ -167,21 +208,34 @@ export default class Game extends Phaser.Scene {
         console.log("on DRAW CARDS step");
         this.currentStep++;
 
-        this.drawCardsImage?.setVisible(true);
-        this.selectCardImage?.setVisible(false);
-        this.pointerImage?.setPosition(265, 875);
-        this.pointerImage?.setVisible(true);
+        this.showDrawCardsImage();
         this.boss.drawCards();
         // wait for user to draw
     }
+
+    // selectCard() {
+    //     console.log("on SELECT CARD step");
+    //     this.currentStep++;
+    //     // wait for user to select card
+    // }
+
+    // selectPlayerMember() {
+    //     console.log("on SELECT PLAYER MEMBER step");
+    //     this.currentStep++;
+    //     // wait for user to select player
+    // }
+
+    // selectEnemyMember() {
+    //     console.log("on SELECT ENEMY MEMBER step");
+    //     this.currentStep++;
+    //     // wait for user to select enemy
+    // }
 
     assignCards() {
         console.log("on ASSIGN CARDS step");
         this.currentStep++;
 
-        this.drawCardsImage?.setVisible(false);
-        this.selectCardImage?.setVisible(true);
-        this.pointerImage?.setPosition(1500, 850);
+        this.showSelectCardImage();
 
         this.boss.assignCards();
         // wait for user to assign

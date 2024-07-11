@@ -7,6 +7,7 @@ import Card from "./Card";
 import Deck from "./Deck";
 import Game from "../scenes/Game";
 import Member from "./Member";
+import { GameSteps } from '../scenes/GameSteps';
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -67,7 +68,7 @@ export default class Hand {
 
     handleCardClick(card: Card, members: Member[]) {
         var currentStep = (this.scene.scene.get('Game') as Game).getCurrentStep();
-        if (currentStep !== 1) {
+        if (currentStep !== GameSteps.ASSIGN_CARDS) {
             console.log("Not in the right step to select a card");
             return;
         }
@@ -91,6 +92,7 @@ export default class Hand {
             }
         }
         card.togglePopUp();
+
         this.poppedUpCard = card;
         this.selectedCard = card;
     }

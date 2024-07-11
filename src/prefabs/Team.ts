@@ -9,6 +9,7 @@ import Deck from "./Deck";
 import Hand from "./Hand";
 import Member from "./Member";
 import Game from "../scenes/Game"
+import { GameSteps } from '../scenes/GameSteps';
 /* END-USER-IMPORTS */
 
 export default abstract class Team extends Phaser.GameObjects.Container {
@@ -69,7 +70,7 @@ export default abstract class Team extends Phaser.GameObjects.Container {
     }
 
     onDeckClick() {
-        if ((this.scene.scene.get('Game') as Game).getCurrentStep() != 0) {
+        if ((this.scene.scene.get('Game') as Game).getCurrentStep() != GameSteps.DRAW_CARDS) {
             console.log("can't draw cards now");
             return;
         }

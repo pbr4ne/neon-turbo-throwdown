@@ -9,6 +9,7 @@ import Game from "../scenes/Game";
 import Member from "./Member";
 import Team from "./Team";
 import FloatingObjectScript from "../script-nodes/ui/FloatingObjectScript";
+import { GameSteps } from '../scenes/GameSteps';
 /* END-USER-IMPORTS */
 
 export default class Player extends Team {
@@ -21,7 +22,6 @@ export default class Player extends Team {
         this.deck.on("deckClicked", this.onDeckClick.bind(this));
 
         this.createEndTurnButton();
-        //this.checkEndTurnButtonVisibility();
 		/* END-USER-CTR-CODE */
 	}
 
@@ -29,6 +29,7 @@ export default class Player extends Team {
 	public throwdownButton!: Phaser.GameObjects.Image;
     private selectedThrowMember: Member | null = null;
     private targetArc: Phaser.GameObjects.Graphics | null = null;
+    private assignedMember: Member | null = null;
 
 	addMembers() {
         const member1 = new Member(this.scene, 558, 404, 'player1', true, this, 1);
@@ -55,7 +56,7 @@ export default class Player extends Team {
     onDeckClick() {
         super.onDeckClick();
         var currentStep = (this.scene.scene.get('Game') as Game).getCurrentStep();
-        if (currentStep == 0 && this.hand.getCards().length == 5) {
+        if (currentStep == GameSteps.DRAW_CARDS && this.hand.getCards().length == 5) {
             console.log('go to next step');
             (this.scene.scene.get('Game') as Game).nextStep();
         }
@@ -64,10 +65,12 @@ export default class Player extends Team {
     handleMemberClick(member: Member) {
         var currentStep = (this.scene.scene.get('Game') as Game).getCurrentStep();
 
-        if (currentStep == 1) {
+        if (currentStep == GameSteps.ASSIGN_CARDS) {
             super.handleMemberClick(member);
 
             this.hand.assignCardToMember(member);
+
+            this.assignedMember = member;
 
             // Check if all members have at least one card assigned
             const allMembersHaveCards = this.members.every(member => member.getAssignedCards().length > 0);
@@ -77,7 +80,7 @@ export default class Player extends Team {
                 (this.scene.scene.get('Game') as Game).nextStep();
             }
 
-        } else if (currentStep == 2) {
+        } else if (currentStep == GameSteps.TARGET_MEMBERS) {
             super.handleMemberClick(member);
 
             const cardTypes = member.getAssignedCards().map(card => card.cardType);
@@ -105,7 +108,7 @@ export default class Player extends Team {
     handleEnemyClick(enemy: Member) {
         var currentStep = (this.scene.scene.get('Game') as Game).getCurrentStep();
 
-        if (currentStep != 2) {
+        if (currentStep != GameSteps.TARGET_MEMBERS) {
             console.log("can't click on enemy now");
             return;
         }

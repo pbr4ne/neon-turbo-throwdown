@@ -1,0 +1,10 @@
+export enum GameSteps {
+    DRAW_CARDS = 0,
+    ASSIGN_CARDS = 1,
+    TARGET_MEMBERS = 2,
+    START_TURN = 3,
+    DISCARD_REMAINING_CARDS = 4,
+    EXECUTE_TURN_ACTIONS = 5,
+    CHECK_END_GAME_CONDITION = 6,
+    LOOP_BACK = 7
+}
