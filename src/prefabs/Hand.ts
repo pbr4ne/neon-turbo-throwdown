@@ -52,10 +52,25 @@ export default class Hand {
         const totalWidth = this.cards.length * cardWidth + (this.cards.length - 1) * cardSpacing;
         const startX = (screenWidth - totalWidth) / 2;
         const yPos = screenHeight - cardWidth - 50;
-
+    
+        //BIG BRAIN CODING
         this.cards.forEach((card, index) => {
-            card.setPosition((startX + index * (cardWidth + cardSpacing)) + (cardWidth/2), yPos);
+            if (index === 0) {
+                card.setPosition(556, yPos);
+            } else if (index === 1) {
+                card.setPosition(556 + 182 + 20, yPos);
+            }
+            else if (index === 2) {
+                card.setPosition(556 + 182 + 20 + 182 + 20, yPos);
+            }
+            else if (index === 3) {
+                card.setPosition(556 + 182 + 20 + 182 + 20 + 182 + 20, yPos);
+            }
+            else if (index === 4) {
+                card.setPosition(556 + 182 + 20 + 182 + 20 + 182 + 20 + 182 + 20, yPos);
+            }
         });
+        
     }
 
     handleCardClick(card: Card) {

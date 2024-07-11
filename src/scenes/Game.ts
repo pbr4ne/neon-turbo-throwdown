@@ -37,6 +37,12 @@ export default class Game extends Phaser.Scene {
 		// difficulty_1
 		this.add.image(1747, 411, "difficulty-1");
 
+        this.add.image(556, 848, "empty");
+        this.add.image(758, 848, "empty");
+        this.add.image(960, 848, "empty");
+        this.add.image(1162, 848, "empty");
+        this.add.image(1364, 848, "empty");
+
 		// gameplayScript
 		const gameplayScript = new GameplayScript(this);
 

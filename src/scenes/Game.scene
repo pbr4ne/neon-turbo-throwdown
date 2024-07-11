@@ -63,6 +63,56 @@
             "y": 411
         },
         {
+            "type": "Image",
+            "id": "2f42f786-5388-41d5-8c0d-e5e8481fb53e",
+            "label": "empty",
+            "texture": {
+                "key": "empty"
+            },
+            "x": 956,
+            "y": 847
+        },
+        {
+            "type": "Image",
+            "id": "a4f8895b-b942-4081-8f5b-e0e7aaefeb1f",
+            "label": "empty_1",
+            "texture": {
+                "key": "empty"
+            },
+            "x": 1149,
+            "y": 850
+        },
+        {
+            "type": "Image",
+            "id": "2fa4476a-bf7e-4474-8737-2def5cb9a21b",
+            "label": "empty_2",
+            "texture": {
+                "key": "empty"
+            },
+            "x": 756,
+            "y": 845
+        },
+        {
+            "type": "Image",
+            "id": "e08d1d3f-0faf-47a2-960c-2a528fe8ca16",
+            "label": "empty_3",
+            "texture": {
+                "key": "empty"
+            },
+            "x": 1328,
+            "y": 850
+        },
+        {
+            "type": "Image",
+            "id": "e42ff83b-3757-4808-b88d-6c57949fc1f6",
+            "label": "empty_4",
+            "texture": {
+                "key": "empty"
+            },
+            "x": 561,
+            "y": 850
+        },
+        {
             "prefabId": "d8801a27-29ff-4774-a8a6-1f4e9b14d6cc",
             "id": "789d2f54-a153-406e-a5e6-cf5e700681e3",
             "label": "gameplayScript",
