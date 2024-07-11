@@ -145,6 +145,7 @@ export default class Game extends Phaser.Scene {
 
     showDrawCardsImage() {
         this.clearAllInstructions();
+        this.drawCardsImage?.setVisible(true);
         this.pointerImage?.setVisible(true);
         this.pointerImage?.setPosition(265, 875);
     }
@@ -176,7 +177,7 @@ export default class Game extends Phaser.Scene {
     showTargetOpponentImage() {
         this.clearAllInstructions();
         this.targetOpponentImage?.setVisible(true);
-        this.boss.getUntargetedMembers().forEach((member) => {
+        this.boss.members.forEach((member) => {
             if (member.getNumber() == 4) {
                 this.pointerImage?.setPosition(755, 297);
                 this.pointerImage?.setVisible(true);
@@ -328,11 +329,13 @@ export default class Game extends Phaser.Scene {
         this.currentStep++;
 
         if (this.player.members.length === 0) {
+            this.clearAllInstructions();
             console.log("Game over");
             const msg = new GameoverPrefab(this, "Failure!");
 		    this.add.existing(msg);
 		    this.events.emit("scene-awake");
         } else if (this.boss.members.length === 0) {
+            this.clearAllInstructions();
             console.log("You win!");
             const msg = new GameoverPrefab(this, "Victory!");
 		    this.add.existing(msg);

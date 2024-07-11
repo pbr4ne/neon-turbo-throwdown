@@ -112,11 +112,6 @@ export default class Boss extends Team {
         }
         return null;
     }
-
-    getUntargetedMembers(): Member[] {
-        return this.members.filter(member => member.getIntendedTarget() === null);
-    }
-
     /* END-USER-CODE */
 }
 
