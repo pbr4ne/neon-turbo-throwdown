@@ -232,6 +232,11 @@
                 "key": "start-button"
             },
             {
+                "url": "assets/images/instructions/start-round.png",
+                "type": "image",
+                "key": "start-round"
+            },
+            {
                 "url": "assets/images/instructions/target-opponent.png",
                 "type": "image",
                 "key": "target-opponent"
@@ -240,6 +245,11 @@
                 "url": "assets/images/cards/throw.png",
                 "type": "image",
                 "key": "throw"
+            },
+            {
+                "url": "assets/images/instructions/throwdown-button.png",
+                "type": "image",
+                "key": "throwdown-button"
             },
             {
                 "url": "assets/images/ui/throwdownButton.png",
@@ -256,6 +266,16 @@
                 "fontDataURL": "assets/fonts/turbo.xml",
                 "type": "bitmapFont",
                 "key": "turbo"
+            },
+            {
+                "url": "assets/images/cards/turbo-throw.png",
+                "type": "image",
+                "key": "turbo-throw"
+            },
+            {
+                "url": "assets/images/cards/upgrade.png",
+                "type": "image",
+                "key": "upgrade"
             }
         ]
     },
