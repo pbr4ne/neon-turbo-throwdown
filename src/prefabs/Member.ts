@@ -149,7 +149,7 @@ export default class Member extends Phaser.GameObjects.Container {
     }
 
     enableGlow() {
-        this.sprite.setTint(0xff00ff);
+        this.sprite.setTint(0xffffff);
     }
 
     disableGlow() {
