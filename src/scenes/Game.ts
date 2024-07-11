@@ -166,6 +166,7 @@ export default class Game extends Phaser.Scene {
         this.targetOpponentImage?.setVisible(false);
         this.startRoundImage?.setVisible(false);
         this.pointerImage?.setVisible(false);
+        this.pointerImage?.setAngle(0);
         this.pointerImage2?.setVisible(false);
         this.pointerImage3?.setVisible(false);
         
@@ -227,7 +228,8 @@ export default class Game extends Phaser.Scene {
         this.player.throwdownButton.setVisible(true);
         this.startRoundImage?.setVisible(true);
         this.pointerImage?.setVisible(true);
-        this.pointerImage?.setPosition(1730, 800);
+        this.pointerImage?.setPosition(1715, 775);
+        this.pointerImage?.setAngle(-90);
     }
 
     getCurrentStep(): number {
