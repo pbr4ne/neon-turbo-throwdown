@@ -41,6 +41,7 @@ export default class DialogBox extends Phaser.GameObjects.Container {
 	private optionText3!: Phaser.GameObjects.Text;
 	private optionInstructions!: Phaser.GameObjects.Text;
 	private avatar!: Phaser.GameObjects.Image;
+	private avatarName!: Phaser.GameObjects.Text;
 
 	generateDialogue(dialogueConversation: DialogueConversation) {
         var step = dialogueConversation.getCurrentStep();
@@ -80,6 +81,8 @@ export default class DialogBox extends Phaser.GameObjects.Container {
 		this.hideAllTextAreas();
 		const text = step.getText();
 		this.avatar.setTexture(step.getCoach().getAvatar());
+		this.avatarName.setText(step.getNameOverride() ?? step.getCoach().getName());
+		console.log(step.getCoach().getName());
 
 		if (typeof text === 'string') {
 			this.dialogueText.setText(text);
@@ -114,13 +117,24 @@ export default class DialogBox extends Phaser.GameObjects.Container {
 		this.nextButton.destroy();
 		this.buttonText.destroy();
 		this.avatar.destroy();
+		this.avatarName.destroy();
 	}
 
 	//todo omg this is terrible
 	initializeTextAreas() {
-		console.log("initializeTextAreas");
 		//avatar
-		this.avatar = this.scene.add.image(1750, 850, 'you');
+		this.avatar = this.scene.add.image(1760, 850, 'you');
+
+		//avatar name
+		this.avatarName = new Phaser.GameObjects.Text(this.scene, 800, 430, "", {
+			fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
+			fontSize: '16px',
+			color: '#ffffff',
+			padding: { x: 5, y: 5 },
+			align: 'left'
+		});
+		this.add(this.avatarName)
+		this.avatarName.setOrigin(0.5, 0.5);
 
 		//single text
 		this.dialogueText = new Phaser.GameObjects.Text(this.scene, -630, 200, "", {
