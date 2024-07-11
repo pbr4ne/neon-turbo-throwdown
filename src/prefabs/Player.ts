@@ -79,7 +79,7 @@ export default class Player extends Team {
     }
 
     createEndTurnButton() {
-		this.throwdownButton = new Phaser.GameObjects.Image(this.scene, 1660, 940, 'throwdownButton')
+		this.throwdownButton = new Phaser.GameObjects.Image(this.scene, 1710, 850, 'throwdown-button')
 			.setOrigin(0.5)
 			.setInteractive()
 			.setVisible(false)
