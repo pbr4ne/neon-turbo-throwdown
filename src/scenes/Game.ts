@@ -75,7 +75,10 @@ export default class Game extends Phaser.Scene {
 	public currentStep: number = 0;
 
     private drawCardsImage: Phaser.GameObjects.Image | null = null;
-    private assignCardsImage: Phaser.GameObjects.Image | null = null;
+    private selectCardImage: Phaser.GameObjects.Image | null = null;
+    private selectPlayerImage: Phaser.GameObjects.Image | null = null;
+    private targetOpponentImage: Phaser.GameObjects.Image | null = null;
+    private pointerImage: Phaser.GameObjects.Image | null = null;
 
 	create() {
 		this.editorCreate();
@@ -90,6 +93,22 @@ export default class Game extends Phaser.Scene {
 
 		this.playerLayer.add(this.player);
 		this.playerLayer.add(this.boss);
+
+        this.drawCardsImage = this.add.image(960, 1020, "draw-cards");
+        this.drawCardsImage.setVisible(false);
+
+        this.selectCardImage = this.add.image(960, 1020, "select-card");
+        this.selectCardImage.setVisible(false);
+
+        this.selectPlayerImage = this.add.image(960, 1020, "select-player");
+        this.selectPlayerImage.setVisible(false);
+
+        this.targetOpponentImage = this.add.image(960, 1020, "target-opponent");
+        this.targetOpponentImage.setVisible(false);
+
+        this.pointerImage = this.add.image(265, 875, "pointer");
+        this.pointerImage.setVisible(false);
+
 
 		this.setupInitialState();
 		this.startGameLoop();
@@ -148,7 +167,8 @@ export default class Game extends Phaser.Scene {
         console.log("on DRAW CARDS step");
         this.currentStep++;
 
-        this.drawCardsImage = this.add.image(960, 1020, "draw-cards");
+        this.drawCardsImage?.setVisible(true);
+        this.pointerImage?.setVisible(true);
         this.boss.drawCards();
         // wait for user to draw
     }
@@ -157,7 +177,8 @@ export default class Game extends Phaser.Scene {
         console.log("on ASSIGN CARDS step");
         this.currentStep++;
 
-        this.drawCardsImage?.destroy();
+        this.drawCardsImage?.setVisible(false);
+        this.pointerImage?.setVisible(false);
         this.boss.assignCards();
         // wait for user to assign
     }
