@@ -5,6 +5,7 @@
 
 import Card from "./Card";
 import Deck from "./Deck";
+import Game from "../scenes/Game";
 import Member from "./Member";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
@@ -54,12 +55,16 @@ export default class Hand {
     
         this.cards.forEach((card, index) => {
             const xPos = startX + index * (cardWidth + cardSpacing);
-            console.log(xPos);
             card.setPosition(xPos, yPos);
         });
     }
 
     handleCardClick(card: Card) {
+        var currentStep = (this.scene.scene.get('Game') as Game).getCurrentStep();
+        if (currentStep !== 1) {
+            console.log("Not in the right step to select a card");
+            return;
+        }
         if (this.poppedUpCard) {
             this.poppedUpCard.togglePopUp();
             if (this.poppedUpCard === card) {

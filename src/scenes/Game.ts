@@ -168,6 +168,8 @@ export default class Game extends Phaser.Scene {
         this.currentStep++;
 
         this.drawCardsImage?.setVisible(true);
+        this.selectCardImage?.setVisible(false);
+        this.pointerImage?.setPosition(265, 875);
         this.pointerImage?.setVisible(true);
         this.boss.drawCards();
         // wait for user to draw
@@ -178,7 +180,6 @@ export default class Game extends Phaser.Scene {
         this.currentStep++;
 
         this.drawCardsImage?.setVisible(false);
-        //this.pointerImage?.setVisible(false);
         this.selectCardImage?.setVisible(true);
         this.pointerImage?.setPosition(1500, 850);
 
