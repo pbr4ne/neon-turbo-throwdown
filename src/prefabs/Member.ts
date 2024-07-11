@@ -20,8 +20,11 @@ export default class Member extends Phaser.GameObjects.Container {
     private team: Team;
     private intendedTarget: Member | null = null;
     private number: number;
+    private bracketDefaultLeft: Phaser.GameObjects.Image | null = null;
+    private bracketDefaultRight: Phaser.GameObjects.Image | null = null;
+    public assignedText: Phaser.GameObjects.Text | null = null;
 
-    constructor(scene: Phaser.Scene, x: number, y: number, texture: string, visibleMove: boolean, team: Team, number: number, flip: boolean = false) {
+    constructor(scene: Phaser.Scene, x: number, y: number, texture: string, visibleMove: boolean, team: Team, number: number, flip: boolean = false, bracketOffset: number = 0) {
         super(scene, x, y);
 
         this.visibleMove = visibleMove;
@@ -44,6 +47,22 @@ export default class Member extends Phaser.GameObjects.Container {
 
         this.setInteractive(new Phaser.Geom.Rectangle(0, 0, this.sprite.width, this.sprite.height), Phaser.Geom.Rectangle.Contains);
 
+        this.bracketDefaultLeft = new Phaser.GameObjects.Image(this.scene, -50, 150 - bracketOffset, 'bracket-default');
+        this.bracketDefaultRight = new Phaser.GameObjects.Image(this.scene, 50, 150 - bracketOffset, 'bracket-default');
+        this.bracketDefaultRight.setFlipX(true);
+        this.add(this.bracketDefaultLeft);
+        this.add(this.bracketDefaultRight);
+
+        this.assignedText = new Phaser.GameObjects.Text(scene, 0, 150 - bracketOffset, "", {
+            fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
+            fontSize: '14px',
+            color: '#ffff00',
+            padding: { x: 5, y: 5 },
+            align: 'center'
+        });
+        this.assignedText.setOrigin(0.5, 0.5);
+        this.add(this.assignedText);
+
         this.on('pointerover', () => { this.scene.input.setDefaultCursor('pointer'); });
         this.on('pointerout', () => { this.scene.input.setDefaultCursor('default'); });
     }
@@ -59,13 +78,17 @@ export default class Member extends Phaser.GameObjects.Container {
         return this.intendedTarget;
     }
 
-    assignCard(card: Card, whiteIconTexture: string) {
+    assignCard(card: Card, whiteIconTexture: string, isBoss: boolean = false) {
+        console.log("assigning card!");
         if (this.assignedCards.length >= 1) {
             return;
         }
         this.assignedCards.push(card);
         card.showAssignedRing();
-        console.log("Assigned " + card.cardType + " to " + this);
+        this.assignedText?.setText(card.cardType);
+        if (isBoss) {
+            return;
+        }
         if (card.cardType === "throw") {
             (this.scene.scene.get('Game') as Game).nextStep();
         } else {
@@ -76,12 +99,6 @@ export default class Member extends Phaser.GameObjects.Container {
             } else {
                 (this.scene.scene.get('Game') as Game).setStep(GameSteps.SELECT_CARD);
             }
-        }
-
-        if (this.visibleMove)  {
-            const icon = new Phaser.GameObjects.Image(this.scene, 0, -20, whiteIconTexture);
-            this.add(icon);
-            this.cardIcons.push(icon);
         }
     }
 

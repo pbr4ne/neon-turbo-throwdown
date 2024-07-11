@@ -185,6 +185,9 @@ export default class Game extends Phaser.Scene {
             case GameSteps.DRAW_CARDS:
                 this.drawCards();
                 break;
+            case GameSteps.BOSS_ASSIGN_AND_SELECT_CARDS:
+                this.bossAssignAndSelectCards();
+                break;
             case GameSteps.SELECT_CARD:
                 this.selectCard();
                 break;
@@ -218,13 +221,24 @@ export default class Game extends Phaser.Scene {
 
         this.showDrawCardsImage();
         this.boss.drawCards();
+        
         // wait for user to draw
+    }
+
+    bossAssignAndSelectCards() {
+        console.log("on BOSS ASSIGN AND SELECT CARDS step");
+        this.currentStep++;
+        this.boss.assignCards();
+        this.boss.targetMembers();
+        this.nextStep();
     }
 
     selectCard() {
         console.log("on SELECT CARD step");
         this.currentStep++;
 
+        this.boss.assignCards();
+        this.boss.targetMembers();
         this.showSelectCardImage();
         // wait for user to select card
     }

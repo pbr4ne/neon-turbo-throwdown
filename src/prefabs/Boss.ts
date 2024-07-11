@@ -54,7 +54,9 @@ export default class Boss extends Team {
                 const cardType = randomCard.getCardType();
                 const whiteIconTexture = randomCard.getWhiteIconTexture();
 
-                member.assignCard(randomCard, whiteIconTexture);
+                member.assignCard(randomCard, whiteIconTexture, true);
+                member.assignedText?.setText(cardType);
+                console.log(member.assignedText?.text);
 
                 this.hand.getCards().splice(randomIndex, 1);
 
@@ -64,9 +66,9 @@ export default class Boss extends Team {
     }
 
     addMembers() {
-        const enemy1 = new Member(this.scene, 664, 196, 'enemy1', false, this, 4);
-        const enemy2 = new Member(this.scene, 950, 152, 'enemy2', false, this, 5);
-        const enemy3 = new Member(this.scene, 1220, 191, 'enemy3', false, this, 6);
+        const enemy1 = new Member(this.scene, 664, 196, 'enemy1', false, this, 4, false, 40);
+        const enemy2 = new Member(this.scene, 950, 152, 'enemy2', false, this, 5, false, 40);
+        const enemy3 = new Member(this.scene, 1220, 191, 'enemy3', false, this, 6, false, 40);
 
         this.add(enemy1);
         this.add(enemy2);

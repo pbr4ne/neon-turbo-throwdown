@@ -104,8 +104,10 @@ export default class Player extends Team {
 
             const allMembersHaveCards = this.members.every(member => member.getAssignedCards().length > 0);
             if (allMembersHaveCards) {
+                this.currentMember = null;
                 (this.scene.scene.get('Game') as Game).nextStep();
             } else {
+                this.currentMember = null;
                 (this.scene.scene.get('Game') as Game).setStep(GameSteps.SELECT_CARD);
             }  
         }
