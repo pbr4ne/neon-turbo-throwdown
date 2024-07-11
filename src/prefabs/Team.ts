@@ -84,7 +84,7 @@ export default abstract class Team extends Phaser.GameObjects.Container {
                 topCard.off("pointerdown");
                 this.deck.updateTopCardInteraction();
                 topCard.on("pointerdown", () => {
-                    this.hand.handleCardClick(topCard);
+                    this.hand.handleCardClick(topCard, this.members);
                 });
             }
         }

@@ -59,12 +59,23 @@ export default class Hand {
         });
     }
 
-    handleCardClick(card: Card) {
+    handleCardClick(card: Card, members: Member[]) {
         var currentStep = (this.scene.scene.get('Game') as Game).getCurrentStep();
         if (currentStep !== 1) {
             console.log("Not in the right step to select a card");
             return;
         }
+
+        // Check if any member already has the card assigned
+        const cardAlreadyAssigned = members.some(member => 
+            member.getAssignedCards().includes(card)
+        );
+
+        if (cardAlreadyAssigned) {
+            console.log("Card is already assigned to a member");
+            return;
+        }
+
         if (this.poppedUpCard) {
             this.poppedUpCard.togglePopUp();
             if (this.poppedUpCard === card) {
@@ -84,7 +95,7 @@ export default class Hand {
                 const cardType = this.poppedUpCard.getCardType();
                 const whiteIconTexture = this.poppedUpCard.getWhiteIconTexture();
                 member.assignCard(this.poppedUpCard, whiteIconTexture);
-                this.poppedUpCard.hide();
+                //this.poppedUpCard.hide();
                 this.cards = this.cards.filter(card => card !== this.poppedUpCard);
             }
             this.poppedUpCard.togglePopUp(); 

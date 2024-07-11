@@ -72,6 +72,10 @@ export default class Card extends Phaser.GameObjects.Container {
         this.iconImage.setVisible(visible);
     }
 
+    showAssignedRing() {
+        this.ringAssignedImage.setVisible(true);
+    }
+
     updateIcon() {
         switch (this.cardType) {
             case 'block':
@@ -93,6 +97,7 @@ export default class Card extends Phaser.GameObjects.Container {
     }
 
     togglePopUp() {
+        
         if (this.isPoppedUp) {
             //this.y += 20;
             this.ringSelectedImage.setVisible(false);

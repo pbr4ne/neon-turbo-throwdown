@@ -62,6 +62,7 @@ export default class Member extends Phaser.GameObjects.Container {
             return;
         }
         this.assignedCards.push(card);
+        card.showAssignedRing();
         console.log("Assigned " + card.cardType + " to " + this);
 
         if (this.visibleMove)  {
