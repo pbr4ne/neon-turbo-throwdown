@@ -108,8 +108,8 @@ export default class Member extends Phaser.GameObjects.Container {
 
     clearAssignedCards() {
         this.assignedCards = [];
-        //delete icon
         this.cardIcons.forEach(icon => icon.destroy());
+        this.assignedText?.setText("");
     }
 
     getHP(): number {
