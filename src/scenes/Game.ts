@@ -90,13 +90,7 @@ export default class Game extends Phaser.Scene {
 		this.playerLayer = this.add.layer();
 		this.dialogLayer = this.add.layer();
 
-		this.player = new Player(this);
-		this.boss = new Boss(this);
-		this.player.opponent = this.boss;
-		this.boss.opponent = this.player;
-
-		this.playerLayer.add(this.player);
-		this.playerLayer.add(this.boss);
+		
 
         this.drawCardsImage = this.add.image(960, 1020, "draw-cards");
         this.drawCardsImage.setVisible(false);
@@ -209,6 +203,14 @@ export default class Game extends Phaser.Scene {
     }
 
 	setupInitialState() {
+        this.player = new Player(this);
+		this.boss = new Boss(this);
+		this.player.opponent = this.boss;
+		this.boss.opponent = this.player;
+
+		this.playerLayer.add(this.player);
+		this.playerLayer.add(this.boss);
+        
         this.player.deck.buildDeck();
         this.player.deck.renderDeck(100, 840);
 
