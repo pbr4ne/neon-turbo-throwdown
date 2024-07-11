@@ -175,16 +175,24 @@ export default class Game extends Phaser.Scene {
         this.player.createEndTurnButton();
     }
 
+    setStep(step: number) {
+        this.currentStep = step;
+        this.nextStep();
+    }  
+
 	nextStep() {
         switch (this.currentStep) {
             case GameSteps.DRAW_CARDS:
                 this.drawCards();
                 break;
-            case GameSteps.ASSIGN_CARDS:
-                this.assignCards();
+            case GameSteps.SELECT_CARD:
+                this.selectCard();
                 break;
-            case GameSteps.TARGET_MEMBERS:
-                this.targetMembers();
+            case GameSteps.SELECT_PLAYER_MEMBER:
+                this.selectPlayerMember();
+                break;
+            case GameSteps.SELECT_ENEMY_MEMBER:
+                this.selectEnemyMember();
                 break;
             case GameSteps.START_TURN:
                 this.startTurn();
@@ -213,42 +221,28 @@ export default class Game extends Phaser.Scene {
         // wait for user to draw
     }
 
-    // selectCard() {
-    //     console.log("on SELECT CARD step");
-    //     this.currentStep++;
-    //     // wait for user to select card
-    // }
-
-    // selectPlayerMember() {
-    //     console.log("on SELECT PLAYER MEMBER step");
-    //     this.currentStep++;
-    //     // wait for user to select player
-    // }
-
-    // selectEnemyMember() {
-    //     console.log("on SELECT ENEMY MEMBER step");
-    //     this.currentStep++;
-    //     // wait for user to select enemy
-    // }
-
-    assignCards() {
-        console.log("on ASSIGN CARDS step");
+    selectCard() {
+        console.log("on SELECT CARD step");
         this.currentStep++;
 
         this.showSelectCardImage();
-
-        this.boss.assignCards();
-        // wait for user to assign
+        // wait for user to select card
     }
 
-    targetMembers() {
-        console.log("on TARGET MEMBERS step");
+    selectPlayerMember() {
+        console.log("on SELECT PLAYER MEMBER step");
         this.currentStep++;
-        this.boss.targetMembers();
-        if (this.player.checkAllThrowersHaveTargets()) {
-            this.nextStep();
-        }
-        // wait for user to target
+
+        this.showSelectPlayerImage();
+        // wait for user to select player
+    }
+
+    selectEnemyMember() {
+        console.log("on SELECT ENEMY MEMBER step");
+        this.currentStep++;
+
+        this.showTargetOpponentImage();
+        // wait for user to select enemy
     }
 
     startTurn() {

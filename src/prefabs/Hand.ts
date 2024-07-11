@@ -68,7 +68,7 @@ export default class Hand {
 
     handleCardClick(card: Card, members: Member[]) {
         var currentStep = (this.scene.scene.get('Game') as Game).getCurrentStep();
-        if (currentStep !== GameSteps.ASSIGN_CARDS) {
+        if (currentStep !== GameSteps.SELECT_CARD) {
             console.log("Not in the right step to select a card");
             return;
         }
@@ -92,6 +92,8 @@ export default class Hand {
             }
         }
         card.togglePopUp();
+
+        (this.scene.scene.get('Game') as Game).nextStep();
 
         this.poppedUpCard = card;
         this.selectedCard = card;

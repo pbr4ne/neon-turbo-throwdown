@@ -29,7 +29,7 @@ export default class Player extends Team {
 	public throwdownButton!: Phaser.GameObjects.Image;
     private selectedThrowMember: Member | null = null;
     private targetArc: Phaser.GameObjects.Graphics | null = null;
-    private assignedMember: Member | null = null;
+    private currentMember: Member | null = null;
 
 	addMembers() {
         const member1 = new Member(this.scene, 558, 404, 'player1', true, this, 1);
@@ -65,31 +65,13 @@ export default class Player extends Team {
     handleMemberClick(member: Member) {
         var currentStep = (this.scene.scene.get('Game') as Game).getCurrentStep();
 
-        if (currentStep == GameSteps.ASSIGN_CARDS) {
+        if (currentStep == GameSteps.SELECT_PLAYER_MEMBER) {
             super.handleMemberClick(member);
 
             this.hand.assignCardToMember(member);
 
-            this.assignedMember = member;
-
-            // Check if all members have at least one card assigned
-            const allMembersHaveCards = this.members.every(member => member.getAssignedCards().length > 0);
-
-            // If all members have a card assigned, proceed to the next step
-            if (allMembersHaveCards) {
-                (this.scene.scene.get('Game') as Game).nextStep();
-            }
-
-        } else if (currentStep == GameSteps.TARGET_MEMBERS) {
-            super.handleMemberClick(member);
-
-            const cardTypes = member.getAssignedCards().map(card => card.cardType);
-            if (cardTypes.includes("throw")) {
-                this.selectedThrowMember = member;
-            } else {
-                this.selectedThrowMember = null;
-            }
-           
+            this.currentMember = member;
+ 
         } else {
             console.log("can't click on member now");
             return;
@@ -108,18 +90,24 @@ export default class Player extends Team {
     handleEnemyClick(enemy: Member) {
         var currentStep = (this.scene.scene.get('Game') as Game).getCurrentStep();
 
-        if (currentStep != GameSteps.TARGET_MEMBERS) {
+        if (currentStep != GameSteps.SELECT_ENEMY_MEMBER) {
             console.log("can't click on enemy now");
             return;
         }
-        if (this.selectedThrowMember) {
-            this.selectedThrowMember.setIntendedTarget(enemy);
-            
-            this.drawTargetArc(this.selectedThrowMember, enemy);
 
-             if (this.checkAllThrowersHaveTargets()) {
+        super.handleMemberClick(enemy);
+
+        if (this.currentMember) {
+            this.currentMember.setIntendedTarget(enemy);
+            
+            this.drawTargetArc(this.currentMember, enemy);
+
+            const allMembersHaveCards = this.members.every(member => member.getAssignedCards().length > 0);
+            if (allMembersHaveCards) {
                 (this.scene.scene.get('Game') as Game).nextStep();
-             }
+            } else {
+                (this.scene.scene.get('Game') as Game).setStep(GameSteps.SELECT_CARD);
+            }  
         }
     }
 

@@ -7,6 +7,8 @@ import Phaser from "phaser";
 /* START-USER-IMPORTS */
 import Card from "./Card";
 import Team from "./Team";
+import Game from "../scenes/Game";
+import { GameSteps } from "../scenes/GameSteps";
 /* END-USER-IMPORTS */
 
 export default class Member extends Phaser.GameObjects.Container {
@@ -64,6 +66,17 @@ export default class Member extends Phaser.GameObjects.Container {
         this.assignedCards.push(card);
         card.showAssignedRing();
         console.log("Assigned " + card.cardType + " to " + this);
+        if (card.cardType === "throw") {
+            (this.scene.scene.get('Game') as Game).nextStep();
+        } else {
+            //if all members have a card, move to next step
+            const allMembersHaveCards = this.team.members.every(member => member.getAssignedCards().length > 0);
+            if (allMembersHaveCards) {
+                (this.scene.scene.get('Game') as Game).setStep(GameSteps.START_TURN);
+            } else {
+                (this.scene.scene.get('Game') as Game).setStep(GameSteps.SELECT_CARD);
+            }
+        }
 
         if (this.visibleMove)  {
             const icon = new Phaser.GameObjects.Image(this.scene, 0, -20, whiteIconTexture);
