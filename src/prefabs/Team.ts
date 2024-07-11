@@ -21,6 +21,7 @@ export default abstract class Team extends Phaser.GameObjects.Container {
 		this.visibleCards = visibleCards;
 		this.members = [];
         this.deck = new Deck(scene);
+        this.discardPile = new Deck(scene);
         this.hand = new Hand(scene, 5);
       
         this.addMembers();
@@ -30,6 +31,7 @@ export default abstract class Team extends Phaser.GameObjects.Container {
 
 	/* START-USER-CODE */
 	public deck!: Deck;
+    public discardPile!: Deck;
     public hand!: Hand;
     public members!: Member[];
     public opponent!: Team;
@@ -87,8 +89,16 @@ export default abstract class Team extends Phaser.GameObjects.Container {
                 topCard.on("pointerdown", () => {
                     this.hand.handleCardClick(topCard, this.members);
                 });
+                this.discardPile.getCards().push(topCard);
             }
         }
+    }
+
+    recombineDeck() {
+        this.discardPile.getCards().forEach(card => {
+            this.deck.addCard(card);
+        });
+        this.discardPile.clear();
     }
 
     clearMembers() {

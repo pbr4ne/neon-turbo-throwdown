@@ -264,10 +264,10 @@ export default class Game extends Phaser.Scene {
 		this.playerLayer.add(this.player);
 		this.playerLayer.add(this.boss);
 
-        this.player.deck.buildDeck();
+        this.player.deck.initializeStartingDeck();
         this.player.deck.renderDeck(100, 840);
 
-        this.boss.deck.buildDeck();
+        this.boss.deck.initializeStartingDeck();
 
         this.player.createEndTurnButton();
     }
@@ -421,11 +421,11 @@ export default class Game extends Phaser.Scene {
         this.boss.hand.clear();
 
         if (this.player.deck.getCards().length < 5) {
-            this.player.deck.buildDeck();
+            this.player.recombineDeck();
             this.player.deck.renderDeck(100, 840);
         }
         if (this.boss.deck.getCards().length < 5) {
-            this.boss.deck.buildDeck();
+            this.boss.recombineDeck();
         }
 
         this.currentStep = 0;

@@ -33,11 +33,8 @@ export default class Member extends Phaser.GameObjects.Container {
         
         this.add(this.sprite);
         if (flip) {
-            console.log("flipping");
             this.sprite.toggleFlipX();
         }
-
-        console.log("sprite properties: " + this.sprite.flipX);
 
         this.assignedCards = [];
         this.cardIcons = [];

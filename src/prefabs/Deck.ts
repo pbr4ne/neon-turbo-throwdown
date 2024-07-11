@@ -17,10 +17,9 @@ export default class Deck extends Phaser.GameObjects.Container {
         this.scene.add.existing(this);
     }
 
-    buildDeck() {
+    initializeStartingDeck() {
         this.cards = [];
 
-        // Define the specific makeup of the deck
         const deckMakeup = [
             { type: CardType.throw, count: 4 },
             { type: CardType.evade, count: 3 },
@@ -28,7 +27,6 @@ export default class Deck extends Phaser.GameObjects.Container {
             { type: CardType.catch, count: 1 },
         ];
 
-        // Create the cards based on the deck makeup
         deckMakeup.forEach(cardType => {
             for (let i = 0; i < cardType.count; i++) {
                 const card = new Card(this.scene, 0, 0, "front");
@@ -78,10 +76,11 @@ export default class Deck extends Phaser.GameObjects.Container {
         return this.cards;
     }
 
-    removeCard(card: Card) {
-        const index = this.cards.indexOf(card);
-        if (index > -1) {
-            this.cards.splice(index, 1);
-        }
+    addCard(card: Card) {
+        this.cards.push(card);
+    }
+
+    clear() {
+        this.cards = [];
     }
 }

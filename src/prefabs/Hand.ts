@@ -4,7 +4,6 @@
 /* START OF COMPILED CODE */
 
 import Card from "./Card";
-import Deck from "./Deck";
 import Game from "../scenes/Game";
 import Member from "./Member";
 import { GameSteps } from '../enums/GameSteps';
