@@ -34,11 +34,6 @@
                 "key": "block"
             },
             {
-                "url": "assets/images/cards/blockWhite.png",
-                "type": "image",
-                "key": "blockWhite"
-            },
-            {
                 "url": "assets/images/players/bracket-assigned.png",
                 "type": "image",
                 "key": "bracket-assigned"
@@ -70,11 +65,6 @@
                 "key": "catch"
             },
             {
-                "url": "assets/images/cards/catchWhite.png",
-                "type": "image",
-                "key": "catchWhite"
-            },
-            {
                 "url": "assets/images/game/coach-corner.png",
                 "type": "image",
                 "key": "coach-corner"
@@ -103,11 +93,6 @@
                 "url": "assets/images/cards/dodge.png",
                 "type": "image",
                 "key": "dodge"
-            },
-            {
-                "url": "assets/images/cards/dodgeWhite.png",
-                "type": "image",
-                "key": "dodgeWhite"
             },
             {
                 "url": "assets/images/instructions/draw-cards.png",
@@ -255,11 +240,6 @@
                 "url": "assets/images/ui/throwdownButton.png",
                 "type": "image",
                 "key": "throwdownButton"
-            },
-            {
-                "url": "assets/images/cards/throwWhite.png",
-                "type": "image",
-                "key": "throwWhite"
             },
             {
                 "textureURL": "assets/fonts/turbo.png",
