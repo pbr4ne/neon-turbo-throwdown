@@ -9,7 +9,7 @@ import Deck from "./Deck";
 import Hand from "./Hand";
 import Member from "./Member";
 import Game from "../scenes/Game"
-import { GameSteps } from '../scenes/GameSteps';
+import { GameSteps } from '../enums/GameSteps';
 /* END-USER-IMPORTS */
 
 export default abstract class Team extends Phaser.GameObjects.Container {

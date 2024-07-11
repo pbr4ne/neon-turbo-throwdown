@@ -8,7 +8,7 @@ import DialogBox from "../prefabs/DialogBox";
 import Boss from "../prefabs/Boss";
 import Player from "../prefabs/Player";
 import GameoverPrefab from "../prefabs/GameoverPrefab";
-import { GameSteps } from './GameSteps';
+import { GameSteps } from '../enums/GameSteps';
 /* END-USER-IMPORTS */
 
 export default class Game extends Phaser.Scene {

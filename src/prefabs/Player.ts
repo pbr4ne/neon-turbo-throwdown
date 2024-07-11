@@ -9,7 +9,8 @@ import Game from "../scenes/Game";
 import Member from "./Member";
 import Team from "./Team";
 import FloatingObjectScript from "../script-nodes/ui/FloatingObjectScript";
-import { GameSteps } from '../scenes/GameSteps';
+import { GameSteps } from '../enums/GameSteps';
+import { CardTypes } from "../enums/CardTypes";
 /* END-USER-IMPORTS */
 
 export default class Player extends Team {
@@ -118,7 +119,7 @@ export default class Player extends Team {
     checkAllThrowersHaveTargets(): boolean {
         // Check if all members with a throw card have a selected target
         return this.members
-            .filter(member => member.getAssignedCards().some(card => card.cardType === "throw"))
+            .filter(member => member.getAssignedCards().some(card => card.cardType === CardTypes.throw))
             .every(member => member.getIntendedTarget() !== null);
     }
 

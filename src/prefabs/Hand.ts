@@ -7,7 +7,7 @@ import Card from "./Card";
 import Deck from "./Deck";
 import Game from "../scenes/Game";
 import Member from "./Member";
-import { GameSteps } from '../scenes/GameSteps';
+import { GameSteps } from '../enums/GameSteps';
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 

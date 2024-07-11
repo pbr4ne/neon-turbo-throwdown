@@ -5,6 +5,7 @@
 
 /* START-USER-IMPORTS */
 import Card from "./Card";
+import { CardTypes } from "../enums/CardTypes";
 /* END-USER-IMPORTS */
 
 export default class Deck extends Phaser.GameObjects.Container {
@@ -21,10 +22,10 @@ export default class Deck extends Phaser.GameObjects.Container {
 
         // Define the specific makeup of the deck
         const deckMakeup = [
-            { type: "throw", count: 4 },
-            { type: "evade", count: 3 },
-            { type: "block", count: 2 },
-            { type: "catch", count: 1 },
+            { type: CardTypes.throw, count: 4 },
+            { type: CardTypes.evade, count: 3 },
+            { type: CardTypes.block, count: 2 },
+            { type: CardTypes.catch, count: 1 },
         ];
 
         // Create the cards based on the deck makeup
