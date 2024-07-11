@@ -93,6 +93,8 @@ export default class Game extends Phaser.Scene {
     private dialogueStorage!: DialogueStorage;
 
     private currentState = "dialog";
+    private currentCoach: Coach = Coach.getCoach("primo");
+    private coachName!: Phaser.GameObjects.Text;
 
 	create() {
 		this.editorCreate();
@@ -110,6 +112,19 @@ export default class Game extends Phaser.Scene {
         this.cardSlot3.setVisible(false);
         this.cardSlot4.setVisible(false);
         this.cardSlot5.setVisible(false);
+
+        this.coachName = new Phaser.GameObjects.Text(this, 1720, 340, this.currentCoach.getName(), {
+			fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
+			fontSize: '16px',
+			color: '#000000',
+            stroke: '#000000',
+            strokeThickness: 1,
+			padding: { x: 5, y: 5 },
+			align: 'left'
+		});
+		this.playerLayer.add(this.coachName);
+		this.coachName.setOrigin(0.5, 0.5);
+        this.coachName.setVisible(false);
 
         this.drawCardsImage = this.add.image(960, 1020, "draw-cards");
         this.selectCardImage = this.add.image(960, 1020, "select-card");
@@ -225,6 +240,7 @@ export default class Game extends Phaser.Scene {
         this.scoreImage.setVisible(true);
         this.forfeitImage.setVisible(true);
         this.coachCornerImage.setVisible(true);
+        this.coachName.setVisible(true);
         this.difficultyImage.setVisible(true);
         this.cardSlot1.setVisible(true);
         this.cardSlot2.setVisible(true);
@@ -233,7 +249,7 @@ export default class Game extends Phaser.Scene {
         this.cardSlot5.setVisible(true);
 
         this.player = new Player(this);
-		this.boss = new Boss(this, Coach.getCoach("primo"));
+		this.boss = new Boss(this, this.currentCoach);
 		this.player.opponent = this.boss;
 		this.boss.opponent = this.player;
 
