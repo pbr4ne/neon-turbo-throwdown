@@ -14,21 +14,22 @@ export class GameSounds {
         }
 
         GameSounds.musicSound = scene.sound.add("music") as Phaser.Sound.WebAudioSound;
-        //GameSounds.musicSound.play({ loop: true, volume: 0.2 });
+        GameSounds.musicSound.play({ loop: true, volume: 0.2 });
+        console.log('mustic playing');
 
         GameSounds.ballSound = scene.sound.add("ball") as Phaser.Sound.WebAudioSound;
-        //GameSounds.effectsEnabled = true;
+        GameSounds.effectsEnabled = true;
     }
 
     static toggleMusic() {
 
         if (GameSounds.musicEnabled) {
 
-            //GameSounds.musicSound.pause();
+            GameSounds.musicSound.pause();
 
         } else {
 
-            //GameSounds.musicSound.resume();
+            GameSounds.musicSound.resume();
         }
     }
 
@@ -46,7 +47,7 @@ export class GameSounds {
 
         if (GameSounds.effectsEnabled) {
 
-            //GameSounds.ballSound.play();
+            GameSounds.ballSound.play();
         }
     }
 }
