@@ -4,11 +4,13 @@ import Phaser from "phaser";
 import GameplayScript from "../script-nodes/gameplay/GameplayScript";
 import TextureInfoScript from "../script-nodes/gameplay/TextureInfoScript";
 /* START-USER-IMPORTS */
-import DialogBox from "../prefabs/DialogBox";
+import DialogBox from "../dialogue/DialogBox";
 import Boss from "../prefabs/Boss";
 import Player from "../prefabs/Player";
 import GameoverPrefab from "../prefabs/GameoverPrefab";
 import { GameSteps } from '../enums/GameSteps';
+import { DialogueConversation } from "../dialogue/Dialogue";
+import { DialogueStorage } from "../dialogue/DialogueStorage";
 /* END-USER-IMPORTS */
 
 export default class Game extends Phaser.Scene {
@@ -23,26 +25,17 @@ export default class Game extends Phaser.Scene {
 
 	editorCreate(): void {
 
-		// court
-		this.add.image(953, 443, "court");
+		this.courtImage = this.add.image(953, 443, "court");
+		this.scoreImage = this.add.image(80, 110, "score");
+		this.forfeitImage = this.add.image(77, 243, "forfeit");
 
-		// score
-		this.add.image(80, 110, "score");
-
-		// forfeit
-		this.add.image(77, 243, "forfeit");
-
-		// coach_corner
-		this.add.image(1625, 193, "coach-corner");
-
-		// difficulty_1
-		this.add.image(1747, 411, "difficulty-1");
-
-        this.add.image(556, 848, "empty");
-        this.add.image(758, 848, "empty");
-        this.add.image(960, 848, "empty");
-        this.add.image(1162, 848, "empty");
-        this.add.image(1364, 848, "empty");
+		this.coachCornerImage = this.add.image(1625, 193, "coach-corner");
+		this.difficultyImage = this.add.image(1747, 411, "difficulty-1");
+        this.cardSlot1 = this.add.image(556, 848, "empty");
+        this.cardSlot2 = this.add.image(758, 848, "empty");
+        this.cardSlot3 = this.add.image(960, 848, "empty");
+        this.cardSlot4 = this.add.image(1162, 848, "empty");
+        this.cardSlot5 = this.add.image(1364, 848, "empty");
 
 		// gameplayScript
 		const gameplayScript = new GameplayScript(this);
@@ -75,6 +68,17 @@ export default class Game extends Phaser.Scene {
 	private playerLayer!: Phaser.GameObjects.Layer;
 	public currentStep: number = 0;
 
+    private courtImage!: Phaser.GameObjects.Image;
+    private scoreImage!: Phaser.GameObjects.Image;
+    private forfeitImage!: Phaser.GameObjects.Image;
+    private coachCornerImage!: Phaser.GameObjects.Image;
+    private difficultyImage!: Phaser.GameObjects.Image;
+    private cardSlot1!: Phaser.GameObjects.Image;
+    private cardSlot2!: Phaser.GameObjects.Image;
+    private cardSlot3!: Phaser.GameObjects.Image;
+    private cardSlot4!: Phaser.GameObjects.Image;
+    private cardSlot5!: Phaser.GameObjects.Image;
+
     private drawCardsImage: Phaser.GameObjects.Image | null = null;
     private selectCardImage: Phaser.GameObjects.Image | null = null;
     private selectPlayerImage: Phaser.GameObjects.Image | null = null;
@@ -84,43 +88,57 @@ export default class Game extends Phaser.Scene {
     private pointerImage2: Phaser.GameObjects.Image | null = null;
     private pointerImage3: Phaser.GameObjects.Image | null = null;
 
+    private dialogBox!: DialogBox;
+    private dialogueStorage!: DialogueStorage;
+
+    private currentState = "dialog";
+
 	create() {
 		this.editorCreate();
 
 		this.playerLayer = this.add.layer();
 		this.dialogLayer = this.add.layer();
 
-		
+        this.courtImage.setVisible(true);
+        this.scoreImage.setVisible(false);
+        this.forfeitImage.setVisible(false);
+        this.coachCornerImage.setVisible(false);
+        this.difficultyImage.setVisible(false);
+        this.cardSlot1.setVisible(false);
+        this.cardSlot2.setVisible(false);
+        this.cardSlot3.setVisible(false);
+        this.cardSlot4.setVisible(false);
+        this.cardSlot5.setVisible(false);
 
         this.drawCardsImage = this.add.image(960, 1020, "draw-cards");
-        this.drawCardsImage.setVisible(false);
-
         this.selectCardImage = this.add.image(960, 1020, "select-card");
-        this.selectCardImage.setVisible(false);
-
         this.selectPlayerImage = this.add.image(960, 1020, "select-player");
-        this.selectPlayerImage.setVisible(false);
-
         this.targetOpponentImage = this.add.image(960, 1020, "target-opponent");
-        this.targetOpponentImage.setVisible(false);
-
         this.startRoundImage = this.add.image(960, 1020, "start-round");
-        this.startRoundImage.setVisible(false);
-
         this.pointerImage = this.add.image(265, 875, "pointer");
-        this.pointerImage.setVisible(true);
-
         this.pointerImage2 = this.add.image(265, 875, "pointer");
-        this.pointerImage2.setVisible(false);
-
         this.pointerImage3 = this.add.image(265, 875, "pointer");
-        this.pointerImage3.setVisible(false);
 
+        this.clearAllInstructions();
 
-		this.setupInitialState();
-		this.startGameLoop();
+        this.dialogueStorage = new DialogueStorage();
+        this.doDialogue(this.dialogueStorage.introDialogue);
 
-		//this.showDialog();
+		//this.setupInitialState();
+		//this.startGameLoop();
+    }
+
+    doDialogue(dialogueConversation: DialogueConversation) {
+        
+        const dialog = new DialogBox(this, 960, 542, dialogueConversation);
+
+        this.dialogBox = this.dialogLayer.add(dialog);
+    }
+
+    finishDialogue() {
+        this.dialogBox.destroy();
+        this.setupInitialState();
+        this.startGameLoop();
     }
 
     clearAllInstructions() {
@@ -132,9 +150,10 @@ export default class Game extends Phaser.Scene {
         this.pointerImage?.setVisible(false);
         this.pointerImage2?.setVisible(false);
         this.pointerImage3?.setVisible(false);
-                
-        this.player.throwdownButton.setVisible(false);
-
+        
+        if (this.player) {
+            this.player.throwdownButton.setVisible(false);
+        }
     }
 
     showDrawCardsImage() {
@@ -203,6 +222,17 @@ export default class Game extends Phaser.Scene {
     }
 
 	setupInitialState() {
+        this.courtImage.setVisible(true);
+        this.scoreImage.setVisible(true);
+        this.forfeitImage.setVisible(true);
+        this.coachCornerImage.setVisible(true);
+        this.difficultyImage.setVisible(true);
+        this.cardSlot1.setVisible(true);
+        this.cardSlot2.setVisible(true);
+        this.cardSlot3.setVisible(true);
+        this.cardSlot4.setVisible(true);
+        this.cardSlot5.setVisible(true);
+
         this.player = new Player(this);
 		this.boss = new Boss(this);
 		this.player.opponent = this.boss;
@@ -210,7 +240,7 @@ export default class Game extends Phaser.Scene {
 
 		this.playerLayer.add(this.player);
 		this.playerLayer.add(this.boss);
-        
+
         this.player.deck.buildDeck();
         this.player.deck.renderDeck(100, 840);
 
@@ -364,17 +394,6 @@ export default class Game extends Phaser.Scene {
 
         this.currentStep = 0;
         this.nextStep();
-    }
-
-	showDialog() {
-        const dialog = new DialogBox(this, 960, 540);
-		dialog.generateDialog( "Choose your dialogue option:", ["Option 1", "Option 2", "Option 3"]);
-
-        dialog.on('optionSelected', (option: string) => {
-            console.log(`Selected option: ${option}`);
-        });
-
-        this.dialogLayer.add(dialog);
     }
 	/* END-USER-CODE */
 }
