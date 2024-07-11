@@ -123,9 +123,6 @@ export default class Game extends Phaser.Scene {
 
         this.dialogueStorage = new DialogueStorage();
         this.doDialogue(this.dialogueStorage.introDialogue);
-
-		//this.setupInitialState();
-		//this.startGameLoop();
     }
 
     doDialogue(dialogueConversation: DialogueConversation) {
@@ -136,6 +133,7 @@ export default class Game extends Phaser.Scene {
     }
 
     finishDialogue() {
+        this.dialogBox.destroyEverything();
         this.dialogBox.destroy();
         this.setupInitialState();
         this.startGameLoop();

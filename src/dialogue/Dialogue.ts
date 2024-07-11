@@ -1,8 +1,12 @@
+import Boss from "~/prefabs/Boss";
+
 export class DialogueStep {
     private text: string | string[];
+    private avatar: string;
 
-    constructor(text: string | string[]) {
+    constructor(text: string | string[], avatar: string) {
         this.text = text;
+        this.avatar = avatar as string;
     }
 
     public getText(): string | string[] {
@@ -12,14 +16,18 @@ export class DialogueStep {
     public isList(): boolean {
         return Array.isArray(this.text);
     }
+
+    public getAvatar(): string {
+        return this.avatar;
+    }
 }
 
 export class DialogueConversation {
     private steps: DialogueStep[] = [];
     private currentStepIndex: number = 0;
 
-    public addStep(text: string | string[]): void {
-        this.steps.push(new DialogueStep(text));
+    public addStep(text: string | string[], avatar: string): void {
+        this.steps.push(new DialogueStep(text, avatar));
     }
 
     public getCurrentStep(): DialogueStep | null {

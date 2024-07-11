@@ -6,7 +6,7 @@
 import Phaser from "phaser";
 /* START-USER-IMPORTS */
 import Game from "../scenes/Game";
-import { DialogueConversation } from "./Dialogue";
+import { DialogueConversation, DialogueStep } from "./Dialogue";
 /* END-USER-IMPORTS */
 
 export default class DialogBox extends Phaser.GameObjects.Container {
@@ -40,30 +40,29 @@ export default class DialogBox extends Phaser.GameObjects.Container {
 	private optionText2!: Phaser.GameObjects.Text;
 	private optionText3!: Phaser.GameObjects.Text;
 	private optionInstructions!: Phaser.GameObjects.Text;
+	private avatar!: Phaser.GameObjects.Image;
 
 	generateDialogue(dialogueConversation: DialogueConversation) {
-        var text = dialogueConversation.getCurrentStep()?.getText() ?? '';
+        var step = dialogueConversation.getCurrentStep();
         
 		this.initializeTextAreas();
 
-		this.renderText(text);
+		this.renderText(step!);
 	}
 
 	handleNextButtonClick() {
         console.log("Next button clicked");
         // Logic to advance the dialogue
         var next = this.dialogueConversation.nextStep();
-        var text = this.dialogueConversation.getCurrentStep()?.getText() ?? '';
+        var step = this.dialogueConversation.getCurrentStep();
 
-		console.log("next");
-		console.log(next);
 		if (!next) {
 			console.log("going to the next scene");
 			(this.scene.scene.get('Game') as Game).finishDialogue()
 		} else {
 			console.log("rendering some more text");
-			this.renderText(text);
-			console.log(text);
+			this.renderText(step!);
+			console.log(step);
 		}
     }
 
@@ -77,8 +76,10 @@ export default class DialogBox extends Phaser.GameObjects.Container {
 		this.buttonText.setVisible(false);
 	}
 
-	renderText(text: string | string[]) {
+	renderText(step: DialogueStep) {
 		this.hideAllTextAreas();
+		const text = step.getText();
+		this.avatar.setTexture(step.getAvatar());
 
 		if (typeof text === 'string') {
 			this.dialogueText.setText(text);
@@ -104,8 +105,23 @@ export default class DialogBox extends Phaser.GameObjects.Container {
 		}
 	}
 
+	destroyEverything() {
+		this.dialogueText.destroy();
+		this.optionText1.destroy();
+		this.optionText2.destroy();
+		this.optionText3.destroy();
+		this.optionInstructions.destroy();
+		this.nextButton.destroy();
+		this.buttonText.destroy();
+		this.avatar.destroy();
+	}
+
 	//todo omg this is terrible
 	initializeTextAreas() {
+		console.log("initializeTextAreas");
+		//avatar
+		this.avatar = this.scene.add.image(1750, 850, 'you');
+
 		//single text
 		this.dialogueText = new Phaser.GameObjects.Text(this.scene, -630, 200, "", {
             fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
@@ -130,7 +146,7 @@ export default class DialogBox extends Phaser.GameObjects.Container {
 		this.optionText1.setInteractive({ useHandCursor: true })
 		.on('pointerdown', () => this.handleNextButtonClick())
 		.on('pointerover', () => this.optionText1.setColor('#ff00ff'))
-		.on('pointerout', () => this.optionText1.setColor('#ff00ff'));
+		.on('pointerout', () => this.optionText1.setColor('#00ffff'));
 
 		//option text 2
 		this.optionText2 = new Phaser.GameObjects.Text(this.scene, -630, 250, "", {
@@ -145,7 +161,7 @@ export default class DialogBox extends Phaser.GameObjects.Container {
 		this.optionText2.setInteractive({ useHandCursor: true })
 		.on('pointerdown', () => this.handleNextButtonClick())
 		.on('pointerover', () => this.optionText2.setColor('#ff00ff'))
-		.on('pointerout', () => this.optionText2.setColor('#ff00ff'));
+		.on('pointerout', () => this.optionText2.setColor('#00ffff'));
 
 		//option text 3
 		this.optionText3 = new Phaser.GameObjects.Text(this.scene, -630, 300, "", {
@@ -160,7 +176,7 @@ export default class DialogBox extends Phaser.GameObjects.Container {
 		this.optionText3.setInteractive({ useHandCursor: true })
 		.on('pointerdown', () => this.handleNextButtonClick())
 		.on('pointerover', () => this.optionText3.setColor('#ff00ff'))
-		.on('pointerout', () => this.optionText3.setColor('#ff00ff'));
+		.on('pointerout', () => this.optionText3.setColor('#00ffff'));
 
 		//option instructions
 		this.optionInstructions = new Phaser.GameObjects.Text(this.scene, 340, 453, "[Choose an option]", {
@@ -182,8 +198,10 @@ export default class DialogBox extends Phaser.GameObjects.Container {
                 this.buttonText.setColor('#ff00ff');
             })
             .on('pointerout', () => {
-                this.nextButton.setStrokeStyle(2, 0x00ffff);
-                this.buttonText.setColor('#00ffff');
+				if (this.nextButton && this.buttonText) {
+                	this.nextButton.setStrokeStyle(2, 0x00ffff);
+                	this.buttonText.setColor('#00ffff');
+				}
             });
 
         // Create the text for the button

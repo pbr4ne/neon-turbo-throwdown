@@ -256,6 +256,11 @@
                 "url": "assets/images/cards/upgrade.png",
                 "type": "image",
                 "key": "upgrade"
+            },
+            {
+                "url": "assets/images/level/you.png",
+                "type": "image",
+                "key": "you"
             }
         ]
     },
