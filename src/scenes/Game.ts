@@ -4,6 +4,7 @@ import Phaser from "phaser";
 import GameplayScript from "../script-nodes/gameplay/GameplayScript";
 import TextureInfoScript from "../script-nodes/gameplay/TextureInfoScript";
 /* START-USER-IMPORTS */
+import { Coach } from "../dialogue/Coach";
 import DialogBox from "../dialogue/DialogBox";
 import Boss from "../prefabs/Boss";
 import Player from "../prefabs/Player";
@@ -232,7 +233,7 @@ export default class Game extends Phaser.Scene {
         this.cardSlot5.setVisible(true);
 
         this.player = new Player(this);
-		this.boss = new Boss(this);
+		this.boss = new Boss(this, Coach.getCoach("primo"));
 		this.player.opponent = this.boss;
 		this.boss.opponent = this.player;
 

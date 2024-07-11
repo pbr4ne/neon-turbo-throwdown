@@ -79,7 +79,7 @@ export default class DialogBox extends Phaser.GameObjects.Container {
 	renderText(step: DialogueStep) {
 		this.hideAllTextAreas();
 		const text = step.getText();
-		this.avatar.setTexture(step.getAvatar());
+		this.avatar.setTexture(step.getCoach().getAvatar());
 
 		if (typeof text === 'string') {
 			this.dialogueText.setText(text);

@@ -8,17 +8,18 @@ import Phaser from "phaser";
 import Member from "./Member";
 import Player from "./Player";
 import Team from "./Team";
+import { Coach } from "../dialogue/Coach";
 import { CardType, getCardName } from "../enums/CardType";
 import FloatingObjectScript from "../script-nodes/ui/FloatingObjectScript";
 /* END-USER-IMPORTS */
 
 export default class Boss extends Team {
 
-    constructor(scene: Phaser.Scene) {
+    constructor(scene: Phaser.Scene, coach: Coach) {
         super(scene, false);
 
         /* START-USER-CTR-CODE */
-        const bossImage = new Phaser.GameObjects.Image(scene, 1795, 80, "opponent1").setOrigin(1, 0);
+        const bossImage = new Phaser.GameObjects.Image(scene, 1795, 80, coach.getAvatar()).setOrigin(1, 0);
         this.add(bossImage);
         /* END-USER-CTR-CODE */
     }

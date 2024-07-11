@@ -152,9 +152,9 @@
                 "key": "music2-on"
             },
             {
-                "url": "assets/images/level/opponent1.png",
+                "url": "assets/images/level/primo.png",
                 "type": "image",
-                "key": "opponent1"
+                "key": "primo"
             },
             {
                 "url": "assets/images/players/player1.png",

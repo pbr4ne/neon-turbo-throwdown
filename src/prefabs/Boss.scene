@@ -15,9 +15,9 @@
         {
             "type": "Image",
             "id": "107437df-5bf1-41d6-b04b-7d2f416da6f1",
-            "label": "opponent1",
+            "label": "primo",
             "texture": {
-                "key": "opponent1"
+                "key": "primo"
             },
             "x": 313,
             "y": 180

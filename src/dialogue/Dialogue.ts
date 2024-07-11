@@ -1,12 +1,15 @@
-import Boss from "~/prefabs/Boss";
+
+import { Coach } from './Coach'; 
 
 export class DialogueStep {
     private text: string | string[];
-    private avatar: string;
+    private coach: Coach;
+    private nameOverride: string;
 
-    constructor(text: string | string[], avatar: string) {
+    constructor(text: string | string[], coach: Coach, nameOverride?: string) {
         this.text = text;
-        this.avatar = avatar as string;
+        this.coach = coach;
+        this.nameOverride = nameOverride!;
     }
 
     public getText(): string | string[] {
@@ -17,8 +20,12 @@ export class DialogueStep {
         return Array.isArray(this.text);
     }
 
-    public getAvatar(): string {
-        return this.avatar;
+    public getCoach(): Coach {
+        return this.coach;
+    }
+
+    public getNameOverride() {
+        return this.nameOverride;
     }
 }
 
@@ -26,8 +33,8 @@ export class DialogueConversation {
     private steps: DialogueStep[] = [];
     private currentStepIndex: number = 0;
 
-    public addStep(text: string | string[], avatar: string): void {
-        this.steps.push(new DialogueStep(text, avatar));
+    public addStep(text: string | string[], coach: Coach, nameOverride?: string): void {
+        this.steps.push(new DialogueStep(text, coach, nameOverride));
     }
 
     public getCurrentStep(): DialogueStep | null {
@@ -38,7 +45,6 @@ export class DialogueConversation {
     }
 
     public nextStep(): DialogueStep | null {
-        console.log("nextStep: " + this.currentStepIndex + "<" + (this.steps.length - 1));
         if (this.currentStepIndex < this.steps.length - 1) {
             this.currentStepIndex++;
             return this.steps[this.currentStepIndex];
@@ -51,7 +57,6 @@ export class DialogueConversation {
     }
 
     public isFinished(): boolean {
-        console.log("isFinished: " + this.currentStepIndex + ">=" + this.steps.length);
         return this.currentStepIndex >= this.steps.length;
     }
 }
