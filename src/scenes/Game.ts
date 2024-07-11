@@ -178,7 +178,10 @@ export default class Game extends Phaser.Scene {
         this.currentStep++;
 
         this.drawCardsImage?.setVisible(false);
-        this.pointerImage?.setVisible(false);
+        //this.pointerImage?.setVisible(false);
+        this.selectCardImage?.setVisible(true);
+        this.pointerImage?.setPosition(1500, 850);
+
         this.boss.assignCards();
         // wait for user to assign
     }
