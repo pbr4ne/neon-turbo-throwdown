@@ -59,7 +59,7 @@ export default class Preload extends Phaser.Scene {
                 families: ['Press Start 2P']
             },
             active: () => {
-		this.editorCreate();
+                this.editorCreate();
             }
         }); 
 
@@ -68,7 +68,8 @@ export default class Preload extends Phaser.Scene {
 
 	create() {
 
-		this.scene.start("Welcome");
+		//this.scene.start("Welcome");
+		this.scene.start("Game");
 	}
 
 	/* END-USER-CODE */

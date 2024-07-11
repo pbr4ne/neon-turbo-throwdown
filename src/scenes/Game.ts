@@ -79,6 +79,7 @@ export default class Game extends Phaser.Scene {
     private selectCardImage: Phaser.GameObjects.Image | null = null;
     private selectPlayerImage: Phaser.GameObjects.Image | null = null;
     private targetOpponentImage: Phaser.GameObjects.Image | null = null;
+    private startRoundImage: Phaser.GameObjects.Image | null = null;
     private pointerImage: Phaser.GameObjects.Image | null = null;
     private pointerImage2: Phaser.GameObjects.Image | null = null;
     private pointerImage3: Phaser.GameObjects.Image | null = null;
@@ -109,8 +110,11 @@ export default class Game extends Phaser.Scene {
         this.targetOpponentImage = this.add.image(960, 1020, "target-opponent");
         this.targetOpponentImage.setVisible(false);
 
+        this.startRoundImage = this.add.image(960, 1020, "start-round");
+        this.startRoundImage.setVisible(false);
+
         this.pointerImage = this.add.image(265, 875, "pointer");
-        this.pointerImage.setVisible(false);
+        this.pointerImage.setVisible(true);
 
         this.pointerImage2 = this.add.image(265, 875, "pointer");
         this.pointerImage2.setVisible(false);
@@ -125,36 +129,73 @@ export default class Game extends Phaser.Scene {
 		//this.showDialog();
     }
 
-    showDrawCardsImage() {
-        this.drawCardsImage?.setVisible(true);
+    clearAllInstructions() {
+        this.drawCardsImage?.setVisible(false);
         this.selectCardImage?.setVisible(false);
         this.selectPlayerImage?.setVisible(false);
         this.targetOpponentImage?.setVisible(false);
+        this.startRoundImage?.setVisible(false);
+        this.pointerImage?.setVisible(false);
+        this.pointerImage2?.setVisible(false);
+        this.pointerImage3?.setVisible(false);
+                
+        this.player.throwdownButton.setVisible(false);
+
+    }
+
+    showDrawCardsImage() {
+        this.clearAllInstructions();
+        this.pointerImage?.setVisible(true);
         this.pointerImage?.setPosition(265, 875);
     }
 
     showSelectCardImage() {
-        this.drawCardsImage?.setVisible(false);
+        this.clearAllInstructions();
         this.selectCardImage?.setVisible(true);
-        this.selectPlayerImage?.setVisible(false);
-        this.targetOpponentImage?.setVisible(false);
+        this.pointerImage?.setVisible(true);
         this.pointerImage?.setPosition(1500, 850);
     }
 
     showSelectPlayerImage() {
-        this.drawCardsImage?.setVisible(false);
-        this.selectCardImage?.setVisible(false);
+        this.clearAllInstructions();
         this.selectPlayerImage?.setVisible(true);
-        this.targetOpponentImage?.setVisible(false);
-        this.pointerImage?.setPosition(1500, 850);
+        this.player.getUnassignedMembers().forEach((member) => {
+            if (member.getNumber() == 1) {
+                this.pointerImage?.setPosition(650, 547);
+                this.pointerImage?.setVisible(true);
+            } else if (member.getNumber() == 2) {
+                this.pointerImage2?.setPosition(1062, 654);
+                this.pointerImage2?.setVisible(true);
+            } else if (member.getNumber() == 3) {
+                this.pointerImage3?.setPosition(1421, 550);
+                this.pointerImage3?.setVisible(true);
+            }
+        });
     }
 
     showTargetOpponentImage() {
-        this.drawCardsImage?.setVisible(false);
-        this.selectCardImage?.setVisible(false);
-        this.selectPlayerImage?.setVisible(false);
+        this.clearAllInstructions();
         this.targetOpponentImage?.setVisible(true);
-        this.pointerImage?.setPosition(1500, 850);
+        this.boss.getUntargetedMembers().forEach((member) => {
+            if (member.getNumber() == 4) {
+                this.pointerImage?.setPosition(755, 297);
+                this.pointerImage?.setVisible(true);
+            } else if (member.getNumber() == 5) {
+                this.pointerImage2?.setPosition(1041, 241);
+                this.pointerImage2?.setVisible(true);
+            } else if (member.getNumber() == 6) {
+                this.pointerImage3?.setPosition(1319, 299);
+                this.pointerImage3?.setVisible(true);
+            }
+        });
+    }
+
+    showThrowdown() {
+        this.clearAllInstructions();
+        this.player.throwdownButton.setVisible(true);
+        this.startRoundImage?.setVisible(true);
+        this.pointerImage?.setVisible(true);
+        this.pointerImage?.setPosition(1730, 800);
     }
 
     getCurrentStep(): number {
@@ -221,7 +262,7 @@ export default class Game extends Phaser.Scene {
 
         this.showDrawCardsImage();
         this.boss.drawCards();
-        
+
         // wait for user to draw
     }
 
@@ -260,17 +301,18 @@ export default class Game extends Phaser.Scene {
     }
 
     startTurn() {
-        this.player.throwdownButton.setVisible(true);
         console.log("on START TURN step");
         this.currentStep++;
+
+        this.showThrowdown();
         // wait for user to click throwdown buton
     }
 
     discardRemainingCards() {
         console.log("on DISCARD REMAINING CARDS step");
         this.currentStep++;
-        
-        this.player.throwdownButton.setVisible(false);
+
+        this.clearAllInstructions();
         this.nextStep();
     }
 
@@ -279,7 +321,7 @@ export default class Game extends Phaser.Scene {
         this.currentStep++;
         await this.player.executeTurn();
         await this.boss.executeTurn();
-        
+
         this.nextStep();
     }
 

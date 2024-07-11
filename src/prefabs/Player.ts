@@ -85,6 +85,8 @@ export default class Player extends Team {
 			.setVisible(false)
 			.on('pointerdown', () => (this.scene.scene.get('Game') as Game).nextStep());
         this.add(this.throwdownButton);
+        this.throwdownButton.on('pointerover', () => { this.scene.input.setDefaultCursor('pointer'); });
+        this.throwdownButton.on('pointerout', () => { this.scene.input.setDefaultCursor('default'); });
     }
 
     handleEnemyClick(enemy: Member) {
@@ -143,6 +145,10 @@ export default class Player extends Team {
     clearMembers() {
         super.clearMembers();
         this.targetArc?.clear();
+    }
+
+    getUnassignedMembers(): Member[] {
+        return this.members.filter(member => member.getAssignedCards().length === 0);
     }
     
 	/* END-USER-CODE */

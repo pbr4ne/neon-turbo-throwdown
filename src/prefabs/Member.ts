@@ -67,6 +67,10 @@ export default class Member extends Phaser.GameObjects.Container {
         this.on('pointerout', () => { this.scene.input.setDefaultCursor('default'); });
     }
 
+    getNumber(): number {
+        return this.number;
+    }  
+
     setIntendedTarget(target: Member | null) {
         if (target) {
             console.log(`${this} targets ${target}`);
