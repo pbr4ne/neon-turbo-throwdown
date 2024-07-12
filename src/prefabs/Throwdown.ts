@@ -190,6 +190,11 @@ export default class Throwdown extends Phaser.GameObjects.Container {
         });
     }
 
+    destroy() {
+        console.log("destroy");
+        this.gameOverPrefab?.destroy();
+        super.destroy();
+    }
 	showThrowdown() {
         this.hideAllInstructions();
         this.player.throwdownButton.setVisible(true);
@@ -352,6 +357,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
             this.hideAllInstructions();
             this.player.clearMembers();
             this.player.clearHand();
+            this.boss.destroy();
 
             console.log("You win!");
             this.gameOverPrefab = new GameoverPrefab(this.scene, "VICTORY!");
@@ -361,7 +367,6 @@ export default class Throwdown extends Phaser.GameObjects.Container {
 		    this.scene.events.emit("scene-awake");
             
             (this.scene.scene.get('Game') as Game).winThrowdown();
-            //this.doDialogue(this.dialogueStorage.primoWinDialogue, "win");
         } else {
             this.nextStep();
         }

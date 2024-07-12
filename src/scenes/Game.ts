@@ -27,27 +27,6 @@ export default class Game extends Phaser.Scene {
 
 		this.courtImage = this.add.image(953, 443, "court");
 		
-		// gameplayScript
-		const gameplayScript = new GameplayScript(this);
-
-		// yellow
-		const yellow = new TextureInfoScript(gameplayScript.textures);
-
-		// orange
-		const orange = new TextureInfoScript(gameplayScript.textures);
-
-		// green
-		const green = new TextureInfoScript(gameplayScript.textures);
-
-		// yellow (prefab fields)
-		yellow.texture = {"key":"ball-cyan"};
-
-		// orange (prefab fields)
-		orange.texture = {"key":"ball-yellow"};
-
-		// green (prefab fields)
-		green.texture = {"key":"ball-magenta"};
-
 		this.events.emit("scene-awake");
 	}
 
@@ -94,6 +73,7 @@ export default class Game extends Phaser.Scene {
             this.throwdown = new Throwdown(this, this.currentCoach, this.player);
             this.player.setThrowdown(this.throwdown);
         } else if (type === "win") {
+            this.throwdown.destroy();
             this.doRunUpgrade();
         }
     }
