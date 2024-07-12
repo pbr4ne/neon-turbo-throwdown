@@ -11,8 +11,10 @@ import { DialogueConversation, DialogueStep } from "./Dialogue";
 
 export default class DialogBox extends Phaser.GameObjects.Container {
 
-	constructor(scene: Phaser.Scene, x?: number, y?: number, dialogueConversation?: DialogueConversation) {
+	constructor(scene: Phaser.Scene, x: number, y: number, dialogueConversation: DialogueConversation, dialogType: string) {
 		super(scene, x ?? 960, y ?? 542);
+
+		this.dialogType = dialogType;
 
 		// rectangle_1
 		const rectangle_1 = scene.add.rectangle(-7, 340, 128, 128);
@@ -32,6 +34,7 @@ export default class DialogBox extends Phaser.GameObjects.Container {
 
 	/* START-USER-CODE */
 
+	private dialogType: string;
 	private dialogueConversation: DialogueConversation;
 	private dialogueText!: Phaser.GameObjects.Text;
 	private nextButton!: Phaser.GameObjects.Rectangle;
@@ -59,7 +62,7 @@ export default class DialogBox extends Phaser.GameObjects.Container {
 
 		if (!next) {
 			console.log("going to the next scene");
-			(this.scene.scene.get('Game') as Game).finishDialogue()
+			(this.scene.scene.get('Game') as Game).finishDialogue(this.dialogType);
 		} else {
 			console.log("rendering some more text");
 			this.renderText(step!);

@@ -12,6 +12,7 @@ import GameoverPrefab from "../prefabs/GameoverPrefab";
 import { GameSteps } from '../throwdown/GameSteps';
 import { DialogueConversation } from "../dialogue/Dialogue";
 import { DialogueStorage } from "../dialogue/DialogueStorage";
+import RunUpgrade from "../prefabs/RunUpgrade";
 /* END-USER-IMPORTS */
 
 export default class Game extends Phaser.Scene {
@@ -93,9 +94,10 @@ export default class Game extends Phaser.Scene {
 
     private dialogBox!: DialogBox;
     private dialogueStorage!: DialogueStorage;
+    private runUpgrade!: RunUpgrade;
 
     private currentState = "dialog";
-    private currentCoach: Coach = Coach.getCoach("primo");
+    private currentCoach: Coach = Coach.primo;
     private coachName!: Phaser.GameObjects.Text;
 
 	create() {
@@ -129,21 +131,41 @@ export default class Game extends Phaser.Scene {
         this.clearAllInstructions();
 
         this.dialogueStorage = new DialogueStorage();
-        this.doDialogue(this.dialogueStorage.introDialogue);
+        this.doDialogue(this.dialogueStorage.introDialogue, "intro");
+        //this.player = new Player(this); //remove this
+        //this.doRunUpgrade();
     }
 
-    doDialogue(dialogueConversation: DialogueConversation) {
+    doDialogue(dialogueConversation: DialogueConversation, type: string) {
         
-        const dialog = new DialogBox(this, 960, 542, dialogueConversation);
+        const dialog = new DialogBox(this, 960, 542, dialogueConversation, type);
 
         this.dialogBox = this.dialogLayer.add(dialog);
     }
 
-    finishDialogue() {
+    doRunUpgrade() {
+        this.runUpgrade = new RunUpgrade(this, this.currentCoach, this.player);
+        this.runUpgrade = this.dialogLayer.add(this.runUpgrade);
+    }
+
+    finishDialogue(type: string) {
         this.dialogBox.destroyEverything();
         this.dialogBox.destroy();
+        if (type === "intro") {
         this.setupInitialState();
         this.startGameLoop();
+        } else if (type === "win") {
+            this.doRunUpgrade();
+        }
+    }
+
+    finishRunUpgrade() {
+        this.runUpgrade.destroyEverything();
+        this.runUpgrade.destroy();
+        this.renderGym();
+        this.nextStep();
+        //this.setupInitialState();
+        //this.startGameLoop();
     }
 
     clearAllGymStuff() {
@@ -242,19 +264,7 @@ export default class Game extends Phaser.Scene {
     }
 
 	setupInitialState() {
-        this.courtImage.setVisible(true);
-        this.scoreImage.setVisible(true);
-        this.forfeitImage.setVisible(true);
-        this.coachCornerImage.setVisible(true);
-        this.coachName.setVisible(true);
-        this.difficultyImage.setVisible(true);
-        this.cardSlot1.setVisible(true);
-        this.cardSlot2.setVisible(true);
-        this.cardSlot3.setVisible(true);
-        this.cardSlot4.setVisible(true);
-        this.cardSlot5.setVisible(true);
-
-        this.gameOverPrefab?.setVisible(false);
+        this.renderGym();
 
         this.player = new Player(this);
 		this.boss = new Boss(this, this.currentCoach);
@@ -270,6 +280,22 @@ export default class Game extends Phaser.Scene {
         this.boss.deck.initializeStartingDeck();
 
         this.player.createEndTurnButton();
+    }
+
+    renderGym() {
+        this.courtImage.setVisible(true);
+        this.scoreImage.setVisible(true);
+        this.forfeitImage.setVisible(true);
+        this.coachCornerImage.setVisible(true);
+        this.coachName.setVisible(true);
+        this.difficultyImage.setVisible(true);
+        this.cardSlot1.setVisible(true);
+        this.cardSlot2.setVisible(true);
+        this.cardSlot3.setVisible(true);
+        this.cardSlot4.setVisible(true);
+        this.cardSlot5.setVisible(true);
+
+        this.gameOverPrefab?.setVisible(false);
     }
 
     setStep(step: number) {
@@ -403,6 +429,10 @@ export default class Game extends Phaser.Scene {
             this.player.clearHand();
             this.boss.clearHand();
             this.boss.destroy();
+            this.currentCoach = Coach.sporticus;
+            this.boss = new Boss(this, this.currentCoach);
+            this.player.recombineDeck();
+            
 
             console.log("You win!");
             this.gameOverPrefab = new GameoverPrefab(this, "VICTORY!");
@@ -411,7 +441,7 @@ export default class Game extends Phaser.Scene {
 
 		    this.events.emit("scene-awake");
             
-            this.doDialogue(this.dialogueStorage.primoWinDialogue);
+            this.doDialogue(this.dialogueStorage.primoWinDialogue, "win");
         } else {
             this.nextStep();
         }
