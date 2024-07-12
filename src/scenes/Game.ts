@@ -1,8 +1,6 @@
 /* START OF COMPILED CODE */
 
 import Phaser from "phaser";
-import GameplayScript from "../script-nodes/gameplay/GameplayScript";
-import TextureInfoScript from "../script-nodes/gameplay/TextureInfoScript";
 /* START-USER-IMPORTS */
 import { Coach } from "../throwdown/Coach";
 import DialogBox from "../dialogue/DialogBox";
@@ -11,6 +9,7 @@ import { DialogueConversation } from "../dialogue/Dialogue";
 import { DialogueStorage } from "../dialogue/DialogueStorage";
 import RunUpgrade from "../prefabs/RunUpgrade";
 import Throwdown from "../prefabs/Throwdown";
+import { Library } from "../throwdown/Library";
 /* END-USER-IMPORTS */
 
 export default class Game extends Phaser.Scene {
@@ -76,6 +75,7 @@ export default class Game extends Phaser.Scene {
         this.dialogBox.destroy();
         if (type === "intro") {
             this.player = new Player(this);
+            Library.initializeLibrary();
             this.throwdown = new Throwdown(this, this.currentCoach, this.player);
             this.player.setThrowdown(this.throwdown);
 

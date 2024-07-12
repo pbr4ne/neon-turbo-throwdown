@@ -61,6 +61,7 @@ export default class Boss extends Team {
                 console.log("Assigned card to member: " + cardType.getName() + " " + member);
 
                 this.hand.getCards().splice(randomIndex, 1);
+                this.hand.getCardsInPlay().push(randomCard);
 
                 
             }

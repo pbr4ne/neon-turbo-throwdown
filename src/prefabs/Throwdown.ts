@@ -11,6 +11,7 @@ import Player from "../prefabs/Player";
 import GameoverPrefab from "../prefabs/GameoverPrefab";
 import Game from '../scenes/Game';
 import { GameSteps } from '../throwdown/GameSteps';
+import { Library } from "../throwdown/Library";
 /* END-USER-IMPORTS */
 
 export default class Throwdown extends Phaser.GameObjects.Container {
@@ -102,10 +103,10 @@ export default class Throwdown extends Phaser.GameObjects.Container {
 		this.playerLayer.add(this.player);
 		this.playerLayer.add(this.boss);
 
-        this.player.deck.initializeStartingDeck();
+        this.player.deck.initializeStartingDeck(Library.getCardTypes());
         this.player.deck.renderDeck(100, 840);
 
-        this.boss.deck.initializeStartingDeck();
+        this.boss.deck.initializeStartingDeck(this.coach.getBaseCards());
 
         this.player.createEndTurnButton();
 

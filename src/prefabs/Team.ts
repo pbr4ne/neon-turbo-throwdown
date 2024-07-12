@@ -96,7 +96,6 @@ export default abstract class Team extends Phaser.GameObjects.Container {
                 topCard.on("pointerdown", () => {
                     this.hand.handleCardClick(topCard, this.members);
                 });
-                this.discardPile.getCards().push(topCard);
             }
         }
     }

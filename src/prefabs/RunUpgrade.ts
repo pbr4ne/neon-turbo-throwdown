@@ -10,6 +10,7 @@ import Player from "./Player";
 import Card from "./Card";
 import { CardType } from "../cards/CardType";
 import Game from "../scenes/Game";
+import { Library } from "../throwdown/Library";
 /* END-USER-IMPORTS */
 
 export default class RunUpgrade extends Phaser.GameObjects.Container {
@@ -96,6 +97,7 @@ export default class RunUpgrade extends Phaser.GameObjects.Container {
 		const newCard = new Card(this.scene, this.currentCards[cardIndex-1], 0, 0, "front");
 		newCard.showName(false);
 		newCard.showIcon(false);
+		Library.addCardType(newCard.getCardType());
 		this.player.deck.addCard(newCard);
 
         // Draw the next set of cards

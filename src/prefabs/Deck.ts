@@ -5,10 +5,7 @@
 
 /* START-USER-IMPORTS */
 import Card from "./Card";
-import { Block } from "../cards/Block";
-import { Catch } from "../cards/Catch";
-import { Evade } from "../cards/Evade";
-import { Throw } from "../cards/Throw";
+import { CardType } from "../cards/CardType";
 /* END-USER-IMPORTS */
 
 export default class Deck extends Phaser.GameObjects.Container {
@@ -20,23 +17,14 @@ export default class Deck extends Phaser.GameObjects.Container {
         this.scene.add.existing(this);
     }
 
-    initializeStartingDeck() {
+    initializeStartingDeck(cardTypes: CardType[]) {
         this.cards = [];
 
-        const deckMakeup = [
-            { type: new Throw(), count: 4 },
-            { type: new Evade(), count: 3 },
-            { type: new Block(), count: 2 },
-            { type: new Catch(), count: 1 },
-        ];
-
-        deckMakeup.forEach(cardType => {
-            for (let i = 0; i < cardType.count; i++) {
-                const card = new Card(this.scene, cardType.type, 0, 0, "front");
-                card.showName(false);
-                card.showIcon(false);
-                this.cards.push(card);
-            }
+        cardTypes.forEach(cardType => {
+            const card = new Card(this.scene, cardType, 0, 0, "front");
+            card.showName(false);
+            card.showIcon(false);
+            this.cards.push(card);
         });
 
         this.shuffle();
