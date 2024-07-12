@@ -4,8 +4,8 @@ import { DialogueConversation } from './Dialogue';
 export class DialogueStorage {
     public introDialogue: DialogueConversation = new DialogueConversation();
     public primoWinDialogue: DialogueConversation = new DialogueConversation();
-    public spiritDialogue: DialogueConversation = new DialogueConversation();
-    public sportacusIntroDialogue: DialogueConversation = new DialogueConversation();
+    public primoLoseDialogue: DialogueConversation = new DialogueConversation();
+    public sporticusIntroDialogue: DialogueConversation = new DialogueConversation();
 
     public constructor() {
         //Intro Dialogue
@@ -28,10 +28,10 @@ export class DialogueStorage {
         this.primoWinDialogue.addStep("Ya did it, kid! Only 9 more gym bosses to go!", Coach.coach);
         this.primoWinDialogue.addStep(["Nine?", "I told you, I'm not a kid.", "TURBO-SLICED!!!!"], Coach.you);
         //Lose Dialogue Primo
-        this.spiritDialogue.addStep("It's ok", Coach.coach);
+        this.primoLoseDialogue.addStep("It's ok", Coach.coach);
         //Intro Dialogue Sporticus
-        this.sportacusIntroDialogue.addStep("I am Sporticus!!", Coach.sporticus, "???");
-        this.sportacusIntroDialogue.addStep(["No, I am Sporticus!", "....'cause Sports?", "I am 37."], Coach.you);
+        this.sporticusIntroDialogue.addStep("I am Sporticus!!", Coach.sporticus, "???");
+        this.sporticusIntroDialogue.addStep(["No, I am Sporticus!", "....'cause Sports?", "I am 37."], Coach.you);
         //Win Dialogue Sporticus
         //Lose Dialogue Sporticus        
         //Intro Dialogue Russ Tyler

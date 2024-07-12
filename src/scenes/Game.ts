@@ -8,6 +8,7 @@ import Player from "../prefabs/Player";
 import { DialogueConversation } from "../dialogue/Dialogue";
 import { DialogueStorage } from "../dialogue/DialogueStorage";
 import RunUpgrade from "../prefabs/RunUpgrade";
+import PermUpgrade from "../prefabs/PermUpgrade";
 import Throwdown from "../prefabs/Throwdown";
 import { Library } from "../throwdown/Library";
 /* END-USER-IMPORTS */
@@ -36,8 +37,10 @@ export default class Game extends Phaser.Scene {
     private dialogBox!: DialogBox;
     private dialogueStorage!: DialogueStorage;
     private runUpgrade!: RunUpgrade;
+    private permUpgrade!: PermUpgrade;
     private currentCoach: Coach = Coach.primo;
     public throwdown!: Throwdown;
+    private numRuns: number = 0;
 
 	create() {
 		this.editorCreate();
@@ -66,9 +69,9 @@ export default class Game extends Phaser.Scene {
             this.throwdown.destroy();
             this.doRunUpgrade();
             
-        } else if (type === "loss") {
+        } else if (type === "lose") {
             this.throwdown.destroy();
-            //this.doPermUpgrade();
+            this.doPermUpgrade();
         }
     }
 
@@ -77,7 +80,7 @@ export default class Game extends Phaser.Scene {
     }
 
     loseThrowdown() {
-        this.doDialogue(this.dialogueStorage.primoWinDialogue, "lose");
+        this.doDialogue(this.dialogueStorage.primoLoseDialogue, "lose");
     }
 
     doRunUpgrade() {
@@ -96,8 +99,17 @@ export default class Game extends Phaser.Scene {
     }
 
     doPermUpgrade() {
-        //to implement
+        this.permUpgrade = new PermUpgrade(this, this.player);
+        this.permUpgrade = this.dialogLayer.add(this.permUpgrade);
     }
+
+    finishPermUpgrade() {
+        this.permUpgrade.destroyEverything();
+        this.permUpgrade.destroy();
+
+        this.scene.start('Welcome');
+    }
+
 	/* END-USER-CODE */
 }
 

@@ -344,22 +344,29 @@ export default class Throwdown extends Phaser.GameObjects.Container {
         console.log("on CHECK END GAME CONDITION step");
         this.currentStep++;
 
-        if (this.player.members.length === 0) {
-            this.hideAllInstructions();
-            console.log("Game over");
-            this.gameOverPrefab = new GameoverPrefab(this.scene, "FAILURE!");
-            this.gameOverPrefab.setVisible(true);
-            this.scene.add.existing(this.gameOverPrefab);
-
-		    this.scene.events.emit("scene-awake");
-        } else if (this.boss.members.length === 0) {
+        if (this.player.members.length === 0 || this.boss.members.length === 0) {
             this.hideAllGymStuff();
             this.hideAllInstructions();
             this.player.clearMembers();
             this.player.clearHand();
             this.boss.destroy();
+        }
+
+        if (this.player.members.length === 0) {
+            
+            console.log("Game over");
+
+            this.gameOverPrefab = new GameoverPrefab(this.scene, "FAILURE!");
+            this.gameOverPrefab.setVisible(true);
+            this.scene.add.existing(this.gameOverPrefab);
+
+		    this.scene.events.emit("scene-awake");
+
+            (this.scene.scene.get('Game') as Game).loseThrowdown();
+        } else if (this.boss.members.length === 0) {
 
             console.log("You win!");
+
             this.gameOverPrefab = new GameoverPrefab(this.scene, "VICTORY!");
             this.gameOverPrefab.setVisible(true);
             this.scene.add.existing(this.gameOverPrefab);
@@ -390,8 +397,6 @@ export default class Throwdown extends Phaser.GameObjects.Container {
         this.currentStep = 0;
         this.nextStep();
     }
-
-
 	/* END-USER-CODE */
 }
 
