@@ -10,6 +10,7 @@ import Team from "./Team";
 import Game from "../scenes/Game";
 import { GameSteps } from "../throwdown/GameSteps";
 import { CardType } from "../cards/CardType";
+import Throwdown from "./Throwdown";
 /* END-USER-IMPORTS */
 
 export default class Member extends Phaser.GameObjects.Container {
@@ -91,14 +92,14 @@ export default class Member extends Phaser.GameObjects.Container {
             return;
         }
         if (card.cardType.needsTarget()) {
-            (this.scene.scene.get('Game') as Game).nextStep();
+            (this.scene.scene.get('Game') as Game).throwdown.nextStep();
         } else {
             //if all members have a card, move to next step
             const allMembersHaveCards = this.team.members.every(member => member.getAssignedCard() != null);
             if (allMembersHaveCards) {
-                (this.scene.scene.get('Game') as Game).setStep(GameSteps.START_TURN);
+                (this.scene.scene.get('Game') as Game).throwdown.setStep(GameSteps.START_TURN);
             } else {
-                (this.scene.scene.get('Game') as Game).setStep(GameSteps.SELECT_CARD);
+                (this.scene.scene.get('Game') as Game).throwdown.setStep(GameSteps.SELECT_CARD);
             }
         }
     }
@@ -154,7 +155,7 @@ export default class Member extends Phaser.GameObjects.Container {
     }
 
     enableGlow() {
-        this.sprite.setTint(0xffffff);
+        this.sprite.setTint(0x00ff00);
     }
 
     disableGlow() {

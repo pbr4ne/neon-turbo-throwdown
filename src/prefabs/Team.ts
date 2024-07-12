@@ -11,6 +11,7 @@ import Hand from "./Hand";
 import Member from "./Member";
 import Game from "../scenes/Game"
 import { GameSteps } from '../throwdown/GameSteps';
+import Throwdown from "./Throwdown";
 /* END-USER-IMPORTS */
 
 export default abstract class Team extends Phaser.GameObjects.Container {
@@ -40,8 +41,13 @@ export default abstract class Team extends Phaser.GameObjects.Container {
     public layer!: Phaser.GameObjects.Layer;
     private selectedMember: Member | null = null;
     private memberClicked: boolean = false;
+    protected throwdown!: Throwdown;
 
 	abstract addMembers(): void;
+
+    setThrowdown(throwdown: Throwdown) {
+        this.throwdown = throwdown;
+    }
 
     setOpponent(opponent: Team) {
         this.opponent = opponent;
@@ -73,7 +79,7 @@ export default abstract class Team extends Phaser.GameObjects.Container {
     }
 
     onDeckClick() {
-        if ((this.scene.scene.get('Game') as Game).getCurrentStep() != GameSteps.DRAW_CARDS) {
+        if (this.throwdown.getCurrentStep() != GameSteps.DRAW_CARDS) {
             console.log("can't draw cards now");
             return;
         }

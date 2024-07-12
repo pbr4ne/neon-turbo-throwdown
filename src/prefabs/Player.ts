@@ -10,6 +10,7 @@ import Member from "./Member";
 import Team from "./Team";
 import FloatingObjectScript from "../script-nodes/ui/FloatingObjectScript";
 import { GameSteps } from '../throwdown/GameSteps';
+import Throwdown from "./Throwdown";
 /* END-USER-IMPORTS */
 
 export default class Player extends Team {
@@ -55,15 +56,15 @@ export default class Player extends Team {
 
     onDeckClick() {
         super.onDeckClick();
-        var currentStep = (this.scene.scene.get('Game') as Game).getCurrentStep();
+        var currentStep = this.throwdown.getCurrentStep();
         if (currentStep == GameSteps.DRAW_CARDS && this.hand.getCards().length == 5) {
             console.log('go to next step');
-            (this.scene.scene.get('Game') as Game).nextStep();
+            (this.scene.scene.get('Game') as Game).throwdown.nextStep();
         }
     }
 
     handleMemberClick(member: Member) {
-        var currentStep = (this.scene.scene.get('Game') as Game).getCurrentStep();
+        var currentStep = this.throwdown.getCurrentStep();
 
         if (currentStep == GameSteps.SELECT_PLAYER_MEMBER) {
             super.handleMemberClick(member);
@@ -83,14 +84,14 @@ export default class Player extends Team {
 			.setOrigin(0.5)
 			.setInteractive()
 			.setVisible(false)
-			.on('pointerdown', () => (this.scene.scene.get('Game') as Game).nextStep());
+			.on('pointerdown', () => this.throwdown.nextStep());
         this.add(this.throwdownButton);
         this.throwdownButton.on('pointerover', () => { this.scene.input.setDefaultCursor('pointer'); });
         this.throwdownButton.on('pointerout', () => { this.scene.input.setDefaultCursor('default'); });
     }
 
     handleEnemyClick(enemy: Member) {
-        var currentStep = (this.scene.scene.get('Game') as Game).getCurrentStep();
+        var currentStep = this.throwdown.getCurrentStep();
 
         if (currentStep != GameSteps.SELECT_ENEMY_MEMBER) {
             console.log("can't click on enemy now");
@@ -107,10 +108,10 @@ export default class Player extends Team {
             const allMembersHaveCards = this.members.every(member => member.getAssignedCard() != null);
             if (allMembersHaveCards) {
                 this.currentMember = null;
-                (this.scene.scene.get('Game') as Game).nextStep();
+                this.throwdown.nextStep();
             } else {
                 this.currentMember = null;
-                (this.scene.scene.get('Game') as Game).setStep(GameSteps.SELECT_CARD);
+                this.throwdown.setStep(GameSteps.SELECT_CARD);
             }  
         }
     }

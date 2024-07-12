@@ -7,6 +7,7 @@ import Card from "./Card";
 import Game from "../scenes/Game";
 import Member from "./Member";
 import { GameSteps } from '../throwdown/GameSteps';
+import Throwdown from "./Throwdown";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -61,7 +62,7 @@ export default class Hand {
     }
 
     handleCardClick(card: Card, members: Member[]) {
-        var currentStep = (this.scene.scene.get('Game') as Game).getCurrentStep();
+        var currentStep = (this.scene.scene.get('Game') as Game).throwdown.getCurrentStep();
         if (currentStep !== GameSteps.SELECT_CARD) {
             console.log("Not in the right step to select a card");
             return;
@@ -87,7 +88,7 @@ export default class Hand {
         }
         card.togglePopUp();
 
-        (this.scene.scene.get('Game') as Game).nextStep();
+        (this.scene.scene.get('Game') as Game).throwdown.nextStep();
 
         this.poppedUpCard = card;
         this.selectedCard = card;
