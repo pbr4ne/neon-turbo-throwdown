@@ -24,17 +24,9 @@ export default class RunUpgrade extends Phaser.GameObjects.Container {
 		
 		this.selectCardImage = scene.add.image(960, 1020, "select-card");
 
-		this.cardImage1 = scene.add.image(758, 848, "front").setInteractive({ useHandCursor: true });
-        this.cardImage2 = scene.add.image(960, 848, "front").setInteractive({ useHandCursor: true });
-        this.cardImage3 = scene.add.image(1162, 848, "front").setInteractive({ useHandCursor: true });
-
 		this.cardSlot1 = scene.add.image(758, 848, "empty");
         this.cardSlot2 = scene.add.image(960, 848, "empty");
         this.cardSlot3 = scene.add.image(1162, 848, "empty");
-
-		this.cardImage1.on('pointerdown', () => this.handleCardSelection(1));
-        this.cardImage2.on('pointerdown', () => this.handleCardSelection(2));
-        this.cardImage3.on('pointerdown', () => this.handleCardSelection(3));
 
 		this.cardRound();
 		/* END-USER-CTR-CODE */
@@ -46,9 +38,6 @@ export default class RunUpgrade extends Phaser.GameObjects.Container {
 	private cardSlot1!: Phaser.GameObjects.Image;
     private cardSlot2!: Phaser.GameObjects.Image;
     private cardSlot3!: Phaser.GameObjects.Image;
-	private cardImage1!: Phaser.GameObjects.Image;
-    private cardImage2!: Phaser.GameObjects.Image;
-    private cardImage3!: Phaser.GameObjects.Image;
 	private selectCardImage: Phaser.GameObjects.Image | null = null;
 	private numDraws: number = 0;
     private currentCards: CardType[] = [];
@@ -57,9 +46,6 @@ export default class RunUpgrade extends Phaser.GameObjects.Container {
 		this.cardSlot1.destroy();
 		this.cardSlot2.destroy();
 		this.cardSlot3.destroy();
-		this.cardImage1.destroy();
-		this.cardImage2.destroy();
-		this.cardImage3.destroy();
 		this.selectCardImage?.destroy();
 	}
 
@@ -72,19 +58,24 @@ export default class RunUpgrade extends Phaser.GameObjects.Container {
 		const thirdCard = this.coach.getBaseCards().pop();
 		this.numDraws++;
 
-		this.cardSlot1.setTexture(firstCard!.getIcon());
-		this.cardSlot2.setTexture(secondCard!.getIcon());
-		this.cardSlot3.setTexture(thirdCard!.getIcon());
-
         if (firstCard) {
             this.currentCards.push(firstCard);
+			const card = new Card(this.scene, firstCard, 758, 848, "front");
+			card.on('pointerdown', () => this.handleCardSelection(1));
+			this.add(card);
         }
 		if (secondCard) {
 			this.currentCards.push(secondCard);
+			const card = new Card(this.scene, secondCard, 960, 848, "front");
+			card.on('pointerdown', () => this.handleCardSelection(2));
+			this.add(card);
 		}
 		if (thirdCard) {
 			this.currentCards.push(thirdCard);
-		}
+			const card = new Card(this.scene, thirdCard, 1162, 848, "front");
+			card.on('pointerdown', () => this.handleCardSelection(3));
+			this.add(card);
+		}	
 	}
 
 	private handleCardSelection(cardIndex: number) {
@@ -113,11 +104,6 @@ export default class RunUpgrade extends Phaser.GameObjects.Container {
         }
 
         this.cardRound();
-
-        // Re-enable interactivity
-        this.cardImage1.setInteractive({ useHandCursor: true });
-        this.cardImage2.setInteractive({ useHandCursor: true });
-        this.cardImage3.setInteractive({ useHandCursor: true });
     }
 	/* END-USER-CODE */
 }

@@ -207,6 +207,16 @@
                 "key": "select-player"
             },
             {
+                "url": "assets/images/instructions/select-reward.png",
+                "type": "image",
+                "key": "select-reward"
+            },
+            {
+                "url": "assets/images/instructions/select-trophy.png",
+                "type": "image",
+                "key": "select-trophy"
+            },
+            {
                 "url": "assets/images/welcome/sound2-off.png",
                 "type": "image",
                 "key": "sound2-off"
