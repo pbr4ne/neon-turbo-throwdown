@@ -22,7 +22,7 @@ export default class RunUpgrade extends Phaser.GameObjects.Container {
 		this.coach = coach;
 		this.player = player;
 		
-		this.selectCardImage = scene.add.image(960, 1020, "select-card");
+		this.selectCardImage = scene.add.image(960, 1020, "select-reward");
 
 		this.cardSlot1 = scene.add.image(758, 848, "empty");
         this.cardSlot2 = scene.add.image(960, 848, "empty");

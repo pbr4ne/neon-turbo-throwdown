@@ -10,6 +10,7 @@ import { TrophyType } from '../trophies/TrophyType';
 import { Library } from "../throwdown/Library";
 import Game from "../scenes/Game";
 import { TrophyList } from "../trophies/TrophyList";
+import Trophy from "./Trophy";
 /* END-USER-IMPORTS */
 
 export default class PermUpgrade extends Phaser.GameObjects.Container {
@@ -20,19 +21,11 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
 		/* START-USER-CTR-CODE */
 		this.player = player;
 		
-		this.selectCardImage = scene.add.image(960, 1020, "select-card");
-
-		this.cardImage1 = scene.add.image(758, 848, "upgrade").setInteractive({ useHandCursor: true });
-        this.cardImage2 = scene.add.image(960, 848, "upgrade").setInteractive({ useHandCursor: true });
-        this.cardImage3 = scene.add.image(1162, 848, "upgrade").setInteractive({ useHandCursor: true });
+		this.selectCardImage = scene.add.image(960, 1020, "select-trophy");
 
 		this.cardSlot1 = scene.add.image(758, 848, "empty");
         this.cardSlot2 = scene.add.image(960, 848, "empty");
         this.cardSlot3 = scene.add.image(1162, 848, "empty");
-
-		this.cardImage1.on('pointerdown', () => this.handleCardSelection(1));
-        this.cardImage2.on('pointerdown', () => this.handleCardSelection(2));
-        this.cardImage3.on('pointerdown', () => this.handleCardSelection(3));
 
 		this.cardRound();
 		/* END-USER-CTR-CODE */
@@ -44,9 +37,6 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
 	private cardSlot1!: Phaser.GameObjects.Image;
     private cardSlot2!: Phaser.GameObjects.Image;
     private cardSlot3!: Phaser.GameObjects.Image;
-	private cardImage1!: Phaser.GameObjects.Image;
-    private cardImage2!: Phaser.GameObjects.Image;
-    private cardImage3!: Phaser.GameObjects.Image;
 	private selectCardImage: Phaser.GameObjects.Image | null = null;
     private currentTrophies: TrophyType[] = [];
 
@@ -54,32 +44,34 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
 		this.cardSlot1.destroy();
 		this.cardSlot2.destroy();
 		this.cardSlot3.destroy();
-		this.cardImage1.destroy();
-		this.cardImage2.destroy();
-		this.cardImage3.destroy();
 		this.selectCardImage?.destroy();
 	}
 
 	private cardRound() {
 		Phaser.Utils.Array.Shuffle(TrophyList.getTrophyTypes());
 		this.currentTrophies = [];
-		const firstCard = TrophyList.getTrophyTypes()[0];
-		const secondCard = TrophyList.getTrophyTypes()[1];
-		const thirdCard = TrophyList.getTrophyTypes()[2];
+		const firstTrophy = TrophyList.getTrophyTypes()[0];
+		const secondTrophy = TrophyList.getTrophyTypes()[1];
+		const thirdTrophy = TrophyList.getTrophyTypes()[2];
 
-		this.cardSlot1.setTexture(firstCard!.getIcon());
-		this.cardSlot2.setTexture(secondCard!.getIcon());
-		this.cardSlot3.setTexture(thirdCard!.getIcon());
-
-        if (firstCard) {
-            this.currentTrophies.push(firstCard);
+		if (firstTrophy) {
+            this.currentTrophies.push(firstTrophy);
+			const trophy = new Trophy(this.scene, firstTrophy, 758, 848, "upgrade");
+			trophy.on('pointerdown', () => this.handleCardSelection(1));
+			this.add(trophy);
         }
-		if (secondCard) {
-			this.currentTrophies.push(secondCard);
+		if (secondTrophy) {
+			this.currentTrophies.push(secondTrophy);
+			const trophy = new Trophy(this.scene, secondTrophy, 960, 848, "upgrade");
+			trophy.on('pointerdown', () => this.handleCardSelection(2));
+			this.add(trophy);
 		}
-		if (thirdCard) {
-			this.currentTrophies.push(thirdCard);
-		}
+		if (thirdTrophy) {
+			this.currentTrophies.push(thirdTrophy);
+			const trophy = new Trophy(this.scene, thirdTrophy, 1162, 848, "upgrade");
+			trophy.on('pointerdown', () => this.handleCardSelection(3));
+			this.add(trophy);
+		}	
 	}
 
 	private handleCardSelection(cardIndex: number) {
