@@ -120,12 +120,6 @@ export default abstract class Team extends Phaser.GameObjects.Container {
             freshCard.showIcon(false);
             this.deck.addCard(freshCard);
         });
-        this.hand.getCards().forEach(card => {
-            const freshCard = new Card(this.scene, card.getCardType(), 0, 0, "front");
-            freshCard.showName(false);
-            freshCard.showIcon(false);
-            this.deck.addCard(freshCard);
-        });
         this.discardPile.clear();
     }
 
