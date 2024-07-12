@@ -400,8 +400,8 @@ export default class Game extends Phaser.Scene {
             this.clearAllInstructions();
             this.player.clearMembers();
             this.boss.clearMembers();
-            this.player.hand.clear();
-            this.boss.hand.clear();
+            this.player.clearHand();
+            this.boss.clearHand();
             this.boss.destroy();
 
             console.log("You win!");
@@ -421,8 +421,8 @@ export default class Game extends Phaser.Scene {
         console.log("on LOOP BACK step");
         this.player.clearMembers();
         this.boss.clearMembers();
-        this.player.hand.clear();
-        this.boss.hand.clear();
+        this.player.clearHand();
+        this.boss.clearHand();
 
         if (this.player.deck.getCards().length < 5) {
             this.player.recombineDeck();

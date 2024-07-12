@@ -5,6 +5,7 @@
 
 import Phaser from "phaser";
 /* START-USER-IMPORTS */
+import Card from "./Card";
 import Deck from "./Deck";
 import Hand from "./Hand";
 import Member from "./Member";
@@ -94,13 +95,38 @@ export default abstract class Team extends Phaser.GameObjects.Container {
         }
     }
 
+    clearHand() {
+        while (this.hand.getCards().length > 0) {
+            const card = this.hand.getCards().pop();
+            if (card) {
+                this.discardPile.addCard(card);
+                card.destroy();
+            }
+        }
+        while (this.hand.getCardsInPlay().length > 0) {
+            const card = this.hand.getCardsInPlay().pop();
+            if (card) {
+                this.discardPile.addCard(card);
+                card.destroy();
+            }
+        } 
+    }
+
     recombineDeck() {
-        this.deck.initializeStartingDeck();
-        // bug in this. it wrecks the card somehow so it can't be rerendered
-        // this.discardPile.getCards().forEach(card => {
-        //     this.deck.addCard(card);
-        // });
-        // this.discardPile.clear();
+        // todo - figure out how i don't have to recreate the cards
+        this.discardPile.getCards().forEach(card => {
+            const freshCard = new Card(this.scene, card.getCardType(), 0, 0, "front");
+            freshCard.showName(false);
+            freshCard.showIcon(false);
+            this.deck.addCard(freshCard);
+        });
+        this.hand.getCards().forEach(card => {
+            const freshCard = new Card(this.scene, card.getCardType(), 0, 0, "front");
+            freshCard.showName(false);
+            freshCard.showIcon(false);
+            this.deck.addCard(freshCard);
+        });
+        this.discardPile.clear();
     }
 
     clearMembers() {

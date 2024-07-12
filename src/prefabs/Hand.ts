@@ -37,17 +37,12 @@ export default class Hand {
         }
     }
 
-    clear() {
-        console.log('clearing hand');
-        this.cards.forEach(card => card.destroy());
-        this.cardsInPlay.forEach(card => card.destroy());
-        this.cards = [];
-        this.cardsInPlay = [];
-        this.updateHandPositions();
-    }
-
     getCards(): Card[] {
         return this.cards;
+    }
+
+    getCardsInPlay(): Card[] {
+        return this.cardsInPlay;
     }
 
     updateHandPositions() {
