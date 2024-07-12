@@ -9,12 +9,12 @@ import Card from "./Card";
 import Team from "./Team";
 import Game from "../scenes/Game";
 import { GameSteps } from "../throwdown/GameSteps";
-import { CardType } from "../throwdown/CardType";
+import { CardType } from "../cards/CardType";
 /* END-USER-IMPORTS */
 
 export default class Member extends Phaser.GameObjects.Container {
     public sprite: Phaser.GameObjects.Sprite;
-    private assignedCards: Card[];
+    private assignedCard: Card | null = null;
     private cardIcons: Phaser.GameObjects.Image[];
     private visibleMove: boolean = true;
     private hp: number;
@@ -36,7 +36,6 @@ export default class Member extends Phaser.GameObjects.Container {
             this.sprite.toggleFlipX();
         }
 
-        this.assignedCards = [];
         this.cardIcons = [];
         this.hp = 3;
         this.team = team;
@@ -80,22 +79,22 @@ export default class Member extends Phaser.GameObjects.Container {
         return this.intendedTarget;
     }
 
-    assignCard(card: Card, whiteIconTexture: string, isBoss: boolean = false) {
+    assignCard(card: Card, isBoss: boolean = false) {
         console.log("assigning card!");
-        if (this.assignedCards.length >= 1) {
+        if (this.assignedCard != null) {
             return;
         }
-        this.assignedCards.push(card);
+        this.assignedCard = card;
         card.showAssignedRing();
         this.assignedText?.setText(card.cardType.getName());
         if (isBoss) {
             return;
         }
-        if (card.cardType === CardType.throw) {
+        if (card.cardType.needsTarget()) {
             (this.scene.scene.get('Game') as Game).nextStep();
         } else {
             //if all members have a card, move to next step
-            const allMembersHaveCards = this.team.members.every(member => member.getAssignedCards().length > 0);
+            const allMembersHaveCards = this.team.members.every(member => member.getAssignedCard() != null);
             if (allMembersHaveCards) {
                 (this.scene.scene.get('Game') as Game).setStep(GameSteps.START_TURN);
             } else {
@@ -104,12 +103,12 @@ export default class Member extends Phaser.GameObjects.Container {
         }
     }
 
-    getAssignedCards(): Card[] {
-        return this.assignedCards;
+    getAssignedCard(): Card | null {
+        return this.assignedCard;
     }
 
     clearAssignedCards() {
-        this.assignedCards = [];
+        this.assignedCard = null;
         this.cardIcons.forEach(icon => icon.destroy());
         this.assignedText?.setText("");
     }
@@ -118,41 +117,11 @@ export default class Member extends Phaser.GameObjects.Container {
         return this.hp;
     }
 
-    hit(damage: number, attacker: Member) {
-        const cardTypes = this.assignedCards.map(card => card.cardType);
-
-        var hit = true;
-
-        if (cardTypes.includes(CardType.evade)) {
-            if (Math.random() < 0.75) {
-                this.showFloatingAction("evaded");
-                hit = false;
-            }
-        }
-
-        if (cardTypes.includes(CardType.block)) {
-            if (Math.random() < 0.5) {
-                this.showFloatingAction("blocked");
-                attacker.hit(1, this);
-                hit = false
-            }            
-        }        
-        
-        if (cardTypes.includes(CardType.catch)) {
-            if (Math.random() < 0.5) {
-                this.showFloatingAction("caught");
-                attacker.hit(3, this);
-                hit = false;
-            }
-        } 
-        
-        if (hit) {
-            this.hp -= damage;
-            this.showFloatingAction(damage.toString());
-            if (this.hp <= 0) {
-                this.hp = 0;
-                this.destroyMember();
-            }
+    reduceHP(amount: number) {
+        this.hp -= amount;
+        if (this.hp <= 0) {
+            this.hp = 0;
+            this.destroyMember();
         }
     }
 

@@ -5,7 +5,10 @@
 
 /* START-USER-IMPORTS */
 import Card from "./Card";
-import { CardType } from "../throwdown/CardType";
+import { Block } from "../cards/Block";
+import { Catch } from "../cards/Catch";
+import { Evade } from "../cards/Evade";
+import { Throw } from "../cards/Throw";
 /* END-USER-IMPORTS */
 
 export default class Deck extends Phaser.GameObjects.Container {
@@ -21,16 +24,15 @@ export default class Deck extends Phaser.GameObjects.Container {
         this.cards = [];
 
         const deckMakeup = [
-            { type: CardType.throw, count: 4 },
-            { type: CardType.evade, count: 3 },
-            { type: CardType.block, count: 2 },
-            { type: CardType.catch, count: 1 },
+            { type: new Throw(), count: 4 },
+            { type: new Evade(), count: 3 },
+            { type: new Block(), count: 2 },
+            { type: new Catch(), count: 1 },
         ];
 
         deckMakeup.forEach(cardType => {
             for (let i = 0; i < cardType.count; i++) {
-                const card = new Card(this.scene, 0, 0, "front");
-                card.setType(cardType.type);
+                const card = new Card(this.scene, cardType.type, 0, 0, "front");
                 card.showName(false);
                 card.showIcon(false);
                 this.cards.push(card);

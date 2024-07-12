@@ -112,13 +112,12 @@ export default abstract class Team extends Phaser.GameObjects.Container {
 
     async executeTurn() {
         for (const member of this.members) {
+            const card = member.getAssignedCard();
             const target = member.getIntendedTarget();
-            
-            if (target) {
-                console.log(`${member} intends to target ${target}`);
+            if (target !== null && card != null) {
                 await this.pause(1000); 
-                this.performThrow(member, target);
-                member.setIntendedTarget(null); // Clear the target after the throw
+                card.getCardType().offense(member, target); 
+                member.setIntendedTarget(null);             
             }
         }
         await this.pause(1000); 
@@ -131,13 +130,6 @@ export default abstract class Team extends Phaser.GameObjects.Container {
     removeMember(member: Member) {
         this.members = this.members.filter(p => p !== member);
     }
-
-    performThrow(thrower: Member, target: Member) {
-        const damage = 1;
-        target.hit(damage, thrower);
-        console.log(`${thrower} hits ${target} for ${damage} damage`);
-    }
-
 	/* END-USER-CODE */
 }
 

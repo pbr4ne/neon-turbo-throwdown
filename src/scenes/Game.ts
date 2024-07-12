@@ -373,6 +373,10 @@ export default class Game extends Phaser.Scene {
     async executeTurnActions() {
         console.log("on EXECUTE TURN ACTIONS step");
         this.currentStep++;
+
+        //temp - instakill boss {
+        //this.boss.members.forEach(member => member.destroyMember());
+
         await this.player.executeTurn();
         await this.boss.executeTurn();
 

@@ -10,7 +10,6 @@ import Member from "./Member";
 import Team from "./Team";
 import FloatingObjectScript from "../script-nodes/ui/FloatingObjectScript";
 import { GameSteps } from '../throwdown/GameSteps';
-import { CardType } from "../throwdown/CardType";
 /* END-USER-IMPORTS */
 
 export default class Player extends Team {
@@ -105,7 +104,7 @@ export default class Player extends Team {
             
             this.drawTargetArc(this.currentMember, enemy);
 
-            const allMembersHaveCards = this.members.every(member => member.getAssignedCards().length > 0);
+            const allMembersHaveCards = this.members.every(member => member.getAssignedCard() != null);
             if (allMembersHaveCards) {
                 this.currentMember = null;
                 (this.scene.scene.get('Game') as Game).nextStep();
@@ -119,7 +118,7 @@ export default class Player extends Team {
     checkAllThrowersHaveTargets(): boolean {
         // Check if all members with a throw card have a selected target
         return this.members
-            .filter(member => member.getAssignedCards().some(card => card.cardType === CardType.throw))
+            .filter(member => member.getAssignedCard()?.getCardType().needsTarget())
             .every(member => member.getIntendedTarget() !== null);
     }
 
@@ -149,7 +148,7 @@ export default class Player extends Team {
     }
 
     getUnassignedMembers(): Member[] {
-        return this.members.filter(member => member.getAssignedCards().length === 0);
+        return this.members.filter(member => member.getAssignedCard() == null);
     }
     
 	/* END-USER-CODE */

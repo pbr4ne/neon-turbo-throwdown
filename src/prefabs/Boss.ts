@@ -9,7 +9,7 @@ import Member from "./Member";
 import Player from "./Player";
 import Team from "./Team";
 import { Coach } from "../throwdown/Coach";
-import { CardType } from "../throwdown/CardType";
+import { CardType } from "../cards/CardType";
 import FloatingObjectScript from "../script-nodes/ui/FloatingObjectScript";
 /* END-USER-IMPORTS */
 
@@ -37,12 +37,13 @@ export default class Boss extends Team {
     }
 
     targetMembers() {
-        const throwers = this.members.filter(member => 
-            member.getAssignedCards().some(card => card.cardType === CardType.throw)
-        );
-        throwers.forEach(thrower => {
-            const target = this.selectRandomMember(this.opponent.members);
-            thrower.setIntendedTarget(target);
+        this.members.forEach(member => {
+            const assignedCard = member.getAssignedCard(); // Assuming this now returns a single card
+    
+            if (assignedCard && assignedCard.getCardType().needsTarget()) {
+                const target = this.selectRandomMember(this.opponent.members);
+                member.setIntendedTarget(target);
+            }
         });
     }
 
@@ -54,9 +55,8 @@ export default class Boss extends Team {
                 const randomIndex = Phaser.Math.Between(0, this.hand.getCards().length - 1);
                 const randomCard = this.hand.getCards()[randomIndex];
                 const cardType = randomCard.getCardType();
-                const whiteIconTexture = randomCard.getWhiteIconTexture();
 
-                member.assignCard(randomCard, whiteIconTexture, true);
+                member.assignCard(randomCard, true);
                 member.assignedText?.setText(cardType.getName());
                 console.log("Assigned card to member: " + cardType.getName() + " " + member);
 
@@ -97,7 +97,7 @@ export default class Boss extends Team {
 
     selectRandomMemberWithCard(cardType: CardType, members: Member[]): Member | null {
         const eligibleMembers = members.filter(member => 
-            member.getAssignedCards().some(card => card.cardType === cardType)
+            member.getAssignedCard()?.getCardType() == cardType
         );
         if (eligibleMembers.length > 0) {
             const randomIndex = Phaser.Math.Between(0, eligibleMembers.length - 1);

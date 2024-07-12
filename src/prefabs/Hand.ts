@@ -74,7 +74,7 @@ export default class Hand {
 
         // Check if any member already has the card assigned
         const cardAlreadyAssigned = members.some(member => 
-            member.getAssignedCards().includes(card)
+            member.getAssignedCard() == card
         );
 
         if (cardAlreadyAssigned) {
@@ -100,11 +100,9 @@ export default class Hand {
 
     assignCardToMember(member: Member) {
         if (this.poppedUpCard) {
-            if (member.getAssignedCards().length < 1) {
+            if (member.getAssignedCard() == null) {
                 const cardType = this.poppedUpCard.getCardType();
-                const whiteIconTexture = this.poppedUpCard.getWhiteIconTexture();
-                member.assignCard(this.poppedUpCard, whiteIconTexture);
-                //this.poppedUpCard.hide();
+                member.assignCard(this.poppedUpCard);
                 this.cards = this.cards.filter(card => card !== this.poppedUpCard);
                 this.cardsInPlay.push(this.poppedUpCard);
             }

@@ -5,7 +5,7 @@
 
 import Phaser from "phaser";
 /* START-USER-IMPORTS */
-import { CardType } from "../throwdown/CardType";
+import { CardType } from "../cards/CardType";
 /* END-USER-IMPORTS */
 
 export default class Card extends Phaser.GameObjects.Container {
@@ -17,10 +17,9 @@ export default class Card extends Phaser.GameObjects.Container {
     private iconImage: Phaser.GameObjects.Image;
     private isPoppedUp: boolean;
 
-    constructor(scene: Phaser.Scene, x?: number, y?: number, texture?: string, frame?: number | string, name?: string) {
+    constructor(scene: Phaser.Scene, cardType: CardType, x?: number, y?: number, texture?: string) {
         super(scene, x ?? 0, y ?? 0);
-        
-        this.cardImage = new Phaser.GameObjects.Image(scene, 0, 0, texture || "front", frame);
+        this.cardImage = new Phaser.GameObjects.Image(scene, 0, 0, texture || "front");
         this.add(this.cardImage);
 
         this.ringSelectedImage = new Phaser.GameObjects.Image(scene, 0, 0, 'ring-selected');
@@ -31,7 +30,7 @@ export default class Card extends Phaser.GameObjects.Container {
         this.add(this.ringAssignedImage);
         this.ringAssignedImage.setVisible(false);
 
-        this.cardType = CardType.unknown;
+        this.cardType = cardType;
 
         this.nameText = new Phaser.GameObjects.Text(scene, 0, 64, this.cardType.getName(), {
             fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
@@ -43,7 +42,7 @@ export default class Card extends Phaser.GameObjects.Container {
         this.nameText.setOrigin(0.5, 0.5);
         this.add(this.nameText);
 
-        this.iconImage = new Phaser.GameObjects.Image(scene, 0, -30, '');
+        this.iconImage = new Phaser.GameObjects.Image(scene, 0, -30, this.cardType.getIcon());
         this.add(this.iconImage);
 
         this.isPoppedUp = false;
@@ -58,12 +57,6 @@ export default class Card extends Phaser.GameObjects.Container {
     clearCard() {
         this.ringSelectedImage.setVisible(false);
         this.ringAssignedImage.setVisible(false);
-    }
-
-    setType(type: CardType) {
-        this.cardType = type;
-        this.nameText.setText(this.cardType.getName());
-        this.updateIcon();
     }
 
     setTexture(texture: string) {
@@ -82,33 +75,10 @@ export default class Card extends Phaser.GameObjects.Container {
         this.ringAssignedImage.setVisible(true);
     }
 
-    updateIcon() {
-        switch (this.cardType) {
-            case CardType.block:
-                this.iconImage.setTexture('block');
-                break;
-            case CardType.catch:
-                this.iconImage.setTexture('catch');
-                break;
-            case CardType.evade:
-                this.iconImage.setTexture('dodge');
-                break;
-            case CardType.throw:
-                this.iconImage.setTexture('throw');
-                break;
-            default:
-                this.iconImage.setTexture('');
-                break;
-        }
-    }
-
     togglePopUp() {
-        
         if (this.isPoppedUp) {
-            //this.y += 20;
             this.ringSelectedImage.setVisible(false);
         } else {
-            //this.y -= 20;
             this.ringSelectedImage.setVisible(true);
         }
         this.isPoppedUp = !this.isPoppedUp;
@@ -124,20 +94,5 @@ export default class Card extends Phaser.GameObjects.Container {
 
     getIconTexture(): string {
         return this.iconImage.texture.key;
-    }
-
-    getWhiteIconTexture(): string {
-        switch (this.cardType) {
-            case CardType.block:
-                return 'block';
-            case CardType.catch:
-                return 'catch';
-            case CardType.evade:
-                return 'dodge';
-            case CardType.throw:
-                return 'throw';
-            default:
-                return '';
-        }
     }
 }
