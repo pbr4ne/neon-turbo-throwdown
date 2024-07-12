@@ -33,6 +33,33 @@ export class Coach {
         return this.baseCards;
     }
 
+    public getNextCoach(): Coach {
+        switch (this.avatar) {
+            case "primo":
+                return Coach.sporticus;
+            case "sporticus":
+                return Coach.russ;
+            case "russ":
+                return Coach.boss;
+            case "boss":
+                return Coach.steve;
+            case "steve":
+                return Coach.betsy;
+            case "betsy":
+                return Coach.coree;
+            case "coree":
+                return Coach.turbo;
+            case "turbo":
+                return Coach.shadow;
+            case "shadow":
+                return Coach.boss10;
+            case "boss10":
+                return Coach.you;
+            default:
+                return Coach.you;
+        }
+    }
+
     public static you = new Coach("You", "you", 0, []);
     public static coach = new Coach("Coach", "coach", 0, []);
     public static spirit = new Coach("Spirit Coach", "spirit", 0, []);
