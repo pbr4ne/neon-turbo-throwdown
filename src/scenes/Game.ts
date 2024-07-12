@@ -53,23 +53,6 @@ export default class Game extends Phaser.Scene {
         this.dialogBox = this.dialogLayer.add(dialog);
     }
 
-    doRunUpgrade() {
-        this.runUpgrade = new RunUpgrade(this, this.currentCoach, this.player);
-        this.runUpgrade = this.dialogLayer.add(this.runUpgrade);
-    }
-
-    doPermUpgrade() {
-        //to implement
-    }
-
-    winThrowdown() {
-        this.doDialogue(this.dialogueStorage.primoWinDialogue, "win");
-    }
-
-    loseThrowdown() {
-        this.doDialogue(this.dialogueStorage.primoWinDialogue, "lose");
-    }
-
     finishDialogue(type: string) {
         this.dialogBox.destroyEverything();
         this.dialogBox.destroy();
@@ -89,6 +72,19 @@ export default class Game extends Phaser.Scene {
         }
     }
 
+    winThrowdown() {
+        this.doDialogue(this.dialogueStorage.primoWinDialogue, "win");
+    }
+
+    loseThrowdown() {
+        this.doDialogue(this.dialogueStorage.primoWinDialogue, "lose");
+    }
+
+    doRunUpgrade() {
+        this.runUpgrade = new RunUpgrade(this, this.currentCoach, this.player);
+        this.runUpgrade = this.dialogLayer.add(this.runUpgrade);
+    }
+
     finishRunUpgrade() {
         this.runUpgrade.destroyEverything();
         this.runUpgrade.destroy();
@@ -97,6 +93,10 @@ export default class Game extends Phaser.Scene {
 
         this.throwdown = new Throwdown(this, this.currentCoach, this.player);
         this.player.setThrowdown(this.throwdown);
+    }
+
+    doPermUpgrade() {
+        //to implement
     }
 	/* END-USER-CODE */
 }
