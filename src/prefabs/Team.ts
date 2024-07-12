@@ -95,10 +95,12 @@ export default abstract class Team extends Phaser.GameObjects.Container {
     }
 
     recombineDeck() {
-        this.discardPile.getCards().forEach(card => {
-            this.deck.addCard(card);
-        });
-        this.discardPile.clear();
+        this.deck.initializeStartingDeck();
+        // bug in this. it wrecks the card somehow so it can't be rerendered
+        // this.discardPile.getCards().forEach(card => {
+        //     this.deck.addCard(card);
+        // });
+        // this.discardPile.clear();
     }
 
     clearMembers() {
