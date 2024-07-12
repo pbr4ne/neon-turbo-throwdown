@@ -2,6 +2,9 @@ import { CardType } from "./CardType";
 import Member from "../prefabs/Member";
 
 export class Throw extends CardType {
+    private static chanceToOffend : number = 0.75;
+    private static offenseDamage: number = 1;
+
     constructor() {
         super("throw", "throw");
     }
@@ -9,7 +12,7 @@ export class Throw extends CardType {
     offense(member: Member, target: Member): boolean {
 
         var offenseSuccess = true;
-        if (Math.random() < 0.75) {
+        if (Math.random() < Throw.chanceToOffend) {
             var targetCard = target.getAssignedCard();
             var defenseSuccess = false;
             if (targetCard != null) {
@@ -18,6 +21,7 @@ export class Throw extends CardType {
             if (defenseSuccess) {
                 offenseSuccess = false;
             } else {
+                target.reduceHP(Throw.offenseDamage);
                 offenseSuccess = true;
             }
         } else {

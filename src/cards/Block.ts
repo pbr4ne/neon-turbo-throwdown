@@ -2,6 +2,9 @@ import { CardType } from "./CardType";
 import Member from "../prefabs/Member";
 
 export class Block extends CardType {
+    private static chanceToDefend : number = 0.50;
+    private static defenseDamage: number = 1;
+    
     constructor() {
         super("block", "block");
     }
@@ -11,10 +14,10 @@ export class Block extends CardType {
     }
 
     defense(member: Member, attacker: Member): boolean {
-        if (Math.random() < 0.50) {
+        if (Math.random() < Block.chanceToDefend) {
             member.showFloatingAction(this.getName());
-            attacker.showFloatingAction("1");
-            attacker.reduceHP(1);
+            attacker.showFloatingAction(Block.defenseDamage.toString());
+            attacker.reduceHP(Block.defenseDamage);
             return true;
         }
         return false;
