@@ -4,6 +4,7 @@ import { DialogueConversation } from './Dialogue';
 export class DialogueStorage {
     public introDialogue: DialogueConversation = new DialogueConversation();
     public primoWinDialogue: DialogueConversation = new DialogueConversation();
+    public spiritDialogue: DialogueConversation = new DialogueConversation();
 
     public constructor() {
         this.introDialogue.addStep("You step into the gym for an ordinary day of sick gains when...", Coach.you);
@@ -23,5 +24,7 @@ export class DialogueStorage {
         this.primoWinDialogue.addStep(["More like Primo WORSTman", "Yayyyy can I go home now?"], Coach.you);
         this.primoWinDialogue.addStep("Ya did it, kid! Only 9 more gym bosses to go!", Coach.coach);
         this.primoWinDialogue.addStep(["Nine?", "I told you, I'm not a kid.", "TURBO-SLICED!!!!"], Coach.you);
+     
+        this.spiritDialogue.addStep("It's ok", Coach.coach);
     }
 }
