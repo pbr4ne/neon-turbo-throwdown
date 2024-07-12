@@ -37,7 +37,6 @@ export default class Game extends Phaser.Scene {
     private dialogBox!: DialogBox;
     private dialogueStorage!: DialogueStorage;
     private runUpgrade!: RunUpgrade;
-    private currentState = "dialog";
     private currentCoach: Coach = Coach.primo;
     public throwdown!: Throwdown;
 
@@ -60,21 +59,33 @@ export default class Game extends Phaser.Scene {
         this.runUpgrade = this.dialogLayer.add(this.runUpgrade);
     }
 
+    doPermUpgrade() {
+        //to implement
+    }
+
     winThrowdown() {
         this.doDialogue(this.dialogueStorage.primoWinDialogue, "win");
+    }
+
+    loseThrowdown() {
+        this.doDialogue(this.dialogueStorage.primoWinDialogue, "lose");
     }
 
     finishDialogue(type: string) {
         this.dialogBox.destroyEverything();
         this.dialogBox.destroy();
         if (type === "intro") {
-            this.setupInitialState();
-
+            this.player = new Player(this);
             this.throwdown = new Throwdown(this, this.currentCoach, this.player);
             this.player.setThrowdown(this.throwdown);
+
         } else if (type === "win") {
             this.throwdown.destroy();
             this.doRunUpgrade();
+            
+        } else if (type === "loss") {
+            this.throwdown.destroy();
+            //this.doPermUpgrade();
         }
     }
 
@@ -82,14 +93,10 @@ export default class Game extends Phaser.Scene {
         this.runUpgrade.destroyEverything();
         this.runUpgrade.destroy();
 
+        this.currentCoach = this.currentCoach.getNextCoach();
+
         this.throwdown = new Throwdown(this, this.currentCoach, this.player);
         this.player.setThrowdown(this.throwdown);
-        // this.renderGym();
-        // this.nextStep();
-    }
-
-	setupInitialState() {
-        this.player = new Player(this);
     }
 	/* END-USER-CODE */
 }

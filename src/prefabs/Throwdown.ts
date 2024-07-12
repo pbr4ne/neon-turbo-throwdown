@@ -97,7 +97,6 @@ export default class Throwdown extends Phaser.GameObjects.Container {
         this.pointerImage2 = this.scene.add.image(265, 875, "pointer");
         this.pointerImage3 = this.scene.add.image(265, 875, "pointer");
 
-        //this.hideAllGymStuff();
         this.hideAllInstructions();
 
 		this.playerLayer.add(this.player);
