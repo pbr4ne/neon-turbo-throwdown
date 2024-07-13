@@ -22,8 +22,8 @@ export default class Member extends Phaser.GameObjects.Container {
     private team: Team;
     private intendedTarget: Member | null = null;
     private number: number;
-    private bracketDefaultLeft: Phaser.GameObjects.Image | null = null;
-    private bracketDefaultRight: Phaser.GameObjects.Image | null = null;
+    private bracketLeft: Phaser.GameObjects.Image | null = null;
+    private bracketRight: Phaser.GameObjects.Image | null = null;
     public assignedText: Phaser.GameObjects.Text | null = null;
     private targetArc: Phaser.GameObjects.Graphics | null = null;
 
@@ -49,11 +49,11 @@ export default class Member extends Phaser.GameObjects.Container {
 
         this.setInteractive(new Phaser.Geom.Rectangle(0, 0, this.sprite.width, this.sprite.height), Phaser.Geom.Rectangle.Contains);
 
-        this.bracketDefaultLeft = new Phaser.GameObjects.Image(this.scene, -50, 150 - bracketOffset, 'bracket-default');
-        this.bracketDefaultRight = new Phaser.GameObjects.Image(this.scene, 50, 150 - bracketOffset, 'bracket-default');
-        this.bracketDefaultRight.setFlipX(true);
-        this.add(this.bracketDefaultLeft);
-        this.add(this.bracketDefaultRight);
+        this.bracketLeft = new Phaser.GameObjects.Image(this.scene, -50, 150 - bracketOffset, 'bracket-default');
+        this.bracketRight = new Phaser.GameObjects.Image(this.scene, 50, 150 - bracketOffset, 'bracket-default');
+        this.bracketRight.setFlipX(true);
+        this.add(this.bracketLeft);
+        this.add(this.bracketRight);
 
         this.assignedText = new Phaser.GameObjects.Text(scene, 0, 150 - bracketOffset, "", {
             fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
@@ -66,8 +66,21 @@ export default class Member extends Phaser.GameObjects.Container {
         this.assignedText.setWordWrapWidth(100);
         this.add(this.assignedText);
 
-        this.on('pointerover', () => { this.scene.input.setDefaultCursor('pointer'); });
-        this.on('pointerout', () => { this.scene.input.setDefaultCursor('default'); });
+        this.on('pointerover', () => { 
+            this.scene.input.setDefaultCursor('pointer'); 
+            this.bracketLeft?.setTexture('bracket-hover');
+            this.bracketRight?.setTexture('bracket-hover');
+        });
+        this.on('pointerout', () => { 
+            this.scene.input.setDefaultCursor('default'); 
+            if (this.assignedCard != null) {
+                this.bracketLeft?.setTexture('bracket-assigned');
+                this.bracketRight?.setTexture('bracket-assigned');
+            } else {
+                this.bracketLeft?.setTexture('bracket-default');
+                this.bracketRight?.setTexture('bracket-default');
+            }
+        });
     }
 
     getNumber(): number {
@@ -119,8 +132,8 @@ export default class Member extends Phaser.GameObjects.Container {
         const controlY = Math.min(startY, endY) - 50 + offsetY;
     
         const curve = new Phaser.Curves.QuadraticBezier(
-            new Phaser.Math.Vector2(startX, startY),
-            new Phaser.Math.Vector2(controlX, controlY),
+            new Phaser.Math.Vector2(startX + offsetX, startY + offsetY),
+            new Phaser.Math.Vector2(controlX + offsetX, controlY + offsetY),
             new Phaser.Math.Vector2(endX, endY)
         );
     
@@ -141,6 +154,8 @@ export default class Member extends Phaser.GameObjects.Container {
         }
         this.assignedCard = card;
         card.showAssignedRing();
+        this.bracketLeft?.setTexture('bracket-assigned');
+        this.bracketRight?.setTexture('bracket-assigned');
         
         if (boss != null) {
             if (boss.getCoach().getDifficulty() === 1) {
@@ -172,6 +187,8 @@ export default class Member extends Phaser.GameObjects.Container {
         this.assignedCard = null;
         this.cardIcons.forEach(icon => icon.destroy());
         this.assignedText?.setText("");
+        this.bracketLeft?.setTexture('bracket-default');
+        this.bracketRight?.setTexture('bracket-default');
     }
 
     getHP(): number {
