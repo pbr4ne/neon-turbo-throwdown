@@ -2,7 +2,7 @@ export class GameSounds {
 
     static musicSound: Phaser.Sound.WebAudioSound;
 
-    static ballSound: Phaser.Sound.WebAudioSound;
+    static hitSound: Phaser.Sound.WebAudioSound;
 
     static effectsEnabled: boolean;
 
@@ -15,9 +15,8 @@ export class GameSounds {
 
         GameSounds.musicSound = scene.sound.add("music") as Phaser.Sound.WebAudioSound;
         GameSounds.musicSound.play({ loop: true, volume: 0.2 });
-        console.log('mustic playing');
 
-        GameSounds.ballSound = scene.sound.add("ball") as Phaser.Sound.WebAudioSound;
+        GameSounds.hitSound = scene.sound.add("hit") as Phaser.Sound.WebAudioSound;
         GameSounds.effectsEnabled = true;
     }
 
@@ -43,11 +42,11 @@ export class GameSounds {
         GameSounds.effectsEnabled = !GameSounds.effectsEnabled;
     }
 
-    static playball() {
+    static playHit() {
 
         if (GameSounds.effectsEnabled) {
 
-            GameSounds.ballSound.play();
+            GameSounds.hitSound.play();
         }
     }
 }

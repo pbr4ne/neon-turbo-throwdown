@@ -7,28 +7,6 @@
                 "key": "back"
             },
             {
-                "url": [
-                    "assets/audio/ball.mp3"
-                ],
-                "type": "audio",
-                "key": "ball"
-            },
-            {
-                "url": "assets/images/items/ball-cyan.png",
-                "type": "image",
-                "key": "ball-cyan"
-            },
-            {
-                "url": "assets/images/items/ball-magenta.png",
-                "type": "image",
-                "key": "ball-magenta"
-            },
-            {
-                "url": "assets/images/items/ball-yellow.png",
-                "type": "image",
-                "key": "ball-yellow"
-            },
-            {
                 "url": "assets/images/level/betsy.png",
                 "type": "image",
                 "key": "betsy"
@@ -69,12 +47,6 @@
                 "key": "bracket-hover"
             },
             {
-                "atlasURL": "assets/atlas/texture.json",
-                "textureURL": "assets/atlas/texture.png",
-                "type": "atlas",
-                "key": "buttons"
-            },
-            {
                 "url": "assets/images/cards/catch.png",
                 "type": "image",
                 "key": "catch"
@@ -88,6 +60,11 @@
                 "url": "assets/images/game/coach-corner.png",
                 "type": "image",
                 "key": "coach-corner"
+            },
+            {
+                "url": "assets/images/game/coach-corner-boss.png",
+                "type": "image",
+                "key": "coach-corner-boss"
             },
             {
                 "url": "assets/images/game/coach-corner-spirit.png",
@@ -123,6 +100,11 @@
                 "url": "assets/images/game/difficulty-3.png",
                 "type": "image",
                 "key": "difficulty-3"
+            },
+            {
+                "url": "assets/images/game/difficulty-boss.png",
+                "type": "image",
+                "key": "difficulty-boss"
             },
             {
                 "url": "assets/images/cards/dodge.png",
@@ -316,15 +298,9 @@
                 "key": "throwdown-button"
             },
             {
-                "url": "assets/images/ui/throwdownButton.png",
+                "url": "assets/images/cards/tooltip.png",
                 "type": "image",
-                "key": "throwdownButton"
-            },
-            {
-                "textureURL": "assets/fonts/turbo.png",
-                "fontDataURL": "assets/fonts/turbo.xml",
-                "type": "bitmapFont",
-                "key": "turbo"
+                "key": "tooltip"
             },
             {
                 "url": "assets/images/level/turbo.png",
@@ -345,6 +321,11 @@
                 "url": "assets/images/cards/upgrade.png",
                 "type": "image",
                 "key": "upgrade"
+            },
+            {
+                "url": "assets/images/welcome/view-credits.png",
+                "type": "image",
+                "key": "view-credits"
             },
             {
                 "url": "assets/images/level/you.png",

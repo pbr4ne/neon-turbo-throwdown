@@ -21,12 +21,6 @@
             },
             "x": 953,
             "y": 443
-        },
-        {
-            "prefabId": "d8801a27-29ff-4774-a8a6-1f4e9b14d6cc",
-            "id": "789d2f54-a153-406e-a5e6-cf5e700681e3",
-            "label": "gameplayScript",
-            "nestedPrefabs": []
         }
     ],
     "plainObjects": [],
