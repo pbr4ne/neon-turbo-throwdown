@@ -18,12 +18,19 @@ export default class Boss extends Team {
     constructor(scene: Phaser.Scene, coach: Coach) {
         super(scene, false);
 
+        this.coach = coach;
         /* START-USER-CTR-CODE */
         const bossImage = new Phaser.GameObjects.Image(scene, 1855, 78, coach.getAvatar())
             .setOrigin(1, 0)
             .setScale(1.2);
         this.add(bossImage);
         /* END-USER-CTR-CODE */
+    }
+
+    private coach: Coach;
+
+    getCoach(): Coach {
+        return this.coach;
     }
 
     drawCards() {
@@ -58,14 +65,11 @@ export default class Boss extends Team {
                 const randomCard = this.hand.getCards()[randomIndex];
                 const cardType = randomCard.getCardType();
 
-                member.assignCard(randomCard, true);
-                member.assignedText?.setText(cardType.getName());
+                member.assignCard(randomCard, this);
                 console.log("Assigned card to member: " + cardType.getName() + " " + member);
 
                 this.hand.getCards().splice(randomIndex, 1);
                 this.hand.getCardsInPlay().push(randomCard);
-
-                
             }
         });
     }

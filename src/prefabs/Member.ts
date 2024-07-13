@@ -10,6 +10,7 @@ import Team from "./Team";
 import Game from "../scenes/Game";
 import { GameSteps } from "../throwdown/GameSteps";
 import { checkUrlParam } from "../utilities/GameUtils";
+import Boss from "./Boss";
 /* END-USER-IMPORTS */
 
 export default class Member extends Phaser.GameObjects.Container {
@@ -83,17 +84,23 @@ export default class Member extends Phaser.GameObjects.Container {
         return this.intendedTarget;
     }
 
-    assignCard(card: Card, isBoss: boolean = false) {
+    assignCard(card: Card, boss?: Boss) {
         console.log("assigning card!");
         if (this.assignedCard != null) {
             return;
         }
         this.assignedCard = card;
         card.showAssignedRing();
-        this.assignedText?.setText(card.cardType.getName());
-        if (isBoss) {
+        
+        if (boss != null) {
+            if (boss.getCoach().getDifficulty() === 1) {
+                this.assignedText?.setText(card.cardType.getName());
+            } else {
+                this.assignedText?.setText("???");
+            }
             return;
         }
+        this.assignedText?.setText(card.cardType.getName());
         if (card.cardType.needsTarget()) {
             (this.scene.scene.get('Game') as Game).throwdown.nextStep();
         } else {
