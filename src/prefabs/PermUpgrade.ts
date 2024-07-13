@@ -57,6 +57,11 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
 			{ x: 1162, y: 848 }
 		];
 	
+		if (OutstandingTrophyList.getEligibleTrophyTypes().length <= 0) {
+			(this.scene.scene.get('Game') as Game).finishPermUpgrade();
+			return;
+		}
+
 		OutstandingTrophyList.getEligibleTrophyTypes().slice(0, 3).forEach((trophyType, index) => {
 			if (trophyType) {
 				this.currentTrophies.push(trophyType);
