@@ -1,7 +1,4 @@
 import { GameSounds } from "../GameSounds";
-
-/* START OF COMPILED CODE */
-
 import Phaser from "phaser";
 import { StartSceneActionScript } from "@phaserjs/editor-scripts-core";
 import { OnEventScript } from "@phaserjs/editor-scripts-core";
@@ -11,21 +8,14 @@ import { PushActionScript } from "@phaserjs/editor-scripts-simple-animations";
 import { CallbackActionScript } from "@phaserjs/editor-scripts-core";
 import SwitchImageActionScript from "../script-nodes/ui/SwitchImageActionScript";
 import FloatingObjectScript from "../script-nodes/ui/FloatingObjectScript";
-/* START-USER-IMPORTS */
-/* END-USER-IMPORTS */
 
 export default class Welcome extends Phaser.Scene {
 
 	constructor() {
 		super("Welcome");
-
-		/* START-USER-CTR-CODE */
-		// Write your code here.
-		/* END-USER-CTR-CODE */
 	}
 
 	editorCreate(): void {
-
 		const logo = this.add.image(1000, 360, "logo");
 		const playBtn = this.add.image(1000, 680, "start-button");
 		const musicBtn = this.add.image(1720, 960, "music2-on");
@@ -40,20 +30,15 @@ export default class Welcome extends Phaser.Scene {
 		const startGameAction = new StartSceneActionScript(pushActionScript_2);
 
 		const onKeydown_SPACE = new OnEventScript(this);
-
 		const startGame_2 = new ExecActionScript(onKeydown_SPACE);
-
 		const onKeydown_ENTER = new OnEventScript(this);
 		const startGame_1 = new ExecActionScript(onKeydown_ENTER);
 
 		onKeydown_SPACE.eventName = "keydown-SPACE";
 		onKeydown_SPACE.eventEmitter = "scene.input.keyboard";
-
 		startGame_2.targetAction = startGameAction;
-
 		onKeydown_ENTER.eventName = "keydown-ENTER";
 		onKeydown_ENTER.eventEmitter = "scene.input.keyboard";
-
 		startGameAction.sceneKey = "Game";
 		startGame_1.targetAction = startGameAction;
 
@@ -84,40 +69,31 @@ export default class Welcome extends Phaser.Scene {
 		creditsSwitchImageAction.onTexture = {"key":"view-credits","frame":"view-credits"};
 		creditsSwitchImageAction.offTexture = {"key":"view-credits","frame":"view-credits"};
 		creditsSwitchImageAction.isOn = true;
-		creditsSwitchImageAction.mementoKey = "effects";
+		creditsSwitchImageAction.mementoKey = "view-credits";
 
 		toggleMusicAction.callback = () => GameSounds.toggleMusic();
 		toggleEffectsAction.callback = () => GameSounds.toggleEffects();
 
-		this.musicSwitchImageAction = musicSwitchImageAction;
-		this.musicBtn = musicBtn;
-		this.soundSwitchImageAction = soundSwitchImageAction;
-		this.soundBtn = soundBtn;
-		this.creditsSwitchImageAction = creditsSwitchImageAction;
-		this.creditsBtn = creditsBtn;
-
 		this.events.emit("scene-awake");
+
+		this.setButtonInteractive(playBtn);
+		this.setButtonInteractive(musicBtn);
+		this.setButtonInteractive(soundBtn);
+		this.setButtonInteractive(creditsBtn);
 	}
 
-	/* START-USER-CODE */
-
-	private musicSwitchImageAction!: SwitchImageActionScript;
-	private musicBtn!: Phaser.GameObjects.Image;
-	private soundSwitchImageAction!: SwitchImageActionScript;
-	private soundBtn!: Phaser.GameObjects.Image;
-	private creditsSwitchImageAction!: SwitchImageActionScript;
-	private creditsBtn!: Phaser.GameObjects.Image;
+	private setButtonInteractive(button: Phaser.GameObjects.Image) {
+		button.setInteractive({ useHandCursor: true })
+			.on('pointerover', () => {
+				this.input.setDefaultCursor('pointer');
+			})
+			.on('pointerout', () => {
+				this.input.setDefaultCursor('default');
+			});
+	}
 
 	create() {
-
 		this.editorCreate();
-
 		GameSounds.init(this);
 	}
-
-	/* END-USER-CODE */
 }
-
-/* END OF COMPILED CODE */
-
-// You can write more code here
