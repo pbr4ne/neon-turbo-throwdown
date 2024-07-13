@@ -1,10 +1,7 @@
 import { Throw } from "../cards/Throw";
-import { CardType } from "../cards/CardType";
 import { Block } from "../cards/Block";
 import { Catch } from "../cards/Catch";
 import { Evade } from "../cards/Evade";
-import { CoachDialogue } from "../dialogue/CoachDialogue";
-import { DialogueStorage } from "../dialogue/DialogueStorage";
 import { Coach } from "./Coach";
 
 export class CoachList {
@@ -120,7 +117,7 @@ export class CoachList {
         new Block(),
         new Catch()
     ]);
-    public static boss10 = new Coach("Boss #10", "boss10", 3, [
+    public static boss10 = new Coach("Boss #10", "boss10", 4, [
         new Throw(),
         new Throw(),
         new Throw(),
@@ -132,6 +129,4 @@ export class CoachList {
         new Block(),
         new Catch()
     ]);
-
-    
 }

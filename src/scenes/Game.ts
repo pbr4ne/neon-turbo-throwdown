@@ -11,8 +11,6 @@ import RunUpgrade from "../prefabs/RunUpgrade";
 import PermUpgrade from "../prefabs/PermUpgrade";
 import Throwdown from "../prefabs/Throwdown";
 import { Library } from "../throwdown/Library";
-import { StorageManager } from "../utilities/StorageManager";
-import { TurboThrow } from "../trophies/TurboThrow";
 /* END-USER-IMPORTS */
 
 export default class Game extends Phaser.Scene {
