@@ -80,6 +80,8 @@ export default class Welcome extends Phaser.Scene {
 		this.setButtonInteractive(musicBtn);
 		this.setButtonInteractive(soundBtn);
 		this.setButtonInteractive(creditsBtn);
+
+		creditsBtn.on('pointerdown', this.showCredits, this);
 	}
 
 	private setButtonInteractive(button: Phaser.GameObjects.Image) {
@@ -96,4 +98,45 @@ export default class Welcome extends Phaser.Scene {
 		this.editorCreate();
 		GameSounds.init(this);
 	}
+
+	private showCredits() {
+		const popup = this.add.container(960, 540);
+
+		const background = this.add.rectangle(0, 0, 900, 700, 0x000000, 0.8).setOrigin(0.5, 0.5);
+		background.setStrokeStyle(4, 0x00ffff);
+
+		const creditsText = this.add.text(-420, -320, "Credits:\n\nDeveloper: \nWriter: \nUI Artist: \nMusic: ", {
+			fontFamily: '"Press Start 2P"',
+			fontSize: '20px',
+			color: '#00ffff',
+			align: 'left',
+			wordWrap: { width: 860, useAdvancedWrap: true }
+		});
+
+		const closeButton = this.add.text(0, 320, "Close", {
+			fontFamily: '"Press Start 2P"',
+			fontSize: '20px',
+			color: '#ff00ff',
+			backgroundColor: '#000000',
+			padding: { x: 10, y: 5 }
+		}).setOrigin(0.5, 0.5).setInteractive({ useHandCursor: true });
+
+		closeButton.on('pointerdown', () => {
+			popup.destroy();
+		});
+
+		closeButton.on('pointerover', () => {
+			this.input.setDefaultCursor('pointer');
+		});
+
+		closeButton.on('pointerout', () => {
+			this.input.setDefaultCursor('default');
+		});
+
+		popup.add([background, creditsText, closeButton]);
+	}
+
+	/* END-USER-CODE */
 }
+
+/* END OF COMPILED CODE */
