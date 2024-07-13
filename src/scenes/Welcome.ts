@@ -101,11 +101,19 @@ export default class Welcome extends Phaser.Scene {
 
 	private showCredits() {
 		const popup = this.add.container(960, 540);
-
+	
 		const background = this.add.rectangle(0, 0, 900, 700, 0x000000, 0.8).setOrigin(0.5, 0.5);
 		background.setStrokeStyle(4, 0x00ffff);
-
-		const creditsText = this.add.text(-420, -320, "Credits:\n\nDeveloper: \nWriter: \nUI Artist: \nMusic: ", {
+	
+		const creditsText = this.add.text(-420, -320, "Credits:", {
+			fontFamily: '"Press Start 2P"',
+			fontSize: '20px',
+			color: '#ffffff',
+			align: 'left',
+			wordWrap: { width: 860, useAdvancedWrap: true }
+		});
+	
+		const developerText = this.add.text(-420, -270, "Developer: pbrane", {
 			fontFamily: '"Press Start 2P"',
 			fontSize: '20px',
 			color: '#00ffff',
@@ -113,27 +121,58 @@ export default class Welcome extends Phaser.Scene {
 			wordWrap: { width: 860, useAdvancedWrap: true }
 		});
 
+		const developerLink = this.add.text(-50, -270, "github", {
+			fontFamily: '"Press Start 2P"',
+			fontSize: '20px',
+			color: '#ffff00',
+		}).setInteractive({ useHandCursor: true }).on('pointerdown', () => {
+			window.open('https://github.com/pbr4ne', '_blank');
+		});
+	
+		const writerText = this.add.text(-420, -220, "Writer:", {
+			fontFamily: '"Press Start 2P"',
+			fontSize: '20px',
+			color: '#00ffff',
+			align: 'left',
+			wordWrap: { width: 860, useAdvancedWrap: true }
+		});
+	
+		const uiArtistText = this.add.text(-420, -170, "UI Artist: ", {
+			fontFamily: '"Press Start 2P"',
+			fontSize: '20px',
+			color: '#00ffff',
+			align: 'left',
+			wordWrap: { width: 860, useAdvancedWrap: true }
+		});
+	
+		const musicText = this.add.text(-420, -120, "Music: ", {
+			fontFamily: '"Press Start 2P"',
+			fontSize: '20px',
+			color: '#00ffff',
+			align: 'left',
+			wordWrap: { width: 860, useAdvancedWrap: true }
+		});
+	
 		const closeButton = this.add.text(0, 320, "Close", {
 			fontFamily: '"Press Start 2P"',
 			fontSize: '20px',
 			color: '#ff00ff',
-			backgroundColor: '#000000',
 			padding: { x: 10, y: 5 }
 		}).setOrigin(0.5, 0.5).setInteractive({ useHandCursor: true });
-
+	
 		closeButton.on('pointerdown', () => {
 			popup.destroy();
 		});
-
+	
 		closeButton.on('pointerover', () => {
 			this.input.setDefaultCursor('pointer');
 		});
-
+	
 		closeButton.on('pointerout', () => {
 			this.input.setDefaultCursor('default');
 		});
-
-		popup.add([background, creditsText, closeButton]);
+	
+		popup.add([background, creditsText, developerText, developerLink, writerText, uiArtistText, musicText, closeButton]);
 	}
 
 	/* END-USER-CODE */
