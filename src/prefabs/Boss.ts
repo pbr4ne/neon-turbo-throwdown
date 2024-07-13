@@ -51,7 +51,7 @@ export default class Boss extends Team {
     
             if (assignedCard && assignedCard.getCardType().needsTarget()) {
                 const target = this.selectRandomMember(this.opponent.members);
-                member.setIntendedTarget(target);
+                member.setIntendedTarget(target, this);
             }
         });
     }

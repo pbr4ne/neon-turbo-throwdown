@@ -10,7 +10,6 @@ import Member from "./Member";
 import Team from "./Team";
 import FloatingObjectScript from "../script-nodes/ui/FloatingObjectScript";
 import { GameSteps } from '../throwdown/GameSteps';
-import Throwdown from "./Throwdown";
 /* END-USER-IMPORTS */
 
 export default class Player extends Team {
@@ -29,7 +28,6 @@ export default class Player extends Team {
 	/* START-USER-CODE */
 	public throwdownButton!: Phaser.GameObjects.Image;
     private selectedThrowMember: Member | null = null;
-    private targetArc: Phaser.GameObjects.Graphics | null = null;
     private currentMember: Member | null = null;
 
 	addMembers() {
@@ -102,8 +100,6 @@ export default class Player extends Team {
 
         if (this.currentMember) {
             this.currentMember.setIntendedTarget(enemy);
-            
-            this.drawTargetArc(this.currentMember, enemy);
 
             const allMembersHaveCards = this.members.every(member => member.getAssignedCard() != null);
             if (allMembersHaveCards) {
@@ -123,29 +119,9 @@ export default class Player extends Team {
             .every(member => member.getIntendedTarget() !== null);
     }
 
-    drawTargetArc(thrower: Member, target: Member) {
-        if (this.targetArc) {
-            this.targetArc.clear();
-        } else {
-            this.targetArc = this.scene.add.graphics();
-        }
-
-        const startX = thrower.x;
-        const startY = thrower.y;
-        const endX = target.x;
-        const endY = target.y;
-
-        this.targetArc.lineStyle(3, 0xffff00, 1);
-        this.targetArc.beginPath();
-
-        this.targetArc.moveTo(startX, startY);
-        this.targetArc.lineTo(endX, endY);
-        this.targetArc.strokePath();
-    }
-
     clearMembers() {
         super.clearMembers();
-        this.targetArc?.clear();
+        this.members.forEach(member => member.clearTargetArc());
     }
 
     getUnassignedMembers(): Member[] {
@@ -156,5 +132,3 @@ export default class Player extends Team {
 }
 
 /* END OF COMPILED CODE */
-
-// You can write more code here

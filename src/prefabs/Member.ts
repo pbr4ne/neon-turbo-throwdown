@@ -25,6 +25,7 @@ export default class Member extends Phaser.GameObjects.Container {
     private bracketDefaultLeft: Phaser.GameObjects.Image | null = null;
     private bracketDefaultRight: Phaser.GameObjects.Image | null = null;
     public assignedText: Phaser.GameObjects.Text | null = null;
+    private targetArc: Phaser.GameObjects.Graphics | null = null;
 
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string, visibleMove: boolean, team: Team, number: number, flip: boolean = false, bracketOffset: number = 0) {
         super(scene, x, y);
@@ -73,15 +74,58 @@ export default class Member extends Phaser.GameObjects.Container {
         return this.number;
     }  
 
-    setIntendedTarget(target: Member | null) {
+    setIntendedTarget(target: Member | null, boss?: Boss) {
         if (target) {
             console.log(`${this} targets ${target}`);
         }
         this.intendedTarget = target;
+        if (!boss || boss.getCoach().getDifficulty() === 1) {
+            this.drawTargetArc(target, boss);
+        }
     }
 
     getIntendedTarget(): Member | null {
         return this.intendedTarget;
+    }
+
+    drawTargetArc(target: Member | null, boss?: Boss) {
+        if (!target) {
+            this.clearTargetArc();
+            return;
+        }
+
+        if (this.targetArc) {
+            this.targetArc.clear();
+        } else {
+            this.targetArc = this.scene.add.graphics();
+        }
+
+        const startX = this.x;
+        const startY = this.y;
+        const endX = target.x;
+        const endY = target.y;
+
+        let lineColour = 0xffff00;
+        let offsetX = 0;
+        let offsetY = 0;
+
+        if (boss != null) {
+            lineColour = 0x00ffff;
+            offsetX = 10;
+            offsetY = 10;
+        }
+        this.targetArc.lineStyle(3, lineColour, 1);
+        this.targetArc.beginPath();
+
+        this.targetArc.moveTo(startX + offsetX, startY + offsetY);
+        this.targetArc.lineTo(endX + offsetX, endY + offsetY);
+        this.targetArc.strokePath();
+    }
+
+    clearTargetArc() {
+        if (this.targetArc) {
+            this.targetArc.clear();
+        }
     }
 
     assignCard(card: Card, boss?: Boss) {
@@ -161,6 +205,7 @@ export default class Member extends Phaser.GameObjects.Container {
 
     destroyMember() {
         this.team.removeMember(this);
+        this.clearTargetArc();
         this.destroy(); 
     }
 
