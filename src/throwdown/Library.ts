@@ -6,6 +6,7 @@ import { Evade } from "../cards/Evade";
 import { PlayerThrow } from "../cards/PlayerThrow";
 import { Throw } from "../cards/Throw";
 import { StorageManager } from "../utilities/StorageManager";
+import { OutstandingTrophyList } from "../trophies/OutstandingTrophyList";
 
 export class Library {
 
@@ -45,6 +46,7 @@ export class Library {
 
     public static setTrophyTypes(trophyTypes: TrophyType[]) {
         this.trophyTypes.push(...trophyTypes);
+        OutstandingTrophyList.removeTrophies(trophyTypes);
     }
 
     public static initializeLibrary() {

@@ -9,7 +9,7 @@ import Player from "./Player";
 import { TrophyType } from '../trophies/TrophyType';
 import { Library } from "../throwdown/Library";
 import Game from "../scenes/Game";
-import { TrophyList } from "../trophies/TrophyList";
+import { OutstandingTrophyList } from "../trophies/OutstandingTrophyList";
 import Trophy from "./Trophy";
 /* END-USER-IMPORTS */
 
@@ -48,7 +48,7 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
 	}
 
 	private cardRound() {
-		Phaser.Utils.Array.Shuffle(TrophyList.getTrophyTypes());
+		Phaser.Utils.Array.Shuffle(OutstandingTrophyList.getEligibleTrophyTypes());
 		this.currentTrophies = [];
 	
 		const positions = [
@@ -57,13 +57,13 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
 			{ x: 1162, y: 848 }
 		];
 	
-		TrophyList.getTrophyTypes().slice(0, 3).forEach((trophyType, index) => {
+		OutstandingTrophyList.getEligibleTrophyTypes().slice(0, 3).forEach((trophyType, index) => {
 			if (trophyType) {
 				this.currentTrophies.push(trophyType);
 				const trophy = new Trophy(this.scene, trophyType, positions[index].x, positions[index].y, "upgrade");
 				trophy.on('pointerdown', () => this.handleCardSelection(index + 1));
 				this.add(trophy);
-				TrophyList.removeTrophy(trophyType);
+				OutstandingTrophyList.removeTrophy(trophyType);
 			}
 		});
 	}
