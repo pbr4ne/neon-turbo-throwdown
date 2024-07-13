@@ -59,6 +59,7 @@ export default class Member extends Phaser.GameObjects.Container {
             align: 'center'
         });
         this.assignedText.setOrigin(0.5, 0.5);
+this.assignedText.setWordWrapWidth(100);
         this.add(this.assignedText);
 
         this.on('pointerover', () => { this.scene.input.setDefaultCursor('pointer'); });
