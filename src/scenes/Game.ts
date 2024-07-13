@@ -48,7 +48,6 @@ export default class Game extends Phaser.Scene {
 
 		this.dialogLayer = this.add.layer();
         this.dialogueStorage = new DialogueStorage();
-        //this.doRunUpgrade();
 
         this.player = new Player(this);
         Library.initializeLibrary();

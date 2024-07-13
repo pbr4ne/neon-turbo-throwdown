@@ -18,6 +18,27 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
 	constructor(scene: Phaser.Scene, player: Player) {
 		super(scene);
 
+		this.spiritCornerImage = this.scene.add.image(1625, 193, "coach-corner-spirit");
+
+		this.courtImage = this.scene.add.image(953, 443, "court-cyan");
+
+		this.coachName = new Phaser.GameObjects.Text(this.scene, 1720, 340, "spirit coach", {
+			fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
+			fontSize: '16px',
+			color: '#000000',
+            stroke: '#000000',
+            strokeThickness: 1,
+			padding: { x: 5, y: 5 },
+			align: 'left'
+		});
+		this.add(this.coachName);
+		this.coachName.setOrigin(0.5, 0.5);
+
+		this.spiritCoachImage = new Phaser.GameObjects.Image(scene, 1855, 78, "spirit")
+            .setOrigin(1, 0)
+            .setScale(1.2);
+        this.add(this.spiritCoachImage);
+
 		/* START-USER-CTR-CODE */
 		this.player = player;
 		
@@ -27,6 +48,8 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
         this.cardSlot2 = scene.add.image(960, 848, "empty");
         this.cardSlot3 = scene.add.image(1162, 848, "empty");
 
+		scene.add.existing(this);
+
 		this.cardRound();
 		/* END-USER-CTR-CODE */
 	}
@@ -34,6 +57,10 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
 	/* START-USER-CODE */
 
 	private player: Player;
+	private courtImage: Phaser.GameObjects.Image;
+	private spiritCornerImage: Phaser.GameObjects.Image;
+	private spiritCoachImage: Phaser.GameObjects.Image;
+	private coachName: Phaser.GameObjects.Text;
 	private cardSlot1!: Phaser.GameObjects.Image;
     private cardSlot2!: Phaser.GameObjects.Image;
     private cardSlot3!: Phaser.GameObjects.Image;
@@ -41,9 +68,13 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
     private currentTrophies: TrophyType[] = [];
 
 	destroyEverything() {
+		this.courtImage.destroy();
 		this.cardSlot1.destroy();
 		this.cardSlot2.destroy();
 		this.cardSlot3.destroy();
+		this.spiritCornerImage.destroy();
+		this.spiritCoachImage.destroy();
+		this.coachName.destroy();
 		this.selectCardImage?.destroy();
 	}
 
