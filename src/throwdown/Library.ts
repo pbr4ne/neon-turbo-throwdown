@@ -3,6 +3,7 @@ import { TrophyType } from "../trophies/TrophyType";
 import { Block } from "../cards/Block";
 import { Catch } from "../cards/Catch";
 import { Evade } from "../cards/Evade";
+import { PlayerThrow } from "../cards/PlayerThrow";
 import { Throw } from "../cards/Throw";
 
 export class Library {
@@ -28,10 +29,10 @@ export class Library {
 
     public static initializeLibrary() {
         this.cardTypes = [
-            new Throw(),
-            new Throw(),
-            new Throw(),
-            new Throw(),
+            new PlayerThrow(),
+            new PlayerThrow(),
+            new PlayerThrow(),
+            new PlayerThrow(),
             new Evade(),
             new Evade(),
             new Evade(),
@@ -39,5 +40,18 @@ export class Library {
             new Block(),
             new Catch()
         ];
+    }
+
+    private static cardTypeToPlayerCardTypeMap: Map<CardType, CardType> = new Map([
+        [new Throw(), new PlayerThrow()],
+    ]);
+
+    public static getPlayerCardType(cardType: CardType): CardType {
+        const playerCardType = this.cardTypeToPlayerCardTypeMap.get(cardType);
+        if (!playerCardType) {
+            console.log(`Player card type not found for ${cardType.constructor.name}`);
+            return cardType;
+        }
+        return playerCardType;
     }
 }

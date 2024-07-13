@@ -88,7 +88,8 @@ export default class RunUpgrade extends Phaser.GameObjects.Container {
 		const newCard = new Card(this.scene, this.currentCards[cardIndex-1], 0, 0, "front");
 		newCard.showName(false);
 		newCard.showIcon(false);
-		Library.addCardType(newCard.getCardType());
+		const newCardPlayerType = Library.getPlayerCardType(newCard.getCardType());
+		Library.addCardType(newCardPlayerType);
 		this.player.deck.addCard(newCard);
 
         // Draw the next set of cards
