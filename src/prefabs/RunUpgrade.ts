@@ -79,7 +79,7 @@ export default class RunUpgrade extends Phaser.GameObjects.Container {
 	}
 
 	private handleCardSelection(cardIndex: number) {
-		if (this.numDraws >= 3) {
+		if (this.numDraws > 3) {
 			console.log("No more draws allowed");
 			(this.scene.scene.get('Game') as Game).finishRunUpgrade()
 			return;
