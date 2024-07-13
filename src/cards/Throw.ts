@@ -24,7 +24,7 @@ export class Throw extends CardType {
             if (defenseSuccess) {
                 offenseSuccess = false;
             } else {
-                target.reduceHP(this.offenseDamage);
+                target.reduceHP(this.offenseDamage, member);
                 target.showFloatingAction(this.offenseDamage.toString());
                 offenseSuccess = true;
             }

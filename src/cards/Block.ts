@@ -18,7 +18,7 @@ export class Block extends CardType {
         if (Math.random() < Block.chanceToDefend) {
             member.showFloatingAction(this.getName());
             attacker.showFloatingAction(Block.defenseDamage.toString());
-            attacker.reduceHP(Block.defenseDamage);
+            attacker.reduceHP(Block.defenseDamage, attacker);
             return true;
         }
         return false;

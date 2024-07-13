@@ -18,7 +18,7 @@ export class Catch extends CardType {
         if (Math.random() < Catch.chanceToDefend) {
             member.showFloatingAction(this.getName());
             attacker.showFloatingAction(Catch.defenseDamage.toString());
-            attacker.reduceHP(Catch.defenseDamage);
+            attacker.reduceHP(Catch.defenseDamage, attacker);
             return true;
         }
         return false;

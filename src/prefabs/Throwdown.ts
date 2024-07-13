@@ -338,11 +338,11 @@ export default class Throwdown extends Phaser.GameObjects.Container {
         const instaKillBoss = checkUrlParam("instakill", "true");
         const instaKillPlayer = checkUrlParam("instadie", "true");
         if (instaKillBoss) {
-            this.boss.members.forEach(member => member.destroyMember());
+            this.boss.members.forEach(member => member.destroyMember(member));
         }
 
         if (instaKillPlayer) {
-            this.player.members.forEach(member => member.destroyMember());
+            this.player.members.forEach(member => member.destroyMember(member));
         }
 
         if (!instaKillBoss && !instaKillPlayer) {

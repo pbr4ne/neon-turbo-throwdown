@@ -111,15 +111,21 @@ export default class Member extends Phaser.GameObjects.Container {
 
         if (boss != null) {
             lineColour = 0x00ffff;
-            offsetX = 10;
+            offsetX = 10; 
             offsetY = 10;
         }
+    
+        const controlX = (startX + endX) / 2 + offsetX;
+        const controlY = Math.min(startY, endY) - 50 + offsetY;
+    
+        const curve = new Phaser.Curves.QuadraticBezier(
+            new Phaser.Math.Vector2(startX, startY),
+            new Phaser.Math.Vector2(controlX, controlY),
+            new Phaser.Math.Vector2(endX, endY)
+        );
+    
         this.targetArc.lineStyle(3, lineColour, 1);
-        this.targetArc.beginPath();
-
-        this.targetArc.moveTo(startX + offsetX, startY + offsetY);
-        this.targetArc.lineTo(endX + offsetX, endY + offsetY);
-        this.targetArc.strokePath();
+        curve.draw(this.targetArc);
     }
 
     clearTargetArc() {
@@ -172,11 +178,11 @@ export default class Member extends Phaser.GameObjects.Container {
         return this.hp;
     }
 
-    reduceHP(amount: number) {
+    reduceHP(amount: number, memberWhoTargeted: Member) {
         this.hp -= amount;
         if (this.hp <= 0) {
             this.hp = 0;
-            this.destroyMember();
+            this.destroyMember(memberWhoTargeted);
         }
     }
 
@@ -203,9 +209,10 @@ export default class Member extends Phaser.GameObjects.Container {
         });
     }
 
-    destroyMember() {
+    destroyMember(memberWhoTargeted: Member) {
         this.team.removeMember(this);
         this.clearTargetArc();
+        memberWhoTargeted.clearTargetArc();
         this.destroy(); 
     }
 
