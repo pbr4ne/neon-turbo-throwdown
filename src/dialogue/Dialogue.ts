@@ -37,6 +37,10 @@ export class DialogueConversation {
         this.steps.push(new DialogueStep(text, coach, nameOverride));
     }
 
+    public getSteps(): DialogueStep[] {
+        return this.steps;
+    }
+
     public getCurrentStep(): DialogueStep | null {
         if (this.currentStepIndex < this.steps.length) {
             return this.steps[this.currentStepIndex];

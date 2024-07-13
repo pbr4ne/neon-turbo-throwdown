@@ -1,14 +1,13 @@
-import { Throw } from "../cards/Throw";
 import { CardType } from "../cards/CardType";
-import { Block } from "../cards/Block";
-import { Catch } from "../cards/Catch";
-import { Evade } from "../cards/Evade";
+import { CoachDialogue } from "../dialogue/CoachDialogue";
+import { CoachList } from "./CoachList";
 
 export class Coach {
     private name: string;
     private avatar: string;
     private difficulty: number;
     private baseCards: CardType[];
+    private dialogue: CoachDialogue | undefined;
 
     constructor(name: string, avatar: string, difficulty: number, baseCards: CardType[]) {
         this.name = name;
@@ -33,154 +32,38 @@ export class Coach {
         return this.baseCards;
     }
 
+    public getDialogue(): CoachDialogue | undefined {
+        return this.dialogue;
+    }
+
+    public setDialogue(dialogue: CoachDialogue) {
+        this.dialogue = dialogue;
+    }
+    
     public getNextCoach(): Coach {
         switch (this.avatar) {
             case "primo":
-                return Coach.sporticus;
+                return CoachList.sporticus;
             case "sporticus":
-                return Coach.russ;
+                return CoachList.russ;
             case "russ":
-                return Coach.boss;
+                return CoachList.boss;
             case "boss":
-                return Coach.steve;
+                return CoachList.steve;
             case "steve":
-                return Coach.betsy;
+                return CoachList.betsy;
             case "betsy":
-                return Coach.coree;
+                return CoachList.coree;
             case "coree":
-                return Coach.turbo;
+                return CoachList.turbo;
             case "turbo":
-                return Coach.shadow;
+                return CoachList.shadow;
             case "shadow":
-                return Coach.boss10;
+                return CoachList.boss10;
             case "boss10":
-                return Coach.you;
+                return CoachList.you;
             default:
-                return Coach.you;
+                return CoachList.you;
         }
     }
-
-    public static you = new Coach("You", "you", 0, []);
-    public static coach = new Coach("Coach", "coach", 0, []);
-    public static spirit = new Coach("Spirit Coach", "spirit", 0, []);
-    public static primo = new Coach("Primo Firstman", "primo", 1, [
-        new Throw(),
-        new Throw(),
-        new Throw(),
-        new Throw(),
-        new Evade(),
-        new Evade(),
-        new Evade(),
-        new Block(),
-        new Block(),
-        new Catch()
-    ]);
-    public static sporticus = new Coach("Sporticus", "sporticus", 1, [
-        new Throw(),
-        new Throw(),
-        new Throw(),
-        new Throw(),
-        new Evade(),
-        new Evade(),
-        new Evade(),
-        new Block(),
-        new Block(),
-        new Catch()
-    ]);
-    public static russ = new Coach("Russ Tyler", "russ", 1, [
-        new Throw(),
-        new Throw(),
-        new Throw(),
-        new Throw(),
-        new Evade(),
-        new Evade(),
-        new Evade(),
-        new Block(),
-        new Block(),
-        new Catch()
-    ]);
-    public static boss = new Coach("The Boss", "boss", 2, [
-        new Throw(),
-        new Throw(),
-        new Throw(),
-        new Throw(),
-        new Evade(),
-        new Evade(),
-        new Evade(),
-        new Block(),
-        new Block(),
-        new Catch()
-    ]);
-    public static steve = new Coach("Sgt. Steve", "steve", 2, [
-        new Throw(),
-        new Throw(),
-        new Throw(),
-        new Throw(),
-        new Evade(),
-        new Evade(),
-        new Evade(),
-        new Block(),
-        new Block(),
-        new Catch()
-    ]);
-    public static betsy = new Coach("Betsy and the Nets", "betsy", 2, [
-        new Throw(),
-        new Throw(),
-        new Throw(),
-        new Throw(),
-        new Evade(),
-        new Evade(),
-        new Evade(),
-        new Block(),
-        new Block(),
-        new Catch()
-    ]);
-    public static coree = new Coach("C.O.R.E.E.", "coree", 3, [
-        new Throw(),
-        new Throw(),
-        new Throw(),
-        new Throw(),
-        new Evade(),
-        new Evade(),
-        new Evade(),
-        new Block(),
-        new Block(),
-        new Catch()
-    ]);
-    public static turbo = new Coach("Turbo Nerd", "turbo", 3, [
-        new Throw(),
-        new Throw(),
-        new Throw(),
-        new Throw(),
-        new Evade(),
-        new Evade(),
-        new Evade(),
-        new Block(),
-        new Block(),
-        new Catch()
-    ]);
-    public static shadow = new Coach("Shadow Ken", "shadow", 3, [
-        new Throw(),
-        new Throw(),
-        new Throw(),
-        new Throw(),
-        new Evade(),
-        new Evade(),
-        new Evade(),
-        new Block(),
-        new Block(),
-        new Catch()
-    ]);
-    public static boss10 = new Coach("Boss #10", "boss10", 4, [
-        new Throw(),
-        new Throw(),
-        new Throw(),
-        new Throw(),
-        new Evade(),
-        new Evade(),
-        new Evade(),
-        new Block(),
-        new Block(),
-        new Catch()
-    ]);
 }

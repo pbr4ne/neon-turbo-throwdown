@@ -7,14 +7,16 @@ import Phaser from "phaser";
 /* START-USER-IMPORTS */
 import Game from "../scenes/Game";
 import { DialogueConversation, DialogueStep } from "./Dialogue";
+import { Coach } from "../throwdown/Coach";
+import { DialogueStorage } from "./DialogueStorage";
 /* END-USER-IMPORTS */
 
 export default class DialogBox extends Phaser.GameObjects.Container {
 
-	constructor(scene: Phaser.Scene, x: number, y: number, dialogueConversation: DialogueConversation, dialogType: string) {
+	constructor(scene: Phaser.Scene, x: number, y: number, coach: Coach, dialogueType: string) {
 		super(scene, x ?? 960, y ?? 542);
 
-		this.dialogType = dialogType;
+		this.dialogueType = dialogueType;
 
 		// rectangle_1
 		const rectangle_1 = scene.add.rectangle(-7, 340, 128, 128);
@@ -25,17 +27,35 @@ export default class DialogBox extends Phaser.GameObjects.Container {
 		this.add(rectangle_1);
 
 		/* START-USER-CTR-CODE */
-		this.dialogueConversation = dialogueConversation as DialogueConversation;
-        if (dialogueConversation) {
-            this.generateDialogue(dialogueConversation);
+		this.dialogueConversation = DialogueStorage.missingDialogueConversation;
+
+		if (dialogueType === "intro") {
+			const convo = coach.getDialogue()?.getAndIncrementIntroDialogue();
+			if (convo != null) {
+				this.dialogueConversation = convo;
+			}
+		} else if (dialogueType === "win") {
+			const convo = coach.getDialogue()?.getAndIncrementWinDialogue();
+			if (convo != null) {
+				this.dialogueConversation = convo;
+			}
+		} else if (dialogueType === "lose") {
+			const convo = coach.getDialogue()?.getAndIncrementLoseDialogue();
+			if (convo != null) {
+				this.dialogueConversation = convo;
+			}
+		}		
+
+        if (this.dialogueConversation) {
+            this.generateDialogue();
         }
 		/* END-USER-CTR-CODE */
 	}
 
 	/* START-USER-CODE */
 
-	private dialogType: string;
-	private dialogueConversation: DialogueConversation;
+	private dialogueType: string;
+	private dialogueConversation!: DialogueConversation;
 	private dialogueText!: Phaser.GameObjects.Text;
 	private nextButton!: Phaser.GameObjects.Rectangle;
 	private buttonText!: Phaser.GameObjects.Text;
@@ -46,8 +66,8 @@ export default class DialogBox extends Phaser.GameObjects.Container {
 	private avatar!: Phaser.GameObjects.Image;
 	private avatarName!: Phaser.GameObjects.Text;
 
-	generateDialogue(dialogueConversation: DialogueConversation) {
-        var step = dialogueConversation.getCurrentStep();
+	generateDialogue() {
+        var step = this.dialogueConversation.getCurrentStep();
         
 		this.initializeTextAreas();
 
@@ -62,7 +82,7 @@ export default class DialogBox extends Phaser.GameObjects.Container {
 
 		if (!next) {
 			console.log("going to the next scene");
-			(this.scene.scene.get('Game') as Game).finishDialogue(this.dialogType);
+			(this.scene.scene.get('Game') as Game).finishDialogue(this.dialogueType);
 		} else {
 			console.log("rendering some more text");
 			this.renderText(step!);
@@ -85,7 +105,6 @@ export default class DialogBox extends Phaser.GameObjects.Container {
 		const text = step.getText();
 		this.avatar.setTexture(step.getCoach().getAvatar());
 		this.avatarName.setText(step.getNameOverride() ?? step.getCoach().getName());
-		console.log(step.getCoach().getName());
 
 		if (typeof text === 'string') {
 			this.dialogueText.setText(text);

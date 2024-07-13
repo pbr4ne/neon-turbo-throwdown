@@ -3,6 +3,7 @@
 import Phaser from "phaser";
 /* START-USER-IMPORTS */
 import { Coach } from "../throwdown/Coach";
+import { CoachList } from "../throwdown/CoachList";
 import DialogBox from "../dialogue/DialogBox";
 import Player from "../prefabs/Player";
 import { DialogueConversation } from "../dialogue/Dialogue";
@@ -38,7 +39,7 @@ export default class Game extends Phaser.Scene {
     private dialogueStorage!: DialogueStorage;
     private runUpgrade!: RunUpgrade;
     private permUpgrade!: PermUpgrade;
-    private currentCoach: Coach = Coach.primo;
+    private currentCoach: Coach = CoachList.primo;
     public throwdown!: Throwdown;
     private numRuns: number = 0;
 
@@ -46,12 +47,25 @@ export default class Game extends Phaser.Scene {
 		this.editorCreate();
 		this.dialogLayer = this.add.layer();
         this.dialogueStorage = new DialogueStorage();
-        this.doDialogue(this.dialogueStorage.introDialogue, "intro");
+        //this.doRunUpgrade();
+
+        CoachList.primo.setDialogue(DialogueStorage.primoDialogue);
+        CoachList.sporticus.setDialogue(DialogueStorage.sporticusDialogue);
+        CoachList.russ.setDialogue(DialogueStorage.russDialogue);
+        CoachList.boss.setDialogue(DialogueStorage.bossDialogue);
+        CoachList.steve.setDialogue(DialogueStorage.steveDialogue);
+        CoachList.betsy.setDialogue(DialogueStorage.betsyDialogue);
+        CoachList.coree.setDialogue(DialogueStorage.coreeDialogue);
+        CoachList.turbo.setDialogue(DialogueStorage.turboDialogue);
+        CoachList.shadow.setDialogue(DialogueStorage.shadowDialogue);
+        CoachList.boss10.setDialogue(DialogueStorage.boss10Dialogue);
+
+        this.doDialogue(this.currentCoach, "intro");
     }
 
-    doDialogue(dialogueConversation: DialogueConversation, type: string) {
+    doDialogue(coach: Coach, type: string) {
         
-        const dialog = new DialogBox(this, 960, 542, dialogueConversation, type);
+        const dialog = new DialogBox(this, 960, 542, coach, type);
 
         this.dialogBox = this.dialogLayer.add(dialog);
     }
@@ -76,11 +90,11 @@ export default class Game extends Phaser.Scene {
     }
 
     winThrowdown() {
-        this.doDialogue(this.dialogueStorage.primoWinDialogue, "win");
+        this.doDialogue(this.currentCoach, "win");
     }
 
     loseThrowdown() {
-        this.doDialogue(this.dialogueStorage.primoLoseDialogue, "lose");
+        this.doDialogue(this.currentCoach, "lose");
     }
 
     doRunUpgrade() {
