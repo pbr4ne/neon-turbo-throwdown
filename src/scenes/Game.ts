@@ -106,6 +106,8 @@ export default class Game extends Phaser.Scene {
             this.throwdown.destroy();
             this.doPermUpgrade();
         }
+
+        DialogueStorage.saveDialogues();
     }
 
     winThrowdown() {

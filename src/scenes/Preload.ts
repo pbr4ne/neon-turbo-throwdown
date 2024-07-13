@@ -10,6 +10,7 @@ import assetPackUrl from "../../static/assets/asset-pack.json";
 import WebFont from 'webfontloader';
 import { checkUrlParam } from "../utilities/GameUtils";
 import { StorageManager } from "../utilities/StorageManager";
+import { DialogueStorage } from "../dialogue/DialogueStorage";
 /* END-USER-IMPORTS */
 
 export default class Preload extends Phaser.Scene {
@@ -71,6 +72,7 @@ export default class Preload extends Phaser.Scene {
 			await StorageManager.initializeDB();
 			await StorageManager.loadTrophyTypes();
 			await StorageManager.loadRunCount();	
+			await DialogueStorage.loadDialogues();
 		}
 	}
 

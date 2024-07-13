@@ -3,6 +3,7 @@ import { Library } from '../throwdown/Library';
 import { TrophyType } from '../trophies/TrophyType';
 import { TurboThrow } from '../trophies/TurboThrow';
 import { UnknownTrophy } from '../trophies/UnknownTrophy';
+import { CoachDialogue } from '../dialogue/CoachDialogue';
 
 interface GameDB extends DBSchema {
     trophies: {
@@ -12,6 +13,15 @@ interface GameDB extends DBSchema {
     runs: {
         key: string;
         value: { key: string, count: number };
+    },
+    dialogues: {
+        key: string;
+        value: {
+            key: string;
+            currentIntroDialogue: number;
+            currentWinDialogue: number;
+            currentLoseDialogue: number;
+        };
     };
 }
 
@@ -26,13 +36,14 @@ export class StorageManager {
                 upgrade(db) {
                     db.createObjectStore('trophies', { keyPath: 'key' });
                     db.createObjectStore('runs', { keyPath: 'key' });
+                    db.createObjectStore('dialogues', { keyPath: 'key' });
                 },
             });
         }
     }
 
     public static async saveTrophyTypes(trophyTypes: TrophyType[]) {
-        await this.initializeDB();
+        //await this.initializeDB();
         if (this.db) {
             for (const trophyType of trophyTypes) {
                 console.log("saving trophy type to db", trophyType.getKey());
@@ -42,7 +53,7 @@ export class StorageManager {
     }
 
     public static async loadTrophyTypes(): Promise<TrophyType[]> {
-        await this.initializeDB();
+        //await this.initializeDB();
         if (this.db) {
             const trophyNames = await this.db.getAll('trophies');
             const trophyType = trophyNames.map(trophyStored => StorageManager.createTrophyType( trophyStored.key ));
@@ -66,7 +77,7 @@ export class StorageManager {
     }
 
     public static async saveRunCount(runCount: number) {
-        await this.initializeDB();
+        //await this.initializeDB();
         if (this.db) {
             console.log("saving run count to db", runCount);
             await this.db.put('runs', { key: 'runCount', count: runCount });
@@ -74,7 +85,7 @@ export class StorageManager {
     }
 
     public static async loadRunCount(): Promise<number> {
-        await this.initializeDB();
+        //await this.initializeDB();
         if (this.db) {
             const runData = await this.db.get('runs', 'runCount');
             console.log("loaded run count from db", runData);
@@ -83,5 +94,34 @@ export class StorageManager {
             return runCount;
         }
         return 0;
+    }
+
+    public static async saveDialogue(coachKey: string, coachDialogue: CoachDialogue) {
+        //await this.initializeDB();
+        if (this.db) {
+            console.log("saving dialogue to db", coachKey);
+            await this.db.put('dialogues', {
+                key: coachKey,
+                currentIntroDialogue: coachDialogue.getCurrentIntroDialogue(),
+                currentWinDialogue: coachDialogue.getCurrentWinDialogue(),
+                currentLoseDialogue: coachDialogue.getCurrentLoseDialogue()
+            });
+        }
+    }
+
+    public static async loadDialogue(coachKey: string): Promise<{ currentIntroDialogue: number, currentWinDialogue: number, currentLoseDialogue: number } | null> {
+        //await this.initializeDB();
+        if (this.db) {
+            const dialogueData = await this.db.get('dialogues', coachKey);
+            if (dialogueData) {
+                console.log("loaded coach dialogue from db", dialogueData);
+                return {
+                    currentIntroDialogue: dialogueData.currentIntroDialogue,
+                    currentWinDialogue: dialogueData.currentWinDialogue,
+                    currentLoseDialogue: dialogueData.currentLoseDialogue
+                };
+            }
+        }
+        return null;
     }
 }

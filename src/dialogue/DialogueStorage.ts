@@ -1,6 +1,7 @@
 import { CoachList } from '../throwdown/CoachList';
 import { CoachDialogue } from './CoachDialogue';
 import { DialogueConversation, DialogueStep } from './Dialogue';
+import { StorageManager } from '../utilities/StorageManager';
 
 export class DialogueStorage {
 
@@ -158,6 +159,41 @@ export class DialogueStorage {
                 console.log("Dialogue missing for " + coach + " Lose Dialogue");
             }
         });
+    }
+
+    private static dialogueMapping: { [key: string]: CoachDialogue } = {
+        primo: DialogueStorage.primoDialogue,
+        sporticus: DialogueStorage.sporticusDialogue,
+        russ: DialogueStorage.russDialogue,
+        boss: DialogueStorage.bossDialogue,
+        steve: DialogueStorage.steveDialogue,
+        betsy: DialogueStorage.betsyDialogue,
+        coree: DialogueStorage.coreeDialogue,
+        turbo: DialogueStorage.turboDialogue,
+        shadow: DialogueStorage.shadowDialogue,
+        boss10: DialogueStorage.boss10Dialogue,
+        missing: DialogueStorage.missingDialogue
+    };
+
+    public static async saveDialogues() {
+        for (const key in this.dialogueMapping) {
+            if (this.dialogueMapping.hasOwnProperty(key)) {
+                await StorageManager.saveDialogue(key, this.dialogueMapping[key]);
+            }
+        }
+    }
+
+    public static async loadDialogues() {
+        for (const key in this.dialogueMapping) {
+            if (this.dialogueMapping.hasOwnProperty(key)) {
+                const data = await StorageManager.loadDialogue(key);
+                if (data) {
+                    this.dialogueMapping[key].setCurrentIntroDialogue(data.currentIntroDialogue);
+                    this.dialogueMapping[key].setCurrentWinDialogue(data.currentWinDialogue);
+                    this.dialogueMapping[key].setCurrentLoseDialogue(data.currentLoseDialogue);
+                }
+            }
+        }
     }
 }
 
