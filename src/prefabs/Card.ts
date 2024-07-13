@@ -40,6 +40,7 @@ export default class Card extends Phaser.GameObjects.Container {
             align: 'center'
         });
         this.nameText.setOrigin(0.5, 0.5);
+        this.nameText.setWordWrapWidth(100);
         this.add(this.nameText);
 
         this.iconImage = new Phaser.GameObjects.Image(scene, 0, -30, this.cardType.getIcon());

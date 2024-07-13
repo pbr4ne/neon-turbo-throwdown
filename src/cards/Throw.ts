@@ -56,10 +56,16 @@ export class Throw extends CardType {
     }
 
     getName(): string {
+        if (Library.getTrophyTypes().some(trophy => trophy instanceof TurboThrow)) {
+            return "turbo throw";
+        }
         return "throw";
     }
 
     getIcon(): string {
+        if (Library.getTrophyTypes().some(trophy => trophy instanceof TurboThrow)) {
+            return "turbo-throw";
+        }
         return "throw";
     }
 

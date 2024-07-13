@@ -68,6 +68,10 @@ export default class DialogBox extends Phaser.GameObjects.Container {
 
 	generateDialogue() {
         var step = this.dialogueConversation.getCurrentStep();
+
+		if (step == null) {
+			step = DialogueStorage.missingDialogueStep;
+		}
         
 		this.initializeTextAreas();
 
