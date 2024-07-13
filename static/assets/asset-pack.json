@@ -263,6 +263,11 @@
                 "key": "sound2-on"
             },
             {
+                "url": "assets/images/level/spirit.png",
+                "type": "image",
+                "key": "spirit"
+            },
+            {
                 "url": "assets/images/level/sporticus.png",
                 "type": "image",
                 "key": "sporticus"
