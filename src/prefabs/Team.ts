@@ -143,7 +143,7 @@ export default abstract class Team extends Phaser.GameObjects.Container {
             const target = member.getIntendedTarget();
             if (target !== null && card != null) {
                 await this.pause(500); 
-                card.getCardType().offense(member, target); 
+                card.getCardType().offense(member, target, this, this.opponent); 
                 console.log(`OFFENSE: ${member} attacks ${target}`);
                 member.setIntendedTarget(null);             
             }

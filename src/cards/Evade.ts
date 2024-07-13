@@ -1,5 +1,6 @@
 import { CardType } from "./CardType";
 import Member from "../prefabs/Member";
+import Team from "../prefabs/Team";
 
 export class Evade extends CardType {
     private static chanceToDefend : number = 0.75;
@@ -8,11 +9,15 @@ export class Evade extends CardType {
         super("evade", "dodge");
     }
 
-    offense(member: Member, target: Member): boolean {
+    special(member: Member, team: Team, opponentTeam: Team): boolean {
         return false;
     }
 
-    defense(member: Member, attacker: Member): boolean {
+    offense(member: Member, target: Member, team: Team, opponentTeam: Team): boolean {
+        return false;
+    }
+
+    defense(member: Member, attacker: Member, team: Team, opponentTeam: Team): boolean {
         if (Math.random() < Evade.chanceToDefend) {
             member.showFloatingAction(this.getName());
             return true;

@@ -1,4 +1,5 @@
 import Member from "../prefabs/Member";
+import Team from "../prefabs/Team";
 
 export abstract class CardType {
     private name: string;
@@ -9,9 +10,11 @@ export abstract class CardType {
         this.icon = icon;
     }
 
-    abstract offense(member: Member, target: Member): boolean;
+    abstract special(member: Member, team: Team, opponentTeam: Team): boolean;
 
-    abstract defense(member: Member, attacker: Member): boolean;
+    abstract offense(member: Member, target: Member, team: Team, opponentTeam: Team): boolean;
+
+    abstract defense(member: Member, attacker: Member, team: Team, opponentTeam: Team): boolean;
 
     abstract needsTarget(): boolean;
 

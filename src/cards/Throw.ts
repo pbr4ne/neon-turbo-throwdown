@@ -1,5 +1,7 @@
 import { CardType } from "./CardType";
+import Boss from "../prefabs/Boss";
 import Member from "../prefabs/Member";
+import Player from "../prefabs/Player";
 
 export class Throw extends CardType {
     private static chanceToOffend : number = 0.75;
@@ -9,14 +11,18 @@ export class Throw extends CardType {
         super("throw", "throw");
     }
 
-    offense(member: Member, target: Member): boolean {
+    special(member: Member, player: Player, boss: Boss): boolean {
+        return false;
+    }
+
+    offense(member: Member, target: Member, player: Player, boss: Boss): boolean {
 
         var offenseSuccess = true;
         if (Math.random() < Throw.chanceToOffend) {
             var targetCard = target.getAssignedCard();
             var defenseSuccess = false;
             if (targetCard != null) {
-                defenseSuccess = targetCard.getCardType().defense(target, member);
+                defenseSuccess = targetCard.getCardType().defense(target, member, player, boss);
             }
             if (defenseSuccess) {
                 offenseSuccess = false;
@@ -32,8 +38,7 @@ export class Throw extends CardType {
         return offenseSuccess;        
     }
 
-    defense(member: Member, attacker: Member): boolean {
-        
+    defense(member: Member, attacker: Member, player: Player, boss: Boss): boolean {
         return false;
     }
 
