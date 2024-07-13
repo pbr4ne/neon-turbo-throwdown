@@ -69,7 +69,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
 		this.forfeitImage = this.scene.add.image(77, 243, "forfeit");
 
 		this.coachCornerImage = this.scene.add.image(1625, 193, "coach-corner");
-		this.difficultyImage = this.scene.add.image(1747, 411, "difficulty-1");
+		this.difficultyImage = this.scene.add.image(1747, 411, "difficulty-" + this.coach.getDifficulty() );
         this.cardSlot1 = this.scene.add.image(556, 848, "empty");
         this.cardSlot2 = this.scene.add.image(758, 848, "empty");
         this.cardSlot3 = this.scene.add.image(960, 848, "empty");
