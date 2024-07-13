@@ -8,6 +8,7 @@ import PreloadBarUpdaterScript from "../script-nodes/ui/PreloadBarUpdaterScript"
 /* START-USER-IMPORTS */
 import assetPackUrl from "../../static/assets/asset-pack.json";
 import WebFont from 'webfontloader';
+import { checkUrlParam } from "../GameUtils";
 /* END-USER-IMPORTS */
 
 export default class Preload extends Phaser.Scene {
@@ -67,9 +68,11 @@ export default class Preload extends Phaser.Scene {
 	}
 
 	create() {
-
-		this.scene.start("Welcome");
-		//this.scene.start("Game");
+		if (checkUrlParam("skipWelcome", "true")) {
+			this.scene.start("Game")
+		} else {
+			this.scene.start("Welcome");
+		}
 	}
 
 	/* END-USER-CODE */

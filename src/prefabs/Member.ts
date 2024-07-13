@@ -9,8 +9,7 @@ import Card from "./Card";
 import Team from "./Team";
 import Game from "../scenes/Game";
 import { GameSteps } from "../throwdown/GameSteps";
-import { CardType } from "../cards/CardType";
-import Throwdown from "./Throwdown";
+import { checkUrlParam } from "../GameUtils";
 /* END-USER-IMPORTS */
 
 export default class Member extends Phaser.GameObjects.Container {
@@ -39,6 +38,9 @@ export default class Member extends Phaser.GameObjects.Container {
 
         this.cardIcons = [];
         this.hp = 3;
+        if (checkUrlParam("lowHP","true")){
+            this.hp = 1;
+        }
         this.team = team;
         this.number = number;
         this.setSize(this.sprite.width, this.sprite.height);
@@ -59,7 +61,7 @@ export default class Member extends Phaser.GameObjects.Container {
             align: 'center'
         });
         this.assignedText.setOrigin(0.5, 0.5);
-this.assignedText.setWordWrapWidth(100);
+        this.assignedText.setWordWrapWidth(100);
         this.add(this.assignedText);
 
         this.on('pointerover', () => { this.scene.input.setDefaultCursor('pointer'); });

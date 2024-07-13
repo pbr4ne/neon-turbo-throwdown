@@ -12,6 +12,7 @@ import GameoverPrefab from "../prefabs/GameoverPrefab";
 import Game from '../scenes/Game';
 import { GameSteps } from '../throwdown/GameSteps';
 import { Library } from "../throwdown/Library";
+import { checkUrlParam } from "../GameUtils";
 /* END-USER-IMPORTS */
 
 export default class Throwdown extends Phaser.GameObjects.Container {
@@ -331,11 +332,20 @@ export default class Throwdown extends Phaser.GameObjects.Container {
         console.log("on EXECUTE TURN ACTIONS step");
         this.currentStep++;
 
-        //temp - instakill boss {
-        //this.boss.members.forEach(member => member.destroyMember());
+        const instaKillBoss = checkUrlParam("instakill", "true");
+        const instaKillPlayer = checkUrlParam("instadie", "true");
+        if (instaKillBoss) {
+            this.boss.members.forEach(member => member.destroyMember());
+        }
 
-        await this.player.executeTurn();
-        await this.boss.executeTurn();
+        if (instaKillPlayer) {
+            this.player.members.forEach(member => member.destroyMember());
+        }
+
+        if (!instaKillBoss && !instaKillPlayer) {
+            await this.player.executeTurn();
+            await this.boss.executeTurn();
+        }
 
         this.nextStep();
     }

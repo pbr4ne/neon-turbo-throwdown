@@ -1,5 +1,6 @@
 
 import { Coach } from '../throwdown/Coach'; 
+import { checkUrlParam } from '../GameUtils';
 
 export class DialogueStep {
     private text: string | string[];
@@ -49,6 +50,9 @@ export class DialogueConversation {
     }
 
     public nextStep(): DialogueStep | null {
+        if (checkUrlParam("skipDialogue", "true")) {
+            return null;
+        }
         if (this.currentStepIndex < this.steps.length - 1) {
             this.currentStepIndex++;
             return this.steps[this.currentStepIndex];
