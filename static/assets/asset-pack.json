@@ -165,6 +165,13 @@
                 "key": "front"
             },
             {
+                "url": [
+                    "assets/audio/hit.mp3"
+                ],
+                "type": "audio",
+                "key": "hit"
+            },
+            {
                 "url": "assets/images/welcome/logo.png",
                 "type": "image",
                 "key": "logo"
