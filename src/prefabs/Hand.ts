@@ -101,9 +101,9 @@ export default class Hand {
                 member.assignCard(this.poppedUpCard);
                 this.cards = this.cards.filter(card => card !== this.poppedUpCard);
                 this.cardsInPlay.push(this.poppedUpCard);
+                this.poppedUpCard.togglePopUp(); 
+                this.poppedUpCard = null;
             }
-            this.poppedUpCard.togglePopUp(); 
-            this.poppedUpCard = null;
         }
     }
 }
