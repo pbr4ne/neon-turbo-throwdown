@@ -5,10 +5,6 @@ import Team from "../prefabs/Team";
 export class Evade extends CardType {
     private static chanceToDefend : number = 0.75;
 
-    constructor() {
-        super("evade", "dodge");
-    }
-
     special(member: Member, team: Team, opponentTeam: Team): boolean {
         return false;
     }
@@ -27,5 +23,18 @@ export class Evade extends CardType {
 
     needsTarget(): boolean {
         return false;
+    }
+
+    getName(): string {
+        return "evade";
+    }
+
+    getIcon(): string {
+        return "dodge";
+    }
+
+    getDescription(): string {
+        const chancePercentage = (Evade.chanceToDefend * 100).toFixed(0); 
+        return `Evade 1 attack. ${chancePercentage}% effective.`;
     }
 }

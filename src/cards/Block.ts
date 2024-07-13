@@ -5,10 +5,6 @@ import Team from "../prefabs/Team";
 export class Block extends CardType {
     private static chanceToDefend : number = 0.50;
     private static defenseDamage: number = 1;
-    
-    constructor() {
-        super("block", "block");
-    }
 
     special(member: Member, team: Team, opponentTeam: Team): boolean {
         return false;
@@ -30,5 +26,18 @@ export class Block extends CardType {
 
     needsTarget(): boolean {
         return false;
+    }
+
+    getName(): string {
+        return "block";
+    }
+
+    getIcon(): string {
+        return "block";
+    }
+
+    getDescription(): string {
+        const chancePercentage = (Block.chanceToDefend * 100).toFixed(0); 
+        return `Block 1 attack. ${chancePercentage}% effective. If successful, rebound ${Block.defenseDamage} DMG.`;
     }
 }

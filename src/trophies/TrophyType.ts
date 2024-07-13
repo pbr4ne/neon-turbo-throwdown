@@ -1,24 +1,17 @@
-import Player from "../prefabs/Player";
-import { IncreaseDamage } from "./IncreaseDamage";
-import { IncreaseDefense } from "./IncreaseDefense";
-import { IncreaseHP } from "./IncreaseHP";
-
 export abstract class TrophyType {
     private name: string;
-    private icon: string;
+    private description: string;
 
-    constructor(name: string, icon: string) {
+    constructor(name: string, description: string) {
         this.name = name;
-        this.icon = icon;
+        this.description = description;
     }
-
-    abstract applyChanges(player: Player): void;
 
     public getName(): string {
         return this.name;
     }
 
-    public getIcon(): string {
-        return this.icon;
+    public getDescription(): string {
+        return this.description;
     }
 }

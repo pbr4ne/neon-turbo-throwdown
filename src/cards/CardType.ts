@@ -2,13 +2,6 @@ import Member from "../prefabs/Member";
 import Team from "../prefabs/Team";
 
 export abstract class CardType {
-    private name: string;
-    private icon: string;
-
-    constructor(name: string, icon: string) {
-        this.name = name;
-        this.icon = icon;
-    }
 
     abstract special(member: Member, team: Team, opponentTeam: Team): boolean;
 
@@ -18,11 +11,9 @@ export abstract class CardType {
 
     abstract needsTarget(): boolean;
 
-    public getName(): string {
-        return this.name;
-    }
+    abstract getName(): string;
 
-    public getIcon(): string {
-        return this.icon;
-    }
+    abstract getIcon(): string;
+
+    abstract getDescription(): string;
 }

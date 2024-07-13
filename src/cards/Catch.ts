@@ -6,10 +6,6 @@ export class Catch extends CardType {
     private static chanceToDefend : number = 0.50;
     private static defenseDamage: number = 3;
 
-    constructor() {
-        super("catch", "catch");
-    }
-
     special(member: Member, team: Team, opponentTeam: Team): boolean {
         return false;
     }
@@ -30,5 +26,18 @@ export class Catch extends CardType {
 
     needsTarget(): boolean {
         return false;
+    }
+
+    getName(): string {
+        return "catch";
+    }
+
+    getIcon(): string {
+        return "catch";
+    }
+
+    getDescription(): string {
+        const chancePercentage = (Catch.chanceToDefend * 100).toFixed(0); 
+        return `Catch 1 attack. ${chancePercentage}% effective. If successful, rebound ${Catch.defenseDamage} DMG.`;
     }
 }
