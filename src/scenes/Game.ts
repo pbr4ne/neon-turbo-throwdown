@@ -11,6 +11,7 @@ import RunUpgrade from "../prefabs/RunUpgrade";
 import PermUpgrade from "../prefabs/PermUpgrade";
 import Throwdown from "../prefabs/Throwdown";
 import { Library } from "../throwdown/Library";
+import { checkUrlParam } from "../utilities/GameUtils";
 /* END-USER-IMPORTS */
 
 export default class Game extends Phaser.Scene {
@@ -73,7 +74,12 @@ export default class Game extends Phaser.Scene {
         this.cardDescription.setWordWrapWidth(400);
 		this.dialogLayer.add(this.cardDescription);
 
-        this.doDialogue(this.currentCoach, "intro");
+        if (checkUrlParam("skipIntro", "true")) {
+            this.throwdown = new Throwdown(this, this.currentCoach, this.player);
+            this.player.setThrowdown(this.throwdown);
+        } else {
+            this.doDialogue(this.currentCoach, "intro");
+        }
     }
 
     setCardDescription(description: string) {
