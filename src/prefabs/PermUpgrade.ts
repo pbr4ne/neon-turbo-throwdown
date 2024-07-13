@@ -50,28 +50,22 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
 	private cardRound() {
 		Phaser.Utils.Array.Shuffle(TrophyList.getTrophyTypes());
 		this.currentTrophies = [];
-		const firstTrophy = TrophyList.getTrophyTypes()[0];
-		const secondTrophy = TrophyList.getTrophyTypes()[1];
-		const thirdTrophy = TrophyList.getTrophyTypes()[2];
-
-		if (firstTrophy) {
-            this.currentTrophies.push(firstTrophy);
-			const trophy = new Trophy(this.scene, firstTrophy, 758, 848, "upgrade");
-			trophy.on('pointerdown', () => this.handleCardSelection(1));
-			this.add(trophy);
-        }
-		if (secondTrophy) {
-			this.currentTrophies.push(secondTrophy);
-			const trophy = new Trophy(this.scene, secondTrophy, 960, 848, "upgrade");
-			trophy.on('pointerdown', () => this.handleCardSelection(2));
-			this.add(trophy);
-		}
-		if (thirdTrophy) {
-			this.currentTrophies.push(thirdTrophy);
-			const trophy = new Trophy(this.scene, thirdTrophy, 1162, 848, "upgrade");
-			trophy.on('pointerdown', () => this.handleCardSelection(3));
-			this.add(trophy);
-		}	
+	
+		const positions = [
+			{ x: 758, y: 848 },
+			{ x: 960, y: 848 },
+			{ x: 1162, y: 848 }
+		];
+	
+		TrophyList.getTrophyTypes().slice(0, 3).forEach((trophyType, index) => {
+			if (trophyType) {
+				this.currentTrophies.push(trophyType);
+				const trophy = new Trophy(this.scene, trophyType, positions[index].x, positions[index].y, "upgrade");
+				trophy.on('pointerdown', () => this.handleCardSelection(index + 1));
+				this.add(trophy);
+				TrophyList.removeTrophy(trophyType);
+			}
+		});
 	}
 
 	private handleCardSelection(cardIndex: number) {
