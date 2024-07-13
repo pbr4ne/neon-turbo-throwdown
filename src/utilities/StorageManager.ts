@@ -8,6 +8,10 @@ interface GameDB extends DBSchema {
     trophies: {
         key: string;
         value: { key: string };
+    },
+    runs: {
+        key: string;
+        value: { key: string, count: number };
     };
 }
 
@@ -21,6 +25,7 @@ export class StorageManager {
             this.db = await openDB<GameDB>(this.dbName, this.dbVersion, {
                 upgrade(db) {
                     db.createObjectStore('trophies', { keyPath: 'key' });
+                    db.createObjectStore('runs', { keyPath: 'key' });
                 },
             });
         }
@@ -58,5 +63,25 @@ export class StorageManager {
                 console.log(`Unknown trophy type: ${key}`);
                 return new UnknownTrophy();
         }
+    }
+
+    public static async saveRunCount(runCount: number) {
+        await this.initializeDB();
+        if (this.db) {
+            console.log("saving run count to db", runCount);
+            await this.db.put('runs', { key: 'runCount', count: runCount });
+        }
+    }
+
+    public static async loadRunCount(): Promise<number> {
+        await this.initializeDB();
+        if (this.db) {
+            const runData = await this.db.get('runs', 'runCount');
+            console.log("loaded run count from db", runData);
+            const runCount = runData ? runData.count : 0;
+            Library.setNumRuns(runCount);
+            return runCount;
+        }
+        return 0;
     }
 }

@@ -9,8 +9,22 @@ import { StorageManager } from "../utilities/StorageManager";
 
 export class Library {
 
+    private static numRuns = 0;
     private static cardTypes: CardType[] = [];
     private static trophyTypes: TrophyType[] = [];
+
+    public static getNumRuns() {
+        return this.numRuns;
+    }
+
+    public static incrementNumRuns() {
+        this.numRuns++;
+        StorageManager.saveRunCount(this.numRuns);
+    }
+
+    public static setNumRuns(numRuns: number) {
+        this.numRuns = numRuns;
+    }
 
     public static getCardTypes() {
         return this.cardTypes;

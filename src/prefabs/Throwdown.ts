@@ -366,6 +366,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
             
             console.log("Game over");
 
+            Library.incrementNumRuns();
             this.gameOverPrefab = new GameoverPrefab(this.scene, "FAILURE!");
             this.gameOverPrefab.setVisible(true);
             this.scene.add.existing(this.gameOverPrefab);
@@ -377,6 +378,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
 
             console.log("You win!");
 
+            Library.incrementNumRuns();
             this.gameOverPrefab = new GameoverPrefab(this.scene, "VICTORY!");
             this.gameOverPrefab.setVisible(true);
             this.scene.add.existing(this.gameOverPrefab);

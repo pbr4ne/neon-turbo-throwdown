@@ -68,7 +68,8 @@ export default class Preload extends Phaser.Scene {
 		this.load.pack("asset-pack", assetPackUrl);
 
 		await StorageManager.initializeDB();
-        await StorageManager.loadTrophyTypes();		
+        await StorageManager.loadTrophyTypes();
+		await StorageManager.loadRunCount();	
 	}
 
 	create() {
