@@ -53,7 +53,7 @@ export class Throw extends CardType {
 
     getDescription(): string {
         const chancePercentage = (this.getChanceToOffend() * 100).toFixed(0); 
-        return `${this.offenseDamage} DMG. ${chancePercentage}% effective.`;
+        return `${this.getOffenseDamage()} DMG. ${chancePercentage}% effective.`;
     }
 
     getChanceToOffend(): number {
