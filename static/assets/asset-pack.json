@@ -330,6 +330,11 @@
                 "key": "turbo-throw"
             },
             {
+                "url": "assets/images/cards/unknown.png",
+                "type": "image",
+                "key": "unknown"
+            },
+            {
                 "url": "assets/images/cards/upgrade.png",
                 "type": "image",
                 "key": "upgrade"
