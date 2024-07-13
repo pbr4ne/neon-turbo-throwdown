@@ -126,6 +126,8 @@ export default abstract class Team extends Phaser.GameObjects.Container {
             this.deck.addCard(freshCard);
         });
         this.discardPile.clear();
+        //log the size of the deck
+        console.log("CURRENT DECK SIZE AFTER RECOMBINE: " + this.deck.getCards().length);
     }
 
     clearMembers() {

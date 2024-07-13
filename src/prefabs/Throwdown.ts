@@ -316,7 +316,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
         this.currentStep++;
 
         this.showThrowdown();
-        // wait for user to click throwdown buton
+        // wait for user to click throwdown button
     }
 
     discardRemainingCards() {

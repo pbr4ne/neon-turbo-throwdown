@@ -45,9 +45,13 @@ export default class Game extends Phaser.Scene {
 
 	create() {
 		this.editorCreate();
+
 		this.dialogLayer = this.add.layer();
         this.dialogueStorage = new DialogueStorage();
         //this.doRunUpgrade();
+
+        this.player = new Player(this);
+        Library.initializeLibrary();
 
         CoachList.primo.setDialogue(DialogueStorage.primoDialogue);
         CoachList.sporticus.setDialogue(DialogueStorage.sporticusDialogue);
@@ -74,10 +78,9 @@ export default class Game extends Phaser.Scene {
         this.dialogBox.destroyEverything();
         this.dialogBox.destroy();
         if (type === "intro") {
-            this.player = new Player(this);
-            Library.initializeLibrary();
             this.throwdown = new Throwdown(this, this.currentCoach, this.player);
             this.player.setThrowdown(this.throwdown);
+            console.log("CURRENT DECK SIZE START OF THROWDOWN: " + this.player.deck.getCards().length);
 
         } else if (type === "win") {
             this.throwdown.destroy();
