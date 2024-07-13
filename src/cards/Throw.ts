@@ -3,7 +3,7 @@ import Boss from "../prefabs/Boss";
 import Member from "../prefabs/Member";
 import Player from "../prefabs/Player";
 import { Library } from "../throwdown/Library";
-import { TurboThrow } from "~/trophies/TurboThrow";
+import { TurboThrow } from "../trophies/TurboThrow";
 
 export class Throw extends CardType {
     private chanceToOffend : number = 0.75;
