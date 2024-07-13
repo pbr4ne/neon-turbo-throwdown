@@ -7,6 +7,7 @@ import Phaser from "phaser";
 /* START-USER-IMPORTS */
 import { CardType } from "../cards/CardType";
 import Game from "../scenes/Game";
+import Member from "./Member";
 /* END-USER-IMPORTS */
 
 export default class Card extends Phaser.GameObjects.Container {
@@ -14,6 +15,7 @@ export default class Card extends Phaser.GameObjects.Container {
     private cardImage: Phaser.GameObjects.Image;
     private ringSelectedImage: Phaser.GameObjects.Image;
     private ringAssignedImage: Phaser.GameObjects.Image;
+    private assignedMemberText: Phaser.GameObjects.Text;
     private nameText: Phaser.GameObjects.Text;
     private iconImage: Phaser.GameObjects.Image;
     private isPoppedUp: boolean;
@@ -30,6 +32,17 @@ export default class Card extends Phaser.GameObjects.Container {
         this.ringAssignedImage = new Phaser.GameObjects.Image(scene, 0, 0, 'ring-assigned');
         this.add(this.ringAssignedImage);
         this.ringAssignedImage.setVisible(false);
+
+        this.assignedMemberText = new Phaser.GameObjects.Text(scene, 30, -90, "", {
+            fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
+            fontSize: '24px',
+            color: '#000000',
+            padding: { x: 5, y: 5 },
+            align: 'center'
+        });
+        this.add(this.assignedMemberText);
+        this.assignedMemberText.setOrigin(0.5, 0.5);
+        this.assignedMemberText.setVisible(false);
 
         this.cardType = cardType;
 
@@ -65,6 +78,8 @@ export default class Card extends Phaser.GameObjects.Container {
     clearCard() {
         this.ringSelectedImage.setVisible(false);
         this.ringAssignedImage.setVisible(false);
+        this.assignedMemberText.setVisible(false);
+        this.assignedMemberText.setText("");
     }
 
     setTexture(texture: string) {
@@ -79,8 +94,10 @@ export default class Card extends Phaser.GameObjects.Container {
         this.iconImage.setVisible(visible);
     }
 
-    showAssignedRing() {
+    showAssignedRing(member: Member) {
         this.ringAssignedImage.setVisible(true);
+        this.assignedMemberText.setVisible(true);
+        this.assignedMemberText.setText(member.getNumber().toString());
     }
 
     togglePopUp() {

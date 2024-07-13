@@ -24,6 +24,8 @@ export default class Member extends Phaser.GameObjects.Container {
     private number: number;
     private bracketLeft: Phaser.GameObjects.Image | null = null;
     private bracketRight: Phaser.GameObjects.Image | null = null;
+    public assignedBlock: Phaser.GameObjects.Image | null = null;
+    public assignedBlockText: Phaser.GameObjects.Text | null = null;
     public assignedText: Phaser.GameObjects.Text | null = null;
     private targetArc: Phaser.GameObjects.Graphics | null = null;
 
@@ -54,6 +56,24 @@ export default class Member extends Phaser.GameObjects.Container {
         this.bracketRight.setFlipX(true);
         this.add(this.bracketLeft);
         this.add(this.bracketRight);
+
+        let assignedBlockX = -75;
+        if (flip) {
+            assignedBlockX = 75;
+        }
+        this.assignedBlock = new Phaser.GameObjects.Image(scene, assignedBlockX, 150 - bracketOffset, 'bracket-assigned-text-field');
+        this.add(this.assignedBlock);
+        this.assignedBlock.setVisible(false);
+
+        this.assignedBlockText = new Phaser.GameObjects.Text(scene, assignedBlockX, 150 - bracketOffset, "", {
+            fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
+            fontSize: '14px',
+            color: '#000000',
+            padding: { x: 5, y: 5 },
+            align: 'center'
+        });
+        this.assignedBlockText.setOrigin(0.5, 0.5);
+        this.add(this.assignedBlockText);
 
         this.assignedText = new Phaser.GameObjects.Text(scene, 0, 150 - bracketOffset, "", {
             fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
@@ -153,7 +173,7 @@ export default class Member extends Phaser.GameObjects.Container {
             return;
         }
         this.assignedCard = card;
-        card.showAssignedRing();
+        card.showAssignedRing(this);
         this.bracketLeft?.setTexture('bracket-assigned');
         this.bracketRight?.setTexture('bracket-assigned');
         
@@ -165,7 +185,11 @@ export default class Member extends Phaser.GameObjects.Container {
             }
             return;
         }
+
         this.assignedText?.setText(card.cardType.getName());
+        this.assignedBlock?.setVisible(true);
+        this.assignedBlockText?.setText(this.getNumber().toString());
+
         if (card.cardType.needsTarget()) {
             (this.scene.scene.get('Game') as Game).throwdown.nextStep();
         } else {
@@ -189,6 +213,8 @@ export default class Member extends Phaser.GameObjects.Container {
         this.assignedText?.setText("");
         this.bracketLeft?.setTexture('bracket-default');
         this.bracketRight?.setTexture('bracket-default');
+        this.assignedBlock?.setVisible(false);
+        this.assignedBlockText?.setText("");
     }
 
     getHP(): number {
@@ -234,11 +260,11 @@ export default class Member extends Phaser.GameObjects.Container {
     }
 
     enableGlow() {
-        this.sprite.setTint(0x00ff00);
+        //this.sprite.setTint(0x00ff00);
     }
 
     disableGlow() {
-        this.sprite.clearTint();
+        //this.sprite.clearTint();
     }
 
     toString(): string {
