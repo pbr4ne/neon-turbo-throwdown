@@ -38,10 +38,10 @@ export default class Welcome extends Phaser.Scene {
 		const playBtn = this.add.image(1000, 680, "start-button");
 
 		// music2_on
-		this.add.image(1720, 960, "music2-on");
+		const musicBtn = this.add.image(1720, 960, "music2-on");
 
 		// sound2_on
-		this.add.image(1840, 960, "sound2-on");
+		const soundBtn = this.add.image(1840, 960, "sound2-on");
 
 		const floatingObjectScript = new FloatingObjectScript(logo);
 		floatingObjectScript.offset = 5;
@@ -82,22 +82,68 @@ export default class Welcome extends Phaser.Scene {
 		// startGame_1 (prefab fields)
 		startGame_1.targetAction = startGameAction;
 
+		// onPointerDownScript_3
+		const onPointerDownScript_3 = new OnPointerDownScript(musicBtn);
+
+		// toggleMusicAction
+		const toggleMusicAction = new CallbackActionScript(onPointerDownScript_3);
+
+		// pushActionScript_1
+		const pushActionScript_1 = new PushActionScript(onPointerDownScript_3);
+
+		// musicSwitchImageAction
+		const musicSwitchImageAction = new SwitchImageActionScript(pushActionScript_1);
+
+		// onPointerDownScript_2
+		const onPointerDownScript_2 = new OnPointerDownScript(soundBtn);
+
+		// toggleEffectsAction
+		const toggleEffectsAction = new CallbackActionScript(onPointerDownScript_2);
+
+		// pushActionScript_3
+		const pushActionScript_3 = new PushActionScript(onPointerDownScript_2);
+
+		// soundSwitchImageAction
+		const soundSwitchImageAction = new SwitchImageActionScript(pushActionScript_3);
+
+		// toggleMusicAction (prefab fields)
+		toggleMusicAction.callback = () => GameSounds.toggleMusic();
+
+		// musicSwitchImageAction (prefab fields)
+		musicSwitchImageAction.onTexture = {"key":"music2-on","frame":"music2-on.png"};
+		musicSwitchImageAction.offTexture = {"key":"music2-off","frame":"music2-off.png"};
+		musicSwitchImageAction.isOn = true;
+		musicSwitchImageAction.mementoKey = "music";
+
+		// toggleEffectsAction (prefab fields)
+		toggleEffectsAction.callback = () => GameSounds.toggleEffects();
+
+		// soundSwitchImageAction (prefab fields)
+		soundSwitchImageAction.onTexture = {"key":"sound2-on","frame":"sound2-on.png"};
+		soundSwitchImageAction.offTexture = {"key":"sound2-off","frame":"sound2-off.png"};
+		soundSwitchImageAction.isOn = true;
+		soundSwitchImageAction.mementoKey = "effects";
+
+		this.musicSwitchImageAction = musicSwitchImageAction;
+		this.musicBtn = musicBtn;
+		this.soundSwitchImageAction = soundSwitchImageAction;
+		this.soundBtn = soundBtn;
+
 		this.events.emit("scene-awake");
 	}
 
 	/* START-USER-CODE */
+
+	private musicSwitchImageAction!: SwitchImageActionScript;
+	private musicBtn!: Phaser.GameObjects.Image;
+	private soundSwitchImageAction!: SwitchImageActionScript;
+	public soundBtn!: Phaser.GameObjects.Image;
 
 	create() {
 
 		this.editorCreate();
 
 		GameSounds.init(this);
-
-		// if (this.musicBtn && this.soundBtn) {
-
-		// 	this.musicSwitchImageAction.isOn = GameSounds.musicEnabled;
-		// 	this.soundSwitchImageAction.isOn = GameSounds.effectsEnabled;
-		// }
 	}
 
 	/* END-USER-CODE */

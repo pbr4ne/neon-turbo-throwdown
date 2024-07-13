@@ -194,6 +194,13 @@
                 "key": "music2-on"
             },
             {
+                "url": [
+                    "assets/audio/neon-turbo-throwdown-hard.mp3"
+                ],
+                "type": "audio",
+                "key": "neon-turbo-throwdown-hard"
+            },
+            {
                 "url": "assets/images/players/player1.png",
                 "type": "image",
                 "key": "player1"
