@@ -29,9 +29,24 @@
                 "key": "ball-yellow"
             },
             {
+                "url": "assets/images/level/betsy.png",
+                "type": "image",
+                "key": "betsy"
+            },
+            {
                 "url": "assets/images/cards/block.png",
                 "type": "image",
                 "key": "block"
+            },
+            {
+                "url": "assets/images/level/boss.png",
+                "type": "image",
+                "key": "boss"
+            },
+            {
+                "url": "assets/images/level/boss10.png",
+                "type": "image",
+                "key": "boss10"
             },
             {
                 "url": "assets/images/players/bracket-assigned.png",
@@ -75,9 +90,24 @@
                 "key": "coach-corner"
             },
             {
+                "url": "assets/images/game/coach-corner-spirit.png",
+                "type": "image",
+                "key": "coach-corner-spirit"
+            },
+            {
+                "url": "assets/images/level/coree.png",
+                "type": "image",
+                "key": "coree"
+            },
+            {
                 "url": "assets/images/game/court.png",
                 "type": "image",
                 "key": "court"
+            },
+            {
+                "url": "assets/images/game/court-cyan.png",
+                "type": "image",
+                "key": "court-cyan"
             },
             {
                 "url": "assets/images/game/difficulty-1.png",
@@ -192,6 +222,11 @@
                 "key": "ring-selected"
             },
             {
+                "url": "assets/images/level/russ.png",
+                "type": "image",
+                "key": "russ"
+            },
+            {
                 "url": "assets/images/game/score.png",
                 "type": "image",
                 "key": "score"
@@ -215,6 +250,11 @@
                 "url": "assets/images/instructions/select-trophy.png",
                 "type": "image",
                 "key": "select-trophy"
+            },
+            {
+                "url": "assets/images/level/shadow.png",
+                "type": "image",
+                "key": "shadow"
             },
             {
                 "url": "assets/images/welcome/sound2-off.png",
@@ -242,6 +282,11 @@
                 "key": "start-round"
             },
             {
+                "url": "assets/images/level/steve.png",
+                "type": "image",
+                "key": "steve"
+            },
+            {
                 "url": "assets/images/instructions/target-opponent.png",
                 "type": "image",
                 "key": "target-opponent"
@@ -266,6 +311,11 @@
                 "fontDataURL": "assets/fonts/turbo.xml",
                 "type": "bitmapFont",
                 "key": "turbo"
+            },
+            {
+                "url": "assets/images/level/turbo.png",
+                "type": "image",
+                "key": "turbo_1"
             },
             {
                 "url": "assets/images/cards/turbo-throw.png",
