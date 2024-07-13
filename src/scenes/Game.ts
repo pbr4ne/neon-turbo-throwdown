@@ -6,12 +6,13 @@ import { Coach } from "../throwdown/Coach";
 import { CoachList } from "../throwdown/CoachList";
 import DialogBox from "../dialogue/DialogBox";
 import Player from "../prefabs/Player";
-import { DialogueConversation } from "../dialogue/Dialogue";
 import { DialogueStorage } from "../dialogue/DialogueStorage";
 import RunUpgrade from "../prefabs/RunUpgrade";
 import PermUpgrade from "../prefabs/PermUpgrade";
 import Throwdown from "../prefabs/Throwdown";
 import { Library } from "../throwdown/Library";
+import { StorageManager } from "../utilities/StorageManager";
+import { TurboThrow } from "../trophies/TurboThrow";
 /* END-USER-IMPORTS */
 
 export default class Game extends Phaser.Scene {

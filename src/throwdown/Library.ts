@@ -5,6 +5,7 @@ import { Catch } from "../cards/Catch";
 import { Evade } from "../cards/Evade";
 import { PlayerThrow } from "../cards/PlayerThrow";
 import { Throw } from "../cards/Throw";
+import { StorageManager } from "../utilities/StorageManager";
 
 export class Library {
 
@@ -25,6 +26,11 @@ export class Library {
 
     public static addTrophyType(trophyType: TrophyType) {
         this.trophyTypes.push(trophyType);
+        StorageManager.saveTrophyTypes(this.trophyTypes);
+    }
+
+    public static setTrophyTypes(trophyTypes: TrophyType[]) {
+        this.trophyTypes.push(...trophyTypes);
     }
 
     public static initializeLibrary() {

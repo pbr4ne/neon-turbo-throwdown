@@ -9,6 +9,7 @@ import PreloadBarUpdaterScript from "../script-nodes/ui/PreloadBarUpdaterScript"
 import assetPackUrl from "../../static/assets/asset-pack.json";
 import WebFont from 'webfontloader';
 import { checkUrlParam } from "../utilities/GameUtils";
+import { StorageManager } from "../utilities/StorageManager";
 /* END-USER-IMPORTS */
 
 export default class Preload extends Phaser.Scene {
@@ -51,7 +52,7 @@ export default class Preload extends Phaser.Scene {
 
 	// Write your code here
 
-	preload() {
+	async preload() {
 
 		this.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js');
 

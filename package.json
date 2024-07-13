@@ -28,6 +28,7 @@
   "dependencies": {
     "@phaserjs/editor-scripts-core": "^2.0.0",
     "@phaserjs/editor-scripts-simple-animations": "^2.0.0",
+    "idb": "^8.0.0",
     "phaser": "^3.80.1",
     "webfontloader": "^1.6.28",
     "webpack-dev-server": "^4.15.2"
