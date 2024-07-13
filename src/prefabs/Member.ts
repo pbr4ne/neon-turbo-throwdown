@@ -9,7 +9,7 @@ import Card from "./Card";
 import Team from "./Team";
 import Game from "../scenes/Game";
 import { GameSteps } from "../throwdown/GameSteps";
-import { checkUrlParam } from "../GameUtils";
+import { checkUrlParam } from "../utilities/GameUtils";
 /* END-USER-IMPORTS */
 
 export default class Member extends Phaser.GameObjects.Container {

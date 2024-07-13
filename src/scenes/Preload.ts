@@ -8,7 +8,7 @@ import PreloadBarUpdaterScript from "../script-nodes/ui/PreloadBarUpdaterScript"
 /* START-USER-IMPORTS */
 import assetPackUrl from "../../static/assets/asset-pack.json";
 import WebFont from 'webfontloader';
-import { checkUrlParam } from "../GameUtils";
+import { checkUrlParam } from "../utilities/GameUtils";
 /* END-USER-IMPORTS */
 
 export default class Preload extends Phaser.Scene {
@@ -65,6 +65,9 @@ export default class Preload extends Phaser.Scene {
         }); 
 
 		this.load.pack("asset-pack", assetPackUrl);
+
+		await StorageManager.initializeDB();
+        await StorageManager.loadTrophyTypes();		
 	}
 
 	create() {

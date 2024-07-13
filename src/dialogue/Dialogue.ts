@@ -1,6 +1,6 @@
 
 import { Coach } from '../throwdown/Coach'; 
-import { checkUrlParam } from '../GameUtils';
+import { checkUrlParam } from '../utilities/GameUtils';
 
 export class DialogueStep {
     private text: string | string[];

@@ -12,7 +12,7 @@ import GameoverPrefab from "../prefabs/GameoverPrefab";
 import Game from '../scenes/Game';
 import { GameSteps } from '../throwdown/GameSteps';
 import { Library } from "../throwdown/Library";
-import { checkUrlParam } from "../GameUtils";
+import { checkUrlParam } from "../utilities/GameUtils";
 /* END-USER-IMPORTS */
 
 export default class Throwdown extends Phaser.GameObjects.Container {
