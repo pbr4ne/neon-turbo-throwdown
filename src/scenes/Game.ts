@@ -40,6 +40,7 @@ export default class Game extends Phaser.Scene {
     private runUpgrade!: RunUpgrade;
     private permUpgrade!: PermUpgrade;
     private currentCoach: Coach = CoachList.primo;
+    private cardDescription!: Phaser.GameObjects.Text;
     public throwdown!: Throwdown;
     private numRuns: number = 0;
 
@@ -64,7 +65,21 @@ export default class Game extends Phaser.Scene {
         CoachList.shadow.setDialogue(DialogueStorage.shadowDialogue);
         CoachList.boss10.setDialogue(DialogueStorage.boss10Dialogue);
 
+        this.cardDescription = new Phaser.GameObjects.Text(this, 1500, 740, "", {
+			fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
+			fontSize: '16px',
+			color: '#00ffff',
+			padding: { x: 5, y: 5 },
+			align: 'left'
+		});
+        this.cardDescription.setWordWrapWidth(400);
+		this.dialogLayer.add(this.cardDescription);
+
         this.doDialogue(this.currentCoach, "intro");
+    }
+
+    setCardDescription(description: string) {
+        this.cardDescription.setText(description);
     }
 
     doDialogue(coach: Coach, type: string) {
