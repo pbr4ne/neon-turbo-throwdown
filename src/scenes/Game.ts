@@ -108,8 +108,7 @@ export default class Game extends Phaser.Scene {
 
         this.currentCoach = this.currentCoach.getNextCoach();
 
-        this.throwdown = new Throwdown(this, this.currentCoach, this.player);
-        this.player.setThrowdown(this.throwdown);
+        this.doDialogue(this.currentCoach, "intro");
     }
 
     doPermUpgrade() {
