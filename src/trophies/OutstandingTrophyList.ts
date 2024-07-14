@@ -32,9 +32,9 @@ export class OutstandingTrophyList {
         new SeeCards1(),
         new SeeCards2(),
         new SeeCards3(),
-        new SeeTargets1(),
-        new SeeTargets2(),
-        new SeeTargets3(),
+        // new SeeTargets1(),
+        // new SeeTargets2(),
+        // new SeeTargets3(),
     ];
 
     public static getTrophyTypes() {
