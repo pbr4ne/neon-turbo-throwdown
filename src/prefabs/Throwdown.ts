@@ -12,7 +12,7 @@ import GameoverPrefab from "../prefabs/GameoverPrefab";
 import Game from '../scenes/Game';
 import { GameSteps } from '../throwdown/GameSteps';
 import { Library } from "../throwdown/Library";
-import { checkUrlParam, log } from "../utilities/GameUtils";
+import { checkUrlParam, getUrlParam, log } from "../utilities/GameUtils";
 import Card from "./Card";
 import { CoachList } from "../throwdown/CoachList";
 /* END-USER-IMPORTS */
@@ -339,17 +339,16 @@ export default class Throwdown extends Phaser.GameObjects.Container {
         log("on EXECUTE TURN ACTIONS step");
         this.currentStep++;
 
-        const instaKillBoss = checkUrlParam("instakill", "true");
-        const instaKillPlayer = checkUrlParam("instadie", "true");
-        if (instaKillBoss) {
+        const insta = getUrlParam("insta");
+        if (insta === "win") {
             this.boss.members.forEach(member => member.destroyMember(member));
         }
 
-        if (instaKillPlayer) {
+        if (insta === "lose") {
             this.player.members.forEach(member => member.destroyMember(member));
         }
 
-        if (!instaKillBoss && !instaKillPlayer) {
+        if (!insta) {
             await this.player.executeTurn();
             await this.boss.executeTurn();
         }
