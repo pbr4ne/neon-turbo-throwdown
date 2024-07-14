@@ -209,9 +209,6 @@ export default class Member extends Phaser.GameObjects.Container {
             return;
         }
         this.assignedCard = card;
-        card.showAssignedRing(this);
-        this.bracketLeft?.setTexture('bracket-assigned');
-        this.bracketRight?.setTexture('bracket-assigned');
         
         if (boss != null) {
             let visibleText = "???";
@@ -228,6 +225,9 @@ export default class Member extends Phaser.GameObjects.Container {
             return;
         }
 
+        card.showAssignedRing(this);
+        this.bracketLeft?.setTexture('bracket-assigned');
+        this.bracketRight?.setTexture('bracket-assigned');
         this.assignedText?.setText(card.cardType.getName());
         this.assignedBlock?.setVisible(true);
         this.assignedBlockText?.setText(card.getOrder().toString());
