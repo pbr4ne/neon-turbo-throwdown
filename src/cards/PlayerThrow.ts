@@ -27,10 +27,10 @@ export class PlayerThrow extends Throw {
 
     getIcon(): string {
         if (Library.getTrophyTypes().some(trophy => trophy instanceof UltraTurboThrow)) {
-            return "unknown";
+            return "throw-turbo-ultra";
         }
         if (Library.getTrophyTypes().some(trophy => trophy instanceof TurboThrow)) {
-            return "turbo-throw";
+            return "throw-turbo";
         }
         return "throw";
     }

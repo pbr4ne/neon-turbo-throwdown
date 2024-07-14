@@ -2,19 +2,29 @@
     "section1": {
         "files": [
             {
-                "url": "assets/images/cards/back.png",
-                "type": "image",
-                "key": "back"
-            },
-            {
                 "url": "assets/images/level/betsy.png",
                 "type": "image",
                 "key": "betsy"
             },
             {
+                "url": "assets/images/deck/black.png",
+                "type": "image",
+                "key": "black"
+            },
+            {
                 "url": "assets/images/cards/block.png",
                 "type": "image",
                 "key": "block"
+            },
+            {
+                "url": "assets/images/cards/block-turbo.png",
+                "type": "image",
+                "key": "block-turbo"
+            },
+            {
+                "url": "assets/images/cards/block-turbo-ultra.png",
+                "type": "image",
+                "key": "block-turbo-ultra"
             },
             {
                 "url": "assets/images/level/boss.png",
@@ -52,6 +62,16 @@
                 "key": "catch"
             },
             {
+                "url": "assets/images/cards/catch-turbo.png",
+                "type": "image",
+                "key": "catch-turbo"
+            },
+            {
+                "url": "assets/images/cards/catch-turbo-ultra.png",
+                "type": "image",
+                "key": "catch-turbo-ultra"
+            },
+            {
                 "url": "assets/images/level/coach.png",
                 "type": "image",
                 "key": "coach"
@@ -85,6 +105,11 @@
                 "url": "assets/images/game/court-cyan.png",
                 "type": "image",
                 "key": "court-cyan"
+            },
+            {
+                "url": "assets/images/deck/cyan.png",
+                "type": "image",
+                "key": "cyan"
             },
             {
                 "url": "assets/images/game/difficulty-1.png",
@@ -122,6 +147,11 @@
                 "key": "empty"
             },
             {
+                "url": "assets/images/deck/empty.png",
+                "type": "image",
+                "key": "empty_1"
+            },
+            {
                 "url": "assets/images/players/enemy1.png",
                 "type": "image",
                 "key": "enemy1"
@@ -137,6 +167,21 @@
                 "key": "enemy3"
             },
             {
+                "url": "assets/images/cards/evade.png",
+                "type": "image",
+                "key": "evade"
+            },
+            {
+                "url": "assets/images/cards/evade-turbo.png",
+                "type": "image",
+                "key": "evade-turbo"
+            },
+            {
+                "url": "assets/images/cards/evade-turbo-ultra.png",
+                "type": "image",
+                "key": "evade-turbo-ultra"
+            },
+            {
                 "url": "assets/images/game/forfeit.png",
                 "type": "image",
                 "key": "forfeit"
@@ -145,6 +190,41 @@
                 "url": "assets/images/cards/front.png",
                 "type": "image",
                 "key": "front"
+            },
+            {
+                "url": "assets/images/deck/front.png",
+                "type": "image",
+                "key": "front_1"
+            },
+            {
+                "url": "assets/images/cards/group-heal.png",
+                "type": "image",
+                "key": "group-heal"
+            },
+            {
+                "url": "assets/images/cards/group-heal-turbo.png",
+                "type": "image",
+                "key": "group-heal-turbo"
+            },
+            {
+                "url": "assets/images/cards/group-heal-turbo-ultra.png",
+                "type": "image",
+                "key": "group-heal-turbo-ultra"
+            },
+            {
+                "url": "assets/images/cards/heal.png",
+                "type": "image",
+                "key": "heal"
+            },
+            {
+                "url": "assets/images/cards/heal-turbo.png",
+                "type": "image",
+                "key": "heal-turbo"
+            },
+            {
+                "url": "assets/images/cards/heal-turbo-ultra.png",
+                "type": "image",
+                "key": "heal-turbo-ultra"
             },
             {
                 "url": [
@@ -157,6 +237,11 @@
                 "url": "assets/images/welcome/logo.png",
                 "type": "image",
                 "key": "logo"
+            },
+            {
+                "url": "assets/images/deck/magenta.png",
+                "type": "image",
+                "key": "magenta"
             },
             {
                 "url": [
@@ -208,14 +293,29 @@
                 "key": "primo"
             },
             {
+                "url": "assets/images/deck/red.png",
+                "type": "image",
+                "key": "red"
+            },
+            {
                 "url": "assets/images/cards/ring-assigned.png",
                 "type": "image",
                 "key": "ring-assigned"
             },
             {
+                "url": "assets/images/deck/ring-assigned.png",
+                "type": "image",
+                "key": "ring-assigned_1"
+            },
+            {
                 "url": "assets/images/cards/ring-selected.png",
                 "type": "image",
                 "key": "ring-selected"
+            },
+            {
+                "url": "assets/images/deck/ring-selected.png",
+                "type": "image",
+                "key": "ring-selected_1"
             },
             {
                 "url": "assets/images/level/russ.png",
@@ -298,6 +398,16 @@
                 "key": "throw"
             },
             {
+                "url": "assets/images/cards/throw-turbo.png",
+                "type": "image",
+                "key": "throw-turbo"
+            },
+            {
+                "url": "assets/images/cards/throw-turbo-ultra.png",
+                "type": "image",
+                "key": "throw-turbo-ultra"
+            },
+            {
                 "url": "assets/images/instructions/throwdown-button.png",
                 "type": "image",
                 "key": "throwdown-button"
@@ -306,6 +416,11 @@
                 "url": "assets/images/cards/tooltip.png",
                 "type": "image",
                 "key": "tooltip"
+            },
+            {
+                "url": "assets/images/deck/tooltip.png",
+                "type": "image",
+                "key": "tooltip_1"
             },
             {
                 "url": "assets/images/level/turbo.png",
@@ -328,9 +443,24 @@
                 "key": "upgrade"
             },
             {
+                "url": "assets/images/deck/upgrade.png",
+                "type": "image",
+                "key": "upgrade_1"
+            },
+            {
                 "url": "assets/images/welcome/view-credits.png",
                 "type": "image",
                 "key": "view-credits"
+            },
+            {
+                "url": "assets/images/deck/white.png",
+                "type": "image",
+                "key": "white"
+            },
+            {
+                "url": "assets/images/deck/yellow.png",
+                "type": "image",
+                "key": "yellow"
             },
             {
                 "url": "assets/images/level/you.png",

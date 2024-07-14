@@ -66,17 +66,16 @@ export class DialogueStorage {
         primoIntroDialogue1.addStep("I am Primo Firstman. Are you here to throwdown?", CoachList.primo, "???");
         primoIntroDialogue1.addStep(["What?"], CoachList.you);
         primoIntroDialogue1.addStep("In other words, are you asking for a CHALLENGE?", CoachList.primo);
-        primoIntroDialogue1.addStep(["Throwdown as in…fight?", "I'm just here for sick gains, bro", "Prepare to be TURBO THRASHED!"], CoachList.you);
+        primoIntroDialogue1.addStep(["Throwdown as in... fight?", "I'm just here for sick gains, bro", "Prepare to be TURBO THRASHED!"], CoachList.you);
         primoIntroDialogue1.addStep("Hahahahaha. Then prepare your team and let us BEGIN.", CoachList.primo);
-        primoIntroDialogue1.addStep("Hey kid, wait!", CoachList.coach);
-        primoIntroDialogue1.addStep(["Who?", "What?", "I'm 37"], CoachList.you);
-        primoIntroDialogue1.addStep("I know a rookie when I see one. Let me give you some pointers.", CoachList.coach);
+        // primoIntroDialogue1.addStep("Hey kid, wait!", CoachList.coach);
+        // primoIntroDialogue1.addStep(["Who?", "What?", "I'm 37"], CoachList.you);
+        // primoIntroDialogue1.addStep("I know a rookie when I see one. Let me give you some pointers.", CoachList.coach);
         //Win Dialogue Primo
         primoWinDialogue1.addStep("Waaaah! I got turbo-thrashed!", CoachList.primo);
         primoWinDialogue1.addStep(["More like Primo WORSTman", "Yayyyy can I go home now?"], CoachList.you);
         primoWinDialogue1.addStep("Ya did it, kid! Only 9 more gym bosses to go!", CoachList.coach);
         primoWinDialogue1.addStep(["Nine?", "I told you, I'm not a kid.", "TURBO-SLICED!!!!"], CoachList.you);
-        primoWinDialogue2.addStep("placeholder", CoachList.primo);
         //Lose Dialogue Primo
         //to add
     }

@@ -44,7 +44,7 @@ export default class Deck extends Phaser.GameObjects.Container {
         const offset = 5;
 
         this.cards.forEach((card, index) => {
-            card.setTexture("back");
+            card.setTexture("magenta");
             card.setPosition(x + index * offset, y + index * offset);
             this.add(card);
         });
