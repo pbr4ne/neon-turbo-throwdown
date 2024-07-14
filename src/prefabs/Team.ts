@@ -9,9 +9,9 @@ import Card from "./Card";
 import Deck from "./Deck";
 import Hand from "./Hand";
 import Member from "./Member";
-import Game from "../scenes/Game"
 import { GameSteps } from '../throwdown/GameSteps';
 import Throwdown from "./Throwdown";
+import Player from "./Player";
 /* END-USER-IMPORTS */
 
 export default abstract class Team extends Phaser.GameObjects.Container {
@@ -87,9 +87,8 @@ export default abstract class Team extends Phaser.GameObjects.Container {
         if (this.hand.getCards().length < 5) {
             const topCard = this.deck.drawCard();
             if (topCard) {
-                topCard.setTexture("front");
-                topCard.showName(this.visibleCards);
-                topCard.showIcon(this.visibleCards);
+                topCard.changeState(this instanceof Player ? "playerHand" : "bossHand");
+
                 this.hand.addCard(topCard);
                 topCard.off("pointerdown");
                 this.deck.updateTopCardInteraction();
@@ -105,24 +104,24 @@ export default abstract class Team extends Phaser.GameObjects.Container {
             const card = this.hand.getCards().pop();
             if (card) {
                 this.discardPile.addCard(card);
-                card.destroy();
+                card.changeState(this instanceof Player ? "playerDiscard" : "bossDiscard");
             }
         }
         while (this.hand.getCardsInPlay().length > 0) {
             const card = this.hand.getCardsInPlay().pop();
             if (card) {
                 this.discardPile.addCard(card);
-                card.destroy();
+                card.changeState(this instanceof Player ? "playerDiscard" : "bossDiscard");
             }
-        } 
+        }
+        this.discardPile.arrangeCardPositions(100, 840);
     }
 
     recombineDeck() {
         // todo - figure out how i don't have to recreate the cards
         this.discardPile.getCards().forEach(card => {
-            const freshCard = new Card(this.scene, card.getCardType(), 0, 0, "front");
-            freshCard.showName(false);
-            freshCard.showIcon(false);
+            const cardState = this instanceof Player ? "playerDeck" : "bossDeck";
+            const freshCard = new Card(this.scene, card.getCardType(), cardState, 0, 0, "front");
             this.deck.addCard(freshCard);
         });
         this.discardPile.clear();

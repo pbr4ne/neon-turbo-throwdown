@@ -6,6 +6,8 @@
 /* START-USER-IMPORTS */
 import Card from "./Card";
 import { CardType } from "../cards/CardType";
+import Team from "./Team";
+import Player from "./Player";
 /* END-USER-IMPORTS */
 
 export default class Deck extends Phaser.GameObjects.Container {
@@ -17,18 +19,18 @@ export default class Deck extends Phaser.GameObjects.Container {
         this.scene.add.existing(this);
     }
 
-    initializeStartingDeck(cardTypes: CardType[]) {
+    initializeDeck(cardTypes: CardType[], team: Team) {
         this.cards = [];
 
+        const cardState = team instanceof Player ? "playerDeck" : "bossDeck";
+
         cardTypes.forEach(cardType => {
-            const card = new Card(this.scene, cardType, 0, 0, "front");
-            card.showName(false);
-            card.showIcon(false);
+            const card = new Card(this.scene, cardType, cardState, 0, 0, "front");
             this.cards.push(card);
         });
 
         this.shuffle();
-        console.log("built deck");
+        console.log(`built ${cardState}`);
     }
 
     drawCard(): Card | undefined {
@@ -40,11 +42,16 @@ export default class Deck extends Phaser.GameObjects.Container {
         return this;
     }
 
-    renderDeck(x: number, y: number) {
+    hideDeck() {
+        this.cards.forEach(card => {
+            card.changeState("playerDeckHidden");
+        });
+    }
+
+    arrangeCardPositions(x: number, y: number) {
         const offset = 5;
 
         this.cards.forEach((card, index) => {
-            card.setTexture("magenta");
             card.setPosition(x + index * offset, y + index * offset);
             this.add(card);
         });

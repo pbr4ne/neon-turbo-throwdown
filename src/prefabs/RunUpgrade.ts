@@ -60,19 +60,19 @@ export default class RunUpgrade extends Phaser.GameObjects.Container {
 
         if (firstCard) {
             this.currentCards.push(firstCard);
-			const card = new Card(this.scene, firstCard, 758, 848, "front");
+			const card = new Card(this.scene, firstCard, "upgrade", 758, 848, "front");
 			card.on('pointerdown', () => this.handleCardSelection(1));
 			this.add(card);
         }
 		if (secondCard) {
 			this.currentCards.push(secondCard);
-			const card = new Card(this.scene, secondCard, 960, 848, "front");
+			const card = new Card(this.scene, secondCard, "upgrade", 960, 848, "front");
 			card.on('pointerdown', () => this.handleCardSelection(2));
 			this.add(card);
 		}
 		if (thirdCard) {
 			this.currentCards.push(thirdCard);
-			const card = new Card(this.scene, thirdCard, 1162, 848, "front");
+			const card = new Card(this.scene, thirdCard, "upgrade", 1162, 848, "front");
 			card.on('pointerdown', () => this.handleCardSelection(3));
 			this.add(card);
 		}	
@@ -85,9 +85,7 @@ export default class RunUpgrade extends Phaser.GameObjects.Container {
 			return;
 		}
 
-		const newCard = new Card(this.scene, this.currentCards[cardIndex-1], 0, 0, "front");
-		newCard.showName(false);
-		newCard.showIcon(false);
+		const newCard = new Card(this.scene, this.currentCards[cardIndex-1], "playerDeck", 0, 0, "front");
 		const newCardPlayerType = Library.getPlayerCardType(newCard.getCardType());
 		Library.addCardType(newCardPlayerType);
 		this.player.deck.addCard(newCard);

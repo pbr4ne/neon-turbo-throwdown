@@ -107,10 +107,10 @@ export default class Throwdown extends Phaser.GameObjects.Container {
 		this.playerLayer.add(this.player);
 		this.playerLayer.add(this.boss);
 
-        this.player.deck.initializeStartingDeck(Library.getCardTypes());
-        this.player.deck.renderDeck(100, 840);
+        this.player.deck.initializeDeck(Library.getCardTypes(), this.player);
+        this.player.deck.arrangeCardPositions(100, 840);
 
-        this.boss.deck.initializeStartingDeck(this.coach.getBaseCards());
+        this.boss.deck.initializeDeck(this.coach.getBaseCards(), this.boss);
 
         this.player.createEndTurnButton();
 
@@ -209,7 +209,6 @@ export default class Throwdown extends Phaser.GameObjects.Container {
     }
 
 	renderGym() {
-        //this.courtImage.setVisible(true);
         this.scoreImage.setVisible(true);
         this.forfeitImage.setVisible(true);
         this.coachCornerImage.setVisible(true);
@@ -362,6 +361,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
             this.hideAllInstructions();
             this.player.clearMembers();
             this.player.clearHand();
+            this.player.deck.hideDeck();
             this.boss.destroy();
         }
 
@@ -403,7 +403,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
 
         if (this.player.deck.getCards().length < 5) {
             this.player.recombineDeck();
-            this.player.deck.renderDeck(100, 840);
+            this.player.deck.arrangeCardPositions(100, 840);
         }
         if (this.boss.deck.getCards().length < 5) {
             this.boss.recombineDeck();

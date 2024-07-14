@@ -30,11 +30,8 @@ export default class Hand {
 
     addCard(card: Card) {
         if (this.cards.length < this.maxCards) {
-            card.setTexture("front");
-            card.showName(true);
-            card.showIcon(true);
             this.cards.push(card);
-            this.updateHandPositions();
+            this.arrangeCardPositions();
         }
     }
 
@@ -46,7 +43,7 @@ export default class Hand {
         return this.cardsInPlay;
     }
 
-    updateHandPositions() {
+    arrangeCardPositions() {
         const screenWidth = this.scene.scale.width;
         const screenHeight = this.scene.scale.height;
         const cardSpacing = 20;
@@ -62,6 +59,7 @@ export default class Hand {
     }
 
     handleCardClick(card: Card, members: Member[]) {
+        console.log(`Clicking on ${card.toString()}`);
         var currentStep = (this.scene.scene.get('Game') as Game).throwdown.getCurrentStep();
         if (currentStep !== GameSteps.SELECT_CARD) {
             console.log("Not in the right step to select a card");

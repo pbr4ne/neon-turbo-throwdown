@@ -18,20 +18,20 @@ export default class Card extends Phaser.GameObjects.Container {
     private assignedMemberText: Phaser.GameObjects.Text;
     private nameText: Phaser.GameObjects.Text;
     private iconImage: Phaser.GameObjects.Image;
-    private isPoppedUp: boolean;
+    private isPoppedUp: boolean = false;
+    private cardState: string;
 
-    constructor(scene: Phaser.Scene, cardType: CardType, x?: number, y?: number, texture?: string) {
+    constructor(scene: Phaser.Scene, cardType: CardType, cardState: string, x?: number, y?: number, texture?: string) {
         super(scene, x ?? 0, y ?? 0);
+
+        this.cardType = cardType;
+        this.cardState = cardState;
+
         this.cardImage = new Phaser.GameObjects.Image(scene, 0, 0, texture || "front");
-        this.add(this.cardImage);
 
         this.ringSelectedImage = new Phaser.GameObjects.Image(scene, 0, 0, 'ring-selected');
-        this.add(this.ringSelectedImage);
-        this.ringSelectedImage.setVisible(false);
-
         this.ringAssignedImage = new Phaser.GameObjects.Image(scene, 0, 0, 'ring-assigned');
-        this.add(this.ringAssignedImage);
-        this.ringAssignedImage.setVisible(false);
+        this.iconImage = new Phaser.GameObjects.Image(scene, 0, -30, this.cardType.getIcon());
 
         this.assignedMemberText = new Phaser.GameObjects.Text(scene, 30, -90, "", {
             fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
@@ -40,11 +40,7 @@ export default class Card extends Phaser.GameObjects.Container {
             padding: { x: 5, y: 5 },
             align: 'center'
         });
-        this.add(this.assignedMemberText);
         this.assignedMemberText.setOrigin(0.5, 0.5);
-        this.assignedMemberText.setVisible(false);
-
-        this.cardType = cardType;
 
         this.nameText = new Phaser.GameObjects.Text(scene, 0, 64, this.cardType.getName(), {
             fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
@@ -55,43 +51,88 @@ export default class Card extends Phaser.GameObjects.Container {
         });
         this.nameText.setOrigin(0.5, 0.5);
         this.nameText.setWordWrapWidth(100);
-        this.add(this.nameText);
-
-        this.iconImage = new Phaser.GameObjects.Image(scene, 0, -30, this.cardType.getIcon());
-        this.add(this.iconImage);
-
-        this.isPoppedUp = false;
 
         this.setSize(this.cardImage.width, this.cardImage.height);
         this.setInteractive(new Phaser.Geom.Rectangle(0, 0, this.cardImage.width, this.cardImage.height), Phaser.Geom.Rectangle.Contains);
 
-        this.on('pointerover', () => { 
-            this.scene.input.setDefaultCursor('pointer'); 
-            (this.scene.scene.get('Game') as Game).setCardDescription(this.cardType.getDescription());
-        });
-        this.on('pointerout', () => { 
-            this.scene.input.setDefaultCursor('default'); 
-            (this.scene.scene.get('Game') as Game).setCardDescription("");
-        });
+        this.add([this.cardImage, this.ringSelectedImage, this.ringAssignedImage, this.assignedMemberText, this.nameText, this.iconImage]);
+
+        this.renderForState();
+
+        
+    }
+
+    changeState(cardState: string): void {
+        this.cardState = cardState;
+        this.renderForState();
+    }
+
+    renderForState(): void {
+        this.clearCard();
+        console.log(`rendering for state: ${this.toString()}`);
+        switch (this.cardState) {
+            case "playerDeck":
+                this.setTexture("magenta");
+                this.cardImage.setVisible(true);
+                this.on('pointerover', () => { 
+                    this.scene.input.setDefaultCursor('pointer'); 
+                    (this.scene.scene.get('Game') as Game).setCardDescription(this.cardType.getDescription());
+                    console.log(`mouse over ${this.toString()}`)
+                });
+                this.on('pointerout', () => { 
+                    this.scene.input.setDefaultCursor('default'); 
+                    (this.scene.scene.get('Game') as Game).setCardDescription("");
+                });
+                break;
+            case "playerDeckHidden":
+            case "bossDeck":
+                break;
+            case "playerHand":
+                this.setTexture("front");
+                this.cardImage.setVisible(true);
+                this.nameText.setVisible(true);
+                this.iconImage.setVisible(true);
+                this.on('pointerover', () => { 
+                    this.scene.input.setDefaultCursor('pointer'); 
+                    (this.scene.scene.get('Game') as Game).setCardDescription(this.cardType.getDescription());
+                    console.log(`mouse over ${this.toString()}`)
+                });
+                this.on('pointerout', () => { 
+                    this.scene.input.setDefaultCursor('default'); 
+                    (this.scene.scene.get('Game') as Game).setCardDescription("");
+                });
+                break;
+            case "bossHand":
+                break;
+            case "playerDiscard":
+                this.off("pointerout");
+                this.off("pointerover");
+                this.off("pointerdown");
+                break;
+            case "bossDiscard":
+                break;
+            case "upgrade":
+                break;
+            default:
+                console.log(`unknown card state: ${this.cardState}`);
+                break;
+        }
     }
 
     clearCard() {
+        this.cardImage.setVisible(false);
+        this.nameText.setVisible(false);
+        this.iconImage.setVisible(false);
         this.ringSelectedImage.setVisible(false);
         this.ringAssignedImage.setVisible(false);
         this.assignedMemberText.setVisible(false);
         this.assignedMemberText.setText("");
+        this.off("pointerout");
+        this.off("pointerover");
     }
 
     setTexture(texture: string) {
         this.cardImage.setTexture(texture);
-    }
-
-    showName(visible: boolean) {
-        this.nameText.setVisible(visible);
-    }
-
-    showIcon(visible: boolean) {
-        this.iconImage.setVisible(visible);
     }
 
     showAssignedRing(member: Member) {
@@ -119,5 +160,9 @@ export default class Card extends Phaser.GameObjects.Container {
 
     getIconTexture(): string {
         return this.iconImage.texture.key;
+    }
+
+    toString(): string {
+        return `${this.cardState} (${this.cardType.getName()})`;
     }
 }

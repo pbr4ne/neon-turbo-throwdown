@@ -168,7 +168,6 @@ export default class Member extends Phaser.GameObjects.Container {
     }
 
     assignCard(card: Card, boss?: Boss) {
-        console.log("assigning card!");
         if (this.assignedCard != null) {
             return;
         }
