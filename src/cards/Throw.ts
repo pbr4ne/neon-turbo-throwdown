@@ -5,6 +5,7 @@ import Team from "../prefabs/Team";
 import { Coach } from "../throwdown/Coach";
 import { UltraTurboThrow } from "../trophies/card/UltraTurboThrow";
 import { TurboThrow } from "../trophies/card/TurboThrow";
+import { GameSounds } from "../GameSounds";
 
 
 export class Throw extends CardType {
@@ -37,6 +38,10 @@ export class Throw extends CardType {
         } else {
             member.showFloatingAction("miss");
             offenseSuccess = false;
+        }
+
+        if (offenseSuccess) {
+            GameSounds.playHit();
         }
         return offenseSuccess;        
     }
