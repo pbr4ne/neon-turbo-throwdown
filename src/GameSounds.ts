@@ -6,6 +6,7 @@ export class GameSounds {
     static effectsEnabled: boolean = true;
     static musicShouldBePlaying: boolean = true;
     static currentSongKey: string | null = null;
+    static fadeDuration: number = 1000; //ms
 
     static init(scene: Phaser.Scene) {
         if (GameSounds.hitSound) {
@@ -46,17 +47,35 @@ export class GameSounds {
             return;
         }
 
+        //fade out current song
         if (GameSounds.musicSound) {
-            GameSounds.musicSound.stop();
-            GameSounds.musicSound.destroy();
+            scene.tweens.add({
+                targets: GameSounds.musicSound,
+                volume: 0,
+                duration: GameSounds.fadeDuration,
+                onComplete: () => {
+                    GameSounds.musicSound.stop();
+                    GameSounds.musicSound.destroy();
+                    GameSounds.startNewSong(scene, newSongKey);
+                }
+            });
+        } else {
+            GameSounds.startNewSong(scene, newSongKey);
         }
+    }
 
+    static startNewSong(scene: Phaser.Scene, newSongKey: string) {
         GameSounds.musicSound = scene.sound.add(newSongKey) as Phaser.Sound.WebAudioSound;
         GameSounds.currentSongKey = newSongKey;
 
         if (GameSounds.musicShouldBePlaying) {
-            log("Playing music");
-            GameSounds.musicSound.play({ loop: true, volume: 0.2 });
+            GameSounds.musicSound.play({ loop: true, volume: 0 });
+            //fade in new song
+            scene.tweens.add({
+                targets: GameSounds.musicSound,
+                volume: 0.2,
+                duration: GameSounds.fadeDuration
+            });
         } else {
             log("Not playing music");
         }
