@@ -23,22 +23,24 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
 		this.courtImage = this.scene.add.image(953, 443, "court-cyan");
 		this.courtImage.setDepth(-10);
 
-		this.coachName = new Phaser.GameObjects.Text(this.scene, 1720, 340, "spirit coach", {
+		
+
+		this.spiritCoachImage = new Phaser.GameObjects.Image(scene, 1855, 78, "spirit")
+            .setOrigin(1, 0)
+            .setScale(1.2);
+        this.add(this.spiritCoachImage);
+
+		this.coachName = new Phaser.GameObjects.Text(this.scene, 1720, 340, "Turbovoid", {
 			fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
-			fontSize: '16px',
+			fontSize: '20px',
 			color: '#000000',
             stroke: '#000000',
             strokeThickness: 1,
 			padding: { x: 5, y: 5 },
 			align: 'left'
 		});
-		this.add(this.coachName);
+		this.scene.add.existing(this.coachName);
 		this.coachName.setOrigin(0.5, 0.5);
-
-		this.spiritCoachImage = new Phaser.GameObjects.Image(scene, 1855, 78, "spirit")
-            .setOrigin(1, 0)
-            .setScale(1.2);
-        this.add(this.spiritCoachImage);
 
 		/* START-USER-CTR-CODE */
 		this.player = player;
