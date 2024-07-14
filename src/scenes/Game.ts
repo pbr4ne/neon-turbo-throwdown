@@ -38,7 +38,7 @@ export default class Game extends Phaser.Scene {
     private dialogueStorage!: DialogueStorage;
     private runUpgrade!: RunUpgrade;
     private permUpgrade!: PermUpgrade;
-    private currentCoach: Coach = CoachList.boss10;
+    private currentCoach: Coach = CoachList.primo;
     private cardDescription!: Phaser.GameObjects.Text;
     public throwdown!: Throwdown;
     private numRuns: number = 0;
