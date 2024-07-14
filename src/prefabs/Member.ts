@@ -29,6 +29,7 @@ export default class Member extends Phaser.GameObjects.Container {
     private assignedCard: Card | null = null;
     private cardIcons: Phaser.GameObjects.Image[];
     private visibleMove: boolean = true;
+    private maxHP: number;
     private hp: number;
     private team: Team;
     private coach: Coach;
@@ -39,6 +40,7 @@ export default class Member extends Phaser.GameObjects.Container {
     public assignedBlock: Phaser.GameObjects.Image | null = null;
     public assignedBlockText: Phaser.GameObjects.Text | null = null;
     public assignedText: Phaser.GameObjects.Text | null = null;
+    private healthBar: Phaser.GameObjects.Graphics;
     private targetArc: Phaser.GameObjects.Graphics | null = null;
 
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string, visibleMove: boolean, team: Team, coach: Coach, number: number, flip: boolean = false, bracketOffset: number = 0) {
@@ -56,15 +58,15 @@ export default class Member extends Phaser.GameObjects.Container {
 
         this.cardIcons = [];
         this.hp = 3;
-        if (checkUrlParam("lowHP","true")){
+        if (checkUrlParam("lowHP", "true")) {
             this.hp = 1;
         } else if (this.getTrophyTypes().some(trophy => trophy instanceof IncreaseHP)) {
             this.hp++;
         }
+        this.maxHP = this.hp;
 
         log(`member has ${this.hp} hp`);
 
-        
         this.number = number;
         this.setSize(this.sprite.width, this.sprite.height);
 
@@ -107,6 +109,11 @@ export default class Member extends Phaser.GameObjects.Container {
         this.assignedText.setWordWrapWidth(100);
         this.add(this.assignedText);
 
+        this.healthBar = new Phaser.GameObjects.Graphics(scene);
+        this.add(this.healthBar);
+        this.healthBar.setVisible(false);
+        this.updateHealthBar();
+    
         this.on('pointerover', () => { 
             this.scene.input.setDefaultCursor('pointer'); 
             this.bracketLeft?.setTexture('bracket-hover');
@@ -127,6 +134,26 @@ export default class Member extends Phaser.GameObjects.Container {
     showAssignedStuff() {
         this.bracketLeft?.setVisible(true);
         this.bracketRight?.setVisible(true);
+        this.healthBar.setVisible(true);
+    }
+
+    updateHealthBar() {
+        const healthBarWidth = 50;
+        const healthBarHeight = 5;
+        const healthBarY = this.sprite.height / 2;
+        
+        this.healthBar.clear();
+
+        const currentHealthWidth = (this.hp / this.maxHP) * healthBarWidth;
+
+        this.healthBar.fillStyle(0xff0000, 1);
+        this.healthBar.fillRect(-healthBarWidth / 2, healthBarY, currentHealthWidth, healthBarHeight);
+
+        const capWidth = 2;
+        const capHeight = healthBarHeight + 2; 
+        this.healthBar.fillStyle(0xffffff, 1);
+        this.healthBar.fillRect(-healthBarWidth / 2 - capWidth, healthBarY - 1, capWidth, capHeight);
+        this.healthBar.fillRect(healthBarWidth / 2, healthBarY - 1, capWidth, capHeight);
     }
 
     getNumber(): number {
@@ -269,6 +296,7 @@ export default class Member extends Phaser.GameObjects.Container {
             this.hp = 0;
             this.destroyMember(memberWhoTargeted);
         }
+        this.updateHealthBar();
     }
 
     showFloatingAction(action: string) {
@@ -348,6 +376,7 @@ export default class Member extends Phaser.GameObjects.Container {
         this.assignedBlock?.setVisible(false);
         this.assignedBlockText?.setVisible(false);
         this.assignedText?.setVisible(false);
+        this.healthBar.setVisible(false);
     }
 
     getTrophyTypes(): TrophyType[] {
