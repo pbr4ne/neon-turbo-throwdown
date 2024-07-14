@@ -13,7 +13,6 @@ export class Throw extends CardType {
     }
 
     offense(member: Member, target: Member, team: Team, opponentTeam: Team): boolean {
-
         var offenseSuccess = true;
         if (Math.random() < this.chanceToOffend) {
             var targetCard = target.getAssignedCard();
@@ -24,8 +23,8 @@ export class Throw extends CardType {
             if (defenseSuccess) {
                 offenseSuccess = false;
             } else {
-                target.reduceHP(this.offenseDamage, member);
                 target.showFloatingAction(this.offenseDamage.toString());
+                target.reduceHP(this.offenseDamage, member);
                 offenseSuccess = true;
             }
         } else {
