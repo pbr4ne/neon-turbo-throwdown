@@ -8,6 +8,12 @@ import Phaser from "phaser";
 import { CardType } from "../cards/CardType";
 import Member from "./Member";
 import { log } from "../utilities/GameUtils";
+import { Library } from "../throwdown/Library";
+import { RedDeck } from "../trophies/RedDeck";
+import { BlackDeck } from "../trophies/BlackDeck";
+import { WhiteDeck } from "../trophies/WhiteDeck";
+import { YellowDeck } from "../trophies/YellowDeck";
+import { CyanDeck } from "../trophies/CyanDeck";
 /* END-USER-IMPORTS */
 
 export default class Card extends Phaser.GameObjects.Container {
@@ -81,12 +87,28 @@ export default class Card extends Phaser.GameObjects.Container {
         this.renderForState();
     }
 
+    getDeckBackTexture(): string {
+        if (Library.getTrophyTypes().some(trophy => trophy instanceof RedDeck)) {
+            return "red";
+        } else if (Library.getTrophyTypes().some(trophy => trophy instanceof BlackDeck)) {
+            return "black";
+        } else if (Library.getTrophyTypes().some(trophy => trophy instanceof WhiteDeck)) {
+            return "white";
+        } else if (Library.getTrophyTypes().some(trophy => trophy instanceof YellowDeck)) {
+            return "yellow";
+        } else if (Library.getTrophyTypes().some(trophy => trophy instanceof CyanDeck)) {
+            return "cyan";
+        } else {
+            return "magenta";
+        }
+    }
+
     renderForState(): void {
         this.clearCard();
         //log(`rendering for state: ${this.toString()}`);
         switch (this.cardState) {
             case "playerDeck":
-                this.setTexture("magenta");
+                this.setTexture(this.getDeckBackTexture());
                 this.cardImage.setVisible(true);
                 this.on('pointerover', () => { 
                     this.scene.input.setDefaultCursor('pointer'); 

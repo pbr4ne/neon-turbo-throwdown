@@ -3,6 +3,11 @@ import { IncreaseHP } from "./IncreaseHP";
 import { TrophyType } from "./TrophyType";
 import { Library } from "../throwdown/Library";
 import { UltraTurboThrow } from "./UltraTurboThrow";
+import { CyanDeck } from "./CyanDeck";
+import { YellowDeck } from "./YellowDeck";
+import { BlackDeck } from "./BlackDeck";
+import { RedDeck } from "./RedDeck";
+import { WhiteDeck } from "./WhiteDeck";
 
 export class OutstandingTrophyList {
 
@@ -10,6 +15,11 @@ export class OutstandingTrophyList {
         new TurboThrow(),
         new UltraTurboThrow(),
         new IncreaseHP(),
+        new CyanDeck(),
+        new YellowDeck(),
+        new WhiteDeck(),
+        new BlackDeck(),
+        new RedDeck()
     ];
 
     public static getTrophyTypes() {
