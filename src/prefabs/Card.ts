@@ -82,14 +82,14 @@ export default class Card extends Phaser.GameObjects.Container {
 
     renderForState(): void {
         this.clearCard();
-        console.log(`rendering for state: ${this.toString()}`);
+        //console.log(`rendering for state: ${this.toString()}`);
         switch (this.cardState) {
             case "playerDeck":
                 this.setTexture("magenta");
                 this.cardImage.setVisible(true);
                 this.on('pointerover', () => { 
                     this.scene.input.setDefaultCursor('pointer'); 
-                    console.log(`mouse over ${this.toString()}`)
+                   // console.log(`mouse over ${this.toString()}`)
                 });
                 this.on('pointerout', () => { 
                     this.scene.input.setDefaultCursor('default'); 
@@ -107,7 +107,7 @@ export default class Card extends Phaser.GameObjects.Container {
                     this.scene.input.setDefaultCursor('pointer'); 
                     this.tooltipImage.setVisible(true);
                     this.tooltipText.setVisible(true);
-                    console.log(`mouse over ${this.toString()}`)
+                    //console.log(`mouse over ${this.toString()}`)
                 });
                 this.on('pointerout', () => { 
                     this.scene.input.setDefaultCursor('default'); 
@@ -133,7 +133,7 @@ export default class Card extends Phaser.GameObjects.Container {
                     this.scene.input.setDefaultCursor('pointer'); 
                     this.tooltipImage.setVisible(true);
                     this.tooltipText.setVisible(true);
-                    console.log(`mouse over ${this.toString()}`)
+                    //console.log(`mouse over ${this.toString()}`)
                 });
                 this.on('pointerout', () => { 
                     this.scene.input.setDefaultCursor('default'); 

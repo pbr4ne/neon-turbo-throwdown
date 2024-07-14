@@ -20,6 +20,7 @@ export default class Deck extends Phaser.GameObjects.Container {
     }
 
     initializeDeck(cardTypes: CardType[], team: Team) {
+        console.log(cardTypes);
         this.cards = [];
 
         const cardState = team instanceof Player ? "playerDeck" : "bossDeck";
@@ -74,6 +75,7 @@ export default class Deck extends Phaser.GameObjects.Container {
     }
 
     addCard(card: Card) {
+        console.log(`adding card to deck: ${card.toString()}`);
         this.cards.push(card);
     }
 

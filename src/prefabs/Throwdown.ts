@@ -14,6 +14,7 @@ import { GameSteps } from '../throwdown/GameSteps';
 import { Library } from "../throwdown/Library";
 import { checkUrlParam } from "../utilities/GameUtils";
 import Card from "./Card";
+import { CoachList } from "../throwdown/CoachList";
 /* END-USER-IMPORTS */
 
 export default class Throwdown extends Phaser.GameObjects.Container {
@@ -108,7 +109,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
 		this.playerLayer.add(this.player);
 		this.playerLayer.add(this.boss);
 
-        this.player.deck.initializeDeck(Library.getCardTypes(), this.player);
+        this.player.deck.initializeDeck(CoachList.you.getBaseCards(), this.player);
         this.player.deck.arrangeCardPositions(100, 840);
 
         this.boss.deck.initializeDeck(this.coach.getBaseCards(), this.boss);
@@ -407,6 +408,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
         this.boss.clearMembers();
         this.player.clearHand();
         this.boss.clearHand();
+        Card.resetOrder();
 
         if (this.player.deck.getCards().length < 5) {
             this.player.recombineDeck();

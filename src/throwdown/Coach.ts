@@ -1,3 +1,4 @@
+import { TrophyType } from "../trophies/TrophyType";
 import { CardType } from "../cards/CardType";
 import { CoachDialogue } from "../dialogue/CoachDialogue";
 import { CoachList } from "./CoachList";
@@ -6,14 +7,14 @@ export class Coach {
     private name: string;
     private avatar: string;
     private difficulty: number;
-    private baseCards: CardType[];
+    private baseCards: CardType[] = [];
     private dialogue: CoachDialogue | undefined;
+    private trophyTypes: TrophyType[] = [];
 
-    constructor(name: string, avatar: string, difficulty: number, baseCards: CardType[]) {
+    constructor(name: string, avatar: string, difficulty: number) {
         this.name = name;
         this.avatar = avatar;
         this.difficulty = difficulty;
-        this.baseCards = baseCards;
     }
 
     public getName(): string {
@@ -32,12 +33,24 @@ export class Coach {
         return this.baseCards;
     }
 
+    public setBaseCards(baseCards: CardType[]) {
+        this.baseCards = baseCards;
+    }
+
     public getDialogue(): CoachDialogue | undefined {
         return this.dialogue;
     }
 
     public setDialogue(dialogue: CoachDialogue) {
         this.dialogue = dialogue;
+    }
+
+    public getTrophyTypes(): TrophyType[] {
+        return this.trophyTypes;
+    }
+
+    public setTrophyTypes(trophyTypes: TrophyType[]) {
+        this.trophyTypes = trophyTypes;
     }
     
     public getNextCoach(): Coach {
