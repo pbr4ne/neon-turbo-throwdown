@@ -1,12 +1,7 @@
-import { CardType } from "../cards/CardType";
 import { TrophyType } from "../trophies/TrophyType";
-import { Block } from "../cards/Block";
-import { Catch } from "../cards/Catch";
-import { Evade } from "../cards/Evade";
-import { Throw } from "../cards/Throw";
 import { StorageManager } from "../utilities/StorageManager";
 import { OutstandingTrophyList } from "../trophies/OutstandingTrophyList";
-import { CoachList } from "./CoachList";
+import { log } from "../utilities/GameUtils";
 
 export class Library {
 
@@ -31,7 +26,7 @@ export class Library {
     }
 
     public static addTrophyType(trophyType: TrophyType) {
-        console.log("Adding trophy type to player: " + trophyType.getName());
+        log("Adding trophy type to player: " + trophyType.getName());
         this.trophyTypes.push(trophyType);
         StorageManager.saveTrophyTypes(this.trophyTypes);
     }
