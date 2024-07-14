@@ -62,7 +62,7 @@ export default class Member extends Phaser.GameObjects.Container {
             this.hp++;
         }
 
-        console.log(`member has ${this.hp} hp`);
+        log(`member has ${this.hp} hp`);
 
         
         this.number = number;
