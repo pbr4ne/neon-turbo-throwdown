@@ -11,12 +11,16 @@ export class Coach {
     private dialogue: CoachDialogue | undefined;
     private trophyTypes: TrophyType[] = [];
     private isBoss = true;
+    private winPhrase: string;
+    private losePhrase: string;
 
-    constructor(name: string, avatar: string, difficulty: number, isBoss: boolean = true) {
+    constructor(name: string, avatar: string, difficulty: number, isBoss: boolean = true, winPhrase: string, losePhrase: string) {
         this.name = name;
         this.avatar = avatar;
         this.difficulty = difficulty;
         this.isBoss = isBoss;
+        this.winPhrase = winPhrase;
+        this.losePhrase = losePhrase
     }
 
     public getName(): string {
@@ -57,6 +61,14 @@ export class Coach {
 
     public getIsBoss(): boolean {
         return this.isBoss;
+    }
+
+    public getWinPhrase(): string {
+        return this.winPhrase;
+    }
+
+    public getLosePhrase(): string {
+        return this.losePhrase;
     }
     
     public getNextCoach(): Coach {
