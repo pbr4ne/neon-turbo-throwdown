@@ -65,7 +65,7 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
     private cardSlot2!: Phaser.GameObjects.Image;
     private cardSlot3!: Phaser.GameObjects.Image;
 	private selectCardImage: Phaser.GameObjects.Image | null = null;
-    private currentTrophies: TrophyType[] = [];
+    private trophiesToSelect: TrophyType[] = [];
 
 	destroyEverything() {
 		this.courtImage.destroy();
@@ -79,8 +79,8 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
 	}
 
 	private cardRound() {
-		Phaser.Utils.Array.Shuffle(OutstandingTrophyList.getEligibleTrophyTypes());
-		this.currentTrophies = [];
+		let eligibleTrophies = OutstandingTrophyList.getEligibleTrophyTypes();
+		this.trophiesToSelect = [];
 	
 		const positions = [
 			{ x: 758, y: 848 },
@@ -88,14 +88,15 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
 			{ x: 1162, y: 848 }
 		];
 	
-		if (OutstandingTrophyList.getEligibleTrophyTypes().length <= 0) {
+		if (eligibleTrophies.length <= 0) {
 			(this.scene.scene.get('Game') as Game).finishPermUpgrade();
 			return;
 		}
+		Phaser.Utils.Array.Shuffle(eligibleTrophies);
 
-		OutstandingTrophyList.getEligibleTrophyTypes().slice(0, 3).forEach((trophyType, index) => {
+		eligibleTrophies.slice(0, 3).forEach((trophyType, index) => {
 			if (trophyType) {
-				this.currentTrophies.push(trophyType);
+				this.trophiesToSelect.push(trophyType);
 				const trophy = new Trophy(this.scene, trophyType, positions[index].x, positions[index].y, "upgrade");
 				trophy.on('pointerdown', () => this.handleCardSelection(index + 1));
 				this.add(trophy);
@@ -105,7 +106,7 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
 
 	private handleCardSelection(cardIndex: number) {
 	
-		const trophyType = this.currentTrophies[cardIndex-1]
+		const trophyType = this.trophiesToSelect[cardIndex-1]
 		Library.addTrophyType(trophyType);
 		OutstandingTrophyList.removeTrophy(trophyType);
         (this.scene.scene.get('Game') as Game).finishPermUpgrade();
