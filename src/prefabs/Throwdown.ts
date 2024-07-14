@@ -368,6 +368,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
             this.player.hideMembers();
             this.boss.clearHand();
             this.player.deck.hideDeck();
+            this.player.discardPile.clear();
             this.boss.destroy();
             Card.resetOrder();
         }

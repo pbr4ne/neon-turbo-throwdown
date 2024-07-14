@@ -79,4 +79,8 @@ export class Coach {
                 return CoachList.you;
         }
     }
+
+    public toString(): string {
+        return `Coach: ${this.name}`;
+    }
 }

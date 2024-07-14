@@ -36,4 +36,8 @@ export abstract class CardType {
 
         return  [];
     }
+
+    toString(): string {
+        return `CardType: ${this.getName()} ${this.coach}`;
+    }
 }

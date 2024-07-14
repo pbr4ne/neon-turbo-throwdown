@@ -78,30 +78,34 @@ export default abstract class Team extends Phaser.GameObjects.Container {
         while (this.hand.getCards().length > 0) {
             const card = this.hand.getCards().pop();
             if (card) {
-                this.discardPile.addCard(card);
                 card.changeState(this instanceof Player ? "playerDiscard" : "bossDiscard");
+                this.discardPile.addCard(card);
+                
             }
         }
         while (this.hand.getCardsInPlay().length > 0) {
             const card = this.hand.getCardsInPlay().pop();
             if (card) {
-                this.discardPile.addCard(card);
                 card.changeState(this instanceof Player ? "playerDiscard" : "bossDiscard");
+                this.discardPile.addCard(card);
             }
         }
-        log(`CURRENT ${this} DECK SIZE AFTER CLEAR HAND: ${this.deck.getCards().length}`);
+        log(`CURRENT ${this} DISCARD PILE SIZE AFTER CLEAR HAND: ${this.discardPile.getCards().length}`);
         this.discardPile.arrangeCardPositions(100, 840);
     }
 
     recombineDeck() {
         // todo - figure out how i don't have to recreate the cards
-        this.discardPile.getCards().forEach(card => {
-            const cardState = this instanceof Player ? "playerDeck" : "bossDeck";
-            const freshCard = new Card(this.scene, card.getCardType(), cardState, 0, 0, "front");
-            this.deck.addCard(freshCard);
-        });
-        this.discardPile.clear();
+        while (this.discardPile.getCards().length > 0) {
+            const card = this.discardPile.getCards().pop();
+            if (card) {
+                const cardState = this instanceof Player ? "playerDeck" : "bossDeck";
+                const freshCard = new Card(this.scene, card.getCardType(), cardState, 0, 0, "front");
+                this.deck.addCard(freshCard);
+            }
+        }
         //log the size of the deck
+        log(`CURRENT ${this} DISCARD PILE SIZE AFTER RECOMBINE: ${this.discardPile.getCards().length}`);
         log(`CURRENT ${this} DECK SIZE AFTER RECOMBINE: ${this.deck.getCards().length}`);
     }
 

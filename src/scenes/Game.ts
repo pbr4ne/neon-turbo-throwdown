@@ -99,6 +99,7 @@ export default class Game extends Phaser.Scene {
             this.throwdown = new Throwdown(this, this.currentCoach, this.player);
             this.player.setThrowdown(this.throwdown);
             log("CURRENT DECK SIZE START OF THROWDOWN: " + this.player.deck.getCards().length);
+            log("CURRENT DISCARD PILE SIZE START OF THROWDOWN: " + this.player.discardPile.getCards().length);
 
         } else if (type === "win") {
             this.throwdown.destroy();
