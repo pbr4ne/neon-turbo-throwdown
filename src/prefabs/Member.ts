@@ -112,7 +112,7 @@ export default class Member extends Phaser.GameObjects.Container {
 
     getNumber(): number {
         return this.number;
-    }  
+    }
 
     setIntendedTarget(target: Member | null, boss?: Boss) {
         if (target) {
@@ -194,7 +194,7 @@ export default class Member extends Phaser.GameObjects.Container {
 
         this.assignedText?.setText(card.cardType.getName());
         this.assignedBlock?.setVisible(true);
-        this.assignedBlockText?.setText(this.getNumber().toString());
+        this.assignedBlockText?.setText(card.getOrder().toString());
 
         if (card.cardType.needsTarget()) {
             (this.scene.scene.get('Game') as Game).throwdown.nextStep();
@@ -272,14 +272,6 @@ export default class Member extends Phaser.GameObjects.Container {
         this.assignedBlock?.setVisible(false);
         this.assignedBlockText?.setVisible(false);
         this.assignedText?.setVisible(false);
-    }
-
-    enableGlow() {
-        //this.sprite.setTint(0x00ff00);
-    }
-
-    disableGlow() {
-        //this.sprite.clearTint();
     }
 
     toString(): string {

@@ -21,6 +21,8 @@ export default class Card extends Phaser.GameObjects.Container {
     private tooltipImage: Phaser.GameObjects.Image;
     private isPoppedUp: boolean = false;
     private cardState: string;
+    private order: number = 1;
+    private static currentOrder: number = 1;
 
     constructor(scene: Phaser.Scene, cardType: CardType, cardState: string, x?: number, y?: number, texture?: string) {
         super(scene, x ?? 0, y ?? 0);
@@ -165,7 +167,7 @@ export default class Card extends Phaser.GameObjects.Container {
     showAssignedRing(member: Member) {
         this.ringAssignedImage.setVisible(true);
         this.assignedMemberText.setVisible(true);
-        this.assignedMemberText.setText(member.getNumber().toString());
+        this.assignedMemberText.setText(this.getOrder().toString());
     }
 
     togglePopUp() {
@@ -191,5 +193,30 @@ export default class Card extends Phaser.GameObjects.Container {
 
     toString(): string {
         return `${this.cardState} (${this.cardType.getName()})`;
+    }
+
+    getOrder(): number {
+        console.log(`getting order: ${this.order}`);
+        return this.order;
+    }
+
+    getNextOrder(): number {
+        console.log(`getting next order: ${Card.currentOrder}`);
+        return Card.currentOrder++;
+    }
+
+    incrementOrder() {
+        Card.currentOrder = Card.currentOrder++;
+        console.log(`incremented order: ${Card.currentOrder}`);
+    }
+
+    static resetOrder(): void {
+        console.log(`resetting order`);
+        Card.currentOrder = 1;
+    }
+
+    setOrder(order: number) {
+        this.order = order;
+        console.log(`setting order: ${this.order}`);
     }
 }

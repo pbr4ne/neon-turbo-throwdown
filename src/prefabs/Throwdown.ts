@@ -13,6 +13,7 @@ import Game from '../scenes/Game';
 import { GameSteps } from '../throwdown/GameSteps';
 import { Library } from "../throwdown/Library";
 import { checkUrlParam } from "../utilities/GameUtils";
+import Card from "./Card";
 /* END-USER-IMPORTS */
 
 export default class Throwdown extends Phaser.GameObjects.Container {
@@ -368,6 +369,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
             this.boss.clearHand();
             this.player.deck.hideDeck();
             this.boss.destroy();
+            Card.resetOrder();
         }
 
         if (this.player.members.length === 0) {

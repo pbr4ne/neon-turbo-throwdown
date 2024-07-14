@@ -76,6 +76,9 @@ export default class Hand {
             return;
         }
 
+        card.setOrder(card.getNextOrder());
+        card.incrementOrder();
+
         if (this.poppedUpCard) {
             this.poppedUpCard.togglePopUp();
             if (this.poppedUpCard === card) {

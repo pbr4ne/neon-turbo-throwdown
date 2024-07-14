@@ -27,7 +27,6 @@ export default class Player extends Team {
 
 	/* START-USER-CODE */
 	public throwdownButton!: Phaser.GameObjects.Image;
-    private selectedThrowMember: Member | null = null;
     private currentMember: Member | null = null;
 
 	addMembers() {
@@ -80,7 +79,6 @@ export default class Player extends Team {
         var currentStep = this.throwdown.getCurrentStep();
 
         if (currentStep == GameSteps.SELECT_PLAYER_MEMBER) {
-            super.handleMemberClick(member);
 
             this.hand.assignCardToMember(member);
 
@@ -110,8 +108,6 @@ export default class Player extends Team {
             console.log("can't click on enemy now");
             return;
         }
-
-        super.handleMemberClick(enemy);
 
         if (this.currentMember) {
             this.currentMember.setIntendedTarget(enemy);
