@@ -19,6 +19,9 @@ import { IncreaseHP } from "../trophies/member/IncreaseHP";
 import { SeeCards1 } from "../trophies/member/SeeCards1";
 import { SeeCards2 } from "../trophies/member/SeeCards2";
 import { SeeCards3 } from "../trophies/member/SeeCards3";
+import { SeeTargets1 } from "../trophies/member/SeeTargets1";
+import { SeeTargets2 } from "../trophies/member/SeeTargets2";
+import { SeeTargets3 } from "../trophies/member/SeeTargets3";
 /* END-USER-IMPORTS */
 
 export default class Member extends Phaser.GameObjects.Container {
@@ -135,8 +138,19 @@ export default class Member extends Phaser.GameObjects.Container {
             log(`${this} targets ${target}`);
         }
         this.intendedTarget = target;
-        if (!boss || boss.getCoach().getDifficulty() === 1) {
+        if (!boss) {
             this.drawTargetArc(target, boss);
+        } else {
+            if (boss.getCoach().getDifficulty() === 1) {
+                this.drawTargetArc(target, boss);
+            } else if (boss.getCoach().getDifficulty() === 2 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeTargets1)) {
+                this.drawTargetArc(target, boss);
+            } else if (boss.getCoach().getDifficulty() === 3 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeTargets2)) {
+                this.drawTargetArc(target, boss);
+            } else if (boss.getCoach().getDifficulty() === 4 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeTargets3)) {
+                this.drawTargetArc(target, boss);
+            }
+            return;
         }
     }
 
@@ -200,19 +214,17 @@ export default class Member extends Phaser.GameObjects.Container {
         this.bracketRight?.setTexture('bracket-assigned');
         
         if (boss != null) {
+            let visibleText = "???";
             if (boss.getCoach().getDifficulty() === 1) {
-                this.assignedText?.setText(card.cardType.getName());
-            } else{
-                let visibleText = "???";
-                if (boss.getCoach().getDifficulty() === 2 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeCards1)) {
-                    visibleText = card.cardType.getName();
-                } else if (boss.getCoach().getDifficulty() === 3 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeCards2)) {
-                    visibleText = card.cardType.getName();
-                } else if (boss.getCoach().getDifficulty() === 4 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeCards3)) {
-                    visibleText = card.cardType.getName();
-                }
-                this.assignedText?.setText(visibleText);
+                visibleText = card.cardType.getName();
+            } else if (boss.getCoach().getDifficulty() === 2 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeCards1)) {
+                visibleText = card.cardType.getName();
+            } else if (boss.getCoach().getDifficulty() === 3 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeCards2)) {
+                visibleText = card.cardType.getName();
+            } else if (boss.getCoach().getDifficulty() === 4 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeCards3)) {
+                visibleText = card.cardType.getName();
             }
+            this.assignedText?.setText(visibleText);
             return;
         }
 
