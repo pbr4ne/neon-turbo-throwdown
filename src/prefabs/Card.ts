@@ -141,6 +141,7 @@ export default class Card extends Phaser.GameObjects.Container {
                     this.tooltipImage.setVisible(false);
                     this.tooltipText.setVisible(false);
                 });
+                break;
             default:
                 log(`unknown card state: ${this.cardState}`);
                 break;
