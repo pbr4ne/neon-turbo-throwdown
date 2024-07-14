@@ -393,11 +393,6 @@
                 "key": "tooltip"
             },
             {
-                "url": "assets/images/cards/turbo-throw.png",
-                "type": "image",
-                "key": "turbo-throw"
-            },
-            {
                 "url": "assets/images/cards/unknown.png",
                 "type": "image",
                 "key": "unknown"
