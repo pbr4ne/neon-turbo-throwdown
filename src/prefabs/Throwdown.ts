@@ -85,9 +85,14 @@ export default class Throwdown extends Phaser.GameObjects.Container {
 
 		this.playerLayer = this.scene.add.layer();
 
-        this.coachName = new Phaser.GameObjects.Text(this.scene, 1720, 340, this.coach.getName(), {
+        let fontSize = "18px";
+        if (this.coach == CoachList.betsy) {
+            fontSize = "16px";
+        }
+
+        this.coachName = new Phaser.GameObjects.Text(this.scene, 1740, 340, this.coach.getName(), {
 			fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
-			fontSize: '16px',
+			fontSize,
 			color: '#000000',
             stroke: '#000000',
             strokeThickness: 1,
