@@ -105,6 +105,8 @@ export default class Card extends Phaser.GameObjects.Container {
 
     renderForState(): void {
         this.clearCard();
+        this.scene.children.remove(this);
+        this.scene.children.add(this);
         //log(`rendering for state: ${this.toString()}`);
         switch (this.cardState) {
             case "playerDeck":
