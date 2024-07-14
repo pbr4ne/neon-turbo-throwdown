@@ -21,6 +21,7 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
 		this.spiritCornerImage = this.scene.add.image(1625, 193, "coach-corner-spirit");
 
 		this.courtImage = this.scene.add.image(953, 443, "court-cyan");
+		this.courtImage.setDepth(-10);
 
 		this.coachName = new Phaser.GameObjects.Text(this.scene, 1720, 340, "spirit coach", {
 			fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
