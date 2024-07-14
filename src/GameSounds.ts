@@ -37,7 +37,7 @@ export class GameSounds {
 
     static playHit() {
         if (GameSounds.effectsEnabled && GameSounds.hitSound) {
-            GameSounds.hitSound.play();
+            GameSounds.hitSound.play({ volume: 0.2});
         }
     }
 
