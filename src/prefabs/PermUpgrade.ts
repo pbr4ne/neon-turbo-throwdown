@@ -49,6 +49,8 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
         this.cardSlot2 = scene.add.image(960, 848, "empty");
         this.cardSlot3 = scene.add.image(1162, 848, "empty");
 
+		this.pointerImage = this.scene.add.image(1300, 850, "pointer");
+
 		scene.add.existing(this);
 
 		this.cardRound();
@@ -66,6 +68,7 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
     private cardSlot2!: Phaser.GameObjects.Image;
     private cardSlot3!: Phaser.GameObjects.Image;
 	private selectCardImage: Phaser.GameObjects.Image | null = null;
+	private pointerImage: Phaser.GameObjects.Image | null = null;
     private trophiesToSelect: TrophyType[] = [];
 
 	destroyEverything() {
@@ -77,6 +80,7 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
 		this.spiritCoachImage.destroy();
 		this.coachName.destroy();
 		this.selectCardImage?.destroy();
+		this.pointerImage?.destroy();
 	}
 
 	private cardRound() {
