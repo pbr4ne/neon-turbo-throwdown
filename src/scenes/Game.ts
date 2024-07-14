@@ -38,7 +38,7 @@ export default class Game extends Phaser.Scene {
     private dialogueStorage!: DialogueStorage;
     private runUpgrade!: RunUpgrade;
     private permUpgrade!: PermUpgrade;
-    private currentCoach: Coach = CoachList.primo;
+    private currentCoach: Coach = CoachList.boss10;
     private cardDescription!: Phaser.GameObjects.Text;
     public throwdown!: Throwdown;
     private numRuns: number = 0;
@@ -52,7 +52,6 @@ export default class Game extends Phaser.Scene {
         this.player = new Player(this);
         this.player.addMembers();
         CoachList.setupCoachDecks();
-        //Library.initializeLibrary();
 
         CoachList.primo.setDialogue(DialogueStorage.primoDialogue);
         CoachList.sporticus.setDialogue(DialogueStorage.sporticusDialogue);

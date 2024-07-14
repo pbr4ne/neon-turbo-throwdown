@@ -1,5 +1,4 @@
 import { TurboThrow } from "./card/TurboThrow";
-import { IncreaseHP } from "./member/IncreaseHP";
 import { TrophyType } from "./TrophyType";
 import { Library } from "../throwdown/Library";
 import { UltraTurboThrow } from "./card/UltraTurboThrow";
@@ -8,18 +7,34 @@ import { YellowDeck } from "./cosmetic/YellowDeck";
 import { BlackDeck } from "./cosmetic/BlackDeck";
 import { RedDeck } from "./cosmetic/RedDeck";
 import { WhiteDeck } from "./cosmetic/WhiteDeck";
+import { IncreaseHP } from "./member/IncreaseHP";
+import { SeeCards1 } from "./member/SeeCards1";
+import { SeeCards2 } from "./member/SeeCards2";
+import { SeeCards3 } from "./member/SeeCards3";
+import { SeeTargets1 } from "./member/SeeTargets1";
+import { SeeTargets2 } from "./member/SeeTargets2";
+import { SeeTargets3 } from "./member/SeeTargets3";
 
 export class OutstandingTrophyList {
 
     private static trophyTypes: TrophyType[] = [
+        //card
         new TurboThrow(),
         new UltraTurboThrow(),
-        new IncreaseHP(),
+        //cosmetic
         new CyanDeck(),
         new YellowDeck(),
         new WhiteDeck(),
         new BlackDeck(),
-        new RedDeck()
+        new RedDeck(),
+        //member
+        new IncreaseHP(),
+        new SeeCards1(),
+        new SeeCards2(),
+        new SeeCards3(),
+        new SeeTargets1(),
+        new SeeTargets2(),
+        new SeeTargets3(),
     ];
 
     public static getTrophyTypes() {
