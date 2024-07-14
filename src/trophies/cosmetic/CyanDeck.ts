@@ -1,4 +1,4 @@
-import { TrophyType } from "./TrophyType";
+import { TrophyType } from "../TrophyType";
 
 export class CyanDeck extends TrophyType {
     constructor() {

@@ -9,11 +9,11 @@ import { CardType } from "../cards/CardType";
 import Member from "./Member";
 import { log } from "../utilities/GameUtils";
 import { Library } from "../throwdown/Library";
-import { RedDeck } from "../trophies/RedDeck";
-import { BlackDeck } from "../trophies/BlackDeck";
-import { WhiteDeck } from "../trophies/WhiteDeck";
-import { YellowDeck } from "../trophies/YellowDeck";
-import { CyanDeck } from "../trophies/CyanDeck";
+import { RedDeck } from "../trophies/cosmetic/RedDeck";
+import { BlackDeck } from "../trophies/cosmetic/BlackDeck";
+import { WhiteDeck } from "../trophies/cosmetic/WhiteDeck";
+import { YellowDeck } from "../trophies/cosmetic/YellowDeck";
+import { CyanDeck } from "../trophies/cosmetic/CyanDeck";
 /* END-USER-IMPORTS */
 
 export default class Card extends Phaser.GameObjects.Container {

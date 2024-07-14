@@ -1,4 +1,4 @@
-import { TrophyType } from "./TrophyType";
+import { TrophyType } from "../TrophyType";
 import { YellowDeck } from "./YellowDeck";
 
 export class WhiteDeck extends TrophyType {

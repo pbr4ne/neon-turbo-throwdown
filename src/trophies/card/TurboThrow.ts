@@ -1,4 +1,4 @@
-import { TrophyType } from "./TrophyType";
+import { TrophyType } from "../TrophyType";
 
 export class TurboThrow extends TrophyType {
     constructor() {

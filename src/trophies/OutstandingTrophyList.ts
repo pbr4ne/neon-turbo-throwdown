@@ -1,13 +1,13 @@
-import { TurboThrow } from "./TurboThrow";
-import { IncreaseHP } from "./IncreaseHP";
+import { TurboThrow } from "./card/TurboThrow";
+import { IncreaseHP } from "./member/IncreaseHP";
 import { TrophyType } from "./TrophyType";
 import { Library } from "../throwdown/Library";
-import { UltraTurboThrow } from "./UltraTurboThrow";
-import { CyanDeck } from "./CyanDeck";
-import { YellowDeck } from "./YellowDeck";
-import { BlackDeck } from "./BlackDeck";
-import { RedDeck } from "./RedDeck";
-import { WhiteDeck } from "./WhiteDeck";
+import { UltraTurboThrow } from "./card/UltraTurboThrow";
+import { CyanDeck } from "./cosmetic/CyanDeck";
+import { YellowDeck } from "./cosmetic/YellowDeck";
+import { BlackDeck } from "./cosmetic/BlackDeck";
+import { RedDeck } from "./cosmetic/RedDeck";
+import { WhiteDeck } from "./cosmetic/WhiteDeck";
 
 export class OutstandingTrophyList {
 

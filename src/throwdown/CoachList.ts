@@ -3,7 +3,7 @@ import { Block } from "../cards/Block";
 import { Catch } from "../cards/Catch";
 import { Evade } from "../cards/Evade";
 import { Coach } from "./Coach";
-import { TurboThrow } from "../trophies/TurboThrow";
+import { TurboThrow } from "../trophies/card/TurboThrow";
 
 export class CoachList {
 

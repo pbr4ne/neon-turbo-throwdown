@@ -1,7 +1,7 @@
 import { openDB, DBSchema, IDBPDatabase } from 'idb';
 import { Library } from '../throwdown/Library';
 import { TrophyType } from '../trophies/TrophyType';
-import { TurboThrow } from '../trophies/TurboThrow';
+import { TurboThrow } from '../trophies/card/TurboThrow';
 import { UnknownTrophy } from '../trophies/UnknownTrophy';
 import { CoachDialogue } from '../dialogue/CoachDialogue';
 import { log } from "../utilities/GameUtils";

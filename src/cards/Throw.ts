@@ -3,8 +3,8 @@ import { CardType } from "./CardType";
 import Member from "../prefabs/Member";
 import Team from "../prefabs/Team";
 import { Coach } from "../throwdown/Coach";
-import { UltraTurboThrow } from "../trophies/UltraTurboThrow";
-import { TurboThrow } from "../trophies/TurboThrow";
+import { UltraTurboThrow } from "../trophies/card/UltraTurboThrow";
+import { TurboThrow } from "../trophies/card/TurboThrow";
 
 
 export class Throw extends CardType {

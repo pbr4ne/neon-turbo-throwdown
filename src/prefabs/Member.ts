@@ -15,7 +15,7 @@ import { Coach } from "../throwdown/Coach";
 import { TrophyType } from "../trophies/TrophyType";
 import { CoachList } from "../throwdown/CoachList";
 import { Library } from "../throwdown/Library";
-import { IncreaseHP } from "../trophies/IncreaseHP";
+import { IncreaseHP } from "../trophies/member/IncreaseHP";
 /* END-USER-IMPORTS */
 
 export default class Member extends Phaser.GameObjects.Container {
