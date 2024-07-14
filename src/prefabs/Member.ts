@@ -56,6 +56,8 @@ export default class Member extends Phaser.GameObjects.Container {
         this.bracketRight.setFlipX(true);
         this.add(this.bracketLeft);
         this.add(this.bracketRight);
+        this.bracketRight.setVisible(false);
+        this.bracketLeft.setVisible(false);
 
         let assignedBlockX = -75;
         if (flip) {
@@ -101,6 +103,11 @@ export default class Member extends Phaser.GameObjects.Container {
                 this.bracketRight?.setTexture('bracket-default');
             }
         });
+    }
+
+    showAssignedStuff() {
+        this.bracketLeft?.setVisible(true);
+        this.bracketRight?.setVisible(true);
     }
 
     getNumber(): number {

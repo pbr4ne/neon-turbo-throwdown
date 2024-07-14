@@ -143,6 +143,12 @@ export default abstract class Team extends Phaser.GameObjects.Container {
         });
     }
 
+    showAssignedMemberStuff() {
+        this.members.forEach(member => {
+            member.showAssignedStuff();
+        });
+    }
+
     async executeTurn() {
         for (const member of this.members) {
             const card = member.getAssignedCard();

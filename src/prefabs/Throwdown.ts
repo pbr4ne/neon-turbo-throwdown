@@ -285,6 +285,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
     bossAssignAndSelectCards() {
         console.log("on BOSS ASSIGN AND SELECT CARDS step");
         this.currentStep++;
+        this.boss.showAssignedMemberStuff();
         this.boss.assignCards();
         this.boss.targetMembers();
         this.nextStep();
@@ -293,6 +294,8 @@ export default class Throwdown extends Phaser.GameObjects.Container {
     selectCard() {
         console.log("on SELECT CARD step");
         this.currentStep++;
+
+        this.player.showAssignedMemberStuff();
 
         this.showSelectCardImage();
         // wait for user to select card
