@@ -6,7 +6,6 @@
 import Phaser from "phaser";
 /* START-USER-IMPORTS */
 import { CardType } from "../cards/CardType";
-import Game from "../scenes/Game";
 import Member from "./Member";
 /* END-USER-IMPORTS */
 
@@ -17,7 +16,9 @@ export default class Card extends Phaser.GameObjects.Container {
     private ringAssignedImage: Phaser.GameObjects.Image;
     private assignedMemberText: Phaser.GameObjects.Text;
     private nameText: Phaser.GameObjects.Text;
+    private tooltipText: Phaser.GameObjects.Text;
     private iconImage: Phaser.GameObjects.Image;
+    private tooltipImage: Phaser.GameObjects.Image;
     private isPoppedUp: boolean = false;
     private cardState: string;
 
@@ -32,6 +33,7 @@ export default class Card extends Phaser.GameObjects.Container {
         this.ringSelectedImage = new Phaser.GameObjects.Image(scene, 0, 0, 'ring-selected');
         this.ringAssignedImage = new Phaser.GameObjects.Image(scene, 0, 0, 'ring-assigned');
         this.iconImage = new Phaser.GameObjects.Image(scene, 0, -30, this.cardType.getIcon());
+        this.tooltipImage = new Phaser.GameObjects.Image(scene, 0, -205, 'tooltip');
 
         this.assignedMemberText = new Phaser.GameObjects.Text(scene, 30, -90, "", {
             fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
@@ -52,14 +54,23 @@ export default class Card extends Phaser.GameObjects.Container {
         this.nameText.setOrigin(0.5, 0.5);
         this.nameText.setWordWrapWidth(100);
 
+        this.tooltipText = new Phaser.GameObjects.Text(scene, 5, -275, this.cardType.getDescription(), {
+            fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
+            fontSize: '16px',
+            color: '#00ffff',
+            lineSpacing: 15,
+            padding: { x: 5, y: 5 },
+            align: 'left'
+        });
+        this.tooltipText.setOrigin(0.5, 0);
+        this.tooltipText.setWordWrapWidth(350);
+
         this.setSize(this.cardImage.width, this.cardImage.height);
         this.setInteractive(new Phaser.Geom.Rectangle(0, 0, this.cardImage.width, this.cardImage.height), Phaser.Geom.Rectangle.Contains);
 
-        this.add([this.cardImage, this.ringSelectedImage, this.ringAssignedImage, this.assignedMemberText, this.nameText, this.iconImage]);
+        this.add([this.cardImage, this.ringSelectedImage, this.ringAssignedImage, this.assignedMemberText, this.nameText, this.iconImage, this.tooltipImage, this.tooltipText]);
 
-        this.renderForState();
-
-        
+        this.renderForState(); 
     }
 
     changeState(cardState: string): void {
@@ -76,12 +87,10 @@ export default class Card extends Phaser.GameObjects.Container {
                 this.cardImage.setVisible(true);
                 this.on('pointerover', () => { 
                     this.scene.input.setDefaultCursor('pointer'); 
-                    (this.scene.scene.get('Game') as Game).setCardDescription(this.cardType.getDescription());
                     console.log(`mouse over ${this.toString()}`)
                 });
                 this.on('pointerout', () => { 
                     this.scene.input.setDefaultCursor('default'); 
-                    (this.scene.scene.get('Game') as Game).setCardDescription("");
                 });
                 break;
             case "playerDeckHidden":
@@ -94,12 +103,14 @@ export default class Card extends Phaser.GameObjects.Container {
                 this.iconImage.setVisible(true);
                 this.on('pointerover', () => { 
                     this.scene.input.setDefaultCursor('pointer'); 
-                    (this.scene.scene.get('Game') as Game).setCardDescription(this.cardType.getDescription());
+                    this.tooltipImage.setVisible(true);
+                    this.tooltipText.setVisible(true);
                     console.log(`mouse over ${this.toString()}`)
                 });
                 this.on('pointerout', () => { 
                     this.scene.input.setDefaultCursor('default'); 
-                    (this.scene.scene.get('Game') as Game).setCardDescription("");
+                    this.tooltipImage.setVisible(false);
+                    this.tooltipText.setVisible(false);
                 });
                 break;
             case "bossHand":
@@ -123,6 +134,8 @@ export default class Card extends Phaser.GameObjects.Container {
         this.cardImage.setVisible(false);
         this.nameText.setVisible(false);
         this.iconImage.setVisible(false);
+        this.tooltipImage.setVisible(false);
+        this.tooltipText.setVisible(false);
         this.ringSelectedImage.setVisible(false);
         this.ringAssignedImage.setVisible(false);
         this.assignedMemberText.setVisible(false);
