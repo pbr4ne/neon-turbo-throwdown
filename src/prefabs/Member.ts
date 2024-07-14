@@ -258,6 +258,46 @@ export default class Member extends Phaser.GameObjects.Container {
         });
     }
 
+    showActionBam(text: string) {
+        if (!this.scene) {
+            return;
+        }
+    
+        const scene = this.scene;
+    
+        const centerX = scene.cameras.main.width / 2;
+        const centerY = scene.cameras.main.height / 2;
+    
+        const floatingText = scene.add.text(centerX, centerY, text, {
+            fontFamily: '"Press Start 2P"',
+            fontSize: '10px',
+            color: '#ff00ff',
+            stroke: '#00ffff',
+            strokeThickness: 1,
+            align: 'center'
+        }).setOrigin(0.5);
+    
+        // Animate the text to grow in size
+        scene.add.tween({
+            targets: floatingText,
+            scale: { from: 0.5, to: 8 },
+            duration: 500,
+            ease: 'Power1',
+            onComplete: () => {
+                // Fade out after the scaling is done
+                scene.add.tween({
+                    targets: floatingText,
+                    alpha: { from: 1, to: 0 },
+                    duration: 500,
+                    ease: 'Power1',
+                    onComplete: () => {
+                        floatingText.destroy();
+                    }
+                });
+            }
+        });
+    }
+
     destroyMember(memberWhoTargeted: Member) {
         this.team.removeMember(this);
         this.clearTargetArc();
