@@ -113,7 +113,7 @@ export default class Welcome extends Phaser.Scene {
 			wordWrap: { width: 860, useAdvancedWrap: true }
 		});
 	
-		const developerText = this.add.text(-420, -270, "Developer: pbrane", {
+		const developerText = this.add.text(-420, -270, "Code Jockey: pbrane", {
 			fontFamily: '"Press Start 2P"',
 			fontSize: '20px',
 			color: '#00ffff',
@@ -121,7 +121,7 @@ export default class Welcome extends Phaser.Scene {
 			wordWrap: { width: 860, useAdvancedWrap: true }
 		});
 
-		const developerLink = this.add.text(-50, -270, "github", {
+		const developerLink = this.add.text(0, -270, "github", {
 			fontFamily: '"Press Start 2P"',
 			fontSize: '20px',
 			color: '#ffff00',
@@ -129,7 +129,23 @@ export default class Welcome extends Phaser.Scene {
 			window.open('https://github.com/pbr4ne', '_blank');
 		});
 	
-		const writerText = this.add.text(-420, -220, "Writer:", {
+		const writerText = this.add.text(-420, -220, "Verbs & Vibes: James Funfer", {
+			fontFamily: '"Press Start 2P"',
+			fontSize: '20px',
+			color: '#00ffff',
+			align: 'left',
+			wordWrap: { width: 860, useAdvancedWrap: true }
+		});
+
+		const writerLink = this.add.text(150, -220, "author page", {
+			fontFamily: '"Press Start 2P"',
+			fontSize: '20px',
+			color: '#ffff00',
+		}).setInteractive({ useHandCursor: true }).on('pointerdown', () => {
+			window.open('https://jamesfunfer.com', '_blank');
+		});
+	
+		const uiArtistText = this.add.text(-420, -170, "Design Nerd: Blake Mann", {
 			fontFamily: '"Press Start 2P"',
 			fontSize: '20px',
 			color: '#00ffff',
@@ -137,15 +153,39 @@ export default class Welcome extends Phaser.Scene {
 			wordWrap: { width: 860, useAdvancedWrap: true }
 		});
 	
-		const uiArtistText = this.add.text(-420, -170, "UI Artist: ", {
+		const musicText = this.add.text(-420, -120, "Throwdown Tunes: terranaut1066", {
 			fontFamily: '"Press Start 2P"',
 			fontSize: '20px',
 			color: '#00ffff',
 			align: 'left',
 			wordWrap: { width: 860, useAdvancedWrap: true }
 		});
-	
-		const musicText = this.add.text(-420, -120, "Music: ", {
+
+		const musicLink = this.add.text(210, -120, "youtube", {
+			fontFamily: '"Press Start 2P"',
+			fontSize: '20px',
+			color: '#ffff00',
+		}).setInteractive({ useHandCursor: true }).on('pointerdown', () => {
+			window.open('https://www.youtube.com/user/Kitchen1066', '_blank');
+		});
+
+		const artistText = this.add.text(-420, -70, "Rival Renderers:", {
+			fontFamily: '"Press Start 2P"',
+			fontSize: '20px',
+			color: '#00ffff',
+			align: 'left',
+			wordWrap: { width: 860, useAdvancedWrap: true }
+		});
+
+		const testerText = this.add.text(-420, -20, "Court Testers:", {
+			fontFamily: '"Press Start 2P"',
+			fontSize: '20px',
+			color: '#00ffff',
+			align: 'left',
+			wordWrap: { width: 860, useAdvancedWrap: true }
+		});
+
+		const thanksText = this.add.text(-420, 30, "Special Thanks:", {
 			fontFamily: '"Press Start 2P"',
 			fontSize: '20px',
 			color: '#00ffff',
@@ -172,7 +212,7 @@ export default class Welcome extends Phaser.Scene {
 			this.input.setDefaultCursor('default');
 		});
 	
-		popup.add([background, creditsText, developerText, developerLink, writerText, uiArtistText, musicText, closeButton]);
+		popup.add([background, creditsText, developerText, developerLink, writerText, writerLink, uiArtistText, musicText, musicLink, artistText, testerText, thanksText, closeButton]);
 	}
 
 	/* END-USER-CODE */
