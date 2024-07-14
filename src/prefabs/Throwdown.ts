@@ -382,6 +382,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
         if (this.player.members.length === 0 || this.boss.members.length === 0) {
             this.hideAllGymStuff();
             this.hideAllInstructions();
+            this.player.clearMembers();
             this.boss.clearMembers();
             this.player.clearHand();
             this.player.hideMembers();
