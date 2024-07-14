@@ -36,7 +36,7 @@ export class GameSounds {
     }
 
     static playHit() {
-        if (GameSounds.effectsEnabled) {
+        if (GameSounds.effectsEnabled && GameSounds.hitSound) {
             GameSounds.hitSound.play();
         }
     }
