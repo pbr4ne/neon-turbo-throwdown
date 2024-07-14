@@ -47,6 +47,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
 	private playerLayer!: Phaser.GameObjects.Layer;
 
 	private scoreImage!: Phaser.GameObjects.Image;
+    private scoreText!: Phaser.GameObjects.Text;
     private forfeitImage!: Phaser.GameObjects.Image;
     private coachCornerImage!: Phaser.GameObjects.Image;
     private difficultyImage!: Phaser.GameObjects.Image;
@@ -102,6 +103,19 @@ export default class Throwdown extends Phaser.GameObjects.Container {
 		this.playerLayer.add(this.coachName);
 		this.coachName.setOrigin(0.5, 0.5);
 
+        this.scoreText = new Phaser.GameObjects.Text(this.scene, 150, 68, Library.getNumRuns().toString(), {
+            fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
+            fontSize: "64px",
+            color: '#ffff00',
+            stroke: '#ffff00',
+            strokeThickness: 1,
+            padding: { x: 5, y: 5 },
+            align: 'left'
+        });
+        this.playerLayer.add(this.scoreText);
+
+
+
         this.drawCardsImage = this.scene.add.image(960, 1020, "draw-cards");
         this.selectCardImage = this.scene.add.image(960, 1020, "select-card");
         this.selectPlayerImage = this.scene.add.image(960, 1020, "select-player");
@@ -130,6 +144,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
 
 	hideAllGymStuff() {
         this.scoreImage.setVisible(false);
+        this.scoreText.setVisible(false);
         this.forfeitImage.setVisible(false);
         this.coachCornerImage.setVisible(false);
         this.coachName.setVisible(false);
