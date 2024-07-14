@@ -7,19 +7,19 @@ import { TurboThrow } from "../trophies/card/TurboThrow";
 
 export class CoachList {
 
-    public static you = new Coach("You", "you", 0, false, "", "");
-    public static coach = new Coach("Coach", "coach", 0, false, "", "");
-    public static spirit = new Coach("Spirit Coach", "spirit", 0, false, "", "");
-    public static primo = new Coach("Primo Firstman", "primo", 1, true, "VICTORY!", "FAILURE!");
-    public static sporticus = new Coach("Sporticus", "sporticus", 1, true, "WOOP!", "AWWW!");
-    public static russ = new Coach("Russ Tyler", "russ", 1, true, "VICTORY!", "FAILURE!");
-    public static boss = new Coach("The Boss", "boss", 2, true, "VICTORY!", "FAILURE!");
-    public static steve = new Coach("Sgt. Steve", "steve", 2, true, "VICTORY!", "FAILURE!");
-    public static betsy = new Coach("Betsy and the Nets", "betsy", 2, true, "VICTORY!", "FAILURE!");
-    public static coree = new Coach("C.O.R.E.E.", "coree", 3, true, "VICTORY!", "FAILURE!");
-    public static turbo = new Coach("Turbo Nerd", "turbo", 3, true, "VICTORY!", "FAILURE!");
-    public static shadow = new Coach("Shadow Ken", "shadow", 3, true, "VICTORY!", "FAILURE!");
-    public static boss10 = new Coach("Boss #10", "boss10", 4, true, "VICTORY!", "FAILURE!");
+    public static you = new Coach("You", "you", 0, false, "", "", "");
+    public static coach = new Coach("Coach", "coach", 0, false, "", "", "");
+    public static spirit = new Coach("Spirit Coach", "spirit", 0, false, "", "", "");
+    public static primo = new Coach("Primo Firstman", "primo", 1, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
+    public static sporticus = new Coach("Sporticus", "sporticus", 1, true, "WOOP!", "AWWW!", "neon-turbo-throwdown");
+    public static russ = new Coach("Russ Tyler", "russ", 1, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
+    public static boss = new Coach("The Boss", "boss", 2, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
+    public static steve = new Coach("Sgt. Steve", "steve", 2, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
+    public static betsy = new Coach("Betsy and the Nets", "betsy", 2, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
+    public static coree = new Coach("C.O.R.E.E.", "coree", 3, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
+    public static turbo = new Coach("Turbo Nerd", "turbo", 3, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
+    public static shadow = new Coach("Shadow Ken", "shadow", 3, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
+    public static boss10 = new Coach("Boss #10", "boss10", 4, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
 
     public static setupCoachDecks() {
         this.you.setBaseCards([

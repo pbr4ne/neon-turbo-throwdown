@@ -25,7 +25,7 @@ export default class Game extends Phaser.Scene {
 
 	editorCreate(): void {
 
-		this.courtImage = this.add.image(953, 443, "court");
+		this.add.image(953, 443, "court");
 		
 		this.events.emit("scene-awake");
 	}
@@ -33,21 +33,17 @@ export default class Game extends Phaser.Scene {
 	/* START-USER-CODE */
 	private player!: Player;
 	private dialogLayer!: Phaser.GameObjects.Layer;
-    private courtImage!: Phaser.GameObjects.Image;
     private dialogBox!: DialogBox;
-    private dialogueStorage!: DialogueStorage;
     private runUpgrade!: RunUpgrade;
     private permUpgrade!: PermUpgrade;
     private currentCoach: Coach = CoachList.primo;
     private cardDescription!: Phaser.GameObjects.Text;
     public throwdown!: Throwdown;
-    private numRuns: number = 0;
 
 	create() {
 		this.editorCreate();
 
 		this.dialogLayer = this.add.layer();
-        this.dialogueStorage = new DialogueStorage();
 
         this.player = new Player(this);
         this.player.addMembers();

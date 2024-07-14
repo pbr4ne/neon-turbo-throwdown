@@ -13,14 +13,16 @@ export class Coach {
     private isBoss = true;
     private winPhrase: string;
     private losePhrase: string;
+    private song: string;
 
-    constructor(name: string, avatar: string, difficulty: number, isBoss: boolean = true, winPhrase: string, losePhrase: string) {
+    constructor(name: string, avatar: string, difficulty: number, isBoss: boolean = true, winPhrase: string, losePhrase: string, song: string) {
         this.name = name;
         this.avatar = avatar;
         this.difficulty = difficulty;
         this.isBoss = isBoss;
         this.winPhrase = winPhrase;
-        this.losePhrase = losePhrase
+        this.losePhrase = losePhrase;
+        this.song = song;
     }
 
     public getName(): string {
@@ -69,6 +71,10 @@ export class Coach {
 
     public getLosePhrase(): string {
         return this.losePhrase;
+    }
+
+    public getSong(): string {
+        return this.song;
     }
     
     public getNextCoach(): Coach {

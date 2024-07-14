@@ -12,9 +12,10 @@ import GameoverPrefab from "../prefabs/GameoverPrefab";
 import Game from '../scenes/Game';
 import { GameSteps } from '../throwdown/GameSteps';
 import { Library } from "../throwdown/Library";
-import { checkUrlParam, getUrlParam, log } from "../utilities/GameUtils";
+import { getUrlParam, log } from "../utilities/GameUtils";
 import Card from "./Card";
 import { CoachList } from "../throwdown/CoachList";
+import { GameSounds } from "../GameSounds";
 /* END-USER-IMPORTS */
 
 export default class Throwdown extends Phaser.GameObjects.Container {
@@ -116,6 +117,8 @@ export default class Throwdown extends Phaser.GameObjects.Container {
         this.boss.deck.initializeDeck(this.coach.getBaseCards(), this.boss);
 
         this.player.createEndTurnButton();
+
+        GameSounds.switchSong(this.scene, this.coach.getSong());
 
         this.startGameLoop();
 	}

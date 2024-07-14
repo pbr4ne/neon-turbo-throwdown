@@ -233,7 +233,7 @@
                     "assets/audio/neon-turbo-throwdown.mp3"
                 ],
                 "type": "audio",
-                "key": "music"
+                "key": "neon-turbo-throwdown"
             },
             {
                 "url": "assets/images/welcome/music2-off.png",
