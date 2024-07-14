@@ -169,4 +169,39 @@ export class CoachList {
             new Catch(this.boss10)
         ]);
     }
+
+    public static getCoachByName(name: string): Coach {
+        if (name === "primo") {
+            return CoachList.primo;
+        }
+        if (name === "sporticus") {
+            return CoachList.sporticus;
+        }
+        if (name === "russ") {
+            return CoachList.russ;
+        }
+        if (name === "boss") {
+            return CoachList.boss;
+        }
+        if (name === "steve") {
+            return CoachList.steve;
+        }
+        if (name === "betsy") {
+            return CoachList.betsy;
+        }
+        if (name === "coree") {
+            return CoachList.coree;
+        }
+        if (name === "turbo") {
+            return CoachList.turbo;
+        }
+        if (name === "shadow") {
+            return CoachList.shadow;
+        }
+        if (name === "boss10") {
+            return CoachList.boss10;
+        }
+
+        return CoachList.you;
+    }
 }

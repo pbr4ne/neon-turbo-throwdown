@@ -10,7 +10,7 @@ import { DialogueStorage } from "../dialogue/DialogueStorage";
 import RunUpgrade from "../prefabs/RunUpgrade";
 import PermUpgrade from "../prefabs/PermUpgrade";
 import Throwdown from "../prefabs/Throwdown";
-import { checkUrlParam, log } from "../utilities/GameUtils";
+import { checkUrlParam, getUrlParam, log } from "../utilities/GameUtils";
 /* END-USER-IMPORTS */
 
 export default class Game extends Phaser.Scene {
@@ -51,6 +51,12 @@ export default class Game extends Phaser.Scene {
 
         this.player = new Player(this);
         this.player.addMembers();
+
+        const overrideCoach = getUrlParam("setCoach");
+        if (overrideCoach) {
+            this.currentCoach = CoachList.getCoachByName(overrideCoach);
+        }
+
         CoachList.setupCoachDecks();
 
         CoachList.primo.setDialogue(DialogueStorage.primoDialogue);
