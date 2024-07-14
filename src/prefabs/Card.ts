@@ -105,9 +105,8 @@ export default class Card extends Phaser.GameObjects.Container {
 
     renderForState(): void {
         this.clearCard();
-        this.scene.children.remove(this);
-        this.scene.children.add(this);
-        //log(`rendering for state: ${this.toString()}`);
+        
+        log(`rendering for state: ${this.toString()}`);
         switch (this.cardState) {
             case "playerDeck":
                 this.setTexture(this.getDeckBackTexture());
@@ -119,6 +118,8 @@ export default class Card extends Phaser.GameObjects.Container {
                 this.on('pointerout', () => { 
                     this.scene.input.setDefaultCursor('default'); 
                 });
+                this.scene.children.remove(this);
+                this.scene.children.add(this);
                 break;
             case "playerDeckHidden":
             case "bossDeck":
@@ -139,6 +140,8 @@ export default class Card extends Phaser.GameObjects.Container {
                     this.tooltipImage.setVisible(false);
                     this.tooltipText.setVisible(false);
                 });
+                this.scene.children.remove(this);
+                this.scene.children.add(this);
                 break;
             case "bossHand":
                 break;
@@ -165,6 +168,8 @@ export default class Card extends Phaser.GameObjects.Container {
                     this.tooltipImage.setVisible(false);
                     this.tooltipText.setVisible(false);
                 });
+                this.scene.children.remove(this);
+                this.scene.children.add(this);
                 break;
             default:
                 log(`unknown card state: ${this.cardState}`);
