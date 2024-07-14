@@ -29,6 +29,8 @@ export default class RunUpgrade extends Phaser.GameObjects.Container {
         this.cardSlot2 = scene.add.image(960, 848, "empty");
         this.cardSlot3 = scene.add.image(1162, 848, "empty");
 
+		this.pointerImage = this.scene.add.image(1300, 850, "pointer");
+
 		this.cardRound();
 		/* END-USER-CTR-CODE */
 	}
@@ -40,6 +42,7 @@ export default class RunUpgrade extends Phaser.GameObjects.Container {
     private cardSlot2!: Phaser.GameObjects.Image;
     private cardSlot3!: Phaser.GameObjects.Image;
 	private selectCardImage: Phaser.GameObjects.Image | null = null;
+	private pointerImage: Phaser.GameObjects.Image | null = null;
 	private numDraws: number = 0;
     private currentCards: CardType[] = [];
 
@@ -48,6 +51,7 @@ export default class RunUpgrade extends Phaser.GameObjects.Container {
 		this.cardSlot2.destroy();
 		this.cardSlot3.destroy();
 		this.selectCardImage?.destroy();
+		this.pointerImage?.destroy();
 	}
 
 	private cardRound() {
