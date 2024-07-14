@@ -88,6 +88,8 @@ export default class RunUpgrade extends Phaser.GameObjects.Container {
 		const newCard = new Card(this.scene, this.currentCards[cardIndex-1], "playerDeck", 0, 0, "front");
 		CoachList.you.getBaseCards().push(newCard.getCardType());
 		this.player.deck.addCard(newCard);
+		//todo - this is suspicious that i have to hide it. because it should be moved later but it stays on the screen
+		newCard.hide();
 
         // Draw the next set of cards
         this.drawNextSetOfCards();
