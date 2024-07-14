@@ -23,8 +23,6 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
 		this.courtImage = this.scene.add.image(953, 443, "court-cyan");
 		this.courtImage.setDepth(-10);
 
-		
-
 		this.spiritCoachImage = new Phaser.GameObjects.Image(scene, 1855, 78, "spirit")
             .setOrigin(1, 0)
             .setScale(1.2);

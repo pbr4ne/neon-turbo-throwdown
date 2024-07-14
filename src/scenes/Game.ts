@@ -25,7 +25,8 @@ export default class Game extends Phaser.Scene {
 
 	editorCreate(): void {
 
-		this.add.image(953, 443, "court");
+		let courtImage = this.add.image(953, 443, "court");
+        courtImage.setDepth(-20);
 		
 		this.events.emit("scene-awake");
 	}

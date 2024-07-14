@@ -21,6 +21,8 @@ export default class Trophy extends Phaser.GameObjects.Container {
         this.cardImage = new Phaser.GameObjects.Image(scene, 0, 0, texture || "upgrade");
         this.add(this.cardImage);
 
+        this.setDepth(10);
+
         this.tooltipImage = new Phaser.GameObjects.Image(scene, 0, -205, 'tooltip');
         this.add(this.tooltipImage);
         this.tooltipImage.setVisible(false);
