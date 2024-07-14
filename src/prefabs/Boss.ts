@@ -11,6 +11,7 @@ import Team from "./Team";
 import { Coach } from "../throwdown/Coach";
 import { CardType } from "../cards/CardType";
 import FloatingObjectScript from "../script-nodes/ui/FloatingObjectScript";
+import { log } from "../utilities/GameUtils";
 /* END-USER-IMPORTS */
 
 export default class Boss extends Team {
@@ -34,14 +35,14 @@ export default class Boss extends Team {
     }
 
     drawCards() {
-        console.log("boss drawing cards");
+        log("boss drawing cards");
         for (let i = 0; i < 5; i++) {
             this.onDeckClick();
         }
     }
 
     assignCards() {
-        console.log("boss assigning cards");
+        log("boss assigning cards");
         this.assignRandomCardsToMembers();
     }
 
@@ -66,7 +67,7 @@ export default class Boss extends Team {
                 const cardType = randomCard.getCardType();
 
                 member.assignCard(randomCard, this);
-                console.log("Assigned card to member: " + cardType.getName() + " " + member);
+                log("Assigned card to member: " + cardType.getName() + " " + member);
 
                 this.hand.getCards().splice(randomIndex, 1);
                 this.hand.getCardsInPlay().push(randomCard);
@@ -97,7 +98,7 @@ export default class Boss extends Team {
     }
 
     handleEnemyClick(enemy: Member) {
-        console.log("Enemy clicked");
+        log("Enemy clicked");
         const playerScene = this.opponent as Player;
         playerScene.handleEnemyClick(enemy);
     }

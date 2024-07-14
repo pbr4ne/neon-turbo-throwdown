@@ -5,3 +5,9 @@ export function checkUrlParam(param: string, value: string): boolean {
     }
     return false;
 }
+
+export function log(message: string): void {
+    if (checkUrlParam("debug", "true")) {
+        console.log(message);
+    }
+}

@@ -7,7 +7,7 @@ import Card from "./Card";
 import Game from "../scenes/Game";
 import Member from "./Member";
 import { GameSteps } from '../throwdown/GameSteps';
-import Throwdown from "./Throwdown";
+import { log } from "../utilities/GameUtils";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -59,10 +59,10 @@ export default class Hand {
     }
 
     handleCardClick(card: Card, members: Member[]) {
-        console.log(`Clicking on ${card.toString()}`);
+        log(`Clicking on ${card.toString()}`);
         var currentStep = (this.scene.scene.get('Game') as Game).throwdown.getCurrentStep();
         if (currentStep !== GameSteps.SELECT_CARD) {
-            console.log("Not in the right step to select a card");
+            log("Not in the right step to select a card");
             return;
         }
 
@@ -72,7 +72,7 @@ export default class Hand {
         );
 
         if (cardAlreadyAssigned) {
-            console.log("Card is already assigned to a member");
+            log("Card is already assigned to a member");
             return;
         }
 

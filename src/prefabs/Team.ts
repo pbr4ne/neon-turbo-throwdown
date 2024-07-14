@@ -12,6 +12,7 @@ import Member from "./Member";
 import { GameSteps } from '../throwdown/GameSteps';
 import Throwdown from "./Throwdown";
 import Player from "./Player";
+import { log } from "../utilities/GameUtils";
 /* END-USER-IMPORTS */
 
 export default abstract class Team extends Phaser.GameObjects.Container {
@@ -52,7 +53,7 @@ export default abstract class Team extends Phaser.GameObjects.Container {
 
     onDeckClick() {
         if (this.throwdown.getCurrentStep() != GameSteps.DRAW_CARDS) {
-            console.log("can't draw cards now");
+            log("can't draw cards now");
             return;
         }
 
@@ -72,8 +73,8 @@ export default abstract class Team extends Phaser.GameObjects.Container {
     }
 
     clearHand() {
-        console.log(`CURRENT ${this} HAND SIZE BEFORE CLEAR HAND: ${this.hand.getCards().length}`);
-        console.log(`CURRENT ${this} HAND IN PLAY SIZE BEFORE CLEAR HAND: ${this.hand.getCardsInPlay().length}`);
+        log(`CURRENT ${this} HAND SIZE BEFORE CLEAR HAND: ${this.hand.getCards().length}`);
+        log(`CURRENT ${this} HAND IN PLAY SIZE BEFORE CLEAR HAND: ${this.hand.getCardsInPlay().length}`);
         while (this.hand.getCards().length > 0) {
             const card = this.hand.getCards().pop();
             if (card) {
@@ -88,7 +89,7 @@ export default abstract class Team extends Phaser.GameObjects.Container {
                 card.changeState(this instanceof Player ? "playerDiscard" : "bossDiscard");
             }
         }
-        console.log(`CURRENT ${this} DECK SIZE AFTER CLEAR HAND: ${this.deck.getCards().length}`);
+        log(`CURRENT ${this} DECK SIZE AFTER CLEAR HAND: ${this.deck.getCards().length}`);
         this.discardPile.arrangeCardPositions(100, 840);
     }
 
@@ -101,7 +102,7 @@ export default abstract class Team extends Phaser.GameObjects.Container {
         });
         this.discardPile.clear();
         //log the size of the deck
-        console.log(`CURRENT ${this} DECK SIZE AFTER RECOMBINE: ${this.deck.getCards().length}`);
+        log(`CURRENT ${this} DECK SIZE AFTER RECOMBINE: ${this.deck.getCards().length}`);
     }
 
     clearMembers() {
@@ -130,7 +131,7 @@ export default abstract class Team extends Phaser.GameObjects.Container {
             const card = member.getAssignedCard();
             if (card != null) {
                 card.getCardType().special(member, this, this.opponent); 
-                console.log(`SPECIAL: ${member}`);
+                log(`SPECIAL: ${member}`);
             }
         }
         for (const member of this.members) {
@@ -139,7 +140,7 @@ export default abstract class Team extends Phaser.GameObjects.Container {
             if (target !== null && card != null) {
                 await this.pause(500); 
                 card.getCardType().offense(member, target, this, this.opponent); 
-                console.log(`OFFENSE: ${member} attacks ${target}`);
+                log(`OFFENSE: ${member} attacks ${target}`);
                 member.setIntendedTarget(null);             
             }
         }

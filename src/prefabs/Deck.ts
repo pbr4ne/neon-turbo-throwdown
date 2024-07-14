@@ -8,6 +8,7 @@ import Card from "./Card";
 import { CardType } from "../cards/CardType";
 import Team from "./Team";
 import Player from "./Player";
+import { log } from "../utilities/GameUtils";
 /* END-USER-IMPORTS */
 
 export default class Deck extends Phaser.GameObjects.Container {
@@ -20,7 +21,7 @@ export default class Deck extends Phaser.GameObjects.Container {
     }
 
     initializeDeck(cardTypes: CardType[], team: Team) {
-        console.log(cardTypes);
+        log(`initializeDeck: cards to add: ${cardTypes}`);
         this.cards = [];
 
         const cardState = team instanceof Player ? "playerDeck" : "bossDeck";
@@ -31,7 +32,7 @@ export default class Deck extends Phaser.GameObjects.Container {
         });
 
         this.shuffle();
-        console.log(`built ${cardState}`);
+        log(`built ${cardState}`);
     }
 
     drawCard(): Card | undefined {
@@ -75,7 +76,7 @@ export default class Deck extends Phaser.GameObjects.Container {
     }
 
     addCard(card: Card) {
-        console.log(`adding card to deck: ${card.toString()}`);
+        log(`adding card to deck: ${card.toString()}`);
         this.cards.push(card);
     }
 

@@ -2,6 +2,7 @@ import { CoachList } from '../throwdown/CoachList';
 import { CoachDialogue } from './CoachDialogue';
 import { DialogueConversation, DialogueStep } from './Dialogue';
 import { StorageManager } from '../utilities/StorageManager';
+import { log } from "../utilities/GameUtils";
 
 export class DialogueStorage {
 
@@ -133,29 +134,29 @@ export class DialogueStorage {
     public warnIfMissingDialogue(coachDialogue: CoachDialogue, coach: string): void {
 
         if (coachDialogue.getIntroDialogueList().length === 0) {
-            console.log("Dialogue missing for " + coach + " Intro Dialogue");
+            log("Dialogue missing for " + coach + " Intro Dialogue");
         }
         coachDialogue.getIntroDialogueList().forEach((dialogue: DialogueConversation) => {
             if (dialogue.getSteps().length === 0) {
-                console.log("Dialogue missing for " + coach + " Intro Dialogue");
+                log("Dialogue missing for " + coach + " Intro Dialogue");
             }
         });
 
         if (coachDialogue.getWinDialogueList().length === 0) {
-            console.log("Dialogue missing for " + coach + " Win Dialogue");
+            log("Dialogue missing for " + coach + " Win Dialogue");
         }
         coachDialogue.getWinDialogueList().forEach((dialogue: DialogueConversation) => {
             if (dialogue.getSteps().length === 0) {
-                console.log("Dialogue missing for " + coach + " Win Dialogue");
+                log("Dialogue missing for " + coach + " Win Dialogue");
             }
         });
 
         if (coachDialogue.getLoseDialogueList().length === 0) {
-            console.log("Dialogue missing for " + coach + " Lose Dialogue");
+            log("Dialogue missing for " + coach + " Lose Dialogue");
         }
         coachDialogue.getLoseDialogueList().forEach((dialogue: DialogueConversation) => {
             if (dialogue.getSteps().length === 0) {
-                console.log("Dialogue missing for " + coach + " Lose Dialogue");
+                log("Dialogue missing for " + coach + " Lose Dialogue");
             }
         });
     }

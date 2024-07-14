@@ -12,7 +12,7 @@ import GameoverPrefab from "../prefabs/GameoverPrefab";
 import Game from '../scenes/Game';
 import { GameSteps } from '../throwdown/GameSteps';
 import { Library } from "../throwdown/Library";
-import { checkUrlParam } from "../utilities/GameUtils";
+import { checkUrlParam, log } from "../utilities/GameUtils";
 import Card from "./Card";
 import { CoachList } from "../throwdown/CoachList";
 /* END-USER-IMPORTS */
@@ -197,7 +197,6 @@ export default class Throwdown extends Phaser.GameObjects.Container {
     }
 
     destroy() {
-        console.log("destroy");
         this.gameOverPrefab?.destroy();
         super.destroy();
     }
@@ -275,7 +274,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
     }
 
 	drawCards() {
-        console.log("on DRAW CARDS step");
+        log("on DRAW CARDS step");
         this.currentStep++;
 
         this.showDrawCardsImage();
@@ -285,7 +284,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
     }
 
     bossAssignAndSelectCards() {
-        console.log("on BOSS ASSIGN AND SELECT CARDS step");
+        log("on BOSS ASSIGN AND SELECT CARDS step");
         this.currentStep++;
         this.boss.showAssignedMemberStuff();
         this.boss.assignCards();
@@ -294,7 +293,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
     }
 
     selectCard() {
-        console.log("on SELECT CARD step");
+        log("on SELECT CARD step");
         this.currentStep++;
 
         this.player.showAssignedMemberStuff();
@@ -304,7 +303,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
     }
 
     selectPlayerMember() {
-        console.log("on SELECT PLAYER MEMBER step");
+        log("on SELECT PLAYER MEMBER step");
         this.currentStep++;
 
         this.showSelectPlayerImage();
@@ -312,7 +311,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
     }
 
     selectEnemyMember() {
-        console.log("on SELECT ENEMY MEMBER step");
+        log("on SELECT ENEMY MEMBER step");
         this.currentStep++;
 
         this.showTargetOpponentImage();
@@ -320,7 +319,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
     }
 
     startTurn() {
-        console.log("on START TURN step");
+        log("on START TURN step");
         this.currentStep++;
 
         this.showThrowdown();
@@ -328,7 +327,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
     }
 
     discardRemainingCards() {
-        console.log("on DISCARD REMAINING CARDS step");
+        log("on DISCARD REMAINING CARDS step");
         this.currentStep++;
 
         this.hideAllInstructions();
@@ -336,7 +335,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
     }
 
     async executeTurnActions() {
-        console.log("on EXECUTE TURN ACTIONS step");
+        log("on EXECUTE TURN ACTIONS step");
         this.currentStep++;
 
         const instaKillBoss = checkUrlParam("instakill", "true");
@@ -358,7 +357,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
     }
 
     checkEndGameCondition() {
-        console.log("on CHECK END GAME CONDITION step");
+        log("on CHECK END GAME CONDITION step");
         this.currentStep++;
 
         if (this.player.members.length === 0 || this.boss.members.length === 0) {
@@ -375,7 +374,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
 
         if (this.player.members.length === 0) {
             
-            console.log("Game over");
+            log("Game over");
 
             Library.incrementNumRuns();
             this.gameOverPrefab = new GameoverPrefab(this.scene, "FAILURE!");
@@ -387,7 +386,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
             (this.scene.scene.get('Game') as Game).loseThrowdown();
         } else if (this.boss.members.length === 0) {
 
-            console.log("You win!");
+            log("You win!");
 
             Library.incrementNumRuns();
             this.gameOverPrefab = new GameoverPrefab(this.scene, "VICTORY!");
@@ -403,7 +402,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
     }
 
     loopBack() {
-        console.log("on LOOP BACK step");
+        log("on LOOP BACK step");
         this.player.clearMembers();
         this.boss.clearMembers();
         this.player.clearHand();

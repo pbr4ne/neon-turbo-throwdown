@@ -9,6 +9,7 @@ import Game from "../scenes/Game";
 import { DialogueConversation, DialogueStep } from "./Dialogue";
 import { Coach } from "../throwdown/Coach";
 import { DialogueStorage } from "./DialogueStorage";
+import { log } from "../utilities/GameUtils";
 /* END-USER-IMPORTS */
 
 export default class DialogBox extends Phaser.GameObjects.Container {
@@ -79,18 +80,15 @@ export default class DialogBox extends Phaser.GameObjects.Container {
 	}
 
 	handleNextButtonClick() {
-        console.log("Next button clicked");
+        log("Next button clicked");
         // Logic to advance the dialogue
         var next = this.dialogueConversation.nextStep();
         var step = this.dialogueConversation.getCurrentStep();
 
 		if (!next) {
-			console.log("going to the next scene");
 			(this.scene.scene.get('Game') as Game).finishDialogue(this.dialogueType);
 		} else {
-			console.log("rendering some more text");
 			this.renderText(step!);
-			console.log(step);
 		}
     }
 

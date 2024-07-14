@@ -10,8 +10,7 @@ import { DialogueStorage } from "../dialogue/DialogueStorage";
 import RunUpgrade from "../prefabs/RunUpgrade";
 import PermUpgrade from "../prefabs/PermUpgrade";
 import Throwdown from "../prefabs/Throwdown";
-import { Library } from "../throwdown/Library";
-import { checkUrlParam } from "../utilities/GameUtils";
+import { checkUrlParam, log } from "../utilities/GameUtils";
 /* END-USER-IMPORTS */
 
 export default class Game extends Phaser.Scene {
@@ -99,7 +98,7 @@ export default class Game extends Phaser.Scene {
         if (type === "intro") {
             this.throwdown = new Throwdown(this, this.currentCoach, this.player);
             this.player.setThrowdown(this.throwdown);
-            console.log("CURRENT DECK SIZE START OF THROWDOWN: " + this.player.deck.getCards().length);
+            log("CURRENT DECK SIZE START OF THROWDOWN: " + this.player.deck.getCards().length);
 
         } else if (type === "win") {
             this.throwdown.destroy();

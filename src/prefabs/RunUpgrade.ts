@@ -11,6 +11,7 @@ import Card from "./Card";
 import { CardType } from "../cards/CardType";
 import Game from "../scenes/Game";
 import { CoachList } from "../throwdown/CoachList";
+import { log } from "../utilities/GameUtils";
 /* END-USER-IMPORTS */
 
 export default class RunUpgrade extends Phaser.GameObjects.Container {
@@ -80,7 +81,6 @@ export default class RunUpgrade extends Phaser.GameObjects.Container {
 
 	private handleCardSelection(cardIndex: number) {
 		if (this.numDraws > 3) {
-			console.log("No more draws allowed");
 			(this.scene.scene.get('Game') as Game).finishRunUpgrade()
 			return;
 		}
@@ -96,7 +96,6 @@ export default class RunUpgrade extends Phaser.GameObjects.Container {
     private drawNextSetOfCards() {
         // Check if there are enough cards left to draw another set of three
         if (this.coach.getBaseCards().length < 3) {
-            console.log("Not enough cards to draw another set.");
 			(this.scene.scene.get('Game') as Game).finishRunUpgrade()
             return;
         }

@@ -10,6 +10,7 @@ import Member from "./Member";
 import Team from "./Team";
 import FloatingObjectScript from "../script-nodes/ui/FloatingObjectScript";
 import { GameSteps } from '../throwdown/GameSteps';
+import { log } from "../utilities/GameUtils";
 /* END-USER-IMPORTS */
 
 export default class Player extends Team {
@@ -30,7 +31,7 @@ export default class Player extends Team {
     private currentMember: Member | null = null;
 
 	addMembers() {
-        console.log("adding new members");
+        log("adding new members");
         this.destroyMembers();
 
         const member1 = new Member(this.scene, 558, 404, 'player1', true, this, 1);
@@ -70,7 +71,7 @@ export default class Player extends Team {
         super.onDeckClick();
         var currentStep = this.throwdown.getCurrentStep();
         if (currentStep == GameSteps.DRAW_CARDS && this.hand.getCards().length == 5) {
-            console.log('go to next step');
+            log('go to next step');
             (this.scene.scene.get('Game') as Game).throwdown.nextStep();
         }
     }
@@ -85,7 +86,7 @@ export default class Player extends Team {
             this.currentMember = member;
  
         } else {
-            console.log("can't click on member now");
+            log("can't click on member now");
             return;
         }
     }
@@ -105,7 +106,7 @@ export default class Player extends Team {
         var currentStep = this.throwdown.getCurrentStep();
 
         if (currentStep != GameSteps.SELECT_ENEMY_MEMBER) {
-            console.log("can't click on enemy now");
+            log("can't click on enemy now");
             return;
         }
 

@@ -9,7 +9,7 @@ import Card from "./Card";
 import Team from "./Team";
 import Game from "../scenes/Game";
 import { GameSteps } from "../throwdown/GameSteps";
-import { checkUrlParam } from "../utilities/GameUtils";
+import { checkUrlParam, log } from "../utilities/GameUtils";
 import Boss from "./Boss";
 /* END-USER-IMPORTS */
 
@@ -116,7 +116,7 @@ export default class Member extends Phaser.GameObjects.Container {
 
     setIntendedTarget(target: Member | null, boss?: Boss) {
         if (target) {
-            console.log(`${this} targets ${target}`);
+            log(`${this} targets ${target}`);
         }
         this.intendedTarget = target;
         if (!boss || boss.getCoach().getDifficulty() === 1) {
