@@ -33,8 +33,6 @@ export abstract class CardType {
         } else {
             return this.coach.getTrophyTypes();
         }
-
-        return  [];
     }
 
     toString(): string {

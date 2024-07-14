@@ -11,7 +11,6 @@ import { CoachList } from "./CoachList";
 export class Library {
 
     private static numRuns = 0;
-    //private static cardTypes: CardType[] = [];
     private static trophyTypes: TrophyType[] = [];
 
     public static getNumRuns() {
@@ -27,19 +26,12 @@ export class Library {
         this.numRuns = numRuns;
     }
 
-    // public static getCardTypes() {
-    //     return this.cardTypes;
-    // }
-
-    // public static addCardType(cardType: CardType) {
-    //     this.cardTypes.push(cardType);
-    // }
-
     public static getTrophyTypes() {
         return this.trophyTypes;
     }
 
     public static addTrophyType(trophyType: TrophyType) {
+        console.log("Adding trophy type to player: " + trophyType.getName());
         this.trophyTypes.push(trophyType);
         StorageManager.saveTrophyTypes(this.trophyTypes);
     }

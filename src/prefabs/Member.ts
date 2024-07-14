@@ -11,6 +11,11 @@ import Game from "../scenes/Game";
 import { GameSteps } from "../throwdown/GameSteps";
 import { checkUrlParam, log } from "../utilities/GameUtils";
 import Boss from "./Boss";
+import { Coach } from "../throwdown/Coach";
+import { TrophyType } from "../trophies/TrophyType";
+import { CoachList } from "../throwdown/CoachList";
+import { Library } from "../throwdown/Library";
+import { IncreaseHP } from "../trophies/IncreaseHP";
 /* END-USER-IMPORTS */
 
 export default class Member extends Phaser.GameObjects.Container {
@@ -20,6 +25,7 @@ export default class Member extends Phaser.GameObjects.Container {
     private visibleMove: boolean = true;
     private hp: number;
     private team: Team;
+    private coach: Coach;
     private intendedTarget: Member | null = null;
     private number: number;
     private bracketLeft: Phaser.GameObjects.Image | null = null;
@@ -29,9 +35,11 @@ export default class Member extends Phaser.GameObjects.Container {
     public assignedText: Phaser.GameObjects.Text | null = null;
     private targetArc: Phaser.GameObjects.Graphics | null = null;
 
-    constructor(scene: Phaser.Scene, x: number, y: number, texture: string, visibleMove: boolean, team: Team, number: number, flip: boolean = false, bracketOffset: number = 0) {
+    constructor(scene: Phaser.Scene, x: number, y: number, texture: string, visibleMove: boolean, team: Team, coach: Coach, number: number, flip: boolean = false, bracketOffset: number = 0) {
         super(scene, x, y);
 
+        this.team = team;
+        this.coach = coach;
         this.visibleMove = visibleMove;
         this.sprite = new Phaser.GameObjects.Sprite(scene, 0, 0, texture);
         
@@ -44,8 +52,13 @@ export default class Member extends Phaser.GameObjects.Container {
         this.hp = 3;
         if (checkUrlParam("lowHP","true")){
             this.hp = 1;
+        } else if (this.getTrophyTypes().some(trophy => trophy instanceof IncreaseHP)) {
+            this.hp++;
         }
-        this.team = team;
+
+        console.log(`member has ${this.hp} hp`);
+
+        
         this.number = number;
         this.setSize(this.sprite.width, this.sprite.height);
 
@@ -312,6 +325,14 @@ export default class Member extends Phaser.GameObjects.Container {
         this.assignedBlock?.setVisible(false);
         this.assignedBlockText?.setVisible(false);
         this.assignedText?.setVisible(false);
+    }
+
+    getTrophyTypes(): TrophyType[] {
+        if (this.coach === CoachList.you) {
+            return Library.getTrophyTypes();
+        } else {
+            return this.coach.getTrophyTypes();
+        }
     }
 
     toString(): string {

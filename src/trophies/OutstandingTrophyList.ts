@@ -1,6 +1,5 @@
 import { TurboThrow } from "./TurboThrow";
 import { IncreaseHP } from "./IncreaseHP";
-import { IncreaseDefense } from "./IncreaseDefense";
 import { TrophyType } from "./TrophyType";
 import { Library } from "../throwdown/Library";
 import { UltraTurboThrow } from "./UltraTurboThrow";
@@ -10,6 +9,7 @@ export class OutstandingTrophyList {
     private static trophyTypes: TrophyType[] = [
         new TurboThrow(),
         new UltraTurboThrow(),
+        new IncreaseHP(),
     ];
 
     public static getTrophyTypes() {

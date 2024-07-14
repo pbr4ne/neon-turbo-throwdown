@@ -26,6 +26,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
 		this.coach = coach;
 		this.player = player;
 		this.boss = new Boss(this.scene, this.coach);
+        this.boss.addMembers();
         this.boss.setThrowdown(this);
 		this.player.opponent = this.boss;
 		this.boss.opponent = this.player;

@@ -10,11 +10,13 @@ export class Coach {
     private baseCards: CardType[] = [];
     private dialogue: CoachDialogue | undefined;
     private trophyTypes: TrophyType[] = [];
+    private isBoss = true;
 
-    constructor(name: string, avatar: string, difficulty: number) {
+    constructor(name: string, avatar: string, difficulty: number, isBoss: boolean = true) {
         this.name = name;
         this.avatar = avatar;
         this.difficulty = difficulty;
+        this.isBoss = isBoss;
     }
 
     public getName(): string {
@@ -51,6 +53,10 @@ export class Coach {
 
     public setTrophyTypes(trophyTypes: TrophyType[]) {
         this.trophyTypes = trophyTypes;
+    }
+
+    public getIsBoss(): boolean {
+        return this.isBoss;
     }
     
     public getNextCoach(): Coach {

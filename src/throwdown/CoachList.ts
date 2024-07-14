@@ -7,9 +7,9 @@ import { TurboThrow } from "../trophies/TurboThrow";
 
 export class CoachList {
 
-    public static you = new Coach("You", "you", 0);
-    public static coach = new Coach("Coach", "coach", 0);
-    public static spirit = new Coach("Spirit Coach", "spirit", 0);
+    public static you = new Coach("You", "you", 0, false);
+    public static coach = new Coach("Coach", "coach", 0, false);
+    public static spirit = new Coach("Spirit Coach", "spirit", 0, false);
     public static primo = new Coach("Primo Firstman", "primo", 1);
     public static sporticus = new Coach("Sporticus", "sporticus", 1);
     public static russ = new Coach("Russ Tyler", "russ", 1);

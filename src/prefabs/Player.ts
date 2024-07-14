@@ -11,6 +11,7 @@ import Team from "./Team";
 import FloatingObjectScript from "../script-nodes/ui/FloatingObjectScript";
 import { GameSteps } from '../throwdown/GameSteps';
 import { log } from "../utilities/GameUtils";
+import { CoachList } from "../throwdown/CoachList";
 /* END-USER-IMPORTS */
 
 export default class Player extends Team {
@@ -34,9 +35,9 @@ export default class Player extends Team {
         log("adding new members");
         this.destroyMembers();
 
-        const member1 = new Member(this.scene, 558, 404, 'player1', true, this, 1);
-        const member2 = new Member(this.scene, 947, 516, 'player2', true, this, 2);
-        const member3 = new Member(this.scene, 1325, 404, 'player3', true, this, 3, true);
+        const member1 = new Member(this.scene, 558, 404, 'player1', true, this, CoachList.you, 1);
+        const member2 = new Member(this.scene, 947, 516, 'player2', true, this, CoachList.you, 2);
+        const member3 = new Member(this.scene, 1325, 404, 'player3', true, this, CoachList.you, 3, true);
 
         this.add(member1);
         this.add(member2);

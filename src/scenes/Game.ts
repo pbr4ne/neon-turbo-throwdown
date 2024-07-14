@@ -50,6 +50,7 @@ export default class Game extends Phaser.Scene {
         this.dialogueStorage = new DialogueStorage();
 
         this.player = new Player(this);
+        this.player.addMembers();
         CoachList.setupCoachDecks();
         //Library.initializeLibrary();
 

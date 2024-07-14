@@ -26,9 +26,7 @@ export default abstract class Team extends Phaser.GameObjects.Container {
         this.deck = new Deck(scene);
         this.discardPile = new Deck(scene);
         this.hand = new Hand(scene, 5);
-      
-        this.addMembers();
-		/* END-USER-CTR-CODE */
+      	/* END-USER-CTR-CODE */
 	}
 
 	/* START-USER-CODE */

@@ -99,7 +99,6 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
 				const trophy = new Trophy(this.scene, trophyType, positions[index].x, positions[index].y, "upgrade");
 				trophy.on('pointerdown', () => this.handleCardSelection(index + 1));
 				this.add(trophy);
-				OutstandingTrophyList.removeTrophy(trophyType);
 			}
 		});
 	}
@@ -108,7 +107,7 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
 	
 		const trophyType = this.currentTrophies[cardIndex-1]
 		Library.addTrophyType(trophyType);
-
+		OutstandingTrophyList.removeTrophy(trophyType);
         (this.scene.scene.get('Game') as Game).finishPermUpgrade();
     }
 
