@@ -132,24 +132,14 @@
                 "key": "difficulty-4"
             },
             {
-                "url": "assets/images/cards/dodge.png",
-                "type": "image",
-                "key": "dodge"
-            },
-            {
                 "url": "assets/images/instructions/draw-cards.png",
                 "type": "image",
                 "key": "draw-cards"
             },
             {
-                "url": "assets/images/cards/empty.png",
-                "type": "image",
-                "key": "empty"
-            },
-            {
                 "url": "assets/images/deck/empty.png",
                 "type": "image",
-                "key": "empty_1"
+                "key": "empty"
             },
             {
                 "url": "assets/images/players/enemy1.png",
@@ -187,14 +177,9 @@
                 "key": "forfeit"
             },
             {
-                "url": "assets/images/cards/front.png",
-                "type": "image",
-                "key": "front"
-            },
-            {
                 "url": "assets/images/deck/front.png",
                 "type": "image",
-                "key": "front_1"
+                "key": "front"
             },
             {
                 "url": "assets/images/cards/group-heal.png",
@@ -298,24 +283,14 @@
                 "key": "red"
             },
             {
-                "url": "assets/images/cards/ring-assigned.png",
+                "url": "assets/images/deck/ring-assigned.png",
                 "type": "image",
                 "key": "ring-assigned"
             },
             {
-                "url": "assets/images/deck/ring-assigned.png",
-                "type": "image",
-                "key": "ring-assigned_1"
-            },
-            {
-                "url": "assets/images/cards/ring-selected.png",
-                "type": "image",
-                "key": "ring-selected"
-            },
-            {
                 "url": "assets/images/deck/ring-selected.png",
                 "type": "image",
-                "key": "ring-selected_1"
+                "key": "ring-selected"
             },
             {
                 "url": "assets/images/level/russ.png",
@@ -413,19 +388,9 @@
                 "key": "throwdown-button"
             },
             {
-                "url": "assets/images/cards/tooltip.png",
-                "type": "image",
-                "key": "tooltip"
-            },
-            {
                 "url": "assets/images/deck/tooltip.png",
                 "type": "image",
-                "key": "tooltip_1"
-            },
-            {
-                "url": "assets/images/level/turbo.png",
-                "type": "image",
-                "key": "turbo_1"
+                "key": "tooltip"
             },
             {
                 "url": "assets/images/cards/turbo-throw.png",
@@ -438,14 +403,9 @@
                 "key": "unknown"
             },
             {
-                "url": "assets/images/cards/upgrade.png",
-                "type": "image",
-                "key": "upgrade"
-            },
-            {
                 "url": "assets/images/deck/upgrade.png",
                 "type": "image",
-                "key": "upgrade_1"
+                "key": "upgrade"
             },
             {
                 "url": "assets/images/welcome/view-credits.png",

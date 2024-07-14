@@ -30,7 +30,7 @@ export class Evade extends CardType {
     }
 
     getIcon(): string {
-        return "dodge";
+        return "evade";
     }
 
     getDescription(): string {
