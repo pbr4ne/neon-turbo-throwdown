@@ -31,6 +31,9 @@ export default class Player extends Team {
     private currentMember: Member | null = null;
 
 	addMembers() {
+        console.log("adding new members");
+        this.destroyMembers();
+
         const member1 = new Member(this.scene, 558, 404, 'player1', true, this, 1);
         const member2 = new Member(this.scene, 947, 516, 'player2', true, this, 2);
         const member3 = new Member(this.scene, 1325, 404, 'player3', true, this, 3, true);
@@ -50,6 +53,18 @@ export default class Player extends Team {
         const floatingObjectMember1 = new FloatingObjectScript(member1);
         const floatingObjectMember2 = new FloatingObjectScript(member2);
         const floatingObjectMember3 = new FloatingObjectScript(member3);
+    }
+
+    destroyMembers() {
+        this.members.forEach(member => {
+            member.destroyMember(member);
+        });
+    }
+
+    hideMembers() {
+        this.members.forEach(member => {
+            member.hide();
+        });
     }
 
     onDeckClick() {

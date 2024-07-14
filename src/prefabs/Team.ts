@@ -136,6 +136,13 @@ export default abstract class Team extends Phaser.GameObjects.Container {
         });
     }
 
+    destroyMembers() {
+        this.members.forEach(member => {
+            member.setIntendedTarget(null);
+            member.destroy();
+        });
+    }
+
     async executeTurn() {
         for (const member of this.members) {
             const card = member.getAssignedCard();

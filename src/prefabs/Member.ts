@@ -258,6 +258,15 @@ export default class Member extends Phaser.GameObjects.Container {
         this.destroy(); 
     }
 
+    hide() {
+        this.sprite.setVisible(false);
+        this.bracketLeft?.setVisible(false);
+        this.bracketRight?.setVisible(false);
+        this.assignedBlock?.setVisible(false);
+        this.assignedBlockText?.setVisible(false);
+        this.assignedText?.setVisible(false);
+    }
+
     enableGlow() {
         //this.sprite.setTint(0x00ff00);
     }

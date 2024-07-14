@@ -123,7 +123,21 @@ export default class Card extends Phaser.GameObjects.Container {
             case "bossDiscard":
                 break;
             case "upgrade":
-                break;
+                this.setTexture("front");
+                this.cardImage.setVisible(true);
+                this.nameText.setVisible(true);
+                this.iconImage.setVisible(true);
+                this.on('pointerover', () => { 
+                    this.scene.input.setDefaultCursor('pointer'); 
+                    this.tooltipImage.setVisible(true);
+                    this.tooltipText.setVisible(true);
+                    console.log(`mouse over ${this.toString()}`)
+                });
+                this.on('pointerout', () => { 
+                    this.scene.input.setDefaultCursor('default'); 
+                    this.tooltipImage.setVisible(false);
+                    this.tooltipText.setVisible(false);
+                });
             default:
                 console.log(`unknown card state: ${this.cardState}`);
                 break;

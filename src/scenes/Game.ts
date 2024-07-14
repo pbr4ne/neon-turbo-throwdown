@@ -87,7 +87,6 @@ export default class Game extends Phaser.Scene {
     }
 
     doDialogue(coach: Coach, type: string) {
-        
         const dialog = new DialogBox(this, 960, 542, coach, type);
 
         this.dialogBox = this.dialogLayer.add(dialog);
@@ -104,7 +103,6 @@ export default class Game extends Phaser.Scene {
         } else if (type === "win") {
             this.throwdown.destroy();
             this.doRunUpgrade();
-            
         } else if (type === "lose") {
             this.throwdown.destroy();
             this.doPermUpgrade();
@@ -131,6 +129,8 @@ export default class Game extends Phaser.Scene {
         this.runUpgrade.destroy();
 
         this.currentCoach = this.currentCoach.getNextCoach();
+
+        this.player.addMembers();
 
         this.doDialogue(this.currentCoach, "intro");
     }
