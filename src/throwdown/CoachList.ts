@@ -27,7 +27,6 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.THROW),
             CardFactory.createCardType(CardKeys.THROW),
             CardFactory.createCardType(CardKeys.THROW),
-            CardFactory.createCardType(CardKeys.THROW),
             CardFactory.createCardType(CardKeys.EVADE),
             CardFactory.createCardType(CardKeys.EVADE),
             CardFactory.createCardType(CardKeys.BLOCK),

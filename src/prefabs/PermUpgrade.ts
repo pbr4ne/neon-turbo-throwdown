@@ -11,6 +11,7 @@ import { CoachList } from "../throwdown/CoachList";
 import Upgrade from "./Upgrade";
 import { log } from "../utilities/GameUtils";
 import { StorageManager } from "../utilities/StorageManager";
+import { CardKeys } from "~/cards/CardKeys";
 
 export default class PermUpgrade extends Phaser.GameObjects.Container {
 
@@ -137,46 +138,49 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
 
     private async handleCardSelection(selectedItem: Trophy | Upgrade) {
         if (selectedItem instanceof Trophy) {
-			console.log("Trophy selected");
+            console.log("Trophy selected");
             Library.addTrophyType(selectedItem.trophyType);
             OutstandingTrophyList.removeTrophy(selectedItem.trophyType);
         } else if (selectedItem instanceof Upgrade) {
-			console.log("Upgrade selected");
-			const upgrade = selectedItem.getCardType().getUpgrade();
-			if (upgrade === null) {
-				log("Upgrade is null");
-				return;
-			}
-			console.log("ADDING UPGRADE: " + upgrade);
-			const newCard = new Card(this.scene, upgrade, "playerDeck", 0, 0, "front");
-			//log all cards in baseCards
-			log("full deck is now: ");
-			CoachList.you.getBaseCards().forEach(card => {
-				log(card.toString());
-			});
-			//delete genericCard from CoachList.you.getBaseCards()
-            const index = this.findCardTypeIndexByName(CoachList.you.getBaseCards(), selectedItem.getCardType());
-
-			if (index > -1) {
-				log("Could find card to remove at index " + index);
-				log("array length was " + CoachList.you.getBaseCards().length);
-				CoachList.you.getBaseCards().splice(index, 1);
-			} else {
-				log("Couldn't find card to remove");
-			}
-			CoachList.you.getBaseCards().push(upgrade);
+            console.log("Upgrade selected");
+            const upgrade = selectedItem.getCardType().getUpgrade();
+            if (upgrade === null) {
+                log("Upgrade is null");
+                return;
+            }
+            console.log("ADDING UPGRADE: " + upgrade);
+            const newCard = new Card(this.scene, upgrade, "playerDeck", 0, 0, "front");
+            //log all cards in baseCards
+            
+            // Delete the card using the key
+            const index = this.findCardTypeIndexByKey(CoachList.you.getBaseCards(), selectedItem.getCardType().getKey());
+    
+            if (index > -1) {
+                log("Found card to remove at index " + index);
+                log("array length was " + CoachList.you.getBaseCards().length);
+                CoachList.you.getBaseCards().splice(index, 1);
+            } else {
+                log("Couldn't find card to remove");
+            }
+            CoachList.you.getBaseCards().push(upgrade);
             await StorageManager.saveBaseDeck(CoachList.you.getBaseCards());
-			//todo - this is suspicious that i have to hide it. because it should be moved later but it stays on the screen
-			newCard.hide();
-        } else {
-			console.log("Unknown item selected");
-		}
 
+            log("full deck is now: ");
+            CoachList.you.getBaseCards().forEach(card => {
+                log(card.toString());
+            });
+            
+            //todo - this is suspicious that i have to hide it. because it should be moved later but it stays on the screen
+            newCard.hide();
+        } else {
+            console.log("Unknown item selected");
+        }
+    
         (this.scene.scene.get('Game') as Game).finishPermUpgrade();
     }
-
-    findCardTypeIndexByName(cards: CardType[], cardType: CardType): number {
-        log("Finding card type index by name: " + cardType.getName());
-        return cards.findIndex(card => card.getName() === cardType.getName());
+    
+    findCardTypeIndexByKey(cards: CardType[], key: CardKeys): number {
+        log("Finding card type index by key: " + key);
+        return cards.findIndex(card => card.getKey() === key);
     }
 }
