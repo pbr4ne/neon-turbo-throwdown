@@ -112,9 +112,13 @@ export default class Player extends Team {
         }
 
         if (this.currentMember) {
+            if (enemy.getHP() <= 0) {
+                log("can't target a dead member");
+                return;
+            }
             this.currentMember.setIntendedTarget(enemy);
 
-            const allMembersHaveCards = this.members.every(member => member.getAssignedCard() != null);
+            const allMembersHaveCards = this.getAliveMembers().every(member => member.getAssignedCard() != null);
             if (allMembersHaveCards) {
                 this.currentMember = null;
                 this.throwdown.nextStep();
@@ -125,20 +129,15 @@ export default class Player extends Team {
         }
     }
 
-    checkAllThrowersHaveTargets(): boolean {
-        // Check if all members with a throw card have a selected target
-        return this.members
-            .filter(member => member.getAssignedCard()?.getCardType().needsTarget())
-            .every(member => member.getIntendedTarget() !== null);
-    }
-
     clearMembers() {
         super.clearMembers();
-        this.members.forEach(member => member.clearTargetArc());
+        this.members.forEach(member => {
+            member.clearTargetArc();
+        });
     }
 
     getUnassignedMembers(): Member[] {
-        return this.members.filter(member => member.getAssignedCard() == null);
+        return this.getAliveMembers().filter(member => member.getAssignedCard() == null);
     }
     
 	/* END-USER-CODE */

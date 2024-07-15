@@ -137,6 +137,12 @@ export default class Member extends Phaser.GameObjects.Container {
         this.healthBar.setVisible(true);
     }
 
+    hideAssignedStuff() {
+        this.bracketLeft?.setVisible(false);
+        this.bracketRight?.setVisible(false);
+        this.healthBar.setVisible(false);
+    }
+
     updateHealthBar() {
         const healthBarWidth = 50;
         const healthBarHeight = 5;
@@ -263,7 +269,7 @@ export default class Member extends Phaser.GameObjects.Container {
             (this.scene.scene.get('Game') as Game).throwdown.nextStep();
         } else {
             //if all members have a card, move to next step
-            const allMembersHaveCards = this.team.members.every(member => member.getAssignedCard() != null);
+            const allMembersHaveCards = this.team.getAliveMembers().every(member => member.getAssignedCard() != null);
             if (allMembersHaveCards) {
                 (this.scene.scene.get('Game') as Game).throwdown.setStep(GameSteps.START_TURN);
             } else {
@@ -294,7 +300,12 @@ export default class Member extends Phaser.GameObjects.Container {
         this.hp -= amount;
         if (this.hp <= 0) {
             this.hp = 0;
-            this.destroyMember(memberWhoTargeted);
+            this.sprite.setAlpha(0.25);
+            this.bracketLeft?.setAlpha(0.25);
+            this.bracketRight?.setAlpha(0.25);
+            this.assignedBlock?.setAlpha(0.25);
+            this.assignedBlockText?.setAlpha(0.25);
+            this.off("pointerdown");
         }
         this.updateHealthBar();
     }

@@ -107,6 +107,15 @@ export default abstract class Team extends Phaser.GameObjects.Container {
         log(`CURRENT ${this} DECK SIZE AFTER RECOMBINE: ${this.deck.getCards().length}`);
     }
 
+
+    allMembersDead(): boolean {
+        return this.members.every(member => member.getHP() <= 0);
+    }
+
+    getAliveMembers(): Member[] {
+        return this.members.filter(member => member.getHP() > 0);
+    }
+
     clearMembers() {
         this.members.forEach(member => {
             member.clearAssignedCards();

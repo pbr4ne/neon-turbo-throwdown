@@ -206,7 +206,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
     showTargetOpponentImage() {
         this.hideAllInstructions();
         this.targetOpponentImage?.setVisible(true);
-        this.boss.members.forEach((member) => {
+        this.boss.getAliveMembers().forEach((member) => {
             if (member.getNumber() == 4) {
                 this.pointerImage?.setPosition(755, 297);
                 this.pointerImage?.setVisible(true);
@@ -379,7 +379,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
         log("on CHECK END GAME CONDITION step");
         this.currentStep++;
 
-        if (this.player.members.length === 0 || this.boss.members.length === 0) {
+        if (this.player.allMembersDead() || this.boss.allMembersDead()) {
             this.hideAllGymStuff();
             this.hideAllInstructions();
             this.player.clearMembers();
@@ -393,7 +393,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
             Card.resetOrder();
         }
 
-        if (this.player.members.length === 0) {
+        if (this.player.allMembersDead()) {
             
             log("Game over");
 
@@ -405,7 +405,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
 		    this.scene.events.emit("scene-awake");
 
             (this.scene.scene.get('Game') as Game).loseThrowdown();
-        } else if (this.boss.members.length === 0) {
+        } else if (this.boss.allMembersDead()) {
 
             log("You win!");
 
