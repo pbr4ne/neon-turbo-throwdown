@@ -2,10 +2,15 @@ import { CardType } from "./CardType";
 import Member from "../prefabs/Member";
 import Team from "../prefabs/Team";
 import { log } from "../utilities/GameUtils";
+import { CardKeys } from "./CardKeys";
 
 export class Evade extends CardType {
     private static chanceToDefend : number = 0.75;
     private numDefends: number = 0;
+
+    constructor(key: CardKeys = CardKeys.EVADE, upgradeKey: CardKeys | null = null) {
+        super(key, upgradeKey);
+    }
 
     resetTurn(): void {
         this.numDefends = 0;
@@ -46,9 +51,5 @@ export class Evade extends CardType {
     getDescription(): string {
         const chancePercentage = (Evade.chanceToDefend * 100).toFixed(0); 
         return `Evade 1 attack. ${chancePercentage}% effective.`;
-    }
-
-    getUpgrade(): CardType | null {
-        return null;
     }
 }

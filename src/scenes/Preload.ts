@@ -81,6 +81,10 @@ export default class Preload extends Phaser.Scene {
 		
 		new DialogueStorage();
         CoachList.setupCoachDecks();
+
+		if (checkUrlParam("enableSaveLoad", "true")) {
+			await StorageManager.loadBaseDeck();
+		}
 		log("PRELOAD COMPLETE");
 	}
 

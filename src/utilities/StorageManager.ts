@@ -28,14 +28,15 @@ interface GameDB extends DBSchema {
         };
     },
     baseDeck: {
-        key: string;
-        value: { key: string };
+        key: number;
+        value: { id?: number; key: CardKeys };
+        indexes: { 'key': string };
     }
 }
 
 export class StorageManager {
     private static dbName: string = 'neon-turbo-throwdown';
-    private static dbVersion: number = 6;
+    private static dbVersion: number = 1
     private static db: IDBPDatabase<GameDB> | null = null;
 
     public static async initializeDB() {
@@ -45,6 +46,8 @@ export class StorageManager {
                     db.createObjectStore('trophies', { keyPath: 'key' });
                     db.createObjectStore('runs', { keyPath: 'key' });
                     db.createObjectStore('dialogues', { keyPath: 'key' });
+                    const baseDeckStore = db.createObjectStore('baseDeck', { keyPath: 'id', autoIncrement: true });
+                    baseDeckStore.createIndex('key', 'key');
                 },
             });
         }
@@ -64,7 +67,7 @@ export class StorageManager {
         //await this.initializeDB();
         if (this.db) {
             const trophyNames = await this.db.getAll('trophies');
-            const trophyType = trophyNames.map(trophyStored => StorageManager.createTrophyType( trophyStored.key ));
+            const trophyType = trophyNames.map(trophyStored => StorageManager.createTrophyType(trophyStored.key));
             log(`loaded trophy types from db ${trophyType}`);
             Library.setTrophyTypes(trophyType);
             return trophyType;
@@ -72,7 +75,6 @@ export class StorageManager {
         return [];
     }
 
-    
     public static createTrophyType(key: string): TrophyType {
         log("creating trophy type " + key);
         switch (key) {
@@ -133,22 +135,31 @@ export class StorageManager {
 
     public static async saveBaseDeck(cardTypes: CardType[]) {
         if (this.db) {
+            const tx = this.db.transaction('baseDeck', 'readwrite');
+            await tx.objectStore('baseDeck').clear();
+            await tx.done;
+    
+            const txAdd = this.db.transaction('baseDeck', 'readwrite');
             for (const cardType of cardTypes) {
                 log(`saving card type to db: ${cardType.getName()}`);
-                await this.db.put('baseDeck', { key: cardType.getName() });
+                await txAdd.objectStore('baseDeck').add({ key: cardType.key });
             }
+            await txAdd.done;
         }
     }
-    
+
     public static async loadBaseDeck(): Promise<CardType[]> {
         if (this.db) {
-            const cardNames = await this.db.getAll('baseDeck');
-            const cardTypes = cardNames.map(cardStored => CardFactory.createCardType(cardStored.key as CardKeys));
+            const cardRecords = await this.db.getAll('baseDeck');
+            const cardTypes = cardRecords.map(cardStored => CardFactory.createCardType(cardStored.key));
             log(`loaded card types from db: ${cardTypes}`);
-            CoachList.you.setBaseCards(cardTypes);
+            if (cardTypes.length > 0) {
+                log(`overriding base cards from save`);
+                CoachList.you.setBaseCards(cardTypes);
+            }
             return cardTypes;
         }
         return [];
     }
-
 }
+

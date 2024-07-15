@@ -10,6 +10,7 @@ import { CardType } from "../cards/CardType";
 import { CoachList } from "../throwdown/CoachList";
 import Upgrade from "./Upgrade";
 import { log } from "../utilities/GameUtils";
+import { StorageManager } from "../utilities/StorageManager";
 
 export default class PermUpgrade extends Phaser.GameObjects.Container {
 
@@ -134,7 +135,7 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
         });
     }
 
-    private handleCardSelection(selectedItem: Trophy | Upgrade) {
+    private async handleCardSelection(selectedItem: Trophy | Upgrade) {
         if (selectedItem instanceof Trophy) {
 			console.log("Trophy selected");
             Library.addTrophyType(selectedItem.trophyType);
@@ -164,6 +165,7 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
 				log("Couldn't find card to remove");
 			}
 			CoachList.you.getBaseCards().push(upgrade);
+            await StorageManager.saveBaseDeck(CoachList.you.getBaseCards());
 			//todo - this is suspicious that i have to hide it. because it should be moved later but it stays on the screen
 			newCard.hide();
         } else {

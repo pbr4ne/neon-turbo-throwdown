@@ -10,5 +10,8 @@ export enum CardKeys {
     BLOCK = "block",
 
     //catch
-    CATCH = "catch"
+    CATCH = "catch",
+
+    //unknown
+    UNKNOWN = "unknown"
 }

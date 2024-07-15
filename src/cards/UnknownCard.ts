@@ -2,9 +2,14 @@
 import { CardType } from "./CardType";
 import Member from "../prefabs/Member";
 import Team from "../prefabs/Team";
+import { CardKeys } from "./CardKeys";
 
 
 export class UnknownCard extends CardType {
+    constructor(key: CardKeys = CardKeys.UNKNOWN, upgradeKey: CardKeys | null = null) {
+        super(key, upgradeKey);
+    }
+
     resetTurn(): void {
     }
 

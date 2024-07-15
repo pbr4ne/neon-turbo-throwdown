@@ -1,7 +1,17 @@
 import Member from "../prefabs/Member";
 import Team from "../prefabs/Team";
+import { CardFactory } from "./CardFactory";
+import { CardKeys } from "./CardKeys";
 
 export abstract class CardType {
+
+    public key: CardKeys;
+    private upgradeKey: CardKeys | null;
+
+    constructor(key: CardKeys | CardKeys.UNKNOWN, upgradeKey: CardKeys | null) {
+        this.key = key;
+        this.upgradeKey = upgradeKey;
+    }
 
     abstract resetTurn(): void;
 
@@ -19,9 +29,18 @@ export abstract class CardType {
 
     abstract getDescription(): string;
 
-    abstract getUpgrade(): CardType | null;
+    getKey(): CardKeys {
+        return this.key;
+    }
+
+    getUpgrade(): CardType | null {
+        if (this.upgradeKey != null) {
+            return CardFactory.createCardType(this.upgradeKey);
+        }
+        return null;
+    }
 
     toString(): string {
-        return `CardType: ${this.getName()}`;
+        return `CardType: ${this.getKey()}`;
     }
 }

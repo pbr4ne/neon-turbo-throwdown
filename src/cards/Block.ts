@@ -3,11 +3,16 @@ import Member from "../prefabs/Member";
 import Team from "../prefabs/Team";
 import { GameSounds } from "../utilities/GameSounds";
 import { log } from "../utilities/GameUtils";
+import { CardKeys } from "./CardKeys";
 
 export class Block extends CardType {
     private static chanceToDefend : number = 0.50;
     private static defenseDamage: number = 1;
     private numDefends: number = 0;
+
+    constructor(key: CardKeys = CardKeys.BLOCK, upgradeKey: CardKeys | null = null) {
+        super(key, upgradeKey);
+    }
 
     resetTurn(): void {
         this.numDefends = 0;
@@ -51,9 +56,5 @@ export class Block extends CardType {
     getDescription(): string {
         const chancePercentage = (Block.chanceToDefend * 100).toFixed(0); 
         return `Block 1 attack. ${chancePercentage}% effective. If successful, rebound ${Block.defenseDamage} DMG.`;
-    }
-
-    getUpgrade(): CardType | null {
-        return null;
     }
 }

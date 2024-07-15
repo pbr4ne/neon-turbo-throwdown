@@ -11,6 +11,10 @@ export class Throw extends CardType {
     protected chanceToOffend : number = 0.75;
     protected offenseDamage: number = 1;
 
+    constructor(key: CardKeys = CardKeys.THROW, upgradeKey: CardKeys | null = CardKeys.TURBO_THROW) {
+        super(key, upgradeKey);
+    }
+
     resetTurn(): void {
     }
 
@@ -63,10 +67,6 @@ export class Throw extends CardType {
     getDescription(): string {
         const chancePercentage = (this.getChanceToOffend() * 100).toFixed(0); 
         return `${this.getOffenseDamage()} DMG. ${chancePercentage}% effective.`;
-    }
-
-    getUpgrade(): CardType | null{
-        return CardFactory.createCardType(CardKeys.TURBO_THROW);
     }
 
     getChanceToOffend(): number {
