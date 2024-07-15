@@ -46,6 +46,10 @@ export abstract class CardType {
         return shuffledMembers.slice(0, Math.min(numTargets, shuffledMembers.length));
     }
 
+    getNicePercentage(fraction: number): string {
+        return (fraction * 100).toFixed(0)
+    }
+
     toString(): string {
         return `CardType: ${this.getKey()}`;
     }

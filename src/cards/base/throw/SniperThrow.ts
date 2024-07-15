@@ -1,4 +1,4 @@
-import { CardKeys } from "../CardKeys";
+import { CardKeys } from "../../CardKeys";
 import { RiRicochet } from "./RiRicochet";
 
 export class SniperThrow extends RiRicochet {

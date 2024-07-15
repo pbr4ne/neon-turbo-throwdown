@@ -1,4 +1,4 @@
-import { CardKeys } from "../CardKeys";
+import { CardKeys } from "../../CardKeys";
 import { Ricochet } from "./Ricochet";
 
 export class UltraTurboThrow extends Ricochet {

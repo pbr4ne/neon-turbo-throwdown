@@ -1,14 +1,19 @@
-import { Block } from "./base/Block";
+import { BestBlock } from "./base/block/BestBlock";
+import { BetterBlock } from "./base/block/BetterBlock";
+import { Block } from "./base/block/Block";
+import { DoubleBlock } from "./base/block/DoubleBlock";
+import { TurboBlock } from "./base/block/TurboBlock";
+import { Catch } from "./base/catch/Catch";
+import { Evade } from "./base/evade/Evade";
+import { Ricochet } from "./base/throw/Ricochet";
+import { RiRicochet } from "./base/throw/RiRicochet";
+import { SniperThrow } from "./base/throw/SniperThrow";
+import { Throw } from "./base/throw/Throw";
+import { TurboThrow } from "./base/throw/TurboThrow";
+import { UltraTurboThrow } from "./base/throw/UltraTurboThrow";
 import { CardType } from "./CardType";
-import { Catch } from "./base/Catch";
-import { Evade } from "./base/Evade";
-import { Throw } from "./base/Throw";
-import { TurboThrow } from "./base/TurboThrow";
 import { UnknownCard } from "./UnknownCard";
-import { Ricochet } from "./base/Ricochet";
-import { UltraTurboThrow } from "./base/UltraTurboThrow";
-import { RiRicochet } from "./base/RiRicochet";
-import { SniperThrow } from "./base/SniperThrow";
+
 
 export class CardFactory {
     private static cardTypeMap: Map<string, new () => CardType> = new Map();
@@ -39,6 +44,10 @@ export class CardFactory {
         
         //block
         this.registerCardType("block", Block);
+        this.registerCardType("better-block", BetterBlock);
+        this.registerCardType("turbo-block", TurboBlock);
+        this.registerCardType("best-block", BestBlock);
+        this.registerCardType("double-block", DoubleBlock);
 
         //evade
         this.registerCardType("evade", Evade);

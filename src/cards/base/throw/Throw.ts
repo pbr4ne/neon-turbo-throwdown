@@ -1,10 +1,8 @@
-
-import { CardType } from "../CardType";
-import Member from "../../prefabs/Member";
-import Team from "../../prefabs/Team";
-import { GameSounds } from "../../utilities/GameSounds";
-import { CardKeys } from "../CardKeys";
-
+import { CardKeys } from "../../CardKeys";
+import { CardType } from "../../CardType";
+import Member from "../../../prefabs/Member";
+import Team from "../../../prefabs/Team";
+import { GameSounds } from "../../../utilities/GameSounds";
 
 export class Throw extends CardType {
     protected chanceToOffend : number = 0.75;
@@ -77,7 +75,7 @@ export class Throw extends CardType {
     }
 
     getDescription(): string {
-        const chancePercentage = (this.getChanceToOffend() * 100).toFixed(0); 
+        const chancePercentage = this.getNicePercentage(this.getChanceToOffend());
         return `Targets ${this.getNumTargets()} for ${this.getOffenseDamage()} damage. ${chancePercentage}% effective.`;
     }
 
