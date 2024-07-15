@@ -152,7 +152,7 @@ export default class Member extends Phaser.GameObjects.Container {
 
         const currentHealthWidth = (this.hp / this.maxHP) * healthBarWidth;
 
-        this.healthBar.fillStyle(0xff0000, 1);
+        this.healthBar.fillStyle(0xff005a, 1);
         this.healthBar.fillRect(-healthBarWidth / 2, healthBarY, currentHealthWidth, healthBarHeight);
 
         const capWidth = 2;
