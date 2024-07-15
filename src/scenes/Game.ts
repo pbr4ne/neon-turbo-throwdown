@@ -54,6 +54,7 @@ export default class Game extends Phaser.Scene {
             this.currentCoach = CoachList.getCoachByName(overrideCoach);
         }
 
+        new DialogueStorage();
         CoachList.setupCoachDecks();
 
         CoachList.primo.setDialogue(DialogueStorage.primoDialogue);
