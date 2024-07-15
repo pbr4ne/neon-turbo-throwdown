@@ -6,16 +6,19 @@ import { log } from "../../../utilities/GameUtils";
 import { CardKeys } from "../../CardKeys";
 
 export class Catch extends CardType {
-    private static chanceToDefend : number = 0.50;
-    private static defenseDamage: number = 3;
-    private numDefends: number = 0;
+    protected chanceToDefend : number = 0.50;
+    protected chanceToRebound: number = 0.50;
+    protected defenseDamage: number = 1;
+    protected currentNumDefends: number = 1;
+    protected reboundTargets: number = 1;
+    protected numDefends = 1;
 
-    constructor(key: CardKeys = CardKeys.CATCH, upgradeKey: CardKeys | null = null) {
+    constructor(key: CardKeys = CardKeys.CATCH, upgradeKey: CardKeys | null = CardKeys.TURBO_CATCH) {
         super(key, upgradeKey);
     }
 
     resetTurn(): void {
-        this.numDefends = 0;
+        this.currentNumDefends = 0;
     }
 
     special(member: Member, team: Team, opponentTeam: Team): boolean {
@@ -27,18 +30,28 @@ export class Catch extends CardType {
     }
 
     defense(member: Member, attacker: Member, team: Team, opponentTeam: Team): boolean {
-        this.numDefends++;
-        log("Catch has been used " + this.numDefends + " times.");
-        if (this.numDefends <= 1 && Math.random() < Catch.chanceToDefend) {
-            log("Catch successful.");
+        let defenseSuccess = false;
+        if (this.getCurrentNumDefends() <= 1 && this.getChanceToDefend() >= Math.random()) {
             member.showFloatingAction(this.getName());
-            attacker.showFloatingAction(Catch.defenseDamage.toString());
-            attacker.reduceHP(Catch.defenseDamage, attacker);
-            GameSounds.playBlock();
-            return true;
+
+            let membersToRebound = this.getRandomOtherAliveMembers(opponentTeam, attacker, this.getReboundTargets() - 1);
+            membersToRebound.unshift(attacker);
+            membersToRebound.forEach((enemyMember) => {
+
+                if (this.getChanceToRebound() >= Math.random()) {
+                    enemyMember.showFloatingAction(this.getDefenseDamage().toString());
+                    enemyMember.reduceHP(this.getDefenseDamage(), attacker);
+                }
+            });
+
+            defenseSuccess = true;
         }
-        log("Catch failed.");
-        return false;
+        log("Catch has been used " + this.currentNumDefends + " times.");
+
+        if (defenseSuccess) {
+            GameSounds.playBlock();
+        }
+        return defenseSuccess;
     }
 
     needsTarget(): boolean {
@@ -53,8 +66,33 @@ export class Catch extends CardType {
         return "catch";
     }
 
+    getChanceToDefend(): number {
+        return this.chanceToDefend;
+    }
+
+    getChanceToRebound(): number {
+        return this.chanceToRebound;
+    }
+
+    getDefenseDamage(): number {
+        return this.defenseDamage;
+    }
+
+    getCurrentNumDefends(): number {
+        return this.currentNumDefends;
+    }
+
+    getReboundTargets(): number {
+        return this.reboundTargets;
+    }
+
+    getNumDefends(): number {
+        return this.numDefends;
+    }
+
     getDescription(): string {
-        const chancePercentage = (Catch.chanceToDefend * 100).toFixed(0); 
-        return `Catch 1 attack. ${chancePercentage}% effective. If successful, rebound ${Catch.defenseDamage} DMG.`;
+        const niceChanceToDefend = this.getNicePercentage(this.getChanceToDefend());
+        const niceChanceToRebound = this.getNicePercentage(this.getChanceToRebound());
+        return `Blocks ${this.getNumDefends()}. ${niceChanceToDefend}% effective. If successful, ${niceChanceToRebound}% chance to rebound ${this.getDefenseDamage()} damage.`;
     }
 }

@@ -3,7 +3,9 @@ import { BetterBlock } from "./base/block/BetterBlock";
 import { Block } from "./base/block/Block";
 import { DoubleBlock } from "./base/block/DoubleBlock";
 import { TurboBlock } from "./base/block/TurboBlock";
+import { BigHands } from "./base/catch/BigHands";
 import { Catch } from "./base/catch/Catch";
+import { TurboCatch } from "./base/catch/TurboCatch";
 import { Evade } from "./base/evade/Evade";
 import { Ricochet } from "./base/throw/Ricochet";
 import { RiRicochet } from "./base/throw/RiRicochet";
@@ -54,5 +56,7 @@ export class CardFactory {
         
         //catch
         this.registerCardType("catch", Catch);
+        this.registerCardType("turbo-catch", TurboCatch);
+        this.registerCardType("big-hands", BigHands);
     }
 }
