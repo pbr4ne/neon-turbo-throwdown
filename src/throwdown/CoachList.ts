@@ -27,7 +27,7 @@ export class CoachList {
             new Throw(this.you),
             new Throw(this.you),
             new Throw(this.you),
-            new Evade(this.you),
+            new Throw(this.you),
             new Evade(this.you),
             new Evade(this.you),
             new Block(this.you),
