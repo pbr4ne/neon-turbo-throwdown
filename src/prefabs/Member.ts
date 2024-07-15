@@ -196,39 +196,47 @@ export default class Member extends Phaser.GameObjects.Container {
             this.clearTargetArc();
             return;
         }
-
+    
         if (this.targetArc) {
             this.targetArc.clear();
         } else {
             this.targetArc = this.scene.add.graphics();
         }
-
+    
         const startX = this.x;
         const startY = this.y;
         const endX = target.x;
         const endY = target.y;
-
+    
         let lineColour = 0xffff00;
         let offsetX = 0;
         let offsetY = 0;
-
+        let controlYOffset = -50;
+    
         if (boss != null) {
             lineColour = 0x00ffff;
             offsetX = 10; 
             offsetY = 10;
+            controlYOffset = -100;
         }
     
         const controlX = (startX + endX) / 2 + offsetX;
-        const controlY = Math.min(startY, endY) - 50 + offsetY;
+        const controlY = Math.min(startY, endY) + controlYOffset + offsetY;
     
         const curve = new Phaser.Curves.QuadraticBezier(
             new Phaser.Math.Vector2(startX + offsetX, startY + offsetY),
-            new Phaser.Math.Vector2(controlX + offsetX, controlY + offsetY),
+            new Phaser.Math.Vector2(controlX + offsetX, controlY),
             new Phaser.Math.Vector2(endX, endY)
         );
     
         this.targetArc.lineStyle(3, lineColour, 1);
         curve.draw(this.targetArc);
+    
+        const circleRadius = 5;
+    
+        this.targetArc.fillStyle(lineColour, 1);
+        this.targetArc.fillCircle(startX + offsetX, startY + offsetY, circleRadius);
+        this.targetArc.fillCircle(endX, endY, circleRadius);
     }
 
     clearTargetArc() {

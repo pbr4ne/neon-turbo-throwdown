@@ -76,9 +76,7 @@ export default class Hand {
             return;
         }
 
-        console.log("ORDER: " + card.getOrder());
         card.setOrder(Card.getStaticOrder());
-        console.log("ORDER: " + card.getOrder());
         //card.incrementOrder();
 
         if (this.poppedUpCard) {
@@ -95,8 +93,6 @@ export default class Hand {
         this.selectedCard = card;
 
         if (currentStep === GameSteps.SELECT_CARD) {
-           // card.incrementOrder();
-            log("INCREMENTED ORDER: " + card.getOrder());
             (this.scene.scene.get('Game') as Game).throwdown.nextStep();
         }
     }
@@ -111,7 +107,6 @@ export default class Hand {
                 this.cardsInPlay.push(this.poppedUpCard);
                 this.poppedUpCard.togglePopUp(); 
                 this.poppedUpCard = null;
-                
             }
         }
     }
