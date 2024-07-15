@@ -1,17 +1,7 @@
-import { Coach } from "../throwdown/Coach";
 import Member from "../prefabs/Member";
 import Team from "../prefabs/Team";
-import { TrophyType } from "../trophies/TrophyType";
-import { CoachList } from "../throwdown/CoachList";
-import { Library } from "../throwdown/Library";
 
 export abstract class CardType {
-
-    // protected coach: Coach;
-
-    // constructor(coach: Coach) {
-    //     this.coach = coach;
-    // }
 
     abstract resetTurn(): void;
 
@@ -30,14 +20,6 @@ export abstract class CardType {
     abstract getDescription(): string;
 
     abstract getUpgrade(): CardType | null;
-
-    // getTrophyTypes(): TrophyType[] {
-    //     if (this.coach === CoachList.you) {
-    //         return Library.getTrophyTypes();
-    //     } else {
-    //         return this.coach.getTrophyTypes();
-    //     }
-    // }
 
     toString(): string {
         return `CardType: ${this.getName()}`;

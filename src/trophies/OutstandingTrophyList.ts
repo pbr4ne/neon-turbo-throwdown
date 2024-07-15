@@ -1,7 +1,5 @@
-import { TurboThrow } from "./card/TurboThrow";
 import { TrophyType } from "./TrophyType";
 import { Library } from "../throwdown/Library";
-import { UltraTurboThrow } from "./card/UltraTurboThrow";
 import { CyanDeck } from "./cosmetic/CyanDeck";
 import { YellowDeck } from "./cosmetic/YellowDeck";
 import { BlackDeck } from "./cosmetic/BlackDeck";
@@ -18,9 +16,6 @@ import { SeeTargets3 } from "./member/SeeTargets3";
 export class OutstandingTrophyList {
 
     private static trophyTypes: TrophyType[] = [
-        //card
-        // new TurboThrow(),
-        // new UltraTurboThrow(),
         //cosmetic
         new CyanDeck(),
         new YellowDeck(),

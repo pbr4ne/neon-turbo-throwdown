@@ -4,6 +4,7 @@ import Member from "../prefabs/Member";
 import Team from "../prefabs/Team";
 import { GameSounds } from "../utilities/GameSounds";
 import { CardFactory } from "./CardFactory";
+import { CardKeys } from "./CardKeys";
 
 
 export class Throw extends CardType {
@@ -65,7 +66,7 @@ export class Throw extends CardType {
     }
 
     getUpgrade(): CardType | null{
-        return CardFactory.createTurboThrow();
+        return CardFactory.createCardType(CardKeys.TURBO_THROW);
     }
 
     getChanceToOffend(): number {

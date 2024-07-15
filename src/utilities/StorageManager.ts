@@ -1,10 +1,13 @@
 import { openDB, DBSchema, IDBPDatabase } from 'idb';
 import { Library } from '../throwdown/Library';
 import { TrophyType } from '../trophies/TrophyType';
-import { TurboThrow } from '../trophies/card/TurboThrow';
 import { UnknownTrophy } from '../trophies/UnknownTrophy';
 import { CoachDialogue } from '../dialogue/CoachDialogue';
 import { log } from "../utilities/GameUtils";
+import { CardType } from '../cards/CardType';
+import { CoachList } from '../throwdown/CoachList';
+import { CardFactory } from '../cards/CardFactory';
+import { CardKeys } from '../cards/CardKeys';
 
 interface GameDB extends DBSchema {
     trophies: {
@@ -23,7 +26,11 @@ interface GameDB extends DBSchema {
             currentWinDialogue: number;
             currentLoseDialogue: number;
         };
-    };
+    },
+    baseDeck: {
+        key: string;
+        value: { key: string };
+    }
 }
 
 export class StorageManager {
@@ -69,8 +76,6 @@ export class StorageManager {
     public static createTrophyType(key: string): TrophyType {
         log("creating trophy type " + key);
         switch (key) {
-            case 'turbo-throw':
-                return new TurboThrow();
             default:
                 log(`Unknown trophy type: ${key}`);
                 return new UnknownTrophy();
@@ -125,4 +130,25 @@ export class StorageManager {
         }
         return null;
     }
+
+    public static async saveBaseDeck(cardTypes: CardType[]) {
+        if (this.db) {
+            for (const cardType of cardTypes) {
+                log(`saving card type to db: ${cardType.getName()}`);
+                await this.db.put('baseDeck', { key: cardType.getName() });
+            }
+        }
+    }
+    
+    public static async loadBaseDeck(): Promise<CardType[]> {
+        if (this.db) {
+            const cardNames = await this.db.getAll('baseDeck');
+            const cardTypes = cardNames.map(cardStored => CardFactory.createCardType(cardStored.key as CardKeys));
+            log(`loaded card types from db: ${cardTypes}`);
+            CoachList.you.setBaseCards(cardTypes);
+            return cardTypes;
+        }
+        return [];
+    }
+
 }

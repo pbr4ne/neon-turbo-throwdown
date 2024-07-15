@@ -1,10 +1,7 @@
-import { Throw } from "../cards/Throw";
-import { Block } from "../cards/Block";
-import { Catch } from "../cards/Catch";
-import { Evade } from "../cards/Evade";
 import { Coach } from "./Coach";
-import { TurboThrow } from "../trophies/card/TurboThrow";
 import { log } from "../utilities/GameUtils";
+import { CardFactory } from "../cards/CardFactory";
+import { CardKeys } from "../cards/CardKeys";
 
 export class CoachList {
 
@@ -25,150 +22,151 @@ export class CoachList {
     public static setupCoachDecks() {
         log("SETTING UP COACH DECKS");
         this.you.setBaseCards([
-            new Throw(),
-            new Throw(),
-            new Throw(),
-            new Throw(),
-            new Throw(),
-            new Evade(),
-            new Evade(),
-            new Block(),
-            new Block(),
-            new Catch()
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.EVADE),
+            CardFactory.createCardType(CardKeys.EVADE),
+            CardFactory.createCardType(CardKeys.BLOCK),
+            CardFactory.createCardType(CardKeys.BLOCK),
+            CardFactory.createCardType(CardKeys.CATCH)
         ]);
         
         this.primo.setBaseCards([
-            new Throw(),
-            new Throw(),
-            new Throw(),
-            new Throw(),
-            new Evade(),
-            new Evade(),
-            new Evade(),
-            new Block(),
-            new Block(),
-            new Catch()
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.EVADE),
+            CardFactory.createCardType(CardKeys.EVADE),
+            CardFactory.createCardType(CardKeys.EVADE),
+            CardFactory.createCardType(CardKeys.BLOCK),
+            CardFactory.createCardType(CardKeys.BLOCK),
+            CardFactory.createCardType(CardKeys.CATCH)
         ]);
 
         this.sporticus.setBaseCards([
-            new Throw(),
-            new Throw(),
-            new Throw(),
-            new Throw(),
-            new Evade(),
-            new Evade(),
-            new Evade(),
-            new Block(),
-            new Block(),
-            new Catch()
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.EVADE),
+            CardFactory.createCardType(CardKeys.EVADE),
+            CardFactory.createCardType(CardKeys.EVADE),
+            CardFactory.createCardType(CardKeys.BLOCK),
+            CardFactory.createCardType(CardKeys.BLOCK),
+            CardFactory.createCardType(CardKeys.CATCH)
         ]);
 
         this.russ.setBaseCards([
-            new Throw(),
-            new Throw(),
-            new Throw(),
-            new Throw(),
-            new Evade(),
-            new Evade(),
-            new Evade(),
-            new Block(),
-            new Block(),
-            new Catch()
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.EVADE),
+            CardFactory.createCardType(CardKeys.EVADE),
+            CardFactory.createCardType(CardKeys.EVADE),
+            CardFactory.createCardType(CardKeys.BLOCK),
+            CardFactory.createCardType(CardKeys.BLOCK),
+            CardFactory.createCardType(CardKeys.CATCH)
         ]);
 
         this.russ.setTrophyTypes([
-            new TurboThrow()
+            
         ]);
 
         this.boss.setBaseCards([
-            new Throw(),
-            new Throw(),
-            new Throw(),
-            new Throw(),
-            new Evade(),
-            new Evade(),
-            new Evade(),
-            new Block(),
-            new Block(),
-            new Catch()
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.EVADE),
+            CardFactory.createCardType(CardKeys.EVADE),
+            CardFactory.createCardType(CardKeys.EVADE),
+            CardFactory.createCardType(CardKeys.BLOCK),
+            CardFactory.createCardType(CardKeys.BLOCK),
+            CardFactory.createCardType(CardKeys.CATCH)
         ]);
 
         this.steve.setBaseCards([
-            new Throw(),
-            new Throw(),
-            new Throw(),
-            new Throw(),
-            new Evade(),
-            new Evade(),
-            new Evade(),
-            new Block(),
-            new Block(),
-            new Catch()
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.EVADE),
+            CardFactory.createCardType(CardKeys.EVADE),
+            CardFactory.createCardType(CardKeys.EVADE),
+            CardFactory.createCardType(CardKeys.BLOCK),
+            CardFactory.createCardType(CardKeys.BLOCK),
+            CardFactory.createCardType(CardKeys.CATCH)
         ]);
 
         this.betsy.setBaseCards([
-            new Throw(),
-            new Throw(),
-            new Throw(),
-            new Throw(),
-            new Evade(),
-            new Evade(),
-            new Evade(),
-            new Block(),
-            new Block(),
-            new Catch()
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.EVADE),
+            CardFactory.createCardType(CardKeys.EVADE),
+            CardFactory.createCardType(CardKeys.EVADE),
+            CardFactory.createCardType(CardKeys.BLOCK),
+            CardFactory.createCardType(CardKeys.BLOCK),
+            CardFactory.createCardType(CardKeys.CATCH)
         ]);
 
         this.coree.setBaseCards([
-            new Throw(),
-            new Throw(),
-            new Throw(),
-            new Throw(),
-            new Evade(),
-            new Evade(),
-            new Evade(),
-            new Block(),
-            new Block(),
-            new Catch()
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.EVADE),
+            CardFactory.createCardType(CardKeys.EVADE),
+            CardFactory.createCardType(CardKeys.EVADE),
+            CardFactory.createCardType(CardKeys.BLOCK),
+            CardFactory.createCardType(CardKeys.BLOCK),
+            CardFactory.createCardType(CardKeys.CATCH)
         ]);
 
         this.turbo.setBaseCards([
-            new Throw(),
-            new Throw(),
-            new Throw(),
-            new Throw(),
-            new Evade(),
-            new Evade(),
-            new Evade(),
-            new Block(),
-            new Block(),
-            new Catch()
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.EVADE),
+            CardFactory.createCardType(CardKeys.EVADE),
+            CardFactory.createCardType(CardKeys.EVADE),
+            CardFactory.createCardType(CardKeys.BLOCK),
+            CardFactory.createCardType(CardKeys.BLOCK),
+            CardFactory.createCardType(CardKeys.CATCH)
         ]);
 
         this.shadow.setBaseCards([
-            new Throw(),
-            new Throw(),
-            new Throw(),
-            new Throw(),
-            new Evade(),
-            new Evade(),
-            new Evade(),
-            new Block(),
-            new Block(),
-            new Catch()
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.EVADE),
+            CardFactory.createCardType(CardKeys.EVADE),
+            CardFactory.createCardType(CardKeys.EVADE),
+            CardFactory.createCardType(CardKeys.BLOCK),
+            CardFactory.createCardType(CardKeys.BLOCK),
+            CardFactory.createCardType(CardKeys.CATCH)
         ]);
 
         this.boss10.setBaseCards([
-            new Throw(),
-            new Throw(),
-            new Throw(),
-            new Throw(),
-            new Evade(),
-            new Evade(),
-            new Evade(),
-            new Block(),
-            new Block(),
-            new Catch()
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.EVADE),
+            CardFactory.createCardType(CardKeys.EVADE),
+            CardFactory.createCardType(CardKeys.EVADE),
+            CardFactory.createCardType(CardKeys.BLOCK),
+            CardFactory.createCardType(CardKeys.BLOCK),
+            CardFactory.createCardType(CardKeys.CATCH)
         ]);
     }
 

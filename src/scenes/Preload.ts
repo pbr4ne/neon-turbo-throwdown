@@ -12,6 +12,7 @@ import { checkUrlParam, log } from "../utilities/GameUtils";
 import { StorageManager } from "../utilities/StorageManager";
 import { DialogueStorage } from "../dialogue/DialogueStorage";
 import { CoachList } from "../throwdown/CoachList";
+import { CardFactory } from "../cards/CardFactory";
 /* END-USER-IMPORTS */
 
 export default class Preload extends Phaser.Scene {
@@ -68,6 +69,8 @@ export default class Preload extends Phaser.Scene {
         }); 
 
 		this.load.pack("asset-pack", assetPackUrl);
+
+		CardFactory.registerCardTypes();
 
 		if (checkUrlParam("enableSaveLoad", "true")) {
 			await StorageManager.initializeDB();
