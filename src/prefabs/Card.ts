@@ -1,10 +1,4 @@
-
-// You can write more code here
-
-/* START OF COMPILED CODE */
-
 import Phaser from "phaser";
-/* START-USER-IMPORTS */
 import { CardType } from "../cards/CardType";
 import Member from "./Member";
 import { log } from "../utilities/GameUtils";
@@ -14,9 +8,9 @@ import { BlackDeck } from "../trophies/cosmetic/BlackDeck";
 import { WhiteDeck } from "../trophies/cosmetic/WhiteDeck";
 import { YellowDeck } from "../trophies/cosmetic/YellowDeck";
 import { CyanDeck } from "../trophies/cosmetic/CyanDeck";
-/* END-USER-IMPORTS */
+import GenericCard from "./GenericCard";
 
-export default class Card extends Phaser.GameObjects.Container {
+export default class Card extends GenericCard {
     public cardType: CardType;
     private cardImage: Phaser.GameObjects.Image;
     private ringSelectedImage: Phaser.GameObjects.Image;

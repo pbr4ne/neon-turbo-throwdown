@@ -47,4 +47,8 @@ export class Evade extends CardType {
         const chancePercentage = (Evade.chanceToDefend * 100).toFixed(0); 
         return `Evade 1 attack. ${chancePercentage}% effective.`;
     }
+
+    getUpgrade(): CardType | null {
+        return null;
+    }
 }

@@ -7,11 +7,11 @@ import { Library } from "../throwdown/Library";
 
 export abstract class CardType {
 
-    protected coach: Coach;
+    // protected coach: Coach;
 
-    constructor(coach: Coach) {
-        this.coach = coach;
-    }
+    // constructor(coach: Coach) {
+    //     this.coach = coach;
+    // }
 
     abstract resetTurn(): void;
 
@@ -29,15 +29,17 @@ export abstract class CardType {
 
     abstract getDescription(): string;
 
-    getTrophyTypes(): TrophyType[] {
-        if (this.coach === CoachList.you) {
-            return Library.getTrophyTypes();
-        } else {
-            return this.coach.getTrophyTypes();
-        }
-    }
+    abstract getUpgrade(): CardType | null;
+
+    // getTrophyTypes(): TrophyType[] {
+    //     if (this.coach === CoachList.you) {
+    //         return Library.getTrophyTypes();
+    //     } else {
+    //         return this.coach.getTrophyTypes();
+    //     }
+    // }
 
     toString(): string {
-        return `CardType: ${this.getName()} ${this.coach}`;
+        return `CardType: ${this.getName()}`;
     }
 }

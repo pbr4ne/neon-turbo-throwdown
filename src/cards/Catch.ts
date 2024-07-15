@@ -52,4 +52,8 @@ export class Catch extends CardType {
         const chancePercentage = (Catch.chanceToDefend * 100).toFixed(0); 
         return `Catch 1 attack. ${chancePercentage}% effective. If successful, rebound ${Catch.defenseDamage} DMG.`;
     }
+
+    getUpgrade(): CardType | null {
+        return null;
+    }
 }

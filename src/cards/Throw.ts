@@ -2,10 +2,8 @@
 import { CardType } from "./CardType";
 import Member from "../prefabs/Member";
 import Team from "../prefabs/Team";
-import { Coach } from "../throwdown/Coach";
-import { UltraTurboThrow } from "../trophies/card/UltraTurboThrow";
-import { TurboThrow } from "../trophies/card/TurboThrow";
 import { GameSounds } from "../utilities/GameSounds";
+import { CardFactory } from "./CardFactory";
 
 
 export class Throw extends CardType {
@@ -54,22 +52,10 @@ export class Throw extends CardType {
     }
 
     getName(): string {
-        if (this.getTrophyTypes().some(trophy => trophy instanceof UltraTurboThrow)) {
-            return "ultra turbo throw";
-        }
-        if (this.getTrophyTypes().some(trophy => trophy instanceof TurboThrow)) {
-            return "turbo throw";
-        }
         return "throw";
     }
 
     getIcon(): string {
-        if (this.getTrophyTypes().some(trophy => trophy instanceof UltraTurboThrow)) {
-            return "throw-turbo-ultra";
-        }
-        if (this.getTrophyTypes().some(trophy => trophy instanceof TurboThrow)) {
-            return "throw-turbo";
-        }
         return "throw";
     }
 
@@ -78,17 +64,15 @@ export class Throw extends CardType {
         return `${this.getOffenseDamage()} DMG. ${chancePercentage}% effective.`;
     }
 
+    getUpgrade(): CardType | null{
+        return CardFactory.createTurboThrow();
+    }
+
     getChanceToOffend(): number {
         return this.chanceToOffend;
     }
 
     getOffenseDamage(): number {
-        if (this.getTrophyTypes().some(trophy => trophy instanceof UltraTurboThrow)) {
-            return this.offenseDamage + 2;
-        }
-        else if (this.getTrophyTypes().some(trophy => trophy instanceof TurboThrow)) {
-            return this.offenseDamage + 1;
-        }
         return this.offenseDamage;
     }
 }

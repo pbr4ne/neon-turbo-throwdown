@@ -1,14 +1,8 @@
-
-// You can write more code here
-
-/* START OF COMPILED CODE */
-
 import Phaser from "phaser";
-/* START-USER-IMPORTS */
 import { TrophyType } from "../trophies/TrophyType";
-/* END-USER-IMPORTS */
+import GenericCard from "./GenericCard";
 
-export default class Trophy extends Phaser.GameObjects.Container {
+export default class Trophy extends GenericCard {
     public trophyType: TrophyType;
     private cardImage: Phaser.GameObjects.Image;
     private nameText: Phaser.GameObjects.Text;

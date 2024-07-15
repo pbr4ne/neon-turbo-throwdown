@@ -23,55 +23,55 @@ export class CoachList {
 
     public static setupCoachDecks() {
         this.you.setBaseCards([
-            new Throw(this.you),
-            new Throw(this.you),
-            new Throw(this.you),
-            new Throw(this.you),
-            new Throw(this.you),
-            new Evade(this.you),
-            new Evade(this.you),
-            new Block(this.you),
-            new Block(this.you),
-            new Catch(this.you)
+            new Throw(),
+            new Throw(),
+            new Throw(),
+            new Throw(),
+            new Throw(),
+            new Evade(),
+            new Evade(),
+            new Block(),
+            new Block(),
+            new Catch()
         ]);
         
         this.primo.setBaseCards([
-            new Throw(this.primo),
-            new Throw(this.primo),
-            new Throw(this.primo),
-            new Throw(this.primo),
-            new Evade(this.primo),
-            new Evade(this.primo),
-            new Evade(this.primo),
-            new Block(this.primo),
-            new Block(this.primo),
-            new Catch(this.primo)
+            new Throw(),
+            new Throw(),
+            new Throw(),
+            new Throw(),
+            new Evade(),
+            new Evade(),
+            new Evade(),
+            new Block(),
+            new Block(),
+            new Catch()
         ]);
 
         this.sporticus.setBaseCards([
-            new Throw(this.sporticus),
-            new Throw(this.sporticus),
-            new Throw(this.sporticus),
-            new Throw(this.sporticus),
-            new Evade(this.sporticus),
-            new Evade(this.sporticus),
-            new Evade(this.sporticus),
-            new Block(this.sporticus),
-            new Block(this.sporticus),
-            new Catch(this.sporticus)
+            new Throw(),
+            new Throw(),
+            new Throw(),
+            new Throw(),
+            new Evade(),
+            new Evade(),
+            new Evade(),
+            new Block(),
+            new Block(),
+            new Catch()
         ]);
 
         this.russ.setBaseCards([
-            new Throw(this.russ),
-            new Throw(this.russ),
-            new Throw(this.russ),
-            new Throw(this.russ),
-            new Evade(this.russ),
-            new Evade(this.russ),
-            new Evade(this.russ),
-            new Block(this.russ),
-            new Block(this.russ),
-            new Catch(this.russ)
+            new Throw(),
+            new Throw(),
+            new Throw(),
+            new Throw(),
+            new Evade(),
+            new Evade(),
+            new Evade(),
+            new Block(),
+            new Block(),
+            new Catch()
         ]);
 
         this.russ.setTrophyTypes([
@@ -79,94 +79,94 @@ export class CoachList {
         ]);
 
         this.boss.setBaseCards([
-            new Throw(this.boss),
-            new Throw(this.boss),
-            new Throw(this.boss),
-            new Throw(this.boss),
-            new Evade(this.boss),
-            new Evade(this.boss),
-            new Evade(this.boss),
-            new Block(this.boss),
-            new Block(this.boss),
-            new Catch(this.boss)
+            new Throw(),
+            new Throw(),
+            new Throw(),
+            new Throw(),
+            new Evade(),
+            new Evade(),
+            new Evade(),
+            new Block(),
+            new Block(),
+            new Catch()
         ]);
 
         this.steve.setBaseCards([
-            new Throw(this.steve),
-            new Throw(this.steve),
-            new Throw(this.steve),
-            new Throw(this.steve),
-            new Evade(this.steve),
-            new Evade(this.steve),
-            new Evade(this.steve),
-            new Block(this.steve),
-            new Block(this.steve),
-            new Catch(this.steve)
+            new Throw(),
+            new Throw(),
+            new Throw(),
+            new Throw(),
+            new Evade(),
+            new Evade(),
+            new Evade(),
+            new Block(),
+            new Block(),
+            new Catch()
         ]);
 
         this.betsy.setBaseCards([
-            new Throw(this.betsy),
-            new Throw(this.betsy),
-            new Throw(this.betsy),
-            new Throw(this.betsy),
-            new Evade(this.betsy),
-            new Evade(this.betsy),
-            new Evade(this.betsy),
-            new Block(this.betsy),
-            new Block(this.betsy),
-            new Catch(this.betsy)
+            new Throw(),
+            new Throw(),
+            new Throw(),
+            new Throw(),
+            new Evade(),
+            new Evade(),
+            new Evade(),
+            new Block(),
+            new Block(),
+            new Catch()
         ]);
 
         this.coree.setBaseCards([
-            new Throw(this.coree),
-            new Throw(this.coree),
-            new Throw(this.coree),
-            new Throw(this.coree),
-            new Evade(this.coree),
-            new Evade(this.coree),
-            new Evade(this.coree),
-            new Block(this.coree),
-            new Block(this.coree),
-            new Catch(this.coree)
+            new Throw(),
+            new Throw(),
+            new Throw(),
+            new Throw(),
+            new Evade(),
+            new Evade(),
+            new Evade(),
+            new Block(),
+            new Block(),
+            new Catch()
         ]);
 
         this.turbo.setBaseCards([
-            new Throw(this.turbo),
-            new Throw(this.turbo),
-            new Throw(this.turbo),
-            new Throw(this.turbo),
-            new Evade(this.turbo),
-            new Evade(this.turbo),
-            new Evade(this.turbo),
-            new Block(this.turbo),
-            new Block(this.turbo),
-            new Catch(this.turbo)
+            new Throw(),
+            new Throw(),
+            new Throw(),
+            new Throw(),
+            new Evade(),
+            new Evade(),
+            new Evade(),
+            new Block(),
+            new Block(),
+            new Catch()
         ]);
 
         this.shadow.setBaseCards([
-            new Throw(this.shadow),
-            new Throw(this.shadow),
-            new Throw(this.shadow),
-            new Throw(this.shadow),
-            new Evade(this.shadow),
-            new Evade(this.shadow),
-            new Evade(this.shadow),
-            new Block(this.shadow),
-            new Block(this.shadow),
-            new Catch(this.shadow)
+            new Throw(),
+            new Throw(),
+            new Throw(),
+            new Throw(),
+            new Evade(),
+            new Evade(),
+            new Evade(),
+            new Block(),
+            new Block(),
+            new Catch()
         ]);
 
         this.boss10.setBaseCards([
-            new Throw(this.boss10),
-            new Throw(this.boss10),
-            new Throw(this.boss10),
-            new Throw(this.boss10),
-            new Evade(this.boss10),
-            new Evade(this.boss10),
-            new Evade(this.boss10),
-            new Block(this.boss10),
-            new Block(this.boss10),
-            new Catch(this.boss10)
+            new Throw(),
+            new Throw(),
+            new Throw(),
+            new Throw(),
+            new Evade(),
+            new Evade(),
+            new Evade(),
+            new Block(),
+            new Block(),
+            new Catch()
         ]);
     }
 

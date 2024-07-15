@@ -52,4 +52,8 @@ export class Block extends CardType {
         const chancePercentage = (Block.chanceToDefend * 100).toFixed(0); 
         return `Block 1 attack. ${chancePercentage}% effective. If successful, rebound ${Block.defenseDamage} DMG.`;
     }
+
+    getUpgrade(): CardType | null {
+        return null;
+    }
 }

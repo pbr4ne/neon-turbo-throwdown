@@ -19,8 +19,8 @@ export class OutstandingTrophyList {
 
     private static trophyTypes: TrophyType[] = [
         //card
-        new TurboThrow(),
-        new UltraTurboThrow(),
+        // new TurboThrow(),
+        // new UltraTurboThrow(),
         //cosmetic
         new CyanDeck(),
         new YellowDeck(),
