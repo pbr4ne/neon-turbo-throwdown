@@ -1,5 +1,5 @@
-import { CardKeys } from "./CardKeys";
-import { CardType } from "./CardType";
+import { CardKeys } from "../CardKeys";
+import { CardType } from "../CardType";
 import { Throw } from "./Throw";
 
 export class TurboThrow extends Throw {

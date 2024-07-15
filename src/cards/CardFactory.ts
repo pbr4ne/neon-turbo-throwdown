@@ -1,9 +1,9 @@
-import { Block } from "./Block";
+import { Block } from "./base/Block";
 import { CardType } from "./CardType";
-import { Catch } from "./Catch";
-import { Evade } from "./Evade";
-import { Throw } from "./Throw";
-import { TurboThrow } from "./TurboThrow";
+import { Catch } from "./base/Catch";
+import { Evade } from "./base/Evade";
+import { Throw } from "./base/Throw";
+import { TurboThrow } from "./base/TurboThrow";
 import { UnknownCard } from "./UnknownCard";
 
 export class CardFactory {

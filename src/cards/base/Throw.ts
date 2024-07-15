@@ -1,10 +1,10 @@
 
-import { CardType } from "./CardType";
-import Member from "../prefabs/Member";
-import Team from "../prefabs/Team";
-import { GameSounds } from "../utilities/GameSounds";
-import { CardFactory } from "./CardFactory";
-import { CardKeys } from "./CardKeys";
+import { CardType } from "../CardType";
+import Member from "../../prefabs/Member";
+import Team from "../../prefabs/Team";
+import { GameSounds } from "../../utilities/GameSounds";
+import { CardFactory } from "../CardFactory";
+import { CardKeys } from "../CardKeys";
 
 
 export class Throw extends CardType {

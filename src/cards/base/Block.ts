@@ -1,9 +1,9 @@
-import { CardType } from "./CardType";
-import Member from "../prefabs/Member";
-import Team from "../prefabs/Team";
-import { GameSounds } from "../utilities/GameSounds";
-import { log } from "../utilities/GameUtils";
-import { CardKeys } from "./CardKeys";
+import { CardType } from "../CardType";
+import Member from "../../prefabs/Member";
+import Team from "../../prefabs/Team";
+import { GameSounds } from "../../utilities/GameSounds";
+import { log } from "../../utilities/GameUtils";
+import { CardKeys } from "../CardKeys";
 
 export class Block extends CardType {
     private static chanceToDefend : number = 0.50;
