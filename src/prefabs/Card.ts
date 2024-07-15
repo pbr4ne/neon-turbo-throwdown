@@ -25,7 +25,7 @@ export default class Card extends GenericCard {
     private order: number = 1;
     private static currentOrder: number = 1;
 
-    constructor(scene: Phaser.Scene, cardType: CardType, cardState: string, x?: number, y?: number, texture?: string) {
+    constructor(scene: Phaser.Scene, cardType: CardType, cardState: string, x?: number, y?: number, texture?: string, toAdd?: boolean) {
         super(scene, x ?? 0, y ?? 0);
 
         this.cardType = cardType;
@@ -52,21 +52,35 @@ export default class Card extends GenericCard {
             fontSize: '14px',
             color: '#ffff00',
             padding: { x: 5, y: 5 },
-            align: 'center'
+            align: 'center',
+            wordWrap: { width: 100, useAdvancedWrap: true }
         });
         this.nameText.setOrigin(0.5, 0.5);
-        this.nameText.setWordWrapWidth(100);
 
-        this.tooltipText = new Phaser.GameObjects.Text(scene, 5, -275, this.cardType.getDescription(), {
+        let description = this.cardType.getDescription();
+        if (toAdd) {
+            description = `Add one ${this.cardType.getName()} to your deck (${description})`;
+        }
+
+        let fontSize = 16;
+
+        this.tooltipText = new Phaser.GameObjects.Text(scene, 5, -275, description, {
             fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
             fontSize: '16px',
             color: '#00ffff',
             lineSpacing: 15,
             padding: { x: 5, y: 5 },
-            align: 'left'
+            align: 'left',
+            wordWrap: { width: 350, useAdvancedWrap: true }
         });
         this.tooltipText.setOrigin(0.5, 0);
-        this.tooltipText.setWordWrapWidth(350);
+
+        while (this.tooltipText.height > this.tooltipImage.height - 60) {
+            fontSize--;
+            this.tooltipText.setStyle({ fontSize: `${fontSize}px` });
+        }
+
+        this.add([this.tooltipImage, this.tooltipText]);
 
         this.setSize(this.cardImage.width, this.cardImage.height);
         this.setInteractive(new Phaser.Geom.Rectangle(0, 0, this.cardImage.width, this.cardImage.height), Phaser.Geom.Rectangle.Contains);

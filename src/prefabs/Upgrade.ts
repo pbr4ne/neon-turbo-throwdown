@@ -11,7 +11,7 @@ export default class Upgrade extends GenericCard {
     private iconImage?: Phaser.GameObjects.Image;
     private tooltipImage: Phaser.GameObjects.Image;
 
-	constructor(scene: Phaser.Scene, cardType: CardType, x?: number, y?: number, texture?: string, showIcon: boolean = true) {
+	constructor(scene: Phaser.Scene, cardType: CardType, x?: number, y?: number, texture?: string, showIcon: boolean = true, permanent: boolean = false) {
 		super(scene, x ?? 155, y ?? 139, texture);
 
 		this.cardType = cardType;
@@ -36,16 +36,27 @@ export default class Upgrade extends GenericCard {
         this.nameText.setOrigin(0.5, 0.5);
         this.nameText.setWordWrapWidth(100);
 
-		this.tooltipText = new Phaser.GameObjects.Text(scene, 5, -275, upgradeCard?.getDescription() ?? 'unknown', {
+		const prefix = permanent ? 'Permanently upgrades' : 'Upgrades';
+		const description = `${prefix} one ${cardType.getName()} in your deck to ${upgradeCard?.getName()} (${upgradeCard?.getDescription() ?? 'unknown'})`;
+
+		let fontSize = 16;
+
+        this.tooltipText = new Phaser.GameObjects.Text(scene, 5, -275, description, {
             fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
             fontSize: '16px',
             color: '#00ffff',
             lineSpacing: 15,
             padding: { x: 5, y: 5 },
-            align: 'left'
+            align: 'left',
+            wordWrap: { width: 350, useAdvancedWrap: true }
         });
         this.tooltipText.setOrigin(0.5, 0);
-        this.tooltipText.setWordWrapWidth(350);
+
+        while (this.tooltipText.height > this.tooltipImage.height - 60) {
+            fontSize--;
+            this.tooltipText.setStyle({ fontSize: `${fontSize}px` });
+        }
+
 		this.tooltipText.setVisible(false);
 
 		this.setSize(this.upgradeImage.width, this.upgradeImage.height);

@@ -182,6 +182,16 @@
                 "key": "front"
             },
             {
+                "url": "assets/images/deck/front-dashed.png",
+                "type": "image",
+                "key": "front-dashed"
+            },
+            {
+                "url": "assets/images/deck/front-gift.png",
+                "type": "image",
+                "key": "front-gift"
+            },
+            {
                 "url": "assets/images/cards/group-heal.png",
                 "type": "image",
                 "key": "group-heal"

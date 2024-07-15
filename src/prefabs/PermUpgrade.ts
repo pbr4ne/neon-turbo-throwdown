@@ -127,7 +127,7 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
                     log("Upgrade is null");
                     return;
                 }
-                const upgradeCard = new Upgrade(this.scene, item, positions[index].x, positions[index].y, "trophy", false);
+                const upgradeCard = new Upgrade(this.scene, item, positions[index].x, positions[index].y, "trophy", false, true);
                 upgradeCard.on('pointerdown', () => this.handleCardSelection(upgradeCard));
                 this.add(upgradeCard);
             }
