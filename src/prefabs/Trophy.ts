@@ -18,7 +18,7 @@ export default class Trophy extends Phaser.GameObjects.Container {
     constructor(scene: Phaser.Scene, trophyType: TrophyType, x?: number, y?: number, texture?: string) {
         super(scene, x ?? 0, y ?? 0);
         
-        this.cardImage = new Phaser.GameObjects.Image(scene, 0, 0, texture || "upgrade");
+        this.cardImage = new Phaser.GameObjects.Image(scene, 0, 0, texture || "trophy");
         this.add(this.cardImage);
 
         this.setDepth(10);

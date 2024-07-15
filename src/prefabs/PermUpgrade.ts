@@ -102,7 +102,7 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
 		eligibleTrophies.slice(0, 3).forEach((trophyType, index) => {
 			if (trophyType) {
 				this.trophiesToSelect.push(trophyType);
-				const trophy = new Trophy(this.scene, trophyType, positions[index].x, positions[index].y, "upgrade");
+				const trophy = new Trophy(this.scene, trophyType, positions[index].x, positions[index].y, "trophy");
 				trophy.on('pointerdown', () => this.handleCardSelection(index + 1));
 				this.add(trophy);
 			}

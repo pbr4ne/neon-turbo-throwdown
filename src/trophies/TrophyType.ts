@@ -2,12 +2,14 @@ export abstract class TrophyType {
     private key: string;
     private name: string;
     private description: string;
+    private num: number;
     private prerequisites: TrophyType[] = [];
 
-    constructor(key: string, name: string, description: string, prerequisites: TrophyType[] = []) {
+    constructor(key: string, name: string, description: string, prerequisites: TrophyType[] = [], num: number = 0) {
         this.key = key;
         this.name = name;
         this.description = description;
+        this.num = num;
         this.prerequisites = prerequisites
     }
 
@@ -21,6 +23,14 @@ export abstract class TrophyType {
 
     public getDescription(): string {
         return this.description;
+    }
+
+    public getNum(): number {
+        return this.num;
+    }
+
+    public setNum(num: number): void {
+        this.num = num;
     }
 
     public getPrerequisites(): TrophyType[] {
