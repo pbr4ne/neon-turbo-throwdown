@@ -1,6 +1,7 @@
 import { CardType } from "./CardType";
 import Member from "../prefabs/Member";
 import Team from "../prefabs/Team";
+import { GameSounds } from "../utilities/GameSounds";
 
 export class Block extends CardType {
     private static chanceToDefend : number = 0.50;
@@ -19,6 +20,7 @@ export class Block extends CardType {
             member.showFloatingAction(this.getName());
             attacker.showFloatingAction(Block.defenseDamage.toString());
             attacker.reduceHP(Block.defenseDamage, attacker);
+            GameSounds.playBlock();
             return true;
         }
         return false;

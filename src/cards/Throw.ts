@@ -5,7 +5,7 @@ import Team from "../prefabs/Team";
 import { Coach } from "../throwdown/Coach";
 import { UltraTurboThrow } from "../trophies/card/UltraTurboThrow";
 import { TurboThrow } from "../trophies/card/TurboThrow";
-import { GameSounds } from "../GameSounds";
+import { GameSounds } from "../utilities/GameSounds";
 
 
 export class Throw extends CardType {

@@ -1,4 +1,4 @@
-import { GameSounds } from "../GameSounds";
+import { GameSounds } from "../utilities/GameSounds";
 import Phaser from "phaser";
 import { StartSceneActionScript } from "@phaserjs/editor-scripts-core";
 import { OnEventScript } from "@phaserjs/editor-scripts-core";

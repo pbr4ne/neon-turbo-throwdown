@@ -212,13 +212,6 @@
                 "key": "heal-turbo-ultra"
             },
             {
-                "url": [
-                    "assets/audio/hit.mp3"
-                ],
-                "type": "audio",
-                "key": "hit"
-            },
-            {
                 "url": "assets/images/welcome/logo.png",
                 "type": "image",
                 "key": "logo"
@@ -229,13 +222,6 @@
                 "key": "magenta"
             },
             {
-                "url": [
-                    "assets/audio/neon-turbo-throwdown.mp3"
-                ],
-                "type": "audio",
-                "key": "neon-turbo-throwdown"
-            },
-            {
                 "url": "assets/images/welcome/music2-off.png",
                 "type": "image",
                 "key": "music2-off"
@@ -244,6 +230,20 @@
                 "url": "assets/images/welcome/music2-on.png",
                 "type": "image",
                 "key": "music2-on"
+            },
+            {
+                "url": [
+                    "assets/audio/neon-turbo-throwdown.mp3"
+                ],
+                "type": "audio",
+                "key": "neon-turbo-throwdown"
+            },
+            {
+                "url": [
+                    "assets/audio/neon-turbo-throwdown-chill.mp3"
+                ],
+                "type": "audio",
+                "key": "neon-turbo-throwdown-chill"
             },
             {
                 "url": [
@@ -328,6 +328,55 @@
                 "key": "shadow"
             },
             {
+                "url": [
+                    "assets/audio/sound_block.mp3"
+                ],
+                "type": "audio",
+                "key": "sound_block"
+            },
+            {
+                "url": [
+                    "assets/audio/sound_button.mp3"
+                ],
+                "type": "audio",
+                "key": "sound_button"
+            },
+            {
+                "url": [
+                    "assets/audio/sound_card.mp3"
+                ],
+                "type": "audio",
+                "key": "sound_card"
+            },
+            {
+                "url": [
+                    "assets/audio/sound_heal.mp3"
+                ],
+                "type": "audio",
+                "key": "sound_heal"
+            },
+            {
+                "url": [
+                    "assets/audio/sound_hit.mp3"
+                ],
+                "type": "audio",
+                "key": "sound_hit"
+            },
+            {
+                "url": [
+                    "assets/audio/sound_lose.mp3"
+                ],
+                "type": "audio",
+                "key": "sound_lose"
+            },
+            {
+                "url": [
+                    "assets/audio/sound_win.mp3"
+                ],
+                "type": "audio",
+                "key": "sound_win"
+            },
+            {
                 "url": "assets/images/welcome/sound2-off.png",
                 "type": "image",
                 "key": "sound2-off"
@@ -391,6 +440,11 @@
                 "url": "assets/images/deck/tooltip.png",
                 "type": "image",
                 "key": "tooltip"
+            },
+            {
+                "url": "assets/images/level/turbo.png",
+                "type": "image",
+                "key": "turbo"
             },
             {
                 "url": "assets/images/cards/unknown.png",

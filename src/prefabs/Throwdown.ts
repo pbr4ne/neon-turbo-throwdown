@@ -15,7 +15,7 @@ import { Library } from "../throwdown/Library";
 import { getUrlParam, log } from "../utilities/GameUtils";
 import Card from "./Card";
 import { CoachList } from "../throwdown/CoachList";
-import { GameSounds } from "../GameSounds";
+import { GameSounds } from "../utilities/GameSounds";
 /* END-USER-IMPORTS */
 
 export default class Throwdown extends Phaser.GameObjects.Container {
@@ -401,6 +401,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
             this.gameOverPrefab = new GameoverPrefab(this.scene, this.coach.getLosePhrase());
             this.gameOverPrefab.setVisible(true);
             this.scene.add.existing(this.gameOverPrefab);
+            GameSounds.playLose();
 
 		    this.scene.events.emit("scene-awake");
 
@@ -412,6 +413,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
             this.gameOverPrefab = new GameoverPrefab(this.scene, this.coach.getWinPhrase());
             this.gameOverPrefab.setVisible(true);
             this.scene.add.existing(this.gameOverPrefab);
+            GameSounds.playWin();
 
 		    this.scene.events.emit("scene-awake");
             
