@@ -2,6 +2,7 @@ export enum CardKeys {
     //throw
     THROW = "throw",
     TURBO_THROW = "turbo-throw",
+    RICOCHET = "ricochet",
 
     //evade
     EVADE = "evade",

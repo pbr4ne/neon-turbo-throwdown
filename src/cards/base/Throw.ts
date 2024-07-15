@@ -10,6 +10,7 @@ import { CardKeys } from "../CardKeys";
 export class Throw extends CardType {
     protected chanceToOffend : number = 0.75;
     protected offenseDamage: number = 1;
+    protected numTargets = 1;
 
     constructor(key: CardKeys = CardKeys.THROW, upgradeKey: CardKeys | null = CardKeys.TURBO_THROW) {
         super(key, upgradeKey);
@@ -23,29 +24,41 @@ export class Throw extends CardType {
     }
 
     offense(member: Member, target: Member, team: Team, opponentTeam: Team): boolean {
-        var offenseSuccess = true;
-        if (Math.random() < this.chanceToOffend) {
-            var targetCard = target.getAssignedCard();
-            var defenseSuccess = false;
-            if (targetCard != null) {
-                defenseSuccess = targetCard.getCardType().defense(target, member, team, opponentTeam);
-            }
-            if (defenseSuccess) {
-                offenseSuccess = false;
-            } else {
-                target.showFloatingAction(this.offenseDamage.toString());
-                target.reduceHP(this.offenseDamage, member);
-                offenseSuccess = true;
-            }
-        } else {
-            member.showFloatingAction("miss");
-            offenseSuccess = false;
-        }
 
-        if (offenseSuccess) {
+        let anyOffenseSuccess = false;
+        let membersToTarget = this.getRandomOtherAliveMembers(opponentTeam, target, this.getNumTargets() - 1);
+        membersToTarget.unshift(target);
+
+        membersToTarget.forEach((enemyMember) => {
+            let offenseSuccess = false;
+            //check chance to hit
+            if (this.getChanceToOffend() >= Math.random()) {
+                const targetCard = enemyMember.getAssignedCard();
+                let defenseSuccess = false;
+                if (targetCard != null) {
+                    //see if they successfully defend
+                    defenseSuccess = targetCard.getCardType().defense(enemyMember, member, team, opponentTeam);
+                }
+                if (!defenseSuccess) {
+                    //reduce their HP if they failed to defend
+                    enemyMember.showFloatingAction(this.getOffenseDamage().toString());
+                    enemyMember.reduceHP(this.getOffenseDamage(), member);
+                    offenseSuccess = true;
+                }
+            } else {
+                //show miss
+                member.showFloatingAction("miss");
+            }
+    
+            if (offenseSuccess) {
+                anyOffenseSuccess = true;
+            }
+        });
+
+        if (anyOffenseSuccess) {
             GameSounds.playHit();
         }
-        return offenseSuccess;        
+        return anyOffenseSuccess;     
     }
 
     defense(member: Member, attacker: Member, team: Team, opponentTeam: Team): boolean {
@@ -66,7 +79,7 @@ export class Throw extends CardType {
 
     getDescription(): string {
         const chancePercentage = (this.getChanceToOffend() * 100).toFixed(0); 
-        return `${this.getOffenseDamage()} DMG. ${chancePercentage}% effective.`;
+        return `Targets ${this.getNumTargets()} for ${this.getOffenseDamage()} damage. ${chancePercentage}% effective.`;
     }
 
     getChanceToOffend(): number {
@@ -75,5 +88,9 @@ export class Throw extends CardType {
 
     getOffenseDamage(): number {
         return this.offenseDamage;
+    }
+
+    getNumTargets(): number {
+        return this.numTargets;
     }
 }

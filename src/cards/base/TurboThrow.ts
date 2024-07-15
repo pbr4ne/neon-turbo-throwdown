@@ -1,12 +1,11 @@
 import { CardKeys } from "../CardKeys";
-import { CardType } from "../CardType";
 import { Throw } from "./Throw";
 
 export class TurboThrow extends Throw {
     protected offenseDamage: number = 2;
 
-    constructor() {
-        super(CardKeys.TURBO_THROW, null);
+    constructor(key: CardKeys = CardKeys.TURBO_THROW, upgradeKey: CardKeys | null = CardKeys.RICOCHET) {
+        super(key, upgradeKey);
     }
 
     getName(): string {
@@ -16,5 +15,4 @@ export class TurboThrow extends Throw {
     getIcon(): string {
         return "throw-turbo";
     }
-
 }

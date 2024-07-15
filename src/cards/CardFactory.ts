@@ -5,6 +5,7 @@ import { Evade } from "./base/Evade";
 import { Throw } from "./base/Throw";
 import { TurboThrow } from "./base/TurboThrow";
 import { UnknownCard } from "./UnknownCard";
+import { Ricochet } from "./base/Ricochet";
 
 export class CardFactory {
     private static cardTypeMap: Map<string, new () => CardType> = new Map();
@@ -25,6 +26,8 @@ export class CardFactory {
     public static registerCardTypes() {
         this.registerCardType("throw", Throw);
         this.registerCardType("turbo-throw", TurboThrow);
+        this.registerCardType("ricochet", Ricochet);
+        
         this.registerCardType("evade", Evade);
         this.registerCardType("block", Block);
         this.registerCardType("catch", Catch);

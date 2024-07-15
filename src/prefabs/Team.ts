@@ -49,6 +49,10 @@ export default abstract class Team extends Phaser.GameObjects.Container {
         this.opponent = opponent;
     }
 
+    getMembers(): Member[] {
+        return this.members;
+    }
+
     onDeckClick() {
         if (this.throwdown.getCurrentStep() != GameSteps.DRAW_CARDS) {
             log("can't draw cards now");
