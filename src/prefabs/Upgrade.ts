@@ -1,6 +1,7 @@
 
 import { CardType } from "../cards/CardType";
 import GenericCard from "./GenericCard";
+import { log } from "../utilities/GameUtils";
 
 export default class Upgrade extends GenericCard {
 
@@ -52,7 +53,7 @@ export default class Upgrade extends GenericCard {
         });
         this.tooltipText.setOrigin(0.5, 0);
 
-        while (this.tooltipText.height > this.tooltipImage.height - 60) {
+        while (this.tooltipText.height + 90 > this.tooltipImage.height) {
             fontSize--;
             this.tooltipText.setStyle({ fontSize: `${fontSize}px` });
         }
