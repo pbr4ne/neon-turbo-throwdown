@@ -87,4 +87,10 @@ export default class Deck extends Phaser.GameObjects.Container {
         log(`cleared deck`);
         this.cards = [];
     }
+
+    resetCards() {
+        this.cards.forEach(card => {
+            card.getCardType().resetTurn();
+        });
+    }
 }

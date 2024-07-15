@@ -12,8 +12,7 @@ export class Throw extends CardType {
     protected chanceToOffend : number = 0.75;
     protected offenseDamage: number = 1;
 
-    constructor(coach: Coach) {
-        super(coach);
+    resetTurn(): void {
     }
 
     special(member: Member, team: Team, opponentTeam: Team): boolean {

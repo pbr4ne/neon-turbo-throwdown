@@ -2,10 +2,16 @@ import { CardType } from "./CardType";
 import Member from "../prefabs/Member";
 import Team from "../prefabs/Team";
 import { GameSounds } from "../utilities/GameSounds";
+import { log } from "../utilities/GameUtils";
 
 export class Catch extends CardType {
     private static chanceToDefend : number = 0.50;
     private static defenseDamage: number = 3;
+    private numDefends: number = 0;
+
+    resetTurn(): void {
+        this.numDefends = 0;
+    }
 
     special(member: Member, team: Team, opponentTeam: Team): boolean {
         return false;
@@ -16,13 +22,17 @@ export class Catch extends CardType {
     }
 
     defense(member: Member, attacker: Member, team: Team, opponentTeam: Team): boolean {
-        if (Math.random() < Catch.chanceToDefend) {
+        this.numDefends++;
+        log("Catch has been used " + this.numDefends + " times.");
+        if (this.numDefends <= 1 && Math.random() < Catch.chanceToDefend) {
+            log("Catch successful.");
             member.showFloatingAction(this.getName());
             attacker.showFloatingAction(Catch.defenseDamage.toString());
             attacker.reduceHP(Catch.defenseDamage, attacker);
             GameSounds.playBlock();
             return true;
         }
+        log("Catch failed.");
         return false;
     }
 

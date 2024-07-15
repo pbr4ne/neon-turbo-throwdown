@@ -13,6 +13,8 @@ export abstract class CardType {
         this.coach = coach;
     }
 
+    abstract resetTurn(): void;
+
     abstract special(member: Member, team: Team, opponentTeam: Team): boolean;
 
     abstract offense(member: Member, target: Member, team: Team, opponentTeam: Team): boolean;
