@@ -61,7 +61,7 @@ export default class Hand {
     handleCardClick(card: Card, members: Member[]) {
         log(`Clicking on ${card.toString()}`);
         var currentStep = (this.scene.scene.get('Game') as Game).throwdown.getCurrentStep();
-        if (currentStep !== GameSteps.SELECT_CARD) {
+        if (currentStep !== GameSteps.SELECT_CARD && currentStep !== GameSteps.SELECT_PLAYER_MEMBER) {
             log("Not in the right step to select a card");
             return;
         }
@@ -76,8 +76,10 @@ export default class Hand {
             return;
         }
 
-        card.setOrder(card.getNextOrder());
-        card.incrementOrder();
+        console.log("ORDER: " + card.getOrder());
+        card.setOrder(Card.getStaticOrder());
+        console.log("ORDER: " + card.getOrder());
+        //card.incrementOrder();
 
         if (this.poppedUpCard) {
             this.poppedUpCard.togglePopUp();
@@ -89,21 +91,27 @@ export default class Hand {
         }
         card.togglePopUp();
 
-        (this.scene.scene.get('Game') as Game).throwdown.nextStep();
-
         this.poppedUpCard = card;
         this.selectedCard = card;
+
+        if (currentStep === GameSteps.SELECT_CARD) {
+           // card.incrementOrder();
+            log("INCREMENTED ORDER: " + card.getOrder());
+            (this.scene.scene.get('Game') as Game).throwdown.nextStep();
+        }
     }
 
     assignCardToMember(member: Member) {
         if (this.poppedUpCard) {
             if (member.getAssignedCard() == null) {
+                Card.incrementOrder();
                 const cardType = this.poppedUpCard.getCardType();
                 member.assignCard(this.poppedUpCard);
                 this.cards = this.cards.filter(card => card !== this.poppedUpCard);
                 this.cardsInPlay.push(this.poppedUpCard);
                 this.poppedUpCard.togglePopUp(); 
                 this.poppedUpCard = null;
+                
             }
         }
     }

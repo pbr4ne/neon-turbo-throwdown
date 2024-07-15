@@ -230,12 +230,12 @@ export default class Card extends Phaser.GameObjects.Container {
         return this.order;
     }
 
-    getNextOrder(): number {
-        return Card.currentOrder++;
+    static getStaticOrder(): number {
+        return Card.currentOrder;
     }
 
-    incrementOrder() {
-        Card.currentOrder = Card.currentOrder++;
+    static incrementOrder() {
+        Card.currentOrder++;
     }
 
     static resetOrder(): void {
