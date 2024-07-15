@@ -10,6 +10,7 @@ import { DialogueConversation, DialogueStep } from "./Dialogue";
 import { Coach } from "../throwdown/Coach";
 import { DialogueStorage } from "./DialogueStorage";
 import { log } from "../utilities/GameUtils";
+import { GameSounds } from "../utilities/GameSounds";
 /* END-USER-IMPORTS */
 
 export default class DialogBox extends Phaser.GameObjects.Container {
@@ -18,6 +19,8 @@ export default class DialogBox extends Phaser.GameObjects.Container {
 		super(scene, x ?? 960, y ?? 542);
 
 		this.dialogueType = dialogueType;
+
+		GameSounds.switchSong(this.scene, "neon-turbo-throwdown-chill");
 
 		// rectangle_1
 		const rectangle_1 = scene.add.rectangle(-7, 340, 128, 128);
