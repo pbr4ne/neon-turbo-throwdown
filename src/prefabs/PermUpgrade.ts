@@ -92,7 +92,7 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
 
     private cardRound() {
         let eligibleTrophies = OutstandingTrophyList.getEligibleTrophyTypes();
-        let upgrades = this.getUpgradeList();
+        let upgrades = this.getUpgradeList().map(item => item.card);
         this.trophiesToSelect = [];
     
         const positions = [
@@ -101,16 +101,14 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
             { x: 1162, y: 848 }
         ];
 
-        // Take up to 3 trophies
-        if (eligibleTrophies.length > 0) {
-            Phaser.Utils.Array.Shuffle(eligibleTrophies);
-            this.trophiesToSelect = eligibleTrophies.slice(0, 3);
-        }
+        // Combine the eligible trophies and upgrades
+        const combinedItems: (TrophyType | CardType)[] = [...eligibleTrophies, ...upgrades];
 
-        // If there are less than 3 trophies, fill the remaining slots with upgrades
-        while (this.trophiesToSelect.length < 3 && upgrades.length > 0) {
-            this.trophiesToSelect.push(upgrades.pop()!.card);
-        }
+        // Shuffle the combined array
+        Phaser.Utils.Array.Shuffle(combinedItems);
+
+        // Select the first 3 items
+        this.trophiesToSelect = combinedItems.slice(0, 3);
 
         // If there are no trophies or upgrades, finish the upgrade process
         if (this.trophiesToSelect.length <= 0) {
@@ -124,11 +122,11 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
                 trophy.on('pointerdown', () => this.handleCardSelection(trophy));
                 this.add(trophy);
             } else {
-				const upgrade = item.getUpgrade();
-				if (upgrade === null) {
-					log("Upgrade is null");
-					return;
-				}
+                const upgrade = item.getUpgrade();
+                if (upgrade === null) {
+                    log("Upgrade is null");
+                    return;
+                }
                 const upgradeCard = new Upgrade(this.scene, item, positions[index].x, positions[index].y, "trophy", false);
                 upgradeCard.on('pointerdown', () => this.handleCardSelection(upgradeCard));
                 this.add(upgradeCard);
@@ -137,9 +135,6 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
     }
 
     private handleCardSelection(selectedItem: Trophy | Upgrade) {
-		console.log("hi");
-        //const selectedItem = this.trophiesToSelect[cardIndex - 1];
-
         if (selectedItem instanceof Trophy) {
 			console.log("Trophy selected");
             Library.addTrophyType(selectedItem.trophyType);
@@ -159,7 +154,6 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
 				log(card.toString());
 			});
 			//delete genericCard from CoachList.you.getBaseCards()
-			//const index = CoachList.you.getBaseCards().indexOf(selectedItem.getCardType());
             const index = this.findCardTypeIndexByName(CoachList.you.getBaseCards(), selectedItem.getCardType());
 
 			if (index > -1) {
@@ -184,5 +178,3 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
         return cards.findIndex(card => card.getName() === cardType.getName());
     }
 }
-
-
