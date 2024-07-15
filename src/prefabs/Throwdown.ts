@@ -130,6 +130,8 @@ export default class Throwdown extends Phaser.GameObjects.Container {
 		this.playerLayer.add(this.player);
 		this.playerLayer.add(this.boss);
 
+        log("Throwdown render - initialize player deck");
+        CoachList.you.getBaseCards().forEach(card => log(card.getName()));
         this.player.deck.initializeDeck(CoachList.you.getBaseCards(), this.player);
         this.player.deck.arrangeCardPositions(100, 840);
 

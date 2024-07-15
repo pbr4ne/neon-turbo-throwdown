@@ -1,3 +1,4 @@
+import { CardType } from "./CardType";
 import { Throw } from "./Throw";
 
 export class TurboThrow extends Throw {
@@ -9,6 +10,10 @@ export class TurboThrow extends Throw {
 
     getIcon(): string {
         return "throw-turbo";
+    }
+
+    getUpgrade(): CardType | null {
+        return null;
     }
 
 }

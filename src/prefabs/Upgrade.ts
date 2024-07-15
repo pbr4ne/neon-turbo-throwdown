@@ -11,7 +11,7 @@ export default class Upgrade extends GenericCard {
     private iconImage?: Phaser.GameObjects.Image;
     private tooltipImage: Phaser.GameObjects.Image;
 
-	constructor(scene: Phaser.Scene, cardType: CardType, x?: number, y?: number, texture?: string) {
+	constructor(scene: Phaser.Scene, cardType: CardType, x?: number, y?: number, texture?: string, showIcon: boolean = true) {
 		super(scene, x ?? 155, y ?? 139, texture);
 
 		this.cardType = cardType;
@@ -20,7 +20,7 @@ export default class Upgrade extends GenericCard {
 		this.upgradeImage = new Phaser.GameObjects.Image(scene, 0, 0, texture || "trophy");
         this.add(this.upgradeImage);
 
-		if (upgradeCard) {
+		if (upgradeCard && showIcon) {
 			this.iconImage = new Phaser.GameObjects.Image(scene, 0, -30, upgradeCard.getIcon());
 		}
         this.tooltipImage = new Phaser.GameObjects.Image(scene, 0, -205, 'tooltip');

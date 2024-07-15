@@ -8,9 +8,10 @@ import PreloadBarUpdaterScript from "../script-nodes/ui/PreloadBarUpdaterScript"
 /* START-USER-IMPORTS */
 import assetPackUrl from "../../static/assets/asset-pack.json";
 import WebFont from 'webfontloader';
-import { checkUrlParam } from "../utilities/GameUtils";
+import { checkUrlParam, log } from "../utilities/GameUtils";
 import { StorageManager } from "../utilities/StorageManager";
 import { DialogueStorage } from "../dialogue/DialogueStorage";
+import { CoachList } from "../throwdown/CoachList";
 /* END-USER-IMPORTS */
 
 export default class Preload extends Phaser.Scene {
@@ -74,6 +75,10 @@ export default class Preload extends Phaser.Scene {
 			await StorageManager.loadRunCount();	
 			await DialogueStorage.loadDialogues();
 		}
+		
+		new DialogueStorage();
+        CoachList.setupCoachDecks();
+		log("PRELOAD COMPLETE");
 	}
 
 	create() {

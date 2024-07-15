@@ -4,6 +4,7 @@ import { Catch } from "../cards/Catch";
 import { Evade } from "../cards/Evade";
 import { Coach } from "./Coach";
 import { TurboThrow } from "../trophies/card/TurboThrow";
+import { log } from "../utilities/GameUtils";
 
 export class CoachList {
 
@@ -22,6 +23,7 @@ export class CoachList {
     public static boss10 = new Coach("Boss #10", "boss10", 4, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
 
     public static setupCoachDecks() {
+        log("SETTING UP COACH DECKS");
         this.you.setBaseCards([
             new Throw(),
             new Throw(),
