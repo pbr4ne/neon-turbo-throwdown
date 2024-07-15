@@ -78,6 +78,10 @@ export default class Player extends Team {
     }
 
     handleMemberClick(member: Member) {
+        if (!this.throwdown) {
+            log("throwdown not initialized");
+            return;
+        }
         var currentStep = this.throwdown.getCurrentStep();
 
         if (currentStep == GameSteps.SELECT_PLAYER_MEMBER) {
