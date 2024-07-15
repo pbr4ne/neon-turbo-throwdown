@@ -176,7 +176,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
         this.hideAllInstructions();
         this.drawCardsImage?.setVisible(true);
         this.pointerImage?.setVisible(true);
-        this.pointerImage?.setPosition(265, 875);
+        this.pointerImage?.setPosition(280, 875);
     }
 
     showSelectCardImage() {

@@ -54,7 +54,7 @@ export default class Deck extends Phaser.GameObjects.Container {
     }
 
     arrangeCardPositions(x: number, y: number) {
-        const offset = 5;
+        const offset = 60 / this.cards.length;
 
         this.cards.forEach((card, index) => {
             card.setPosition(x + index * offset, y + index * offset);
