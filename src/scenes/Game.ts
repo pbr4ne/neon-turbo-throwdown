@@ -52,6 +52,9 @@ export default class Game extends Phaser.Scene {
         const overrideCoach = getUrlParam("setCoach");
         if (overrideCoach) {
             this.currentCoach = CoachList.getCoachByName(overrideCoach);
+        } else {
+            //reset back to first coach
+            this.currentCoach = CoachList.primo;
         }
 
         new DialogueStorage();
