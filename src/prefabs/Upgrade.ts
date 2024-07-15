@@ -32,10 +32,10 @@ export default class Upgrade extends GenericCard {
             fontSize: '14px',
             color: '#ffff00',
             padding: { x: 5, y: 5 },
-            align: 'center'
+            align: 'center',
+			wordWrap: { width: 100, useAdvancedWrap: true }
         });
         this.nameText.setOrigin(0.5, 0.5);
-        this.nameText.setWordWrapWidth(100);
 
 		const prefix = permanent ? 'Permanently upgrades' : 'Upgrades';
 		const description = `${prefix} one ${cardType.getName()} in your deck to ${upgradeCard?.getName()} (${upgradeCard?.getDescription() ?? 'unknown'})`;

@@ -3,14 +3,13 @@ import { CardType } from "../CardType";
 import Member from "../../prefabs/Member";
 import Team from "../../prefabs/Team";
 import { GameSounds } from "../../utilities/GameSounds";
-import { CardFactory } from "../CardFactory";
 import { CardKeys } from "../CardKeys";
 
 
 export class Throw extends CardType {
     protected chanceToOffend : number = 0.75;
     protected offenseDamage: number = 1;
-    protected numTargets = 1;
+    protected numTargets: number = 1;
 
     constructor(key: CardKeys = CardKeys.THROW, upgradeKey: CardKeys | null = CardKeys.TURBO_THROW) {
         super(key, upgradeKey);
