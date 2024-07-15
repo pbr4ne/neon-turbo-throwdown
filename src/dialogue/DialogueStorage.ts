@@ -48,12 +48,14 @@ export class DialogueStorage {
 
     public initializePrimoDialogue(): void {
         const primoIntroDialogue1 = new DialogueConversation();
+        const primoIntroDialogue2 = new DialogueConversation();
         const primoWinDialogue1 = new DialogueConversation();
         const primoWinDialogue2 = new DialogueConversation();
         const primoLoseDialogue1 = new DialogueConversation();
         const primoLoseDialogue2 = new DialogueConversation();
 
         DialogueStorage.primoDialogue.getIntroDialogueList().push(primoIntroDialogue1);
+        DialogueStorage.primoDialogue.getIntroDialogueList().push(primoIntroDialogue2);
         DialogueStorage.primoDialogue.getWinDialogueList().push(primoWinDialogue1);
         DialogueStorage.primoDialogue.getWinDialogueList().push(primoWinDialogue2);
         DialogueStorage.primoDialogue.getLoseDialogueList().push(primoLoseDialogue1);
@@ -63,12 +65,13 @@ export class DialogueStorage {
         primoIntroDialogue1.addStep("You step into the gym for an ordinary day of sick gains when...", CoachList.you);
         primoIntroDialogue1.addStep(["What...?"], CoachList.you);
         primoIntroDialogue1.addStep("A portal appears and sucks you in!", CoachList.you);
-        primoIntroDialogue1.addStep("It still _looks_ like the local gym, but everything is strange and neon!", CoachList.you)
-        primoIntroDialogue1.addStep("I am Primo Firstman. Are you here to throwdown?", CoachList.primo, "???");
-        primoIntroDialogue1.addStep(["What?"], CoachList.you);
-        primoIntroDialogue1.addStep("In other words, are you asking for a CHALLENGE?", CoachList.primo);
-        primoIntroDialogue1.addStep(["Throwdown as in... fight?", "I'm just here for sick gains, bro", "Prepare to be TURBO THRASHED!"], CoachList.you);
-        primoIntroDialogue1.addStep("Hahahahaha. Then prepare your team and let us BEGIN.", CoachList.primo);
+        primoIntroDialogue2.addStep("You're back at the strange gym.", CoachList.you);
+        // primoIntroDialogue1.addStep("It still _looks_ like the local gym, but everything is strange and neon!", CoachList.you)
+        // primoIntroDialogue1.addStep("I am Primo Firstman. Are you here to throwdown?", CoachList.primo, "???");
+        // primoIntroDialogue1.addStep(["What?"], CoachList.you);
+        // primoIntroDialogue1.addStep("In other words, are you asking for a CHALLENGE?", CoachList.primo);
+        // primoIntroDialogue1.addStep(["Throwdown as in... fight?", "I'm just here for sick gains, bro", "Prepare to be TURBO THRASHED!"], CoachList.you);
+        // primoIntroDialogue1.addStep("Hahahahaha. Then prepare your team and let us BEGIN.", CoachList.primo);
         // primoIntroDialogue1.addStep("Hey kid, wait!", CoachList.coach);
         // primoIntroDialogue1.addStep(["Who?", "What?", "I'm 37"], CoachList.you);
         // primoIntroDialogue1.addStep("I know a rookie when I see one. Let me give you some pointers.", CoachList.coach);

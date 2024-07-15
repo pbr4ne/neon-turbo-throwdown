@@ -1,3 +1,4 @@
+import { log } from '../utilities/GameUtils';
 import { DialogueConversation } from './Dialogue';
 
 export class CoachDialogue {
