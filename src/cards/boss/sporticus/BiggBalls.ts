@@ -6,13 +6,14 @@ import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import Player from "../../../prefabs/Player";
 import { SporticusCard } from "./SporticusCard";
+import { ThrowdownPhase } from "../../../throwdown/ThrowdownPhase";
 
 export class BiggBalls extends SporticusCard {
 
     protected chance: number = 0.2;
 
     constructor() {
-        super(CardKeys.BIGG_BALLS, null);
+        super(CardKeys.BIGG_BALLS, null, ThrowdownPhase.SPECIAL);
     }
 
     special(member: Member, team: Team, opponentTeam: Team): boolean {

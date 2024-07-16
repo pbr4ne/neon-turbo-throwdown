@@ -15,6 +15,7 @@ import Player from "./Player";
 import { log } from "../utilities/GameUtils";
 import { GameSounds } from "../utilities/GameSounds";
 import { Modifiers } from "../throwdown/Modifiers";
+import { ThrowdownPhase } from "../throwdown/ThrowdownPhase";
 /* END-USER-IMPORTS */
 
 export default abstract class Team extends Phaser.GameObjects.Container {
@@ -149,23 +150,32 @@ export default abstract class Team extends Phaser.GameObjects.Container {
         });
     }
 
-    async executeTurn() {
-        await this.pause(500); 
+    async executeSpecialPhase() {
         for (const member of this.members) {
             const card = member.getAssignedCard();
             if (card != null) {
-                card.getCardType().special(member, this, this.opponent); 
-                log(`SPECIAL: ${member}`);
+                const cardType = card.getCardType();
+                if (cardType.getPhase() == ThrowdownPhase.SPECIAL) {
+                    await this.pause(500); 
+                    cardType.special(member, this, this.opponent); 
+                    log(`SPECIAL: ${member}`);
+                }
             }
         }
+    }
+
+    async executeAttackPhase() {
         for (const member of this.members) {
             const card = member.getAssignedCard();
             const target = member.getIntendedTarget();
             if (target !== null && card != null) {
-                await this.pause(500); 
-                card.getCardType().offense(member, target, this, this.opponent); 
-                log(`OFFENSE: ${member} attacks ${target}`);
-                member.setIntendedTarget(null);             
+                const cardType = card.getCardType();
+                if (cardType.getPhase() == ThrowdownPhase.ATTACK) {
+                    await this.pause(500); 
+                    card.getCardType().offense(member, target, this, this.opponent); 
+                    log(`OFFENSE: ${member} attacks ${target}`);
+                    member.setIntendedTarget(null);
+                }
             }
         }
         await this.pause(500); 

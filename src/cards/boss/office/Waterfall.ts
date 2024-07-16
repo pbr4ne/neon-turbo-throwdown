@@ -6,16 +6,17 @@ import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import Player from "../../../prefabs/Player";
 import { OfficeCard } from "./OfficeCard";
+import { ThrowdownPhase } from "../../../throwdown/ThrowdownPhase";
 
 export class Waterfall extends OfficeCard {
 
     protected offenseDamage: number = 1;
 
     constructor() {
-        super(CardKeys.WATERFALL, null);
+        super(CardKeys.WATERFALL, null, ThrowdownPhase.ATTACK);
     }
 
-    special(member: Member, team: Team, opponentTeam: Team): boolean {
+    offense(member: Member, target: Member, team: Team, opponentTeam: Team): boolean {
         let anyOffenseSuccess = false;
         let membersToTarget = this.getAllAliveMembers(opponentTeam);
 
@@ -46,6 +47,10 @@ export class Waterfall extends OfficeCard {
             GameSounds.playHit();
         }
         return anyOffenseSuccess;  
+    }
+
+    needsTarget(): boolean {
+        return false;
     }
 
     getName(): string {

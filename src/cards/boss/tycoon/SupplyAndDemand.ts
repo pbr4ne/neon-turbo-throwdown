@@ -6,13 +6,14 @@ import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import Player from "../../../prefabs/Player";
 import { TycoonCard } from "./TycoonCard";
+import { ThrowdownPhase } from "../../../throwdown/ThrowdownPhase";
 
 export class SupplyAndDemand extends TycoonCard {
 
     protected healthSteal: number = 1;
 
     constructor() {
-        super(CardKeys.SUPPLY_AND_DEMAND, null);
+        super(CardKeys.SUPPLY_AND_DEMAND, null, ThrowdownPhase.ATTACK);
     }
 
     offense(member: Member, target: Member, team: Team, opponentTeam: Team): boolean {

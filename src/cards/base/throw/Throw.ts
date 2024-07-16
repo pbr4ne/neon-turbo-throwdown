@@ -3,6 +3,7 @@ import { CardType } from "../../CardType";
 import Member from "../../../prefabs/Member";
 import Team from "../../../prefabs/Team";
 import { GameSounds } from "../../../utilities/GameSounds";
+import { ThrowdownPhase } from "../../../throwdown/ThrowdownPhase";
 
 export class Throw extends CardType {
     protected chanceToOffend : number = 0.75;
@@ -10,7 +11,7 @@ export class Throw extends CardType {
     protected numTargets: number = 1;
 
     constructor(key: CardKeys = CardKeys.THROW_1_THROW, upgradeKey: CardKeys | null = CardKeys.THROW_2_TURBO_THROW) {
-        super(key, upgradeKey);
+        super(key, upgradeKey, ThrowdownPhase.ATTACK);
     }
 
     offense(member: Member, target: Member, team: Team, opponentTeam: Team): boolean {

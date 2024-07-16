@@ -6,6 +6,7 @@ import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import Player from "../../../prefabs/Player";
 import { CoreeCard } from "./CoreeCard";
+import { ThrowdownPhase } from "../../../throwdown/ThrowdownPhase";
 
 export class F7 extends CoreeCard {
 
@@ -13,7 +14,7 @@ export class F7 extends CoreeCard {
     protected healthToResurrect: number = 3;
 
     constructor() {
-        super(CardKeys.F7, null);
+        super(CardKeys.F7, null, ThrowdownPhase.SPECIAL);
     }
 
     special(member: Member, team: Team, opponentTeam: Team): boolean {

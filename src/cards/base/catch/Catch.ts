@@ -6,6 +6,7 @@ import { log } from "../../../utilities/GameUtils";
 import { CardKeys } from "../../CardKeys";
 import Player from "../../../prefabs/Player";
 import { CoachList } from "../../../throwdown/CoachList";
+import { ThrowdownPhase } from "../../../throwdown/ThrowdownPhase";
 
 export class Catch extends CardType {
     protected chanceToDefend : number = 0.50;
@@ -15,7 +16,7 @@ export class Catch extends CardType {
     protected numDefends = 1;
 
     constructor(key: CardKeys = CardKeys.CATCH_1_CATCH, upgradeKey: CardKeys | null = CardKeys.CATCH_2_TURBO_CATCH) {
-        super(key, upgradeKey);
+        super(key, upgradeKey, ThrowdownPhase.DEFENSE);
     }
 
     resetTurn(): void {

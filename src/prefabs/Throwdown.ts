@@ -407,8 +407,10 @@ export default class Throwdown extends Phaser.GameObjects.Container {
         } else if (insta === "lose") {
             this.player.members.forEach(member => member.destroyMember(member));
         } else {
-            await this.player.executeTurn();
-            await this.boss.executeTurn();
+            await this.player.executeSpecialPhase();
+            await this.boss.executeSpecialPhase();
+            await this.player.executeAttackPhase();
+            await this.boss.executeAttackPhase();
         }
 
         this.nextStep();

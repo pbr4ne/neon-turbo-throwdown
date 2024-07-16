@@ -6,6 +6,7 @@ import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import Player from "../../../prefabs/Player";
 import { BetsyCard } from "./BetsyCard";
+import { ThrowdownPhase } from "../../../throwdown/ThrowdownPhase";
 
 export class DeadOrAlive extends BetsyCard {
 
@@ -13,7 +14,7 @@ export class DeadOrAlive extends BetsyCard {
     protected offenseDamage: number = 5;
 
     constructor() {
-        super(CardKeys.DEAD_OR_ALIVE, null);
+        super(CardKeys.DEAD_OR_ALIVE, null, ThrowdownPhase.ATTACK);
     }
 
     offense(member: Member, target: Member, team: Team, opponentTeam: Team): boolean {

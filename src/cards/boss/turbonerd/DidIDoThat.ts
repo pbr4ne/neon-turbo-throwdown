@@ -6,6 +6,7 @@ import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import Player from "../../../prefabs/Player";
 import { TurbonerdCard } from "./TurbonerdCard";
+import { ThrowdownPhase } from "../../../throwdown/ThrowdownPhase";
 
 export class DidIDoThat extends TurbonerdCard {
 
@@ -15,10 +16,10 @@ export class DidIDoThat extends TurbonerdCard {
     protected damageMax: number = 4;
 
     constructor() {
-        super(CardKeys.DID_I_DO_THAT, null);
+        super(CardKeys.DID_I_DO_THAT, null, ThrowdownPhase.ATTACK);
     }
 
-    special(member: Member, team: Team, opponentTeam: Team): boolean {
+    offense(member: Member, target: Member, team: Team, opponentTeam: Team): boolean {
         let anyOffenseSuccess = false;
         let membersToTarget = this.getRandomAliveMembers(opponentTeam, null, this.getRandomInteger(this.getNumTargetsMin(), this.getNumTargetsMax()));
 
@@ -50,6 +51,10 @@ export class DidIDoThat extends TurbonerdCard {
         }
 
         return anyOffenseSuccess;  
+    }
+
+    needsTarget(): boolean {
+        return false;
     }
 
     getName(): string {

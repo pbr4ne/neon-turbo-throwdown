@@ -6,6 +6,7 @@ import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import Player from "../../../prefabs/Player";
 import { SgtSteveCard } from "./StgSteveCard";
+import { ThrowdownPhase } from "../../../throwdown/ThrowdownPhase";
 
 export class SoldierOn extends SgtSteveCard {
 
@@ -13,7 +14,7 @@ export class SoldierOn extends SgtSteveCard {
     protected healthMax: number = 3;
 
     constructor() {
-        super(CardKeys.SOLDIER_ON, null);
+        super(CardKeys.SOLDIER_ON, null, ThrowdownPhase.SPECIAL);
     }
 
     special(member: Member, team: Team, opponentTeam: Team): boolean {

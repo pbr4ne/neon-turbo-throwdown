@@ -4,16 +4,19 @@ import Team from "../prefabs/Team";
 import { CardFactory } from "./CardFactory";
 import { CardKeys } from "./CardKeys";
 import Player from "../prefabs/Player";
+import { ThrowdownPhase } from "../throwdown/ThrowdownPhase";
 
 export abstract class CardType {
 
     public key: CardKeys;
     private upgradeKey: CardKeys | null;
     private player?: Player;
+    private phase: ThrowdownPhase;
 
-    constructor(key: CardKeys | CardKeys.UNKNOWN, upgradeKey: CardKeys | null) {
+    constructor(key: CardKeys | CardKeys.UNKNOWN, upgradeKey: CardKeys | null, phase: ThrowdownPhase = ThrowdownPhase.NONE) {
         this.key = key;
         this.upgradeKey = upgradeKey;
+        this.phase = phase;
     }
 
     //should be overridden if the card has things to reset at the end of the turn
@@ -49,6 +52,10 @@ export abstract class CardType {
     abstract getIcon(): string;
 
     abstract getDescription(): string;
+
+    getPhase(): ThrowdownPhase {
+        return this.phase;
+    }
 
     getCoach(): Coach | null {
         return null;

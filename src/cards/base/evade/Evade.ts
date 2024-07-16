@@ -4,6 +4,7 @@ import Team from "../../../prefabs/Team";
 import { log } from "../../../utilities/GameUtils";
 import { CardKeys } from "../../CardKeys";
 import { GameSounds } from "../../../utilities/GameSounds";
+import { ThrowdownPhase } from "../../../throwdown/ThrowdownPhase";
 
 export class Evade extends CardType {
     protected chanceToDefend : number = 0.75;
@@ -11,7 +12,7 @@ export class Evade extends CardType {
     protected numDefends = 1;
 
     constructor(key: CardKeys = CardKeys.EVADE_1_EVADE, upgradeKey: CardKeys | null = CardKeys.EVADE_2_DOUBLE_EVADE) {
-        super(key, upgradeKey);
+        super(key, upgradeKey, ThrowdownPhase.DEFENSE);
     }
 
     resetTurn(): void {
