@@ -71,7 +71,11 @@ export class Throw extends CardType {
 
     getDescription(): string {
         const chancePercentage = this.getNicePercentage(this.getChanceToOffend());
-        return `Targets ${this.getNumTargets()} for ${this.getOffenseDamage()} damage. ${chancePercentage}% effective.`;
+        const description = `Target 1 enemy for ${this.getOffenseDamage()} damage. ${chancePercentage}% effective.`
+        if (this.getNumTargets() > 1) {
+            return description + ` Ricochets to ${this.getNumTargets() - 1} additional random target(s).`;
+        }
+        return description;
     }
 
     getChanceToOffend(): number {

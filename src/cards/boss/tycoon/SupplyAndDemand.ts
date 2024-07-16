@@ -51,7 +51,7 @@ export class SupplyAndDemand extends TycoonCard {
     }
 
     getDescription(): string {
-        return "Steal 1 health from target.";
+        return "Steal 1 health from target. Can be evaded.";
     }
 
     getHealthSteal(): number {
