@@ -108,6 +108,8 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.BETTER_BLOCK),
             CardFactory.createCardType(CardKeys.TURBO_EVADE),
             CardFactory.createCardType(CardKeys.TURBO_CATCH),
+            CardFactory.createCardType(CardKeys.SOLDIER_ON),
+            CardFactory.createCardType(CardKeys.SOLDIER_ON),
         ]);
 
         this.betsy.setBaseCards([

@@ -9,6 +9,9 @@ import { SgtSteveCard } from "./StgSteveCard";
 
 export class SoldierOn extends SgtSteveCard {
 
+    protected healthMin: number = 1;
+    protected healthMax: number = 3;
+
     constructor() {
         super(CardKeys.SOLDIER_ON, null);
     }
@@ -17,7 +20,13 @@ export class SoldierOn extends SgtSteveCard {
     }
 
     special(member: Member, team: Team, opponentTeam: Team): boolean {
-        return false;
+        //get a random integer between healthMin and healthMax
+        const healthSteal = Math.floor(Math.random() * (this.getHealthMax() - this.getHealthMin() + 1)) + this.getHealthMin();
+
+        member.showFloatingAction(`+${healthSteal}`, "#00ff00", 1);
+        member.increaseHP(healthSteal);
+        GameSounds.playHeal();
+        return true;
     }
 
     offense(member: Member, target: Member, team: Team, opponentTeam: Team): boolean {
@@ -37,10 +46,18 @@ export class SoldierOn extends SgtSteveCard {
     }
 
     getIcon(): string {
-        return "unknown";
+        return "heal";
+    }
+
+    getHealthMin(): number {
+        return this.healthMin;
+    }
+
+    getHealthMax(): number {
+        return this.healthMax;
     }
 
     getDescription(): string {
-        return "tbd";
+        return `Heal ${this.getHealthMin()} - ${this.getHealthMax()} HP.`;
     }
 }

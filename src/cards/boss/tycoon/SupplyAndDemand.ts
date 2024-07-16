@@ -57,7 +57,7 @@ export class SupplyAndDemand extends TycoonCard {
     }
 
     getIcon(): string {
-        return "unknown";
+        return "heal";
     }
 
     getDescription(): string {
