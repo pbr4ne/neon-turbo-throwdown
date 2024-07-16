@@ -3,7 +3,22 @@ import { log } from "../utilities/GameUtils";
 export class Modifiers {
     private roundCatchChanceMultiplier: number = 1;
     private turnCatchChanceMultiplier: number = 1;
+    private turnEvadeChanceOverride: number | null = null;
 
+    //evade chance
+    getEvadeChanceOverride(): number | null {
+        return this.turnEvadeChanceOverride;
+    }
+
+    setTurnEvadeChanceOverride(value: number): void {
+        this.turnEvadeChanceOverride = value;
+    }
+
+    resetTurnEvadeChanceOverride(): void {
+        this.turnEvadeChanceOverride = null;
+    }
+
+    //catch chance
     getCatchChanceMultiplier(): number {
         return this.roundCatchChanceMultiplier * this.turnCatchChanceMultiplier;
     }
@@ -30,13 +45,15 @@ export class Modifiers {
         this.turnCatchChanceMultiplier = 1;
     }
 
-    resetAllRoundMultipliers(): void {
-        log("Resetting all round multipliers.");
+    //reset all
+    resetAllRoundModifiers(): void {
+        log("Resetting all round modifiers.");
         this.resetRoundCatchChanceMultiplier();
     }
 
-    resetAllTurnMultipliers(): void {
-        log("Resetting all turn multipliers.");
+    resetAllTurnModifiers(): void {
+        log("Resetting all turn modifiers.");
         this.resetTurnCatchChanceMultiplier();
+        this.resetTurnEvadeChanceOverride();
     }
 }
