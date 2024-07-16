@@ -2,12 +2,21 @@ import { log } from "../utilities/GameUtils";
 import Member from "../prefabs/Member";
 
 export class Modifiers {
+    //catch
     private combatCatchChanceMultiplier: number = 0;
     private turnCatchChanceMultiplier: number = 0;
+    //evade
     private turnEvadeChanceOverride: number | null = null;
     private turnEvadeDisable: boolean = false;
-    private turnDamageReceiveMultipliers: Map<Member, number> = new Map();
+    //block
+    private turnBlockChanceMultiplier: number = 0;
+    private combatBlockChanceMultiplier: number = 0;
+    private turnBlockNumberAddition: number = 0;
+    private combatBlockNumberAddition: number = 0;
+    //throw
     private combatThrowEffectivenessMultiplier: number = 0;
+    //damage
+    private turnDamageReceiveMultipliers: Map<Member, number> = new Map();
 
     // Evade chance
     getEvadeChanceOverride(): number | null {
@@ -36,7 +45,7 @@ export class Modifiers {
 
     // Catch chance
     getCatchChanceMultiplier(): number {
-        return this.combatCatchChanceMultiplier * this.turnCatchChanceMultiplier;
+        return this.combatCatchChanceMultiplier + this.turnCatchChanceMultiplier;
     }
 
     addRoundCatchChanceMultiplier(multiplier: number): void {
@@ -53,6 +62,47 @@ export class Modifiers {
 
     resetTurnCatchChanceMultiplier(): void {
         this.turnCatchChanceMultiplier = 0;
+    }
+
+    // Block chance
+    getBlockChanceMultiplier(): number {
+        return this.combatBlockChanceMultiplier + this.turnBlockChanceMultiplier;
+    }
+
+    addRoundBlockChanceMultiplier(multiplier: number): void {
+        this.combatBlockChanceMultiplier += multiplier;
+    }
+
+    addTurnBlockChanceMultiplier(multiplier: number): void {
+        this.turnBlockChanceMultiplier += multiplier;
+    }
+
+    getBlockNumberAddition(): number {
+        return this.combatBlockNumberAddition + this.turnBlockNumberAddition;
+    }
+
+    addCombatBlockNumberAddition(addition: number): void {
+        this.combatBlockNumberAddition += addition;
+    }
+
+    addTurnBlockNumberAddition(addition: number): void {
+        this.turnBlockNumberAddition += addition;
+    }
+
+    resetRoundBlockChanceMultiplier(): void {
+        this.combatBlockChanceMultiplier = 0;
+    }
+
+    resetTurnBlockChanceMultiplier(): void {
+        this.turnBlockChanceMultiplier = 0;
+    }
+
+    resetRoundBlockNumberAddition(): void {
+        this.combatBlockNumberAddition = 0;
+    }
+
+    resetTurnBlockNumberAddition(): void {
+        this.turnBlockNumberAddition = 0;
     }
 
     // Damage receive multiplier
@@ -93,6 +143,8 @@ export class Modifiers {
         log("Resetting all combat modifiers.");
         this.resetRoundCatchChanceMultiplier();
         this.resetCombatThrowEffectivenessMultiplier();
+        this.resetRoundBlockChanceMultiplier();
+        this.resetRoundBlockNumberAddition();
     }
 
     resetAllTurnModifiers(): void {
@@ -101,5 +153,7 @@ export class Modifiers {
         this.resetTurnEvadeChanceOverride();
         this.resetTurnEvadeDisable();
         this.resetAllTurnDamageReceiveMultipliers();
+        this.resetTurnBlockChanceMultiplier();
+        this.resetTurnBlockNumberAddition();
     }
 }

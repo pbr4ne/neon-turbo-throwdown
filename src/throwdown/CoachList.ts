@@ -205,6 +205,10 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.EVADE_3_TURBO_EVADE),
             CardFactory.createCardType(CardKeys.DEAD_OR_ALIVE),
             CardFactory.createCardType(CardKeys.DEAD_OR_ALIVE),
+            CardFactory.createCardType(CardKeys.AINT_GONNA_TAKE_IT),
+            CardFactory.createCardType(CardKeys.AINT_GONNA_TAKE_IT),
+            CardFactory.createCardType(CardKeys.BLOCK_OF_AGES),
+            CardFactory.createCardType(CardKeys.BLOCK_OF_AGES),
         ]);
 
         this.coree.setBaseCards([

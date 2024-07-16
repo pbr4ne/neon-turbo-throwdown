@@ -51,8 +51,29 @@ export class Block extends CardType {
         return "block";
     }
 
-    getChanceToDefend(): number {
-        return this.chanceToDefend;
+    getChanceToDefend(team?: Team): number {
+        const modifiers = team?.getModifiers() || this.getPlayer()?.getModifiers();
+        let chance = this.chanceToDefend;
+    
+        if (modifiers) {
+            chance += modifiers.getBlockChanceMultiplier();
+        }
+    
+        return Phaser.Math.Clamp(chance, 0, 1);
+    }
+
+    getNumDefends(team?: Team): number {
+        const modifiers = team?.getModifiers() || this.getPlayer()?.getModifiers();
+        let numDefends = this.numDefends;
+    
+        if (modifiers) {
+            numDefends += modifiers.getBlockNumberAddition();
+        }
+    
+        if (numDefends < 0) {
+            return 0;
+        }
+        return numDefends;
     }
 
     getDefenseDamage(): number {
@@ -61,10 +82,6 @@ export class Block extends CardType {
 
     getCurrentNumDefends(): number {
         return this.currentNumDefends;
-    }
-
-    getNumDefends(): number {
-        return this.numDefends;
     }
 
     getDescription(): string {
