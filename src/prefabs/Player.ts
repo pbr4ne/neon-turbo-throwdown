@@ -77,7 +77,7 @@ export default class Player extends Team {
         }
     }
 
-    handleMemberClick(member: Member) {
+    handleMemberClick(member: Member): void {
         if (!this.throwdown) {
             log("throwdown not initialized");
             return;

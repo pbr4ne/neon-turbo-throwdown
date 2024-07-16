@@ -22,6 +22,7 @@ import { SeeCards3 } from "../trophies/member/SeeCards3";
 import { SeeTargets1 } from "../trophies/member/SeeTargets1";
 import { SeeTargets2 } from "../trophies/member/SeeTargets2";
 import { SeeTargets3 } from "../trophies/member/SeeTargets3";
+import Player from "./Player";
 /* END-USER-IMPORTS */
 
 export default class Member extends Phaser.GameObjects.Container {
@@ -314,7 +315,6 @@ export default class Member extends Phaser.GameObjects.Container {
     }
 
     kill() {
-        this.hp = 0;
         this.sprite.setAlpha(0.25);
         this.bracketLeft?.setAlpha(0.25);
         this.bracketRight?.setAlpha(0.25);
@@ -325,10 +325,26 @@ export default class Member extends Phaser.GameObjects.Container {
     }
 
     increaseHP(amount: number) {
+        const originalHp = this.hp;
         this.hp += amount;
         if (this.hp > this.maxHP) {
             this.hp = this.maxHP;
         }
+
+        //reactivate if health was <= 0
+        if (originalHp <= 0) {
+            this.sprite.setAlpha(1);
+            this.bracketLeft?.setAlpha(1);
+            this.bracketRight?.setAlpha(1);
+            this.assignedBlock?.setAlpha(1);
+            this.assignedBlockText?.setAlpha(1);
+            if (this.team instanceof Player) {
+                this.on("pointerdown", () => (this.team as Player).handleMemberClick(this));
+            } else {
+                this.on("pointerdown", () => (this.team as Boss).handleEnemyClick(this));
+            }
+        }
+        
         this.updateHealthBar();
         this.showFloatingAction(`+${amount.toString()}`, "#00ff00", 1);
     }
