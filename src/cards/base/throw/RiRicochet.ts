@@ -13,6 +13,6 @@ export class RiRicochet extends UltraTurboThrow {
     }
 
     getIcon(): string {
-        return "throw-turbo-ultra";
+        return "ricochet";
     }
 }

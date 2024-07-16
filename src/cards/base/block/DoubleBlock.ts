@@ -13,6 +13,6 @@ export class DoubleBlock extends BestBlock {
     }
 
     getIcon(): string {
-        return "block-turbo-ultra";
+        return "block-double";
     }
 }

@@ -17,6 +17,11 @@
                 "key": "block"
             },
             {
+                "url": "assets/images/cards/block-double.png",
+                "type": "image",
+                "key": "block-double"
+            },
+            {
                 "url": "assets/images/cards/block-turbo.png",
                 "type": "image",
                 "key": "block-turbo"
@@ -60,6 +65,11 @@
                 "url": "assets/images/cards/catch.png",
                 "type": "image",
                 "key": "catch"
+            },
+            {
+                "url": "assets/images/cards/catch-big.png",
+                "type": "image",
+                "key": "catch-big"
             },
             {
                 "url": "assets/images/cards/catch-turbo.png",
@@ -160,6 +170,16 @@
                 "url": "assets/images/cards/evade.png",
                 "type": "image",
                 "key": "evade"
+            },
+            {
+                "url": "assets/images/cards/evade-double.png",
+                "type": "image",
+                "key": "evade-double"
+            },
+            {
+                "url": "assets/images/cards/evade-triple.png",
+                "type": "image",
+                "key": "evade-triple"
             },
             {
                 "url": "assets/images/cards/evade-turbo.png",
@@ -293,6 +313,11 @@
                 "key": "red"
             },
             {
+                "url": "assets/images/cards/ricochet.png",
+                "type": "image",
+                "key": "ricochet"
+            },
+            {
                 "url": "assets/images/deck/ring-assigned.png",
                 "type": "image",
                 "key": "ring-assigned"
@@ -336,6 +361,11 @@
                 "url": "assets/images/level/shadow.png",
                 "type": "image",
                 "key": "shadow"
+            },
+            {
+                "url": "assets/images/cards/sniper.png",
+                "type": "image",
+                "key": "sniper"
             },
             {
                 "url": [

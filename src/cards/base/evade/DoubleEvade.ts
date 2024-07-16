@@ -13,6 +13,6 @@ export class DoubleEvade extends Evade {
     }
 
     getIcon(): string {
-        return "evade-turbo";
+        return "evade-double";
     }
 }

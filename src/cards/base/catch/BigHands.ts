@@ -13,6 +13,6 @@ export class BigHands extends TurboCatch {
     }
 
     getIcon(): string {
-        return "catch-turbo-ultra";
+        return "catch-big";
     }
 }

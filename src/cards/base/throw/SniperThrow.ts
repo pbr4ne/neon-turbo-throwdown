@@ -13,6 +13,6 @@ export class SniperThrow extends RiRicochet {
     }
 
     getIcon(): string {
-        return "throw-turbo-ultra";
+        return "sniper";
     }
 }
