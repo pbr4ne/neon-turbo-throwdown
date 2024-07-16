@@ -73,13 +73,13 @@ export class Catch extends CardType {
     getChanceToDefend(team?: Team): number {
         if (team) {
             log("Returning chance to defend for team: " + team);
-            log((this.chanceToDefend * team.getCatchChanceMultiplier()).toString());
-            return this.chanceToDefend * team.getCatchChanceMultiplier();
+            log((this.chanceToDefend * team.getModifiers().getCatchChanceMultiplier()).toString());
+            return this.chanceToDefend * team.getModifiers().getCatchChanceMultiplier();
         } else {
             log("Returning chance to defend for base player");
             const player = this.getPlayer();
             if (player) {
-                return this.chanceToDefend * player.getCatchChanceMultiplier();
+                return this.chanceToDefend * player.getModifiers().getCatchChanceMultiplier();
             }
             return this.chanceToDefend;
         }

@@ -14,6 +14,7 @@ import Throwdown from "./Throwdown";
 import Player from "./Player";
 import { log } from "../utilities/GameUtils";
 import { GameSounds } from "../utilities/GameSounds";
+import { Modifiers } from "../throwdown/Modifiers";
 /* END-USER-IMPORTS */
 
 export default abstract class Team extends Phaser.GameObjects.Container {
@@ -39,23 +40,7 @@ export default abstract class Team extends Phaser.GameObjects.Container {
 	protected visibleCards!: boolean;
     public layer!: Phaser.GameObjects.Layer;
     protected throwdown!: Throwdown;
-
-    private catchChanceMultiplier: number = 1;
-
-    getCatchChanceMultiplier(): number {
-        return this.catchChanceMultiplier;
-    }
-
-    addCatchChanceMultiplier(multiplier: number): void {
-        this.catchChanceMultiplier += multiplier;
-        if (this.catchChanceMultiplier < 0) {
-            this.catchChanceMultiplier = 0;
-        }
-    }
-
-    resetCatchChanceMultiplier(): void {
-        this.catchChanceMultiplier = 1;
-    }
+    protected modifiers: Modifiers = new Modifiers();
 
 	abstract addMembers(): void;
 
@@ -69,6 +54,10 @@ export default abstract class Team extends Phaser.GameObjects.Container {
 
     getMembers(): Member[] {
         return this.members;
+    }
+
+    getModifiers(): Modifiers {
+        return this.modifiers;
     }
 
     onDeckClick() {
