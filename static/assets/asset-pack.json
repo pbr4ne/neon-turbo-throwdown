@@ -32,11 +32,6 @@
                 "key": "block-turbo-ultra"
             },
             {
-                "url": "assets/images/level/boss.png",
-                "type": "image",
-                "key": "boss"
-            },
-            {
                 "url": "assets/images/level/boss10.png",
                 "type": "image",
                 "key": "boss10"
@@ -333,11 +328,6 @@
                 "key": "ring-selected"
             },
             {
-                "url": "assets/images/level/russ.png",
-                "type": "image",
-                "key": "russ"
-            },
-            {
                 "url": "assets/images/game/score.png",
                 "type": "image",
                 "key": "score"
@@ -366,11 +356,6 @@
                 "url": "assets/images/level/sgtsteve.png",
                 "type": "image",
                 "key": "sgtsteve"
-            },
-            {
-                "url": "assets/images/level/shadow.png",
-                "type": "image",
-                "key": "shadow"
             },
             {
                 "url": "assets/images/level/shadowken.png",
@@ -462,11 +447,6 @@
                 "key": "start-round"
             },
             {
-                "url": "assets/images/level/steve.png",
-                "type": "image",
-                "key": "steve"
-            },
-            {
                 "url": "assets/images/instructions/target-opponent.png",
                 "type": "image",
                 "key": "target-opponent"
@@ -500,11 +480,6 @@
                 "url": "assets/images/deck/trophy.png",
                 "type": "image",
                 "key": "trophy"
-            },
-            {
-                "url": "assets/images/level/turbo.png",
-                "type": "image",
-                "key": "turbo"
             },
             {
                 "url": "assets/images/level/turbonerd.png",
