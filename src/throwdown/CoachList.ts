@@ -57,7 +57,8 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.DOUBLE_EVADE),
             CardFactory.createCardType(CardKeys.BLOCK),
             CardFactory.createCardType(CardKeys.BETTER_BLOCK),
-            CardFactory.createCardType(CardKeys.CATCH)
+            CardFactory.createCardType(CardKeys.CATCH),
+            CardFactory.createCardType(CardKeys.BIGG_BALLS)
         ]);
 
         this.tycoon.setBaseCards([
@@ -70,7 +71,8 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.THROW),
             CardFactory.createCardType(CardKeys.THROW),
             CardFactory.createCardType(CardKeys.THROW),
-            CardFactory.createCardType(CardKeys.CATCH)
+            CardFactory.createCardType(CardKeys.CATCH),
+            CardFactory.createCardType(CardKeys.SUPPLY_AND_DEMAND),
         ]);
 
         this.tycoon.setTrophyTypes([
@@ -87,7 +89,7 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.BETTER_BLOCK),
             CardFactory.createCardType(CardKeys.DOUBLE_BLOCK),
             CardFactory.createCardType(CardKeys.TURBO_EVADE),
-            CardFactory.createCardType(CardKeys.TURBO_CATCH)
+            CardFactory.createCardType(CardKeys.TURBO_CATCH),
         ]);
 
         this.sgtsteve.setBaseCards([
@@ -100,7 +102,7 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.SNIPER_THROW),
             CardFactory.createCardType(CardKeys.BETTER_BLOCK),
             CardFactory.createCardType(CardKeys.TURBO_EVADE),
-            CardFactory.createCardType(CardKeys.TURBO_CATCH)
+            CardFactory.createCardType(CardKeys.TURBO_CATCH),
         ]);
 
         this.betsy.setBaseCards([
@@ -113,7 +115,7 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.RICOCHET),
             CardFactory.createCardType(CardKeys.RICOCHET),
             CardFactory.createCardType(CardKeys.TURBO_EVADE),
-            CardFactory.createCardType(CardKeys.TURBO_EVADE)
+            CardFactory.createCardType(CardKeys.TURBO_EVADE),
         ]);
 
         this.coree.setBaseCards([
@@ -126,7 +128,7 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.DOUBLE_EVADE),
             CardFactory.createCardType(CardKeys.SNIPER_THROW),
             CardFactory.createCardType(CardKeys.SNIPER_THROW),
-            CardFactory.createCardType(CardKeys.TURBO_CATCH)
+            CardFactory.createCardType(CardKeys.TURBO_CATCH),
         ]);
 
         this.turbonerd.setBaseCards([
@@ -139,7 +141,7 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.TRIPLE_EVADE),
             CardFactory.createCardType(CardKeys.TRIPLE_EVADE),
             CardFactory.createCardType(CardKeys.RI_RICOCHET),
-            CardFactory.createCardType(CardKeys.BIG_HANDS)
+            CardFactory.createCardType(CardKeys.BIG_HANDS),
         ]);
 
         this.shadowken.setBaseCards([
@@ -152,7 +154,7 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.TRIPLE_EVADE),
             CardFactory.createCardType(CardKeys.TURBO_EVADE),
             CardFactory.createCardType(CardKeys.RI_RICOCHET),
-            CardFactory.createCardType(CardKeys.BIG_HANDS)
+            CardFactory.createCardType(CardKeys.BIG_HANDS),
         ]);
 
         this.boss10.setBaseCards([
@@ -165,7 +167,7 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.TRIPLE_EVADE),
             CardFactory.createCardType(CardKeys.DOUBLE_BLOCK),
             CardFactory.createCardType(CardKeys.DOUBLE_BLOCK),
-            CardFactory.createCardType(CardKeys.BIG_HANDS)
+            CardFactory.createCardType(CardKeys.BIG_HANDS),
         ]);
     }
 

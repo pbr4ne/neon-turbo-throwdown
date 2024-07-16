@@ -9,6 +9,8 @@ import { TycoonCard } from "./TycoonCard";
 
 export class SupplyAndDemand extends TycoonCard {
 
+    protected healthSteal: number = 1;
+
     constructor() {
         super(CardKeys.SUPPLY_AND_DEMAND, null);
     }
@@ -21,7 +23,24 @@ export class SupplyAndDemand extends TycoonCard {
     }
 
     offense(member: Member, target: Member, team: Team, opponentTeam: Team): boolean {
-        return false;
+        let offenseSuccess = false;
+        member.showFloatingAction(this.getName());
+        const targetCard = target.getAssignedCard();
+        let defenseSuccess = false;
+        if (targetCard != null) {
+            //see if they successfully defend
+            defenseSuccess = targetCard.getCardType().defense(target, member, opponentTeam, team);
+        }
+        if (!defenseSuccess) {
+            //reduce their HP if they failed to defend
+            target.showFloatingAction((this.getHealthSteal() * -1).toString(), "#ff005a");
+            target.reduceHP(this.getHealthSteal(), member);
+            member.showFloatingAction(`+${this.getHealthSteal().toString()}`, "#00ff00", 1);
+            member.increaseHP(this.getHealthSteal());
+            offenseSuccess = true;
+        }
+
+        return offenseSuccess;
     }
 
     defense(member: Member, attacker: Member, team: Team, opponentTeam: Team): boolean {
@@ -29,7 +48,7 @@ export class SupplyAndDemand extends TycoonCard {
     }
 
     needsTarget(): boolean {
-        return false;
+        return true;
     }
 
     getName(): string {
@@ -42,5 +61,9 @@ export class SupplyAndDemand extends TycoonCard {
 
     getDescription(): string {
         return "tbd";
+    }
+
+    getHealthSteal(): number {
+        return this.healthSteal;
     }
 }

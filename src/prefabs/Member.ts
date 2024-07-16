@@ -318,20 +318,31 @@ export default class Member extends Phaser.GameObjects.Container {
         this.updateHealthBar();
     }
 
-    showFloatingAction(action: string, color: string = '#ffffff') {
+    increaseHP(amount: number) {
+        this.hp += amount;
+        if (this.hp > this.maxHP) {
+            this.hp = this.maxHP;
+        }
+        this.updateHealthBar();
+    }
+
+    showFloatingAction(action: string, color: string = '#ffffff', incrementIndex: number = 0) {
         if (!this.scene) {
             return;
         }
-        const actionText = this.scene.add.text(this.x, this.y - this.sprite.height / 2, action, {
+        const baseOffset = -35;
+        const yOffset = incrementIndex * baseOffset;
+    
+        const actionText = this.scene.add.text(this.x, this.y - this.sprite.height / 2 + yOffset, action, {
             fontSize: '48px',
             color: color,
             stroke: color,
             strokeThickness: 3
         }).setOrigin(0.5);
-
+    
         this.scene.add.tween({
             targets: actionText,
-            y: this.y - this.sprite.height / 2 - 50,
+            y: this.y - this.sprite.height / 2 - 50 + yOffset,
             alpha: 0,
             duration: 1000,
             ease: 'Power1',
@@ -340,6 +351,7 @@ export default class Member extends Phaser.GameObjects.Container {
             }
         });
     }
+    
 
     showActionBam(text: string) {
         if (!this.scene) {
