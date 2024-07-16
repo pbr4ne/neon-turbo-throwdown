@@ -8,6 +8,7 @@ import { PushActionScript } from "@phaserjs/editor-scripts-simple-animations";
 import { CallbackActionScript } from "@phaserjs/editor-scripts-core";
 import SwitchImageActionScript from "../script-nodes/ui/SwitchImageActionScript";
 import FloatingObjectScript from "../script-nodes/ui/FloatingObjectScript";
+import { StorageManager } from "../utilities/StorageManager";
 
 export default class Welcome extends Phaser.Scene {
 
@@ -82,6 +83,14 @@ export default class Welcome extends Phaser.Scene {
 		this.setButtonInteractive(creditsBtn);
 
 		creditsBtn.on('pointerdown', this.showCredits, this);
+
+		const hardResetText = this.add.text(1710, 850, "hard reset", {
+            fontFamily: '"Press Start 2P"',
+            fontSize: '14px',
+            color: '#ffffff'
+        }).setInteractive({ useHandCursor: true });
+
+        hardResetText.on('pointerdown', this.showHardResetPopup, this);
 	}
 
 	private setButtonInteractive(button: Phaser.GameObjects.Image) {
@@ -215,7 +224,41 @@ export default class Welcome extends Phaser.Scene {
 		popup.add([background, creditsText, developerText, developerLink, writerText, writerLink, uiArtistText, musicText, musicLink, artistText, testerText, thanksText, closeButton]);
 	}
 
-	/* END-USER-CODE */
+	private showHardResetPopup() {
+        const popup = this.add.container(960, 540);
+    
+        const background = this.add.rectangle(0, 0, 400, 200, 0x000000, 0.8).setOrigin(0.5, 0.5);
+        background.setStrokeStyle(4, 0x00ffff);
+    
+        const questionText = this.add.text(0, -60, "Are you sure?", {
+            fontFamily: '"Press Start 2P"',
+            fontSize: '20px',
+            color: '#ffffff',
+        }).setOrigin(0.5, 0.5);
+    
+        const yesButton = this.add.text(-80, 40, "Yes", {
+            fontFamily: '"Press Start 2P"',
+            fontSize: '20px',
+            color: '#00ffff',
+            padding: { x: 10, y: 5 }
+        }).setOrigin(0.5, 0.5).setInteractive({ useHandCursor: true });
+    
+        const noButton = this.add.text(80, 40, "No", {
+            fontFamily: '"Press Start 2P"',
+            fontSize: '20px',
+            color: '#ff0000',
+            padding: { x: 10, y: 5 }
+        }).setOrigin(0.5, 0.5).setInteractive({ useHandCursor: true });
+    
+        yesButton.on('pointerdown', async () => {
+            await StorageManager.clearAllData(); // Call the method to clear the database
+            popup.destroy();
+        });
+    
+        noButton.on('pointerdown', () => {
+            popup.destroy();
+        });
+    
+        popup.add([background, questionText, yesButton, noButton]);
+    }
 }
-
-/* END OF COMPILED CODE */

@@ -161,5 +161,18 @@ export class StorageManager {
         }
         return [];
     }
+
+    public static async clearAllData() {
+        if (this.db) {
+            const tx = this.db.transaction(['trophies', 'runs', 'dialogues', 'baseDeck'], 'readwrite');
+            await Promise.all([
+                tx.objectStore('trophies').clear(),
+                tx.objectStore('runs').clear(),
+                tx.objectStore('dialogues').clear(),
+                tx.objectStore('baseDeck').clear()
+            ]);
+            await tx.done;
+        }
+    }
 }
 
