@@ -15,7 +15,8 @@ export class Evade extends CardType {
     }
 
     resetTurn(): void {
-        this.numDefends = 0;
+        this.currentNumDefends = 0;
+        super.resetTurn();
     }
 
     special(member: Member, team: Team, opponentTeam: Team): boolean {

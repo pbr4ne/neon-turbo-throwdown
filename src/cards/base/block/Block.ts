@@ -18,6 +18,7 @@ export class Block extends CardType {
 
     resetTurn(): void {
         this.currentNumDefends = 0;
+        super.resetTurn();
     }
 
     special(member: Member, team: Team, opponentTeam: Team): boolean {

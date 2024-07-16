@@ -169,7 +169,8 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
             CoachList.you.getBaseCards().forEach(card => {
                 log(card.toString());
             });
-            
+            //do this so you can see current modifiers on the card description
+			newCard.getCardType().setPlayer(this.player);
             //todo - this is suspicious that i have to hide it. because it should be moved later but it stays on the screen
             newCard.hide();
         } else {

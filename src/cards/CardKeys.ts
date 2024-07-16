@@ -27,6 +27,9 @@ export enum CardKeys {
     TURBO_CATCH = "turbo-catch",
     BIG_HANDS = "big-hands",
 
+    //sporticus
+    BIGG_BALLS = "bigg-balls",
+
     //unknown
     UNKNOWN = "unknown"
 }

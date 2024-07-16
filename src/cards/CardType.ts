@@ -1,19 +1,27 @@
+import { Coach } from "../throwdown/Coach";
 import Member from "../prefabs/Member";
 import Team from "../prefabs/Team";
 import { CardFactory } from "./CardFactory";
 import { CardKeys } from "./CardKeys";
+import Player from "../prefabs/Player";
 
 export abstract class CardType {
 
     public key: CardKeys;
     private upgradeKey: CardKeys | null;
+    private player?: Player;
 
     constructor(key: CardKeys | CardKeys.UNKNOWN, upgradeKey: CardKeys | null) {
         this.key = key;
         this.upgradeKey = upgradeKey;
     }
 
-    abstract resetTurn(): void;
+    resetTurn(): void {
+        
+    }
+
+    resetRound(): void {
+    }
 
     abstract special(member: Member, team: Team, opponentTeam: Team): boolean;
 
@@ -48,6 +56,14 @@ export abstract class CardType {
 
     getNicePercentage(fraction: number): string {
         return (fraction * 100).toFixed(0)
+    }
+
+    setPlayer(player: Player): void {
+        this.player = player;
+    }
+
+    getPlayer(): Player | undefined {
+        return this.player;
     }
 
     toString(): string {

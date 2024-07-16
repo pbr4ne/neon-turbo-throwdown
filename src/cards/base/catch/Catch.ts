@@ -4,6 +4,8 @@ import Team from "../../../prefabs/Team";
 import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import { CardKeys } from "../../CardKeys";
+import Player from "../../../prefabs/Player";
+import { CoachList } from "../../../throwdown/CoachList";
 
 export class Catch extends CardType {
     protected chanceToDefend : number = 0.50;
@@ -19,6 +21,7 @@ export class Catch extends CardType {
 
     resetTurn(): void {
         this.currentNumDefends = 0;
+        super.resetTurn();
     }
 
     special(member: Member, team: Team, opponentTeam: Team): boolean {
@@ -30,8 +33,10 @@ export class Catch extends CardType {
     }
 
     defense(member: Member, attacker: Member, team: Team, opponentTeam: Team): boolean {
+        console.log("DEFENSE " + team);
         let defenseSuccess = false;
-        if (this.getCurrentNumDefends() <= 1 && this.getChanceToDefend() >= Math.random()) {
+        log(`DEFENSE - this is the modifier: ${this.getChanceToDefend(team)}`);
+        if (this.getCurrentNumDefends() <= 1 && this.getChanceToDefend(team) >= Math.random()) {
             member.showFloatingAction(this.getName());
 
             let membersToRebound = this.getRandomOtherAliveMembers(opponentTeam, attacker, this.getReboundTargets() - 1);
@@ -68,8 +73,19 @@ export class Catch extends CardType {
         return "catch";
     }
 
-    getChanceToDefend(): number {
-        return this.chanceToDefend;
+    getChanceToDefend(team?: Team): number {
+        if (team) {
+            log("Returning chance to defend for team: " + team);
+            log((this.chanceToDefend * team.getCatchChanceMultiplier()).toString());
+            return this.chanceToDefend * team.getCatchChanceMultiplier();
+        } else {
+            log("Returning chance to defend for base player");
+            const player = this.getPlayer();
+            if (player) {
+                return this.chanceToDefend * player.getCatchChanceMultiplier();
+            }
+            return this.chanceToDefend;
+        }
     }
 
     getChanceToRebound(): number {

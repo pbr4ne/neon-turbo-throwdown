@@ -9,6 +9,7 @@ import { CardType } from "../cards/CardType";
 import Team from "./Team";
 import Player from "./Player";
 import { log } from "../utilities/GameUtils";
+import Game from "../scenes/Game";
 /* END-USER-IMPORTS */
 
 export default class Deck extends Phaser.GameObjects.Container {
@@ -20,10 +21,9 @@ export default class Deck extends Phaser.GameObjects.Container {
         this.scene.add.existing(this);
     }
 
-    initializeDeck(cardTypes: CardType[], team: Team) {
-        log(`initializeDeck: cards to add:`);
+    initializeDeck(cardTypes: CardType[], team: Team, player: Player) {
         cardTypes.forEach(cardType => {
-            log(`${cardType}`);
+            cardType.setPlayer(player);
         });
         this.cards = [];
 
@@ -88,9 +88,15 @@ export default class Deck extends Phaser.GameObjects.Container {
         this.cards = [];
     }
 
-    resetCards() {
+    resetTurn() {
         this.cards.forEach(card => {
             card.getCardType().resetTurn();
+        });
+    }
+
+    resetRound() {
+        this.cards.forEach(card => {
+            card.getCardType().resetRound();
         });
     }
 }

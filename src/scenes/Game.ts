@@ -32,7 +32,7 @@ export default class Game extends Phaser.Scene {
 	}
 
 	/* START-USER-CODE */
-	private player!: Player;
+	public player!: Player;
 	private dialogLayer!: Phaser.GameObjects.Layer;
     private dialogBox!: DialogBox;
     private runUpgrade!: RunUpgrade;

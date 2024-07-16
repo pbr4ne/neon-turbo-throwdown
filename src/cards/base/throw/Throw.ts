@@ -13,9 +13,6 @@ export class Throw extends CardType {
         super(key, upgradeKey);
     }
 
-    resetTurn(): void {
-    }
-
     special(member: Member, team: Team, opponentTeam: Team): boolean {
         return false;
     }
@@ -34,7 +31,7 @@ export class Throw extends CardType {
                 let defenseSuccess = false;
                 if (targetCard != null) {
                     //see if they successfully defend
-                    defenseSuccess = targetCard.getCardType().defense(enemyMember, member, team, opponentTeam);
+                    defenseSuccess = targetCard.getCardType().defense(enemyMember, member, opponentTeam, team);
                 }
                 if (!defenseSuccess) {
                     //reduce their HP if they failed to defend

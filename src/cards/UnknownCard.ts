@@ -10,9 +10,6 @@ export class UnknownCard extends CardType {
         super(key, upgradeKey);
     }
 
-    resetTurn(): void {
-    }
-
     special(member: Member, team: Team, opponentTeam: Team): boolean {
         return false;
     }

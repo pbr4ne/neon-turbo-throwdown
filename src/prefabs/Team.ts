@@ -39,6 +39,23 @@ export default abstract class Team extends Phaser.GameObjects.Container {
     public layer!: Phaser.GameObjects.Layer;
     protected throwdown!: Throwdown;
 
+    private catchChanceMultiplier: number = 1;
+
+    getCatchChanceMultiplier(): number {
+        return this.catchChanceMultiplier;
+    }
+
+    addCatchChanceMultiplier(multiplier: number): void {
+        this.catchChanceMultiplier += multiplier;
+        if (this.catchChanceMultiplier < 0) {
+            this.catchChanceMultiplier = 0;
+        }
+    }
+
+    resetCatchChanceMultiplier(): void {
+        this.catchChanceMultiplier = 1;
+    }
+
 	abstract addMembers(): void;
 
     setThrowdown(throwdown: Throwdown) {
@@ -106,7 +123,7 @@ export default abstract class Team extends Phaser.GameObjects.Container {
                 this.deck.addCard(freshCard);
             }
         }
-        this.deck.resetCards();
+        this.deck.shuffle();
         //log the size of the deck
         log(`CURRENT ${this} DISCARD PILE SIZE AFTER RECOMBINE: ${this.discardPile.getCards().length}`);
         log(`CURRENT ${this} DECK SIZE AFTER RECOMBINE: ${this.deck.getCards().length}`);
@@ -139,10 +156,6 @@ export default abstract class Team extends Phaser.GameObjects.Container {
         this.members.forEach(member => {
             member.showAssignedStuff();
         });
-    }
-
-    resetCards() {
-
     }
 
     async executeTurn() {

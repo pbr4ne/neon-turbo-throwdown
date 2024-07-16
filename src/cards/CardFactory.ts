@@ -16,23 +16,24 @@ import { SniperThrow } from "./base/throw/SniperThrow";
 import { Throw } from "./base/throw/Throw";
 import { TurboThrow } from "./base/throw/TurboThrow";
 import { UltraTurboThrow } from "./base/throw/UltraTurboThrow";
+import { BiggBalls } from "./boss/sporticus/BiggBalls";
+import { CardKeys } from "./CardKeys";
 import { CardType } from "./CardType";
 import { UnknownCard } from "./UnknownCard";
 
-
 export class CardFactory {
-    private static cardTypeMap: Map<string, new () => CardType> = new Map();
+    private static cardTypeMap: Map<CardKeys, new () => CardType> = new Map();
 
-    public static registerCardType(typeName: string, constructor: new () => CardType) {
-        CardFactory.cardTypeMap.set(typeName, constructor);
+    public static registerCardType(type: CardKeys, constructor: new () => CardType) {
+        CardFactory.cardTypeMap.set(type, constructor);
     }
 
-    public static createCardType(typeName: string): CardType {
-        const constructor = CardFactory.cardTypeMap.get(typeName);
+    public static createCardType(type: CardKeys): CardType {
+        const constructor = CardFactory.cardTypeMap.get(type);
         if (constructor) {
             return new constructor();
         }
-        console.error(`Card type not found: ${typeName}`);
+        console.error(`Card type not found: ${type}`);
         return new UnknownCard();
     }
 
@@ -40,29 +41,35 @@ export class CardFactory {
         //base cards
 
         //throw
-        this.registerCardType("throw", Throw);
-        this.registerCardType("turbo-throw", TurboThrow);
-        this.registerCardType("ricochet", Ricochet);
-        this.registerCardType("ultra-turbo-throw", UltraTurboThrow);
-        this.registerCardType("ri-ricochet", RiRicochet);
-        this.registerCardType("sniper-throw", SniperThrow);
+        this.registerCardType(CardKeys.THROW, Throw);
+        this.registerCardType(CardKeys.TURBO_THROW, TurboThrow);
+        this.registerCardType(CardKeys.RICOCHET, Ricochet);
+        this.registerCardType(CardKeys.ULTRA_TURBO_THROW, UltraTurboThrow);
+        this.registerCardType(CardKeys.RI_RICOCHET, RiRicochet);
+        this.registerCardType(CardKeys.SNIPER_THROW, SniperThrow);
         
         //block
-        this.registerCardType("block", Block);
-        this.registerCardType("better-block", BetterBlock);
-        this.registerCardType("turbo-block", TurboBlock);
-        this.registerCardType("best-block", BestBlock);
-        this.registerCardType("double-block", DoubleBlock);
+        this.registerCardType(CardKeys.BLOCK, Block);
+        this.registerCardType(CardKeys.BETTER_BLOCK, BetterBlock);
+        this.registerCardType(CardKeys.TURBO_BLOCK, TurboBlock);
+        this.registerCardType(CardKeys.BEST_BLOCK, BestBlock);
+        this.registerCardType(CardKeys.DOUBLE_BLOCK, DoubleBlock);
 
         //evade
-        this.registerCardType("evade", Evade);
-        this.registerCardType("double-evade", DoubleEvade);
-        this.registerCardType("turbo-evade", TurboEvade);
-        this.registerCardType("triple-evade", TripleEvade);
+        this.registerCardType(CardKeys.EVADE, Evade);
+        this.registerCardType(CardKeys.DOUBLE_EVADE, DoubleEvade);
+        this.registerCardType(CardKeys.TURBO_EVADE, TurboEvade);
+        this.registerCardType(CardKeys.TRIPLE_EVADE, TripleEvade);
         
         //catch
-        this.registerCardType("catch", Catch);
-        this.registerCardType("turbo-catch", TurboCatch);
-        this.registerCardType("big-hands", BigHands);
+        this.registerCardType(CardKeys.CATCH, Catch);
+        this.registerCardType(CardKeys.TURBO_CATCH, TurboCatch);
+        this.registerCardType(CardKeys.BIG_HANDS, BigHands);
+
+        //sporticus
+        this.registerCardType(CardKeys.BIGG_BALLS, BiggBalls);
+
+        //unknown
+        this.registerCardType(CardKeys.UNKNOWN, UnknownCard);
     }
 }
