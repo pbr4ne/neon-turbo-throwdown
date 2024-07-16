@@ -8,13 +8,13 @@ export class DialogueStorage {
 
     public static primoDialogue: CoachDialogue = new CoachDialogue();
     public static sporticusDialogue: CoachDialogue = new CoachDialogue();
-    public static russDialogue: CoachDialogue = new CoachDialogue();
-    public static bossDialogue: CoachDialogue = new CoachDialogue();
-    public static steveDialogue: CoachDialogue = new CoachDialogue();
+    public static tycoonDialogue: CoachDialogue = new CoachDialogue();
+    public static officeDialogue: CoachDialogue = new CoachDialogue();
+    public static sgtsteveDialogue: CoachDialogue = new CoachDialogue();
     public static betsyDialogue: CoachDialogue = new CoachDialogue();
     public static coreeDialogue: CoachDialogue = new CoachDialogue();
-    public static turboDialogue: CoachDialogue = new CoachDialogue();
-    public static shadowDialogue: CoachDialogue = new CoachDialogue();
+    public static turbonerdDialogue: CoachDialogue = new CoachDialogue();
+    public static shadowkenDialogue: CoachDialogue = new CoachDialogue();
     public static boss10Dialogue: CoachDialogue = new CoachDialogue();
     public static missingDialogue: CoachDialogue = new CoachDialogue();
     public static missingDialogueConversation: DialogueConversation = new DialogueConversation();
@@ -23,26 +23,26 @@ export class DialogueStorage {
     public constructor() {
         this.initializePrimoDialogue();
         this.initializeSporticusDialogue();
-        this.initializeRussDialogue();
-        this.initializeBossDialogue();
-        this.initializeSteveDialogue();
+        this.initializeTycoonDialogue();
+        this.initializeOfficeDialogue();
+        this.initializeSgtsteveDialogue();
         this.initializeBetsyDialogue();
         this.initializeCoreeDialogue();
-        this.initializeTurboDialogue();
-        this.initializeShadowDialogue();
+        this.initializeTurbonerdDialogue();
+        this.initializeShadowkenDialogue();
         this.initializeBoss10Dialogue();
         this.initializeMissingDialogue();
         this.initializeMissingDialogueConversation();
 
         this.warnIfMissingDialogue(DialogueStorage.primoDialogue, "primo");
         this.warnIfMissingDialogue(DialogueStorage.sporticusDialogue, "sporticus");
-        this.warnIfMissingDialogue(DialogueStorage.russDialogue, "russ");
-        this.warnIfMissingDialogue(DialogueStorage.bossDialogue, "boss");
-        this.warnIfMissingDialogue(DialogueStorage.steveDialogue, "steve");
+        this.warnIfMissingDialogue(DialogueStorage.tycoonDialogue, "russ");
+        this.warnIfMissingDialogue(DialogueStorage.officeDialogue, "boss");
+        this.warnIfMissingDialogue(DialogueStorage.sgtsteveDialogue, "steve");
         this.warnIfMissingDialogue(DialogueStorage.betsyDialogue, "betsy");
         this.warnIfMissingDialogue(DialogueStorage.coreeDialogue, "coree");
-        this.warnIfMissingDialogue(DialogueStorage.turboDialogue, "turbo");
-        this.warnIfMissingDialogue(DialogueStorage.shadowDialogue, "shadow");
+        this.warnIfMissingDialogue(DialogueStorage.turbonerdDialogue, "turbo");
+        this.warnIfMissingDialogue(DialogueStorage.shadowkenDialogue, "shadow");
         this.warnIfMissingDialogue(DialogueStorage.boss10Dialogue, "boss10");
     }
 
@@ -92,13 +92,13 @@ export class DialogueStorage {
         sporticusIntroDialogue1.addStep(["No, I am Sporticus!", "....'cause Sports?", "I am 37."], CoachList.you);
     }
 
-    public initializeRussDialogue(): void {   
+    public initializeTycoonDialogue(): void {   
     }
 
-    public initializeBossDialogue(): void {
+    public initializeOfficeDialogue(): void {
     }
 
-    public initializeSteveDialogue(): void {
+    public initializeSgtsteveDialogue(): void {
     }
 
     public initializeBetsyDialogue(): void {
@@ -107,10 +107,10 @@ export class DialogueStorage {
     public initializeCoreeDialogue(): void {
     }
 
-    public initializeTurboDialogue(): void {
+    public initializeTurbonerdDialogue(): void {
     }
 
-    public initializeShadowDialogue(): void {
+    public initializeShadowkenDialogue(): void {
     }
 
     public initializeBoss10Dialogue(): void {
@@ -167,13 +167,13 @@ export class DialogueStorage {
     private static dialogueMapping: { [key: string]: CoachDialogue } = {
         primo: DialogueStorage.primoDialogue,
         sporticus: DialogueStorage.sporticusDialogue,
-        russ: DialogueStorage.russDialogue,
-        boss: DialogueStorage.bossDialogue,
-        steve: DialogueStorage.steveDialogue,
+        tycoon: DialogueStorage.tycoonDialogue,
+        office: DialogueStorage.officeDialogue,
+        sgtsteve: DialogueStorage.sgtsteveDialogue,
         betsy: DialogueStorage.betsyDialogue,
         coree: DialogueStorage.coreeDialogue,
-        turbo: DialogueStorage.turboDialogue,
-        shadow: DialogueStorage.shadowDialogue,
+        turbonerd: DialogueStorage.turbonerdDialogue,
+        shadowken: DialogueStorage.shadowkenDialogue,
         boss10: DialogueStorage.boss10Dialogue,
         missing: DialogueStorage.missingDialogue
     };

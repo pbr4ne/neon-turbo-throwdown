@@ -82,19 +82,19 @@ export class Coach {
             case "primo":
                 return CoachList.sporticus;
             case "sporticus":
-                return CoachList.russ;
+                return CoachList.tycoon;
             case "russ":
-                return CoachList.boss;
+                return CoachList.office;
             case "boss":
-                return CoachList.steve;
+                return CoachList.sgtsteve;
             case "steve":
                 return CoachList.betsy;
             case "betsy":
                 return CoachList.coree;
             case "coree":
-                return CoachList.turbo;
+                return CoachList.turbonerd;
             case "turbo":
-                return CoachList.shadow;
+                return CoachList.shadowken;
             case "shadow":
                 return CoachList.boss10;
             case "boss10":

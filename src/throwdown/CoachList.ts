@@ -9,14 +9,14 @@ export class CoachList {
     public static coach = new Coach("Coach", "coach", 0, false, "", "", "");
     public static spirit = new Coach("Spirit Coach", "spirit", 0, false, "", "", "");
     public static primo = new Coach("Primo Firstman", "primo", 1, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
-    public static sporticus = new Coach("Sporticus", "sporticus", 1, true, "WOOP!", "AWWW!", "neon-turbo-throwdown");
-    public static russ = new Coach("Russ Tyler", "russ", 1, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
-    public static boss = new Coach("The Boss", "boss", 2, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
-    public static steve = new Coach("Sgt. Steve", "steve", 2, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
+    public static sporticus = new Coach("Sporticus", "sporticus", 1, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
+    public static tycoon = new Coach("Throwdown Tycoon", "tycoon", 1, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
+    public static office = new Coach("Office Boss", "office", 2, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
+    public static sgtsteve = new Coach("Sgt. Steve", "steve", 2, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
     public static betsy = new Coach("Betsy and the Nets", "betsy", 2, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
     public static coree = new Coach("C.O.R.E.E.", "coree", 3, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
-    public static turbo = new Coach("Turbo Nerd", "turbo", 3, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
-    public static shadow = new Coach("Shadow Ken", "shadow", 3, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
+    public static turbonerd = new Coach("Turbo Nerd", "turbo", 3, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
+    public static shadowken = new Coach("Shadow Ken", "shadow", 3, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
     public static boss10 = new Coach("Boss #10", "boss10", 4, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
 
     public static setupCoachDecks() {
@@ -60,7 +60,7 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.CATCH)
         ]);
 
-        this.russ.setBaseCards([
+        this.tycoon.setBaseCards([
             CardFactory.createCardType(CardKeys.TURBO_THROW),
             CardFactory.createCardType(CardKeys.TURBO_THROW),
             CardFactory.createCardType(CardKeys.TURBO_BLOCK),
@@ -73,11 +73,11 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.CATCH)
         ]);
 
-        this.russ.setTrophyTypes([
+        this.tycoon.setTrophyTypes([
             
         ]);
 
-        this.boss.setBaseCards([
+        this.office.setBaseCards([
             CardFactory.createCardType(CardKeys.THROW),
             CardFactory.createCardType(CardKeys.TURBO_THROW),
             CardFactory.createCardType(CardKeys.TURBO_THROW),
@@ -90,7 +90,7 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.TURBO_CATCH)
         ]);
 
-        this.steve.setBaseCards([
+        this.sgtsteve.setBaseCards([
             CardFactory.createCardType(CardKeys.ULTRA_TURBO_THROW),
             CardFactory.createCardType(CardKeys.BEST_BLOCK),
             CardFactory.createCardType(CardKeys.TRIPLE_EVADE),
@@ -129,7 +129,7 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.TURBO_CATCH)
         ]);
 
-        this.turbo.setBaseCards([
+        this.turbonerd.setBaseCards([
             CardFactory.createCardType(CardKeys.BEST_BLOCK),
             CardFactory.createCardType(CardKeys.SNIPER_THROW),
             CardFactory.createCardType(CardKeys.SNIPER_THROW),
@@ -142,7 +142,7 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.BIG_HANDS)
         ]);
 
-        this.shadow.setBaseCards([
+        this.shadowken.setBaseCards([
             CardFactory.createCardType(CardKeys.SNIPER_THROW),
             CardFactory.createCardType(CardKeys.DOUBLE_BLOCK),
             CardFactory.createCardType(CardKeys.SNIPER_THROW),
@@ -176,14 +176,14 @@ export class CoachList {
         if (name === "sporticus") {
             return CoachList.sporticus;
         }
-        if (name === "russ") {
-            return CoachList.russ;
+        if (name === "tycoon") {
+            return CoachList.tycoon;
         }
-        if (name === "boss") {
-            return CoachList.boss;
+        if (name === "office") {
+            return CoachList.office;
         }
-        if (name === "steve") {
-            return CoachList.steve;
+        if (name === "sgtsteve") {
+            return CoachList.sgtsteve;
         }
         if (name === "betsy") {
             return CoachList.betsy;
@@ -191,11 +191,11 @@ export class CoachList {
         if (name === "coree") {
             return CoachList.coree;
         }
-        if (name === "turbo") {
-            return CoachList.turbo;
+        if (name === "turbonerd") {
+            return CoachList.turbonerd;
         }
-        if (name === "shadow") {
-            return CoachList.shadow;
+        if (name === "shadowken") {
+            return CoachList.shadowken;
         }
         if (name === "boss10") {
             return CoachList.boss10;

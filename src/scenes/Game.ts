@@ -61,13 +61,13 @@ export default class Game extends Phaser.Scene {
 
         CoachList.primo.setDialogue(DialogueStorage.primoDialogue);
         CoachList.sporticus.setDialogue(DialogueStorage.sporticusDialogue);
-        CoachList.russ.setDialogue(DialogueStorage.russDialogue);
-        CoachList.boss.setDialogue(DialogueStorage.bossDialogue);
-        CoachList.steve.setDialogue(DialogueStorage.steveDialogue);
+        CoachList.tycoon.setDialogue(DialogueStorage.tycoonDialogue);
+        CoachList.office.setDialogue(DialogueStorage.officeDialogue);
+        CoachList.sgtsteve.setDialogue(DialogueStorage.sgtsteveDialogue);
         CoachList.betsy.setDialogue(DialogueStorage.betsyDialogue);
         CoachList.coree.setDialogue(DialogueStorage.coreeDialogue);
-        CoachList.turbo.setDialogue(DialogueStorage.turboDialogue);
-        CoachList.shadow.setDialogue(DialogueStorage.shadowDialogue);
+        CoachList.turbonerd.setDialogue(DialogueStorage.turbonerdDialogue);
+        CoachList.shadowken.setDialogue(DialogueStorage.shadowkenDialogue);
         CoachList.boss10.setDialogue(DialogueStorage.boss10Dialogue);
 
         this.cardDescription = new Phaser.GameObjects.Text(this, 1500, 740, "", {
