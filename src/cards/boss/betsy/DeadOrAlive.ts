@@ -9,6 +9,9 @@ import { BetsyCard } from "./BetsyCard";
 
 export class DeadOrAlive extends BetsyCard {
 
+    protected chanceToSucceed: number = 0.5;
+    protected offenseDamage: number = 5;
+
     constructor() {
         super(CardKeys.DEAD_OR_ALIVE, null);
     }
@@ -21,7 +24,32 @@ export class DeadOrAlive extends BetsyCard {
     }
 
     offense(member: Member, target: Member, team: Team, opponentTeam: Team): boolean {
-        return false;
+
+        let offenseSuccess = false;
+        //check chance to hit
+        if (this.getChanceToSucceed() >= Math.random()) {
+            member.showFloatingAction(this.getName());
+            const targetCard = target.getAssignedCard();
+            let defenseSuccess = false;
+            if (targetCard != null) {
+                //see if they successfully defend
+                defenseSuccess = targetCard.getCardType().defense(target, member, opponentTeam, team);
+            }
+            if (!defenseSuccess) {
+                //reduce their HP if they failed to defend
+                target.reduceHP(this.getOffenseDamage());
+                offenseSuccess = true;
+            }
+        } else {
+            //backfire
+            const currentHP = member.getHP();
+            member.reduceHP(currentHP);
+        }
+
+        if (offenseSuccess) {
+            GameSounds.playHit();
+        }
+        return offenseSuccess;    
     }
 
     defense(member: Member, attacker: Member, team: Team, opponentTeam: Team): boolean {
@@ -29,7 +57,7 @@ export class DeadOrAlive extends BetsyCard {
     }
 
     needsTarget(): boolean {
-        return false;
+        return true;
     }
 
     getName(): string {
@@ -37,10 +65,19 @@ export class DeadOrAlive extends BetsyCard {
     }
 
     getIcon(): string {
-        return "unknown";
+        return "throw-turbo";
+    }
+
+    getChanceToSucceed(): number {
+        return this.chanceToSucceed;
+    }
+
+    getOffenseDamage(): number {
+        return this.offenseDamage;
     }
 
     getDescription(): string {
-        return "tbd";
+        const chancePercentage = this.getNicePercentage(this.getChanceToSucceed());
+        return `${chancePercentage}% chance to kill player, ${chancePercentage}% chance to deal ${this.getOffenseDamage()} damage to target.`;
     }
 }

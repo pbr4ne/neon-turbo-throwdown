@@ -139,6 +139,8 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.RICOCHET),
             CardFactory.createCardType(CardKeys.TURBO_EVADE),
             CardFactory.createCardType(CardKeys.TURBO_EVADE),
+            CardFactory.createCardType(CardKeys.DEAD_OR_ALIVE),
+            CardFactory.createCardType(CardKeys.DEAD_OR_ALIVE),
         ]);
 
         this.betsy.setTrophyTypes([
