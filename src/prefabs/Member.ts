@@ -318,14 +318,14 @@ export default class Member extends Phaser.GameObjects.Container {
         this.updateHealthBar();
     }
 
-    showFloatingAction(action: string) {
+    showFloatingAction(action: string, color: string = '#ffffff') {
         if (!this.scene) {
             return;
         }
         const actionText = this.scene.add.text(this.x, this.y - this.sprite.height / 2, action, {
             fontSize: '48px',
-            color: '#ffffff',
-            stroke: '#ffffff',
+            color: color,
+            stroke: color,
             strokeThickness: 3
         }).setOrigin(0.5);
 

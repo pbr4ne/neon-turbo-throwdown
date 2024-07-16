@@ -41,7 +41,7 @@ export class Catch extends CardType {
             let membersToRebound = this.getRandomOtherAliveMembers(opponentTeam, attacker, this.getReboundTargets() - 1);
             membersToRebound.unshift(attacker);
             membersToRebound.forEach((enemyMember) => {
-                enemyMember.showFloatingAction(this.getDefenseDamage().toString());
+                enemyMember.showFloatingAction(this.getDefenseDamage().toString(), "#ff005a");
                 enemyMember.reduceHP(this.getDefenseDamage(), attacker);
             });
 

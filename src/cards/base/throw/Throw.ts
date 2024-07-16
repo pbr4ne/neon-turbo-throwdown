@@ -27,6 +27,7 @@ export class Throw extends CardType {
             let offenseSuccess = false;
             //check chance to hit
             if (this.getChanceToOffend() >= Math.random()) {
+                member.showFloatingAction(this.getName());
                 const targetCard = enemyMember.getAssignedCard();
                 let defenseSuccess = false;
                 if (targetCard != null) {
@@ -35,7 +36,7 @@ export class Throw extends CardType {
                 }
                 if (!defenseSuccess) {
                     //reduce their HP if they failed to defend
-                    enemyMember.showFloatingAction(this.getOffenseDamage().toString());
+                    enemyMember.showFloatingAction((this.getOffenseDamage() * -1).toString(), "#ff005a");
                     enemyMember.reduceHP(this.getOffenseDamage(), member);
                     offenseSuccess = true;
                 }
