@@ -145,13 +145,14 @@ export default class Member extends Phaser.GameObjects.Container {
     }
 
     updateHealthBar() {
+        const currentHP = this.hp < 0 ? 0 : this.hp;
         const healthBarWidth = 50;
         const healthBarHeight = 5;
         const healthBarY = this.sprite.height / 2;
         
         this.healthBar.clear();
 
-        const currentHealthWidth = (this.hp / this.maxHP) * healthBarWidth;
+        const currentHealthWidth = (currentHP / this.maxHP) * healthBarWidth;
 
         this.healthBar.fillStyle(0xff005a, 1);
         this.healthBar.fillRect(-healthBarWidth / 2, healthBarY, currentHealthWidth, healthBarHeight);
@@ -308,20 +309,15 @@ export default class Member extends Phaser.GameObjects.Container {
     reduceHP(amount: number) {
         this.hp -= amount;
         if (this.hp <= 0) {
-            this.kill();
+            this.sprite.setAlpha(0.25);
+            this.bracketLeft?.setAlpha(0.25);
+            this.bracketRight?.setAlpha(0.25);
+            this.assignedBlock?.setAlpha(0.25);
+            this.assignedBlockText?.setAlpha(0.25);
+            this.off("pointerdown");
         }
         this.updateHealthBar();
         this.showFloatingAction((amount * -1).toString(), "#ff005a");
-    }
-
-    kill() {
-        this.sprite.setAlpha(0.25);
-        this.bracketLeft?.setAlpha(0.25);
-        this.bracketRight?.setAlpha(0.25);
-        this.assignedBlock?.setAlpha(0.25);
-        this.assignedBlockText?.setAlpha(0.25);
-        this.off("pointerdown");
-        this.updateHealthBar();
     }
 
     increaseHP(amount: number) {
