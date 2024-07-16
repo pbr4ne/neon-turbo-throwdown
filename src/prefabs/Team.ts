@@ -110,7 +110,7 @@ export default abstract class Team extends Phaser.GameObjects.Container {
             }
         }
         log(`CURRENT ${this} DISCARD PILE SIZE AFTER CLEAR HAND: ${this.discardPile.getCards().length}`);
-        this.discardPile.arrangeCardPositions(100, 840);
+        this.discardPile.arrangeCardPositions(3000, 840);
     }
 
     recombineDeck() {
