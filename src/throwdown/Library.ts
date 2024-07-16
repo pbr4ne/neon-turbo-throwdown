@@ -6,7 +6,8 @@ import { log } from "../utilities/GameUtils";
 export class Library {
 
     private static numRuns = 0;
-    private static trophyTypes: TrophyType[] = [];
+    private static trophyTypes: TrophyType[] = [
+    ];
 
     public static getNumRuns() {
         return this.numRuns;

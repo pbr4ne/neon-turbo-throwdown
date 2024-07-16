@@ -2,8 +2,13 @@ import { Coach } from "./Coach";
 import { log } from "../utilities/GameUtils";
 import { CardFactory } from "../cards/CardFactory";
 import { CardKeys } from "../cards/CardKeys";
-import { IncreaseHP } from "../trophies/member/IncreaseHP";
 import { CoachKeys } from "./CoachKeys";
+import { IncreaseHP1 } from "../trophies/member/IncreaseHP1";
+import { IncreaseHP2 } from "../trophies/member/IncreaseHP2";
+import { IncreaseHP3 } from "../trophies/member/IncreaseHP3";
+import { IncreaseHP4 } from "../trophies/member/IncreaseHP4";
+import { IncreaseHP5 } from "../trophies/member/IncreaseHP5";
+import { IncreaseHP6 } from "../trophies/member/IncreaseHP6";
 
 export class CoachList {
 
@@ -22,6 +27,80 @@ export class CoachList {
     public static boss10 = new Coach("Boss #10", CoachKeys.BOSS_10, 4, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
 
     public static setupCoachDecks() {
+        log("SETTING UP COACH TROPHIES");
+
+        this.primo.setTrophyTypes([
+            new IncreaseHP1(),
+            new IncreaseHP2(),
+            new IncreaseHP3(),
+        ]);
+
+        this.sporticus.setTrophyTypes([
+            new IncreaseHP1(),
+            new IncreaseHP2(),
+            new IncreaseHP3(),
+        ]);
+
+        this.tycoon.setTrophyTypes([
+            new IncreaseHP1(),
+            new IncreaseHP2(),
+            new IncreaseHP3(),
+        ]);
+
+        this.office.setTrophyTypes([
+            new IncreaseHP1(),
+            new IncreaseHP2(),
+            new IncreaseHP3(),
+        ]);
+
+        this.sgtsteve.setTrophyTypes([
+            new IncreaseHP1(),
+            new IncreaseHP2(),
+            new IncreaseHP3(),
+        ]);
+
+        this.betsy.setTrophyTypes([
+            new IncreaseHP1(),
+            new IncreaseHP2(),
+            new IncreaseHP3(),
+        ]);
+
+        this.coree.setTrophyTypes([
+            new IncreaseHP1(),
+            new IncreaseHP2(),
+            new IncreaseHP3(),
+            new IncreaseHP4(),
+            new IncreaseHP5(),
+            new IncreaseHP6(),
+        ]);
+
+        this.turbonerd.setTrophyTypes([
+            new IncreaseHP1(),
+            new IncreaseHP2(),
+            new IncreaseHP3(),
+            new IncreaseHP4(),
+            new IncreaseHP5(),
+            new IncreaseHP6(),
+        ]);
+
+        this.shadowken.setTrophyTypes([
+            new IncreaseHP1(),
+            new IncreaseHP2(),
+            new IncreaseHP3(),
+            new IncreaseHP4(),
+            new IncreaseHP5(),
+            new IncreaseHP6(),
+        ]);
+
+        this.boss10.setTrophyTypes([
+            new IncreaseHP1(),
+            new IncreaseHP2(),
+            new IncreaseHP3(),
+            new IncreaseHP4(),
+            new IncreaseHP5(),
+            new IncreaseHP6(),
+        ]);
+
         log("SETTING UP COACH DECKS");
         this.you.setBaseCards([
             CardFactory.createCardType(CardKeys.THROW),
@@ -49,10 +128,6 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.CATCH)
         ]);
 
-        this.primo.setTrophyTypes([
-            new IncreaseHP(),
-        ]);
-
         this.sporticus.setBaseCards([
             CardFactory.createCardType(CardKeys.THROW),
             CardFactory.createCardType(CardKeys.THROW),
@@ -66,10 +141,6 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.CATCH),
             CardFactory.createCardType(CardKeys.BIGG_BALLS),
             CardFactory.createCardType(CardKeys.BIGG_BALLS),
-        ]);
-
-        this.sporticus.setTrophyTypes([
-            new IncreaseHP(),
         ]);
 
         this.tycoon.setBaseCards([
@@ -87,10 +158,6 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.SUPPLY_AND_DEMAND),
         ]);
 
-        this.tycoon.setTrophyTypes([
-            new IncreaseHP(),
-        ]);
-
         this.office.setBaseCards([
             CardFactory.createCardType(CardKeys.THROW),
             CardFactory.createCardType(CardKeys.TURBO_THROW),
@@ -104,10 +171,6 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.TURBO_CATCH),
             CardFactory.createCardType(CardKeys.WATERFALL),
             CardFactory.createCardType(CardKeys.WATERFALL),
-        ]);
-
-        this.office.setTrophyTypes([
-            new IncreaseHP(),
         ]);
 
         this.sgtsteve.setBaseCards([
@@ -125,10 +188,6 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.SOLDIER_ON),
         ]);
 
-        this.sgtsteve.setTrophyTypes([
-            new IncreaseHP(),
-        ]);
-
         this.betsy.setBaseCards([
             CardFactory.createCardType(CardKeys.RI_RICOCHET),
             CardFactory.createCardType(CardKeys.RI_RICOCHET),
@@ -144,10 +203,6 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.DEAD_OR_ALIVE),
         ]);
 
-        this.betsy.setTrophyTypes([
-            new IncreaseHP(),
-        ]);
-
         this.coree.setBaseCards([
             CardFactory.createCardType(CardKeys.ULTRA_TURBO_THROW),
             CardFactory.createCardType(CardKeys.TURBO_BLOCK),
@@ -159,10 +214,6 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.SNIPER_THROW),
             CardFactory.createCardType(CardKeys.SNIPER_THROW),
             CardFactory.createCardType(CardKeys.TURBO_CATCH),
-        ]);
-
-        this.coree.setTrophyTypes([
-            new IncreaseHP(),
         ]);
 
         this.turbonerd.setBaseCards([
@@ -178,10 +229,6 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.BIG_HANDS),
         ]);
 
-        this.turbonerd.setTrophyTypes([
-            new IncreaseHP(),
-        ]);
-
         this.shadowken.setBaseCards([
             CardFactory.createCardType(CardKeys.SNIPER_THROW),
             CardFactory.createCardType(CardKeys.DOUBLE_BLOCK),
@@ -195,10 +242,6 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.BIG_HANDS),
         ]);
 
-        this.shadowken.setTrophyTypes([
-            new IncreaseHP(),
-        ]);
-
         this.boss10.setBaseCards([
             CardFactory.createCardType(CardKeys.SNIPER_THROW),
             CardFactory.createCardType(CardKeys.SNIPER_THROW),
@@ -210,10 +253,6 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.DOUBLE_BLOCK),
             CardFactory.createCardType(CardKeys.DOUBLE_BLOCK),
             CardFactory.createCardType(CardKeys.BIG_HANDS),
-        ]);
-
-        this.boss10.setTrophyTypes([
-            new IncreaseHP(),
         ]);
     }
 

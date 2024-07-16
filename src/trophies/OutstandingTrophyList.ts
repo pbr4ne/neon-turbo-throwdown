@@ -5,13 +5,20 @@ import { YellowDeck } from "./cosmetic/YellowDeck";
 import { BlackDeck } from "./cosmetic/BlackDeck";
 import { RedDeck } from "./cosmetic/RedDeck";
 import { WhiteDeck } from "./cosmetic/WhiteDeck";
-import { IncreaseHP } from "./member/IncreaseHP";
 import { SeeCards1 } from "./member/SeeCards1";
 import { SeeCards2 } from "./member/SeeCards2";
 import { SeeCards3 } from "./member/SeeCards3";
+import { SeeCards4 } from "./member/SeeCards4";
 import { SeeTargets1 } from "./member/SeeTargets1";
 import { SeeTargets2 } from "./member/SeeTargets2";
 import { SeeTargets3 } from "./member/SeeTargets3";
+import { SeeTargets4 } from "./member/SeeTargets4";
+import { IncreaseHP1 } from "./member/IncreaseHP1";
+import { IncreaseHP2 } from "./member/IncreaseHP2";
+import { IncreaseHP3 } from "./member/IncreaseHP3";
+import { IncreaseHP4 } from "./member/IncreaseHP4";
+import { IncreaseHP5 } from "./member/IncreaseHP5";
+import { IncreaseHP6 } from "./member/IncreaseHP6";
 
 export class OutstandingTrophyList {
 
@@ -23,13 +30,20 @@ export class OutstandingTrophyList {
         new BlackDeck(),
         new RedDeck(),
         //member
-        new IncreaseHP(),
+        new IncreaseHP1(),
+        new IncreaseHP2(),
+        new IncreaseHP3(),
+        new IncreaseHP4(),
+        new IncreaseHP5(),
+        new IncreaseHP6(),
         new SeeCards1(),
         new SeeCards2(),
         new SeeCards3(),
+        new SeeCards4(),
         new SeeTargets1(),
         new SeeTargets2(),
         new SeeTargets3(),
+        new SeeTargets4(),
     ];
 
     public static getTrophyTypes() {

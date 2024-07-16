@@ -1,10 +1,4 @@
-
-// You can write more code here
-
-/* START OF COMPILED CODE */
-
 import Phaser from "phaser";
-/* START-USER-IMPORTS */
 import Card from "./Card";
 import Team from "./Team";
 import Game from "../scenes/Game";
@@ -15,7 +9,7 @@ import { Coach } from "../throwdown/Coach";
 import { TrophyType } from "../trophies/TrophyType";
 import { CoachList } from "../throwdown/CoachList";
 import { Library } from "../throwdown/Library";
-import { IncreaseHP } from "../trophies/member/IncreaseHP";
+
 import { SeeCards1 } from "../trophies/member/SeeCards1";
 import { SeeCards2 } from "../trophies/member/SeeCards2";
 import { SeeCards3 } from "../trophies/member/SeeCards3";
@@ -25,7 +19,12 @@ import { SeeTargets2 } from "../trophies/member/SeeTargets2";
 import { SeeTargets3 } from "../trophies/member/SeeTargets3";
 import { SeeTargets4 } from "../trophies/member/SeeTargets4";
 import Player from "./Player";
-/* END-USER-IMPORTS */
+import { IncreaseHP1 } from "../trophies/member/IncreaseHP1";
+import { IncreaseHP2 } from "../trophies/member/IncreaseHP2";
+import { IncreaseHP3 } from "../trophies/member/IncreaseHP3";
+import { IncreaseHP4 } from "../trophies/member/IncreaseHP4";
+import { IncreaseHP5 } from "../trophies/member/IncreaseHP5";
+import { IncreaseHP6 } from "../trophies/member/IncreaseHP6";
 
 export default class Member extends Phaser.GameObjects.Container {
     public sprite: Phaser.GameObjects.Sprite;
@@ -63,8 +62,34 @@ export default class Member extends Phaser.GameObjects.Container {
         this.hp = 3;
         if (checkUrlParam("lowHP", "true")) {
             this.hp = 1;
-        } else if (this.getTrophyTypes().some(trophy => trophy instanceof IncreaseHP)) {
-            this.hp++;
+        } else {
+            if (this.getTrophyTypes().some(trophy => trophy instanceof IncreaseHP6)) {
+                this.hp += 2;
+            } else if (this.getTrophyTypes().some(trophy => trophy instanceof IncreaseHP5)) {
+                if ([1, 2, 4, 5].includes(number)) {
+                    this.hp += 2;
+                } else {
+                    this.hp += 1;
+                }
+            } else if (this.getTrophyTypes().some(trophy => trophy instanceof IncreaseHP4)) {
+                if ([1, 4].includes(number)) {
+                    this.hp += 2;
+                } else {
+                    this.hp += 1;
+                }
+            } else if (this.getTrophyTypes().some(trophy => trophy instanceof IncreaseHP3)) {
+                if ([1, 2, 3, 4, 5, 6].includes(number)) {
+                    this.hp += 1;
+                }
+            } else if (this.getTrophyTypes().some(trophy => trophy instanceof IncreaseHP2)) {
+                if ([1, 2, 4, 5].includes(number)) {
+                    this.hp += 1;
+                }
+            } else if (this.getTrophyTypes().some(trophy => trophy instanceof IncreaseHP1)) {
+                if ([1, 4].includes(number)) {
+                    this.hp += 1;
+                }
+            }
         }
         this.maxHP = this.hp;
 
@@ -148,7 +173,8 @@ export default class Member extends Phaser.GameObjects.Container {
 
     updateHealthBar() {
         const currentHP = this.hp < 0 ? 0 : this.hp;
-        const healthBarWidth = 50;
+        const baseHealthBarWidth = 50; 
+        const healthBarWidth = baseHealthBarWidth + (this.maxHP - 3) * 40; 
         const healthBarHeight = 5;
         const healthBarY = this.sprite.height / 2;
         
