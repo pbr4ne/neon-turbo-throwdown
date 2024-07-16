@@ -29,7 +29,7 @@ export class SupplyAndDemand extends TycoonCard {
         let defenseSuccess = false;
         if (targetCard != null) {
             //see if they successfully defend
-            defenseSuccess = targetCard.getCardType().defense(target, member, opponentTeam, team);
+            defenseSuccess = targetCard.getCardType().defense(target, member, opponentTeam, team, true);
         }
         if (!defenseSuccess) {
             //reduce their HP if they failed to defend
@@ -42,7 +42,7 @@ export class SupplyAndDemand extends TycoonCard {
         return offenseSuccess;
     }
 
-    defense(member: Member, attacker: Member, team: Team, opponentTeam: Team): boolean {
+    defense(member: Member, attacker: Member, team: Team, opponentTeam: Team, canRetaliate: boolean): boolean {
         return false;
     }
 

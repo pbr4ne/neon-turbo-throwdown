@@ -9,6 +9,11 @@ import { TurbonerdCard } from "./TurbonerdCard";
 
 export class DidIDoThat extends TurbonerdCard {
 
+    protected numTargetsMin: number = 1;
+    protected numTargetsMax: number = 3;
+    protected damageMin: number = 2;
+    protected damageMax: number = 4;
+
     constructor() {
         super(CardKeys.DID_I_DO_THAT, null);
     }
@@ -17,14 +22,44 @@ export class DidIDoThat extends TurbonerdCard {
     }
 
     special(member: Member, team: Team, opponentTeam: Team): boolean {
-        return false;
+        let anyOffenseSuccess = false;
+        let membersToTarget = this.getRandomAliveMembers(opponentTeam, null, this.getRandomInteger(this.getNumTargetsMin(), this.getNumTargetsMax()));
+
+        membersToTarget.forEach((enemyMember) => {
+            let offenseSuccess = false;
+
+            const targetCard = enemyMember.getAssignedCard();
+            let defenseSuccess = false;
+            if (targetCard != null) {
+                //see if they successfully defend
+                defenseSuccess = targetCard.getCardType().defense(enemyMember, member, opponentTeam, team, false);
+            }
+            if (!defenseSuccess) {
+                //reduce their HP if they failed to defend
+                enemyMember.reduceHP(this.getRandomInteger(this.getDamageMin(), this.getDamageMax()));
+                offenseSuccess = true;
+            }
+    
+            if (offenseSuccess) {
+                anyOffenseSuccess = true;
+            }
+        });
+
+        if (anyOffenseSuccess) {
+            member.showFloatingAction(this.getName());
+            GameSounds.playHit();
+        } else {
+            member.showFloatingAction("miss");
+        }
+
+        return anyOffenseSuccess;  
     }
 
     offense(member: Member, target: Member, team: Team, opponentTeam: Team): boolean {
         return false;
     }
 
-    defense(member: Member, attacker: Member, team: Team, opponentTeam: Team): boolean {
+    defense(member: Member, attacker: Member, team: Team, opponentTeam: Team, canRetaliate: boolean): boolean {
         return false;
     }
 
@@ -37,10 +72,26 @@ export class DidIDoThat extends TurbonerdCard {
     }
 
     getIcon(): string {
-        return "unknown";
+        return "throw-turbo-ultra";
     }
 
     getDescription(): string {
-        return "tbd";
+        return `Does ${this.getDamageMin()}-${this.getDamageMax()} damage to ${this.getNumTargetsMin()}-${this.getNumTargetsMax()} enemies.`;
+    }
+
+    getNumTargetsMin(): number {
+        return this.numTargetsMin;
+    }
+
+    getNumTargetsMax(): number {
+        return this.numTargetsMax;
+    }
+
+    getDamageMin(): number {
+        return this.damageMin;
+    }
+
+    getDamageMax(): number {
+        return this.damageMax;
     }
 }

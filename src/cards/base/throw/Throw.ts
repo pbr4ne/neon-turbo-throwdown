@@ -21,41 +21,44 @@ export class Throw extends CardType {
 
         let anyOffenseSuccess = false;
         let membersToTarget = this.getRandomAliveMembers(opponentTeam, target, this.getNumTargets() - 1);
-        membersToTarget.unshift(target);
 
+        if(this.attackMember(member, target, team, opponentTeam, true)) {
+            anyOffenseSuccess = true;
+        }
+        
         membersToTarget.forEach((enemyMember) => {
-            let offenseSuccess = false;
-            //check chance to hit
-            if (this.getChanceToOffend() >= Math.random()) {
-                member.showFloatingAction(this.getName());
-                const targetCard = enemyMember.getAssignedCard();
-                let defenseSuccess = false;
-                if (targetCard != null) {
-                    //see if they successfully defend
-                    defenseSuccess = targetCard.getCardType().defense(enemyMember, member, opponentTeam, team);
-                }
-                if (!defenseSuccess) {
-                    //reduce their HP if they failed to defend
-                    enemyMember.reduceHP(this.getOffenseDamage());
-                    offenseSuccess = true;
-                }
-            } else {
-                //show miss
-                member.showFloatingAction("miss");
-            }
-    
-            if (offenseSuccess) {
+            if(this.attackMember(member, enemyMember, team, opponentTeam, false)) {
                 anyOffenseSuccess = true;
             }
         });
 
         if (anyOffenseSuccess) {
+            member.showFloatingAction(this.getName());
             GameSounds.playHit();
+        } else {
+            member.showFloatingAction("miss");
         }
-        return anyOffenseSuccess;     
+        return anyOffenseSuccess;
     }
 
-    defense(member: Member, attacker: Member, team: Team, opponentTeam: Team): boolean {
+    attackMember(member: Member, target: Member, team: Team, opponentTeam: Team, canRetaliate: boolean): boolean {
+        if (this.getChanceToOffend() >= Math.random()) {
+            const targetCard = target.getAssignedCard();
+            let defenseSuccess = false;
+            if (targetCard != null) {
+                //see if they successfully defend
+                defenseSuccess = targetCard.getCardType().defense(target, member, opponentTeam, team, canRetaliate);
+            }
+            if (!defenseSuccess) {
+                //reduce their HP if they failed to defend
+                target.reduceHP(this.getOffenseDamage());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    defense(member: Member, attacker: Member, team: Team, opponentTeam: Team, canRetaliate: boolean): boolean {
         return false;
     }
 

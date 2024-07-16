@@ -31,18 +31,20 @@ export class Catch extends CardType {
         return false;
     }
 
-    defense(member: Member, attacker: Member, team: Team, opponentTeam: Team): boolean {
+    defense(member: Member, attacker: Member, team: Team, opponentTeam: Team, canRetaliate: boolean): boolean {
         log("DEFENSE " + team);
         let defenseSuccess = false;
         log(`DEFENSE - this is the modifier: ${this.getChanceToDefend(team)}`);
         if (this.getCurrentNumDefends() <= 1 && this.getChanceToDefend(team) >= Math.random()) {
             member.showFloatingAction(this.getName());
 
-            let membersToRebound = this.getRandomAliveMembers(opponentTeam, attacker, this.getReboundTargets() - 1);
-            membersToRebound.unshift(attacker);
-            membersToRebound.forEach((enemyMember) => {
-                enemyMember.reduceHP(this.getDefenseDamage());
-            });
+            if (canRetaliate) {
+                let membersToRebound = this.getRandomAliveMembers(opponentTeam, attacker, this.getReboundTargets() - 1);
+                membersToRebound.unshift(attacker);
+                membersToRebound.forEach((enemyMember) => {
+                    enemyMember.reduceHP(this.getDefenseDamage());
+                });
+            }
 
             defenseSuccess = true;
         }

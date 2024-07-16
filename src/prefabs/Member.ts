@@ -389,6 +389,7 @@ export default class Member extends Phaser.GameObjects.Container {
     }
 
     showFloatingAction(action: string, color: string = '#ffffff', incrementIndex: number = 0) {
+        log(`${this} shows floating action: ${action}`);
         if (!this.scene) {
             return;
         }

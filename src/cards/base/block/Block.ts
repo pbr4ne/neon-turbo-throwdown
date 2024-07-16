@@ -28,11 +28,15 @@ export class Block extends CardType {
         return false;
     }
 
-    defense(member: Member, attacker: Member, team: Team, opponentTeam: Team): boolean {
+    defense(member: Member, attacker: Member, team: Team, opponentTeam: Team, canRetaliate: boolean): boolean {
         let defenseSuccess = false;
         if (this.getCurrentNumDefends() <= 1 && this.getChanceToDefend() >= Math.random()) {
             member.showFloatingAction(this.getName());
-            attacker.reduceHP(this.getDefenseDamage());
+
+            if (canRetaliate) {
+                attacker.reduceHP(this.getDefenseDamage());
+            }
+            
             defenseSuccess = true;
         }
 

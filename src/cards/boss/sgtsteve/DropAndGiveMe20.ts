@@ -24,7 +24,7 @@ export class DropAndGiveMe20 extends SgtSteveCard {
         return false;
     }
 
-    defense(member: Member, attacker: Member, team: Team, opponentTeam: Team): boolean {
+    defense(member: Member, attacker: Member, team: Team, opponentTeam: Team, canRetaliate: boolean): boolean {
         return false;
     }
 

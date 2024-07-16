@@ -32,7 +32,7 @@ export class Waterfall extends OfficeCard {
             let defenseSuccess = false;
             if (targetCard != null) {
                 //see if they successfully defend
-                defenseSuccess = targetCard.getCardType().defense(enemyMember, member, opponentTeam, team);
+                defenseSuccess = targetCard.getCardType().defense(enemyMember, member, opponentTeam, team, false);
             }
             if (!defenseSuccess) {
                 //reduce their HP if they failed to defend
@@ -55,7 +55,7 @@ export class Waterfall extends OfficeCard {
         return false;
     }
 
-    defense(member: Member, attacker: Member, team: Team, opponentTeam: Team): boolean {
+    defense(member: Member, attacker: Member, team: Team, opponentTeam: Team, canRetaliate: boolean): boolean {
         return false;
     }
 
