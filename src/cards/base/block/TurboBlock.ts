@@ -2,7 +2,7 @@ import { CardKeys } from "../../CardKeys";
 import { BetterBlock } from "./BetterBlock";
 
 export class TurboBlock extends BetterBlock {
-    protected chanceToRebound: number = 1;
+    protected chanceToDefend : number = 0.90;
 
     constructor(key: CardKeys = CardKeys.TURBO_BLOCK, upgradeKey: CardKeys | null = CardKeys.BEST_BLOCK) {
         super(key, upgradeKey);
