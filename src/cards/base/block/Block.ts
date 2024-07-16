@@ -7,7 +7,6 @@ import { CardKeys } from "../../CardKeys";
 
 export class Block extends CardType {
     protected chanceToDefend : number = 0.50;
-    protected chanceToRebound: number = 0.50;
     protected defenseDamage: number = 1;
     protected currentNumDefends: number = 1;
     protected numDefends = 1;
@@ -33,10 +32,8 @@ export class Block extends CardType {
         let defenseSuccess = false;
         if (this.getCurrentNumDefends() <= 1 && this.getChanceToDefend() >= Math.random()) {
             member.showFloatingAction(this.getName());
-            if (this.getChanceToRebound() >= Math.random()) {
-                attacker.showFloatingAction(this.getDefenseDamage().toString());
-                attacker.reduceHP(this.getDefenseDamage(), attacker);
-            }
+            attacker.showFloatingAction(this.getDefenseDamage().toString());
+            attacker.reduceHP(this.getDefenseDamage(), attacker);
             defenseSuccess = true;
         }
 
@@ -66,10 +63,6 @@ export class Block extends CardType {
         return this.chanceToDefend;
     }
 
-    getChanceToRebound(): number {
-        return this.chanceToRebound;
-    }
-
     getDefenseDamage(): number {
         return this.defenseDamage;
     }
@@ -84,7 +77,6 @@ export class Block extends CardType {
 
     getDescription(): string {
         const niceChanceToDefend = this.getNicePercentage(this.getChanceToDefend());
-        const niceChanceToRebound = this.getNicePercentage(this.getChanceToRebound());
-        return `Blocks ${this.getNumDefends()}. ${niceChanceToDefend}% effective. If successful, ${niceChanceToRebound}% chance to rebound ${this.getDefenseDamage()} damage.`;
+        return `Blocks ${this.getNumDefends()}. ${niceChanceToDefend}% effective. If successful, rebound ${this.getDefenseDamage()} damage.`;
     }
 }

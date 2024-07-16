@@ -9,7 +9,6 @@ import { CoachList } from "../../../throwdown/CoachList";
 
 export class Catch extends CardType {
     protected chanceToDefend : number = 0.50;
-    protected chanceToRebound: number = 0.50;
     protected defenseDamage: number = 1;
     protected currentNumDefends: number = 1;
     protected reboundTargets: number = 1;
@@ -42,11 +41,8 @@ export class Catch extends CardType {
             let membersToRebound = this.getRandomOtherAliveMembers(opponentTeam, attacker, this.getReboundTargets() - 1);
             membersToRebound.unshift(attacker);
             membersToRebound.forEach((enemyMember) => {
-
-                if (this.getChanceToRebound() >= Math.random()) {
-                    enemyMember.showFloatingAction(this.getDefenseDamage().toString());
-                    enemyMember.reduceHP(this.getDefenseDamage(), attacker);
-                }
+                enemyMember.showFloatingAction(this.getDefenseDamage().toString());
+                enemyMember.reduceHP(this.getDefenseDamage(), attacker);
             });
 
             defenseSuccess = true;
@@ -88,10 +84,6 @@ export class Catch extends CardType {
         }
     }
 
-    getChanceToRebound(): number {
-        return this.chanceToRebound;
-    }
-
     getDefenseDamage(): number {
         return this.defenseDamage;
     }
@@ -110,7 +102,6 @@ export class Catch extends CardType {
 
     getDescription(): string {
         const niceChanceToDefend = this.getNicePercentage(this.getChanceToDefend());
-        const niceChanceToRebound = this.getNicePercentage(this.getChanceToRebound());
-        return `Blocks ${this.getNumDefends()}. ${niceChanceToDefend}% effective. If successful, ${niceChanceToRebound}% chance to rebound ${this.getDefenseDamage()} damage.`;
+        return `Blocks ${this.getNumDefends()}. ${niceChanceToDefend}% effective. If successful, rebound ${this.getDefenseDamage()} damage.`;
     }
 }
