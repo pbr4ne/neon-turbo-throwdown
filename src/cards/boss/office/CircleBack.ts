@@ -5,8 +5,9 @@ import Team from "../../../prefabs/Team";
 import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import Player from "../../../prefabs/Player";
+import { OfficeCard } from "./OfficeCard";
 
-export class CircleBack extends CardType {
+export class CircleBack extends OfficeCard {
 
     constructor() {
         super(CardKeys.CIRCLE_BACK, null);

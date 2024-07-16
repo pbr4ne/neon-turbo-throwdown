@@ -5,8 +5,9 @@ import Team from "../../../prefabs/Team";
 import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import Player from "../../../prefabs/Player";
+import { Boss10Card } from "./Boss10Card";
 
-export class NothingMatters extends CardType {
+export class NothingMatters extends Boss10Card {
 
     constructor() {
         super(CardKeys.NOTHING_MATTERS, null);

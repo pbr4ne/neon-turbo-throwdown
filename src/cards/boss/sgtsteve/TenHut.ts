@@ -5,8 +5,9 @@ import Team from "../../../prefabs/Team";
 import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import Player from "../../../prefabs/Player";
+import { SgtSteveCard } from "./StgSteveCard";
 
-export class TenHut extends CardType {
+export class TenHut extends SgtSteveCard {
 
     constructor() {
         super(CardKeys.TEN_HUT, null);

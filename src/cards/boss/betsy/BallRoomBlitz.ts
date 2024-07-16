@@ -5,8 +5,9 @@ import Team from "../../../prefabs/Team";
 import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import Player from "../../../prefabs/Player";
+import { BetsyCard } from "./BetsyCard";
 
-export class BallRoomBlitz extends CardType {
+export class BallRoomBlitz extends BetsyCard {
 
     constructor() {
         super(CardKeys.BALL_ROOM_BLITZ, null);

@@ -283,6 +283,11 @@
                 "key": "neon-turbo-throwdown-hard"
             },
             {
+                "url": "assets/images/level/office.png",
+                "type": "image",
+                "key": "office"
+            },
+            {
                 "url": "assets/images/players/player1.png",
                 "type": "image",
                 "key": "player1"
@@ -358,9 +363,19 @@
                 "key": "select-trophy"
             },
             {
+                "url": "assets/images/level/sgtsteve.png",
+                "type": "image",
+                "key": "sgtsteve"
+            },
+            {
                 "url": "assets/images/level/shadow.png",
                 "type": "image",
                 "key": "shadow"
+            },
+            {
+                "url": "assets/images/level/shadowken.png",
+                "type": "image",
+                "key": "shadowken"
             },
             {
                 "url": "assets/images/cards/sniper.png",
@@ -490,6 +505,16 @@
                 "url": "assets/images/level/turbo.png",
                 "type": "image",
                 "key": "turbo"
+            },
+            {
+                "url": "assets/images/level/turbonerd.png",
+                "type": "image",
+                "key": "turbonerd"
+            },
+            {
+                "url": "assets/images/level/tycoon.png",
+                "type": "image",
+                "key": "tycoon"
             },
             {
                 "url": "assets/images/cards/unknown.png",

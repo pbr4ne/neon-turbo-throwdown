@@ -5,8 +5,9 @@ import Team from "../../../prefabs/Team";
 import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import Player from "../../../prefabs/Player";
+import { OfficeCard } from "./OfficeCard";
 
-export class Brainstorm extends CardType {
+export class Brainstorm extends OfficeCard {
 
     constructor() {
         super(CardKeys.BRAINSTORM, null);

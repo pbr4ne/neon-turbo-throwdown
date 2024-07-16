@@ -5,8 +5,9 @@ import Team from "../../../prefabs/Team";
 import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import Player from "../../../prefabs/Player";
+import { Boss10Card } from "./Boss10Card";
 
-export class FourthWall extends CardType {
+export class FourthWall extends Boss10Card {
 
     constructor() {
         super(CardKeys.FOURTH_WALL, null);

@@ -5,8 +5,9 @@ import Team from "../../../prefabs/Team";
 import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import Player from "../../../prefabs/Player";
+import { SporticusCard } from "./SporticusCard";
 
-export class BiggBalls extends CardType {
+export class BiggBalls extends SporticusCard {
 
     protected chance: number = 0.2;
 

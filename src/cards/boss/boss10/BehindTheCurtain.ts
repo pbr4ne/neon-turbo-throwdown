@@ -5,8 +5,9 @@ import Team from "../../../prefabs/Team";
 import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import Player from "../../../prefabs/Player";
+import { Boss10Card } from "./Boss10Card";
 
-export class BehindTheCurtain extends CardType {
+export class BehindTheCurtain extends Boss10Card {
 
     constructor() {
         super(CardKeys.BEHIND_THE_CURTAIN, null);

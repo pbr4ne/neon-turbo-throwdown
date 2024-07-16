@@ -19,6 +19,7 @@ export default class Card extends GenericCard {
     private nameText: Phaser.GameObjects.Text;
     private tooltipText: Phaser.GameObjects.Text;
     private iconImage: Phaser.GameObjects.Image;
+    private coachImage: Phaser.GameObjects.Image | null = null;
     private tooltipImage: Phaser.GameObjects.Image;
     private isPoppedUp: boolean = false;
     private cardState: string;
@@ -27,17 +28,25 @@ export default class Card extends GenericCard {
 
     constructor(scene: Phaser.Scene, cardType: CardType, cardState: string, x?: number, y?: number, texture?: string, toAdd?: boolean) {
         super(scene, x ?? 0, y ?? 0);
-
+    
         this.cardType = cardType;
         this.cardState = cardState;
-
+    
         this.cardImage = new Phaser.GameObjects.Image(scene, 0, 0, texture || "front");
-
+    
         this.ringSelectedImage = new Phaser.GameObjects.Image(scene, 0, 0, 'ring-selected');
         this.ringAssignedImage = new Phaser.GameObjects.Image(scene, 0, 0, 'ring-assigned');
-        this.iconImage = new Phaser.GameObjects.Image(scene, 0, -30, this.cardType.getIcon());
+        
+        const coachImageTexture = this.cardType.getCoach()?.getAvatar();
+        if (coachImageTexture) {
+            this.iconImage = new Phaser.GameObjects.Image(scene, -28, -56, this.cardType.getIcon()).setScale(0.5);
+            this.coachImage = new Phaser.GameObjects.Image(scene, 15, -10, coachImageTexture).setScale(0.4);
+        } else {
+            this.iconImage = new Phaser.GameObjects.Image(scene, 0, -30, this.cardType.getIcon());
+        }
+    
         this.tooltipImage = new Phaser.GameObjects.Image(scene, 0, -205, 'tooltip');
-
+    
         this.assignedMemberText = new Phaser.GameObjects.Text(scene, 30, -90, "", {
             fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
             fontSize: '24px',
@@ -46,7 +55,7 @@ export default class Card extends GenericCard {
             align: 'center'
         });
         this.assignedMemberText.setOrigin(0.5, 0.5);
-
+    
         this.nameText = new Phaser.GameObjects.Text(scene, 0, 64, this.cardType.getName(), {
             fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
             fontSize: '14px',
@@ -56,14 +65,14 @@ export default class Card extends GenericCard {
             wordWrap: { width: 100, useAdvancedWrap: true }
         });
         this.nameText.setOrigin(0.5, 0.5);
-
+    
         let description = this.cardType.getDescription();
         if (toAdd) {
             description = `Add one ${this.cardType.getName()} to your deck (${description})`;
         }
-
+    
         let fontSize = 16;
-
+    
         this.tooltipText = new Phaser.GameObjects.Text(scene, 5, -275, description, {
             fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
             fontSize: '16px',
@@ -74,21 +83,26 @@ export default class Card extends GenericCard {
             wordWrap: { width: 350, useAdvancedWrap: true }
         });
         this.tooltipText.setOrigin(0.5, 0);
-
+    
         while (this.tooltipText.height + 90 > this.tooltipImage.height) {
             fontSize--;
             this.tooltipText.setStyle({ fontSize: `${fontSize}px` });
         }
-
+    
         this.add([this.tooltipImage, this.tooltipText]);
-
+    
         this.setSize(this.cardImage.width, this.cardImage.height);
         this.setInteractive(new Phaser.Geom.Rectangle(0, 0, this.cardImage.width, this.cardImage.height), Phaser.Geom.Rectangle.Contains);
-
-        this.add([this.cardImage, this.ringSelectedImage, this.ringAssignedImage, this.assignedMemberText, this.nameText, this.iconImage, this.tooltipImage, this.tooltipText]);
-
+    
+        const elements = [this.cardImage, this.ringSelectedImage, this.ringAssignedImage, this.assignedMemberText, this.nameText, this.iconImage, this.tooltipImage, this.tooltipText];
+        if (this.coachImage) {
+            elements.push(this.coachImage);
+        }
+        this.add(elements);
+    
         this.renderForState(); 
     }
+    
 
     changeState(cardState: string): void {
         this.cardState = cardState;
@@ -137,6 +151,7 @@ export default class Card extends GenericCard {
                 this.cardImage.setVisible(true);
                 this.nameText.setVisible(true);
                 this.iconImage.setVisible(true);
+                this.coachImage?.setVisible(true);
                 this.on('pointerover', () => { 
                     this.scene.input.setDefaultCursor('pointer'); 
                     this.tooltipImage.setVisible(true);
@@ -165,6 +180,7 @@ export default class Card extends GenericCard {
                 this.cardImage.setVisible(true);
                 this.nameText.setVisible(true);
                 this.iconImage.setVisible(true);
+                this.coachImage?.setVisible(true);
                 this.on('pointerover', () => { 
                     this.scene.input.setDefaultCursor('pointer'); 
                     this.tooltipImage.setVisible(true);
@@ -189,6 +205,7 @@ export default class Card extends GenericCard {
         this.cardImage.setVisible(false);
         this.nameText.setVisible(false);
         this.iconImage.setVisible(false);
+        this.coachImage?.setVisible(false);
         this.tooltipImage.setVisible(false);
         this.tooltipText.setVisible(false);
         this.ringSelectedImage.setVisible(false);

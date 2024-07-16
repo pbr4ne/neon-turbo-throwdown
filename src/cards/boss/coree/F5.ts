@@ -5,8 +5,9 @@ import Team from "../../../prefabs/Team";
 import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import Player from "../../../prefabs/Player";
+import { CoreeCard } from "./CoreeCard";
 
-export class F5 extends CardType {
+export class F5 extends CoreeCard {
 
     constructor() {
         super(CardKeys.F5, null);

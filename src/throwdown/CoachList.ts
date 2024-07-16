@@ -12,11 +12,11 @@ export class CoachList {
     public static sporticus = new Coach("Sporticus", "sporticus", 1, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
     public static tycoon = new Coach("Throwdown Tycoon", "tycoon", 1, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
     public static office = new Coach("Office Boss", "office", 2, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
-    public static sgtsteve = new Coach("Sgt. Steve", "steve", 2, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
+    public static sgtsteve = new Coach("Sgt. Steve", "sgtsteve", 2, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
     public static betsy = new Coach("Betsy and the Nets", "betsy", 2, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
     public static coree = new Coach("C.O.R.E.E.", "coree", 3, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
-    public static turbonerd = new Coach("Turbo Nerd", "turbo", 3, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
-    public static shadowken = new Coach("Shadow Ken", "shadow", 3, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
+    public static turbonerd = new Coach("Turbo Nerd", "turbonerd", 3, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
+    public static shadowken = new Coach("Shadow Ken", "shadowken", 3, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
     public static boss10 = new Coach("Boss #10", "boss10", 4, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
 
     public static setupCoachDecks() {

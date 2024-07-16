@@ -5,8 +5,9 @@ import Team from "../../../prefabs/Team";
 import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import Player from "../../../prefabs/Player";
+import { TurbonerdCard } from "./TurbonerdCard";
 
-export class DidIDoThat extends CardType {
+export class DidIDoThat extends TurbonerdCard {
 
     constructor() {
         super(CardKeys.DID_I_DO_THAT, null);

@@ -5,8 +5,9 @@ import Team from "../../../prefabs/Team";
 import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import Player from "../../../prefabs/Player";
+import { SporticusCard } from "./SporticusCard";
 
-export class BallBearings extends CardType {
+export class BallBearings extends SporticusCard {
 
     constructor() {
         super(CardKeys.BALL_BEARINGS, null);

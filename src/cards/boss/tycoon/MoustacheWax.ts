@@ -5,8 +5,9 @@ import Team from "../../../prefabs/Team";
 import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import Player from "../../../prefabs/Player";
+import { TycoonCard } from "./TycoonCard";
 
-export class MoustacheWax extends CardType {
+export class MoustacheWax extends TycoonCard {
 
     constructor() {
         super(CardKeys.MOUSTACHE_WAX, null);

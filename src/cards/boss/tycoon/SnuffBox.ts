@@ -5,8 +5,9 @@ import Team from "../../../prefabs/Team";
 import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import Player from "../../../prefabs/Player";
+import { TycoonCard } from "./TycoonCard";
 
-export class SnuffBox extends CardType {
+export class SnuffBox extends TycoonCard {
 
     constructor() {
         super(CardKeys.SNUFF_BOX, null);

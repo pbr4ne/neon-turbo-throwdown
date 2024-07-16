@@ -5,8 +5,9 @@ import Team from "../../../prefabs/Team";
 import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import Player from "../../../prefabs/Player";
+import { ShadowkenCard } from "./ShadowkenCard";
 
-export class SmokeBomb extends CardType {
+export class SmokeBomb extends ShadowkenCard {
 
     constructor() {
         super(CardKeys.SMOKE_BOMB, null);

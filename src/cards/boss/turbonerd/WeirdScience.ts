@@ -5,8 +5,9 @@ import Team from "../../../prefabs/Team";
 import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import Player from "../../../prefabs/Player";
+import { TurbonerdCard } from "./TurbonerdCard";
 
-export class WeirdScience extends CardType {
+export class WeirdScience extends TurbonerdCard {
 
     constructor() {
         super(CardKeys.WEIRD_SCIENCE, null);

@@ -5,8 +5,9 @@ import Team from "../../../prefabs/Team";
 import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import Player from "../../../prefabs/Player";
+import { OfficeCard } from "./OfficeCard";
 
-export class TPSReport extends CardType {
+export class TPSReport extends OfficeCard {
 
     constructor() {
         super(CardKeys.TPS_REPORT, null);

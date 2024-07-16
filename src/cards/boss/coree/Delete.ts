@@ -5,8 +5,9 @@ import Team from "../../../prefabs/Team";
 import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import Player from "../../../prefabs/Player";
+import { CoreeCard } from "./CoreeCard";
 
-export class Delete extends CardType {
+export class Delete extends CoreeCard {
 
     constructor() {
         super(CardKeys.DELETE, null);

@@ -5,8 +5,9 @@ import Team from "../../../prefabs/Team";
 import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import Player from "../../../prefabs/Player";
+import { ShadowkenCard } from "./ShadowkenCard";
 
-export class MonkeyStealsThePeach extends CardType {
+export class MonkeyStealsThePeach extends ShadowkenCard {
 
     constructor() {
         super(CardKeys.MONKEY_STEALS_THE_PEACH, null);

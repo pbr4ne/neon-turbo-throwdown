@@ -5,8 +5,9 @@ import Team from "../../../prefabs/Team";
 import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import Player from "../../../prefabs/Player";
+import { TycoonCard } from "./TycoonCard";
 
-export class SupplyAndDemand extends CardType {
+export class SupplyAndDemand extends TycoonCard {
 
     constructor() {
         super(CardKeys.SUPPLY_AND_DEMAND, null);

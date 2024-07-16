@@ -5,8 +5,9 @@ import Team from "../../../prefabs/Team";
 import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import Player from "../../../prefabs/Player";
+import { TycoonCard } from "./TycoonCard";
 
-export class UnionBusting extends CardType {
+export class UnionBusting extends TycoonCard {
 
     constructor() {
         super(CardKeys.UNION_BUSTING, null);

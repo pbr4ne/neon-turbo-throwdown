@@ -5,8 +5,9 @@ import Team from "../../../prefabs/Team";
 import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import Player from "../../../prefabs/Player";
+import { ShadowkenCard } from "./ShadowkenCard";
 
-export class Seppuku extends CardType {
+export class Seppuku extends ShadowkenCard {
 
     constructor() {
         super(CardKeys.SEPPUKU, null);

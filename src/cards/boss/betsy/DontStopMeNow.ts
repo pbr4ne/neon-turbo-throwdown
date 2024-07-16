@@ -5,8 +5,9 @@ import Team from "../../../prefabs/Team";
 import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import Player from "../../../prefabs/Player";
+import { BetsyCard } from "./BetsyCard";
 
-export class DontStopMeNow extends CardType {
+export class DontStopMeNow extends BetsyCard {
 
     constructor() {
         super(CardKeys.DONT_STOP_ME_NOW, null);

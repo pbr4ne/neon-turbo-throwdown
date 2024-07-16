@@ -37,6 +37,10 @@ export abstract class CardType {
 
     abstract getDescription(): string;
 
+    getCoach(): Coach | null {
+        return null;
+    }
+
     getKey(): CardKeys {
         return this.key;
     }
