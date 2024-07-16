@@ -185,12 +185,20 @@ export default class Welcome extends Phaser.Scene {
 			window.open('https://www.youtube.com/user/Kitchen1066', '_blank');
 		});
 
-		const artistText = this.add.text(-420, -70, "Rival Renderers:", {
+		const artistText = this.add.text(-420, -70, "Rival Renderers: atgeaux", {
 			fontFamily: '"Press Start 2P"',
 			fontSize: '20px',
 			color: '#00ffff',
 			align: 'left',
 			wordWrap: { width: 860, useAdvancedWrap: true }
+		});
+
+		const artistLink = this.add.text(100, -70, "instagram", {
+			fontFamily: '"Press Start 2P"',
+			fontSize: '20px',
+			color: '#ffff00',
+		}).setInteractive({ useHandCursor: true }).on('pointerdown', () => {
+			window.open('https://www.instagram.com/artgeaux/', '_blank');
 		});
 
 		const testerText = this.add.text(-420, -20, "Court Testers:", {
@@ -228,7 +236,7 @@ export default class Welcome extends Phaser.Scene {
 			this.input.setDefaultCursor('default');
 		});
 	
-		popup.add([background, creditsText, developerText, developerLink, writerText, writerLink, uiArtistText, musicText, musicLink, artistText, testerText, thanksText, closeButton]);
+		popup.add([background, creditsText, developerText, developerLink, writerText, writerLink, uiArtistText, musicText, musicLink, artistText, artistLink, testerText, thanksText, closeButton]);
 	}
 
 	private showHardResetPopup() {
