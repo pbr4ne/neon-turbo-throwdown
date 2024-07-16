@@ -9,6 +9,8 @@ import { CallbackActionScript } from "@phaserjs/editor-scripts-core";
 import SwitchImageActionScript from "../script-nodes/ui/SwitchImageActionScript";
 import FloatingObjectScript from "../script-nodes/ui/FloatingObjectScript";
 import { StorageManager } from "../utilities/StorageManager";
+import { Library } from "../throwdown/Library";
+import { log } from "../utilities/GameUtils";
 
 export default class Welcome extends Phaser.Scene {
 
@@ -91,6 +93,11 @@ export default class Welcome extends Phaser.Scene {
         }).setInteractive({ useHandCursor: true });
 
         hardResetText.on('pointerdown', this.showHardResetPopup, this);
+
+		if (Library.getTrophyTypes().length > 0) {
+			const trophiesBtn = this.add.image(1000, 750, "unknown").setInteractive({ useHandCursor: true });
+			trophiesBtn.on('pointerdown', this.showTrophies, this);
+		}
 	}
 
 	private setButtonInteractive(button: Phaser.GameObjects.Image) {
@@ -261,4 +268,70 @@ export default class Welcome extends Phaser.Scene {
     
         popup.add([background, questionText, yesButton, noButton]);
     }
+
+	private showTrophies() {
+		const popup = this.add.container(960, 540);
+	
+		const background = this.add.rectangle(0, 0, 900, 700, 0x000000, 0.8).setOrigin(0.5, 0.5);
+		background.setStrokeStyle(4, 0x00ffff);
+	
+		const titleText = this.add.text(0, -320, "Trophies", {
+			fontFamily: '"Press Start 2P"',
+			fontSize: '24px',
+			color: '#ffffff',
+			align: 'center'
+		}).setOrigin(0.5, 0.5);
+	
+		const trophies = Library.getTrophyTypes();
+		const sortedTrophies = trophies.slice().sort((a, b) => a.getName().localeCompare(b.getName()));
+	
+		const maxPopupHeight = 700;
+		const titleHeight = 40; 
+		const closeButtonHeight = 40;
+		const availableHeight = maxPopupHeight - titleHeight - closeButtonHeight - 60;
+		const lineHeight = 30;
+		const maxLines = Math.floor(availableHeight / lineHeight);
+		
+		//adjust font size if number of trophies is too long
+		let fontSize = '18px';
+		if (sortedTrophies.length > maxLines) {
+			fontSize = `${Math.floor((availableHeight / sortedTrophies.length) * 0.6)}px`;
+		}
+	
+		let yPos = -260;
+	
+		sortedTrophies.forEach((trophy) => {
+			const trophyText = this.add.text(-400, yPos, `${trophy.getName()}`, {
+				fontFamily: '"Press Start 2P"',
+				fontSize: fontSize,
+				color: '#00ffff',
+				wordWrap: { width: 800, useAdvancedWrap: true }
+			}).setOrigin(0, 0);
+			popup.add(trophyText);
+			yPos += parseInt(fontSize) + 5;
+		});
+	
+		const closeButton = this.add.text(0, 320, "Close", {
+			fontFamily: '"Press Start 2P"',
+			fontSize: '20px',
+			color: '#ff00ff',
+			padding: { x: 10, y: 5 }
+		}).setOrigin(0.5, 0.5).setInteractive({ useHandCursor: true });
+	
+		closeButton.on('pointerdown', () => {
+			popup.destroy();
+		});
+	
+		closeButton.on('pointerover', () => {
+			this.input.setDefaultCursor('pointer');
+		});
+	
+		closeButton.on('pointerout', () => {
+			this.input.setDefaultCursor('default');
+		});
+	
+		popup.add([background, titleText, closeButton]);
+		popup.sendToBack(background); // Ensure the background is behind the text
+	}
+	
 }

@@ -13,6 +13,7 @@ import { log } from "../utilities/GameUtils";
 import { StorageManager } from "../utilities/StorageManager";
 import { CardKeys } from "../cards/CardKeys";
 import { GameSounds } from "../utilities/GameSounds";
+import { CardUpgrade } from "../trophies/CardUpgrade";
 
 export default class PermUpgrade extends Phaser.GameObjects.Container {
 
@@ -166,6 +167,7 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
             }
             CoachList.you.getBaseCards().push(upgrade);
             await StorageManager.saveBaseDeck(CoachList.you.getBaseCards());
+            Library.getTrophyTypes().push(new CardUpgrade(upgrade));
 
             log("full deck is now: ");
             CoachList.you.getBaseCards().forEach(card => {

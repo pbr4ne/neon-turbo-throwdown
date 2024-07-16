@@ -1,16 +1,18 @@
+import { CardType } from "~/cards/CardType";
+
 export abstract class TrophyType {
     private key: string;
     private name: string;
     private description: string;
-    private num: number;
     private prerequisites: TrophyType[] = [];
+    private card: CardType | null = null;
 
-    constructor(key: string, name: string, description: string, prerequisites: TrophyType[] = [], num: number = 0) {
+    constructor(key: string, name: string, description: string, prerequisites: TrophyType[] = [], card: CardType | null = null) {
         this.key = key;
         this.name = name;
         this.description = description;
-        this.num = num;
-        this.prerequisites = prerequisites
+        this.prerequisites = prerequisites;
+        this.card = card;
     }
 
     public getKey(): string {
@@ -18,6 +20,9 @@ export abstract class TrophyType {
     }
 
     public getName(): string {
+        if (this.card) {
+            return `${this.name} - ${this.card.getName()}`;
+        }
         return this.name;
     }
 
@@ -25,16 +30,12 @@ export abstract class TrophyType {
         return this.description;
     }
 
-    public getNum(): number {
-        return this.num;
-    }
-
-    public setNum(num: number): void {
-        this.num = num;
-    }
-
     public getPrerequisites(): TrophyType[] {
         return this.prerequisites;
+    }
+
+    public getCard(): CardType | null {
+        return this.card;
     }
 
     public equals(other: TrophyType): boolean {
