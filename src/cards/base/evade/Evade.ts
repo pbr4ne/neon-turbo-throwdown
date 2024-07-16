@@ -22,7 +22,7 @@ export class Evade extends CardType {
 
     defense(member: Member, attacker: Member, team: Team, opponentTeam: Team, canRetaliate: boolean): boolean {
         let defenseSuccess = false;
-        if (this.getCurrentNumDefends() <= 1 && this.getChanceToDefend() >= Math.random()) {
+        if (this.getCurrentNumDefends() <= this.getNumDefends() && this.getChanceToDefend() >= Math.random()) {
             member.showFloatingAction(this.getName());
             defenseSuccess = true;
         }
