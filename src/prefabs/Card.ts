@@ -24,6 +24,7 @@ export default class Card extends GenericCard {
     private cardState: string;
     private order: number = 1;
     private static currentOrder: number = 1;
+    private debugRect!: Phaser.GameObjects.Rectangle;
 
     constructor(scene: Phaser.Scene, cardType: CardType, cardState: string, x?: number, y?: number, texture?: string, toAdd?: boolean) {
         super(scene, x ?? 0, y ?? 0);
@@ -83,7 +84,11 @@ export default class Card extends GenericCard {
         this.add([this.tooltipImage, this.tooltipText]);
 
         this.setSize(this.cardImage.width, this.cardImage.height);
-        this.setInteractive(new Phaser.Geom.Rectangle(0, 0, this.cardImage.width, this.cardImage.height), Phaser.Geom.Rectangle.Contains);
+        this.debugRect = new Phaser.GameObjects.Rectangle(scene, this.x, this.y, this.cardImage.width, this.cardImage.height, 0x00ff00, 0.5);
+        this.setInteractive(this.debugRect, Phaser.Geom.Rectangle.Contains);
+        //draw rectangle around card for debugging
+        this.add(this.debugRect);
+        this.debugRect.setVisible(false);
 
         this.add([this.cardImage, this.ringSelectedImage, this.ringAssignedImage, this.assignedMemberText, this.nameText, this.iconImage, this.tooltipImage, this.tooltipText]);
 
@@ -121,13 +126,18 @@ export default class Card extends GenericCard {
                 this.cardImage.setVisible(true);
                 this.on('pointerover', () => { 
                     this.scene.input.setDefaultCursor('pointer'); 
-                   // log(`mouse over ${this.toString()}`)
+                    this.debugRect.setVisible(true);
+                    log(`playerDeck - mouse over ${this.toString()}`)
                 });
                 this.on('pointerout', () => { 
                     this.scene.input.setDefaultCursor('default'); 
+                    this.debugRect.setVisible(false);
                 });
                 this.scene.children.remove(this);
                 this.scene.children.add(this);
+                //this.debugRect = new Phaser.GameObjects.Rectangle(this.scene, this.x, this.y, this.cardImage.width, this.cardImage.height, 0x00ff00, 1);
+                //this.setInteractive(this.debugRect, Phaser.Geom.Rectangle.Contains);
+                //this.debugRect.setVisible(true);
                 break;
             case "playerDeckHidden":
             case "bossDeck":
@@ -141,15 +151,20 @@ export default class Card extends GenericCard {
                     this.scene.input.setDefaultCursor('pointer'); 
                     this.tooltipImage.setVisible(true);
                     this.tooltipText.setVisible(true);
-                    //log(`mouse over ${this.toString()}`)
+                    this.debugRect.setVisible(true);
+                    log(`playerHand - mouse over ${this.toString()}`)
                 });
                 this.on('pointerout', () => { 
                     this.scene.input.setDefaultCursor('default'); 
                     this.tooltipImage.setVisible(false);
                     this.tooltipText.setVisible(false);
+                    this.debugRect.setVisible(false);
                 });
                 this.scene.children.remove(this);
                 this.scene.children.add(this);
+                // this.debugRect = new Phaser.GameObjects.Rectangle(this.scene, this.x, this.y, this.cardImage.width, this.cardImage.height, 0x00ff00, 1);
+                // this.setInteractive(this.debugRect, Phaser.Geom.Rectangle.Contains);
+                // this.debugRect.setVisible(true);
                 break;
             case "bossHand":
                 break;
@@ -169,7 +184,7 @@ export default class Card extends GenericCard {
                     this.scene.input.setDefaultCursor('pointer'); 
                     this.tooltipImage.setVisible(true);
                     this.tooltipText.setVisible(true);
-                    //log(`mouse over ${this.toString()}`)
+                    log(`upgrade - mouse over ${this.toString()}`)
                 });
                 this.on('pointerout', () => { 
                     this.scene.input.setDefaultCursor('default'); 
@@ -178,6 +193,9 @@ export default class Card extends GenericCard {
                 });
                 this.scene.children.remove(this);
                 this.scene.children.add(this);
+                // this.debugRect = new Phaser.GameObjects.Rectangle(this.scene, this.x, this.y, this.cardImage.width, this.cardImage.height, 0x00ff00, 1);
+                // this.setInteractive(this.debugRect, Phaser.Geom.Rectangle.Contains);
+                // this.debugRect.setVisible(true);
                 break;
             default:
                 log(`unknown card state: ${this.cardState}`);
@@ -197,6 +215,7 @@ export default class Card extends GenericCard {
         this.assignedMemberText.setText("");
         this.off("pointerout");
         this.off("pointerover");
+        this.debugRect.setVisible(false);
     }
 
     setTexture(texture: string) {
