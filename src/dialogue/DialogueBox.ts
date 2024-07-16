@@ -48,7 +48,9 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
 			if (convo != null) {
 				this.dialogueConversation = convo;
 			}
-		}		
+		} else if (dialogueType === "final") {
+			this.dialogueConversation =  DialogueStorage.finalDialogue;
+		}
 
         if (this.dialogueConversation) {
             this.generateDialogue();

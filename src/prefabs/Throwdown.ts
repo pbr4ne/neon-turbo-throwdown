@@ -1,10 +1,4 @@
-
-// You can write more code here
-
-/* START OF COMPILED CODE */
-
 import Phaser from "phaser";
-/* START-USER-IMPORTS */
 import { Coach } from "../throwdown/Coach";
 import Boss from "../prefabs/Boss";
 import Player from "../prefabs/Player";
@@ -16,15 +10,13 @@ import { getUrlParam, log } from "../utilities/GameUtils";
 import Card from "./Card";
 import { CoachList } from "../throwdown/CoachList";
 import { GameSounds } from "../utilities/GameSounds";
-/* END-USER-IMPORTS */
 
 export default class Throwdown extends Phaser.GameObjects.Container {
 
 	constructor(scene: Phaser.Scene, coach: Coach, player: Player) {
 		super(scene);
 
-		/* START-USER-CTR-CODE */
-		this.coach = coach;
+        this.coach = coach;
 		this.player = player;
 		this.boss = new Boss(this.scene, this.coach);
         this.boss.addMembers();
@@ -33,10 +25,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
 		this.boss.opponent = this.player;
 
         this.render();
-		/* END-USER-CTR-CODE */
 	}
-
-	/* START-USER-CODE */
 
 	public currentStep: number = 0;
 	private coach: Coach;
@@ -125,8 +114,6 @@ export default class Throwdown extends Phaser.GameObjects.Container {
         });
         this.playerLayer.add(this.scoreText);
 
-
-
         this.drawCardsImage = this.scene.add.image(960, 1020, "draw-cards");
         this.selectCardImage = this.scene.add.image(960, 1020, "select-card");
         this.selectPlayerImage = this.scene.add.image(960, 1020, "select-player");
@@ -150,7 +137,9 @@ export default class Throwdown extends Phaser.GameObjects.Container {
 
         this.player.createEndTurnButton();
 
-        GameSounds.switchSong(this.scene, this.coach.getSong());
+        if (this.coach.getSong()) {
+            GameSounds.switchSong(this.scene, this.coach.getSong());
+        }
 
         this.startGameLoop();
 	}
@@ -234,7 +223,6 @@ export default class Throwdown extends Phaser.GameObjects.Container {
     }
 
     destroy() {
-        //this.gameStatePopup?.destroy();
         super.destroy();
     }
 	showThrowdown() {
@@ -465,9 +453,4 @@ export default class Throwdown extends Phaser.GameObjects.Container {
         this.currentStep = 0;
         this.nextStep();
     }
-	/* END-USER-CODE */
 }
-
-/* END OF COMPILED CODE */
-
-// You can write more code here

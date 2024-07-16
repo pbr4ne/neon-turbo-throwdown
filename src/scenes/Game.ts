@@ -1,7 +1,4 @@
-/* START OF COMPILED CODE */
-
 import Phaser from "phaser";
-/* START-USER-IMPORTS */
 import { Coach } from "../throwdown/Coach";
 import { CoachList } from "../throwdown/CoachList";
 import DialogueBox from "../dialogue/DialogueBox";
@@ -11,16 +8,12 @@ import RunUpgrade from "../prefabs/RunUpgrade";
 import PermUpgrade from "../prefabs/PermUpgrade";
 import Throwdown from "../prefabs/Throwdown";
 import { checkUrlParam, getUrlParam, log } from "../utilities/GameUtils";
-/* END-USER-IMPORTS */
+import { Library } from "../throwdown/Library";
 
 export default class Game extends Phaser.Scene {
 
 	constructor() {
 		super("Game");
-
-		/* START-USER-CTR-CODE */
-		// Write your code here.
-		/* END-USER-CTR-CODE */
 	}
 
 	editorCreate(): void {
@@ -31,7 +24,6 @@ export default class Game extends Phaser.Scene {
 		this.events.emit("scene-awake");
 	}
 
-	/* START-USER-CODE */
 	public player!: Player;
 	private dialogLayer!: Phaser.GameObjects.Layer;
     private dialogBox!: DialogueBox;
@@ -113,6 +105,10 @@ export default class Game extends Phaser.Scene {
         } else if (type === "lose") {
             this.throwdown.destroy();
             this.doPermUpgrade();
+        } else if (type === "final") {
+            this.throwdown.destroy();
+            Library.incrementNumRuns();
+            this.scene.start('Welcome');
         }
 
         DialogueStorage.saveDialogues();
@@ -126,6 +122,10 @@ export default class Game extends Phaser.Scene {
         this.doDialogue(this.currentCoach, "lose");
     }
 
+    doFinalDialogue() {
+        this.doDialogue(this.currentCoach, "final");
+    }
+
     doRunUpgrade() {
         this.runUpgrade = new RunUpgrade(this, this.currentCoach, this.player);
         this.runUpgrade = this.dialogLayer.add(this.runUpgrade);
@@ -136,10 +136,14 @@ export default class Game extends Phaser.Scene {
         this.runUpgrade.destroy();
 
         this.currentCoach = this.currentCoach.getNextCoach();
+        
+        if (this.currentCoach === CoachList.you) {
+            this.doFinalDialogue();
+        } else {
+            this.player.addMembers();
 
-        this.player.addMembers();
-
-        this.doDialogue(this.currentCoach, "intro");
+            this.doDialogue(this.currentCoach, "intro");
+        }
     }
 
     doPermUpgrade() {
@@ -153,10 +157,4 @@ export default class Game extends Phaser.Scene {
 
         this.scene.start('Welcome');
     }
-
-	/* END-USER-CODE */
 }
-
-/* END OF COMPILED CODE */
-
-// You can write more code here

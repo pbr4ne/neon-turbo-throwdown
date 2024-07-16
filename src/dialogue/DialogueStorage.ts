@@ -17,6 +17,9 @@ export class DialogueStorage {
     public static turbonerdDialogue: CoachDialogue = new CoachDialogue();
     public static shadowkenDialogue: CoachDialogue = new CoachDialogue();
     public static boss10Dialogue: CoachDialogue = new CoachDialogue();
+
+    public static finalDialogue: DialogueConversation = new DialogueConversation();
+
     public static missingDialogue: CoachDialogue = new CoachDialogue();
     public static missingDialogueConversation: DialogueConversation = new DialogueConversation();
     public static missingDialogueStep: DialogueStep = new DialogueStep("placeholder", CoachList.you);
@@ -31,6 +34,9 @@ export class DialogueStorage {
         this.initializeCoreeDialogue();
         this.initializeTurbonerdDialogue();
         this.initializeShadowkenDialogue();
+
+        this.initializeFinalDialogue();
+
         this.initializeBoss10Dialogue();
         this.initializeMissingDialogue();
         this.initializeMissingDialogueConversation();
@@ -45,6 +51,10 @@ export class DialogueStorage {
         this.warnIfMissingDialogue(DialogueStorage.turbonerdDialogue, CoachKeys.TURBO_NERD);
         this.warnIfMissingDialogue(DialogueStorage.shadowkenDialogue, CoachKeys.SHADOW_KEN);
         this.warnIfMissingDialogue(DialogueStorage.boss10Dialogue, CoachKeys.BOSS_10);
+    }
+
+    public initializeFinalDialogue(): void {
+        DialogueStorage.finalDialogue.addStep("It was all a dream.", CoachList.you);
     }
 
     public initializePrimoDialogue(): void {

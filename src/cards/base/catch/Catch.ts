@@ -32,7 +32,7 @@ export class Catch extends CardType {
     }
 
     defense(member: Member, attacker: Member, team: Team, opponentTeam: Team): boolean {
-        console.log("DEFENSE " + team);
+        log("DEFENSE " + team);
         let defenseSuccess = false;
         log(`DEFENSE - this is the modifier: ${this.getChanceToDefend(team)}`);
         if (this.getCurrentNumDefends() <= 1 && this.getChanceToDefend(team) >= Math.random()) {

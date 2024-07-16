@@ -140,17 +140,17 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
     private async handleCardSelection(selectedItem: Trophy | Upgrade) {
         GameSounds.playCard();
         if (selectedItem instanceof Trophy) {
-            console.log("Trophy selected");
+            log("Trophy selected");
             Library.addTrophyType(selectedItem.trophyType);
             OutstandingTrophyList.removeTrophy(selectedItem.trophyType);
         } else if (selectedItem instanceof Upgrade) {
-            console.log("Upgrade selected");
+            log("Upgrade selected");
             const upgrade = selectedItem.getCardType().getUpgrade();
             if (upgrade === null) {
                 log("Upgrade is null");
                 return;
             }
-            console.log("ADDING UPGRADE: " + upgrade);
+            log("ADDING UPGRADE: " + upgrade);
             const newCard = new Card(this.scene, upgrade, "playerDeck", 0, 0, "front");
             //log all cards in baseCards
             
@@ -176,7 +176,7 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
             //todo - this is suspicious that i have to hide it. because it should be moved later but it stays on the screen
             newCard.hide();
         } else {
-            console.log("Unknown item selected");
+            log("Unknown item selected");
         }
     
         (this.scene.scene.get('Game') as Game).finishPermUpgrade();
