@@ -147,6 +147,7 @@ export default class Card extends GenericCard {
             case "bossDeck":
                 break;
             case "playerHand":
+            case "upgrade":
                 this.setTexture("front");
                 this.cardImage.setVisible(true);
                 this.nameText.setVisible(true);
@@ -154,6 +155,10 @@ export default class Card extends GenericCard {
                 this.coachImage?.setVisible(true);
                 this.on('pointerover', () => { 
                     this.scene.input.setDefaultCursor('pointer'); 
+    
+                    // Update tooltip text
+                    this.updateTooltipText();
+    
                     this.tooltipImage.setVisible(true);
                     this.tooltipText.setVisible(true);
                     //log(`mouse over ${this.toString()}`)
@@ -175,29 +180,21 @@ export default class Card extends GenericCard {
                 break;
             case "bossDiscard":
                 break;
-            case "upgrade":
-                this.setTexture("front");
-                this.cardImage.setVisible(true);
-                this.nameText.setVisible(true);
-                this.iconImage.setVisible(true);
-                this.coachImage?.setVisible(true);
-                this.on('pointerover', () => { 
-                    this.scene.input.setDefaultCursor('pointer'); 
-                    this.tooltipImage.setVisible(true);
-                    this.tooltipText.setVisible(true);
-                    //log(`mouse over ${this.toString()}`)
-                });
-                this.on('pointerout', () => { 
-                    this.scene.input.setDefaultCursor('default'); 
-                    this.tooltipImage.setVisible(false);
-                    this.tooltipText.setVisible(false);
-                });
-                this.scene.children.remove(this);
-                this.scene.children.add(this);
-                break;
             default:
                 log(`unknown card state: ${this.cardState}`);
                 break;
+        }
+    }
+
+    private updateTooltipText(): void {
+        let description = this.cardType.getDescription();
+        this.tooltipText.setText(description);
+    
+        let fontSize = 16;
+    
+        while (this.tooltipText.height + 90 > this.tooltipImage.height) {
+            fontSize--;
+            this.tooltipText.setStyle({ fontSize: `${fontSize}px` });
         }
     }
 
