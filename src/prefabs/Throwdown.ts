@@ -80,6 +80,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
                 this.scene.input.setDefaultCursor('default');
             })
             .on('pointerdown', () => {
+                Library.incrementNumRuns();
                 this.scene.scene.start('Welcome');
             });
 
