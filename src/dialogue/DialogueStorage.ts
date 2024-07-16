@@ -3,6 +3,7 @@ import { CoachDialogue } from './CoachDialogue';
 import { DialogueConversation, DialogueStep } from './Dialogue';
 import { StorageManager } from '../utilities/StorageManager';
 import { log } from "../utilities/GameUtils";
+import { CoachKeys } from '../throwdown/CoachKeys';
 
 export class DialogueStorage {
 
@@ -34,16 +35,16 @@ export class DialogueStorage {
         this.initializeMissingDialogue();
         this.initializeMissingDialogueConversation();
 
-        this.warnIfMissingDialogue(DialogueStorage.primoDialogue, "primo");
-        this.warnIfMissingDialogue(DialogueStorage.sporticusDialogue, "sporticus");
-        this.warnIfMissingDialogue(DialogueStorage.tycoonDialogue, "russ");
-        this.warnIfMissingDialogue(DialogueStorage.officeDialogue, "boss");
-        this.warnIfMissingDialogue(DialogueStorage.sgtsteveDialogue, "steve");
-        this.warnIfMissingDialogue(DialogueStorage.betsyDialogue, "betsy");
-        this.warnIfMissingDialogue(DialogueStorage.coreeDialogue, "coree");
-        this.warnIfMissingDialogue(DialogueStorage.turbonerdDialogue, "turbo");
-        this.warnIfMissingDialogue(DialogueStorage.shadowkenDialogue, "shadow");
-        this.warnIfMissingDialogue(DialogueStorage.boss10Dialogue, "boss10");
+        this.warnIfMissingDialogue(DialogueStorage.primoDialogue, CoachKeys.PRIMO);
+        this.warnIfMissingDialogue(DialogueStorage.sporticusDialogue, CoachKeys.SPORTICUS);
+        this.warnIfMissingDialogue(DialogueStorage.tycoonDialogue, CoachKeys.TYCOON);
+        this.warnIfMissingDialogue(DialogueStorage.officeDialogue, CoachKeys.OFFICE);
+        this.warnIfMissingDialogue(DialogueStorage.sgtsteveDialogue, CoachKeys.SGT_STEVE);
+        this.warnIfMissingDialogue(DialogueStorage.betsyDialogue, CoachKeys.BETSY);
+        this.warnIfMissingDialogue(DialogueStorage.coreeDialogue, CoachKeys.COREE);
+        this.warnIfMissingDialogue(DialogueStorage.turbonerdDialogue, CoachKeys.TURBO_NERD);
+        this.warnIfMissingDialogue(DialogueStorage.shadowkenDialogue, CoachKeys.SHADOW_KEN);
+        this.warnIfMissingDialogue(DialogueStorage.boss10Dialogue, CoachKeys.BOSS_10);
     }
 
     public initializePrimoDialogue(): void {

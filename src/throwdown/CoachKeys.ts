@@ -1,0 +1,15 @@
+export enum CoachKeys {
+    YOU = "you",
+    COACH = "coach",
+    SPIRIT = "spirit",
+    PRIMO = "primo",
+    SPORTICUS = "sporticus",
+    TYCOON = "tycoon",
+    OFFICE = "office",
+    SGT_STEVE = "sgtsteve",
+    BETSY = "betsy",
+    COREE = "coree",
+    TURBO_NERD = "turbonerd",
+    SHADOW_KEN = "shadowken",
+    BOSS_10 = "boss10",
+}

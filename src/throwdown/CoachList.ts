@@ -3,22 +3,23 @@ import { log } from "../utilities/GameUtils";
 import { CardFactory } from "../cards/CardFactory";
 import { CardKeys } from "../cards/CardKeys";
 import { IncreaseHP } from "../trophies/member/IncreaseHP";
+import { CoachKeys } from "./CoachKeys";
 
 export class CoachList {
 
-    public static you = new Coach("You", "you", 0, false, "", "", "");
-    public static coach = new Coach("Coach", "coach", 0, false, "", "", "");
-    public static spirit = new Coach("Spirit Coach", "spirit", 0, false, "", "", "");
-    public static primo = new Coach("Primo Firstman", "primo", 1, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
-    public static sporticus = new Coach("Sporticus", "sporticus", 1, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
-    public static tycoon = new Coach("Throwdown Tycoon", "tycoon", 1, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
-    public static office = new Coach("Office Boss", "office", 2, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
-    public static sgtsteve = new Coach("Sgt. Steve", "sgtsteve", 2, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
-    public static betsy = new Coach("Betsy and the Nets", "betsy", 2, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
-    public static coree = new Coach("C.O.R.E.E.", "coree", 3, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
-    public static turbonerd = new Coach("Turbo Nerd", "turbonerd", 3, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
-    public static shadowken = new Coach("Shadow Ken", "shadowken", 3, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
-    public static boss10 = new Coach("Boss #10", "boss10", 4, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
+    public static you = new Coach("You", CoachKeys.YOU, 0, false, "", "", "");
+    public static coach = new Coach("Coach", CoachKeys.COACH, 0, false, "", "", "");
+    public static spirit = new Coach("Spirit Coach", CoachKeys.SPIRIT , 0, false, "", "", "");
+    public static primo = new Coach("Primo Firstman", CoachKeys.PRIMO, 1, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
+    public static sporticus = new Coach("Sporticus", CoachKeys.SPORTICUS, 1, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
+    public static tycoon = new Coach("Throwdown Tycoon", CoachKeys.TYCOON, 1, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
+    public static office = new Coach("Office Boss", CoachKeys.OFFICE, 2, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
+    public static sgtsteve = new Coach("Sgt. Steve", CoachKeys.SGT_STEVE, 2, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
+    public static betsy = new Coach("Betsy and the Nets", CoachKeys.BETSY, 2, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
+    public static coree = new Coach("C.O.R.E.E.", CoachKeys.COREE, 3, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
+    public static turbonerd = new Coach("Turbo Nerd", CoachKeys.TURBO_NERD, 3, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
+    public static shadowken = new Coach("Shadow Ken", CoachKeys.SHADOW_KEN, 3, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
+    public static boss10 = new Coach("Boss #10", CoachKeys.BOSS_10, 4, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
 
     public static setupCoachDecks() {
         log("SETTING UP COACH DECKS");
@@ -217,34 +218,34 @@ export class CoachList {
     }
 
     public static getCoachByName(name: string): Coach {
-        if (name === "primo") {
+        if (name === CoachKeys.PRIMO) {
             return CoachList.primo;
         }
-        if (name === "sporticus") {
+        if (name === CoachKeys.SPORTICUS) {
             return CoachList.sporticus;
         }
-        if (name === "tycoon") {
+        if (name === CoachKeys.TYCOON) {
             return CoachList.tycoon;
         }
-        if (name === "office") {
+        if (name === CoachKeys.OFFICE) {
             return CoachList.office;
         }
-        if (name === "sgtsteve") {
+        if (name === CoachKeys.SGT_STEVE) {
             return CoachList.sgtsteve;
         }
-        if (name === "betsy") {
+        if (name === CoachKeys.BETSY) {
             return CoachList.betsy;
         }
-        if (name === "coree") {
+        if (name === CoachKeys.COREE) {
             return CoachList.coree;
         }
-        if (name === "turbonerd") {
+        if (name === CoachKeys.TURBO_NERD) {
             return CoachList.turbonerd;
         }
-        if (name === "shadowken") {
+        if (name === CoachKeys.SHADOW_KEN) {
             return CoachList.shadowken;
         }
-        if (name === "boss10") {
+        if (name === CoachKeys.BOSS_10) {
             return CoachList.boss10;
         }
 
