@@ -23,7 +23,6 @@ export class SoldierOn extends SgtSteveCard {
         //get a random integer between healthMin and healthMax
         const healthSteal = Math.floor(Math.random() * (this.getHealthMax() - this.getHealthMin() + 1)) + this.getHealthMin();
 
-        member.showFloatingAction(`+${healthSteal}`, "#00ff00", 1);
         member.increaseHP(healthSteal);
         GameSounds.playHeal();
         return true;

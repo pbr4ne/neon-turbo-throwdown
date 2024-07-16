@@ -36,8 +36,7 @@ export class Throw extends CardType {
                 }
                 if (!defenseSuccess) {
                     //reduce their HP if they failed to defend
-                    enemyMember.showFloatingAction((this.getOffenseDamage() * -1).toString(), "#ff005a");
-                    enemyMember.reduceHP(this.getOffenseDamage(), member);
+                    enemyMember.reduceHP(this.getOffenseDamage());
                     offenseSuccess = true;
                 }
             } else {

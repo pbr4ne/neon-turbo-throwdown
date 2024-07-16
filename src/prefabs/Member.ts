@@ -304,17 +304,23 @@ export default class Member extends Phaser.GameObjects.Container {
         return this.hp;
     }
 
-    reduceHP(amount: number, memberWhoTargeted: Member) {
+    reduceHP(amount: number) {
         this.hp -= amount;
         if (this.hp <= 0) {
-            this.hp = 0;
-            this.sprite.setAlpha(0.25);
-            this.bracketLeft?.setAlpha(0.25);
-            this.bracketRight?.setAlpha(0.25);
-            this.assignedBlock?.setAlpha(0.25);
-            this.assignedBlockText?.setAlpha(0.25);
-            this.off("pointerdown");
+            this.kill();
         }
+        this.updateHealthBar();
+        this.showFloatingAction((amount * -1).toString(), "#ff005a");
+    }
+
+    kill() {
+        this.hp = 0;
+        this.sprite.setAlpha(0.25);
+        this.bracketLeft?.setAlpha(0.25);
+        this.bracketRight?.setAlpha(0.25);
+        this.assignedBlock?.setAlpha(0.25);
+        this.assignedBlockText?.setAlpha(0.25);
+        this.off("pointerdown");
         this.updateHealthBar();
     }
 
@@ -324,6 +330,7 @@ export default class Member extends Phaser.GameObjects.Container {
             this.hp = this.maxHP;
         }
         this.updateHealthBar();
+        this.showFloatingAction(`+${amount.toString()}`, "#00ff00", 1);
     }
 
     showFloatingAction(action: string, color: string = '#ffffff', incrementIndex: number = 0) {

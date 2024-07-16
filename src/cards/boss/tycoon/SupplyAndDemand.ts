@@ -33,9 +33,7 @@ export class SupplyAndDemand extends TycoonCard {
         }
         if (!defenseSuccess) {
             //reduce their HP if they failed to defend
-            target.showFloatingAction((this.getHealthSteal() * -1).toString(), "#ff005a");
-            target.reduceHP(this.getHealthSteal(), member);
-            member.showFloatingAction(`+${this.getHealthSteal().toString()}`, "#00ff00", 1);
+            target.reduceHP(this.getHealthSteal());
             member.increaseHP(this.getHealthSteal());
             GameSounds.playHeal();
             offenseSuccess = true;

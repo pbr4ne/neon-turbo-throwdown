@@ -36,8 +36,7 @@ export class Waterfall extends OfficeCard {
             }
             if (!defenseSuccess) {
                 //reduce their HP if they failed to defend
-                enemyMember.showFloatingAction((this.getOffenseDamage() * -1).toString(), "#ff005a");
-                enemyMember.reduceHP(this.getOffenseDamage(), member);
+                enemyMember.reduceHP(this.getOffenseDamage());
                 offenseSuccess = true;
             }
     
@@ -69,7 +68,7 @@ export class Waterfall extends OfficeCard {
     }
 
     getIcon(): string {
-        return "unknown";
+        return "throw-turbo";
     }
 
     getOffenseDamage(): number {    

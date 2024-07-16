@@ -45,7 +45,7 @@ export class BiggBalls extends SporticusCard {
     }
 
     getIcon(): string {
-        return "unknown";
+        return "catch";
     }
 
     getDescription(): string {

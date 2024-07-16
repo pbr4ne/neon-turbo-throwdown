@@ -32,8 +32,7 @@ export class Block extends CardType {
         let defenseSuccess = false;
         if (this.getCurrentNumDefends() <= 1 && this.getChanceToDefend() >= Math.random()) {
             member.showFloatingAction(this.getName());
-            attacker.showFloatingAction(this.getDefenseDamage().toString(), "#ff005a");
-            attacker.reduceHP(this.getDefenseDamage(), attacker);
+            attacker.reduceHP(this.getDefenseDamage());
             defenseSuccess = true;
         }
 
