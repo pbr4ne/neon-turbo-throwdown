@@ -117,13 +117,7 @@ export class GameSounds {
         GameSounds.currentSongKey = newSongKey;
 
         if (GameSounds.musicShouldBePlaying) {
-            GameSounds.musicSound.play({ loop: true, volume: 0 });
-            //fade in new song
-            scene.tweens.add({
-                targets: GameSounds.musicSound,
-                volume: 0.2,
-                duration: GameSounds.fadeDuration
-            });
+            GameSounds.musicSound.play({ loop: true, volume: 0.2 });
         } else {
             log("Not playing music");
         }
