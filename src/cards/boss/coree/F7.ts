@@ -16,9 +16,6 @@ export class F7 extends CoreeCard {
         super(CardKeys.F7, null);
     }
 
-    resetTurn(): void {
-    }
-
     special(member: Member, team: Team, opponentTeam: Team): boolean {
         member.showFloatingAction(this.getName());
         this.getRandomDeadMembers(team, this.getNumToResurrect()).forEach((deadMember) => {
@@ -27,18 +24,6 @@ export class F7 extends CoreeCard {
         });
         
         return true;
-    }
-
-    offense(member: Member, target: Member, team: Team, opponentTeam: Team): boolean {
-        return false;
-    }
-
-    defense(member: Member, attacker: Member, team: Team, opponentTeam: Team, canRetaliate: boolean): boolean {
-        return false;
-    }
-
-    needsTarget(): boolean {
-        return false;
     }
 
     getName(): string {

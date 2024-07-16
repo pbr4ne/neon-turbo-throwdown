@@ -16,20 +16,33 @@ export abstract class CardType {
         this.upgradeKey = upgradeKey;
     }
 
+    //should be overridden if the card has things to reset at the end of the turn
     resetTurn(): void {
-        
     }
 
+    //should be overridden if the card has things to reset at the end of the round
     resetRound(): void {
     }
 
-    abstract special(member: Member, team: Team, opponentTeam: Team): boolean;
+    //should be overridden if the card has a special effect
+    special(member: Member, team: Team, opponentTeam: Team): boolean {
+        return false;
+    }
 
-    abstract offense(member: Member, target: Member, team: Team, opponentTeam: Team): boolean;
+    //should be overridden if the card has an attack
+    offense(member: Member, target: Member, team: Team, opponentTeam: Team): boolean {
+        return false;
+    }
 
-    abstract defense(member: Member, attacker: Member, team: Team, opponentTeam: Team, canRetaliate: boolean): boolean;
+    //should be overridden if the card has a defense
+    defense(member: Member, attacker: Member, team: Team, opponentTeam: Team, canRetaliate: boolean): boolean {
+        return false;
+    }
 
-    abstract needsTarget(): boolean;
+    //should be overridden if the card needs a target
+    needsTarget(): boolean {
+        return false;
+    }
 
     abstract getName(): string;
 

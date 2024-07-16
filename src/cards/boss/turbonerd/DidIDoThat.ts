@@ -18,9 +18,6 @@ export class DidIDoThat extends TurbonerdCard {
         super(CardKeys.DID_I_DO_THAT, null);
     }
 
-    resetTurn(): void {
-    }
-
     special(member: Member, team: Team, opponentTeam: Team): boolean {
         let anyOffenseSuccess = false;
         let membersToTarget = this.getRandomAliveMembers(opponentTeam, null, this.getRandomInteger(this.getNumTargetsMin(), this.getNumTargetsMax()));
@@ -53,18 +50,6 @@ export class DidIDoThat extends TurbonerdCard {
         }
 
         return anyOffenseSuccess;  
-    }
-
-    offense(member: Member, target: Member, team: Team, opponentTeam: Team): boolean {
-        return false;
-    }
-
-    defense(member: Member, attacker: Member, team: Team, opponentTeam: Team, canRetaliate: boolean): boolean {
-        return false;
-    }
-
-    needsTarget(): boolean {
-        return false;
     }
 
     getName(): string {

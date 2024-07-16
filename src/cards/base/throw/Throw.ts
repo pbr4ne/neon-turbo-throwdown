@@ -13,10 +13,6 @@ export class Throw extends CardType {
         super(key, upgradeKey);
     }
 
-    special(member: Member, team: Team, opponentTeam: Team): boolean {
-        return false;
-    }
-
     offense(member: Member, target: Member, team: Team, opponentTeam: Team): boolean {
 
         let anyOffenseSuccess = false;
@@ -55,10 +51,6 @@ export class Throw extends CardType {
                 return true;
             }
         }
-        return false;
-    }
-
-    defense(member: Member, attacker: Member, team: Team, opponentTeam: Team, canRetaliate: boolean): boolean {
         return false;
     }
 

@@ -23,14 +23,6 @@ export class Catch extends CardType {
         super.resetTurn();
     }
 
-    special(member: Member, team: Team, opponentTeam: Team): boolean {
-        return false;
-    }
-
-    offense(member: Member, target: Member, team: Team, opponentTeam: Team): boolean {
-        return false;
-    }
-
     defense(member: Member, attacker: Member, team: Team, opponentTeam: Team, canRetaliate: boolean): boolean {
         log("DEFENSE " + team);
         let defenseSuccess = false;
@@ -56,10 +48,6 @@ export class Catch extends CardType {
         this.currentNumDefends++;
         log("Catch has been used " + this.currentNumDefends + " times.");
         return defenseSuccess;
-    }
-
-    needsTarget(): boolean {
-        return false;
     }
 
     getName(): string {

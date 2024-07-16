@@ -16,9 +16,6 @@ export class SoldierOn extends SgtSteveCard {
         super(CardKeys.SOLDIER_ON, null);
     }
 
-    resetTurn(): void {
-    }
-
     special(member: Member, team: Team, opponentTeam: Team): boolean {
         member.showFloatingAction(this.getName());
         //get a random integer between healthMin and healthMax
@@ -27,18 +24,6 @@ export class SoldierOn extends SgtSteveCard {
         member.increaseHP(healthSteal);
         GameSounds.playHeal();
         return true;
-    }
-
-    offense(member: Member, target: Member, team: Team, opponentTeam: Team): boolean {
-        return false;
-    }
-
-    defense(member: Member, attacker: Member, team: Team, opponentTeam: Team, canRetaliate: boolean): boolean {
-        return false;
-    }
-
-    needsTarget(): boolean {
-        return false;
     }
 
     getName(): string {

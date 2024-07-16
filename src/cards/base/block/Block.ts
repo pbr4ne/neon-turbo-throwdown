@@ -20,14 +20,6 @@ export class Block extends CardType {
         super.resetTurn();
     }
 
-    special(member: Member, team: Team, opponentTeam: Team): boolean {
-        return false;
-    }
-
-    offense(member: Member, target: Member, team: Team, opponentTeam: Team): boolean {
-        return false;
-    }
-
     defense(member: Member, attacker: Member, team: Team, opponentTeam: Team, canRetaliate: boolean): boolean {
         let defenseSuccess = false;
         if (this.getCurrentNumDefends() <= 1 && this.getChanceToDefend() >= Math.random()) {
@@ -48,10 +40,6 @@ export class Block extends CardType {
         log("Block has been used " + this.currentNumDefends + " times.");
 
         return defenseSuccess;
-    }
-
-    needsTarget(): boolean {
-        return false;
     }
 
     getName(): string {

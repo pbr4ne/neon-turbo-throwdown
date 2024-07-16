@@ -16,13 +16,6 @@ export class DeadOrAlive extends BetsyCard {
         super(CardKeys.DEAD_OR_ALIVE, null);
     }
 
-    resetTurn(): void {
-    }
-
-    special(member: Member, team: Team, opponentTeam: Team): boolean {
-        return false;
-    }
-
     offense(member: Member, target: Member, team: Team, opponentTeam: Team): boolean {
 
         let offenseSuccess = false;
@@ -50,10 +43,6 @@ export class DeadOrAlive extends BetsyCard {
             GameSounds.playHit();
         }
         return offenseSuccess;    
-    }
-
-    defense(member: Member, attacker: Member, team: Team, opponentTeam: Team, canRetaliate: boolean): boolean {
-        return false;
     }
 
     needsTarget(): boolean {

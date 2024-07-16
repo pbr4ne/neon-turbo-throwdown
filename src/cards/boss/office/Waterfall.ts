@@ -15,9 +15,6 @@ export class Waterfall extends OfficeCard {
         super(CardKeys.WATERFALL, null);
     }
 
-    resetTurn(): void {
-    }
-
     special(member: Member, team: Team, opponentTeam: Team): boolean {
         let anyOffenseSuccess = false;
         let membersToTarget = this.getAllAliveMembers(opponentTeam);
@@ -49,18 +46,6 @@ export class Waterfall extends OfficeCard {
             GameSounds.playHit();
         }
         return anyOffenseSuccess;  
-    }
-
-    offense(member: Member, target: Member, team: Team, opponentTeam: Team): boolean {
-        return false;
-    }
-
-    defense(member: Member, attacker: Member, team: Team, opponentTeam: Team, canRetaliate: boolean): boolean {
-        return false;
-    }
-
-    needsTarget(): boolean {
-        return false;
     }
 
     getName(): string {

@@ -13,25 +13,6 @@ export class BallRoomBlitz extends BetsyCard {
         super(CardKeys.BALL_ROOM_BLITZ, null);
     }
 
-    resetTurn(): void {
-    }
-
-    special(member: Member, team: Team, opponentTeam: Team): boolean {
-        return false;
-    }
-
-    offense(member: Member, target: Member, team: Team, opponentTeam: Team): boolean {
-        return false;
-    }
-
-    defense(member: Member, attacker: Member, team: Team, opponentTeam: Team, canRetaliate: boolean): boolean {
-        return false;
-    }
-
-    needsTarget(): boolean {
-        return false;
-    }
-
     getName(): string {
         return "ball room blitz";
     }
