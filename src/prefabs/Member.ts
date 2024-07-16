@@ -371,7 +371,7 @@ export default class Member extends Phaser.GameObjects.Container {
         }
 
         //reactivate if health was <= 0
-        if (originalHp <= 0) {
+        if (originalHp <= 0 && this.hp > 0) {
             this.sprite.setAlpha(1);
             this.bracketLeft?.setAlpha(1);
             this.bracketRight?.setAlpha(1);
