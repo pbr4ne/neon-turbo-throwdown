@@ -194,7 +194,7 @@ export default class Welcome extends Phaser.Scene {
 			wordWrap: { width: 860, useAdvancedWrap: true }
 		});
 
-		const thanksText = this.add.text(-420, 30, "Special Thanks:", {
+		const thanksText = this.add.text(-420, 30, "Special Thanks: Kakumeii", {
 			fontFamily: '"Press Start 2P"',
 			fontSize: '20px',
 			color: '#00ffff',
@@ -251,7 +251,7 @@ export default class Welcome extends Phaser.Scene {
         }).setOrigin(0.5, 0.5).setInteractive({ useHandCursor: true });
     
         yesButton.on('pointerdown', async () => {
-            await StorageManager.clearAllData(); // Call the method to clear the database
+            await StorageManager.clearAllData();
             popup.destroy();
         });
     
