@@ -150,9 +150,11 @@ export default class Throwdown extends Phaser.GameObjects.Container {
         const pointers = [this.pointerImage, this.pointerImage2, this.pointerImage3];
         pointers.forEach((pointer, index) => {
             if (pointer) {
+                if (this.scene) {
                 this.scene.time.addEvent({
                     delay: 10000,
                     callback: () => {
+                            if (this.scene) {
                         this.scene.tweens.add({
                             targets: pointer,
                             alpha: { from: 1, to: 0 },
@@ -169,8 +171,10 @@ export default class Throwdown extends Phaser.GameObjects.Container {
                                 });
                             }
                         });
+                            }
                     }
                 });
+                }
             }
         });
     }
