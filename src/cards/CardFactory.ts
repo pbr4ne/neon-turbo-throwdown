@@ -6,7 +6,10 @@ import { TurboBlock } from "./base/block/TurboBlock";
 import { BigHands } from "./base/catch/BigHands";
 import { Catch } from "./base/catch/Catch";
 import { TurboCatch } from "./base/catch/TurboCatch";
+import { DoubleEvade } from "./base/evade/DoubleEvade";
 import { Evade } from "./base/evade/Evade";
+import { TripleEvade } from "./base/evade/TripleEvade";
+import { TurboEvade } from "./base/evade/TurboEvade";
 import { Ricochet } from "./base/throw/Ricochet";
 import { RiRicochet } from "./base/throw/RiRicochet";
 import { SniperThrow } from "./base/throw/SniperThrow";
@@ -53,6 +56,9 @@ export class CardFactory {
 
         //evade
         this.registerCardType("evade", Evade);
+        this.registerCardType("double-evade", DoubleEvade);
+        this.registerCardType("turbo-evade", TurboEvade);
+        this.registerCardType("triple-evade", TripleEvade);
         
         //catch
         this.registerCardType("catch", Catch);

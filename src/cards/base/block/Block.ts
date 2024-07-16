@@ -38,11 +38,14 @@ export class Block extends CardType {
             }
             defenseSuccess = true;
         }
-        log("Block has been used " + this.currentNumDefends + " times.");
 
         if (defenseSuccess) {
             GameSounds.playBlock();
         }
+        
+        this.currentNumDefends++;
+        log("Block has been used " + this.currentNumDefends + " times.");
+
         return defenseSuccess;
     }
 

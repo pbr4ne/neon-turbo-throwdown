@@ -3,12 +3,14 @@ import Member from "../../../prefabs/Member";
 import Team from "../../../prefabs/Team";
 import { log } from "../../../utilities/GameUtils";
 import { CardKeys } from "../../CardKeys";
+import { GameSounds } from "../../../utilities/GameSounds";
 
 export class Evade extends CardType {
-    private static chanceToDefend : number = 0.75;
-    private numDefends: number = 0;
+    protected chanceToDefend : number = 0.75;
+    protected currentNumDefends: number = 1;
+    protected numDefends = 1;
 
-    constructor(key: CardKeys = CardKeys.EVADE, upgradeKey: CardKeys | null = null) {
+    constructor(key: CardKeys = CardKeys.EVADE, upgradeKey: CardKeys | null = CardKeys.DOUBLE_EVADE) {
         super(key, upgradeKey);
     }
 
@@ -25,15 +27,19 @@ export class Evade extends CardType {
     }
 
     defense(member: Member, attacker: Member, team: Team, opponentTeam: Team): boolean {
-        this.numDefends++;
-        log("Evade has been used " + this.numDefends + " times.");
-        if (this.numDefends <= 1 && Math.random() < Evade.chanceToDefend) {
-            log("Evade successful.");
+        let defenseSuccess = false;
+        if (this.getCurrentNumDefends() <= 1 && this.getChanceToDefend() >= Math.random()) {
             member.showFloatingAction(this.getName());
-            return true;
+            defenseSuccess = true;
         }
-        log("Evade failed.");
-        return false;
+        
+
+        if (defenseSuccess) {
+            GameSounds.playBlock();
+        }
+        this.currentNumDefends++;
+        log("Evade has been used " + this.currentNumDefends + " times.");
+        return defenseSuccess;
     }
 
     needsTarget(): boolean {
@@ -48,8 +54,20 @@ export class Evade extends CardType {
         return "evade";
     }
 
+    getChanceToDefend(): number {
+        return this.chanceToDefend;
+    }
+
+    getNumDefends(): number {
+        return this.numDefends;
+    }
+
+    getCurrentNumDefends(): number {
+        return this.currentNumDefends;
+    }
+
     getDescription(): string {
-        const chancePercentage = (Evade.chanceToDefend * 100).toFixed(0); 
-        return `Evade 1 attack. ${chancePercentage}% effective.`;
+        const niceChanceToDefend = this.getNicePercentage(this.getChanceToDefend());
+        return `Evade ${this.getNumDefends()}. ${niceChanceToDefend}% effective.`;
     }
 }

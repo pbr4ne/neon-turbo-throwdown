@@ -46,11 +46,13 @@ export class Catch extends CardType {
 
             defenseSuccess = true;
         }
-        log("Catch has been used " + this.currentNumDefends + " times.");
 
         if (defenseSuccess) {
             GameSounds.playBlock();
         }
+
+        this.currentNumDefends++;
+        log("Catch has been used " + this.currentNumDefends + " times.");
         return defenseSuccess;
     }
 
