@@ -8,7 +8,7 @@ import Phaser from "phaser";
 import { Coach } from "../throwdown/Coach";
 import Boss from "../prefabs/Boss";
 import Player from "../prefabs/Player";
-import GameoverPrefab from "../prefabs/GameoverPrefab";
+import GameStatePopup from "./GameStatePopup";
 import Game from '../scenes/Game';
 import { GameSteps } from '../throwdown/GameSteps';
 import { Library } from "../throwdown/Library";
@@ -66,7 +66,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
     private pointerImage2: Phaser.GameObjects.Image | null = null;
     private pointerImage3: Phaser.GameObjects.Image | null = null;
 
-	private gameOverPrefab!: GameoverPrefab;
+	private gameStatePopup!: GameStatePopup;
 
 	render() {
 
@@ -234,7 +234,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
     }
 
     destroy() {
-        this.gameOverPrefab?.destroy();
+        //this.gameStatePopup?.destroy();
         super.destroy();
     }
 	showThrowdown() {
@@ -258,7 +258,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
         this.cardSlot4.setVisible(true);
         this.cardSlot5.setVisible(true);
 
-        this.gameOverPrefab?.setVisible(false);
+        this.gameStatePopup?.setVisible(false);
     }
 
     setStep(step: number) {
@@ -271,6 +271,9 @@ export default class Throwdown extends Phaser.GameObjects.Container {
     }
 
 	startGameLoop() {
+        this.gameStatePopup = new GameStatePopup(this.scene, "THROWDOWN!");
+        this.gameStatePopup.setVisible(true);
+        this.scene.add.existing(this.gameStatePopup);
         this.currentStep = 0;
         this.nextStep();
     }
@@ -412,9 +415,9 @@ export default class Throwdown extends Phaser.GameObjects.Container {
             log("Game over");
 
             Library.incrementNumRuns();
-            this.gameOverPrefab = new GameoverPrefab(this.scene, this.coach.getLosePhrase());
-            this.gameOverPrefab.setVisible(true);
-            this.scene.add.existing(this.gameOverPrefab);
+            this.gameStatePopup = new GameStatePopup(this.scene, this.coach.getLosePhrase());
+            this.gameStatePopup.setVisible(true);
+            this.scene.add.existing(this.gameStatePopup);
             GameSounds.playLose();
 
 		    this.scene.events.emit("scene-awake");
@@ -424,9 +427,9 @@ export default class Throwdown extends Phaser.GameObjects.Container {
 
             log("You win!");
 
-            this.gameOverPrefab = new GameoverPrefab(this.scene, this.coach.getWinPhrase());
-            this.gameOverPrefab.setVisible(true);
-            this.scene.add.existing(this.gameOverPrefab);
+            this.gameStatePopup = new GameStatePopup(this.scene, this.coach.getWinPhrase());
+            this.gameStatePopup.setVisible(true);
+            this.scene.add.existing(this.gameStatePopup);
             GameSounds.playWin();
 
 		    this.scene.events.emit("scene-awake");
