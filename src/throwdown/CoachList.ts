@@ -2,6 +2,7 @@ import { Coach } from "./Coach";
 import { log } from "../utilities/GameUtils";
 import { CardFactory } from "../cards/CardFactory";
 import { CardKeys } from "../cards/CardKeys";
+import Card from "~/prefabs/Card";
 
 export class CoachList {
 
@@ -58,7 +59,8 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.BLOCK),
             CardFactory.createCardType(CardKeys.BETTER_BLOCK),
             CardFactory.createCardType(CardKeys.CATCH),
-            CardFactory.createCardType(CardKeys.BIGG_BALLS)
+            CardFactory.createCardType(CardKeys.BIGG_BALLS),
+            CardFactory.createCardType(CardKeys.BIGG_BALLS),
         ]);
 
         this.tycoon.setBaseCards([
@@ -72,6 +74,7 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.THROW),
             CardFactory.createCardType(CardKeys.THROW),
             CardFactory.createCardType(CardKeys.CATCH),
+            CardFactory.createCardType(CardKeys.SUPPLY_AND_DEMAND),
             CardFactory.createCardType(CardKeys.SUPPLY_AND_DEMAND),
         ]);
 
@@ -90,6 +93,8 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.DOUBLE_BLOCK),
             CardFactory.createCardType(CardKeys.TURBO_EVADE),
             CardFactory.createCardType(CardKeys.TURBO_CATCH),
+            CardFactory.createCardType(CardKeys.WATERFALL),
+            CardFactory.createCardType(CardKeys.WATERFALL),
         ]);
 
         this.sgtsteve.setBaseCards([
