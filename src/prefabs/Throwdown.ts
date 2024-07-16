@@ -71,7 +71,17 @@ export default class Throwdown extends Phaser.GameObjects.Container {
 	render() {
 
 		this.scoreImage = this.scene.add.image(80, 110, "score");
-		this.forfeitImage = this.scene.add.image(77, 243, "forfeit");
+		this.forfeitImage = this.scene.add.image(77, 243, "forfeit")
+            .setInteractive({ useHandCursor: true })
+            .on('pointerover', () => {
+                this.scene.input.setDefaultCursor('pointer');
+            })
+            .on('pointerout', () => {
+                this.scene.input.setDefaultCursor('default');
+            })
+            .on('pointerdown', () => {
+                this.scene.scene.start('Welcome');
+            });
 
 		this.coachCornerImage = this.scene.add.image(1625, 193, "coach-corner");
 		this.difficultyImage = this.scene.add.image(1747, 411, "difficulty-" + this.coach.getDifficulty() );
