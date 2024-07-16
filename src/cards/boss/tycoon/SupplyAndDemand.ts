@@ -37,6 +37,7 @@ export class SupplyAndDemand extends TycoonCard {
             target.reduceHP(this.getHealthSteal(), member);
             member.showFloatingAction(`+${this.getHealthSteal().toString()}`, "#00ff00", 1);
             member.increaseHP(this.getHealthSteal());
+            GameSounds.playHeal();
             offenseSuccess = true;
         }
 
@@ -60,7 +61,7 @@ export class SupplyAndDemand extends TycoonCard {
     }
 
     getDescription(): string {
-        return "tbd";
+        return "Steal 1 health from target.";
     }
 
     getHealthSteal(): number {
