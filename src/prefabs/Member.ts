@@ -19,9 +19,11 @@ import { IncreaseHP } from "../trophies/member/IncreaseHP";
 import { SeeCards1 } from "../trophies/member/SeeCards1";
 import { SeeCards2 } from "../trophies/member/SeeCards2";
 import { SeeCards3 } from "../trophies/member/SeeCards3";
+import { SeeCards4 } from "../trophies/member/SeeCards4";
 import { SeeTargets1 } from "../trophies/member/SeeTargets1";
 import { SeeTargets2 } from "../trophies/member/SeeTargets2";
 import { SeeTargets3 } from "../trophies/member/SeeTargets3";
+import { SeeTargets4 } from "../trophies/member/SeeTargets4";
 import Player from "./Player";
 /* END-USER-IMPORTS */
 
@@ -176,13 +178,15 @@ export default class Member extends Phaser.GameObjects.Container {
         if (!boss) {
             this.drawTargetArc(target, boss);
         } else {
-            if (boss.getCoach().getDifficulty() === 1) {
+            if (boss.getCoach().getDifficulty() === 0) {
                 this.drawTargetArc(target, boss);
-            } else if (boss.getCoach().getDifficulty() === 2 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeTargets1)) {
+            } else if (boss.getCoach().getDifficulty() === 1 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeTargets1)) {
                 this.drawTargetArc(target, boss);
-            } else if (boss.getCoach().getDifficulty() === 3 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeTargets2)) {
+            } else if (boss.getCoach().getDifficulty() === 2 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeTargets2)) {
                 this.drawTargetArc(target, boss);
-            } else if (boss.getCoach().getDifficulty() === 4 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeTargets3)) {
+            } else if (boss.getCoach().getDifficulty() === 3 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeTargets3)) {
+                this.drawTargetArc(target, boss);
+            } else if (boss.getCoach().getDifficulty() === 4 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeTargets4)) {
                 this.drawTargetArc(target, boss);
             }
             return;
@@ -255,13 +259,15 @@ export default class Member extends Phaser.GameObjects.Container {
         
         if (boss != null) {
             let visibleText = "???";
-            if (boss.getCoach().getDifficulty() === 1) {
+            if (boss.getCoach().getDifficulty() === 0) {
                 visibleText = card.cardType.getName();
-            } else if (boss.getCoach().getDifficulty() === 2 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeCards1)) {
+            } else if (boss.getCoach().getDifficulty() === 1 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeCards1)) {
                 visibleText = card.cardType.getName();
-            } else if (boss.getCoach().getDifficulty() === 3 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeCards2)) {
+            } else if (boss.getCoach().getDifficulty() === 2 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeCards2)) {
                 visibleText = card.cardType.getName();
-            } else if (boss.getCoach().getDifficulty() === 4 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeCards3)) {
+            } else if (boss.getCoach().getDifficulty() === 3 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeCards3)) {
+                visibleText = card.cardType.getName();
+            } else if (boss.getCoach().getDifficulty() === 4 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeCards4)) {
                 visibleText = card.cardType.getName();
             }
             this.assignedText?.setText(visibleText);
