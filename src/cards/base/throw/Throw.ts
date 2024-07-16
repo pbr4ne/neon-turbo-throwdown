@@ -9,7 +9,7 @@ export class Throw extends CardType {
     protected offenseDamage: number = 1;
     protected numTargets: number = 1;
 
-    constructor(key: CardKeys = CardKeys.THROW, upgradeKey: CardKeys | null = CardKeys.TURBO_THROW) {
+    constructor(key: CardKeys = CardKeys.THROW_1_THROW, upgradeKey: CardKeys | null = CardKeys.THROW_2_TURBO_THROW) {
         super(key, upgradeKey);
     }
 

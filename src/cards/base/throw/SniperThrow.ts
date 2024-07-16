@@ -4,7 +4,7 @@ import { RiRicochet } from "./RiRicochet";
 export class SniperThrow extends RiRicochet {
     protected chanceToOffend : number = 0.90;
 
-    constructor(key: CardKeys = CardKeys.SNIPER_THROW, upgradeKey: CardKeys | null = null) {
+    constructor(key: CardKeys = CardKeys.THROW_6_SNIPER_THROW, upgradeKey: CardKeys | null = null) {
         super(key, upgradeKey);
     }
 

@@ -11,7 +11,7 @@ export class Block extends CardType {
     protected currentNumDefends: number = 1;
     protected numDefends = 1;
 
-    constructor(key: CardKeys = CardKeys.BLOCK, upgradeKey: CardKeys | null = CardKeys.BETTER_BLOCK) {
+    constructor(key: CardKeys = CardKeys.BLOCK_1_BLOCK, upgradeKey: CardKeys | null = CardKeys.BLOCK_2_BETTER_BLOCK) {
         super(key, upgradeKey);
     }
 

@@ -4,7 +4,7 @@ import { Ricochet } from "./Ricochet";
 export class UltraTurboThrow extends Ricochet {
     protected offenseDamage: number = 3;
 
-    constructor(key: CardKeys = CardKeys.ULTRA_TURBO_THROW, upgradeKey: CardKeys | null = CardKeys.RI_RICOCHET) {
+    constructor(key: CardKeys = CardKeys.THROW_4_ULTRA_TURBO_THROW, upgradeKey: CardKeys | null = CardKeys.THROW_5_RI_RICOCHET) {
         super(key, upgradeKey);
     }
 

@@ -14,7 +14,7 @@ export class Catch extends CardType {
     protected reboundTargets: number = 1;
     protected numDefends = 1;
 
-    constructor(key: CardKeys = CardKeys.CATCH, upgradeKey: CardKeys | null = CardKeys.TURBO_CATCH) {
+    constructor(key: CardKeys = CardKeys.CATCH_1_CATCH, upgradeKey: CardKeys | null = CardKeys.CATCH_2_TURBO_CATCH) {
         super(key, upgradeKey);
     }
 

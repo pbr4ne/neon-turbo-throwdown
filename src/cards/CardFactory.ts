@@ -85,30 +85,30 @@ export class CardFactory {
         //base cards
 
         //throw
-        this.registerCardType(CardKeys.THROW, Throw);
-        this.registerCardType(CardKeys.TURBO_THROW, TurboThrow);
-        this.registerCardType(CardKeys.RICOCHET, Ricochet);
-        this.registerCardType(CardKeys.ULTRA_TURBO_THROW, UltraTurboThrow);
-        this.registerCardType(CardKeys.RI_RICOCHET, RiRicochet);
-        this.registerCardType(CardKeys.SNIPER_THROW, SniperThrow);
+        this.registerCardType(CardKeys.THROW_1_THROW, Throw);
+        this.registerCardType(CardKeys.THROW_2_TURBO_THROW, TurboThrow);
+        this.registerCardType(CardKeys.THROW_3_RICOCHET, Ricochet);
+        this.registerCardType(CardKeys.THROW_4_ULTRA_TURBO_THROW, UltraTurboThrow);
+        this.registerCardType(CardKeys.THROW_5_RI_RICOCHET, RiRicochet);
+        this.registerCardType(CardKeys.THROW_6_SNIPER_THROW, SniperThrow);
         
         //block
-        this.registerCardType(CardKeys.BLOCK, Block);
-        this.registerCardType(CardKeys.BETTER_BLOCK, BetterBlock);
-        this.registerCardType(CardKeys.TURBO_BLOCK, TurboBlock);
-        this.registerCardType(CardKeys.BEST_BLOCK, BestBlock);
-        this.registerCardType(CardKeys.DOUBLE_BLOCK, DoubleBlock);
+        this.registerCardType(CardKeys.BLOCK_1_BLOCK, Block);
+        this.registerCardType(CardKeys.BLOCK_2_BETTER_BLOCK, BetterBlock);
+        this.registerCardType(CardKeys.BLOCK_3_TURBO_BLOCK, TurboBlock);
+        this.registerCardType(CardKeys.BLOCK_4_BEST_BLOCK, BestBlock);
+        this.registerCardType(CardKeys.BLOCK_5_DOUBLE_BLOCK, DoubleBlock);
 
         //evade
-        this.registerCardType(CardKeys.EVADE, Evade);
-        this.registerCardType(CardKeys.DOUBLE_EVADE, DoubleEvade);
-        this.registerCardType(CardKeys.TURBO_EVADE, TurboEvade);
-        this.registerCardType(CardKeys.TRIPLE_EVADE, TripleEvade);
+        this.registerCardType(CardKeys.EVADE_1_EVADE, Evade);
+        this.registerCardType(CardKeys.EVADE_2_DOUBLE_EVADE, DoubleEvade);
+        this.registerCardType(CardKeys.EVADE_3_TURBO_EVADE, TurboEvade);
+        this.registerCardType(CardKeys.EVADE_4_TRIPLE_EVADE, TripleEvade);
         
         //catch
-        this.registerCardType(CardKeys.CATCH, Catch);
-        this.registerCardType(CardKeys.TURBO_CATCH, TurboCatch);
-        this.registerCardType(CardKeys.BIG_HANDS, BigHands);
+        this.registerCardType(CardKeys.CATCH_1_CATCH, Catch);
+        this.registerCardType(CardKeys.CATCH_2_TURBO_CATCH, TurboCatch);
+        this.registerCardType(CardKeys.CATCH_3_BIG_HANDS, BigHands);
 
         //sporticus
         this.registerCardType(CardKeys.BIGG_BALLS, BiggBalls);

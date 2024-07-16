@@ -2,30 +2,30 @@ export enum CardKeys {
     //base cards
     
     //throw
-    THROW = "throw",
-    TURBO_THROW = "turbo-throw",
-    RICOCHET = "ricochet",
-    ULTRA_TURBO_THROW = "ultra-turbo-throw",
-    RI_RICOCHET = "ri-ricochet",
-    SNIPER_THROW = "sniper-throw",
+    THROW_1_THROW = "throw",
+    THROW_2_TURBO_THROW = "turbo-throw",
+    THROW_3_RICOCHET = "ricochet",
+    THROW_4_ULTRA_TURBO_THROW = "ultra-turbo-throw",
+    THROW_5_RI_RICOCHET = "ri-ricochet",
+    THROW_6_SNIPER_THROW = "sniper-throw",
 
     //block
-    BLOCK = "block",
-    BETTER_BLOCK = "better-block",
-    TURBO_BLOCK = "turbo-block",
-    BEST_BLOCK = "best-block",
-    DOUBLE_BLOCK = "double-block",
+    BLOCK_1_BLOCK = "block",
+    BLOCK_2_BETTER_BLOCK = "better-block",
+    BLOCK_3_TURBO_BLOCK = "turbo-block",
+    BLOCK_4_BEST_BLOCK = "best-block",
+    BLOCK_5_DOUBLE_BLOCK = "double-block",
 
     //evade
-    EVADE = "evade",
-    DOUBLE_EVADE = "double-evade",
-    TURBO_EVADE = "turbo-evade",
-    TRIPLE_EVADE = "triple-evade",
+    EVADE_1_EVADE = "evade",
+    EVADE_2_DOUBLE_EVADE = "double-evade",
+    EVADE_3_TURBO_EVADE = "turbo-evade",
+    EVADE_4_TRIPLE_EVADE = "triple-evade",
 
     //catch
-    CATCH = "catch",
-    TURBO_CATCH = "turbo-catch",
-    BIG_HANDS = "big-hands",
+    CATCH_1_CATCH = "catch",
+    CATCH_2_TURBO_CATCH = "turbo-catch",
+    CATCH_3_BIG_HANDS = "big-hands",
 
     //sporticus
     BIGG_BALLS = "bigg-balls",
