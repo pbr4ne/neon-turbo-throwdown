@@ -2,7 +2,7 @@ import { Coach } from "./Coach";
 import { log } from "../utilities/GameUtils";
 import { CardFactory } from "../cards/CardFactory";
 import { CardKeys } from "../cards/CardKeys";
-import Card from "~/prefabs/Card";
+import { IncreaseHP } from "../trophies/member/IncreaseHP";
 
 export class CoachList {
 
@@ -48,6 +48,10 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.CATCH)
         ]);
 
+        this.primo.setTrophyTypes([
+            new IncreaseHP(),
+        ]);
+
         this.sporticus.setBaseCards([
             CardFactory.createCardType(CardKeys.THROW),
             CardFactory.createCardType(CardKeys.THROW),
@@ -61,6 +65,10 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.CATCH),
             CardFactory.createCardType(CardKeys.BIGG_BALLS),
             CardFactory.createCardType(CardKeys.BIGG_BALLS),
+        ]);
+
+        this.sporticus.setTrophyTypes([
+            new IncreaseHP(),
         ]);
 
         this.tycoon.setBaseCards([
@@ -79,7 +87,7 @@ export class CoachList {
         ]);
 
         this.tycoon.setTrophyTypes([
-            
+            new IncreaseHP(),
         ]);
 
         this.office.setBaseCards([
@@ -97,6 +105,10 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.WATERFALL),
         ]);
 
+        this.office.setTrophyTypes([
+            new IncreaseHP(),
+        ]);
+
         this.sgtsteve.setBaseCards([
             CardFactory.createCardType(CardKeys.ULTRA_TURBO_THROW),
             CardFactory.createCardType(CardKeys.BEST_BLOCK),
@@ -112,6 +124,10 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.SOLDIER_ON),
         ]);
 
+        this.sgtsteve.setTrophyTypes([
+            new IncreaseHP(),
+        ]);
+
         this.betsy.setBaseCards([
             CardFactory.createCardType(CardKeys.RI_RICOCHET),
             CardFactory.createCardType(CardKeys.RI_RICOCHET),
@@ -123,6 +139,10 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.RICOCHET),
             CardFactory.createCardType(CardKeys.TURBO_EVADE),
             CardFactory.createCardType(CardKeys.TURBO_EVADE),
+        ]);
+
+        this.betsy.setTrophyTypes([
+            new IncreaseHP(),
         ]);
 
         this.coree.setBaseCards([
@@ -138,6 +158,10 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.TURBO_CATCH),
         ]);
 
+        this.coree.setTrophyTypes([
+            new IncreaseHP(),
+        ]);
+
         this.turbonerd.setBaseCards([
             CardFactory.createCardType(CardKeys.BEST_BLOCK),
             CardFactory.createCardType(CardKeys.SNIPER_THROW),
@@ -149,6 +173,10 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.TRIPLE_EVADE),
             CardFactory.createCardType(CardKeys.RI_RICOCHET),
             CardFactory.createCardType(CardKeys.BIG_HANDS),
+        ]);
+
+        this.turbonerd.setTrophyTypes([
+            new IncreaseHP(),
         ]);
 
         this.shadowken.setBaseCards([
@@ -164,6 +192,10 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.BIG_HANDS),
         ]);
 
+        this.shadowken.setTrophyTypes([
+            new IncreaseHP(),
+        ]);
+
         this.boss10.setBaseCards([
             CardFactory.createCardType(CardKeys.SNIPER_THROW),
             CardFactory.createCardType(CardKeys.SNIPER_THROW),
@@ -175,6 +207,10 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.DOUBLE_BLOCK),
             CardFactory.createCardType(CardKeys.DOUBLE_BLOCK),
             CardFactory.createCardType(CardKeys.BIG_HANDS),
+        ]);
+
+        this.boss10.setTrophyTypes([
+            new IncreaseHP(),
         ]);
     }
 
