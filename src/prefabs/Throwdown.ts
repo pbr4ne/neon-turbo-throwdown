@@ -25,6 +25,8 @@ export default class Throwdown extends Phaser.GameObjects.Container {
 		this.boss.opponent = this.player;
 
         this.render();
+
+        this.startPointerAnimation();
 	}
 
 	public currentStep: number = 0;
@@ -143,6 +145,35 @@ export default class Throwdown extends Phaser.GameObjects.Container {
 
         this.startGameLoop();
 	}
+
+    startPointerAnimation() {
+        const pointers = [this.pointerImage, this.pointerImage2, this.pointerImage3];
+        pointers.forEach((pointer, index) => {
+            if (pointer) {
+                this.scene.time.addEvent({
+                    delay: 10000,
+                    callback: () => {
+                        this.scene.tweens.add({
+                            targets: pointer,
+                            alpha: { from: 1, to: 0 },
+                            duration: 300,
+                            ease: 'Power1',
+                            yoyo: true,
+                            repeat: 0,
+                            onComplete: () => {
+                                this.scene.time.addEvent({
+                                    delay: 10000,
+                                    callback: () => {
+                                        this.startPointerAnimation();
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    }
 
 	hideAllGymStuff() {
         this.scoreImage.setVisible(false);
