@@ -4,7 +4,7 @@ import Phaser from "phaser";
 /* START-USER-IMPORTS */
 import { Coach } from "../throwdown/Coach";
 import { CoachList } from "../throwdown/CoachList";
-import DialogBox from "../dialogue/DialogBox";
+import DialogueBox from "../dialogue/DialogueBox";
 import Player from "../prefabs/Player";
 import { DialogueStorage } from "../dialogue/DialogueStorage";
 import RunUpgrade from "../prefabs/RunUpgrade";
@@ -34,7 +34,7 @@ export default class Game extends Phaser.Scene {
 	/* START-USER-CODE */
 	public player!: Player;
 	private dialogLayer!: Phaser.GameObjects.Layer;
-    private dialogBox!: DialogBox;
+    private dialogBox!: DialogueBox;
     private runUpgrade!: RunUpgrade;
     private permUpgrade!: PermUpgrade;
     private currentCoach: Coach = CoachList.primo;
@@ -93,7 +93,7 @@ export default class Game extends Phaser.Scene {
     }
 
     doDialogue(coach: Coach, type: string) {
-        const dialog = new DialogBox(this, 960, 542, coach, type);
+        const dialog = new DialogueBox(this, 960, 542, coach, type);
 
         this.dialogBox = this.dialogLayer.add(dialog);
     }

@@ -13,7 +13,7 @@ import { log } from "../utilities/GameUtils";
 import { GameSounds } from "../utilities/GameSounds";
 /* END-USER-IMPORTS */
 
-export default class DialogBox extends Phaser.GameObjects.Container {
+export default class DialogueBox extends Phaser.GameObjects.Container {
 
 	constructor(scene: Phaser.Scene, x: number, y: number, coach: Coach, dialogueType: string) {
 		super(scene, x ?? 960, y ?? 542);
@@ -87,6 +87,8 @@ export default class DialogBox extends Phaser.GameObjects.Container {
         // Logic to advance the dialogue
         var next = this.dialogueConversation.nextStep();
         var step = this.dialogueConversation.getCurrentStep();
+
+		GameSounds.playButton();
 
 		if (!next) {
 			(this.scene.scene.get('Game') as Game).finishDialogue(this.dialogueType);

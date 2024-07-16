@@ -8,6 +8,7 @@ import Game from "../scenes/Game";
 import { CoachList } from "../throwdown/CoachList";
 import { log } from "../utilities/GameUtils";
 import Upgrade from "./Upgrade";
+import { GameSounds } from "../utilities/GameSounds";
 
 export default class RunUpgrade extends Phaser.GameObjects.Container {
 
@@ -105,6 +106,7 @@ export default class RunUpgrade extends Phaser.GameObjects.Container {
 
 	private handleCardSelection(genericCard: GenericCard) {
 		log(`Selected card: ${genericCard.toString()}`);
+		GameSounds.playCard();
 		if (this.numDraws > 3) {
 			(this.scene.scene.get('Game') as Game).finishRunUpgrade()
 			return;

@@ -67,7 +67,7 @@ export class GameSounds {
 
     static playCard() {
         if (GameSounds.effectsEnabled && GameSounds.cardSound) {
-            GameSounds.cardSound.play({ volume: 0.2 });
+            GameSounds.cardSound.play({ volume: 1.2 });
         }
     }
 

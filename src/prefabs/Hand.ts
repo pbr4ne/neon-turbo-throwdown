@@ -8,6 +8,7 @@ import Game from "../scenes/Game";
 import Member from "./Member";
 import { GameSteps } from '../throwdown/GameSteps';
 import { log } from "../utilities/GameUtils";
+import { GameSounds } from "../utilities/GameSounds";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -65,6 +66,7 @@ export default class Hand {
 
     handleCardClick(card: Card, members: Member[]) {
         log(`Clicking on ${card.toString()}`);
+        
         var currentStep = (this.scene.scene.get('Game') as Game).throwdown.getCurrentStep();
         if (currentStep !== GameSteps.SELECT_CARD && currentStep !== GameSteps.SELECT_PLAYER_MEMBER) {
             log("Not in the right step to select a card");
@@ -80,6 +82,8 @@ export default class Hand {
             log("Card is already assigned to a member");
             return;
         }
+
+        GameSounds.playCard();
 
         card.setOrder(Card.getStaticOrder());
         //card.incrementOrder();

@@ -13,6 +13,7 @@ import { GameSteps } from '../throwdown/GameSteps';
 import Throwdown from "./Throwdown";
 import Player from "./Player";
 import { log } from "../utilities/GameUtils";
+import { GameSounds } from "../utilities/GameSounds";
 /* END-USER-IMPORTS */
 
 export default abstract class Team extends Phaser.GameObjects.Container {
@@ -81,6 +82,7 @@ export default abstract class Team extends Phaser.GameObjects.Container {
             if (topCard) {
                 topCard.changeState(this instanceof Player ? "playerHand" : "bossHand");
 
+                GameSounds.playCard();
                 this.hand.addCard(topCard);
                 topCard.off("pointerdown");
                 this.deck.updateTopCardInteraction();

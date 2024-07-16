@@ -11,7 +11,8 @@ import { CoachList } from "../throwdown/CoachList";
 import Upgrade from "./Upgrade";
 import { log } from "../utilities/GameUtils";
 import { StorageManager } from "../utilities/StorageManager";
-import { CardKeys } from "~/cards/CardKeys";
+import { CardKeys } from "../cards/CardKeys";
+import { GameSounds } from "../utilities/GameSounds";
 
 export default class PermUpgrade extends Phaser.GameObjects.Container {
 
@@ -137,6 +138,7 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
     }
 
     private async handleCardSelection(selectedItem: Trophy | Upgrade) {
+        GameSounds.playCard();
         if (selectedItem instanceof Trophy) {
             console.log("Trophy selected");
             Library.addTrophyType(selectedItem.trophyType);
