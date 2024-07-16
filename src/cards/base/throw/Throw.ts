@@ -14,13 +14,15 @@ export class Throw extends CardType {
         super(key, upgradeKey, ThrowdownPhase.ATTACK);
     }
 
-    offense(member: Member, target: Member, team: Team, opponentTeam: Team): boolean {
+    attack(member: Member, target: Member | null, team: Team, opponentTeam: Team): boolean {
 
         let anyOffenseSuccess = false;
         let membersToTarget = this.getRandomAliveMembers(opponentTeam, target, this.getNumTargets() - 1);
 
-        if(this.attackMember(member, target, team, opponentTeam, true)) {
-            anyOffenseSuccess = true;
+        if (target) {
+            if(this.attackMember(member, target, team, opponentTeam, true)) {
+                anyOffenseSuccess = true;
+            }
         }
         
         membersToTarget.forEach((enemyMember) => {

@@ -16,21 +16,23 @@ export class SupplyAndDemand extends TycoonCard {
         super(CardKeys.SUPPLY_AND_DEMAND, null, ThrowdownPhase.ATTACK);
     }
 
-    offense(member: Member, target: Member, team: Team, opponentTeam: Team): boolean {
+    attack(member: Member, target: Member | null, team: Team, opponentTeam: Team): boolean {
         let offenseSuccess = false;
-        member.showFloatingAction(this.getName());
-        const targetCard = target.getAssignedCard();
-        let defenseSuccess = false;
-        if (targetCard != null) {
-            //see if they successfully defend
-            defenseSuccess = targetCard.getCardType().defense(target, member, opponentTeam, team, true);
-        }
-        if (!defenseSuccess) {
-            //reduce their HP if they failed to defend
-            target.reduceHP(this.getHealthSteal());
-            member.increaseHP(this.getHealthSteal());
-            GameSounds.playHeal();
-            offenseSuccess = true;
+        if (target) {
+            member.showFloatingAction(this.getName());
+            const targetCard = target.getAssignedCard();
+            let defenseSuccess = false;
+            if (targetCard != null) {
+                //see if they successfully defend
+                defenseSuccess = targetCard.getCardType().defense(target, member, opponentTeam, team, true);
+            }
+            if (!defenseSuccess) {
+                //reduce their HP if they failed to defend
+                target.reduceHP(this.getHealthSteal());
+                member.increaseHP(this.getHealthSteal());
+                GameSounds.playHeal();
+                offenseSuccess = true;
+            }
         }
 
         return offenseSuccess;

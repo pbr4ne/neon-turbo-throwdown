@@ -19,7 +19,7 @@ export class DidIDoThat extends TurbonerdCard {
         super(CardKeys.DID_I_DO_THAT, null, ThrowdownPhase.ATTACK);
     }
 
-    offense(member: Member, target: Member, team: Team, opponentTeam: Team): boolean {
+    attack(member: Member, target: Member | null, team: Team, opponentTeam: Team): boolean {
         let anyOffenseSuccess = false;
         let membersToTarget = this.getRandomAliveMembers(opponentTeam, null, this.getRandomInteger(this.getNumTargetsMin(), this.getNumTargetsMax()));
 

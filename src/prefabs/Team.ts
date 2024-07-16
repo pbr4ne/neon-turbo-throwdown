@@ -153,11 +153,12 @@ export default abstract class Team extends Phaser.GameObjects.Container {
     async executeSpecialPhase() {
         for (const member of this.members) {
             const card = member.getAssignedCard();
+            const target = member.getIntendedTarget();
             if (card != null) {
                 const cardType = card.getCardType();
                 if (cardType.getPhase() == ThrowdownPhase.SPECIAL) {
                     await this.pause(500); 
-                    cardType.special(member, this, this.opponent); 
+                    cardType.special(member, target, this, this.opponent); 
                     log(`SPECIAL: ${member}`);
                 }
             }
@@ -168,11 +169,11 @@ export default abstract class Team extends Phaser.GameObjects.Container {
         for (const member of this.members) {
             const card = member.getAssignedCard();
             const target = member.getIntendedTarget();
-            if (target !== null && card != null) {
+            if (card != null) {
                 const cardType = card.getCardType();
                 if (cardType.getPhase() == ThrowdownPhase.ATTACK) {
                     await this.pause(500); 
-                    card.getCardType().offense(member, target, this, this.opponent); 
+                    card.getCardType().attack(member, target, this, this.opponent); 
                     log(`OFFENSE: ${member} attacks ${target}`);
                     member.setIntendedTarget(null);
                 }

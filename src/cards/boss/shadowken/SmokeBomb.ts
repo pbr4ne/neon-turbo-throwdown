@@ -15,7 +15,7 @@ export class SmokeBomb extends ShadowkenCard {
         super(CardKeys.SMOKE_BOMB, null, ThrowdownPhase.SPECIAL);
     }
 
-    special(member: Member, team: Team, opponentTeam: Team): boolean {
+    special(member: Member, target: Member | null, team: Team, opponentTeam: Team): boolean {
         team.getModifiers().setTurnEvadeChanceOverride(this.getEvadeChance());
         
         member.showFloatingAction(this.getName());

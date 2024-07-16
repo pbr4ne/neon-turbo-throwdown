@@ -17,7 +17,7 @@ export class F7 extends CoreeCard {
         super(CardKeys.F7, null, ThrowdownPhase.SPECIAL);
     }
 
-    special(member: Member, team: Team, opponentTeam: Team): boolean {
+    special(member: Member, target: Member | null, team: Team, opponentTeam: Team): boolean {
         member.showFloatingAction(this.getName());
         this.getRandomDeadMembers(team, this.getNumToResurrect()).forEach((deadMember) => {
             deadMember.setHP(this.getHealthToResurrect());

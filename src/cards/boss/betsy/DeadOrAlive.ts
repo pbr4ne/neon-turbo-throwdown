@@ -17,11 +17,11 @@ export class DeadOrAlive extends BetsyCard {
         super(CardKeys.DEAD_OR_ALIVE, null, ThrowdownPhase.ATTACK);
     }
 
-    offense(member: Member, target: Member, team: Team, opponentTeam: Team): boolean {
+    attack(member: Member, target: Member | null, team: Team, opponentTeam: Team): boolean {
 
         let offenseSuccess = false;
         //check chance to hit
-        if (this.getChanceToSucceed() >= Math.random()) {
+        if (this.getChanceToSucceed() >= Math.random() && target) {
             member.showFloatingAction(this.getName());
             const targetCard = target.getAssignedCard();
             let defenseSuccess = false;

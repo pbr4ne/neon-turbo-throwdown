@@ -14,7 +14,7 @@ export class BehindTheCurtain extends Boss10Card {
         super(CardKeys.BEHIND_THE_CURTAIN, null, ThrowdownPhase.SPECIAL);
     }
 
-    special(member: Member, team: Team, opponentTeam: Team): boolean {
+    special(member: Member, target: Member | null, team: Team, opponentTeam: Team): boolean {
         team.getModifiers().setTurnEvadeDisable(true);
         
         member.showFloatingAction(this.getName());

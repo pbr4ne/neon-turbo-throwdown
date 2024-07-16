@@ -17,7 +17,7 @@ export class SoldierOn extends SgtSteveCard {
         super(CardKeys.SOLDIER_ON, null, ThrowdownPhase.SPECIAL);
     }
 
-    special(member: Member, team: Team, opponentTeam: Team): boolean {
+    special(member: Member, target: Member | null, team: Team, opponentTeam: Team): boolean {
         member.showFloatingAction(this.getName());
         //get a random integer between healthMin and healthMax
         const healthSteal = this.getRandomInteger(this.getHealthMin(), this.getHealthMax());

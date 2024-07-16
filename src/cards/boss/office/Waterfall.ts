@@ -16,7 +16,7 @@ export class Waterfall extends OfficeCard {
         super(CardKeys.WATERFALL, null, ThrowdownPhase.ATTACK);
     }
 
-    offense(member: Member, target: Member, team: Team, opponentTeam: Team): boolean {
+    attack(member: Member, target: Member | null, team: Team, opponentTeam: Team): boolean {
         let anyOffenseSuccess = false;
         let membersToTarget = this.getAllAliveMembers(opponentTeam);
 

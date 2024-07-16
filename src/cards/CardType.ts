@@ -5,6 +5,7 @@ import { CardFactory } from "./CardFactory";
 import { CardKeys } from "./CardKeys";
 import Player from "../prefabs/Player";
 import { ThrowdownPhase } from "../throwdown/ThrowdownPhase";
+import { log } from "../utilities/GameUtils";
 
 export abstract class CardType {
 
@@ -28,17 +29,20 @@ export abstract class CardType {
     }
 
     //should be overridden if the card has a special effect
-    special(member: Member, team: Team, opponentTeam: Team): boolean {
+    special(member: Member, target: Member | null, team: Team, opponentTeam: Team): boolean {
+        log("Special not implemented for " + this.getName());
         return false;
     }
 
     //should be overridden if the card has an attack
-    offense(member: Member, target: Member, team: Team, opponentTeam: Team): boolean {
+    attack(member: Member, target: Member | null, team: Team, opponentTeam: Team): boolean {
+        log("attack not implemented for " + this.getName());
         return false;
     }
 
     //should be overridden if the card has a defense
     defense(member: Member, attacker: Member, team: Team, opponentTeam: Team, canRetaliate: boolean): boolean {
+        log("defense not implemented for " + this.getName());
         return false;
     }
 
