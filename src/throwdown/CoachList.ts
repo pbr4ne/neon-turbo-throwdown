@@ -39,7 +39,7 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.THROW),
             CardFactory.createCardType(CardKeys.THROW),
             CardFactory.createCardType(CardKeys.THROW),
-            CardFactory.createCardType(CardKeys.EVADE),
+            CardFactory.createCardType(CardKeys.THROW),
             CardFactory.createCardType(CardKeys.EVADE),
             CardFactory.createCardType(CardKeys.EVADE),
             CardFactory.createCardType(CardKeys.BLOCK),
@@ -52,24 +52,24 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.THROW),
             CardFactory.createCardType(CardKeys.THROW),
             CardFactory.createCardType(CardKeys.THROW),
+            CardFactory.createCardType(CardKeys.TURBO_THROW),
             CardFactory.createCardType(CardKeys.EVADE),
-            CardFactory.createCardType(CardKeys.EVADE),
-            CardFactory.createCardType(CardKeys.EVADE),
+            CardFactory.createCardType(CardKeys.DOUBLE_EVADE),
             CardFactory.createCardType(CardKeys.BLOCK),
-            CardFactory.createCardType(CardKeys.BLOCK),
+            CardFactory.createCardType(CardKeys.BETTER_BLOCK),
             CardFactory.createCardType(CardKeys.CATCH)
         ]);
 
         this.russ.setBaseCards([
+            CardFactory.createCardType(CardKeys.TURBO_THROW),
+            CardFactory.createCardType(CardKeys.TURBO_THROW),
+            CardFactory.createCardType(CardKeys.TURBO_BLOCK),
+            CardFactory.createCardType(CardKeys.TURBO_BLOCK),
+            CardFactory.createCardType(CardKeys.TURBO_EVADE),
+            CardFactory.createCardType(CardKeys.TURBO_EVADE),
             CardFactory.createCardType(CardKeys.THROW),
             CardFactory.createCardType(CardKeys.THROW),
             CardFactory.createCardType(CardKeys.THROW),
-            CardFactory.createCardType(CardKeys.THROW),
-            CardFactory.createCardType(CardKeys.EVADE),
-            CardFactory.createCardType(CardKeys.EVADE),
-            CardFactory.createCardType(CardKeys.EVADE),
-            CardFactory.createCardType(CardKeys.BLOCK),
-            CardFactory.createCardType(CardKeys.BLOCK),
             CardFactory.createCardType(CardKeys.CATCH)
         ]);
 
@@ -79,93 +79,93 @@ export class CoachList {
 
         this.boss.setBaseCards([
             CardFactory.createCardType(CardKeys.THROW),
-            CardFactory.createCardType(CardKeys.THROW),
-            CardFactory.createCardType(CardKeys.THROW),
-            CardFactory.createCardType(CardKeys.THROW),
-            CardFactory.createCardType(CardKeys.EVADE),
-            CardFactory.createCardType(CardKeys.EVADE),
-            CardFactory.createCardType(CardKeys.EVADE),
-            CardFactory.createCardType(CardKeys.BLOCK),
-            CardFactory.createCardType(CardKeys.BLOCK),
-            CardFactory.createCardType(CardKeys.CATCH)
+            CardFactory.createCardType(CardKeys.TURBO_THROW),
+            CardFactory.createCardType(CardKeys.TURBO_THROW),
+            CardFactory.createCardType(CardKeys.RICOCHET),
+            CardFactory.createCardType(CardKeys.RICOCHET),
+            CardFactory.createCardType(CardKeys.BETTER_BLOCK),
+            CardFactory.createCardType(CardKeys.BETTER_BLOCK),
+            CardFactory.createCardType(CardKeys.DOUBLE_BLOCK),
+            CardFactory.createCardType(CardKeys.TURBO_EVADE),
+            CardFactory.createCardType(CardKeys.TURBO_CATCH)
         ]);
 
         this.steve.setBaseCards([
-            CardFactory.createCardType(CardKeys.THROW),
-            CardFactory.createCardType(CardKeys.THROW),
-            CardFactory.createCardType(CardKeys.THROW),
-            CardFactory.createCardType(CardKeys.THROW),
-            CardFactory.createCardType(CardKeys.EVADE),
-            CardFactory.createCardType(CardKeys.EVADE),
-            CardFactory.createCardType(CardKeys.EVADE),
-            CardFactory.createCardType(CardKeys.BLOCK),
-            CardFactory.createCardType(CardKeys.BLOCK),
-            CardFactory.createCardType(CardKeys.CATCH)
+            CardFactory.createCardType(CardKeys.ULTRA_TURBO_THROW),
+            CardFactory.createCardType(CardKeys.BEST_BLOCK),
+            CardFactory.createCardType(CardKeys.TRIPLE_EVADE),
+            CardFactory.createCardType(CardKeys.TURBO_THROW),
+            CardFactory.createCardType(CardKeys.TURBO_THROW),
+            CardFactory.createCardType(CardKeys.SNIPER_THROW),
+            CardFactory.createCardType(CardKeys.SNIPER_THROW),
+            CardFactory.createCardType(CardKeys.BETTER_BLOCK),
+            CardFactory.createCardType(CardKeys.TURBO_EVADE),
+            CardFactory.createCardType(CardKeys.TURBO_CATCH)
         ]);
 
         this.betsy.setBaseCards([
-            CardFactory.createCardType(CardKeys.THROW),
-            CardFactory.createCardType(CardKeys.THROW),
-            CardFactory.createCardType(CardKeys.THROW),
-            CardFactory.createCardType(CardKeys.THROW),
-            CardFactory.createCardType(CardKeys.EVADE),
-            CardFactory.createCardType(CardKeys.EVADE),
-            CardFactory.createCardType(CardKeys.EVADE),
-            CardFactory.createCardType(CardKeys.BLOCK),
-            CardFactory.createCardType(CardKeys.BLOCK),
-            CardFactory.createCardType(CardKeys.CATCH)
+            CardFactory.createCardType(CardKeys.RI_RICOCHET),
+            CardFactory.createCardType(CardKeys.RI_RICOCHET),
+            CardFactory.createCardType(CardKeys.ULTRA_TURBO_THROW),
+            CardFactory.createCardType(CardKeys.DOUBLE_BLOCK),
+            CardFactory.createCardType(CardKeys.DOUBLE_EVADE),
+            CardFactory.createCardType(CardKeys.BIG_HANDS),
+            CardFactory.createCardType(CardKeys.RICOCHET),
+            CardFactory.createCardType(CardKeys.RICOCHET),
+            CardFactory.createCardType(CardKeys.TURBO_EVADE),
+            CardFactory.createCardType(CardKeys.TURBO_EVADE)
         ]);
 
         this.coree.setBaseCards([
-            CardFactory.createCardType(CardKeys.THROW),
-            CardFactory.createCardType(CardKeys.THROW),
-            CardFactory.createCardType(CardKeys.THROW),
-            CardFactory.createCardType(CardKeys.THROW),
-            CardFactory.createCardType(CardKeys.EVADE),
-            CardFactory.createCardType(CardKeys.EVADE),
-            CardFactory.createCardType(CardKeys.EVADE),
-            CardFactory.createCardType(CardKeys.BLOCK),
-            CardFactory.createCardType(CardKeys.BLOCK),
-            CardFactory.createCardType(CardKeys.CATCH)
+            CardFactory.createCardType(CardKeys.ULTRA_TURBO_THROW),
+            CardFactory.createCardType(CardKeys.TURBO_BLOCK),
+            CardFactory.createCardType(CardKeys.TRIPLE_EVADE),
+            CardFactory.createCardType(CardKeys.RICOCHET),
+            CardFactory.createCardType(CardKeys.RICOCHET),
+            CardFactory.createCardType(CardKeys.BETTER_BLOCK),
+            CardFactory.createCardType(CardKeys.DOUBLE_EVADE),
+            CardFactory.createCardType(CardKeys.SNIPER_THROW),
+            CardFactory.createCardType(CardKeys.SNIPER_THROW),
+            CardFactory.createCardType(CardKeys.TURBO_CATCH)
         ]);
 
         this.turbo.setBaseCards([
-            CardFactory.createCardType(CardKeys.THROW),
-            CardFactory.createCardType(CardKeys.THROW),
-            CardFactory.createCardType(CardKeys.THROW),
-            CardFactory.createCardType(CardKeys.THROW),
-            CardFactory.createCardType(CardKeys.EVADE),
-            CardFactory.createCardType(CardKeys.EVADE),
-            CardFactory.createCardType(CardKeys.EVADE),
-            CardFactory.createCardType(CardKeys.BLOCK),
-            CardFactory.createCardType(CardKeys.BLOCK),
-            CardFactory.createCardType(CardKeys.CATCH)
+            CardFactory.createCardType(CardKeys.BEST_BLOCK),
+            CardFactory.createCardType(CardKeys.SNIPER_THROW),
+            CardFactory.createCardType(CardKeys.SNIPER_THROW),
+            CardFactory.createCardType(CardKeys.SNIPER_THROW),
+            CardFactory.createCardType(CardKeys.SNIPER_THROW),
+            CardFactory.createCardType(CardKeys.BEST_BLOCK),
+            CardFactory.createCardType(CardKeys.TRIPLE_EVADE),
+            CardFactory.createCardType(CardKeys.TRIPLE_EVADE),
+            CardFactory.createCardType(CardKeys.RI_RICOCHET),
+            CardFactory.createCardType(CardKeys.BIG_HANDS)
         ]);
 
         this.shadow.setBaseCards([
-            CardFactory.createCardType(CardKeys.THROW),
-            CardFactory.createCardType(CardKeys.THROW),
-            CardFactory.createCardType(CardKeys.THROW),
-            CardFactory.createCardType(CardKeys.THROW),
-            CardFactory.createCardType(CardKeys.EVADE),
-            CardFactory.createCardType(CardKeys.EVADE),
-            CardFactory.createCardType(CardKeys.EVADE),
-            CardFactory.createCardType(CardKeys.BLOCK),
-            CardFactory.createCardType(CardKeys.BLOCK),
-            CardFactory.createCardType(CardKeys.CATCH)
+            CardFactory.createCardType(CardKeys.SNIPER_THROW),
+            CardFactory.createCardType(CardKeys.DOUBLE_BLOCK),
+            CardFactory.createCardType(CardKeys.SNIPER_THROW),
+            CardFactory.createCardType(CardKeys.RI_RICOCHET),
+            CardFactory.createCardType(CardKeys.DOUBLE_BLOCK),
+            CardFactory.createCardType(CardKeys.BEST_BLOCK),
+            CardFactory.createCardType(CardKeys.TRIPLE_EVADE),
+            CardFactory.createCardType(CardKeys.TURBO_EVADE),
+            CardFactory.createCardType(CardKeys.RI_RICOCHET),
+            CardFactory.createCardType(CardKeys.BIG_HANDS)
         ]);
 
         this.boss10.setBaseCards([
-            CardFactory.createCardType(CardKeys.THROW),
-            CardFactory.createCardType(CardKeys.THROW),
-            CardFactory.createCardType(CardKeys.THROW),
-            CardFactory.createCardType(CardKeys.THROW),
-            CardFactory.createCardType(CardKeys.EVADE),
-            CardFactory.createCardType(CardKeys.EVADE),
-            CardFactory.createCardType(CardKeys.EVADE),
-            CardFactory.createCardType(CardKeys.BLOCK),
-            CardFactory.createCardType(CardKeys.BLOCK),
-            CardFactory.createCardType(CardKeys.CATCH)
+            CardFactory.createCardType(CardKeys.SNIPER_THROW),
+            CardFactory.createCardType(CardKeys.SNIPER_THROW),
+            CardFactory.createCardType(CardKeys.SNIPER_THROW),
+            CardFactory.createCardType(CardKeys.SNIPER_THROW),
+            CardFactory.createCardType(CardKeys.SNIPER_THROW),
+            CardFactory.createCardType(CardKeys.TRIPLE_EVADE),
+            CardFactory.createCardType(CardKeys.TRIPLE_EVADE),
+            CardFactory.createCardType(CardKeys.DOUBLE_BLOCK),
+            CardFactory.createCardType(CardKeys.DOUBLE_BLOCK),
+            CardFactory.createCardType(CardKeys.BIG_HANDS)
         ]);
     }
 
