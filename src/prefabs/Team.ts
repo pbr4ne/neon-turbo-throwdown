@@ -23,9 +23,9 @@ export default abstract class Team extends Phaser.GameObjects.Container {
 		/* START-USER-CTR-CODE */
 		this.visibleCards = visibleCards;
 		this.members = [];
-        this.deck = new Deck(scene);
-        this.discardPile = new Deck(scene);
-        this.hand = new Hand(scene, 5);
+        this.deck = new Deck(scene, visibleCards);
+        this.discardPile = new Deck(scene, false);
+        this.hand = new Hand(scene, 5, visibleCards);
       	/* END-USER-CTR-CODE */
 	}
 
@@ -123,7 +123,7 @@ export default abstract class Team extends Phaser.GameObjects.Container {
                 this.deck.addCard(freshCard);
             }
         }
-        this.deck.shuffle();
+        //this.deck.shuffle();
         //log the size of the deck
         log(`CURRENT ${this} DISCARD PILE SIZE AFTER RECOMBINE: ${this.discardPile.getCards().length}`);
         log(`CURRENT ${this} DECK SIZE AFTER RECOMBINE: ${this.deck.getCards().length}`);

@@ -14,10 +14,12 @@ import Game from "../scenes/Game";
 
 export default class Deck extends Phaser.GameObjects.Container {
     private cards: Card[];
+    private visibleCards: boolean;
 
-    constructor(scene: Phaser.Scene) {
+    constructor(scene: Phaser.Scene, visibleCards: boolean = false) {
         super(scene);
         this.cards = [];
+        this.visibleCards = visibleCards;
         this.scene.add.existing(this);
     }
 
@@ -54,6 +56,10 @@ export default class Deck extends Phaser.GameObjects.Container {
     }
 
     arrangeCardPositions(x: number, y: number) {
+        if (!this.visibleCards) {
+            log(`deck is hidden, not arranging cards`);
+            return;
+        }
         const offset = 60 / this.cards.length;
 
         this.cards.forEach((card, index) => {

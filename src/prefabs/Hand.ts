@@ -18,14 +18,16 @@ export default class Hand {
     private maxCards: number;
     private poppedUpCard: Card | null;
     private selectedCard: Card | null;
+    private renderOnScreen: boolean;
 
-    constructor(scene: Phaser.Scene, maxCards: number = 5) {
+    constructor(scene: Phaser.Scene, maxCards: number = 5, renderOnScreen: boolean = true) {
         this.scene = scene;
         this.cards = [];
         this.cardsInPlay = [];
         this.maxCards = maxCards;
         this.poppedUpCard = null;
         this.selectedCard = null;
+        this.renderOnScreen = renderOnScreen;
     }
 
     addCard(card: Card) {
@@ -49,7 +51,10 @@ export default class Hand {
         const cardSpacing = 20;
         const cardWidth = 182;
         const totalWidth = this.cards.length * cardWidth + (this.cards.length - 1) * cardSpacing;
-        const startX = 556;
+        let startX = 556;
+        if (!this.renderOnScreen) {
+            startX = 3000;
+        }
         const yPos = screenHeight - cardWidth - 50;
     
         this.cards.forEach((card, index) => {
