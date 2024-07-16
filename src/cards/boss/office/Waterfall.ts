@@ -9,6 +9,8 @@ import { OfficeCard } from "./OfficeCard";
 
 export class Waterfall extends OfficeCard {
 
+    protected offenseDamage: number = 1;
+
     constructor() {
         super(CardKeys.WATERFALL, null);
     }
@@ -17,7 +19,37 @@ export class Waterfall extends OfficeCard {
     }
 
     special(member: Member, team: Team, opponentTeam: Team): boolean {
-        return false;
+        let anyOffenseSuccess = false;
+        let membersToTarget = this.getAllOtherAliveMembers(opponentTeam);
+
+        log("waterfall members to target " + membersToTarget.length);
+        membersToTarget.forEach((enemyMember) => {
+            log("waterfalling");
+            let offenseSuccess = false;
+
+            member.showFloatingAction(this.getName());
+            const targetCard = enemyMember.getAssignedCard();
+            let defenseSuccess = false;
+            if (targetCard != null) {
+                //see if they successfully defend
+                defenseSuccess = targetCard.getCardType().defense(enemyMember, member, opponentTeam, team);
+            }
+            if (!defenseSuccess) {
+                //reduce their HP if they failed to defend
+                enemyMember.showFloatingAction((this.getOffenseDamage() * -1).toString(), "#ff005a");
+                enemyMember.reduceHP(this.getOffenseDamage(), member);
+                offenseSuccess = true;
+            }
+    
+            if (offenseSuccess) {
+                anyOffenseSuccess = true;
+            }
+        });
+
+        if (anyOffenseSuccess) {
+            GameSounds.playHit();
+        }
+        return anyOffenseSuccess;  
     }
 
     offense(member: Member, target: Member, team: Team, opponentTeam: Team): boolean {
@@ -40,7 +72,11 @@ export class Waterfall extends OfficeCard {
         return "unknown";
     }
 
+    getOffenseDamage(): number {    
+        return this.offenseDamage;
+    }
+
     getDescription(): string {
-        return "tbd";
+        return "1 damage to each enemy.";
     }
 }

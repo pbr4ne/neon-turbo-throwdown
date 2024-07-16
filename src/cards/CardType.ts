@@ -52,6 +52,10 @@ export abstract class CardType {
         return null;
     }
 
+    getAllOtherAliveMembers(opponentTeam: Team): Member[] {
+        return opponentTeam.getMembers().filter((member) => member.getHP() > 0);
+    }
+
     getRandomOtherAliveMembers(opponentTeam: Team, target: Member, numTargets: number): Member[] {
         var opponentMembers = opponentTeam.getMembers().filter((member) => member !== target && member.getHP() > 0);
         const shuffledMembers = Phaser.Utils.Array.Shuffle([...opponentMembers]);
