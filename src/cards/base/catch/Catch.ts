@@ -38,7 +38,7 @@ export class Catch extends CardType {
         if (this.getCurrentNumDefends() <= 1 && this.getChanceToDefend(team) >= Math.random()) {
             member.showFloatingAction(this.getName());
 
-            let membersToRebound = this.getRandomOtherAliveMembers(opponentTeam, attacker, this.getReboundTargets() - 1);
+            let membersToRebound = this.getRandomAliveMembers(opponentTeam, attacker, this.getReboundTargets() - 1);
             membersToRebound.unshift(attacker);
             membersToRebound.forEach((enemyMember) => {
                 enemyMember.reduceHP(this.getDefenseDamage());

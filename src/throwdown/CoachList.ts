@@ -214,6 +214,8 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.SNIPER_THROW),
             CardFactory.createCardType(CardKeys.SNIPER_THROW),
             CardFactory.createCardType(CardKeys.TURBO_CATCH),
+            CardFactory.createCardType(CardKeys.F7),
+            CardFactory.createCardType(CardKeys.F7),
         ]);
 
         this.turbonerd.setBaseCards([

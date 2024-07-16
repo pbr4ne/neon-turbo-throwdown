@@ -338,6 +338,17 @@ export default class Member extends Phaser.GameObjects.Container {
         return this.hp;
     }
 
+    setHP(amount: number) {
+        if (amount > this.maxHP) {
+            amount = this.maxHP;
+        }
+        if (amount < this.hp) {
+            this.reduceHP(this.hp - amount);
+        } else if (amount > this.hp) {
+            this.increaseHP(amount - this.hp);
+        }
+    }
+
     reduceHP(amount: number) {
         this.hp -= amount;
         if (this.hp <= 0) {
@@ -349,7 +360,7 @@ export default class Member extends Phaser.GameObjects.Container {
             this.off("pointerdown");
         }
         this.updateHealthBar();
-        this.showFloatingAction((amount * -1).toString(), "#ff005a");
+        this.showFloatingAction((amount * -1).toString(), "#ff005a", 1);
     }
 
     increaseHP(amount: number) {

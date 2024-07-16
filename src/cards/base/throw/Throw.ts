@@ -20,7 +20,7 @@ export class Throw extends CardType {
     offense(member: Member, target: Member, team: Team, opponentTeam: Team): boolean {
 
         let anyOffenseSuccess = false;
-        let membersToTarget = this.getRandomOtherAliveMembers(opponentTeam, target, this.getNumTargets() - 1);
+        let membersToTarget = this.getRandomAliveMembers(opponentTeam, target, this.getNumTargets() - 1);
         membersToTarget.unshift(target);
 
         membersToTarget.forEach((enemyMember) => {

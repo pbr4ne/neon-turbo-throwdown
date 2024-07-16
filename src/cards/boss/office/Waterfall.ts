@@ -20,7 +20,7 @@ export class Waterfall extends OfficeCard {
 
     special(member: Member, team: Team, opponentTeam: Team): boolean {
         let anyOffenseSuccess = false;
-        let membersToTarget = this.getAllOtherAliveMembers(opponentTeam);
+        let membersToTarget = this.getAllAliveMembers(opponentTeam);
 
         log("waterfall members to target " + membersToTarget.length);
         membersToTarget.forEach((enemyMember) => {

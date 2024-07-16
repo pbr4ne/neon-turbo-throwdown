@@ -20,6 +20,7 @@ export class SoldierOn extends SgtSteveCard {
     }
 
     special(member: Member, team: Team, opponentTeam: Team): boolean {
+        member.showFloatingAction(this.getName());
         //get a random integer between healthMin and healthMax
         const healthSteal = Math.floor(Math.random() * (this.getHealthMax() - this.getHealthMin() + 1)) + this.getHealthMin();
 
