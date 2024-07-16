@@ -43,8 +43,10 @@ export class Evade extends CardType {
         return "evade";
     }
 
-    getChanceToDefend(): number {
-        return this.chanceToDefend;
+    getChanceToDefend(team?: Team): number {
+        const teamToUse = team || this.getPlayer();
+        const override = teamToUse?.getModifiers().getEvadeChanceOverride();
+        return override ?? this.chanceToDefend;
     }
 
     getNumDefends(): number {

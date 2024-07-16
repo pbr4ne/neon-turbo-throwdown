@@ -244,6 +244,8 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.EVADE_3_TURBO_EVADE),
             CardFactory.createCardType(CardKeys.THROW_5_RI_RICOCHET),
             CardFactory.createCardType(CardKeys.CATCH_3_BIG_HANDS),
+            CardFactory.createCardType(CardKeys.SMOKE_BOMB),
+            CardFactory.createCardType(CardKeys.SMOKE_BOMB),
         ]);
 
         this.boss10.setBaseCards([

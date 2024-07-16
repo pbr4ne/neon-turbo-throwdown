@@ -25,9 +25,7 @@ export class Catch extends CardType {
     }
 
     defense(member: Member, attacker: Member, team: Team, opponentTeam: Team, canRetaliate: boolean): boolean {
-        log("DEFENSE " + team);
         let defenseSuccess = false;
-        log(`DEFENSE - this is the modifier: ${this.getChanceToDefend(team)}`);
         if (this.getCurrentNumDefends() <= 1 && this.getChanceToDefend(team) >= Math.random()) {
             member.showFloatingAction(this.getName());
 
@@ -61,11 +59,8 @@ export class Catch extends CardType {
 
     getChanceToDefend(team?: Team): number {
         if (team) {
-            log("Returning chance to defend for team: " + team);
-            log((this.chanceToDefend * team.getModifiers().getCatchChanceMultiplier()).toString());
             return this.chanceToDefend * team.getModifiers().getCatchChanceMultiplier();
         } else {
-            log("Returning chance to defend for base player");
             const player = this.getPlayer();
             if (player) {
                 return this.chanceToDefend * player.getModifiers().getCatchChanceMultiplier();

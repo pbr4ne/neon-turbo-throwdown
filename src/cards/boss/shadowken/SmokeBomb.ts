@@ -6,11 +6,21 @@ import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import Player from "../../../prefabs/Player";
 import { ShadowkenCard } from "./ShadowkenCard";
+import { ThrowdownPhase } from "../../../throwdown/ThrowdownPhase";
 
 export class SmokeBomb extends ShadowkenCard {
+    protected evadeChance: number = 0.9;
 
     constructor() {
-        super(CardKeys.SMOKE_BOMB, null);
+        super(CardKeys.SMOKE_BOMB, null, ThrowdownPhase.SPECIAL);
+    }
+
+    special(member: Member, team: Team, opponentTeam: Team): boolean {
+        team.getModifiers().setTurnEvadeChanceOverride(this.getEvadeChance());
+        
+        member.showFloatingAction(this.getName());
+
+        return true;
     }
 
     getName(): string {
@@ -18,10 +28,15 @@ export class SmokeBomb extends ShadowkenCard {
     }
 
     getIcon(): string {
-        return "unknown";
+        return "evade-triple";
+    }
+
+    getEvadeChance(): number {
+        return this.evadeChance;
     }
 
     getDescription(): string {
-        return "tbd";
+        const niceEvadeChance = this.getNicePercentage(this.getEvadeChance());
+        return `Your team members have ${niceEvadeChance}% evade this turn.`;
     }
 }
