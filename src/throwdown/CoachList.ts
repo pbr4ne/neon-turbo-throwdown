@@ -158,6 +158,8 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.CATCH_1_CATCH),
             CardFactory.createCardType(CardKeys.SUPPLY_AND_DEMAND),
             CardFactory.createCardType(CardKeys.SUPPLY_AND_DEMAND),
+            CardFactory.createCardType(CardKeys.MONOCLE),
+            CardFactory.createCardType(CardKeys.MONOCLE),
         ]);
 
         this.office.setBaseCards([
