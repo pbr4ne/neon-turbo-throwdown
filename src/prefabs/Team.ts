@@ -155,13 +155,16 @@ export default abstract class Team extends Phaser.GameObjects.Container {
         for (const member of this.members) {
             const card = member.getAssignedCard();
             const target = member.getIntendedTarget();
-            log(`Special Phase: ${card}`);
+            log(`Special Phase: ${card} phase: ${card?.getCardType().getPhase()}`);
             if (card != null) {
                 const cardType = card.getCardType();
+                console.log(cardType.getPhase());
                 if (cardType.getPhase() == ThrowdownPhase.SPECIAL) {
                     await this.pause(500); 
                     cardType.special(member, target, this, this.opponent); 
                     log(`SPECIAL: ${member}`);
+                } else {
+                    log(`No special for ${cardType.getName()}`);
                 }
             }
         }

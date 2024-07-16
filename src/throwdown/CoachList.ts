@@ -141,6 +141,8 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.CATCH_1_CATCH),
             CardFactory.createCardType(CardKeys.BIGG_BALLS),
             CardFactory.createCardType(CardKeys.BIGG_BALLS),
+            CardFactory.createCardType(CardKeys.BLUE_BALLS),
+            CardFactory.createCardType(CardKeys.BLUE_BALLS),
         ]);
 
         this.tycoon.setBaseCards([

@@ -1,12 +1,14 @@
 import { log } from "../utilities/GameUtils";
+import Member from "../prefabs/Member";
 
 export class Modifiers {
     private roundCatchChanceMultiplier: number = 1;
     private turnCatchChanceMultiplier: number = 1;
     private turnEvadeChanceOverride: number | null = null;
     private turnEvadeDisable: boolean = false;
+    private turnDamageReceiveMultipliers: Map<Member, number> = new Map();
 
-    //evade chance
+    // Evade chance
     getEvadeChanceOverride(): number | null {
         return this.turnEvadeChanceOverride;
     }
@@ -31,7 +33,7 @@ export class Modifiers {
         this.turnEvadeDisable = false;
     }
 
-    //catch chance
+    // Catch chance
     getCatchChanceMultiplier(): number {
         return this.roundCatchChanceMultiplier * this.turnCatchChanceMultiplier;
     }
@@ -58,7 +60,25 @@ export class Modifiers {
         this.turnCatchChanceMultiplier = 1;
     }
 
-    //reset all
+    // Damage receive multiplier
+    addTurnDamageReceiveMultiplier(member: Member, multiplier: number): void {
+        const currentMult = this.turnDamageReceiveMultipliers.get(member) ?? 1;
+        this.turnDamageReceiveMultipliers.set(member, currentMult);
+    }
+
+    getTurnDamageReceiveMultiplier(member: Member): number {
+        return this.turnDamageReceiveMultipliers.get(member) ?? 1;
+    }
+
+    resetTurnDamageReceiveMultiplier(member: Member): void {
+        this.turnDamageReceiveMultipliers.set(member, 1);
+    }
+
+    resetAllTurnDamageReceiveMultipliers(): void {
+        this.turnDamageReceiveMultipliers.clear();
+    }
+
+    // Reset all
     resetAllRoundModifiers(): void {
         log("Resetting all round modifiers.");
         this.resetRoundCatchChanceMultiplier();
@@ -69,5 +89,6 @@ export class Modifiers {
         this.resetTurnCatchChanceMultiplier();
         this.resetTurnEvadeChanceOverride();
         this.resetTurnEvadeDisable();
+        this.resetAllTurnDamageReceiveMultipliers();
     }
 }

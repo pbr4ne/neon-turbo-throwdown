@@ -6,11 +6,31 @@ import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import Player from "../../../prefabs/Player";
 import { SporticusCard } from "./SporticusCard";
+import { ThrowdownPhase } from "../../../throwdown/ThrowdownPhase";
 
 export class BlueBalls extends SporticusCard {
 
+    protected damageMultiplier: number = 2;
+
     constructor() {
-        super(CardKeys.BLUE_BALLS, null);
+        super(CardKeys.BLUE_BALLS, null, ThrowdownPhase.SPECIAL);
+    }
+
+    special(member: Member, target: Member | null, team: Team, opponentTeam: Team): boolean {
+        //target opponent takes 2x damage this turn
+        if (target) {
+            log("target for blue balls");
+            member.showFloatingAction(this.getName());
+            opponentTeam.getModifiers().addTurnDamageReceiveMultiplier(target, 2);
+        } else {
+            log("No target for blue balls");
+        }
+
+        return true;
+    }
+
+    needsTarget(): boolean {
+        return true;
     }
 
     getName(): string {
@@ -18,10 +38,14 @@ export class BlueBalls extends SporticusCard {
     }
 
     getIcon(): string {
-        return "unknown";
+        return "throw-turbo";
+    }
+
+    getDamageMultiplier(): number {
+        return this.damageMultiplier;
     }
 
     getDescription(): string {
-        return "tbd";
+        return `Target opponent takes ${this.getDamageMultiplier()}x damage this turn.`;
     }
 }

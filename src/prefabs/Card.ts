@@ -128,7 +128,7 @@ export default class Card extends GenericCard {
     renderForState(): void {
         this.clearCard();
         
-        log(`rendering for state: ${this.toString()}`);
+        //log(`rendering for state: ${this.toString()}`);
         switch (this.cardState) {
             case "playerDeck":
                 this.setTexture(this.getDeckBackTexture());
