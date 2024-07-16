@@ -6,11 +6,20 @@ import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import Player from "../../../prefabs/Player";
 import { Boss10Card } from "./Boss10Card";
+import { ThrowdownPhase } from "../../../throwdown/ThrowdownPhase";
 
 export class BehindTheCurtain extends Boss10Card {
 
     constructor() {
-        super(CardKeys.BEHIND_THE_CURTAIN, null);
+        super(CardKeys.BEHIND_THE_CURTAIN, null, ThrowdownPhase.SPECIAL);
+    }
+
+    special(member: Member, team: Team, opponentTeam: Team): boolean {
+        team.getModifiers().setTurnEvadeDisable(true);
+        
+        member.showFloatingAction(this.getName());
+
+        return true;
     }
 
     getName(): string {
@@ -18,10 +27,10 @@ export class BehindTheCurtain extends Boss10Card {
     }
 
     getIcon(): string {
-        return "unknown";
+        return "evade-triple";
     }
 
     getDescription(): string {
-        return "tbd";
+        return `Team's attacks ignore evade.`;
     }
 }

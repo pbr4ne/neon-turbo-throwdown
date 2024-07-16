@@ -4,18 +4,31 @@ export class Modifiers {
     private roundCatchChanceMultiplier: number = 1;
     private turnCatchChanceMultiplier: number = 1;
     private turnEvadeChanceOverride: number | null = null;
+    private turnEvadeDisable: boolean = false;
 
     //evade chance
     getEvadeChanceOverride(): number | null {
         return this.turnEvadeChanceOverride;
     }
 
+    getEvadeDisable(): boolean {
+        return this.turnEvadeDisable;
+    }
+
     setTurnEvadeChanceOverride(value: number): void {
         this.turnEvadeChanceOverride = value;
     }
 
+    setTurnEvadeDisable(value: boolean): void {
+        this.turnEvadeDisable = value;
+    }
+
     resetTurnEvadeChanceOverride(): void {
         this.turnEvadeChanceOverride = null;
+    }
+
+    resetTurnEvadeDisable(): void {
+        this.turnEvadeDisable = false;
     }
 
     //catch chance
@@ -55,5 +68,6 @@ export class Modifiers {
         log("Resetting all turn modifiers.");
         this.resetTurnCatchChanceMultiplier();
         this.resetTurnEvadeChanceOverride();
+        this.resetTurnEvadeDisable();
     }
 }
