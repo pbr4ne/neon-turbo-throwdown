@@ -1,3 +1,5 @@
+import { CardKeys } from "./CardKeys";
+import { CardType } from "./CardType";
 import { BestBlock } from "./base/block/BestBlock";
 import { BetterBlock } from "./base/block/BetterBlock";
 import { Block } from "./base/block/Block";
@@ -16,10 +18,52 @@ import { SniperThrow } from "./base/throw/SniperThrow";
 import { Throw } from "./base/throw/Throw";
 import { TurboThrow } from "./base/throw/TurboThrow";
 import { UltraTurboThrow } from "./base/throw/UltraTurboThrow";
-import { BiggBalls } from "./boss/sporticus/BiggBalls";
-import { CardKeys } from "./CardKeys";
-import { CardType } from "./CardType";
 import { UnknownCard } from "./UnknownCard";
+import { BiggBalls } from "./boss/sporticus/BiggBalls";
+import { HardBall } from "./boss/sporticus/Hardball";
+import { AmazeBalls } from "./boss/sporticus/AmazeBalls";
+import { BallBearings } from "./boss/sporticus/BallBearings";
+import { BlueBalls } from "./boss/sporticus/BlueBalls";
+import { Monocle } from "./boss/russ/Monocle";
+import { MoustacheWax } from "./boss/russ/MoustacheWax";
+import { SnuffBox } from "./boss/russ/SnuffBox";
+import { SupplyAndDemand } from "./boss/russ/SupplyAndDemand";
+import { UnionBusting } from "./boss/russ/UnionBusting";
+import { CircleBack } from "./boss/boss/CircleBack";
+import { LevelSet } from "./boss/boss/LevelSet";
+import { TPSReport } from "./boss/boss/TPSReport";
+import { Waterfall } from "./boss/boss/Waterfall";
+import { Brainstorm } from "./boss/boss/Brainstorm";
+import { SoldierOn } from "./boss/steve/SoldierOn";
+import { CoveringFire } from "./boss/steve/CoveringFire";
+import { DropAndGiveMe20 } from "./boss/steve/DropAndGiveMe20";
+import { TenHut } from "./boss/steve/TenHut";
+import { Tripwire } from "./boss/steve/Tripwire";
+import { AintGonnaTakeIt } from "./boss/betsy/AintGonnaTakeIt";
+import { BallRoomBlitz } from "./boss/betsy/BallRoomBlitz";
+import { DeadOrAlive } from "./boss/betsy/DeadOrAlive";
+import { BLockOfAges } from "./boss/betsy/BlockOfAges";
+import { DontStopMeNow } from "./boss/betsy/DontStopMeNow";
+import { BehindTheCurtain } from "./boss/boss10/BehindTheCurtain";
+import { FourthWall } from "./boss/boss10/FourthWall";
+import { JustAGame } from "./boss/boss10/JustAGame";
+import { Metagaming } from "./boss/boss10/Metagaming";
+import { NothingMatters } from "./boss/boss10/NothingMatters";
+import { Alt } from "./boss/coree/Alt";
+import { Ctrl } from "./boss/coree/Ctrl";
+import { Delete } from "./boss/coree/Delete";
+import { F5 } from "./boss/coree/F5";
+import { F7 } from "./boss/coree/F7";
+import { MonkeyStealsThePeach } from "./boss/shadow/MonkeyStealsThePeach";
+import { NinjaStar } from "./boss/shadow/NinjaStar";
+import { Seppuku } from "./boss/shadow/Seppuku";
+import { Shadowken } from "./boss/shadow/Shadowken";
+import { SmokeBomb } from "./boss/shadow/SmokeBomb";
+import { Calculator } from "./boss/turbo/Calculator";
+import { DidIDoThat } from "./boss/turbo/DidIDoThat";
+import { Mathlete } from "./boss/turbo/Mathlete";
+import { PocketProtector } from "./boss/turbo/PocketProtector";
+import { WeirdScience } from "./boss/turbo/WeirdScience";
 
 export class CardFactory {
     private static cardTypeMap: Map<CardKeys, new () => CardType> = new Map();
@@ -68,6 +112,66 @@ export class CardFactory {
 
         //sporticus
         this.registerCardType(CardKeys.BIGG_BALLS, BiggBalls);
+        this.registerCardType(CardKeys.HARDBALL, HardBall);
+        this.registerCardType(CardKeys.BLUE_BALLS, BlueBalls);
+        this.registerCardType(CardKeys.BALL_BEARINGS, BallBearings);
+        this.registerCardType(CardKeys.AMAZEBALLS, AmazeBalls);
+
+        //russ
+        this.registerCardType(CardKeys.MONOCLE, Monocle);
+        this.registerCardType(CardKeys.UNION_BUSTING, UnionBusting);
+        this.registerCardType(CardKeys.SUPPLY_AND_DEMAND, SupplyAndDemand);
+        this.registerCardType(CardKeys.MOUSTACHE_WAX, MoustacheWax);
+        this.registerCardType(CardKeys.SNUFF_BOX, SnuffBox);
+
+        //boss
+        this.registerCardType(CardKeys.CIRCLE_BACK, CircleBack);
+        this.registerCardType(CardKeys.LEVEL_SET, LevelSet);
+        this.registerCardType(CardKeys.WATERFALL, Waterfall);
+        this.registerCardType(CardKeys.BRAINSTORM, Brainstorm);
+        this.registerCardType(CardKeys.TPS_REPORT, TPSReport);
+
+        //steve
+        this.registerCardType(CardKeys.SOLDIER_ON, SoldierOn);
+        this.registerCardType(CardKeys.DROP_AND_GIVE_ME_20, DropAndGiveMe20);
+        this.registerCardType(CardKeys.TEN_HUT, TenHut);
+        this.registerCardType(CardKeys.COVERING_FIRE, CoveringFire);
+        this.registerCardType(CardKeys.TRIPWIRE, Tripwire);
+
+        //betsy
+        this.registerCardType(CardKeys.BALL_ROOM_BLITZ, BallRoomBlitz);
+        this.registerCardType(CardKeys.AINT_GONNA_TAKE_IT, AintGonnaTakeIt);
+        this.registerCardType(CardKeys.DEAD_OR_ALIVE, DeadOrAlive);
+        this.registerCardType(CardKeys.BLOCK_OF_AGES, BLockOfAges);
+        this.registerCardType(CardKeys.DONT_STOP_ME_NOW, DontStopMeNow);
+
+        //coree
+        this.registerCardType(CardKeys.CTRL, Ctrl);
+        this.registerCardType(CardKeys.ALT, Alt);
+        this.registerCardType(CardKeys.DELETE, Delete);
+        this.registerCardType(CardKeys.F5, F5);
+        this.registerCardType(CardKeys.F7, F7);        
+
+        //turbo
+        this.registerCardType(CardKeys.POCKET_PROTECTOR, PocketProtector);
+        this.registerCardType(CardKeys.CALCULATOR, Calculator);
+        this.registerCardType(CardKeys.WEIRD_SCIENCE, WeirdScience);
+        this.registerCardType(CardKeys.MATHLETE, Mathlete);
+        this.registerCardType(CardKeys.DID_I_DO_THAT, DidIDoThat);
+
+        //shadow
+        this.registerCardType(CardKeys.SHADOWKEN, Shadowken);
+        this.registerCardType(CardKeys.SMOKE_BOMB, SmokeBomb);
+        this.registerCardType(CardKeys.SEPPUKU, Seppuku);
+        this.registerCardType(CardKeys.NINJA_STAR, NinjaStar);
+        this.registerCardType(CardKeys.MONKEY_STEALS_THE_PEACH, MonkeyStealsThePeach);
+
+        //boss10
+        this.registerCardType(CardKeys.NOTHING_MATTERS, NothingMatters);
+        this.registerCardType(CardKeys.JUST_A_GAME, JustAGame);
+        this.registerCardType(CardKeys.BEHIND_THE_CURTAIN, BehindTheCurtain);
+        this.registerCardType(CardKeys.FOURTH_WALL, FourthWall);
+        this.registerCardType(CardKeys.METAGAMING, Metagaming);
 
         //unknown
         this.registerCardType(CardKeys.UNKNOWN, UnknownCard);

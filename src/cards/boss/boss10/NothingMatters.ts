@@ -6,25 +6,17 @@ import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import Player from "../../../prefabs/Player";
 
-export class BiggBalls extends CardType {
-
-    protected chance: number = 0.2;
+export class NothingMatters extends CardType {
 
     constructor() {
-        super(CardKeys.BIGG_BALLS, null);
+        super(CardKeys.NOTHING_MATTERS, null);
     }
 
     resetTurn(): void {
     }
 
     special(member: Member, team: Team, opponentTeam: Team): boolean {
-        log("Adding catch chance multiplier of " + this.getChance() * -1 + " to " + (opponentTeam instanceof Player ? "player" : "boss") + " team.");
-        opponentTeam.addCatchChanceMultiplier(this.getChance() * -1);
-        log("New catch chance multiplier: " + opponentTeam.getCatchChanceMultiplier());
-        
-        member.showFloatingAction(this.getName());
-
-        return true;
+        return false;
     }
 
     offense(member: Member, target: Member, team: Team, opponentTeam: Team): boolean {
@@ -40,7 +32,7 @@ export class BiggBalls extends CardType {
     }
 
     getName(): string {
-        return "bigg balls";
+        return "nothing matters";
     }
 
     getIcon(): string {
@@ -48,11 +40,6 @@ export class BiggBalls extends CardType {
     }
 
     getDescription(): string {
-        const chancePercentage = this.getNicePercentage(this.getChance());
-        return `Your balls are ${chancePercentage} harder to catch for the remainder of the fight.`;
-    }
-
-    getChance(): number {
-        return this.chance;
+        return "tbd";
     }
 }
