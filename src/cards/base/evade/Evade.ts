@@ -44,13 +44,18 @@ export class Evade extends CardType {
     }
 
     getChanceToDefend(team?: Team): number {
-        const teamToUse = team || this.getPlayer();
-        const override = teamToUse?.getModifiers().getEvadeChanceOverride();
-        const disable = teamToUse?.getModifiers().getEvadeDisable();
-        if (disable) {
-            return 0;
+        const modifiers = team?.getModifiers() || this.getPlayer()?.getModifiers();
+    
+        let chance = this.chanceToDefend;
+        
+        if (modifiers) {
+            if (modifiers.getEvadeDisable()) {
+                return 0;
+            }
+            chance = modifiers.getEvadeChanceOverride() ?? this.chanceToDefend;
         }
-        return override ?? this.chanceToDefend;
+    
+        return Phaser.Math.Clamp(chance, 0, 1);
     }
 
     getNumDefends(): number {

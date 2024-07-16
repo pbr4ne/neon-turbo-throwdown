@@ -99,7 +99,7 @@ export default class Deck extends Phaser.GameObjects.Container {
 
     resetRound() {
         this.cards.forEach(card => {
-            card.getCardType().resetRound();
+            card.getCardType().resetCombat();
         });
     }
 }

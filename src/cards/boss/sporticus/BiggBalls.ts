@@ -17,9 +17,7 @@ export class BiggBalls extends SporticusCard {
     }
 
     special(member: Member, target: Member | null, team: Team, opponentTeam: Team): boolean {
-        log("Adding catch chance multiplier of " + this.getChance() * -1 + " to " + (opponentTeam instanceof Player ? "player" : "boss") + " team.");
         opponentTeam.getModifiers().addRoundCatchChanceMultiplier(this.getChance() * -1);
-        log("New catch chance multiplier: " + opponentTeam.getModifiers().getCatchChanceMultiplier());
         
         member.showFloatingAction(this.getName());
 

@@ -58,15 +58,14 @@ export class Catch extends CardType {
     }
 
     getChanceToDefend(team?: Team): number {
-        if (team) {
-            return this.chanceToDefend * team.getModifiers().getCatchChanceMultiplier();
-        } else {
-            const player = this.getPlayer();
-            if (player) {
-                return this.chanceToDefend * player.getModifiers().getCatchChanceMultiplier();
-            }
-            return this.chanceToDefend;
+        const modifiers = team?.getModifiers() || this.getPlayer()?.getModifiers();
+        let chance = this.chanceToDefend;
+    
+        if (modifiers) {
+            chance += modifiers.getCatchChanceMultiplier();
         }
+    
+        return Phaser.Math.Clamp(chance, 0, 1);
     }
 
     getDefenseDamage(): number {

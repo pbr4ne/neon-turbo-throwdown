@@ -24,8 +24,8 @@ export abstract class CardType {
     resetTurn(): void {
     }
 
-    //should be overridden if the card has things to reset at the end of the round
-    resetRound(): void {
+    //should be overridden if the card has things to reset at the end of the combat
+    resetCombat(): void {
     }
 
     //should be overridden if the card has a special effect

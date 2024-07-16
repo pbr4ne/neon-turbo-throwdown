@@ -4,6 +4,7 @@ import Member from "../../../prefabs/Member";
 import Team from "../../../prefabs/Team";
 import { GameSounds } from "../../../utilities/GameSounds";
 import { ThrowdownPhase } from "../../../throwdown/ThrowdownPhase";
+import { log } from "../../../utilities/GameUtils";
 
 export class Throw extends CardType {
     protected chanceToOffend : number = 0.75;
@@ -41,7 +42,7 @@ export class Throw extends CardType {
     }
 
     attackMember(member: Member, target: Member, team: Team, opponentTeam: Team, canRetaliate: boolean): boolean {
-        if (this.getChanceToOffend() >= Math.random()) {
+        if (this.getChanceToOffend(team) >= Math.random()) {
             const targetCard = target.getAssignedCard();
             let defenseSuccess = false;
             if (targetCard != null) {
@@ -78,8 +79,15 @@ export class Throw extends CardType {
         return description;
     }
 
-    getChanceToOffend(): number {
-        return this.chanceToOffend;
+    getChanceToOffend(team?: Team): number {
+        const modifiers = team?.getModifiers() || this.getPlayer()?.getModifiers();
+        let chance = this.chanceToOffend;
+    
+        if (modifiers) {
+            chance += modifiers.getThrowEffectivenessMultiplier();
+        }
+    
+        return Phaser.Math.Clamp(chance, 0, 1);
     }
 
     getOffenseDamage(): number {
