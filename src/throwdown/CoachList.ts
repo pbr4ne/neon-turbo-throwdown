@@ -284,6 +284,8 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.CATCH_3_BIG_HANDS),
             CardFactory.createCardType(CardKeys.BEHIND_THE_CURTAIN),
             CardFactory.createCardType(CardKeys.BEHIND_THE_CURTAIN),
+            CardFactory.createCardType(CardKeys.METAGAMING),
+            CardFactory.createCardType(CardKeys.METAGAMING),
         ]);
     }
 
