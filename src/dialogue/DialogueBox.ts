@@ -224,7 +224,7 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
 		.on('pointerout', () => this.optionText3.setColor('#00ffff'));
 
 		//option instructions
-		this.optionInstructions = new Phaser.GameObjects.Text(this.scene, 340, 453, "[Choose an option]", {
+		this.optionInstructions = new Phaser.GameObjects.Text(this.scene, 300, 453, "[Click on an option]", {
             fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
             fontSize: '16px',
             color: '#00ffff',
