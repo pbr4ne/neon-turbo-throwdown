@@ -13,7 +13,7 @@ export class Library {
     private static easyMode: boolean = false;
     private static soundOn: boolean = true;
     private static musicOn: boolean = true;
-    private static idleMode: boolean = true;
+    private static idleMode: boolean = false;
 
     public static getNumRuns() {
         return this.numRuns;

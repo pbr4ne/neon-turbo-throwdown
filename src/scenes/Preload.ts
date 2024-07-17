@@ -93,6 +93,10 @@ export default class Preload extends Phaser.Scene {
 			Library.setEasyMode(true);
 		}
 
+		if (checkUrlParam("idleMode", "true")) {
+			Library.setIdleMode(true);
+		}
+
 		Library.setPureDeck(CoachList.you.getBaseCards());
 		log("PRELOAD COMPLETE");
 	}

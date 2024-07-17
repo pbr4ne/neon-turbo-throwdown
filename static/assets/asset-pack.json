@@ -452,6 +452,16 @@
                 "key": "start-round"
             },
             {
+                "url": "assets/images/game/switch-active.png",
+                "type": "image",
+                "key": "switch-active"
+            },
+            {
+                "url": "assets/images/game/switch-idle.png",
+                "type": "image",
+                "key": "switch-idle"
+            },
+            {
                 "url": "assets/images/instructions/target-opponent.png",
                 "type": "image",
                 "key": "target-opponent"
