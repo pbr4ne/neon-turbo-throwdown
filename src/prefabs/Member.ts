@@ -323,7 +323,7 @@ export default class Member extends Phaser.GameObjects.Container {
     
         if (boss != null) {
             lineColour = 0x00ffff;
-            offsetX = 10; 
+            offsetX = 10;
             offsetY = 10;
             controlYOffset = -100;
         }
@@ -337,15 +337,33 @@ export default class Member extends Phaser.GameObjects.Container {
             new Phaser.Math.Vector2(endX, endY)
         );
     
+        const dashLength = 10;
+        const gapLength = 10;
+        const totalLength = dashLength + gapLength;
+        const curveLength = curve.getLength();
+        const segments = Math.floor(curveLength / totalLength);
+    
         this.targetArc.lineStyle(3, lineColour, 1);
-        curve.draw(this.targetArc);
+    
+        for (let i = 0; i < segments; i++) {
+            const startT = (i * totalLength) / curveLength;
+            const endT = (i * totalLength + dashLength) / curveLength;
+    
+            const startPoint = curve.getPoint(startT);
+            const endPoint = curve.getPoint(Math.min(endT, 1));
+    
+            this.targetArc.beginPath();
+            this.targetArc.moveTo(startPoint.x, startPoint.y);
+            this.targetArc.lineTo(endPoint.x, endPoint.y);
+            this.targetArc.strokePath();
+        }
     
         const circleRadius = 5;
     
         this.targetArc.fillStyle(lineColour, 1);
         this.targetArc.fillCircle(startX + offsetX, startY + offsetY, circleRadius);
         this.targetArc.fillCircle(endX, endY, circleRadius);
-    }
+    }    
 
     clearTargetArc() {
         if (this.targetArc) {
