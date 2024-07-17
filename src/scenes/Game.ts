@@ -76,7 +76,7 @@ export default class Game extends Phaser.Scene {
             this.throwdown = new Throwdown(this, this.currentCoach, this.player);
             this.player.setThrowdown(this.throwdown);
         } else {
-            this.doDialogue(this.currentCoach, "intro");
+            this.doDialogue(this.currentCoach, "intro", true);
         }
     }
 
@@ -84,8 +84,8 @@ export default class Game extends Phaser.Scene {
         this.cardDescription.setText(description);
     }
 
-    doDialogue(coach: Coach, type: string) {
-        const dialog = new DialogueBox(this, 960, 542, coach, type);
+    doDialogue(coach: Coach, type: string, initial: boolean = false) {
+        const dialog = new DialogueBox(this, 960, 542, coach, type, initial);
 
         this.dialogBox = this.dialogLayer.add(dialog);
     }

@@ -1,37 +1,51 @@
-// You can write more code here
-
-/* START OF COMPILED CODE */
-
 import Phaser from "phaser";
-/* START-USER-IMPORTS */
 import Game from "../scenes/Game";
 import { DialogueConversation, DialogueStep } from "./Dialogue";
 import { Coach } from "../throwdown/Coach";
 import { DialogueStorage } from "./DialogueStorage";
 import { log } from "../utilities/GameUtils";
 import { GameSounds } from "../utilities/GameSounds";
-/* END-USER-IMPORTS */
+import { Library } from "../throwdown/Library";
 
 export default class DialogueBox extends Phaser.GameObjects.Container {
 
-	constructor(scene: Phaser.Scene, x: number, y: number, coach: Coach, dialogueType: string) {
+	constructor(scene: Phaser.Scene, x: number, y: number, coach: Coach, dialogueType: string, initialDialogue: boolean) {
 		super(scene, x ?? 960, y ?? 542);
-
+	
 		this.dialogueType = dialogueType;
-
+	
 		GameSounds.switchSong(this.scene, "neon-turbo-throwdown-chill");
-
-		// rectangle_1
+	
 		const rectangle_1 = scene.add.rectangle(-7, 340, 128, 128);
 		rectangle_1.scaleX = 10.314571568183906;
 		rectangle_1.scaleY = 2.6941724549327337;
 		rectangle_1.isStroked = true;
 		rectangle_1.strokeColor = 16776960;
 		this.add(rectangle_1);
-
-		/* START-USER-CTR-CODE */
+	
+		if (!initialDialogue) {
+			this.idleModeImage = this.scene.add.image(140, 840, Library.getIdleMode() ? "switch-active" : "switch-idle")
+				.setInteractive({ useHandCursor: true })
+				.on('pointerover', () => {
+					this.scene.input.setDefaultCursor('pointer');
+				})
+				.on('pointerout', () => {
+					this.scene.input.setDefaultCursor('default');
+				})
+				.on('pointerdown', () => {
+					this.switchIdleMode();
+				});
+		
+			this.idleModeText = this.scene.add.text(140, 920, "(for next combat)", {
+				fontFamily: '"Press Start 2P"',
+				fontSize: '14px',
+				color: '#ffff00',
+				align: 'center'
+			}).setOrigin(0.5, 0.5);
+		}
+	
 		this.dialogueConversation = DialogueStorage.missingDialogueConversation;
-
+	
 		if (dialogueType === "intro") {
 			const convo = coach.getDialogue()?.getAndIncrementIntroDialogue();
 			if (convo != null) {
@@ -50,14 +64,12 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
 		} else if (dialogueType === "final") {
 			this.dialogueConversation =  DialogueStorage.finalDialogue;
 		}
-
-        if (this.dialogueConversation) {
-            this.generateDialogue();
-        }
-		/* END-USER-CTR-CODE */
+	
+		if (this.dialogueConversation) {
+			this.generateDialogue();
+		}
 	}
-
-	/* START-USER-CODE */
+	
 
 	private dialogueType: string;
 	private dialogueConversation!: DialogueConversation;
@@ -72,6 +84,13 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
 	private avatarName!: Phaser.GameObjects.Text;
 	private skipButton!: Phaser.GameObjects.Rectangle;
 	private skipButtonText!: Phaser.GameObjects.Text;
+	private idleModeImage!: Phaser.GameObjects.Image;
+	private idleModeText!: Phaser.GameObjects.Text;
+
+	private switchIdleMode() {
+        Library.setIdleMode(!Library.getIdleMode());
+        this.idleModeImage.setTexture(Library.getIdleMode() ? "switch-active" : "switch-idle");
+    }
 
 	generateDialogue() {
         var step = this.dialogueConversation.getCurrentStep();
@@ -163,6 +182,8 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
 		this.avatarName.destroy();
 		this.skipButton.destroy();
 		this.skipButtonText.destroy();
+		this.idleModeImage?.destroy();
+		this.idleModeText?.destroy();
 	}
 
 	initializeTextAreas() {
@@ -300,6 +321,4 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
 
 		this.hideAllTextAreas();
 	}
-
-	/* END-USER-CODE */
 }
