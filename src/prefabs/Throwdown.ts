@@ -59,6 +59,8 @@ export default class Throwdown extends Phaser.GameObjects.Container {
 
 	private gameStatePopup!: GameStatePopup;
 
+    private automationTimer!: Phaser.Time.TimerEvent; 
+
 	render() {
 
 		this.scoreImage = this.scene.add.image(80, 110, "score");
@@ -144,40 +146,89 @@ export default class Throwdown extends Phaser.GameObjects.Container {
         }
 
         this.startGameLoop();
+
+        if (getUrlParam("idleMode") === "true") {
+            this.automationTimer = this.scene.time.addEvent({
+                delay: 500, // 10 seconds
+                callback: this.runAutomation,
+                callbackScope: this,
+                loop: true
+            });
+        }
 	}
 
-    // startPointerAnimation() {
-    //     const pointers = [this.pointerImage, this.pointerImage2, this.pointerImage3];
-    //     pointers.forEach((pointer, index) => {
-    //         if (pointer) {
-    //             if (this.scene) {
-    //                 this.scene.time.addEvent({
-    //                     delay: 10000,
-    //                     callback: () => {
-    //                         if (this.scene) {
-    //                             this.scene.tweens.add({
-    //                                 targets: pointer,
-    //                                 alpha: { from: 1, to: 0 },
-    //                                 duration: 300,
-    //                                 ease: 'Power1',
-    //                                 yoyo: true,
-    //                                 repeat: 0,
-    //                                 onComplete: () => {
-    //                                     this.scene.time.addEvent({
-    //                                         delay: 10000,
-    //                                         callback: () => {
-    //                                             this.startPointerAnimation();
-    //                                         }
-    //                                     });
-    //                                 }
-    //                             });
-    //                         }
-    //                     }
-    //                 });
-    //             }
-    //         }
-    //     });
-    // }
+    private runAutomation() {
+        log('AUTOMATION - running');
+        const step = this.currentStep - 1; //always ahead one
+        log('AUTOMATION - current step ' + step);
+
+        switch (step) {
+            case GameSteps.DRAW_CARDS:
+                this.automateCardDraw();
+                break;
+            case GameSteps.BOSS_ASSIGN_AND_SELECT_CARDS:
+                break;
+            case GameSteps.SELECT_CARD:
+                this.automateCardSelection();
+                break;
+            case GameSteps.SELECT_PLAYER_MEMBER:
+                this.automatePlayerSelection();
+                break;
+            case GameSteps.SELECT_ENEMY_MEMBER:
+                this.automateTargetSelection();
+                break;
+            case GameSteps.START_TURN:
+                this.player.throwdownButton.emit('pointerdown');
+                break;
+            case GameSteps.DISCARD_REMAINING_CARDS:
+                break;
+            case GameSteps.EXECUTE_TURN_ACTIONS:
+                break;
+            case GameSteps.CHECK_END_GAME_CONDITION:
+                break;
+            case GameSteps.LOOP_BACK:
+                break;
+        }
+    }
+
+    automateCardDraw() {
+        log('AUTOMATION - drawing card');
+        this.player.onDeckClick();
+    }
+
+    automateCardSelection() {
+        log('AUTOMATION - selecting card');
+        const cardsInHand = this.player.hand.getCards();
+        //randomly select card
+        const randomCard = cardsInHand[Math.floor(Math.random() * cardsInHand.length)];
+        //automate clicking on card
+        this.player.hand.handleCardClick(randomCard, this.player.members);
+    }
+
+    automatePlayerSelection() {
+        log('AUTOMATION - selecting player');
+        const members = this.player.getUnassignedMembers();
+        //randomly select member
+        const randomMember = members[Math.floor(Math.random() * members.length)];
+        //automate clicking on member
+        this.player.handleMemberClick(randomMember);
+    }
+
+    automateTargetSelection() {
+        log('AUTOMATION - selecting target');
+        const members = this.boss.getAliveMembers();
+
+        if (members.length <= 0) {
+            log('AUTOMATION - no target members');
+            return;
+        }
+
+        //randomly select member
+        const randomMember = members[Math.floor(Math.random() * members.length)];
+        log('AUTOMATION - selecting target ' + randomMember.getNumber());
+        //automate clicking on member
+        this.player.handleEnemyClick(randomMember);
+    }
 
 	hideAllGymStuff() {
         this.scoreImage.setVisible(false);
@@ -258,6 +309,9 @@ export default class Throwdown extends Phaser.GameObjects.Container {
     }
 
     destroy() {
+        if (this.automationTimer) {
+            this.automationTimer.remove();
+        }
         super.destroy();
     }
 	showThrowdown() {

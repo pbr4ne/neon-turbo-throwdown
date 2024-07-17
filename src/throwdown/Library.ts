@@ -13,6 +13,7 @@ export class Library {
     private static easyMode: boolean = false;
     private static soundOn: boolean = true;
     private static musicOn: boolean = true;
+    private static idleMode: boolean = true;
 
     public static getNumRuns() {
         return this.numRuns;
@@ -63,6 +64,14 @@ export class Library {
 
     public static getMusicOn() {
         return this.musicOn;
+    }
+
+    public static setIdleMode(idleMode: boolean) {
+        this.idleMode = idleMode;
+    }
+
+    public static getIdleMode() {
+        return this.idleMode;
     }
 
     public static addTrophyType(trophyType: TrophyType) {

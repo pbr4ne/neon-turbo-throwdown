@@ -130,6 +130,8 @@ export default class Player extends Team {
                 this.currentMember = null;
                 this.throwdown.setStep(GameSteps.SELECT_CARD);
             }  
+        } else {
+            log("no current member selected");
         }
     }
 
