@@ -23,15 +23,15 @@ export class Throw extends CardType {
         if (target) {
             if(this.attackMember(member, target, team, opponentTeam, true)) {
                 anyOffenseSuccess = true;
+
+                membersToTarget.forEach((enemyMember) => {
+                    if(this.attackMember(member, enemyMember, team, opponentTeam, false)) {
+                        anyOffenseSuccess = true;
+                    }
+                });
             }
         }
         
-        membersToTarget.forEach((enemyMember) => {
-            if(this.attackMember(member, enemyMember, team, opponentTeam, false)) {
-                anyOffenseSuccess = true;
-            }
-        });
-
         if (anyOffenseSuccess) {
             member.showFloatingAction(this.getName());
             GameSounds.playHit();
