@@ -170,18 +170,19 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
 		//single text
 		this.dialogueText = new Phaser.GameObjects.Text(this.scene, -630, 200, "", {
             fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
-            fontSize: '16px',
+            fontSize: '18px',
             color: '#00ffff',
             padding: { x: 5, y: 5 },
-            align: 'left'
+            align: 'left',
+			lineSpacing: 15
         });
 		this.add(this.dialogueText);
-		this.dialogueText.setWordWrapWidth(1200);
+		this.dialogueText.setWordWrapWidth(1100);
 
 		//option text 1
 		this.optionText1 = new Phaser.GameObjects.Text(this.scene, -630, 200, "", {
             fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
-            fontSize: '16px',
+            fontSize: '18px',
             color: '#00ffff',
             padding: { x: 5, y: 5 },
             align: 'left'
@@ -196,7 +197,7 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
 		//option text 2
 		this.optionText2 = new Phaser.GameObjects.Text(this.scene, -630, 250, "", {
             fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
-            fontSize: '16px',
+            fontSize: '18px',
             color: '#00ffff',
             padding: { x: 5, y: 5 },
             align: 'left'
@@ -211,7 +212,7 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
 		//option text 3
 		this.optionText3 = new Phaser.GameObjects.Text(this.scene, -630, 300, "", {
             fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
-            fontSize: '16px',
+            fontSize: '18px',
             color: '#00ffff',
             padding: { x: 5, y: 5 },
             align: 'left'
