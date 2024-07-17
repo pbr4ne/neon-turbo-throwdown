@@ -1,18 +1,20 @@
 import { openDB, DBSchema, IDBPDatabase } from 'idb';
 import { Library } from '../throwdown/Library';
 import { TrophyType } from '../trophies/TrophyType';
-import { UnknownTrophy } from '../trophies/UnknownTrophy';
 import { CoachDialogue } from '../dialogue/CoachDialogue';
 import { log } from "../utilities/GameUtils";
 import { CardType } from '../cards/CardType';
 import { CoachList } from '../throwdown/CoachList';
 import { CardFactory } from '../cards/CardFactory';
 import { CardKeys } from '../cards/CardKeys';
+import { TrophyFactory } from '../trophies/TrophyFactory';
+import { TrophyKey } from '../trophies/TrophyKey';
+import { CardUpgrade } from '../trophies/CardUpgrade';
 
 interface GameDB extends DBSchema {
     trophies: {
-        key: string;
-        value: { key: string };
+        key: number;
+        value: { key: TrophyKey, cardKey?: CardKeys };
     },
     runs: {
         key: string;
@@ -43,7 +45,7 @@ export class StorageManager {
         if (!this.db) {
             this.db = await openDB<GameDB>(this.dbName, this.dbVersion, {
                 upgrade(db) {
-                    db.createObjectStore('trophies', { keyPath: 'key' });
+                    db.createObjectStore('trophies', { keyPath: 'id', autoIncrement: true });
                     db.createObjectStore('runs', { keyPath: 'key' });
                     db.createObjectStore('dialogues', { keyPath: 'key' });
                     const baseDeckStore = db.createObjectStore('baseDeck', { keyPath: 'id', autoIncrement: true });
@@ -54,38 +56,43 @@ export class StorageManager {
     }
 
     public static async saveTrophyTypes(trophyTypes: TrophyType[]) {
-        //await this.initializeDB();
         if (this.db) {
+            // Clear the 'trophies' table before adding new entries
+            const txClear = this.db.transaction('trophies', 'readwrite');
+            await txClear.objectStore('trophies').clear();
+            await txClear.done;
+
+            const tx = this.db.transaction('trophies', 'readwrite');
             for (const trophyType of trophyTypes) {
                 log(`saving trophy type to db ${trophyType.getKey()}`);
-                await this.db.put('trophies', { key: trophyType.getKey() });
+                const key = trophyType.getKey();
+                let cardKey: CardKeys | undefined;
+
+                if (trophyType instanceof CardUpgrade) {
+                    cardKey = (trophyType as CardUpgrade).getCardKey() ?? undefined;
+                }
+
+                await tx.store.add({ key, cardKey });
             }
+            await tx.done;
         }
     }
 
     public static async loadTrophyTypes(): Promise<TrophyType[]> {
-        //await this.initializeDB();
         if (this.db) {
-            const trophyNames = await this.db.getAll('trophies');
-            const trophyType = trophyNames.map(trophyStored => StorageManager.createTrophyType(trophyStored.key));
-            log(`loaded trophy types from db ${trophyType}`);
-            Library.setTrophyTypes(trophyType);
-            return trophyType;
+            const trophyRecords = await this.db.getAll('trophies');
+            const trophyTypes = trophyRecords.map(record => {
+                const trophy = TrophyFactory.createTrophyType(record.key, record.cardKey);
+                return trophy;
+            });
+            log(`loaded trophy types from db ${trophyTypes}`);
+            Library.setTrophyTypes(trophyTypes);
+            return trophyTypes;
         }
         return [];
     }
 
-    public static createTrophyType(key: string): TrophyType {
-        log("creating trophy type " + key);
-        switch (key) {
-            default:
-                log(`Unknown trophy type: ${key}`);
-                return new UnknownTrophy();
-        }
-    }
-
     public static async saveRunCount(runCount: number) {
-        //await this.initializeDB();
         if (this.db) {
             log(`saving run count to db: ${runCount}`);
             await this.db.put('runs', { key: 'runCount', count: runCount });
@@ -93,7 +100,6 @@ export class StorageManager {
     }
 
     public static async loadRunCount(): Promise<number> {
-        //await this.initializeDB();
         if (this.db) {
             const runData = await this.db.get('runs', 'runCount');
             log(`loaded run count from db: ${runData}`);
@@ -105,7 +111,6 @@ export class StorageManager {
     }
 
     public static async saveDialogue(coachKey: string, coachDialogue: CoachDialogue) {
-        //await this.initializeDB();
         if (this.db) {
             log(`"saving dialogue to db: ${coachKey}`);
             await this.db.put('dialogues', {
@@ -118,7 +123,6 @@ export class StorageManager {
     }
 
     public static async loadDialogue(coachKey: string): Promise<{ currentIntroDialogue: number, currentWinDialogue: number, currentLoseDialogue: number } | null> {
-        //await this.initializeDB();
         if (this.db) {
             const dialogueData = await this.db.get('dialogues', coachKey);
             if (dialogueData) {
@@ -175,4 +179,3 @@ export class StorageManager {
         }
     }
 }
-

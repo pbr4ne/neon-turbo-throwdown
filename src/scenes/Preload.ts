@@ -14,6 +14,7 @@ import { DialogueStorage } from "../dialogue/DialogueStorage";
 import { CoachList } from "../throwdown/CoachList";
 import { CardFactory } from "../cards/CardFactory";
 import { Library } from "../throwdown/Library";
+import { TrophyFactory } from "../trophies/TrophyFactory";
 /* END-USER-IMPORTS */
 
 export default class Preload extends Phaser.Scene {
@@ -72,6 +73,7 @@ export default class Preload extends Phaser.Scene {
 		this.load.pack("asset-pack", assetPackUrl);
 
 		CardFactory.registerCardTypes();
+		TrophyFactory.registerTrophyTypes();
 
 		if (checkUrlParam("enableSaveLoad", "true")) {
 			await StorageManager.initializeDB();

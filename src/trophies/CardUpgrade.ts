@@ -1,8 +1,9 @@
-import { CardType } from "~/cards/CardType";
 import { TrophyType } from "./TrophyType";
+import { CardKeys } from "~/cards/CardKeys";
+import { TrophyKey } from "./TrophyKey";
 
 export class CardUpgrade extends TrophyType {
-    constructor(card: CardType) {
-        super("card-upgrade", "card upgrade", "Upgraded card", [], card);
+    constructor(cardKey: CardKeys) {
+        super(TrophyKey.CARD_UPGRADE, "card upgrade", "Upgraded card", [], cardKey);
     }
 }

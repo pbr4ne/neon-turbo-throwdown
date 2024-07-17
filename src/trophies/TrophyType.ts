@@ -1,27 +1,28 @@
-import { CardType } from "~/cards/CardType";
+import { CardKeys } from "../cards/CardKeys";
+import { TrophyKey } from "./TrophyKey";
 
 export abstract class TrophyType {
-    private key: string;
+    private key: TrophyKey;
     private name: string;
     private description: string;
     private prerequisites: TrophyType[] = [];
-    private card: CardType | null = null;
+    private cardKey: CardKeys | null = null;
 
-    constructor(key: string, name: string, description: string, prerequisites: TrophyType[] = [], card: CardType | null = null) {
+    constructor(key: TrophyKey, name: string, description: string, prerequisites: TrophyType[] = [], cardKey: CardKeys | null = null) {
         this.key = key;
         this.name = name;
         this.description = description;
         this.prerequisites = prerequisites;
-        this.card = card;
+        this.cardKey = cardKey;
     }
 
-    public getKey(): string {
+    public getKey(): TrophyKey {
         return this.key;
     }
 
     public getName(): string {
-        if (this.card) {
-            return `${this.name} - ${this.card.getName()}`;
+        if (this.cardKey) {
+            return `${this.name} - ${this.cardKey}`;
         }
         return this.name;
     }
@@ -34,11 +35,15 @@ export abstract class TrophyType {
         return this.prerequisites;
     }
 
-    public getCard(): CardType | null {
-        return this.card;
+    public getCardKey(): CardKeys | null {
+        return this.cardKey;
     }
 
     public equals(other: TrophyType): boolean {
         return this.key === other.key;
+    }
+
+    toString(): string {
+        return `${this.key} - ${this.name} - ${this.cardKey}`;
     }
 }

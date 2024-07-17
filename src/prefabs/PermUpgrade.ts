@@ -168,7 +168,7 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
                 log("Couldn't find card to remove");
             }
             deckToModify.push(upgrade);
-            Library.getTrophyTypes().push(new CardUpgrade(upgrade));
+            Library.addTrophyType(new CardUpgrade(upgrade.getKey()));
 
             log("full deck is now: ");
             deckToModify.forEach(card => {

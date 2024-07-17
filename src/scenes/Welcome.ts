@@ -290,8 +290,11 @@ export default class Welcome extends Phaser.Scene {
 			align: 'center'
 		}).setOrigin(0.5, 0.5);
 	
+		log("libary trophy types");
 		const trophies = Library.getTrophyTypes();
+		log(trophies.toString());
 		const sortedTrophies = trophies.slice().sort((a, b) => a.getName().localeCompare(b.getName()));
+		log(sortedTrophies.toString());
 	
 		const maxPopupHeight = 700;
 		const titleHeight = 40; 
@@ -309,6 +312,7 @@ export default class Welcome extends Phaser.Scene {
 		let yPos = -260;
 	
 		sortedTrophies.forEach((trophy) => {
+			log(`trophy: ${trophy.getName()}`);
 			const trophyText = this.add.text(-400, yPos, `${trophy.getName()}`, {
 				fontFamily: '"Press Start 2P"',
 				fontSize: fontSize,
@@ -339,7 +343,6 @@ export default class Welcome extends Phaser.Scene {
 		});
 	
 		popup.add([background, titleText, closeButton]);
-		popup.sendToBack(background); // Ensure the background is behind the text
+		popup.sendToBack(background);
 	}
-	
 }
