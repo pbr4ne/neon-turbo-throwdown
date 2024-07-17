@@ -112,9 +112,9 @@ export class DialogueStorage {
         primoWinDialogue3.addStep("I better learn some new moves", CoachList.primo);
         //Lose Dialogue Primo
         //1
-        primoLoseDialogue1.addStep("Don’t mess with the best! The best being me and of course all the other bosses who occupy a more enviable position in this gym.", CoachList.primo);
+        primoLoseDialogue1.addStep("Don't mess with the best! The best being me and of course all the other bosses who occupy a more enviable position in this gym.", CoachList.primo);
         //2
-        primoLoseDialogue2.addStep("How does LAST feel…’cause first feels great! ‘Cause Primo means first. In case that wasn’t clear. Before.", CoachList.primo);
+        primoLoseDialogue2.addStep("How does LAST feel…'cause first feels great! ‘Cause Primo means first. In case that wasn't clear. Before.", CoachList.primo);
         //3primoLoseDialogue3.addStep("Being FIRST comes easy to me!", CoachList.primo);
     }
 
@@ -146,7 +146,7 @@ export class DialogueStorage {
 
         //lose
         //1
-        sporticusLoseDialogue1.addStep("Your team should’ve worn better protection! Might I suggest the Trojan method?", CoachList.sporticus);
+        sporticusLoseDialogue1.addStep("Your team should've worn better protection! Might I suggest the Trojan method?", CoachList.sporticus);
 
     }
 
@@ -170,16 +170,16 @@ export class DialogueStorage {
         //intro
         //1
         tycoonIntroDialogue1.addStep("I say, old bean! Shall we have a sporting match of sports match?", CoachList.tycoon, "???");
-        tycoonIntroDialogue1.addStep(["I thought it was called Turbo Throwdown?", "How…are you a gym coach exactly?", "I’m 37, I’m not old"], CoachList.you);
+        tycoonIntroDialogue1.addStep(["I thought it was called Turbo Throwdown?", "How…are you a gym coach exactly?", "I'm 37, I'm not old"], CoachList.you);
         tycoonIntroDialogue1.addStep("Hahahaha, capital!", CoachList.tycoon);
         //2
-        tycoonIntroDialogue2.addStep("I used to coach croquet, but alas, it’s so passé!", CoachList.tycoon);
+        tycoonIntroDialogue2.addStep("I used to coach croquet, but alas, it's so passé!", CoachList.tycoon);
         //3
         tycoonIntroDialogue3.addStep("…so I told them a pair would be called a binocle but did they listen to me? Nooooo…", CoachList.tycoon);
 
         //win
         //1
-        tycoonWinDialogue1.addStep("Curses! I didn’t wax my balls enough!", CoachList.tycoon);
+        tycoonWinDialogue1.addStep("Curses! I didn't wax my balls enough!", CoachList.tycoon);
         //2
         tycoonWinDialogue2.addStep("Zounds and turbo-zounds!", CoachList.tycoon);
 
@@ -187,7 +187,7 @@ export class DialogueStorage {
         //1
         tycoonLoseDialogue1.addStep("Capital match, old bean!", CoachList.tycoon);
         //2
-        tycoonLoseDialogue2.addStep("Do say hello to the spirit coach for me, won’t you?", CoachList.tycoon);
+        tycoonLoseDialogue2.addStep("Do say hello to the spirit coach for me, won't you?", CoachList.tycoon);
 
     }
 
@@ -207,7 +207,7 @@ export class DialogueStorage {
         //win
         //1
         officeWinDialogue1.addStep("This will reflect well in your performance review", CoachList.office);
-        officeWinDialogue1.addStep(["You’re not the boss of me", "Whatever, Shoulderpads.", "Thanks, Boss"], CoachList.you);
+        officeWinDialogue1.addStep(["You're not the boss of me", "Whatever, Shoulderpads.", "Thanks, Boss"], CoachList.you);
 
         //lose
         //1
@@ -345,21 +345,21 @@ export class DialogueStorage {
 
         //intro
         //1
-        boss10IntroDialogue1.addStep("So you’ve arrived.", CoachList.boss10, "???");
+        boss10IntroDialogue1.addStep("So you've arrived.", CoachList.boss10, "???");
         boss10IntroDialogue1.addStep(["Are you the last boss?"], CoachList.you);
-        boss10IntroDialogue1.addStep("Fun fact - my responses are fixed. So is this game. You can’t win.", CoachList.boss10);
+        boss10IntroDialogue1.addStep("Fun fact - my responses are fixed. So is this game. You can't win.", CoachList.boss10);
         boss10IntroDialogue1.addStep(["Game?", "Game?", "Game?"], CoachList.you);
-        boss10IntroDialogue1.addStep("It’s all just a game. One that you’re about to lose, PLAYER.", CoachList.boss10);
+        boss10IntroDialogue1.addStep("It's all just a game. One that you're about to lose, PLAYER.", CoachList.boss10);
         //2
         boss10IntroDialogue2.addStep("What upgrades did you pick this time?", CoachList.boss10);
         //3
-        boss10IntroDialogue3.addStep("You’re seriously still playing this?", CoachList.boss10);
+        boss10IntroDialogue3.addStep("You're seriously still playing this?", CoachList.boss10);
 
         //win
         //1
-        boss10WinDialogue1.addStep("Looks like you’ve unlocked Eternal Mode. Whoop-dee-f….", CoachList.boss10);
+        boss10WinDialogue1.addStep("Looks like you've unlocked Eternal Mode. Whoop-dee-f….", CoachList.boss10);
         //2
-        boss10WinDialogue2.addStep("Sorry, there aren’t any additional unlocks.", CoachList.boss10);
+        boss10WinDialogue2.addStep("Sorry, there aren't any additional unlocks.", CoachList.boss10);
 
         //lose
         //1
