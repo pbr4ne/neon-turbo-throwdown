@@ -112,7 +112,7 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.EVADE_1_EVADE),
             CardFactory.createCardType(CardKeys.BLOCK_1_BLOCK),
             CardFactory.createCardType(CardKeys.BLOCK_1_BLOCK),
-            CardFactory.createCardType(CardKeys.CATCH_1_CATCH)
+            CardFactory.createCardType(CardKeys.CATCH_1_CATCH),
         ]);
         
         this.primo.setBaseCards([
@@ -125,7 +125,7 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.EVADE_1_EVADE),
             CardFactory.createCardType(CardKeys.BLOCK_1_BLOCK),
             CardFactory.createCardType(CardKeys.BLOCK_1_BLOCK),
-            CardFactory.createCardType(CardKeys.CATCH_1_CATCH)
+            CardFactory.createCardType(CardKeys.CATCH_1_CATCH),
         ]);
 
         this.sporticus.setBaseCards([
@@ -192,6 +192,8 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.CATCH_2_TURBO_CATCH),
             CardFactory.createCardType(CardKeys.SOLDIER_ON),
             CardFactory.createCardType(CardKeys.SOLDIER_ON),
+            CardFactory.createCardType(CardKeys.DROP_AND_GIVE_ME_20),
+            CardFactory.createCardType(CardKeys.DROP_AND_GIVE_ME_20),
         ]);
 
         this.betsy.setBaseCards([

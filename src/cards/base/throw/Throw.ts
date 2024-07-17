@@ -51,7 +51,7 @@ export class Throw extends CardType {
             }
             if (!defenseSuccess) {
                 //reduce their HP if they failed to defend
-                target.reduceHP(this.getOffenseDamage());
+                target.reduceHP(this.getOffenseDamage(member, target, team));
                 return true;
             }
         }
@@ -90,8 +90,23 @@ export class Throw extends CardType {
         return Phaser.Math.Clamp(chance, 0, 1);
     }
 
-    getOffenseDamage(): number {
-        return this.offenseDamage;
+    getOffenseDamage(member?: Member, target?: Member, team?: Team): number {
+        if (!member || !target) {
+            return this.offenseDamage;
+        }
+        const modifiers = team?.getModifiers() || this.getPlayer()?.getModifiers();
+        let damage = this.offenseDamage;
+    
+        if (modifiers) {
+            damage *= modifiers.getTurnDamageReceiveMultiplier(target);
+            damage += modifiers.getCombatDamageDealtAddition(member);
+        }
+
+        if (damage < 0) {
+            damage = 0;
+        }
+
+        return damage;
     }
 
     getNumTargets(): number {

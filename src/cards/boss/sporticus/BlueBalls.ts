@@ -17,13 +17,9 @@ export class BlueBalls extends SporticusCard {
     }
 
     special(member: Member, target: Member | null, team: Team, opponentTeam: Team): boolean {
-        //target opponent takes 2x damage this turn
         if (target) {
-            log("target for blue balls");
             member.showFloatingAction(this.getName());
             opponentTeam.getModifiers().addTurnDamageReceiveMultiplier(target, 2);
-        } else {
-            log("No target for blue balls");
         }
 
         return true;

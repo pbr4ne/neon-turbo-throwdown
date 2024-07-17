@@ -16,6 +16,7 @@ export class Modifiers {
     //throw
     private combatThrowEffectivenessMultiplier: number = 0;
     //damage
+    private combatDamageDealtAdditions: Map<Member, number> = new Map();
     private turnDamageReceiveMultipliers: Map<Member, number> = new Map();
 
     // Evade chance
@@ -48,7 +49,7 @@ export class Modifiers {
         return this.combatCatchChanceMultiplier + this.turnCatchChanceMultiplier;
     }
 
-    addRoundCatchChanceMultiplier(multiplier: number): void {
+    addCombatCatchChanceMultiplier(multiplier: number): void {
         this.combatCatchChanceMultiplier += multiplier;
     }
 
@@ -56,7 +57,7 @@ export class Modifiers {
         this.turnCatchChanceMultiplier += multiplier;
     }
 
-    resetRoundCatchChanceMultiplier(): void {
+    resetCombatCatchChanceMultiplier(): void {
         this.combatCatchChanceMultiplier = 0;
     }
 
@@ -69,7 +70,7 @@ export class Modifiers {
         return this.combatBlockChanceMultiplier + this.turnBlockChanceMultiplier;
     }
 
-    addRoundBlockChanceMultiplier(multiplier: number): void {
+    addCombatBlockChanceMultiplier(multiplier: number): void {
         this.combatBlockChanceMultiplier += multiplier;
     }
 
@@ -89,7 +90,7 @@ export class Modifiers {
         this.turnBlockNumberAddition += addition;
     }
 
-    resetRoundBlockChanceMultiplier(): void {
+    resetCombatBlockChanceMultiplier(): void {
         this.combatBlockChanceMultiplier = 0;
     }
 
@@ -97,7 +98,7 @@ export class Modifiers {
         this.turnBlockChanceMultiplier = 0;
     }
 
-    resetRoundBlockNumberAddition(): void {
+    resetCombatBlockNumberAddition(): void {
         this.combatBlockNumberAddition = 0;
     }
 
@@ -105,22 +106,40 @@ export class Modifiers {
         this.turnBlockNumberAddition = 0;
     }
 
-    // Damage receive multiplier
+    // Damage receive
     addTurnDamageReceiveMultiplier(member: Member, multiplier: number): void {
-        const currentMult = this.turnDamageReceiveMultipliers.get(member) ?? 0;
-        this.turnDamageReceiveMultipliers.set(member, currentMult);
+        const currentMult = this.turnDamageReceiveMultipliers.get(member) ?? 1;
+        this.turnDamageReceiveMultipliers.set(member, currentMult * multiplier);
     }
 
     getTurnDamageReceiveMultiplier(member: Member): number {
-        return this.turnDamageReceiveMultipliers.get(member) ?? 0;
+        return this.turnDamageReceiveMultipliers.get(member) ?? 1;
     }
 
     resetTurnDamageReceiveMultiplier(member: Member): void {
-        this.turnDamageReceiveMultipliers.set(member, 0);
+        this.turnDamageReceiveMultipliers.set(member, 1);
     }
 
     resetAllTurnDamageReceiveMultipliers(): void {
         this.turnDamageReceiveMultipliers.clear();
+    }
+
+    // Damage dealt
+    addCombatDamageDealtAddition(member: Member, addition: number): void {
+        const currentAdd = this.combatDamageDealtAdditions.get(member) ?? 0;
+        this.combatDamageDealtAdditions.set(member, currentAdd + addition);
+    }
+
+    getCombatDamageDealtAddition(member: Member): number {
+        return this.combatDamageDealtAdditions.get(member) ?? 0;
+    }
+
+    resetCombatDamageDealtAddition(member: Member): void {
+        this.combatDamageDealtAdditions.set(member, 0);
+    }
+
+    resetAllCombatDamageDealtAdditions(): void {
+        this.combatDamageDealtAdditions.clear();
     }
 
     // Throw effectiveness
@@ -129,9 +148,7 @@ export class Modifiers {
     }
 
     addCombatThrowEffectivenessMultiplier(multiplier: number): void {
-        
         this.combatThrowEffectivenessMultiplier += multiplier;
-        log("ROUND THROW EFFECTIVENESS MULTIPLIER: " + this.combatThrowEffectivenessMultiplier);
     }
 
     resetCombatThrowEffectivenessMultiplier(): void {
@@ -141,10 +158,11 @@ export class Modifiers {
     // Reset all
     resetAllCombatModifiers(): void {
         log("Resetting all combat modifiers.");
-        this.resetRoundCatchChanceMultiplier();
+        this.resetCombatCatchChanceMultiplier();
         this.resetCombatThrowEffectivenessMultiplier();
-        this.resetRoundBlockChanceMultiplier();
-        this.resetRoundBlockNumberAddition();
+        this.resetCombatBlockChanceMultiplier();
+        this.resetCombatBlockNumberAddition();
+        this.resetAllCombatDamageDealtAdditions();
     }
 
     resetAllTurnModifiers(): void {
