@@ -96,6 +96,10 @@ export class TrophyFactory {
         //other
         this.registerTrophyType(TrophyKey.CARD_UPGRADE, (cardKey?: CardKeys) => new CardUpgrade(cardKey!));
         this.registerTrophyType(TrophyKey.UNKNOWN, () => new UnknownTrophy);
+    }
 
+    public static getAllTrophyTypes(): TrophyType[] {
+        //remove unknown and card upgrade trophy
+        return Array.from(this.trophyTypeMap.keys()).map(key => this.createTrophyType(key)).filter(trophy => trophy.getKey() !== TrophyKey.UNKNOWN && trophy.getKey() !== TrophyKey.CARD_UPGRADE);
     }
 }

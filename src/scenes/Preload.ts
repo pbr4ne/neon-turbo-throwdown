@@ -15,6 +15,7 @@ import { CoachList } from "../throwdown/CoachList";
 import { CardFactory } from "../cards/CardFactory";
 import { Library } from "../throwdown/Library";
 import { TrophyFactory } from "../trophies/TrophyFactory";
+import { CardKeys } from "../cards/CardKeys";
 /* END-USER-IMPORTS */
 
 export default class Preload extends Phaser.Scene {
@@ -81,7 +82,7 @@ export default class Preload extends Phaser.Scene {
 			await StorageManager.loadRunCount();	
 			await DialogueStorage.loadDialogues();
 		}
-		
+
 		new DialogueStorage();
         CoachList.setupCoachDecks();
 
@@ -98,6 +99,24 @@ export default class Preload extends Phaser.Scene {
 		}
 
 		Library.setPureDeck(CoachList.you.getBaseCards());
+
+		//all unlocks
+		if (checkUrlParam("allTrophiesUnlocked", "true")) {
+			Library.setTrophyTypes(TrophyFactory.getAllTrophyTypes());
+			CoachList.you.setBaseCards([
+				CardFactory.createCardType(CardKeys.THROW_5_RI_RICOCHET),
+				CardFactory.createCardType(CardKeys.THROW_5_RI_RICOCHET),
+				CardFactory.createCardType(CardKeys.THROW_5_RI_RICOCHET),
+				CardFactory.createCardType(CardKeys.THROW_5_RI_RICOCHET),
+				CardFactory.createCardType(CardKeys.THROW_5_RI_RICOCHET),
+				CardFactory.createCardType(CardKeys.EVADE_4_TRIPLE_EVADE),
+				CardFactory.createCardType(CardKeys.EVADE_4_TRIPLE_EVADE),
+				CardFactory.createCardType(CardKeys.BLOCK_5_DOUBLE_BLOCK),
+				CardFactory.createCardType(CardKeys.BLOCK_5_DOUBLE_BLOCK),
+				CardFactory.createCardType(CardKeys.CATCH_3_BIG_HANDS),
+			]);
+		}
+
 		log("PRELOAD COMPLETE");
 	}
 
