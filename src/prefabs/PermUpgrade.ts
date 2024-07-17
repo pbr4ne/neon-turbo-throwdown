@@ -82,7 +82,7 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
     }
 
     getUpgradeList() {
-        let upgradeableCards = CoachList.you.getBaseCards()
+        let upgradeableCards = this.getDeckToModify()
             .filter(card => card.getUpgrade() !== null)
             .map(card => ({ card, type: 'upgradeable' }));
 
@@ -140,10 +140,13 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
 
     private async handleCardSelection(selectedItem: Trophy | Upgrade) {
         GameSounds.playCard();
+        const deckToModify = this.getDeckToModify();
+
         if (selectedItem instanceof Trophy) {
             log("Trophy selected");
             Library.addTrophyType(selectedItem.trophyType);
             OutstandingTrophyList.removeTrophy(selectedItem.trophyType);
+
         } else if (selectedItem instanceof Upgrade) {
             log("Upgrade selected");
             const upgrade = selectedItem.getCardType().getUpgrade();
@@ -153,24 +156,22 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
             }
             log("ADDING UPGRADE: " + upgrade);
             const newCard = new Card(this.scene, upgrade, "playerDeck", 0, 0, "front");
-            //log all cards in baseCards
             
             // Delete the card using the key
-            const index = this.findCardTypeIndexByKey(CoachList.you.getBaseCards(), selectedItem.getCardType().getKey());
+            const index = this.findCardTypeIndexByKey(deckToModify, selectedItem.getCardType().getKey());
     
             if (index > -1) {
                 log("Found card to remove at index " + index);
-                log("array length was " + CoachList.you.getBaseCards().length);
-                CoachList.you.getBaseCards().splice(index, 1);
+                log("array length was " + deckToModify.length);
+                deckToModify.splice(index, 1);
             } else {
                 log("Couldn't find card to remove");
             }
-            CoachList.you.getBaseCards().push(upgrade);
-            await StorageManager.saveBaseDeck(CoachList.you.getBaseCards());
+            deckToModify.push(upgrade);
             Library.getTrophyTypes().push(new CardUpgrade(upgrade));
 
             log("full deck is now: ");
-            CoachList.you.getBaseCards().forEach(card => {
+            deckToModify.forEach(card => {
                 log(card.toString());
             });
             //do this so you can see current modifiers on the card description
@@ -180,6 +181,9 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
         } else {
             log("Unknown item selected");
         }
+
+        await StorageManager.saveBaseDeck(deckToModify);
+        CoachList.you.setBaseCards(deckToModify);
     
         (this.scene.scene.get('Game') as Game).finishPermUpgrade();
     }
@@ -187,5 +191,15 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
     findCardTypeIndexByKey(cards: CardType[], key: CardKeys): number {
         log("Finding card type index by key: " + key);
         return cards.findIndex(card => card.getKey() === key);
+    }
+
+    getDeckToModify() {
+        if (Library.getEasyMode()) {
+            log("Easy mode, returning coach deck");
+            return CoachList.you.getBaseCards();
+        } else {
+            log("Hard mode, returning pure deck");
+            return Library.getPureDeck();
+        }
     }
 }

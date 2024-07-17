@@ -13,6 +13,7 @@ import { StorageManager } from "../utilities/StorageManager";
 import { DialogueStorage } from "../dialogue/DialogueStorage";
 import { CoachList } from "../throwdown/CoachList";
 import { CardFactory } from "../cards/CardFactory";
+import { Library } from "../throwdown/Library";
 /* END-USER-IMPORTS */
 
 export default class Preload extends Phaser.Scene {
@@ -85,6 +86,12 @@ export default class Preload extends Phaser.Scene {
 		if (checkUrlParam("enableSaveLoad", "true")) {
 			await StorageManager.loadBaseDeck();
 		}
+
+		if (checkUrlParam("mode", "easy")) {
+			Library.setEasyMode(true);
+		}
+
+		Library.setPureDeck(CoachList.you.getBaseCards());
 		log("PRELOAD COMPLETE");
 	}
 

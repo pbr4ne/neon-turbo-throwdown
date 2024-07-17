@@ -2,6 +2,7 @@ import { TrophyType } from "../trophies/TrophyType";
 import { CardType } from "../cards/CardType";
 import { CoachDialogue } from "../dialogue/CoachDialogue";
 import { CoachList } from "./CoachList";
+import { log } from "../utilities/GameUtils";
 
 export class Coach {
     private name: string;
@@ -42,7 +43,8 @@ export class Coach {
     }
 
     public setBaseCards(baseCards: CardType[]) {
-        this.baseCards = baseCards;
+        log(`set ${this.name} base cards: ${baseCards}`);
+        this.baseCards = [...baseCards];
     }
 
     public getDialogue(): CoachDialogue | undefined {
