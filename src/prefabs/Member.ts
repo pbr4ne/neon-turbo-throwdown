@@ -47,6 +47,7 @@ export default class Member extends Phaser.GameObjects.Container {
     public assignedBlockText: Phaser.GameObjects.Text | null = null;
     public assignedText: Phaser.GameObjects.Text | null = null;
     private healthBar: Phaser.GameObjects.Graphics;
+    private questionMark: Phaser.GameObjects.Text;
     private targetArc: Phaser.GameObjects.Graphics | null = null;
     private tooltipText: Phaser.GameObjects.Text;
     private tooltipImage: Phaser.GameObjects.Image;
@@ -147,6 +148,18 @@ export default class Member extends Phaser.GameObjects.Container {
         this.healthBar = new Phaser.GameObjects.Graphics(scene);
         this.add(this.healthBar);
         this.healthBar.setVisible(false);
+        this.questionMark = this.scene.add.text(
+            0, 
+            0, 
+            '?', {
+                fontFamily: '"Press Start 2P"',
+                fontSize: '12px',
+                color: '#ff005a',
+                align: 'center'
+            }
+        ).setOrigin(0.5);
+        this.add(this.questionMark);
+        this.questionMark.setVisible(false);
         this.updateHealthBar();
 
         this.tooltipImage = new Phaser.GameObjects.Image(scene, 0, 225, 'tooltip');
@@ -220,55 +233,70 @@ export default class Member extends Phaser.GameObjects.Container {
         this.bracketLeft?.setVisible(true);
         this.bracketRight?.setVisible(true);
         this.healthBar.setVisible(true);
+        if (!this.canSeeHealth()) {
+            this.questionMark.setVisible(true);
+        }
     }
 
     hideAssignedStuff() {
         this.bracketLeft?.setVisible(false);
         this.bracketRight?.setVisible(false);
         this.healthBar.setVisible(false);
+        this.questionMark.setVisible(false);
+    }
+
+    canSeeHealth(): boolean {
+        let canSee: boolean = false;
+        if (this.coach != null) {
+            if (this.coach.getDifficulty() === 0) {
+                canSee = true;
+            } else if (this.coach.getDifficulty() === 1 && Library.hasTrophy(SeeHealth1)) {
+                canSee = true;
+            } else if (this.coach.getDifficulty() === 2 && Library.hasTrophy(SeeHealth2)) {
+                canSee = true;
+            } else if (this.coach.getDifficulty() === 3 && Library.hasTrophy(SeeHealth3)) {
+                canSee = true;
+            } else if (this.coach.getDifficulty() === 4 && Library.hasTrophy(SeeHealth4)) {
+                canSee = true;
+            }
+        }
+
+        return canSee;
     }
 
     updateHealthBar() {
         let renderHealthBar = false;
-        if (this.coach != null) {
-            if (this.coach.getDifficulty() === 0) {
-                renderHealthBar = true;
-            } else if (this.coach.getDifficulty() === 1 && Library.hasTrophy(SeeHealth1)) {
-                renderHealthBar = true;
-            } else if (this.coach.getDifficulty() === 2 && Library.hasTrophy(SeeHealth2)) {
-                renderHealthBar = true;
-            } else if (this.coach.getDifficulty() === 3 && Library.hasTrophy(SeeHealth3)) {
-                renderHealthBar = true;
-            } else if (this.coach.getDifficulty() === 4 && Library.hasTrophy(SeeHealth4)) {
-                renderHealthBar = true;
-            }
+        let renderQuestionMark = false;
+        if (this.canSeeHealth()) {
+            renderHealthBar = true;
+        } else {
+            renderQuestionMark = true;
         }
-
-        if (!renderHealthBar) {
-            this.healthBar.setVisible(false);
-            return;
-        }
-
-        const currentHP = this.hp < 0 ? 0 : this.hp;
+    
         const baseHealthBarWidth = 50; 
         const healthBarWidth = baseHealthBarWidth + (this.maxHP - 3) * 40; 
         const healthBarHeight = 5;
         const healthBarY = this.sprite.height / 2;
         
         this.healthBar.clear();
-
-        const currentHealthWidth = (currentHP / this.maxHP) * healthBarWidth;
-
-        this.healthBar.fillStyle(0xff005a, 1);
-        this.healthBar.fillRect(-healthBarWidth / 2, healthBarY, currentHealthWidth, healthBarHeight);
-
+    
+        if (renderHealthBar) {
+            const currentHP = this.hp < 0 ? 0 : this.hp;
+            const currentHealthWidth = (currentHP / this.maxHP) * healthBarWidth;
+    
+            this.healthBar.fillStyle(0xff005a, 1);
+            this.healthBar.fillRect(-healthBarWidth / 2, healthBarY, currentHealthWidth, healthBarHeight);
+        } else {
+            this.questionMark.setPosition(0, healthBarY + 2.5);
+        }
+    
         const capWidth = 2;
         const capHeight = healthBarHeight + 2; 
         this.healthBar.fillStyle(0xffffff, 1);
         this.healthBar.fillRect(-healthBarWidth / 2 - capWidth, healthBarY - 1, capWidth, capHeight);
         this.healthBar.fillRect(healthBarWidth / 2, healthBarY - 1, capWidth, capHeight);
     }
-
+    
     getNumber(): number {
         return this.number;
     }
@@ -536,6 +564,7 @@ export default class Member extends Phaser.GameObjects.Container {
         this.assignedBlockText?.setVisible(false);
         this.assignedText?.setVisible(false);
         this.healthBar.setVisible(false);
+        this.questionMark.setVisible(false);
     }
 
     getTrophyTypes(): TrophyType[] {
