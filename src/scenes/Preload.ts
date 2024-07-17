@@ -76,19 +76,19 @@ export default class Preload extends Phaser.Scene {
 		CardFactory.registerCardTypes();
 		TrophyFactory.registerTrophyTypes();
 
-		if (checkUrlParam("enableSaveLoad", "true")) {
+		//if (checkUrlParam("enableSaveLoad", "true")) {
 			await StorageManager.initializeDB();
 			await StorageManager.loadTrophyTypes();
 			await StorageManager.loadRunCount();	
 			await DialogueStorage.loadDialogues();
-		}
+		//}
 
 		new DialogueStorage();
         CoachList.setupCoachDecks();
 
-		if (checkUrlParam("enableSaveLoad", "true")) {
+		//if (checkUrlParam("enableSaveLoad", "true")) {
 			await StorageManager.loadBaseDeck();
-		}
+		//}
 
 		if (checkUrlParam("mode", "easy")) {
 			Library.setEasyMode(true);
