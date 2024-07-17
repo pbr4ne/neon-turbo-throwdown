@@ -73,7 +73,7 @@ export default class Card extends GenericCard {
     
         let fontSize = 16;
     
-        this.tooltipText = new Phaser.GameObjects.Text(scene, 5, -275, description, {
+        this.tooltipText = new Phaser.GameObjects.Text(scene, -170, -285, description, {
             fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
             fontSize: '16px',
             color: '#00ffff',
@@ -82,7 +82,7 @@ export default class Card extends GenericCard {
             align: 'left',
             wordWrap: { width: 350, useAdvancedWrap: true }
         });
-        this.tooltipText.setOrigin(0.5, 0);
+        this.tooltipText.setOrigin(0, 0);
     
         while (this.tooltipText.height + 90 > this.tooltipImage.height) {
             fontSize--;

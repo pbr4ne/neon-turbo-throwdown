@@ -3,6 +3,6 @@ import { SeeTargets3 } from "./SeeTargets3";
 
 export class SeeTargets4 extends TrophyType {
     constructor() {
-        super("see-targets-4", "see targets 4", "See enemy targeting for coach difficulty 💀.", [new SeeTargets3()]);
+        super("see-targets-4", "target insight 4", "Insight into enemy targeting for coach difficulty 💀.", [new SeeTargets3()]);
     }
 }

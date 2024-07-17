@@ -48,6 +48,8 @@ export default class Member extends Phaser.GameObjects.Container {
     public assignedText: Phaser.GameObjects.Text | null = null;
     private healthBar: Phaser.GameObjects.Graphics;
     private targetArc: Phaser.GameObjects.Graphics | null = null;
+    private tooltipText: Phaser.GameObjects.Text;
+    private tooltipImage: Phaser.GameObjects.Image;
 
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string, visibleMove: boolean, team: Team, coach: Coach, number: number, flip: boolean = false, bracketOffset: number = 0) {
         super(scene, x, y);
@@ -145,11 +147,43 @@ export default class Member extends Phaser.GameObjects.Container {
         this.add(this.healthBar);
         this.healthBar.setVisible(false);
         this.updateHealthBar();
+
+        this.tooltipImage = new Phaser.GameObjects.Image(scene, 0, 225, 'tooltip');
+        this.tooltipImage.setFlipY(true);
+
+        let fontSize = 16;
+
+        this.tooltipText = new Phaser.GameObjects.Text(scene, -170, 160, "test", { 
+            fontFamily: '"Press Start 2P"',
+            fontSize: '16px',
+            color: '#00ffff',
+            lineSpacing: 15,
+            padding: { x: 5, y: 5 },
+            align: 'left',
+            wordWrap: { width: 350, useAdvancedWrap: true }
+        });
+        this.tooltipText.setOrigin(0, 0);
+        this.tooltipText.setVisible(false);
+        this.tooltipImage.setVisible(false);
+
+        while (this.tooltipText.height + 90 > this.tooltipImage.height) {
+            fontSize--;
+            this.tooltipText.setStyle({ fontSize: `${fontSize}px` });
+        }
+
+        this.add([this.tooltipImage, this.tooltipText]);
     
         this.on('pointerover', () => { 
             this.scene.input.setDefaultCursor('pointer'); 
             this.bracketLeft?.setTexture('bracket-hover');
             this.bracketRight?.setTexture('bracket-hover');
+            if (this.getAssignedCard() && team instanceof Boss) {
+                this.tooltipText.setVisible(true);
+                this.tooltipImage.setVisible(true);
+                this.updateTooltipText();
+                this.scene.children.remove(this);
+                this.scene.children.add(this);
+            }
         });
         this.on('pointerout', () => { 
             this.scene.input.setDefaultCursor('default'); 
@@ -160,7 +194,25 @@ export default class Member extends Phaser.GameObjects.Container {
                 this.bracketLeft?.setTexture('bracket-default');
                 this.bracketRight?.setTexture('bracket-default');
             }
+            this.tooltipText.setVisible(false);
+            this.tooltipImage.setVisible(false);
         });
+    }
+
+    private updateTooltipText(): void {
+        let description = "You need to upgrade your card insight before you can see this enemy's card!";
+        if (this.canSeeCard()) {
+            description = this.getAssignedCard()?.getCardType().getDescription() || "unknown";
+        }
+
+        this.tooltipText.setText(description);
+        
+        let fontSize = 16;
+    
+        while (this.tooltipText.height + 90 > this.tooltipImage.height) {
+            fontSize--;
+            this.tooltipText.setStyle({ fontSize: `${fontSize}px` });
+        }
     }
 
     showAssignedStuff() {
@@ -301,28 +353,39 @@ export default class Member extends Phaser.GameObjects.Container {
         }
     }
 
+    canSeeCard(): boolean {
+        let canSee: boolean = false;
+        if (this.coach) {
+            if (this.coach.getDifficulty() === 0) {
+                canSee = true;
+            } else if (this.coach.getDifficulty() === 1 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeCards1)) {
+                canSee = true;
+            } else if (this.coach.getDifficulty() === 2 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeCards2)) {
+                canSee = true;
+            } else if (this.coach.getDifficulty() === 3 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeCards3)) {
+                canSee = true;
+            } else if (this.coach.getDifficulty() === 4 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeCards4)) {
+                canSee = true;
+            }
+        }
+
+        return canSee;
+    }
+
     assignCard(card: Card, boss?: Boss) {
         if (this.assignedCard != null) {
             return;
         }
         this.assignedCard = card;
         
-        if (boss != null) {
-            let visibleText = "???";
-            if (boss.getCoach().getDifficulty() === 0) {
-                visibleText = card.cardType.getName();
-            } else if (boss.getCoach().getDifficulty() === 1 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeCards1)) {
-                visibleText = card.cardType.getName();
-            } else if (boss.getCoach().getDifficulty() === 2 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeCards2)) {
-                visibleText = card.cardType.getName();
-            } else if (boss.getCoach().getDifficulty() === 3 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeCards3)) {
-                visibleText = card.cardType.getName();
-            } else if (boss.getCoach().getDifficulty() === 4 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeCards4)) {
-                visibleText = card.cardType.getName();
+        if(boss != null) {
+            if (this.canSeeCard()) {
+                this.assignedText?.setText(card.cardType.getName());
+            } else {
+                this.assignedText?.setText("???");
             }
-            this.assignedText?.setText(visibleText);
             return;
-        }
+        }        
 
         card.showAssignedRing(this);
         this.bracketLeft?.setTexture('bracket-assigned');
@@ -439,47 +502,6 @@ export default class Member extends Phaser.GameObjects.Container {
         });
     }
     
-
-    showActionBam(text: string) {
-        if (!this.scene) {
-            return;
-        }
-    
-        const scene = this.scene;
-    
-        const centerX = scene.cameras.main.width / 2;
-        const centerY = scene.cameras.main.height / 2;
-    
-        const floatingText = scene.add.text(centerX, centerY, text, {
-            fontFamily: '"Press Start 2P"',
-            fontSize: '10px',
-            color: '#ff00ff',
-            stroke: '#00ffff',
-            strokeThickness: 1,
-            align: 'center'
-        }).setOrigin(0.5);
-    
-        // Animate the text to grow in size
-        scene.add.tween({
-            targets: floatingText,
-            scale: { from: 0.5, to: 8 },
-            duration: 500,
-            ease: 'Power1',
-            onComplete: () => {
-                // Fade out after the scaling is done
-                scene.add.tween({
-                    targets: floatingText,
-                    alpha: { from: 1, to: 0 },
-                    duration: 500,
-                    ease: 'Power1',
-                    onComplete: () => {
-                        floatingText.destroy();
-                    }
-                });
-            }
-        });
-    }
-
     destroyMember(memberWhoTargeted: Member) {
         this.team.removeMember(this);
         this.clearTargetArc();
