@@ -122,18 +122,18 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
 			this.buttonText.setVisible(true);
 		} else if (Array.isArray(text)) {
 			
-			this.optionText1.setText(text[0]);
+			this.optionText1.setText(`1. ${text[0]}`);
 			this.optionText1.setVisible(true);
 			this.optionInstructions.setVisible(true);
 			
 
 			if (text.length > 1) {
-				this.optionText2.setText(text[1]);
+				this.optionText2.setText(`2. ${text[1]}`);
 				this.optionText2.setVisible(true);
 			}
 
 			if (text.length > 2) {
-				this.optionText3.setText(text[2]);
+				this.optionText3.setText(`3. ${text[2]}`);
 				this.optionText3.setVisible(true);
 			}
 		}

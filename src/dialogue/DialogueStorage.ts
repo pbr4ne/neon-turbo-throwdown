@@ -74,7 +74,7 @@ export class DialogueStorage {
 
         //Intro Dialogue
         primoIntroDialogue1.addStep("You step into the gym for an ordinary day of sick gains when...", CoachList.you);
-        primoIntroDialogue1.addStep(["What...?"], CoachList.you);
+        primoIntroDialogue1.addStep(["What...?", "Huh...?"], CoachList.you);
         primoIntroDialogue1.addStep("A portal appears and sucks you in!", CoachList.you);
         primoIntroDialogue2.addStep("You're back at the strange gym.", CoachList.you);
         // primoIntroDialogue1.addStep("It still _looks_ like the local gym, but everything is strange and neon!", CoachList.you)
