@@ -113,6 +113,11 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.BLOCK_1_BLOCK),
             CardFactory.createCardType(CardKeys.BLOCK_1_BLOCK),
             CardFactory.createCardType(CardKeys.CATCH_1_CATCH),
+            //testers
+            // CardFactory.createCardType(CardKeys.NINJA_STAR),
+            // CardFactory.createCardType(CardKeys.NINJA_STAR),
+            // CardFactory.createCardType(CardKeys.NINJA_STAR),
+            // CardFactory.createCardType(CardKeys.NINJA_STAR),
         ]);
         
         this.primo.setBaseCards([
@@ -262,6 +267,8 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.CATCH_3_BIG_HANDS),
             CardFactory.createCardType(CardKeys.SMOKE_BOMB),
             CardFactory.createCardType(CardKeys.SMOKE_BOMB),
+            CardFactory.createCardType(CardKeys.NINJA_STAR),
+            CardFactory.createCardType(CardKeys.NINJA_STAR),
         ]);
 
         this.boss10.setBaseCards([

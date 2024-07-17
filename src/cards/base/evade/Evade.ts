@@ -31,7 +31,6 @@ export class Evade extends CardType {
             GameSounds.playBlock();
         }
         this.currentNumDefends++;
-        log("Evade has been used " + this.currentNumDefends + " times.");
         return defenseSuccess;
     }
 
