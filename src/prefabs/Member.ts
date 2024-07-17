@@ -21,10 +21,10 @@ import { SeeTargets4 } from "../trophies/insight/SeeTargets4";
 import Player from "./Player";
 import { IncreaseHP1 } from "../trophies/member/IncreaseHP1";
 import { IncreaseHP2 } from "../trophies/member/IncreaseHP2";
-import { IncreaseHP3 } from "../trophies/member/IncreaseHP3";
-import { IncreaseHP4 } from "../trophies/member/IncreaseHP4";
-import { IncreaseHP5 } from "../trophies/member/IncreaseHP5";
-import { IncreaseHP6 } from "../trophies/member/IncreaseHP6";
+import { HealthRegen1 } from "../trophies/member/HealthRegen1";
+import { HealthRegen2 } from "../trophies/member/HealthRegen2";
+import { HealthRegen3 } from "../trophies/member/HealthRegen3";
+import { Resurrect1 } from "../trophies/member/Resurrect1";
 import { SeeHealth1 } from "../trophies/insight/SeeHealth1";
 import { SeeHealth2 } from "../trophies/insight/SeeHealth2";
 import { SeeHealth3 } from "../trophies/insight/SeeHealth3";
@@ -70,33 +70,10 @@ export default class Member extends Phaser.GameObjects.Container {
         if (checkUrlParam("lowHP", "true")) {
             this.hp = 1;
         } else {
-            //todo this is dumb af
-            if (Library.hasTrophy(IncreaseHP6)) {
+            if (Library.hasTrophy(IncreaseHP2)){
                 this.hp += 2;
-            } else if (Library.hasTrophy(IncreaseHP5)) {
-                if ([1, 2, 4, 5].includes(number)) {
-                    this.hp += 2;
-                } else {
-                    this.hp += 1;
-                }
-            } else if (Library.hasTrophy(IncreaseHP4)) {
-                if ([1, 4].includes(number)) {
-                    this.hp += 2;
-                } else {
-                    this.hp += 1;
-                }
-            } else if (Library.hasTrophy(IncreaseHP3)) {
-                if ([1, 2, 3, 4, 5, 6].includes(number)) {
-                    this.hp += 1;
-                }
-            } else if (Library.hasTrophy(IncreaseHP2)) {
-                if ([1, 2, 4, 5].includes(number)) {
-                    this.hp += 1;
-                }
             } else if (Library.hasTrophy(IncreaseHP1)) {
-                if ([1, 4].includes(number)) {
-                    this.hp += 1;
-                }
+                this.hp += 1;
             }
         }
         this.maxHP = this.hp;

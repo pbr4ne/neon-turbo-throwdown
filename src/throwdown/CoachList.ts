@@ -5,10 +5,6 @@ import { CardKeys } from "../cards/CardKeys";
 import { CoachKeys } from "./CoachKeys";
 import { IncreaseHP1 } from "../trophies/member/IncreaseHP1";
 import { IncreaseHP2 } from "../trophies/member/IncreaseHP2";
-import { IncreaseHP3 } from "../trophies/member/IncreaseHP3";
-import { IncreaseHP4 } from "../trophies/member/IncreaseHP4";
-import { IncreaseHP5 } from "../trophies/member/IncreaseHP5";
-import { IncreaseHP6 } from "../trophies/member/IncreaseHP6";
 
 export class CoachList {
 
@@ -31,74 +27,46 @@ export class CoachList {
 
         this.primo.setTrophyTypes([
             new IncreaseHP1(),
-            new IncreaseHP2(),
-            new IncreaseHP3(),
         ]);
 
         this.sporticus.setTrophyTypes([
             new IncreaseHP1(),
-            new IncreaseHP2(),
-            new IncreaseHP3(),
         ]);
 
         this.tycoon.setTrophyTypes([
             new IncreaseHP1(),
-            new IncreaseHP2(),
-            new IncreaseHP3(),
         ]);
 
         this.office.setTrophyTypes([
             new IncreaseHP1(),
-            new IncreaseHP2(),
-            new IncreaseHP3(),
         ]);
 
         this.sgtsteve.setTrophyTypes([
             new IncreaseHP1(),
-            new IncreaseHP2(),
-            new IncreaseHP3(),
         ]);
 
         this.betsy.setTrophyTypes([
             new IncreaseHP1(),
-            new IncreaseHP2(),
-            new IncreaseHP3(),
         ]);
 
         this.coree.setTrophyTypes([
             new IncreaseHP1(),
             new IncreaseHP2(),
-            new IncreaseHP3(),
-            new IncreaseHP4(),
-            new IncreaseHP5(),
-            new IncreaseHP6(),
         ]);
 
         this.turbonerd.setTrophyTypes([
             new IncreaseHP1(),
             new IncreaseHP2(),
-            new IncreaseHP3(),
-            new IncreaseHP4(),
-            new IncreaseHP5(),
-            new IncreaseHP6(),
         ]);
 
         this.shadowken.setTrophyTypes([
             new IncreaseHP1(),
             new IncreaseHP2(),
-            new IncreaseHP3(),
-            new IncreaseHP4(),
-            new IncreaseHP5(),
-            new IncreaseHP6(),
         ]);
 
         this.boss10.setTrophyTypes([
             new IncreaseHP1(),
             new IncreaseHP2(),
-            new IncreaseHP3(),
-            new IncreaseHP4(),
-            new IncreaseHP5(),
-            new IncreaseHP6(),
         ]);
 
         log("SETTING UP COACH DECKS");

@@ -15,10 +15,10 @@ import { SeeTargets3 } from "./insight/SeeTargets3";
 import { SeeTargets4 } from "./insight/SeeTargets4";
 import { IncreaseHP1 } from "./member/IncreaseHP1";
 import { IncreaseHP2 } from "./member/IncreaseHP2";
-import { IncreaseHP3 } from "./member/IncreaseHP3";
-import { IncreaseHP4 } from "./member/IncreaseHP4";
-import { IncreaseHP5 } from "./member/IncreaseHP5";
-import { IncreaseHP6 } from "./member/IncreaseHP6";
+import { HealthRegen1 } from "./member/HealthRegen1";
+import { HealthRegen2 } from "./member/HealthRegen2";
+import { HealthRegen3 } from "./member/HealthRegen3";
+import { Resurrect1 } from "./member/Resurrect1";
 import { SeeHealth1 } from "./insight/SeeHealth1";
 import { SeeHealth2 } from "./insight/SeeHealth2";
 import { SeeHealth3 } from "./insight/SeeHealth3";
@@ -40,10 +40,10 @@ export class OutstandingTrophyList {
         //health
         new IncreaseHP1(),
         new IncreaseHP2(),
-        new IncreaseHP3(),
-        new IncreaseHP4(),
-        new IncreaseHP5(),
-        new IncreaseHP6(),
+        // new HealthRegen1(),
+        // new HealthRegen2(),
+        // new HealthRegen3(),
+        // new Resurrect1(),
         //insight
         new SeeCards1(),
         new SeeCards2(),

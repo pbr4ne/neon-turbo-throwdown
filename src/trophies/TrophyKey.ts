@@ -27,15 +27,14 @@ export enum TrophyKey {
     //increase HP
     INCREASE_HP_1 = "increase-hp-1",
     INCREASE_HP_2 = "increase-hp-2",
-    INCREASE_HP_3 = "increase-hp-3",
-    INCREASE_HP_4 = "increase-hp-4",
-    INCREASE_HP_5 = "increase-hp-5",
-    INCREASE_HP_6 = "increase-hp-6",
 
     //health regen
     HEALTH_REGEN_1 = "health-regen-1",
     HEALTH_REGEN_2 = "health-regen-2",
     HEALTH_REGEN_3 = "health-regen-3",
+
+    //resurrect
+    RESURRECT_1 = "resurrect-1",
 
     //idle
     IDLE_SPEED_1 = "idle-speed-1",

@@ -7,10 +7,10 @@ import { WhiteDeck } from "./cosmetic/WhiteDeck";
 import { YellowDeck } from "./cosmetic/YellowDeck";
 import { IncreaseHP1 } from "./member/IncreaseHP1";
 import { IncreaseHP2 } from "./member/IncreaseHP2";
-import { IncreaseHP3 } from "./member/IncreaseHP3";
-import { IncreaseHP4 } from "./member/IncreaseHP4";
-import { IncreaseHP5 } from "./member/IncreaseHP5";
-import { IncreaseHP6 } from "./member/IncreaseHP6";
+import { HealthRegen1 } from "./member/HealthRegen1";
+import { HealthRegen2 } from "./member/HealthRegen2";
+import { HealthRegen3 } from "./member/HealthRegen3";
+import { Resurrect1 } from "./member/Resurrect1";
 import { SeeCards1 } from "./insight/SeeCards1";
 import { SeeCards2 } from "./insight/SeeCards2";
 import { SeeCards3 } from "./insight/SeeCards3";
@@ -26,9 +26,6 @@ import { SeeTargets4 } from "./insight/SeeTargets4";
 import { TrophyKey } from "./TrophyKey";
 import { TrophyType } from "./TrophyType";
 import { UnknownTrophy } from "./UnknownTrophy";
-import { HealthRegen1 } from "./member/HealthRegen1";
-import { HealthRegen2 } from "./member/HealthRegen2";
-import { HealthRegen3 } from "./member/HealthRegen3";
 import { IdleSpeed1 } from "./idle/IdleSpeed1";
 import { IdleSpeed2 } from "./idle/IdleSpeed2";
 import { IdleSpeed3 } from "./idle/IdleSpeed3";
@@ -80,10 +77,10 @@ export class TrophyFactory {
         //increase HP
         this.registerTrophyType(TrophyKey.INCREASE_HP_1, () => new IncreaseHP1);
         this.registerTrophyType(TrophyKey.INCREASE_HP_2, () => new IncreaseHP2);
-        this.registerTrophyType(TrophyKey.INCREASE_HP_3, () => new IncreaseHP3);
-        this.registerTrophyType(TrophyKey.INCREASE_HP_4, () => new IncreaseHP4);
-        this.registerTrophyType(TrophyKey.INCREASE_HP_5, () => new IncreaseHP5);
-        this.registerTrophyType(TrophyKey.INCREASE_HP_6, () => new IncreaseHP6);
+        this.registerTrophyType(TrophyKey.HEALTH_REGEN_1, () => new HealthRegen1);
+        this.registerTrophyType(TrophyKey.HEALTH_REGEN_2, () => new HealthRegen2);
+        this.registerTrophyType(TrophyKey.HEALTH_REGEN_3, () => new HealthRegen3);
+        this.registerTrophyType(TrophyKey.RESURRECT_1, () => new Resurrect1);
 
         //health regen
         this.registerTrophyType(TrophyKey.HEALTH_REGEN_1, () => new HealthRegen1);
