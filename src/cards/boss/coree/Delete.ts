@@ -31,6 +31,7 @@ export class Delete extends CoreeCard {
         if (!defenseSuccess) {
             //reduce their HP if they failed to defend
             target.reduceHP(this.getOffenseDamage());
+            GameSounds.playHit();
             return true;
         }
 

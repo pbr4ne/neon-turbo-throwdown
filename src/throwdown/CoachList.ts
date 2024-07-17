@@ -245,6 +245,8 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.CATCH_3_BIG_HANDS),
             CardFactory.createCardType(CardKeys.DID_I_DO_THAT),
             CardFactory.createCardType(CardKeys.DID_I_DO_THAT),
+            CardFactory.createCardType(CardKeys.POCKET_PROTECTOR),
+            CardFactory.createCardType(CardKeys.POCKET_PROTECTOR),
         ]);
 
         this.shadowken.setBaseCards([

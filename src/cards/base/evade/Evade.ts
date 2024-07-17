@@ -68,6 +68,6 @@ export class Evade extends CardType {
 
     getDescription(): string {
         const niceChanceToDefend = this.getNicePercentage(this.getChanceToDefend());
-        return `Evade ${this.getNumDefends()}. ${niceChanceToDefend}% effective.`;
+        return `Evade ${this.getNumDefends()} attack(s). ${niceChanceToDefend}% effective.`;
     }
 }
