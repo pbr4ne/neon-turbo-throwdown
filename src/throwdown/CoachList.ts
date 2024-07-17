@@ -175,6 +175,8 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.CATCH_2_TURBO_CATCH),
             CardFactory.createCardType(CardKeys.WATERFALL),
             CardFactory.createCardType(CardKeys.WATERFALL),
+            CardFactory.createCardType(CardKeys.LEVEL_SET),
+            CardFactory.createCardType(CardKeys.LEVEL_SET),
         ]);
 
         this.sgtsteve.setBaseCards([

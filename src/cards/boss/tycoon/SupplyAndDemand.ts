@@ -34,7 +34,6 @@ export class SupplyAndDemand extends TycoonCard {
                 offenseSuccess = true;
             }
         }
-
         return offenseSuccess;
     }
 

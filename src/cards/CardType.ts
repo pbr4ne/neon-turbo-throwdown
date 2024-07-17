@@ -76,12 +76,12 @@ export abstract class CardType {
         return null;
     }
 
-    getAllAliveMembers(opponentTeam: Team): Member[] {
-        return opponentTeam.getMembers().filter((member) => member.getHP() > 0);
+    getAllAliveMembers(team: Team): Member[] {
+        return team.getMembers().filter((member) => member.getHP() > 0);
     }
 
-    getRandomAliveMembers(opponentTeam: Team, target: Member | null, numTargets: number): Member[] {
-        var opponentMembers = opponentTeam.getMembers().filter((member) => member !== target && member.getHP() > 0);
+    getRandomAliveMembers(team: Team, target: Member | null, numTargets: number): Member[] {
+        var opponentMembers = team.getMembers().filter((member) => member !== target && member.getHP() > 0);
         const shuffledMembers = Phaser.Utils.Array.Shuffle([...opponentMembers]);
         return shuffledMembers.slice(0, Math.min(numTargets, shuffledMembers.length));
     }
