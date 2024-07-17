@@ -381,6 +381,13 @@
             },
             {
                 "url": [
+                    "assets/audio/sound_buff.mp3"
+                ],
+                "type": "audio",
+                "key": "sound_buff"
+            },
+            {
+                "url": [
                     "assets/audio/sound_button.mp3"
                 ],
                 "type": "audio",
@@ -392,6 +399,27 @@
                 ],
                 "type": "audio",
                 "key": "sound_card"
+            },
+            {
+                "url": [
+                    "assets/audio/sound_catch.mp3"
+                ],
+                "type": "audio",
+                "key": "sound_catch"
+            },
+            {
+                "url": [
+                    "assets/audio/sound_debuff.mp3"
+                ],
+                "type": "audio",
+                "key": "sound_debuff"
+            },
+            {
+                "url": [
+                    "assets/audio/sound_dodge.mp3"
+                ],
+                "type": "audio",
+                "key": "sound_dodge"
             },
             {
                 "url": [

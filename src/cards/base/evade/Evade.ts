@@ -28,7 +28,7 @@ export class Evade extends CardType {
         }
 
         if (defenseSuccess) {
-            GameSounds.playBlock();
+            GameSounds.playDodge();
         }
         this.currentNumDefends++;
         return defenseSuccess;

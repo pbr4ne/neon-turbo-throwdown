@@ -41,7 +41,7 @@ export class Catch extends CardType {
         }
 
         if (defenseSuccess) {
-            GameSounds.playBlock();
+            GameSounds.playCatch();
         }
 
         this.currentNumDefends++;

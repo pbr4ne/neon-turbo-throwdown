@@ -10,6 +10,10 @@ export class GameSounds {
     static healSound: Phaser.Sound.WebAudioSound;
     static winSound: Phaser.Sound.WebAudioSound;
     static loseSound: Phaser.Sound.WebAudioSound;
+    static catchSound: Phaser.Sound.WebAudioSound;
+    static debuffSound: Phaser.Sound.WebAudioSound;
+    static buffSound: Phaser.Sound.WebAudioSound;
+    static dodgeSound: Phaser.Sound.WebAudioSound;
     static effectsEnabled: boolean = true;
     static musicShouldBePlaying: boolean = true;
     static currentSongKey: string | null = null;
@@ -35,6 +39,10 @@ export class GameSounds {
         GameSounds.healSound = scene.sound.add("sound_heal") as Phaser.Sound.WebAudioSound;
         GameSounds.winSound = scene.sound.add("sound_win") as Phaser.Sound.WebAudioSound;
         GameSounds.loseSound = scene.sound.add("sound_lose") as Phaser.Sound.WebAudioSound;
+        GameSounds.catchSound = scene.sound.add("sound_catch") as Phaser.Sound.WebAudioSound;
+        GameSounds.debuffSound = scene.sound.add("sound_debuff") as Phaser.Sound.WebAudioSound;
+        GameSounds.buffSound = scene.sound.add("sound_buff") as Phaser.Sound.WebAudioSound;
+        GameSounds.dodgeSound = scene.sound.add("sound_dodge") as Phaser.Sound.WebAudioSound;
 
         if (GameSounds.musicSound && GameSounds.musicShouldBePlaying) {
             GameSounds.musicSound.resume();
@@ -101,6 +109,30 @@ export class GameSounds {
     static playLose() {
         if (GameSounds.effectsEnabled && GameSounds.loseSound) {
             GameSounds.loseSound.play({ volume: 0.2 });
+        }
+    }
+
+    static playCatch() {
+        if (GameSounds.effectsEnabled && GameSounds.catchSound) {
+            GameSounds.catchSound.play({ volume: 0.2 });
+        }
+    }
+
+    static playDebuff() {
+        if (GameSounds.effectsEnabled && GameSounds.debuffSound) {
+            GameSounds.debuffSound.play({ volume: 0.2 });
+        }
+    }
+
+    static playBuff() {
+        if (GameSounds.effectsEnabled && GameSounds.buffSound) {
+            GameSounds.buffSound.play({ volume: 0.2 });
+        }
+    }
+
+    static playDodge() {
+        if (GameSounds.effectsEnabled && GameSounds.dodgeSound) {
+            GameSounds.dodgeSound.play({ volume: 0.2 });
         }
     }
 
