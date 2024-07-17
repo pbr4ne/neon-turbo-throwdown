@@ -11,21 +11,28 @@ import { IncreaseHP3 } from "./member/IncreaseHP3";
 import { IncreaseHP4 } from "./member/IncreaseHP4";
 import { IncreaseHP5 } from "./member/IncreaseHP5";
 import { IncreaseHP6 } from "./member/IncreaseHP6";
-import { SeeCards1 } from "./member/SeeCards1";
-import { SeeCards2 } from "./member/SeeCards2";
-import { SeeCards3 } from "./member/SeeCards3";
-import { SeeCards4 } from "./member/SeeCards4";
-import { SeeHealth1 } from "./member/SeeHealth1";
-import { SeeHealth2 } from "./member/SeeHealth2";
-import { SeeHealth3 } from "./member/SeeHealth3";
-import { SeeHealth4 } from "./member/SeeHealth4";
-import { SeeTargets1 } from "./member/SeeTargets1";
-import { SeeTargets2 } from "./member/SeeTargets2";
-import { SeeTargets3 } from "./member/SeeTargets3";
-import { SeeTargets4 } from "./member/SeeTargets4";
+import { SeeCards1 } from "./insight/SeeCards1";
+import { SeeCards2 } from "./insight/SeeCards2";
+import { SeeCards3 } from "./insight/SeeCards3";
+import { SeeCards4 } from "./insight/SeeCards4";
+import { SeeHealth1 } from "./insight/SeeHealth1";
+import { SeeHealth2 } from "./insight/SeeHealth2";
+import { SeeHealth3 } from "./insight/SeeHealth3";
+import { SeeHealth4 } from "./insight/SeeHealth4";
+import { SeeTargets1 } from "./insight/SeeTargets1";
+import { SeeTargets2 } from "./insight/SeeTargets2";
+import { SeeTargets3 } from "./insight/SeeTargets3";
+import { SeeTargets4 } from "./insight/SeeTargets4";
 import { TrophyKey } from "./TrophyKey";
 import { TrophyType } from "./TrophyType";
 import { UnknownTrophy } from "./UnknownTrophy";
+import { HealthRegen1 } from "./member/HealthRegen1";
+import { HealthRegen2 } from "./member/HealthRegen2";
+import { HealthRegen3 } from "./member/HealthRegen3";
+import { IdleSpeed1 } from "./idle/IdleSpeed1";
+import { IdleSpeed2 } from "./idle/IdleSpeed2";
+import { IdleSpeed3 } from "./idle/IdleSpeed3";
+import { IdleSpeed4 } from "./idle/IdleSpeed4";
 
 export class TrophyFactory {
     private static trophyTypeMap: Map<TrophyKey, (cardKey?: CardKeys) => TrophyType> = new Map();
@@ -77,6 +84,17 @@ export class TrophyFactory {
         this.registerTrophyType(TrophyKey.INCREASE_HP_4, () => new IncreaseHP4);
         this.registerTrophyType(TrophyKey.INCREASE_HP_5, () => new IncreaseHP5);
         this.registerTrophyType(TrophyKey.INCREASE_HP_6, () => new IncreaseHP6);
+
+        //health regen
+        this.registerTrophyType(TrophyKey.HEALTH_REGEN_1, () => new HealthRegen1);
+        this.registerTrophyType(TrophyKey.HEALTH_REGEN_2, () => new HealthRegen2);
+        this.registerTrophyType(TrophyKey.HEALTH_REGEN_3, () => new HealthRegen3);
+
+        //idle
+        this.registerTrophyType(TrophyKey.IDLE_SPEED_1, () => new IdleSpeed1);
+        this.registerTrophyType(TrophyKey.IDLE_SPEED_2, () => new IdleSpeed2);
+        this.registerTrophyType(TrophyKey.IDLE_SPEED_3, () => new IdleSpeed3);
+        this.registerTrophyType(TrophyKey.IDLE_SPEED_4, () => new IdleSpeed4);
 
         //other
         this.registerTrophyType(TrophyKey.CARD_UPGRADE, (cardKey?: CardKeys) => new CardUpgrade(cardKey!));

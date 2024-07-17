@@ -10,14 +10,14 @@ import { TrophyType } from "../trophies/TrophyType";
 import { CoachList } from "../throwdown/CoachList";
 import { Library } from "../throwdown/Library";
 
-import { SeeCards1 } from "../trophies/member/SeeCards1";
-import { SeeCards2 } from "../trophies/member/SeeCards2";
-import { SeeCards3 } from "../trophies/member/SeeCards3";
-import { SeeCards4 } from "../trophies/member/SeeCards4";
-import { SeeTargets1 } from "../trophies/member/SeeTargets1";
-import { SeeTargets2 } from "../trophies/member/SeeTargets2";
-import { SeeTargets3 } from "../trophies/member/SeeTargets3";
-import { SeeTargets4 } from "../trophies/member/SeeTargets4";
+import { SeeCards1 } from "../trophies/insight/SeeCards1";
+import { SeeCards2 } from "../trophies/insight/SeeCards2";
+import { SeeCards3 } from "../trophies/insight/SeeCards3";
+import { SeeCards4 } from "../trophies/insight/SeeCards4";
+import { SeeTargets1 } from "../trophies/insight/SeeTargets1";
+import { SeeTargets2 } from "../trophies/insight/SeeTargets2";
+import { SeeTargets3 } from "../trophies/insight/SeeTargets3";
+import { SeeTargets4 } from "../trophies/insight/SeeTargets4";
 import Player from "./Player";
 import { IncreaseHP1 } from "../trophies/member/IncreaseHP1";
 import { IncreaseHP2 } from "../trophies/member/IncreaseHP2";
@@ -25,10 +25,10 @@ import { IncreaseHP3 } from "../trophies/member/IncreaseHP3";
 import { IncreaseHP4 } from "../trophies/member/IncreaseHP4";
 import { IncreaseHP5 } from "../trophies/member/IncreaseHP5";
 import { IncreaseHP6 } from "../trophies/member/IncreaseHP6";
-import { SeeHealth1 } from "../trophies/member/SeeHealth1";
-import { SeeHealth2 } from "../trophies/member/SeeHealth2";
-import { SeeHealth3 } from "../trophies/member/SeeHealth3";
-import { SeeHealth4 } from "../trophies/member/SeeHealth4";
+import { SeeHealth1 } from "../trophies/insight/SeeHealth1";
+import { SeeHealth2 } from "../trophies/insight/SeeHealth2";
+import { SeeHealth3 } from "../trophies/insight/SeeHealth3";
+import { SeeHealth4 } from "../trophies/insight/SeeHealth4";
 
 export default class Member extends Phaser.GameObjects.Container {
     public sprite: Phaser.GameObjects.Sprite;
