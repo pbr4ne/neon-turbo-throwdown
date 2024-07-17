@@ -23,6 +23,10 @@ import { SeeHealth1 } from "./insight/SeeHealth1";
 import { SeeHealth2 } from "./insight/SeeHealth2";
 import { SeeHealth3 } from "./insight/SeeHealth3";
 import { SeeHealth4 } from "./insight/SeeHealth4";
+import { IdleSpeed1 } from "./idle/IdleSpeed1";
+import { IdleSpeed2 } from "./idle/IdleSpeed2";
+import { IdleSpeed3 } from "./idle/IdleSpeed3";
+import { IdleSpeed4 } from "./idle/IdleSpeed4";
 
 export class OutstandingTrophyList {
 
@@ -33,13 +37,14 @@ export class OutstandingTrophyList {
         new WhiteDeck(),
         new BlackDeck(),
         new RedDeck(),
-        //member
+        //health
         new IncreaseHP1(),
         new IncreaseHP2(),
         new IncreaseHP3(),
         new IncreaseHP4(),
         new IncreaseHP5(),
         new IncreaseHP6(),
+        //insight
         new SeeCards1(),
         new SeeCards2(),
         new SeeCards3(),
@@ -52,6 +57,11 @@ export class OutstandingTrophyList {
         new SeeHealth2(),
         new SeeHealth3(),
         new SeeHealth4(),
+        //idle
+        new IdleSpeed1(),
+        new IdleSpeed2(),
+        new IdleSpeed3(),
+        new IdleSpeed4(),
     ];
 
     public static getTrophyTypes() {

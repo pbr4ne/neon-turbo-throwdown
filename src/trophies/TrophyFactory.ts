@@ -1,4 +1,4 @@
-import { CardKeys } from "~/cards/CardKeys";
+import { CardKeys } from "../cards/CardKeys";
 import { CardUpgrade } from "./CardUpgrade";
 import { BlackDeck } from "./cosmetic/BlackDeck";
 import { CyanDeck } from "./cosmetic/CyanDeck";

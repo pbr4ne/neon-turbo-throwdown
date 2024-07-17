@@ -16,6 +16,7 @@ import { log } from "../utilities/GameUtils";
 import { GameSounds } from "../utilities/GameSounds";
 import { Modifiers } from "../throwdown/Modifiers";
 import { ThrowdownPhase } from "../throwdown/ThrowdownPhase";
+import { Library } from "../throwdown/Library";
 /* END-USER-IMPORTS */
 
 export default abstract class Team extends Phaser.GameObjects.Container {
@@ -160,7 +161,7 @@ export default abstract class Team extends Phaser.GameObjects.Container {
                 const cardType = card.getCardType();
                 console.log(cardType.getPhase());
                 if (cardType.getPhase() == ThrowdownPhase.SPECIAL) {
-                    await this.pause(500); 
+                    await this.pause(Library.getIdleTurnDelay()); 
                     cardType.special(member, target, this, this.opponent); 
                     log(`SPECIAL: ${member}`);
                 } else {
@@ -179,14 +180,14 @@ export default abstract class Team extends Phaser.GameObjects.Container {
             if (card != null) {
                 const cardType = card.getCardType();
                 if (cardType.getPhase() == ThrowdownPhase.ATTACK) {
-                    await this.pause(500); 
+                    await this.pause(Library.getIdleTurnDelay()); 
                     card.getCardType().attack(member, target, this, this.opponent); 
                     log(`OFFENSE: ${member} attacks ${target}`);
                     member.setIntendedTarget(null);
                 }
             }
         }
-        await this.pause(500); 
+        await this.pause(Library.getIdleTurnDelay()); 
     }
     
     pause(ms: number) {

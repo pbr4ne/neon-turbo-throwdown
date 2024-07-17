@@ -110,15 +110,15 @@ export default class Card extends GenericCard {
     }
 
     getDeckBackTexture(): string {
-        if (Library.getTrophyTypes().some(trophy => trophy instanceof RedDeck)) {
+        if (Library.hasTrophy(RedDeck)) {
             return "red";
-        } else if (Library.getTrophyTypes().some(trophy => trophy instanceof BlackDeck)) {
+        } else if (Library.hasTrophy(BlackDeck)) {
             return "black";
-        } else if (Library.getTrophyTypes().some(trophy => trophy instanceof WhiteDeck)) {
+        } else if (Library.hasTrophy(WhiteDeck)) {
             return "white";
-        } else if (Library.getTrophyTypes().some(trophy => trophy instanceof YellowDeck)) {
+        } else if (Library.hasTrophy(YellowDeck)) {
             return "yellow";
-        } else if (Library.getTrophyTypes().some(trophy => trophy instanceof CyanDeck)) {
+        } else if (Library.hasTrophy(CyanDeck)) {
             return "cyan";
         } else {
             return "magenta";

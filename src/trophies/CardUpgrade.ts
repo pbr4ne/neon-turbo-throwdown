@@ -1,5 +1,5 @@
 import { TrophyType } from "./TrophyType";
-import { CardKeys } from "~/cards/CardKeys";
+import { CardKeys } from "../cards/CardKeys";
 import { TrophyKey } from "./TrophyKey";
 
 export class CardUpgrade extends TrophyType {

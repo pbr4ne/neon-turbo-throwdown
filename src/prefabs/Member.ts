@@ -69,29 +69,30 @@ export default class Member extends Phaser.GameObjects.Container {
         if (checkUrlParam("lowHP", "true")) {
             this.hp = 1;
         } else {
-            if (this.getTrophyTypes().some(trophy => trophy instanceof IncreaseHP6)) {
+            //todo this is dumb af
+            if (Library.hasTrophy(IncreaseHP6)) {
                 this.hp += 2;
-            } else if (this.getTrophyTypes().some(trophy => trophy instanceof IncreaseHP5)) {
+            } else if (Library.hasTrophy(IncreaseHP5)) {
                 if ([1, 2, 4, 5].includes(number)) {
                     this.hp += 2;
                 } else {
                     this.hp += 1;
                 }
-            } else if (this.getTrophyTypes().some(trophy => trophy instanceof IncreaseHP4)) {
+            } else if (Library.hasTrophy(IncreaseHP4)) {
                 if ([1, 4].includes(number)) {
                     this.hp += 2;
                 } else {
                     this.hp += 1;
                 }
-            } else if (this.getTrophyTypes().some(trophy => trophy instanceof IncreaseHP3)) {
+            } else if (Library.hasTrophy(IncreaseHP3)) {
                 if ([1, 2, 3, 4, 5, 6].includes(number)) {
                     this.hp += 1;
                 }
-            } else if (this.getTrophyTypes().some(trophy => trophy instanceof IncreaseHP2)) {
+            } else if (Library.hasTrophy(IncreaseHP2)) {
                 if ([1, 2, 4, 5].includes(number)) {
                     this.hp += 1;
                 }
-            } else if (this.getTrophyTypes().some(trophy => trophy instanceof IncreaseHP1)) {
+            } else if (Library.hasTrophy(IncreaseHP1)) {
                 if ([1, 4].includes(number)) {
                     this.hp += 1;
                 }
@@ -232,13 +233,13 @@ export default class Member extends Phaser.GameObjects.Container {
         if (this.coach != null) {
             if (this.coach.getDifficulty() === 0) {
                 renderHealthBar = true;
-            } else if (this.coach.getDifficulty() === 1 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeHealth1)) {
+            } else if (this.coach.getDifficulty() === 1 && Library.hasTrophy(SeeHealth1)) {
                 renderHealthBar = true;
-            } else if (this.coach.getDifficulty() === 2 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeHealth2)) {
+            } else if (this.coach.getDifficulty() === 2 && Library.hasTrophy(SeeHealth2)) {
                 renderHealthBar = true;
-            } else if (this.coach.getDifficulty() === 3 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeHealth3)) {
+            } else if (this.coach.getDifficulty() === 3 && Library.hasTrophy(SeeHealth3)) {
                 renderHealthBar = true;
-            } else if (this.coach.getDifficulty() === 4 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeHealth4)) {
+            } else if (this.coach.getDifficulty() === 4 && Library.hasTrophy(SeeHealth4)) {
                 renderHealthBar = true;
             }
         }
@@ -282,13 +283,13 @@ export default class Member extends Phaser.GameObjects.Container {
         } else {
             if (boss.getCoach().getDifficulty() === 0) {
                 this.drawTargetArc(target, boss);
-            } else if (boss.getCoach().getDifficulty() === 1 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeTargets1)) {
+            } else if (boss.getCoach().getDifficulty() === 1 && Library.hasTrophy(SeeTargets1)) {
                 this.drawTargetArc(target, boss);
-            } else if (boss.getCoach().getDifficulty() === 2 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeTargets2)) {
+            } else if (boss.getCoach().getDifficulty() === 2 && Library.hasTrophy(SeeTargets2)) {
                 this.drawTargetArc(target, boss);
-            } else if (boss.getCoach().getDifficulty() === 3 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeTargets3)) {
+            } else if (boss.getCoach().getDifficulty() === 3 && Library.hasTrophy(SeeTargets3)) {
                 this.drawTargetArc(target, boss);
-            } else if (boss.getCoach().getDifficulty() === 4 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeTargets4)) {
+            } else if (boss.getCoach().getDifficulty() === 4 && Library.hasTrophy(SeeTargets4)) {
                 this.drawTargetArc(target, boss);
             }
             return;
@@ -376,13 +377,13 @@ export default class Member extends Phaser.GameObjects.Container {
         if (this.coach) {
             if (this.coach.getDifficulty() === 0) {
                 canSee = true;
-            } else if (this.coach.getDifficulty() === 1 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeCards1)) {
+            } else if (this.coach.getDifficulty() === 1 && Library.hasTrophy(SeeCards1)) {
                 canSee = true;
-            } else if (this.coach.getDifficulty() === 2 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeCards2)) {
+            } else if (this.coach.getDifficulty() === 2 && Library.hasTrophy(SeeCards2)) {
                 canSee = true;
-            } else if (this.coach.getDifficulty() === 3 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeCards3)) {
+            } else if (this.coach.getDifficulty() === 3 && Library.hasTrophy(SeeCards3)) {
                 canSee = true;
-            } else if (this.coach.getDifficulty() === 4 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeCards4)) {
+            } else if (this.coach.getDifficulty() === 4 && Library.hasTrophy(SeeCards4)) {
                 canSee = true;
             }
         }

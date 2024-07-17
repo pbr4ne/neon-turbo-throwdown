@@ -161,7 +161,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
         this.startGameLoop();
 
         this.automationTimer = this.scene.time.addEvent({
-            delay: 1000,
+            delay: Library.getIdleClickDelay(),
             callback: this.runAutomation,
             callbackScope: this,
             loop: true

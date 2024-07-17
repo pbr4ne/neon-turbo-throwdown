@@ -3,6 +3,10 @@ import { StorageManager } from "../utilities/StorageManager";
 import { OutstandingTrophyList } from "../trophies/OutstandingTrophyList";
 import { log } from "../utilities/GameUtils";
 import { CardType } from "../cards/CardType";
+import { IdleSpeed1 } from "../trophies/idle/IdleSpeed1";
+import { IdleSpeed2 } from "../trophies/idle/IdleSpeed2";
+import { IdleSpeed3 } from "../trophies/idle/IdleSpeed3";
+import { IdleSpeed4 } from "../trophies/idle/IdleSpeed4";
 
 export class Library {
 
@@ -64,5 +68,41 @@ export class Library {
     public static setTrophyTypes(trophyTypes: TrophyType[]) {
         this.trophyTypes.push(...trophyTypes);
         OutstandingTrophyList.removeTrophies(trophyTypes);
+    }
+
+    public static hasTrophy(trophyClass: new () => TrophyType): boolean {
+        return this.trophyTypes.some(trophy => trophy instanceof trophyClass);
+    }
+
+    public static getIdleClickDelay(): number{
+        let delay;
+        if (Library.hasTrophy(IdleSpeed4)) {
+            delay = 100;
+        } else if (Library.hasTrophy(IdleSpeed3)) {
+            delay = 500;
+        } else if (Library.hasTrophy(IdleSpeed2)) {
+            delay = 1000;
+        } else if (Library.hasTrophy(IdleSpeed1)) {
+            delay = 2500;
+        } else {
+            delay = 5000;
+        }
+        return delay;
+    }
+
+    public static getIdleTurnDelay(): number{
+        let delay;
+        if (Library.hasTrophy(IdleSpeed4)) {
+            delay = 100;
+        } else if (Library.hasTrophy(IdleSpeed3)) {
+            delay = 200;
+        } else if (Library.hasTrophy(IdleSpeed2)) {
+            delay = 300;
+        } else if (Library.hasTrophy(IdleSpeed1)) {
+            delay = 400;
+        } else {
+            delay = 500;
+        }
+        return delay;
     }
 }
