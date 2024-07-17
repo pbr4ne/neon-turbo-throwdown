@@ -228,6 +228,8 @@ export class CoachList {
             CardFactory.createCardType(CardKeys.CATCH_2_TURBO_CATCH),
             CardFactory.createCardType(CardKeys.F7),
             CardFactory.createCardType(CardKeys.F7),
+            CardFactory.createCardType(CardKeys.DELETE),
+            CardFactory.createCardType(CardKeys.DELETE),
         ]);
 
         this.turbonerd.setBaseCards([
