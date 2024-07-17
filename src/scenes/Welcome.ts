@@ -118,26 +118,6 @@ export default class Welcome extends Phaser.Scene {
 		this.editorCreate();
 	}
 
-	private updateButtonStates() {
-
-		if (GameSounds.musicShouldBePlaying) {
-			log("music is on");
-			this.musicBtn?.setTexture('music2-on');
-		} else {
-			log("music is off");
-			this.musicBtn?.setTexture('music2-off');
-		}
-
-		if (GameSounds.effectsEnabled) {
-			log("effects are on");
-			this.soundBtn?.setTexture('sound2-on');
-		} else {
-			log("effects are off");
-			log(`${this.soundBtn?.texture.key}`);
-			this.soundBtn?.setTexture('sound2-off');
-		}
-	}
-
 	private showCredits() {
 		const popup = this.add.container(960, 540);
 	
@@ -224,7 +204,7 @@ export default class Welcome extends Phaser.Scene {
 			window.open('https://www.instagram.com/artgeaux/', '_blank');
 		});
 
-		const testerText = this.add.text(-420, -20, "Court Testers:", {
+		const testerText = this.add.text(-420, -20, "Court Testers: Julz", {
 			fontFamily: '"Press Start 2P"',
 			fontSize: '20px',
 			color: '#00ffff',
@@ -232,7 +212,48 @@ export default class Welcome extends Phaser.Scene {
 			wordWrap: { width: 860, useAdvancedWrap: true }
 		});
 
-		const thanksText = this.add.text(-420, 30, "Special Thanks: Kakumeii", {
+		const tester1Text = this.add.text(-120, 30, "Mystic", {
+			fontFamily: '"Press Start 2P"',
+			fontSize: '20px',
+			color: '#00ffff',
+			align: 'left',
+			wordWrap: { width: 860, useAdvancedWrap: true }
+		});
+
+		const tester2Text = this.add.text(-120, 80, "Rhap", {
+			fontFamily: '"Press Start 2P"',
+			fontSize: '20px',
+			color: '#00ffff',
+			align: 'left',
+			wordWrap: { width: 860, useAdvancedWrap: true }
+		});
+
+		const tester3Text = this.add.text(-120, 130, "Zelda", {
+			fontFamily: '"Press Start 2P"',
+			fontSize: '20px',
+			color: '#00ffff',
+			align: 'left',
+			wordWrap: { width: 860, useAdvancedWrap: true }
+		});
+
+		// const tester4Text = this.add.text(-120, 180, "Court Testers:", {
+		// 	fontFamily: '"Press Start 2P"',
+		// 	fontSize: '20px',
+		// 	color: '#00ffff',
+		// 	align: 'left',
+		// 	wordWrap: { width: 860, useAdvancedWrap: true }
+		// });
+
+		// const tester5Text = this.add.text(-120, 230, "Court Testers:", {
+		// 	fontFamily: '"Press Start 2P"',
+		// 	fontSize: '20px',
+		// 	color: '#00ffff',
+		// 	align: 'left',
+		// 	wordWrap: { width: 860, useAdvancedWrap: true }
+		// });
+
+
+		const thanksText = this.add.text(-420, 180, "Special Thanks: Kakumeii", {
 			fontFamily: '"Press Start 2P"',
 			fontSize: '20px',
 			color: '#00ffff',
@@ -259,7 +280,8 @@ export default class Welcome extends Phaser.Scene {
 			this.input.setDefaultCursor('default');
 		});
 	
-		popup.add([background, creditsText, developerText, developerLink, writerText, writerLink, uiArtistText, musicText, musicLink, artistText, artistLink, testerText, thanksText, closeButton]);
+		popup.add([background, creditsText, developerText, developerLink, writerText, writerLink, uiArtistText, musicText, musicLink, 
+			artistText, artistLink, testerText, tester1Text, tester2Text, tester3Text, thanksText, closeButton]);
 	}
 
 	private showHardResetPopup() {
