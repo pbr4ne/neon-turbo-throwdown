@@ -1,4 +1,3 @@
-
 // You can write more code here
 
 /* START OF COMPILED CODE */
@@ -71,6 +70,8 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
 	private optionInstructions!: Phaser.GameObjects.Text;
 	private avatar!: Phaser.GameObjects.Image;
 	private avatarName!: Phaser.GameObjects.Text;
+	private skipButton!: Phaser.GameObjects.Rectangle;
+	private skipButtonText!: Phaser.GameObjects.Text;
 
 	generateDialogue() {
         var step = this.dialogueConversation.getCurrentStep();
@@ -99,6 +100,12 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
 		}
     }
 
+	handleSkipButtonClick() {
+		log("Skip button clicked");
+		GameSounds.playButton();
+		(this.scene.scene.get('Game') as Game).finishDialogue(this.dialogueType);
+	}
+
 	hideAllTextAreas() {
 		this.dialogueText.setVisible(false);
 		this.optionText1.setVisible(false);
@@ -107,6 +114,8 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
 		this.optionInstructions.setVisible(false);
 		this.nextButton.setVisible(false);
 		this.buttonText.setVisible(false);
+		this.skipButton.setVisible(false);
+		this.skipButtonText.setVisible(false);
 	}
 
 	renderText(step: DialogueStep) {
@@ -120,12 +129,15 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
 			this.dialogueText.setVisible(true);
 			this.nextButton.setVisible(true);
 			this.buttonText.setVisible(true);
+			this.skipButton.setVisible(true);
+			this.skipButtonText.setVisible(true);
 		} else if (Array.isArray(text)) {
 			
 			this.optionText1.setText(`1. ${text[0]}`);
 			this.optionText1.setVisible(true);
 			this.optionInstructions.setVisible(true);
-			
+			this.skipButton.setVisible(true);
+			this.skipButtonText.setVisible(true);
 
 			if (text.length > 1) {
 				this.optionText2.setText(`2. ${text[1]}`);
@@ -149,9 +161,10 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
 		this.buttonText.destroy();
 		this.avatar.destroy();
 		this.avatarName.destroy();
+		this.skipButton.destroy();
+		this.skipButtonText.destroy();
 	}
 
-	//todo omg this is terrible
 	initializeTextAreas() {
 		//avatar
 		this.avatar = this.scene.add.image(1760, 850, 'you');
@@ -259,12 +272,34 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
         this.buttonText.setOrigin(0.5, 0.5);
         this.add(this.buttonText);
 
+		this.skipButton = this.scene.add.rectangle(700, -480, 500, 50, 0x000000, 0);
+		this.skipButton.setStrokeStyle(2, 0xffff00);
+		this.skipButton.setInteractive({ useHandCursor: true })
+			.on('pointerdown', () => this.handleSkipButtonClick())
+			.on('pointerover', () => {
+				this.skipButton.setStrokeStyle(2, 0xff00ff);
+				this.skipButtonText.setColor('#ff00ff');
+			})
+			.on('pointerout', () => {
+				if (this.skipButton && this.skipButtonText) {
+					this.skipButton.setStrokeStyle(2, 0xffff00);
+					this.skipButtonText.setColor('#ffff00');
+				}
+			});
+
+		this.skipButtonText = new Phaser.GameObjects.Text(this.scene, 0, 0, 'Skip Dialogue (Too Much Lore)', {
+			fontFamily: '"Press Start 2P"', // needs the quotes because of the 2
+			fontSize: '16px',
+			color: '#ffff00'
+		});
+		this.skipButtonText.setOrigin(0.5, 0.5);
+		this.skipButtonText.setPosition(this.skipButton.x, this.skipButton.y); // Ensure text is centered within the rectangle
+		this.add(this.skipButton);
+		this.add(this.skipButtonText);
+
+
 		this.hideAllTextAreas();
 	}
 
 	/* END-USER-CODE */
 }
-
-/* END OF COMPILED CODE */
-
-// You can write more code here
