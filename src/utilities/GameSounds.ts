@@ -1,4 +1,5 @@
 import { log } from "./GameUtils";
+import { StorageManager } from "./StorageManager";
 
 export class GameSounds {
     static musicSound: Phaser.Sound.WebAudioSound;
@@ -14,7 +15,15 @@ export class GameSounds {
     static currentSongKey: string | null = null;
     static fadeDuration: number = 1000; //ms
 
-    static init(scene: Phaser.Scene) {
+    static async init(scene: Phaser.Scene) {
+        const settings = await StorageManager.loadSoundSettings();
+        console.log(settings?.effectsEnabled);
+        console.log(settings?.musicEnabled);
+        if (settings) {
+            GameSounds.effectsEnabled = settings.effectsEnabled;
+            GameSounds.musicShouldBePlaying = settings.musicEnabled;
+        }
+
         if (GameSounds.hitSound && GameSounds.blockSound && GameSounds.buttonSound && GameSounds.cardSound && GameSounds.healSound && GameSounds.winSound && GameSounds.loseSound) {
             return;
         }
@@ -26,10 +35,16 @@ export class GameSounds {
         GameSounds.healSound = scene.sound.add("sound_heal") as Phaser.Sound.WebAudioSound;
         GameSounds.winSound = scene.sound.add("sound_win") as Phaser.Sound.WebAudioSound;
         GameSounds.loseSound = scene.sound.add("sound_lose") as Phaser.Sound.WebAudioSound;
+
+        if (GameSounds.musicSound && GameSounds.musicShouldBePlaying) {
+            GameSounds.musicSound.resume();
+        }
     }
 
-    static toggleMusic() {
+    static async toggleMusic() {
         GameSounds.musicShouldBePlaying = !GameSounds.musicShouldBePlaying;
+        await StorageManager.saveSoundSettings(GameSounds.musicShouldBePlaying, GameSounds.effectsEnabled);
+
         if (GameSounds.musicSound) {
             if (GameSounds.musicShouldBePlaying) {
                 GameSounds.musicSound.resume();
@@ -38,13 +53,13 @@ export class GameSounds {
             }
         }
     }
-
     static get musicEnabled() {
         return GameSounds.musicSound && GameSounds.musicSound.isPlaying;
     }
 
-    static toggleEffects() {
+    static async toggleEffects() {
         GameSounds.effectsEnabled = !GameSounds.effectsEnabled;
+        await StorageManager.saveSoundSettings(GameSounds.musicShouldBePlaying, GameSounds.effectsEnabled);
     }
 
     static playHit() {

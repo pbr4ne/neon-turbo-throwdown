@@ -7,12 +7,9 @@ import { CardType } from "../cards/CardType";
 export class Library {
 
     private static numRuns = 0;
-    private static trophyTypes: TrophyType[] = [
-    ];
+    private static trophyTypes: TrophyType[] = [];
     private static pureDeck: CardType[] = [];
     private static easyMode: boolean = false;
-    private static soundOn: boolean = true;
-    private static musicOn: boolean = true;
     private static idleMode: boolean = false;
 
     public static getNumRuns() {
@@ -48,22 +45,6 @@ export class Library {
 
     public static getEasyMode() {
         return this.easyMode;
-    }
-
-    public static setSoundOn(soundOn: boolean) {
-        this.soundOn = soundOn;
-    }
-
-    public static getSoundOn() {
-        return this.soundOn;
-    }
-
-    public static setMusicOn(musicOn: boolean) {
-        this.musicOn = musicOn;
-    }
-
-    public static getMusicOn() {
-        return this.musicOn;
     }
 
     public static setIdleMode(idleMode: boolean) {

@@ -11,9 +11,10 @@ import { TrophyFactory } from '../trophies/TrophyFactory';
 import { TrophyKey } from '../trophies/TrophyKey';
 import { CardUpgrade } from '../trophies/CardUpgrade';
 
+
 interface GameDB extends DBSchema {
     trophies: {
-        key: number;
+        key: string;
         value: { key: TrophyKey, cardKey?: CardKeys };
     },
     runs: {
@@ -33,23 +34,36 @@ interface GameDB extends DBSchema {
         key: number;
         value: { id?: number; key: CardKeys };
         indexes: { 'key': string };
+    },
+    settings: {
+        key: string;
+        value: {
+            key: string;
+            musicEnabled: boolean;
+            effectsEnabled: boolean;
+        };
     }
 }
 
 export class StorageManager {
     private static dbName: string = 'neon-turbo-throwdown';
-    private static dbVersion: number = 1
+    private static dbVersion: number = 2; // Increment version number
     private static db: IDBPDatabase<GameDB> | null = null;
 
     public static async initializeDB() {
         if (!this.db) {
             this.db = await openDB<GameDB>(this.dbName, this.dbVersion, {
-                upgrade(db) {
-                    db.createObjectStore('trophies', { keyPath: 'id', autoIncrement: true });
-                    db.createObjectStore('runs', { keyPath: 'key' });
-                    db.createObjectStore('dialogues', { keyPath: 'key' });
-                    const baseDeckStore = db.createObjectStore('baseDeck', { keyPath: 'id', autoIncrement: true });
-                    baseDeckStore.createIndex('key', 'key');
+                upgrade(db, oldVersion, newVersion, transaction) {
+                    if (oldVersion < 1) {
+                        db.createObjectStore('trophies', { keyPath: 'key' });
+                        db.createObjectStore('runs', { keyPath: 'key' });
+                        db.createObjectStore('dialogues', { keyPath: 'key' });
+                        const baseDeckStore = db.createObjectStore('baseDeck', { keyPath: 'id', autoIncrement: true });
+                        baseDeckStore.createIndex('key', 'key');
+                    }
+                    if (oldVersion < 2) {
+                        db.createObjectStore('settings', { keyPath: 'key' });
+                    }
                 },
             });
         }
@@ -164,6 +178,24 @@ export class StorageManager {
             return cardTypes;
         }
         return [];
+    }
+
+    public static async saveSoundSettings(musicEnabled: boolean, effectsEnabled: boolean) {
+        if (this.db) {
+            await this.db.put('settings', { key: 'soundSettings', musicEnabled, effectsEnabled });
+            log(`Saved sound settings to db: musicEnabled=${musicEnabled}, effectsEnabled=${effectsEnabled}`);
+        }
+    }
+
+    public static async loadSoundSettings(): Promise<{ key: string; musicEnabled: boolean; effectsEnabled: boolean } | null> {
+        if (this.db) {
+            const settings = await this.db.get('settings', 'soundSettings');
+            if (settings) {
+                log(`Loaded sound settings from db: ${settings}`);
+                return settings;
+            }
+        }
+        return null;
     }
 
     public static async clearAllData() {
