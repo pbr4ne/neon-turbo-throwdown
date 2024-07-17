@@ -25,6 +25,10 @@ import { IncreaseHP3 } from "../trophies/member/IncreaseHP3";
 import { IncreaseHP4 } from "../trophies/member/IncreaseHP4";
 import { IncreaseHP5 } from "../trophies/member/IncreaseHP5";
 import { IncreaseHP6 } from "../trophies/member/IncreaseHP6";
+import { SeeHealth1 } from "../trophies/member/SeeHealth1";
+import { SeeHealth2 } from "../trophies/member/SeeHealth2";
+import { SeeHealth3 } from "../trophies/member/SeeHealth3";
+import { SeeHealth4 } from "../trophies/member/SeeHealth4";
 
 export default class Member extends Phaser.GameObjects.Container {
     public sprite: Phaser.GameObjects.Sprite;
@@ -172,6 +176,26 @@ export default class Member extends Phaser.GameObjects.Container {
     }
 
     updateHealthBar() {
+        let renderHealthBar = false;
+        if (this.coach != null) {
+            if (this.coach.getDifficulty() === 0) {
+                renderHealthBar = true;
+            } else if (this.coach.getDifficulty() === 1 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeHealth1)) {
+                renderHealthBar = true;
+            } else if (this.coach.getDifficulty() === 2 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeHealth2)) {
+                renderHealthBar = true;
+            } else if (this.coach.getDifficulty() === 3 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeHealth3)) {
+                renderHealthBar = true;
+            } else if (this.coach.getDifficulty() === 4 && Library.getTrophyTypes().some(trophy => trophy instanceof SeeHealth4)) {
+                renderHealthBar = true;
+            }
+        }
+
+        if (!renderHealthBar) {
+            this.healthBar.setVisible(false);
+            return;
+        }
+
         const currentHP = this.hp < 0 ? 0 : this.hp;
         const baseHealthBarWidth = 50; 
         const healthBarWidth = baseHealthBarWidth + (this.maxHP - 3) * 40; 

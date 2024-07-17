@@ -19,6 +19,10 @@ import { IncreaseHP3 } from "./member/IncreaseHP3";
 import { IncreaseHP4 } from "./member/IncreaseHP4";
 import { IncreaseHP5 } from "./member/IncreaseHP5";
 import { IncreaseHP6 } from "./member/IncreaseHP6";
+import { SeeHealth1 } from "./member/SeeHealth1";
+import { SeeHealth2 } from "./member/SeeHealth2";
+import { SeeHealth3 } from "./member/SeeHealth3";
+import { SeeHealth4 } from "./member/SeeHealth4";
 
 export class OutstandingTrophyList {
 
@@ -44,6 +48,10 @@ export class OutstandingTrophyList {
         new SeeTargets2(),
         new SeeTargets3(),
         new SeeTargets4(),
+        new SeeHealth1(),
+        new SeeHealth2(),
+        new SeeHealth3(),
+        new SeeHealth4(),
     ];
 
     public static getTrophyTypes() {
