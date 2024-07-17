@@ -482,6 +482,11 @@
                 "key": "tooltip"
             },
             {
+                "url": "assets/images/welcome/trophies.png",
+                "type": "image",
+                "key": "trophies"
+            },
+            {
                 "url": "assets/images/deck/trophy.png",
                 "type": "image",
                 "key": "trophy"

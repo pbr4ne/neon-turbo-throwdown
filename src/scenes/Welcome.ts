@@ -95,7 +95,7 @@ export default class Welcome extends Phaser.Scene {
         hardResetText.on('pointerdown', this.showHardResetPopup, this);
 
 		if (Library.getTrophyTypes().length > 0) {
-			const trophiesBtn = this.add.image(1000, 750, "unknown").setInteractive({ useHandCursor: true });
+			const trophiesBtn = this.add.image(1000, 800, "trophies").setInteractive({ useHandCursor: true });
 			trophiesBtn.on('pointerdown', this.showTrophies, this);
 		}
 	}
