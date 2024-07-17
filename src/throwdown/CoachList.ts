@@ -26,7 +26,6 @@ export class CoachList {
         log("SETTING UP COACH TROPHIES");
 
         this.primo.setTrophyTypes([
-            new IncreaseHP1(),
         ]);
 
         this.sporticus.setTrophyTypes([
