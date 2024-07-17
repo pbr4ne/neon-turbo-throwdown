@@ -63,6 +63,10 @@ export class Coach {
         this.trophyTypes = trophyTypes;
     }
 
+    public hasTrophy(trophyClass: new () => TrophyType): boolean {
+        return this.trophyTypes.some(trophy => trophy instanceof trophyClass);
+    }
+
     public getIsBoss(): boolean {
         return this.isBoss;
     }

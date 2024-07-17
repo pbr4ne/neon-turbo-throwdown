@@ -17,6 +17,12 @@ import { GameSounds } from "../utilities/GameSounds";
 import { Modifiers } from "../throwdown/Modifiers";
 import { ThrowdownPhase } from "../throwdown/ThrowdownPhase";
 import { Library } from "../throwdown/Library";
+import { Resurrect1 } from "../trophies/member/Resurrect1";
+import { HealthRegen1 } from "../trophies/member/HealthRegen1";
+import { HealthRegen3 } from "../trophies/member/HealthRegen3";
+import { HealthRegen2 } from "../trophies/member/HealthRegen2";
+import { TrophyType } from "../trophies/TrophyType";
+import Boss from "./Boss";
 /* END-USER-IMPORTS */
 
 export default abstract class Team extends Phaser.GameObjects.Container {
@@ -131,6 +137,17 @@ export default abstract class Team extends Phaser.GameObjects.Container {
         return this.members.filter(member => member.getHP() > 0);
     }
 
+    getDeadMembers(): Member[] {
+        return this.members.filter(member => member.getHP() <= 0);
+    }
+
+    getMostInjuredMembers(numMembers: number): Member[] {
+        return this.members
+            .filter(member => member.getHP() > 0 && member.getHP() < member.getMaxHP())
+            .sort((a, b) => a.getHP() - b.getHP())
+            .slice(0, numMembers);
+    }
+
     clearMembers() {
         this.members.forEach(member => {
             member.clearAssignedCards();
@@ -151,8 +168,63 @@ export default abstract class Team extends Phaser.GameObjects.Container {
         });
     }
 
+    hasTrophy(trophyClass: new () => TrophyType) {
+        if (this instanceof Player) {
+            return Library.hasTrophy(trophyClass);
+        } else if (this instanceof Boss) {
+            return this.getCoach().hasTrophy(trophyClass);
+        }
+    }
+
+    async resurrectPhase() {
+        log("Resurrect Phase");
+        let numToResurrect = 0;
+        if (this.hasTrophy(Resurrect1)) {
+            numToResurrect = 1;
+        }
+        if (numToResurrect == 0) {
+            return;
+        }
+        const deadMembers = this.getDeadMembers();
+        if (deadMembers.length > 0) {
+            for (let i = 0; i < numToResurrect; i++) {
+                //10% chance to resurrect
+                if (Math.random() > 0.1) {
+                    return;
+                }
+                //randomly pick someone to resurrect
+                const randomIndex = Math.floor(Math.random() * deadMembers.length);
+                const deadMember = deadMembers[randomIndex];
+                deadMember.showFloatingAction("resurrected!");
+                deadMember.setHP(1);
+                await this.pause(Library.getIdleTurnDelay());
+            }
+        }
+    }
+
+    async healPhase() {
+        log("Heal Phase");
+        let numToHeal = 0;
+        if (this.hasTrophy(HealthRegen3)) {
+            numToHeal = 3;
+        } else if (this.hasTrophy(HealthRegen2)) {
+            numToHeal = 2;
+        }
+        else if(this.hasTrophy(HealthRegen1)) {
+            numToHeal = 1;
+        }
+
+        this.getMostInjuredMembers(numToHeal).forEach(member => {
+            member.showFloatingAction("health regen!");
+            member.increaseHP(1);
+            this.pause(Library.getIdleTurnDelay());
+        });
+    }
+
     async executeSpecialPhase() {
         log("Executing Special Phase");
+        this.resurrectPhase();
+        this.healPhase();
         for (const member of this.members) {
             const card = member.getAssignedCard();
             const target = member.getIntendedTarget();

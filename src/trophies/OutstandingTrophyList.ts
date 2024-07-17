@@ -40,10 +40,10 @@ export class OutstandingTrophyList {
         //health
         new IncreaseHP1(),
         new IncreaseHP2(),
-        // new HealthRegen1(),
-        // new HealthRegen2(),
-        // new HealthRegen3(),
-        // new Resurrect1(),
+        new HealthRegen1(),
+        new HealthRegen2(),
+        new HealthRegen3(),
+        new Resurrect1(),
         //insight
         new SeeCards1(),
         new SeeCards2(),

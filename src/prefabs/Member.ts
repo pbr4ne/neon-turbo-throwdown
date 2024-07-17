@@ -449,6 +449,10 @@ export default class Member extends Phaser.GameObjects.Container {
         return this.hp;
     }
 
+    getMaxHP(): number {
+        return this.maxHP;
+    }
+
     setHP(amount: number) {
         if (amount > this.maxHP) {
             amount = this.maxHP;
@@ -480,7 +484,7 @@ export default class Member extends Phaser.GameObjects.Container {
         if (this.hp > this.maxHP) {
             this.hp = this.maxHP;
         }
-
+    
         //reactivate if health was <= 0
         if (originalHp <= 0 && this.hp > 0) {
             this.sprite.setAlpha(1);
@@ -494,9 +498,11 @@ export default class Member extends Phaser.GameObjects.Container {
                 this.on("pointerdown", () => (this.team as Boss).handleEnemyClick(this));
             }
         }
-        
+    
         this.updateHealthBar();
-        this.showFloatingAction(`+${amount.toString()}`, "#00ff00", 1);
+    
+        const displayAmount = originalHp <= 0 ? this.hp : amount;
+        this.showFloatingAction(`+${displayAmount}`, "#00ff00", 1);
     }
 
     showFloatingAction(action: string, color: string = '#ffffff', incrementIndex: number = 0) {
@@ -542,14 +548,6 @@ export default class Member extends Phaser.GameObjects.Container {
         this.assignedText?.setVisible(false);
         this.healthBar.setVisible(false);
         this.questionMark.setVisible(false);
-    }
-
-    getTrophyTypes(): TrophyType[] {
-        if (this.coach === CoachList.you) {
-            return Library.getTrophyTypes();
-        } else {
-            return this.coach.getTrophyTypes();
-        }
     }
 
     toString(): string {
