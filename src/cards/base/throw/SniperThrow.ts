@@ -9,7 +9,7 @@ export class SniperThrow extends RiRicochet {
     }
 
     getName(): string {
-        return "sniper-throw";
+        return "sniper throw";
     }
 
     getIcon(): string {
