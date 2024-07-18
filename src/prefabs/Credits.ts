@@ -4,7 +4,7 @@ export default class Credits extends Phaser.GameObjects.Container {
     constructor(scene: Phaser.Scene) {
         super(scene, 960, 540);
 
-        const blockInput = this.scene.add.rectangle(960, 540, 1920, 1080, 0x000000, 0.5).setInteractive();
+        const blockInput = this.scene.add.rectangle(0, 0, 1920, 1080, 0x000000, 0.5).setOrigin(0.5, 0.5).setInteractive();
         this.add(blockInput);
 
         const background = this.scene.add.rectangle(0, 0, 900, 700, 0x000000, 0.8).setOrigin(0.5, 0.5);
