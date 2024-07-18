@@ -116,10 +116,11 @@ export default class Member extends Phaser.GameObjects.Container {
             fontSize: '14px',
             color: '#ffff00',
             padding: { x: 5, y: 5 },
-            align: 'center'
+            align: 'center',
+            wordWrap: { width: 100, useAdvancedWrap: true }
         });
         this.assignedText.setOrigin(0.5, 0.5);
-        this.assignedText.setWordWrapWidth(100);
+        //this.assignedText.setWordWrapWidth(100);
         this.add(this.assignedText);
 
         this.healthBar = new Phaser.GameObjects.Graphics(scene);
@@ -421,7 +422,11 @@ export default class Member extends Phaser.GameObjects.Container {
         
         if(boss != null) {
             if (this.canSeeCard()) {
-                this.assignedText?.setText(card.cardType.getName());
+                let cardName = card.cardType.getName();
+                if (cardName == "ricochet") {
+                    cardName = "ricoch et";
+                }
+                this.assignedText?.setText("meta gaming");
             } else {
                 this.assignedText?.setText("???");
             }
@@ -494,7 +499,7 @@ export default class Member extends Phaser.GameObjects.Container {
             this.off("pointerdown");
         }
         this.updateHealthBar();
-        this.showFloatingAction((amount * -1).toString(), "#ff005a", 1);
+        this.showFloatingAction((amount * -1).toString(), "#ff005a", true, 1);
     }
 
     increaseHP(amount: number) {
@@ -523,10 +528,10 @@ export default class Member extends Phaser.GameObjects.Container {
         this.updateHealthBar();
     
         const displayAmount = originalHp <= 0 ? this.hp : amount;
-        this.showFloatingAction(`+${displayAmount}`, "#00ff00", 1);
+        this.showFloatingAction(`+${displayAmount}`, "#00ff00", true, 1);
     }
 
-    showFloatingAction(action: string, color: string = '#ffffff', incrementIndex: number = 0) {
+    showFloatingAction(action: string, color: string = '#ffffff', large: boolean = false, incrementIndex: number = 0) {
         log(`${this} shows floating action: ${action}`);
         if (!this.scene) {
             return;
@@ -534,11 +539,17 @@ export default class Member extends Phaser.GameObjects.Container {
         const baseOffset = -35;
         const yOffset = incrementIndex * baseOffset;
     
+        let fontSize = '16px';
+        if (large) {
+            fontSize = '36px';
+        }
+
         const actionText = this.scene.add.text(this.x, this.y - this.sprite.height / 2 + yOffset, action, {
-            fontSize: '48px',
+            fontFamily: '"Press Start 2P"',
+            fontSize,
             color: color,
             stroke: color,
-            strokeThickness: 3
+            strokeThickness: 1
         }).setOrigin(0.5);
     
         this.scene.add.tween({
