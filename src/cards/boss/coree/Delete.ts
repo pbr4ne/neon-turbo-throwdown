@@ -44,7 +44,7 @@ export class Delete extends CoreeCard {
     }
 
     getName(): string {
-        return "delete";
+        return "DELETE";
     }
 
     getIcon(): string {

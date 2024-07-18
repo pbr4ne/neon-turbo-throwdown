@@ -63,7 +63,7 @@ export class Metagaming extends Boss10Card {
     }
 
     getName(): string {
-        return "metagaming";
+        return "meta gaming";
     }
 
     getIcon(): string {

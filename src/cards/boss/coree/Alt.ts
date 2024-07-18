@@ -60,7 +60,7 @@ export class Alt extends CoreeCard {
 
 
     getName(): string {
-        return "alt";
+        return "ALT";
     }
 
     getIcon(): string {
