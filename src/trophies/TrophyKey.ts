@@ -45,6 +45,9 @@ export enum TrophyKey {
     IDLE_SPEED_2 = "idle-speed-2",
     IDLE_SPEED_3 = "idle-speed-3",
     IDLE_SPEED_4 = "idle-speed-4",
+    OFFENSIVE_STRATEGY_1 = "offensive-strategy-1",
+    DEFENSIVE_STRATEGY_1 = "defensive-strategy-1",
+    HEAL_STRATEGY_1 = "heal-strategy-1",
 
     //card upgrades
     //throw

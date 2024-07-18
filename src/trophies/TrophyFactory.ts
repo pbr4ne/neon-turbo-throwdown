@@ -43,6 +43,9 @@ import { Throw3 } from "./card/throw/Throw3";
 import { Throw4 } from "./card/throw/Throw4";
 import { Throw5 } from "./card/throw/Throw5";
 import { Throw6 } from "./card/throw/Throw6";
+import { OffensiveStrategy1 } from "./idle/OffensiveStrategy1";
+import { DefensiveStrategy1 } from "./idle/DefensiveStrategy1";
+import { HealStrategy1 } from "./idle/HealStrategy1";
 
 export class TrophyFactory {
     private static trophyTypeMap: Map<TrophyKey, (cardKey?: CardKeys) => TrophyType> = new Map();
@@ -105,6 +108,9 @@ export class TrophyFactory {
         this.registerTrophyType(TrophyKey.IDLE_SPEED_2, () => new IdleSpeed2);
         this.registerTrophyType(TrophyKey.IDLE_SPEED_3, () => new IdleSpeed3);
         this.registerTrophyType(TrophyKey.IDLE_SPEED_4, () => new IdleSpeed4);
+        this.registerTrophyType(TrophyKey.OFFENSIVE_STRATEGY_1, () => new OffensiveStrategy1);
+        this.registerTrophyType(TrophyKey.DEFENSIVE_STRATEGY_1, () => new DefensiveStrategy1);
+        this.registerTrophyType(TrophyKey.HEAL_STRATEGY_1, () => new HealStrategy1);
 
         //cards
         //throw

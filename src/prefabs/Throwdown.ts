@@ -10,6 +10,10 @@ import { getUrlParam, log } from "../utilities/GameUtils";
 import Card from "./Card";
 import { CoachList } from "../throwdown/CoachList";
 import { GameSounds } from "../utilities/GameSounds";
+import { CardKeys } from "../cards/CardKeys";
+import { HealStrategy1 } from "../trophies/idle/HealStrategy1";
+import { DefensiveStrategy1 } from "../trophies/idle/DefensiveStrategy1";
+import { OffensiveStrategy1 } from "../trophies/idle/OffensiveStrategy1";
 
 export default class Throwdown extends Phaser.GameObjects.Container {
 
@@ -226,8 +230,48 @@ export default class Throwdown extends Phaser.GameObjects.Container {
     automatePlayerSelection() {
         log('AUTOMATION - selecting player');
         const members = this.player.getUnassignedMembers();
-        //randomly select member
+        const poppedUpCardKey = this.player.hand.getPoppedUpCard()?.getCardType().getKey();
+        
+        //ai heal
+        log(`${Library.getTrophyTypes()}`);
+        if(Library.hasTrophy(HealStrategy1)) {
+            const healingCards = [CardKeys.F7, CardKeys.LEVEL_SET, CardKeys.SOLDIER_ON, CardKeys.SUPPLY_AND_DEMAND];
+            
+            if (poppedUpCardKey !== undefined && healingCards.includes(poppedUpCardKey)) {
+                //if there is anyone with 50% health or below, assign to the person with the lowest health
+                const lowHealthMembers = members.filter(member => member.getHealthPercentage() <= 0.5);
+                if (lowHealthMembers.length > 0) {
+                    const lowestHealthMember = lowHealthMembers.reduce((prev, current) => (prev.getHealthPercentage() < current.getHealthPercentage()) ? prev : current);
+                    log('AUTOMATION (Heal AI) - selecting player ' + lowestHealthMember.getNumber());
+                    this.player.handleMemberClick(lowestHealthMember);
+                    return;
+                }
+            }
+        }
+
+        //ai defense
+        if(Library.hasTrophy(DefensiveStrategy1)) {
+            const defenseCards = [CardKeys.BLOCK_1_BLOCK, CardKeys.BLOCK_2_BETTER_BLOCK, CardKeys.BLOCK_3_TURBO_BLOCK, CardKeys.BLOCK_4_BEST_BLOCK, CardKeys.BLOCK_5_DOUBLE_BLOCK,
+                CardKeys.EVADE_1_EVADE, CardKeys.EVADE_2_DOUBLE_EVADE, CardKeys.EVADE_3_TURBO_EVADE, CardKeys.EVADE_4_TRIPLE_EVADE,
+                CardKeys.CATCH_1_CATCH, CardKeys.CATCH_2_TURBO_CATCH, CardKeys.CATCH_3_BIG_HANDS];
+
+            if (poppedUpCardKey !== undefined && defenseCards.includes(poppedUpCardKey)) {
+                members.forEach(member => {
+                    //look to see if any member in Boss has targeted this member
+                    const targetedByBoss = this.boss.getAliveMembers().filter(bossMember => bossMember.getIntendedTarget() === member);
+                    //give to the person with the least health
+                    if (targetedByBoss.length > 0) {
+                        const lowestHealthMember = targetedByBoss.reduce((prev, current) => (prev.getHealthPercentage() < current.getHealthPercentage()) ? prev : current);
+                        log('AUTOMATION (Defensive AI) - selecting player ' + lowestHealthMember.getNumber());
+                        this.player.handleMemberClick(lowestHealthMember);
+                        return;
+                    }
+                });
+            }
+        }
+
         const randomMember = members[Math.floor(Math.random() * members.length)];
+        log('AUTOMATION - selecting player ' + randomMember.getNumber());
         //automate clicking on member
         this.player.handleMemberClick(randomMember);
     }
@@ -238,6 +282,14 @@ export default class Throwdown extends Phaser.GameObjects.Container {
 
         if (members.length <= 0) {
             log('AUTOMATION - no target members');
+            return;
+        }
+
+        //ai offense
+        if (Library.hasTrophy(OffensiveStrategy1)) {
+            const lowestHealthMember = members.reduce((prev, current) => (prev.getHealthPercentage() < current.getHealthPercentage()) ? prev : current);
+            log('AUTOMATION (Offensive AI) - selecting target ' + lowestHealthMember.getNumber());
+            this.player.handleEnemyClick(lowestHealthMember);
             return;
         }
 

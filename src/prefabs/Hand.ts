@@ -31,6 +31,10 @@ export default class Hand {
         this.renderOnScreen = renderOnScreen;
     }
 
+    getPoppedUpCard(): Card | null {
+        return this.poppedUpCard;
+    }
+
     addCard(card: Card) {
         if (this.cards.length < this.maxCards) {
             this.cards.push(card);

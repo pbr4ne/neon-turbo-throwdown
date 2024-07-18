@@ -249,6 +249,10 @@ export default class Member extends Phaser.GameObjects.Container {
         return canSee;
     }
 
+    getHealthPercentage(): number {
+        return this.hp / this.maxHP;
+    }
+
     updateHealthBar() {
         let renderHealthBar = false;
         let renderQuestionMark = false;
