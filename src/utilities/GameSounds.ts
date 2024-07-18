@@ -1,8 +1,7 @@
 import { log } from "./GameUtils";
-import { StorageManager } from "./StorageManager";
 
 export class GameSounds {
-    static musicSound: Phaser.Sound.WebAudioSound;
+    static musicSound: Phaser.Sound.WebAudioSound | null = null;
     static hitSound: Phaser.Sound.WebAudioSound;
     static blockSound: Phaser.Sound.WebAudioSound;
     static buttonSound: Phaser.Sound.WebAudioSound;
@@ -17,17 +16,9 @@ export class GameSounds {
     static effectsEnabled: boolean = true;
     static musicShouldBePlaying: boolean = true;
     static currentSongKey: string | null = null;
-    static fadeDuration: number = 1000; //ms
+    static fadeDuration: number = 1000; // ms
 
-    static async init(scene: Phaser.Scene) {
-        const settings = await StorageManager.loadSoundSettings();
-        console.log(settings?.effectsEnabled);
-        console.log(settings?.musicEnabled);
-        if (settings) {
-            GameSounds.effectsEnabled = settings.effectsEnabled;
-            GameSounds.musicShouldBePlaying = settings.musicEnabled;
-        }
-
+    static init(scene: Phaser.Scene) {
         if (GameSounds.hitSound && GameSounds.blockSound && GameSounds.buttonSound && GameSounds.cardSound && GameSounds.healSound && GameSounds.winSound && GameSounds.loseSound) {
             return;
         }
@@ -43,16 +34,10 @@ export class GameSounds {
         GameSounds.debuffSound = scene.sound.add("sound_debuff") as Phaser.Sound.WebAudioSound;
         GameSounds.buffSound = scene.sound.add("sound_buff") as Phaser.Sound.WebAudioSound;
         GameSounds.dodgeSound = scene.sound.add("sound_dodge") as Phaser.Sound.WebAudioSound;
-
-        if (GameSounds.musicSound && GameSounds.musicShouldBePlaying) {
-            GameSounds.musicSound.resume();
-        }
     }
 
-    static async toggleMusic() {
+    static toggleMusic() {
         GameSounds.musicShouldBePlaying = !GameSounds.musicShouldBePlaying;
-        await StorageManager.saveSoundSettings(GameSounds.musicShouldBePlaying, GameSounds.effectsEnabled);
-
         if (GameSounds.musicSound) {
             if (GameSounds.musicShouldBePlaying) {
                 GameSounds.musicSound.resume();
@@ -61,18 +46,18 @@ export class GameSounds {
             }
         }
     }
+
     static get musicEnabled() {
         return GameSounds.musicSound && GameSounds.musicSound.isPlaying;
     }
 
-    static async toggleEffects() {
+    static toggleEffects() {
         GameSounds.effectsEnabled = !GameSounds.effectsEnabled;
-        await StorageManager.saveSoundSettings(GameSounds.musicShouldBePlaying, GameSounds.effectsEnabled);
     }
 
     static playHit() {
         if (GameSounds.effectsEnabled && GameSounds.hitSound) {
-            GameSounds.hitSound.play({ volume: 0.2});
+            GameSounds.hitSound.play({ volume: 0.2 });
         }
     }
 
@@ -144,13 +129,14 @@ export class GameSounds {
 
         //fade out current song
         if (GameSounds.musicSound) {
+            const currentMusic = GameSounds.musicSound;
             scene.tweens.add({
-                targets: GameSounds.musicSound,
+                targets: currentMusic,
                 volume: 0,
                 duration: GameSounds.fadeDuration,
                 onComplete: () => {
-                    GameSounds.musicSound.stop();
-                    GameSounds.musicSound.destroy();
+                    currentMusic.stop();
+                    currentMusic.destroy();
                     GameSounds.startNewSong(scene, newSongKey);
                 }
             });
@@ -163,7 +149,7 @@ export class GameSounds {
         GameSounds.musicSound = scene.sound.add(newSongKey) as Phaser.Sound.WebAudioSound;
         GameSounds.currentSongKey = newSongKey;
 
-        if (GameSounds.musicShouldBePlaying) {
+        if (GameSounds.musicShouldBePlaying && GameSounds.musicSound) {
             GameSounds.musicSound.play({ loop: true, volume: 0.2 });
         } else {
             log("Not playing music");

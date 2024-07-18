@@ -34,14 +34,6 @@ interface GameDB extends DBSchema {
         value: { id?: number; key: CardKeys };
         indexes: { 'key': string };
     },
-    settings: {
-        key: string;
-        value: {
-            key: string;
-            musicEnabled: boolean;
-            effectsEnabled: boolean;
-        };
-    }
 }
 
 export class StorageManager {
@@ -59,9 +51,6 @@ export class StorageManager {
                         db.createObjectStore('dialogues', { keyPath: 'key' });
                         const baseDeckStore = db.createObjectStore('baseDeck', { keyPath: 'id', autoIncrement: true });
                         baseDeckStore.createIndex('key', 'key');
-                    }
-                    if (oldVersion < 2) {
-                        db.createObjectStore('settings', { keyPath: 'key' });
                     }
                 },
             });
@@ -173,24 +162,6 @@ export class StorageManager {
             return cardTypes;
         }
         return [];
-    }
-
-    public static async saveSoundSettings(musicEnabled: boolean, effectsEnabled: boolean) {
-        if (this.db) {
-            await this.db.put('settings', { key: 'soundSettings', musicEnabled, effectsEnabled });
-            log(`Saved sound settings to db: musicEnabled=${musicEnabled}, effectsEnabled=${effectsEnabled}`);
-        }
-    }
-
-    public static async loadSoundSettings(): Promise<{ key: string; musicEnabled: boolean; effectsEnabled: boolean } | null> {
-        if (this.db) {
-            const settings = await this.db.get('settings', 'soundSettings');
-            if (settings) {
-                log(`Loaded sound settings from db: ${settings}`);
-                return settings;
-            }
-        }
-        return null;
     }
 
     public static async clearAllData() {

@@ -14,7 +14,9 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
 	
 		this.dialogueType = dialogueType;
 		log(`Dialogue type: ${dialogueType}  - spiritCoachDialogue: ${spiritCoachDialogue}`);
-		GameSounds.switchSong(this.scene, "neon-turbo-throwdown-chill");
+		if (!spiritCoachDialogue) {
+			GameSounds.switchSong(this.scene, "neon-turbo-throwdown-chill");
+		}
 	
 		const rectangle_1 = scene.add.rectangle(-7, 340, 128, 128);
 		rectangle_1.scaleX = 10.314571568183906;
