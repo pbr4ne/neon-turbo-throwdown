@@ -23,7 +23,6 @@ export class Metagaming extends Boss10Card {
         super(CardKeys.METAGAMING, null, ThrowdownPhase.ATTACK);
     }
 
-    
     resetTurn(): void {
         this.currentNumDefends = 0;
         super.resetTurn();

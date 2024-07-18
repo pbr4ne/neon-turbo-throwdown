@@ -176,4 +176,12 @@ export class CardFactory {
         //unknown
         this.registerCardType(CardKeys.UNKNOWN, UnknownCard);
     }
+
+    public static getRandomCard(): CardType {
+        const cardConstructors = Array.from(CardFactory.cardTypeMap.values())
+            .filter(cardConstructor => !(cardConstructor.prototype instanceof UnknownCard));
+
+        const randomConstructor = cardConstructors[Math.floor(Math.random() * cardConstructors.length)];
+        return new randomConstructor();
+    }
 }
