@@ -363,6 +363,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
         this.cardSlot3.setVisible(false);
         this.cardSlot4.setVisible(false);
         this.cardSlot5.setVisible(false);
+        this.helpBtn?.setVisible(false);
     }
 
     hideAllInstructions() {

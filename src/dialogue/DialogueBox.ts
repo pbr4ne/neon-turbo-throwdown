@@ -32,7 +32,7 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
 		this.add(rectangle_1);
 	
 		if (!initialDialogue) {
-			this.idleModeImage = this.scene.add.image(140, 840, Library.getIdleMode() ? "switch-active" : "switch-idle")
+			this.idleModeImage = this.scene.add.image(135, 840, Library.getIdleMode() ? "switch-active" : "switch-idle")
 				.setInteractive({ useHandCursor: true })
 				.on('pointerover', () => {
 					this.scene.input.setDefaultCursor('pointer');
@@ -44,7 +44,7 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
 					this.switchIdleMode();
 				});
 		
-			this.idleModeText = this.scene.add.text(140, 920, "(for next combat)", {
+			this.idleModeText = this.scene.add.text(135, 920, "(for next combat)", {
 				fontFamily: '"Press Start 2P"',
 				fontSize: '14px',
 				color: '#ffff00',
