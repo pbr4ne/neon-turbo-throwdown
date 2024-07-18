@@ -110,7 +110,7 @@ export default class RunUpgrade extends Phaser.GameObjects.Container {
     private createCard(card: CardType, type: string, x: number, y: number, index: number) {
         let genericCard: GenericCard;
         if (type === 'coach') {
-            genericCard = new Card(this.scene, card, "upgrade", x, y, "front", true);
+            genericCard = new Card(this.scene, card, "upgrade", x, y, "front-gift", true);
         } else {
             genericCard = new Upgrade(this.scene, card, x, y, "front-upgrade");
         }

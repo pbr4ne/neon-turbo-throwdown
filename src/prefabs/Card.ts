@@ -152,8 +152,8 @@ export default class Card extends GenericCard {
             case "bossDeck":
                 break;
             case "playerHand":
-            case "upgrade":
                 this.setTexture("front");
+            case "upgrade":
                 this.cardImage.setVisible(true);
                 this.nameText.setVisible(true);
                 this.iconImage.setVisible(true);
