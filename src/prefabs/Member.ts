@@ -70,9 +70,9 @@ export default class Member extends Phaser.GameObjects.Container {
         if (checkUrlParam("lowHP", "true")) {
             this.hp = 1;
         } else {
-            if (Library.hasTrophy(IncreaseHP2)){
+            if (this.hasTrophy(IncreaseHP2)){
                 this.hp += 2;
-            } else if (Library.hasTrophy(IncreaseHP1)) {
+            } else if (this.hasTrophy(IncreaseHP1)) {
                 this.hp += 1;
             }
         }
@@ -188,6 +188,14 @@ export default class Member extends Phaser.GameObjects.Container {
             this.tooltipText.setVisible(false);
             this.tooltipImage.setVisible(false);
         });
+    }
+
+    hasTrophy(trophyClass: new () => TrophyType) {
+        if (this.team instanceof Player) {
+            return Library.hasTrophy(trophyClass);
+        } else if (this.team instanceof Boss) {
+            return this.team.getCoach().hasTrophy(trophyClass);
+        }
     }
 
     private updateTooltipText(): void {
