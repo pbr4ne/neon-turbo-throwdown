@@ -68,13 +68,13 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
     private trophiesToSelect: (TrophyType | CardType)[] = [];
 
     destroyEverything() {
-        this.courtImage.destroy();
-        this.cardSlot1.destroy();
-        this.cardSlot2.destroy();
-        this.cardSlot3.destroy();
-        this.spiritCornerImage.destroy();
-        this.spiritCoachImage.destroy();
-        this.coachName.destroy();
+        this.courtImage?.destroy();
+        this.cardSlot1?.destroy();
+        this.cardSlot2?.destroy();
+        this.cardSlot3?.destroy();
+        this.spiritCornerImage?.destroy();
+        this.spiritCoachImage?.destroy();
+        this.coachName?.destroy();
         this.selectCardImage?.destroy();
         this.pointerImage?.destroy();
     }

@@ -137,7 +137,8 @@ export class TrophyFactory {
     }
 
     public static getAllTrophyTypes(): TrophyType[] {
-        //remove unknown and card upgrade trophy
-        return Array.from(this.trophyTypeMap.keys()).map(key => this.createTrophyType(key)).filter(trophy => trophy.getKey() !== TrophyKey.UNKNOWN && trophy.getKey() !== TrophyKey.CARD_UPGRADE);
+        //remove unknown trophy
+        const allTrophies = Array.from(TrophyFactory.trophyTypeMap.keys()).filter(key => key !== TrophyKey.UNKNOWN);
+        return allTrophies.map(key => TrophyFactory.createTrophyType(key));
     }
 }
