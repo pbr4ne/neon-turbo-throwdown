@@ -11,7 +11,7 @@ export default class Help extends Phaser.GameObjects.Container {
         background.setStrokeStyle(4, 0x00ffff);
         this.add(background);
 
-		const coachImage = this.scene.add.image(340, -200, "coach")
+		const coachImage = this.scene.add.image(330, -180, "coach")
 		this.add(coachImage);
 
         const creditsText = this.scene.add.text(-420, -320, "Here, watch this tutor-reel:", {
