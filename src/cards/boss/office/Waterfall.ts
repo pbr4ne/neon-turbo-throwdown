@@ -54,7 +54,7 @@ export class Waterfall extends OfficeCard {
     }
 
     getName(): string {
-        return "waterfall";
+        return "water fall";
     }
 
     getIcon(): string {
