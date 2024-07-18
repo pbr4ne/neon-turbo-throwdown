@@ -44,6 +44,8 @@ export default class RunUpgrade extends Phaser.GameObjects.Container {
 		this.skipButtonBackground.setDepth(0);
 		this.skipButton.setDepth(1);
 
+        this.cardListToChooseFrom = this.getCardList();
+
         this.cardRound();
     }
 
@@ -58,6 +60,7 @@ export default class RunUpgrade extends Phaser.GameObjects.Container {
     private currentGenericCards: GenericCard[] = [];
     private skipButton!: Phaser.GameObjects.Text;
 	private skipButtonBackground!: Phaser.GameObjects.Rectangle;
+    private cardListToChooseFrom: { card: CardType, type: string }[] = [];
 
     destroyEverything() {
         this.cardSlot1.destroy();
@@ -90,16 +93,14 @@ export default class RunUpgrade extends Phaser.GameObjects.Container {
     }
 
     private cardRound() {
-        if (this.numDraws >= 3) {
+        if (this.numDraws >= 3 || this.cardListToChooseFrom.length < 3) {
             (this.scene.scene.get('Game') as Game).finishRunUpgrade();
             return;
         }
 
-        const combinedCards = this.getCardList();
-    
-        const firstCard = combinedCards.pop();
-        const secondCard = combinedCards.pop();
-        const thirdCard = combinedCards.pop();
+        const firstCard = this.cardListToChooseFrom.pop();
+        const secondCard = this.cardListToChooseFrom.pop();
+        const thirdCard = this.cardListToChooseFrom.pop();
         this.numDraws++;
     
         this.clearCurrentCards();
@@ -171,7 +172,7 @@ export default class RunUpgrade extends Phaser.GameObjects.Container {
     }
 
     private drawNextSetOfCards() {
-        if (this.numDraws < 3 && this.getCardList().length >= 3) {
+        if (this.numDraws < 3) {
             this.cardRound();
         } else {
             (this.scene.scene.get('Game') as Game).finishRunUpgrade();

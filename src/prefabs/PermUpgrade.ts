@@ -79,19 +79,6 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
         this.pointerImage?.destroy();
     }
 
-    getUpgradeList() {
-        let upgradeableCards = Library.getPureDeck()
-            .filter(card => card.getUpgrade() !== null)
-            .map(card => ({ card, type: 'upgradeable' }));
-
-        Phaser.Utils.Array.Shuffle(upgradeableCards);
-        upgradeableCards = upgradeableCards.slice(0, 3);
-
-        Phaser.Utils.Array.Shuffle(upgradeableCards);
-
-        return upgradeableCards;
-    }
-
     private cardRound() {
         let eligibleTrophies = OutstandingTrophyList.getEligibleTrophyTypes();
         this.trophiesToSelect = [];
