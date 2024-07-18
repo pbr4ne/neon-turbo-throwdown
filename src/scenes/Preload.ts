@@ -1,11 +1,5 @@
-
-// You can write more code here
-
-/* START OF COMPILED CODE */
-
 import Phaser from "phaser";
 import PreloadBarUpdaterScript from "../script-nodes/ui/PreloadBarUpdaterScript";
-/* START-USER-IMPORTS */
 import assetPackUrl from "../../static/assets/asset-pack.json";
 import WebFont from 'webfontloader';
 import { checkUrlParam, log } from "../utilities/GameUtils";
@@ -17,47 +11,39 @@ import { Library } from "../throwdown/Library";
 import { TrophyFactory } from "../trophies/TrophyFactory";
 import { CardKeys } from "../cards/CardKeys";
 import { OutstandingTrophyList } from "../trophies/OutstandingTrophyList";
-/* END-USER-IMPORTS */
 
 export default class Preload extends Phaser.Scene {
 
 	constructor() {
 		super("Preload");
-
-		/* START-USER-CTR-CODE */
-		// Write your code here.
-		/* END-USER-CTR-CODE */
 	}
 
 	editorCreate(): void {
-
-		// progressBar
-		const progressBar = this.add.rectangle(832.5, 541, 256, 20);
-		progressBar.setOrigin(0, 0);
-		progressBar.isFilled = true;
-		progressBar.fillColor = 0xff00ff;
-
-		// preloadUpdater
-		new PreloadBarUpdaterScript(progressBar);
-
-		// progressBarBg
-		const progressBarBg = this.add.rectangle(832.5, 541, 256, 20);
+		const loadingText = this.add.text(831.5, 509, "Turbocharging...", {
+			color: "#ff00ff",
+			fontFamily: '"Press Start 2P"',
+			fontSize: "25px",
+			strokeThickness: 2,
+			stroke: "#ff00ff"
+		});
+	
+		const textWidth = loadingText.width;
+	
+		const progressBarBg = this.add.rectangle(832.5, 541, textWidth, 20);
 		progressBarBg.setOrigin(0, 0);
 		progressBarBg.fillColor = 0x000000;
 		progressBarBg.isStroked = true;
 		progressBarBg.strokeColor = 0x000000;
-
-		// loadingText
-		const loadingText = this.add.text(831.5, 509, "", {});
-		loadingText.text = "Turbocharging...";
-		loadingText.setStyle({ "color": "#ff00ff", "fontFamily": '"Press Start 2P"', "fontSize": "25px", "strokeThickness": 2, "stroke": "#ff00ff" });
-
+	
+		const progressBar = this.add.rectangle(832.5, 541, textWidth, 20);
+		progressBar.setOrigin(0, 0);
+		progressBar.isFilled = true;
+		progressBar.fillColor = 0xff00ff;
+	
+		new PreloadBarUpdaterScript(progressBar);
+	
 		this.events.emit("scene-awake");
 	}
-
-	/* START-USER-CODE */
-
-	// Write your code here
 
 	async preload() {
 
@@ -132,10 +118,4 @@ export default class Preload extends Phaser.Scene {
 			this.scene.start("Welcome");
 		}
 	}
-
-	/* END-USER-CODE */
 }
-
-/* END OF COMPILED CODE */
-
-// You can write more code here
