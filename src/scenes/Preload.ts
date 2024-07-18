@@ -85,6 +85,8 @@ export default class Preload extends Phaser.Scene {
 			Library.setIdleMode(true);
 		}
 
+		//set your base cards to the 'pure' deck for this permrun
+		//CoachList.you.setBaseCards(Library.getPureDeck());
 		Library.setPureDeck(CoachList.you.getBaseCards());
 		//log every trophy in outstandingtrophylist
 		log("Outstanding Trophies Before: " + OutstandingTrophyList.getTrophyTypes().map(t => t.getKey()).join(", "));

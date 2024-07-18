@@ -66,6 +66,7 @@ export class Library {
     }
 
     public static setTrophyTypes(trophyTypes: TrophyType[]) {
+        this.trophyTypes = [];
         this.trophyTypes.push(...trophyTypes);
         OutstandingTrophyList.removeTrophies(trophyTypes);
     }

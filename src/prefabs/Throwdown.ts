@@ -78,7 +78,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
             })
             .on('pointerdown', () => {
                 Library.incrementNumRuns();
-                this.scene.scene.start('Welcome');
+                this.scene.scene.start('Preload');
             });
 
         this.idleModeImage = this.scene.add.image(77, 376, Library.getIdleMode() ? "switch-active" : "switch-idle")
@@ -211,9 +211,9 @@ export default class Throwdown extends Phaser.GameObjects.Container {
     }
 
     private runAutomation() {
-        log('AUTOMATION - running');
+        //log('AUTOMATION - running');
         const step = this.currentStep - 1; //always ahead one
-        log('AUTOMATION - current step ' + step);
+        //log('AUTOMATION - current step ' + step);
 
         switch (step) {
             case GameSteps.DRAW_CARDS:

@@ -110,6 +110,7 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
 
         // If there are no trophies or upgrades, finish the upgrade process
         if (this.trophiesToSelect.length <= 0) {
+            this.finalizeDeck(Library.getPureDeck());
             (this.scene.scene.get('Game') as Game).finishPermUpgrade();
             return;
         }
@@ -160,11 +161,16 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
             log("Unknown item selected");
         }
 
-        await StorageManager.saveBaseDeck(deckToModify);
-        Library.setPureDeck(deckToModify);
-        CoachList.you.setBaseCards(deckToModify);
+        this.finalizeDeck(deckToModify);
     
         (this.scene.scene.get('Game') as Game).finishPermUpgrade();
+    }
+
+    async finalizeDeck(deckToModify: CardType[]) {
+        await StorageManager.saveBaseDeck(deckToModify);
+        Library.setPureDeck(deckToModify);
+        log("this is the list of cards in the Library pure deck after the upgrade: " + deckToModify.map(card => card.getKey()));
+        CoachList.you.setBaseCards(deckToModify);
     }
     
     findCardTypeIndexByKey(cards: CardType[], key: CardKeys): number {
