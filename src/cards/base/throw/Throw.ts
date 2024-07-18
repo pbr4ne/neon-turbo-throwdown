@@ -10,6 +10,7 @@ export class Throw extends CardType {
     protected chanceToOffend : number = 0.75;
     protected offenseDamage: number = 1;
     protected numTargets: number = 1;
+    protected ricochetDamage: number = 1;
 
     constructor(key: CardKeys = CardKeys.THROW_1, upgradeKey: CardKeys | null = CardKeys.THROW_2) {
         super(key, upgradeKey, ThrowdownPhase.ATTACK);
@@ -49,7 +50,7 @@ export class Throw extends CardType {
             }
             if (!defenseSuccess) {
                 //reduce their HP if they failed to defend
-                target.reduceHP(overrideDamage ? overrideDamage : this.getOffenseDamage(member, target, team));
+                target.reduceHP(overrideDamage ? overrideDamage : this.getRicochetDamage());
                 return true;
             }
         }
@@ -68,11 +69,15 @@ export class Throw extends CardType {
         return "throw";
     }
 
+    getRicochetDamage(): number {
+        return this.ricochetDamage;
+    }
+
     getDescription(): string {
         const chancePercentage = this.getNicePercentage(this.getChanceToOffend());
         const description = `Target 1 enemy for ${this.getOffenseDamage()} damage. ${chancePercentage}% effective.`
         if (this.getNumTargets() > 1) {
-            return description + ` Ricochets to ${this.getNumTargets() - 1} additional random target(s).`;
+            return description + ` Ricochets to ${this.getNumTargets() - 1} additional random target(s) for ${this.getRicochetDamage()} damage.`;
         }
         return description;
     }
