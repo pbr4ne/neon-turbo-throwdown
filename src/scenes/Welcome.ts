@@ -24,8 +24,23 @@ export default class Welcome extends Phaser.Scene {
 	}
 
 	editorCreate(): void {
-		const logo = this.add.image(1000, 360, "logo");
-		const playBtn = this.add.image(1000, 680, "start-button");
+		let playBtn;
+		let logo;
+
+		if (Library.getNumRuns() === 0) {
+			logo = this.add.image(1000, 360, "logo");
+			playBtn = this.add.image(1000, 680, "start-button");
+		} else {
+			logo = this.add.image(1000, 200, "logo-small");
+			this.add.image(1000, 400, "pep-talk");
+			playBtn = this.add.image(1000, 630, "restart-button");
+			this.add.text(1000, 670, "maintain your unlocks", {
+				fontFamily: '"Press Start 2P"',
+				fontSize: '12px',
+				color: '#ffffff',
+			}).setOrigin(0.5, 0.5);
+		}
+
 		this.musicBtn = this.add.image(1720, 960, "music2-on");
 		this.soundBtn = this.add.image(1840, 960, "sound2-on");
 		const creditsBtn = this.add.image(100, 960, "view-credits");
@@ -104,7 +119,7 @@ export default class Welcome extends Phaser.Scene {
 		settingsBtn.on('pointerdown', this.showSettings, this);
 
 		if (Library.getTrophyTypes().length > 0) {
-			const trophiesBtn = this.add.image(1000, 800, "trophies").setInteractive({ useHandCursor: true });
+			const trophiesBtn = this.add.image(1000, 500, "trophies").setInteractive({ useHandCursor: true });
 			trophiesBtn.on('pointerdown', this.showTrophies, this);
 		}
 	}
