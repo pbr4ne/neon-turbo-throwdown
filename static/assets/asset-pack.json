@@ -212,6 +212,11 @@
                 "key": "front-gift"
             },
             {
+                "url": "assets/images/deck/front-upgrade.png",
+                "type": "image",
+                "key": "front-upgrade"
+            },
+            {
                 "url": "assets/images/cards/group-heal.png",
                 "type": "image",
                 "key": "group-heal"
@@ -356,6 +361,11 @@
                 "url": "assets/images/instructions/select-trophy.png",
                 "type": "image",
                 "key": "select-trophy"
+            },
+            {
+                "url": "assets/images/welcome/settings.png",
+                "type": "image",
+                "key": "settings"
             },
             {
                 "url": "assets/images/level/sgtsteve.png",
