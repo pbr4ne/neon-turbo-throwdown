@@ -56,7 +56,12 @@ export default class Card extends GenericCard {
         });
         this.assignedMemberText.setOrigin(0.5, 0.5);
     
-        this.nameText = new Phaser.GameObjects.Text(scene, 0, 64, this.cardType.getName(), {
+        let cardName = this.cardType.getName();
+        if (cardName == "ricochet") {
+            cardName = "ricoch et";
+        }
+
+        this.nameText = new Phaser.GameObjects.Text(scene, 0, 64, cardName, {
             fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
             fontSize: '14px',
             color: '#ffff00',
