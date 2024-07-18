@@ -9,18 +9,22 @@ import { Library } from "../throwdown/Library";
 
 export default class DialogueBox extends Phaser.GameObjects.Container {
 
-	constructor(scene: Phaser.Scene, x: number, y: number, coach: Coach, dialogueType: string, initialDialogue: boolean) {
+	constructor(scene: Phaser.Scene, x: number, y: number, coach: Coach, dialogueType: string, initialDialogue: boolean, spiritCoachDialogue: boolean) {
 		super(scene, x ?? 960, y ?? 542);
 	
 		this.dialogueType = dialogueType;
-	
+		log(`Dialogue type: ${dialogueType}  - spiritCoachDialogue: ${spiritCoachDialogue}`);
 		GameSounds.switchSong(this.scene, "neon-turbo-throwdown-chill");
 	
 		const rectangle_1 = scene.add.rectangle(-7, 340, 128, 128);
 		rectangle_1.scaleX = 10.314571568183906;
 		rectangle_1.scaleY = 2.6941724549327337;
 		rectangle_1.isStroked = true;
-		rectangle_1.strokeColor = 16776960;
+		if (spiritCoachDialogue) {
+			rectangle_1.strokeColor = 0x00ffff;
+		} else {
+			rectangle_1.strokeColor = 0xff00ff
+		}
 		this.add(rectangle_1);
 	
 		if (!initialDialogue) {
@@ -61,6 +65,28 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
 			if (convo != null) {
 				this.dialogueConversation = convo;
 			}
+		} else if (dialogueType === "initialLose") {
+			log('initialLose dialogue!');
+			this.dialogueConversation = DialogueStorage.firstSpiritDialogue;
+			this.scene.add.image(1625, 193, "coach-corner-spirit");
+
+			this.scene.add.image(953, 443, "court-cyan");
+
+			this.scene.add.existing(new Phaser.GameObjects.Image(scene, 1855, 78, "spirit")
+			.setOrigin(1, 0)
+			.setScale(1.2));
+
+			let coachName = new Phaser.GameObjects.Text(this.scene, 1720, 340, "Turbovoid", {
+				fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
+				fontSize: '20px',
+				color: '#000000',
+				stroke: '#000000',
+				strokeThickness: 1,
+				padding: { x: 5, y: 5 },
+				align: 'left'
+			});
+			this.scene.add.existing(coachName);
+			coachName.setOrigin(0.5, 0.5);
 		} else if (dialogueType === "final") {
 			this.dialogueConversation =  DialogueStorage.finalDialogue;
 		}
@@ -96,6 +122,7 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
         var step = this.dialogueConversation.getCurrentStep();
 
 		if (step == null) {
+			log("No dialogue step found. setting missing dialogue");
 			step = DialogueStorage.missingDialogueStep;
 		}
         
@@ -139,6 +166,7 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
 
 	renderText(step: DialogueStep) {
 		this.hideAllTextAreas();
+		log(step.getText() + "");
 		const text = step.getText();
 		this.avatar.setTexture(step.getCoach().getAvatar());
 		this.avatarName.setText(step.getNameOverride() ?? step.getCoach().getName());
@@ -258,7 +286,6 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
 		.on('pointerover', () => this.optionText3.setColor('#ff00ff'))
 		.on('pointerout', () => this.optionText3.setColor('#00ffff'));
 
-		//option instructions
 		this.optionInstructions = new Phaser.GameObjects.Text(this.scene, 300, 453, "[Click on an option]", {
             fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
             fontSize: '16px',
@@ -268,7 +295,6 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
         });
 		this.add(this.optionInstructions);
 
-        // Create a rectangle for the button with a transparent fill and cyan border
         this.nextButton = this.scene.add.rectangle(1500, 995, 125, 50, 0x000000, 0);
         this.nextButton.setStrokeStyle(2, 0x00ffff);
 		this.nextButton.setInteractive({ useHandCursor: true })
@@ -284,7 +310,6 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
 				}
             });
 
-        // Create the text for the button
         this.buttonText = new Phaser.GameObjects.Text(this.scene, 540, 453, 'Next', {
             fontFamily: '"Press Start 2P"', // needs the quotes because of the 2
             fontSize: '16px',
@@ -293,7 +318,7 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
         this.buttonText.setOrigin(0.5, 0.5);
         this.add(this.buttonText);
 
-		this.skipButton = this.scene.add.rectangle(700, -480, 500, 50, 0x000000, 0);
+		this.skipButton = this.scene.add.rectangle(-700, -480, 500, 50, 0x000000, 0);
 		this.skipButton.setStrokeStyle(2, 0xffff00);
 		this.skipButton.setInteractive({ useHandCursor: true })
 			.on('pointerdown', () => this.handleSkipButtonClick())
@@ -314,7 +339,7 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
 			color: '#ffff00'
 		});
 		this.skipButtonText.setOrigin(0.5, 0.5);
-		this.skipButtonText.setPosition(this.skipButton.x, this.skipButton.y); // Ensure text is centered within the rectangle
+		this.skipButtonText.setPosition(this.skipButton.x, this.skipButton.y); 
 		this.add(this.skipButton);
 		this.add(this.skipButtonText);
 

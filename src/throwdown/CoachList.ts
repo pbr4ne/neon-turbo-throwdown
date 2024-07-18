@@ -8,9 +8,9 @@ import { IncreaseHP2 } from "../trophies/member/IncreaseHP2";
 
 export class CoachList {
 
-    public static you = new Coach("You", CoachKeys.YOU, 0, false, "", "", "");
-    public static coach = new Coach("Coach", CoachKeys.COACH, 0, false, "", "", "");
-    public static spirit = new Coach("Spirit Coach", CoachKeys.SPIRIT , 0, false, "", "", "");
+    public static you = new Coach("You", CoachKeys.YOU, 0, false, "", "", "neon-turbo-throwdown");
+    public static coach = new Coach("Coach", CoachKeys.COACH, 0, false, "", "", "neon-turbo-throwdown");
+    public static spirit = new Coach("Spirit Coach", CoachKeys.SPIRIT , 0, false, "", "", "neon-turbo-throwdown");
     public static primo = new Coach("Primo Firstman", CoachKeys.PRIMO, 0, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
     public static sporticus = new Coach("Sporticus", CoachKeys.SPORTICUS, 1, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
     public static tycoon = new Coach("Throwdown Tycoon", CoachKeys.TYCOON, 1, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");

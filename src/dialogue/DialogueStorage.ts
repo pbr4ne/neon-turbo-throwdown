@@ -18,6 +18,8 @@ export class DialogueStorage {
     public static shadowkenDialogue: CoachDialogue = new CoachDialogue();
     public static boss10Dialogue: CoachDialogue = new CoachDialogue();
 
+    //special
+    public static firstSpiritDialogue: DialogueConversation = new DialogueConversation();
     public static finalDialogue: DialogueConversation = new DialogueConversation();
 
     public static missingDialogue: CoachDialogue = new CoachDialogue();
@@ -35,6 +37,7 @@ export class DialogueStorage {
         this.initializeTurbonerdDialogue();
         this.initializeShadowkenDialogue();
 
+        this.initializeSpiritDialogue();
         this.initializeFinalDialogue();
 
         this.initializeBoss10Dialogue();
@@ -51,6 +54,12 @@ export class DialogueStorage {
         this.warnIfMissingDialogue(DialogueStorage.turbonerdDialogue, CoachKeys.TURBO_NERD);
         this.warnIfMissingDialogue(DialogueStorage.shadowkenDialogue, CoachKeys.SHADOW_KEN);
         this.warnIfMissingDialogue(DialogueStorage.boss10Dialogue, CoachKeys.BOSS_10);
+    }
+
+    public initializeSpiritDialogue(): void {
+        DialogueStorage.firstSpiritDialogue.addStep("My child. Do not despair. Choose a consolationnn I mean participation trophy and continue thy quest.", CoachList.spirit, "???");
+        DialogueStorage.firstSpiritDialogue.addStep(["Can I go home instead?", "How do I beat the gym bosses?", "I'm gonna turbo-slice that (insert non-offensive 80s insult here)"], CoachList.you);
+        DialogueStorage.firstSpiritDialogue.addStep("All will be revealed... in time... ", CoachList.spirit);
     }
 
     public initializeFinalDialogue(): void {
@@ -114,7 +123,7 @@ export class DialogueStorage {
         //1
         primoLoseDialogue1.addStep("Don't mess with the best! The best being me and of course all the other bosses who occupy a more enviable position in this gym.", CoachList.primo);
         //2
-        primoLoseDialogue2.addStep("How does LAST feel…'cause first feels great! ‘Cause Primo means first. In case that wasn't clear. Before.", CoachList.primo);
+        primoLoseDialogue2.addStep("How does LAST feel... 'cause first feels great! ‘Cause Primo means first. In case that wasn't clear. Before.", CoachList.primo);
         //3primoLoseDialogue3.addStep("Being FIRST comes easy to me!", CoachList.primo);
     }
 
@@ -170,12 +179,12 @@ export class DialogueStorage {
         //intro
         //1
         tycoonIntroDialogue1.addStep("I say, old bean! Shall we have a sporting match of sports match?", CoachList.tycoon, "???");
-        tycoonIntroDialogue1.addStep(["I thought it was called Turbo Throwdown?", "How…are you a gym coach exactly?", "I'm 37, I'm not old"], CoachList.you);
+        tycoonIntroDialogue1.addStep(["I thought it was called Turbo Throwdown?", "How... are you a gym coach exactly?", "I'm 37, I'm not old"], CoachList.you);
         tycoonIntroDialogue1.addStep("Hahahaha, capital!", CoachList.tycoon);
         //2
         tycoonIntroDialogue2.addStep("I used to coach croquet, but alas, it's so passé!", CoachList.tycoon);
         //3
-        tycoonIntroDialogue3.addStep("…so I told them a pair would be called a binocle but did they listen to me? Nooooo…", CoachList.tycoon);
+        tycoonIntroDialogue3.addStep("...so I told them a pair would be called a binocle but did they listen to me? Nooooo... ", CoachList.tycoon);
 
         //win
         //1
@@ -281,7 +290,7 @@ export class DialogueStorage {
 
         //lose
         //1
-        coreeLoseDialogue1.addStep("YOU FORGOT ABOUT THE 4th E OF THROWDOWN. EXTERMINATE.", CoachList.coree);
+        coreeLoseDialogue1.addStep("YOU FORGOT ABOUT THE 4TH E OF THROWDOWN. EXTERMINATE.", CoachList.coree);
     }
 
     public initializeTurbonerdDialogue(): void {
@@ -357,7 +366,7 @@ export class DialogueStorage {
 
         //win
         //1
-        boss10WinDialogue1.addStep("Looks like you've unlocked Eternal Mode. Whoop-dee-f….", CoachList.boss10);
+        boss10WinDialogue1.addStep("Looks like you've unlocked Eternal Mode. Whoop-dee-f...", CoachList.boss10);
         //2
         boss10WinDialogue2.addStep("Sorry, there aren't any additional unlocks.", CoachList.boss10);
 

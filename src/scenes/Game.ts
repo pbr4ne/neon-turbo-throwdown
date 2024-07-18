@@ -84,8 +84,8 @@ export default class Game extends Phaser.Scene {
         this.cardDescription.setText(description);
     }
 
-    doDialogue(coach: Coach, type: string, initial: boolean = false) {
-        const dialog = new DialogueBox(this, 960, 542, coach, type, initial);
+    doDialogue(coach: Coach, type: string, initial: boolean = false, spiritCoachDialogue: boolean = false) {
+        const dialog = new DialogueBox(this, 960, 542, coach, type, initial, spiritCoachDialogue);
 
         this.dialogBox = this.dialogLayer.add(dialog);
     }
@@ -103,6 +103,17 @@ export default class Game extends Phaser.Scene {
             this.throwdown.destroy();
             this.doRunUpgrade();
         } else if (type === "lose") {
+            this.throwdown.destroy();
+            log("after lose dialogue");
+            if (Library.getNumRuns() === 1) {
+                log("number of runs is 0, running initialLose dialogue");
+                this.doDialogue(this.currentCoach, "initialLose", false, true);
+            } else {
+                log("number of runs is not 0, running perm upgrade");
+                this.doPermUpgrade();
+            }
+        } else if (type === "initialLose") {
+            log('done initialLose dialogue');
             this.throwdown.destroy();
             this.doPermUpgrade();
         } else if (type === "final") {
