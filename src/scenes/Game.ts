@@ -161,8 +161,8 @@ export default class Game extends Phaser.Scene {
     }
 
     finishPermUpgrade() {
-        this.permUpgrade.destroyEverything();
-        this.permUpgrade.destroy();
+        this.permUpgrade?.destroyEverything();
+        this.permUpgrade?.destroy();
 
         this.scene.start('Welcome');
     }
