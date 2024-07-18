@@ -336,6 +336,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
         this.scoreText.setVisible(false);
         this.forfeitImage.setVisible(false);
         this.idleModeImage.setVisible(false);
+        this.idleModeText.setVisible(false);
         this.coachCornerImage.setVisible(false);
         this.coachName.setVisible(false);
         this.difficultyImage.setVisible(false);
