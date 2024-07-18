@@ -25,10 +25,10 @@ export class Catch extends CardType {
         super.resetTurn();
     }
 
-    defense(member: Member, attacker: Member, team: Team, opponentTeam: Team, canRetaliate: boolean): boolean {
+    defense(member: Member, attacker: Member, team: Team, opponentTeam: Team, canRetaliate: boolean, overrideName?: string): boolean {
         let defenseSuccess = false;
         if (this.getCurrentNumDefends() <= this.getNumDefends() && this.getChanceToDefend(team) >= Math.random()) {
-            member.showFloatingAction(this.getName());
+            member.showFloatingAction(overrideName ? overrideName : this.getName());
 
             if (canRetaliate) {
                 let membersToRebound = this.getRandomAliveMembers(opponentTeam, attacker, this.getReboundTargets() - 1);

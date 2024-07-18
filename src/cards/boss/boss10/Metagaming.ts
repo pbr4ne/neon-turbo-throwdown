@@ -7,6 +7,10 @@ import { log } from "../../../utilities/GameUtils";
 import Player from "../../../prefabs/Player";
 import { Boss10Card } from "./Boss10Card";
 import { ThrowdownPhase } from "../../../throwdown/ThrowdownPhase";
+import { Throw } from "../../../cards/base/throw/Throw";
+import { Evade } from "../../../cards/base/evade/Evade";
+import { Block } from "../../../cards/base/block/Block";
+import { Catch } from "../../../cards/base/catch/Catch";
 
 export class Metagaming extends Boss10Card {
 
@@ -28,38 +32,31 @@ export class Metagaming extends Boss10Card {
     //todo does this need to have a chance to offend?
     attack(member: Member, target: Member | null, team: Team, opponentTeam: Team): boolean {
 
-        if (!target) {
-            return false;
-        }
-        const targetCard = target.getAssignedCard();
-        let defenseSuccess = false;
-        if (targetCard != null) {
-            //see if they successfully defend
-            defenseSuccess = targetCard.getCardType().defense(target, member, opponentTeam, team, true);
-        }
-        if (!defenseSuccess) {
-            //reduce their HP if they failed to defend
-            member.showFloatingAction(this.getName());
-            target.reduceHP(this.getOffenseDamage());
-            GameSounds.playHit();
-            return true;
-        }
+        //todo get the highest level one?
+        const throwCard = this.getCoachOrPlayer().getRandomCardOfType(Throw);
 
-        return false;
+        //call throw
+        return throwCard.attack(member, target, team, opponentTeam, this.getName());
     }
 
     defense(member: Member, attacker: Member, team: Team, opponentTeam: Team, canRetaliate: boolean): boolean {
-        let defenseSuccess = false;
-        if (this.getCurrentNumDefends() <= this.getNumDefends()) {
-            member.showFloatingAction(this.getName());
-            defenseSuccess = true;
+        
+        const blockCard = this.getCoachOrPlayer().getRandomCardOfType(Block);
+        const blockSuccess = blockCard.defense(member, attacker, team, opponentTeam, canRetaliate, this.getName());
+
+        if (blockSuccess) {
+            return true;
         }
 
-        if (defenseSuccess) {
-            GameSounds.playBlock();
+        const evadeCard = this.getCoachOrPlayer().getRandomCardOfType(Evade);
+        const evadeSuccess = evadeCard.defense(member, attacker, team, opponentTeam, canRetaliate, this.getName());
+
+        if (evadeSuccess) {
+            return true;
         }
-        this.currentNumDefends++;
-        return defenseSuccess;
+
+        const catchCard = this.getCoachOrPlayer().getRandomCardOfType(Catch);
+        return catchCard.defense(member, attacker, team, opponentTeam, canRetaliate, this.getName());
     }
 
     needsTarget(): boolean {

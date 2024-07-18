@@ -113,4 +113,13 @@ export class Coach {
     public toString(): string {
         return `Coach: ${this.name}`;
     }
+
+    public getRandomCardOfType<T extends CardType>(cardClass: new () => T): T {
+        const cardsOfType = this.baseCards.filter(card => card instanceof cardClass) as T[];
+        if (cardsOfType.length === 0) {
+            return new cardClass();
+        }
+        const randomIndex = Phaser.Math.Between(0, cardsOfType.length - 1);
+        return cardsOfType[randomIndex];
+    }
 }

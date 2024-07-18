@@ -6,6 +6,7 @@ import { CardKeys } from "./CardKeys";
 import Player from "../prefabs/Player";
 import { ThrowdownPhase } from "../throwdown/ThrowdownPhase";
 import { log } from "../utilities/GameUtils";
+import { CoachList } from "../throwdown/CoachList";
 
 export abstract class CardType {
 
@@ -63,6 +64,10 @@ export abstract class CardType {
 
     getCoach(): Coach | null {
         return null;
+    }
+
+    getCoachOrPlayer(): Coach {
+        return this.getCoach() ? this.getCoach() as Coach : CoachList.you;
     }
 
     getKey(): CardKeys {

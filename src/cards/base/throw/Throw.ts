@@ -15,13 +15,13 @@ export class Throw extends CardType {
         super(key, upgradeKey, ThrowdownPhase.ATTACK);
     }
 
-    attack(member: Member, target: Member | null, team: Team, opponentTeam: Team): boolean {
+    attack(member: Member, target: Member | null, team: Team, opponentTeam: Team, overrideName?: string, overrideDamage?: number): boolean {
 
         let anyNonMiss = true;
         let membersToTarget = this.getRandomAliveMembers(opponentTeam, target, this.getNumTargets() - 1);
 
         if (target) {
-            if(this.attackMember(member, target, team, opponentTeam, true)) {
+            if(this.attackMember(member, target, team, opponentTeam, true, overrideDamage)) {
                 membersToTarget.forEach((enemyMember) => {
                     if(this.attackMember(member, enemyMember, team, opponentTeam, false)) {
                         anyNonMiss = true;
@@ -31,7 +31,7 @@ export class Throw extends CardType {
         }
         
         if (anyNonMiss) {
-            member.showFloatingAction(this.getName());
+            member.showFloatingAction(overrideName ? overrideName : this.getName());
             GameSounds.playHit();
         } else {
             member.showFloatingAction("miss");
@@ -39,7 +39,7 @@ export class Throw extends CardType {
         return anyNonMiss;
     }
 
-    attackMember(member: Member, target: Member, team: Team, opponentTeam: Team, canRetaliate: boolean): boolean {
+    attackMember(member: Member, target: Member, team: Team, opponentTeam: Team, canRetaliate: boolean, overrideDamage?: number): boolean {
         if (this.getChanceToOffend(team) >= Math.random()) {
             const targetCard = target.getAssignedCard();
             let defenseSuccess = false;
@@ -49,7 +49,7 @@ export class Throw extends CardType {
             }
             if (!defenseSuccess) {
                 //reduce their HP if they failed to defend
-                target.reduceHP(this.getOffenseDamage(member, target, team));
+                target.reduceHP(overrideDamage ? overrideDamage : this.getOffenseDamage(member, target, team));
                 return true;
             }
         }
