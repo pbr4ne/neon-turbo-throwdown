@@ -119,6 +119,7 @@ export default class Welcome extends Phaser.Scene {
 	}
 
 	private showCredits() {
+		const blockInput = this.add.rectangle(960, 540, 1920, 1080, 0x000000, 0.5).setInteractive();
 		const popup = this.add.container(960, 540);
 	
 		const background = this.add.rectangle(0, 0, 900, 700, 0x000000, 0.8).setOrigin(0.5, 0.5);
@@ -270,6 +271,7 @@ export default class Welcome extends Phaser.Scene {
 	
 		closeButton.on('pointerdown', () => {
 			popup.destroy();
+			blockInput.destroy();
 		});
 	
 		closeButton.on('pointerover', () => {
@@ -285,6 +287,7 @@ export default class Welcome extends Phaser.Scene {
 	}
 
 	private showHardResetPopup() {
+		const blockInput = this.add.rectangle(960, 540, 1920, 1080, 0x000000, 0.5).setInteractive();
         const popup = this.add.container(960, 540);
     
         const background = this.add.rectangle(0, 0, 400, 200, 0x000000, 0.8).setOrigin(0.5, 0.5);
@@ -314,16 +317,19 @@ export default class Welcome extends Phaser.Scene {
             await StorageManager.clearAllData();
 			this.scene.start("Preload");
             popup.destroy();
+			blockInput.destroy();
         });
     
         noButton.on('pointerdown', () => {
             popup.destroy();
+			blockInput.destroy();
         });
     
         popup.add([background, questionText, yesButton, noButton]);
     }
 
 	private showTrophies() {
+		const blockInput = this.add.rectangle(960, 540, 1920, 1080, 0x000000, 0.5).setInteractive();
 		const popup = this.add.container(960, 540);
 	
 		const background = this.add.rectangle(0, 0, 900, 700, 0x000000, 0.8).setOrigin(0.5, 0.5);
@@ -386,6 +392,7 @@ export default class Welcome extends Phaser.Scene {
 	
 		closeButton.on('pointerdown', () => {
 			popup.destroy();
+			blockInput.destroy();
 		});
 	
 		closeButton.on('pointerover', () => {
