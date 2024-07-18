@@ -33,29 +33,70 @@ export default class Help extends Phaser.GameObjects.Container {
         });
         this.add(helpText1);
 
-		const helpText2 = this.scene.add.text(-420, -90, `Your initial deck has THROW, BLOCK, EVADE, and CATCH cards. Test them out and see what they do!`, {
+        const helpText1post = this.scene.add.text(-420, -100, `Your initial deck has:`, {
             fontFamily: '"Press Start 2P"',
             fontSize: '20px',
             color: '#00ffff',
             align: 'left',
-			lineSpacing: 5,
             wordWrap: { width: 860, useAdvancedWrap: true }
         });
-        this.add(helpText2);
 
-		const helpText3 = this.scene.add.text(-420, 20, `Alright kid, that's the tutor-reel. And if you're not sure what to do out there, just remember the three rules of Throwdown:`, {
+        this.add(helpText1post);
+
+		const textParts = [
+            { text: 'THROW', color: '#ff00ff' },
+            { text: ', ', color: '#00ffff' },
+            { text: 'BLOCK', color: '#ff00ff' },
+            { text: ', ', color: '#00ffff' },
+            { text: 'EVADE', color: '#ff00ff' },
+            { text: ', and ', color: '#00ffff' },
+            { text: 'CATCH', color: '#ff00ff' },
+            { text: 'cards.', color: '#00ffff' }
+        ];
+        
+        let xPos = -420;
+        const yPos = -65;
+        
+        textParts.forEach(part => {
+            const text = this.scene.add.text(xPos, yPos, part.text, {
+                fontFamily: '"Press Start 2P"',
+                fontSize: '20px',
+                color: part.color,
+                align: 'left',
+                lineSpacing: 5,
+                wordWrap: { width: 860, useAdvancedWrap: true }
+            }).setOrigin(0, 0);
+            this.add(text);
+        
+            if (part.text === ", " || part.text === ", and " || part.text == "CATCH") {
+                xPos += 15;
+            }
+            xPos += text.width;
+        });
+
+        const helpText2b = this.scene.add.text(-420, -30, `Test them out and see what they do!`, {
             fontFamily: '"Press Start 2P"',
             fontSize: '20px',
             color: '#00ffff',
             align: 'left',
+            wordWrap: { width: 860, useAdvancedWrap: true }
+        });
+        this.add(helpText2b);
+
+		const helpText3 = this.scene.add.text(-420, 40, `Alright kid, that's the tutor-reel. And if you're not sure what to do out there, just remember the three rules of Throwdown:`, {
+            fontFamily: '"Press Start 2P"',
+            fontSize: '20px',
+            color: '#00ffff',
+            align: 'left',
+            lineSpacing: 5,
             wordWrap: { width: 860, useAdvancedWrap: true }
         });
         this.add(helpText3);
 
-		const helpText4 = this.scene.add.text(-420, 90, `
+		const helpText4 = this.scene.add.text(-420, 100, `
             * Evasion
             \n* Envision - You gotta see victory in your brain 
-            \n* Evasion again in case you forgot`, {
+            \n* Evasion again, in case you forgot`, {
             fontFamily: '"Press Start 2P"',
             fontSize: '20px',
             color: '#ffff00',
