@@ -19,6 +19,7 @@ export class Monocle extends TycoonCard {
     special(member: Member, target: Member | null, team: Team, opponentTeam: Team): boolean {
         team.getModifiers().addCombatThrowEffectivenessMultiplier(this.getChance());
         
+        GameSounds.playBuff();
         member.showFloatingAction(this.getName());
 
         return true;

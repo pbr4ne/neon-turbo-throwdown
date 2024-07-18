@@ -19,6 +19,7 @@ export class BiggBalls extends SporticusCard {
     special(member: Member, target: Member | null, team: Team, opponentTeam: Team): boolean {
         opponentTeam.getModifiers().addCombatCatchChanceMultiplier(this.getChance() * -1);
         
+        GameSounds.playBuff();
         member.showFloatingAction(this.getName());
 
         return true;

@@ -19,6 +19,7 @@ export class DropAndGiveMe20 extends SgtSteveCard {
     special(member: Member, target: Member | null, team: Team, opponentTeam: Team): boolean {
         if (member) {
             member.showFloatingAction(this.getName());
+            GameSounds.playBuff();
             team.getModifiers().addCombatDamageDealtAddition(member, this.getDamageIncrease());
         }
         return true;

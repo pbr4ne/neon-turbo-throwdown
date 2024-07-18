@@ -19,6 +19,7 @@ export class AintGonnaTakeIt extends BetsyCard {
     special(member: Member, target: Member | null, team: Team, opponentTeam: Team): boolean {
         team.getModifiers().addTurnBlockNumberAddition(this.getNumTurns());
         
+        GameSounds.playBuff();
         member.showFloatingAction(this.getName());
 
         return true;

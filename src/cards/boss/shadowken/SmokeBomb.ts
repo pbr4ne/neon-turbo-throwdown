@@ -18,6 +18,7 @@ export class SmokeBomb extends ShadowkenCard {
     special(member: Member, target: Member | null, team: Team, opponentTeam: Team): boolean {
         team.getModifiers().setTurnEvadeChanceOverride(this.getEvadeChance());
         
+        GameSounds.playBuff();
         member.showFloatingAction(this.getName());
 
         return true;

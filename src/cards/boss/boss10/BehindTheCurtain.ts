@@ -17,6 +17,7 @@ export class BehindTheCurtain extends Boss10Card {
     special(member: Member, target: Member | null, team: Team, opponentTeam: Team): boolean {
         team.getModifiers().setTurnEvadeDisable(true);
         
+        GameSounds.playBuff();
         member.showFloatingAction(this.getName());
 
         return true;

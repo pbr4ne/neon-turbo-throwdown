@@ -19,6 +19,7 @@ export class BlueBalls extends SporticusCard {
     special(member: Member, target: Member | null, team: Team, opponentTeam: Team): boolean {
         if (target) {
             member.showFloatingAction(this.getName());
+            GameSounds.playDebuff();
             opponentTeam.getModifiers().addTurnDamageReceiveMultiplier(target, 2);
         }
 
