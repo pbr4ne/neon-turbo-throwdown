@@ -252,7 +252,7 @@ export default abstract class Team extends Phaser.GameObjects.Container {
             if (card != null) {
                 const cardType = card.getCardType();
                 if (cardType.getPhase() == ThrowdownPhase.ATTACK) {
-                    member.drawTargetArc(target, true, this);
+                    //member.drawTargetArc(target, true, this);
                     await this.pause(Library.getIdleTurnDelay()); 
                     card.getCardType().attack(member, target, this, this.opponent); 
                     log(`OFFENSE: ${member} attacks ${target}`);

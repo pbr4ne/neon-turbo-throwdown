@@ -329,6 +329,9 @@ export default class Member extends Phaser.GameObjects.Container {
             this.targetArc.clear();
         } else {
             this.targetArc = this.scene.add.graphics();
+            if (target.team instanceof Player) {
+                this.targetArc.setDepth(-1); 
+            }
         }
     
         const startX = this.x;
@@ -365,7 +368,7 @@ export default class Member extends Phaser.GameObjects.Container {
     
         let lineStyle = 3;
         if (highlight) {
-            lineStyle = 7;
+            //lineStyle = 7;
         }
         this.targetArc.lineStyle(lineStyle, lineColour, 1);
     
@@ -387,7 +390,10 @@ export default class Member extends Phaser.GameObjects.Container {
         this.targetArc.fillStyle(lineColour, 1);
         this.targetArc.fillCircle(startX + offsetX, startY + offsetY, circleRadius);
         this.targetArc.fillCircle(endX, endY, circleRadius);
-    }    
+    }
+    
+    
+     
 
     clearTargetArc() {
         if (this.targetArc) {
