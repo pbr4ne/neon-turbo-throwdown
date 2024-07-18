@@ -312,6 +312,7 @@ export default class Welcome extends Phaser.Scene {
     
         yesButton.on('pointerdown', async () => {
             await StorageManager.clearAllData();
+			this.scene.start("Preload");
             popup.destroy();
         });
     

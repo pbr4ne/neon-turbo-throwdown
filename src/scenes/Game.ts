@@ -49,8 +49,6 @@ export default class Game extends Phaser.Scene {
             this.currentCoach = CoachList.primo;
         }
 
-        
-
         CoachList.primo.setDialogue(DialogueStorage.primoDialogue);
         CoachList.sporticus.setDialogue(DialogueStorage.sporticusDialogue);
         CoachList.tycoon.setDialogue(DialogueStorage.tycoonDialogue);

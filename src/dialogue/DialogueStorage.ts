@@ -453,6 +453,10 @@ export class DialogueStorage {
                     this.dialogueMapping[key].setCurrentIntroDialogue(data.currentIntroDialogue);
                     this.dialogueMapping[key].setCurrentWinDialogue(data.currentWinDialogue);
                     this.dialogueMapping[key].setCurrentLoseDialogue(data.currentLoseDialogue);
+                } else {
+                    this.dialogueMapping[key].setCurrentIntroDialogue(0);
+                    this.dialogueMapping[key].setCurrentWinDialogue(0);
+                    this.dialogueMapping[key].setCurrentLoseDialogue(0);
                 }
             }
         }
