@@ -138,12 +138,14 @@ export class DialogueStorage {
         const sporticusWinDialogue1 = new DialogueConversation();
         const sporticusWinDialogue2 = new DialogueConversation();
         const sporticusLoseDialogue1 = new DialogueConversation();
+        const sporticusLoseDialogue2 = new DialogueConversation();
 
         DialogueStorage.sporticusDialogue.getIntroDialogueList().push(sporticusIntroDialogue1);
         DialogueStorage.sporticusDialogue.getIntroDialogueList().push(sporticusIntroDialogue2);
         DialogueStorage.sporticusDialogue.getWinDialogueList().push(sporticusWinDialogue1);
         DialogueStorage.sporticusDialogue.getWinDialogueList().push(sporticusWinDialogue2);
         DialogueStorage.sporticusDialogue.getLoseDialogueList().push(sporticusLoseDialogue1);
+        DialogueStorage.sporticusDialogue.getLoseDialogueList().push(sporticusLoseDialogue2);
 
         //intro
         //1
@@ -161,6 +163,8 @@ export class DialogueStorage {
         //lose
         //1
         sporticusLoseDialogue1.addStep("Your team should've worn better protection! Might I suggest the Trojan method?", CoachList.sporticus);
+        sporticusLoseDialogue1.addStep("Rome wasn't thrown down in a day.", CoachList.sporticus);
+
 
     }
 
