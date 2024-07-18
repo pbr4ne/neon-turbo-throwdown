@@ -14,6 +14,7 @@ import { CardKeys } from "../cards/CardKeys";
 import { HealStrategy1 } from "../trophies/idle/HealStrategy1";
 import { DefensiveStrategy1 } from "../trophies/idle/DefensiveStrategy1";
 import { OffensiveStrategy1 } from "../trophies/idle/OffensiveStrategy1";
+import Help from "./Help";
 
 export default class Throwdown extends Phaser.GameObjects.Container {
 
@@ -60,6 +61,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
     private pointerImage: Phaser.GameObjects.Image | null = null;
     private pointerImage2: Phaser.GameObjects.Image | null = null;
     private pointerImage3: Phaser.GameObjects.Image | null = null;
+    private helpBtn: Phaser.GameObjects.Image | null = null;
 
 	private gameStatePopup!: GameStatePopup;
 
@@ -148,6 +150,17 @@ export default class Throwdown extends Phaser.GameObjects.Container {
         this.pointerImage = this.scene.add.image(265, 875, "pointer");
         this.pointerImage2 = this.scene.add.image(265, 875, "pointer");
         this.pointerImage3 = this.scene.add.image(265, 875, "pointer");
+        
+        this.helpBtn = this.scene.add.image(1840, 1020, "help");
+        this.helpBtn.setInteractive({ useHandCursor: true })
+            .on('pointerover', () => {
+                this.scene.input.setDefaultCursor('pointer');
+            })
+            .on('pointerout', () => {
+                this.scene.input.setDefaultCursor('default');
+            
+            })
+            .on('pointerdown', this.showHelp, this);
 
         this.hideAllInstructions();
 
@@ -198,6 +211,11 @@ export default class Throwdown extends Phaser.GameObjects.Container {
             loop: true
         });
     }
+
+    private showHelp() {
+		const helpPopup = new Help(this.scene);
+		this.scene.add.existing(helpPopup);
+	}
 
     private switchIdleMode() {
         Library.setIdleMode(!Library.getIdleMode());

@@ -96,16 +96,16 @@ export class DialogueStorage {
         primoIntroDialogue1.addStep("Hahahahaha. Then prepare your team and let us BEGIN.", CoachList.primo);
         primoIntroDialogue1.addStep("Hey kid, wait!", CoachList.coach);
         primoIntroDialogue1.addStep(["Who?", "What?", "I'm 37"], CoachList.you);
-        primoIntroDialogue1.addStep("I know a rookie when I see one. Let me give you some pointers.", CoachList.coach);
-        primoIntroDialogue1.addStep(["Pointers for what? My aerobics class?", "I don't need anyone's help, old man", "Sure, show me how to “throw down” or whatever"], CoachList.you);
-        primoIntroDialogue1.addStep(`You'll change your tune when these gym bosses turbo-thrash you, kid. Here, watch this tutor-reel:
-            \nDraw 5 cards, then select a card, assign it to a player, and if it's an attack, select an opponent. When you're ready, THROW DOWN!
-            \nYour initial deck has THROW, BLOCK, EVADE, and CATCH cards. Test them out and see what they do!`, CoachList.coach);
-        primoIntroDialogue1.addStep(`Alright kid, that's the tutor-reel. And if you're not sure what to do out there, just remember the three rules of Throwdown:
-            \n* Evasion
-            \n* Envision - You gotta see victory in your brain 
-            \n* Evasion again in case you forgot`, CoachList.coach);
-        primoIntroDialogue1.addStep(["Thanks coach!", "Coach? You literally just put on a video", "I guess I have no choice but to “throw down”"], CoachList.you);
+        primoIntroDialogue1.addStep("I know a rookie when I see one. Come find me in the corner and I'll give you some pointers.", CoachList.coach);
+        primoIntroDialogue1.addStep(["Pointers for what? My aerobics class?", "I don't need anyone's help, old man", "Sure, I'll ask you how to “throw down” or whatever"], CoachList.you);
+        // primoIntroDialogue1.addStep(`You'll change your tune when these gym bosses turbo-thrash you, kid. Here, watch this tutor-reel:
+        //     \nDraw 5 cards, then select a card, assign it to a player, and if it's an attack, select an opponent. When you're ready, THROW DOWN!
+        //     \nYour initial deck has THROW, BLOCK, EVADE, and CATCH cards. Test them out and see what they do!`, CoachList.coach);
+        // primoIntroDialogue1.addStep(`Alright kid, that's the tutor-reel. And if you're not sure what to do out there, just remember the three rules of Throwdown:
+        //     \n* Evasion
+        //     \n* Envision - You gotta see victory in your brain 
+        //     \n* Evasion again in case you forgot`, CoachList.coach);
+        // primoIntroDialogue1.addStep(["Thanks coach!", "Coach? You literally just put on a video", "I guess I have no choice but to “throw down”"], CoachList.you);
         //2
         primoIntroDialogue2.addStep("You're back at the strange gym.", CoachList.you);
 

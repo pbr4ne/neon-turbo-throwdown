@@ -247,6 +247,11 @@
                 "key": "heal-turbo-ultra"
             },
             {
+                "url": "assets/images/game/help.png",
+                "type": "image",
+                "key": "help"
+            },
+            {
                 "url": "assets/images/welcome/logo.png",
                 "type": "image",
                 "key": "logo"
