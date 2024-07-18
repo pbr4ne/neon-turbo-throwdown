@@ -480,6 +480,8 @@ export default class Member extends Phaser.GameObjects.Container {
             this.bracketRight?.setAlpha(0.25);
             this.assignedBlock?.setAlpha(0.25);
             this.assignedBlockText?.setAlpha(0.25);
+            this.healthBar?.setAlpha(0.25);
+            this.questionMark?.setAlpha(0.25);
             this.off("pointerdown");
         }
         this.updateHealthBar();
@@ -500,6 +502,8 @@ export default class Member extends Phaser.GameObjects.Container {
             this.bracketRight?.setAlpha(1);
             this.assignedBlock?.setAlpha(1);
             this.assignedBlockText?.setAlpha(1);
+            this.healthBar?.setAlpha(1);
+            this.questionMark?.setAlpha(1);
             if (this.team instanceof Player) {
                 this.on("pointerdown", () => (this.team as Player).handleMemberClick(this));
             } else {
