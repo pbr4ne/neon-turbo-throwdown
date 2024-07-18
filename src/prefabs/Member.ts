@@ -286,24 +286,25 @@ export default class Member extends Phaser.GameObjects.Container {
         return this.number;
     }
 
-    setIntendedTarget(target: Member | null, boss?: Boss) {
+    setIntendedTarget(target: Member | null, team?: Team | null) {
         if (target) {
             log(`${this} targets ${target}`);
         }
         this.intendedTarget = target;
-        if (!boss) {
-            this.drawTargetArc(target, boss);
+        if (!team || this.team instanceof Player) {
+            this.drawTargetArc(target, false, team);
         } else {
+            const boss = team as Boss;
             if (boss.getCoach().getDifficulty() === 0) {
-                this.drawTargetArc(target, boss);
+                this.drawTargetArc(target, false, boss);
             } else if (boss.getCoach().getDifficulty() === 1 && Library.hasTrophy(SeeTargets1)) {
-                this.drawTargetArc(target, boss);
+                this.drawTargetArc(target, false, boss);
             } else if (boss.getCoach().getDifficulty() === 2 && Library.hasTrophy(SeeTargets2)) {
-                this.drawTargetArc(target, boss);
+                this.drawTargetArc(target, false, boss);
             } else if (boss.getCoach().getDifficulty() === 3 && Library.hasTrophy(SeeTargets3)) {
-                this.drawTargetArc(target, boss);
+                this.drawTargetArc(target, false, boss);
             } else if (boss.getCoach().getDifficulty() === 4 && Library.hasTrophy(SeeTargets4)) {
-                this.drawTargetArc(target, boss);
+                this.drawTargetArc(target, false, boss);
             }
             return;
         }
@@ -313,7 +314,7 @@ export default class Member extends Phaser.GameObjects.Container {
         return this.intendedTarget;
     }
 
-    drawTargetArc(target: Member | null, boss?: Boss) {
+    drawTargetArc(target: Member | null, highlight: boolean, team?: Team | null) {
         if (!target) {
             this.clearTargetArc();
             return;
@@ -335,7 +336,7 @@ export default class Member extends Phaser.GameObjects.Container {
         let offsetY = 0;
         let controlYOffset = -50;
     
-        if (boss != null) {
+        if (team && team instanceof Boss) {
             lineColour = 0x00ffff;
             offsetX = 10;
             offsetY = 10;
@@ -357,7 +358,11 @@ export default class Member extends Phaser.GameObjects.Container {
         const curveLength = curve.getLength();
         const segments = Math.floor(curveLength / totalLength);
     
-        this.targetArc.lineStyle(3, lineColour, 1);
+        let lineStyle = 3;
+        if (highlight) {
+            lineStyle = 7;
+        }
+        this.targetArc.lineStyle(lineStyle, lineColour, 1);
     
         for (let i = 0; i < segments; i++) {
             const startT = (i * totalLength) / curveLength;

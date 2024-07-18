@@ -25,8 +25,6 @@ export default class Throwdown extends Phaser.GameObjects.Container {
 		this.boss.opponent = this.player;
 
         this.render();
-
-       // this.startPointerAnimation();
 	}
 
 	public currentStep: number = 0;
