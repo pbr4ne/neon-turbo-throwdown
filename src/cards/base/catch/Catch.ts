@@ -10,7 +10,8 @@ import { ThrowdownPhase } from "../../../throwdown/ThrowdownPhase";
 
 export class Catch extends CardType {
     protected chanceToDefend : number = 0.50;
-    protected defenseDamage: number = 1;
+    protected defenseDamage: number = 2;
+    protected ricochetDamage: number = 1;
     protected currentNumDefends: number = 1;
     protected reboundTargets: number = 1;
     protected numDefends = 1;
@@ -31,9 +32,13 @@ export class Catch extends CardType {
 
             if (canRetaliate) {
                 let membersToRebound = this.getRandomAliveMembers(opponentTeam, attacker, this.getReboundTargets() - 1);
-                membersToRebound.unshift(attacker);
+
+                //do defense damage to attacker
+                attacker.reduceHP(this.getDefenseDamage());
+
+                //do ricochet damage to rebounds
                 membersToRebound.forEach((enemyMember) => {
-                    enemyMember.reduceHP(this.getDefenseDamage());
+                    enemyMember.reduceHP(this.getRicochetDamage());
                 });
             }
 
@@ -80,12 +85,16 @@ export class Catch extends CardType {
         return this.reboundTargets;
     }
 
+    getRicochetDamage(): number {
+        return this.ricochetDamage;
+    }
+
     getNumDefends(): number {
         return this.numDefends;
     }
 
     getDescription(): string {
         const niceChanceToDefend = this.getNicePercentage(this.getChanceToDefend());
-        return `Catches ${this.getNumDefends()} attack(s). ${niceChanceToDefend}% effective. If successful, rebound ${this.getDefenseDamage()} damage to attacker and ${this.getReboundTargets() - 1} random enem(ies).`;
+        return `Catches ${this.getNumDefends()} attack(s). ${niceChanceToDefend}% effective. If successful, rebound ${this.getDefenseDamage()} damage to attacker and ${this.getRicochetDamage()} damage to ${this.getReboundTargets() - 1} random enem(ies).`;
     }
 }
