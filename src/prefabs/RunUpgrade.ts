@@ -20,10 +20,6 @@ export default class RunUpgrade extends Phaser.GameObjects.Container {
         
         this.selectCardImage = scene.add.image(960, 1020, "select-reward");
 
-        this.cardSlot1 = scene.add.image(758, 848, "empty");
-        this.cardSlot2 = scene.add.image(960, 848, "empty");
-        this.cardSlot3 = scene.add.image(1162, 848, "empty");
-
         this.pointerImage = this.scene.add.image(600, 850, "pointer");
         this.pointerImage.rotation = Math.PI;
 
@@ -51,9 +47,7 @@ export default class RunUpgrade extends Phaser.GameObjects.Container {
 
     private coach: Coach;
     private player: Player;
-    private cardSlot1!: Phaser.GameObjects.Image;
-    private cardSlot2!: Phaser.GameObjects.Image;
-    private cardSlot3!: Phaser.GameObjects.Image;
+
     private selectCardImage: Phaser.GameObjects.Image | null = null;
     private pointerImage: Phaser.GameObjects.Image | null = null;
     private numDraws: number = 0;
@@ -63,9 +57,6 @@ export default class RunUpgrade extends Phaser.GameObjects.Container {
     private cardListToChooseFrom: { card: CardType, type: string }[] = [];
 
     destroyEverything() {
-        this.cardSlot1.destroy();
-        this.cardSlot2.destroy();
-        this.cardSlot3.destroy();
         this.selectCardImage?.destroy();
         this.pointerImage?.destroy();
         this.skipButton?.destroy();
@@ -121,7 +112,7 @@ export default class RunUpgrade extends Phaser.GameObjects.Container {
         if (type === 'coach') {
             genericCard = new Card(this.scene, card, "upgrade", x, y, "front", true);
         } else {
-            genericCard = new Upgrade(this.scene, card, x, y, "front-gift");
+            genericCard = new Upgrade(this.scene, card, x, y, "front-upgrade");
         }
         genericCard.on('pointerdown', () => this.handleCardSelection(genericCard));
         this.add(genericCard);
