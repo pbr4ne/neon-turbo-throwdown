@@ -58,7 +58,7 @@ export default class Card extends GenericCard {
     
         let cardName = this.cardType.getName();
         if (cardName == "ricochet") {
-            cardName = "ricoch et";
+            cardName = "rico chet";
         }
 
         this.nameText = new Phaser.GameObjects.Text(scene, 0, 64, cardName, {

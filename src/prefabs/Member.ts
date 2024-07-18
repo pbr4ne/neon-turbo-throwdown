@@ -424,7 +424,7 @@ export default class Member extends Phaser.GameObjects.Container {
             if (this.canSeeCard()) {
                 let cardName = card.cardType.getName();
                 if (cardName == "ricochet") {
-                    cardName = "ricoch et";
+                    cardName = "rico chet";
                 }
                 this.assignedText?.setText(cardName);
             } else {
