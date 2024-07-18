@@ -97,16 +97,16 @@ export default class Preload extends Phaser.Scene {
 		if (checkUrlParam("allTrophiesUnlocked", "true")) {
 			Library.setTrophyTypes(TrophyFactory.getAllTrophyTypes());
 			CoachList.you.setBaseCards([
-				CardFactory.createCardType(CardKeys.THROW_6_SNIPER_THROW),
-				CardFactory.createCardType(CardKeys.THROW_6_SNIPER_THROW),
-				CardFactory.createCardType(CardKeys.THROW_6_SNIPER_THROW),
-				CardFactory.createCardType(CardKeys.THROW_6_SNIPER_THROW),
-				CardFactory.createCardType(CardKeys.THROW_6_SNIPER_THROW),
-				CardFactory.createCardType(CardKeys.EVADE_4_TRIPLE_EVADE),
-				CardFactory.createCardType(CardKeys.EVADE_4_TRIPLE_EVADE),
-				CardFactory.createCardType(CardKeys.BLOCK_5_DOUBLE_BLOCK),
-				CardFactory.createCardType(CardKeys.BLOCK_5_DOUBLE_BLOCK),
-				CardFactory.createCardType(CardKeys.CATCH_3_BIG_HANDS),
+				CardFactory.createCardType(CardKeys.THROW_6),
+				CardFactory.createCardType(CardKeys.THROW_6),
+				CardFactory.createCardType(CardKeys.THROW_6),
+				CardFactory.createCardType(CardKeys.THROW_6),
+				CardFactory.createCardType(CardKeys.THROW_6),
+				CardFactory.createCardType(CardKeys.EVADE_4),
+				CardFactory.createCardType(CardKeys.EVADE_4),
+				CardFactory.createCardType(CardKeys.BLOCK_5),
+				CardFactory.createCardType(CardKeys.BLOCK_5),
+				CardFactory.createCardType(CardKeys.CATCH_3),
 			]);
 		}
 

@@ -11,7 +11,7 @@ export class Evade extends CardType {
     protected currentNumDefends: number = 1;
     protected numDefends = 1;
 
-    constructor(key: CardKeys = CardKeys.EVADE_1_EVADE, upgradeKey: CardKeys | null = CardKeys.EVADE_2_DOUBLE_EVADE) {
+    constructor(key: CardKeys = CardKeys.EVADE_1, upgradeKey: CardKeys | null = CardKeys.EVADE_2) {
         super(key, upgradeKey, ThrowdownPhase.DEFENSE);
     }
 

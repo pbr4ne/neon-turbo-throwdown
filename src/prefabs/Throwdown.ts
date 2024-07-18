@@ -282,9 +282,9 @@ export default class Throwdown extends Phaser.GameObjects.Container {
 
         //ai defense
         if(Library.hasTrophy(DefensiveStrategy1)) {
-            const defenseCards = [CardKeys.BLOCK_1_BLOCK, CardKeys.BLOCK_2_BETTER_BLOCK, CardKeys.BLOCK_3_TURBO_BLOCK, CardKeys.BLOCK_4_BEST_BLOCK, CardKeys.BLOCK_5_DOUBLE_BLOCK,
-                CardKeys.EVADE_1_EVADE, CardKeys.EVADE_2_DOUBLE_EVADE, CardKeys.EVADE_3_TURBO_EVADE, CardKeys.EVADE_4_TRIPLE_EVADE,
-                CardKeys.CATCH_1_CATCH, CardKeys.CATCH_2_TURBO_CATCH, CardKeys.CATCH_3_BIG_HANDS];
+            const defenseCards = [CardKeys.BLOCK_1, CardKeys.BLOCK_2, CardKeys.BLOCK_3, CardKeys.BLOCK_4, CardKeys.BLOCK_5,
+                CardKeys.EVADE_1, CardKeys.EVADE_2, CardKeys.EVADE_3, CardKeys.EVADE_4,
+                CardKeys.CATCH_1, CardKeys.CATCH_2, CardKeys.CATCH_3];
 
             if (poppedUpCardKey !== undefined && defenseCards.includes(poppedUpCardKey)) {
                 members.forEach(member => {

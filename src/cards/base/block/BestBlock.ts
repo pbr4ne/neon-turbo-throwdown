@@ -4,7 +4,7 @@ import { TurboBlock } from "./TurboBlock";
 export class BestBlock extends TurboBlock {
     protected chanceToDefend : number = 1;
 
-    constructor(key: CardKeys = CardKeys.BLOCK_4_BEST_BLOCK, upgradeKey: CardKeys | null = CardKeys.BLOCK_5_DOUBLE_BLOCK) {
+    constructor(key: CardKeys = CardKeys.BLOCK_4, upgradeKey: CardKeys | null = CardKeys.BLOCK_5) {
         super(key, upgradeKey);
     }
 

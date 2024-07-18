@@ -4,7 +4,7 @@ import { TurboEvade } from "./TurboEvade";
 export class TripleEvade extends TurboEvade {
     protected numDefends : number = 3;
 
-    constructor(key: CardKeys = CardKeys.EVADE_4_TRIPLE_EVADE, upgradeKey: CardKeys | null = null) {
+    constructor(key: CardKeys = CardKeys.EVADE_4, upgradeKey: CardKeys | null = null) {
         super(key, upgradeKey);
     }
 

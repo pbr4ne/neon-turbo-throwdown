@@ -4,7 +4,7 @@ import { Throw } from "./Throw";
 export class TurboThrow extends Throw {
     protected offenseDamage: number = 2;
 
-    constructor(key: CardKeys = CardKeys.THROW_2_TURBO_THROW, upgradeKey: CardKeys | null = CardKeys.THROW_3_RICOCHET) {
+    constructor(key: CardKeys = CardKeys.THROW_2, upgradeKey: CardKeys | null = CardKeys.THROW_3) {
         super(key, upgradeKey);
     }
 

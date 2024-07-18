@@ -5,6 +5,6 @@ import { Block2 } from "./Block2";
 
 export class Block3 extends TrophyType {
     constructor() {
-        super(TrophyKey.BLOCK_3, "turbo block", "Permanently upgrade your better block to turbo block.", [new Block2], CardKeys.BLOCK_2_BETTER_BLOCK);
+        super(TrophyKey.BLOCK_3, "turbo block", "Permanently upgrade your better block to turbo block.", [new Block2], CardKeys.BLOCK_2);
     }
 }

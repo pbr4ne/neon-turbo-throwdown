@@ -4,7 +4,7 @@ import { Catch } from "./Catch";
 export class TurboCatch extends Catch {
     protected reboundTargets : number = 2;
 
-    constructor(key: CardKeys = CardKeys.CATCH_2_TURBO_CATCH, upgradeKey: CardKeys | null = CardKeys.CATCH_3_BIG_HANDS) {
+    constructor(key: CardKeys = CardKeys.CATCH_2, upgradeKey: CardKeys | null = CardKeys.CATCH_3) {
         super(key, upgradeKey);
     }
 

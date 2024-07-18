@@ -4,7 +4,7 @@ import { TurboCatch } from "./TurboCatch";
 export class BigHands extends TurboCatch {
     protected chanceToDefend : number = 0.75
 
-    constructor(key: CardKeys = CardKeys.CATCH_3_BIG_HANDS, upgradeKey: CardKeys | null = null) {
+    constructor(key: CardKeys = CardKeys.CATCH_3, upgradeKey: CardKeys | null = null) {
         super(key, upgradeKey);
     }
 
