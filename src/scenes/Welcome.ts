@@ -336,7 +336,7 @@ export default class Welcome extends Phaser.Scene {
 			align: 'center'
 		}).setOrigin(0.5, 0.5);
 	
-		log("libary trophy types");
+		log("library trophy types");
 		const trophies = Library.getTrophyTypes();
 		log(trophies.toString());
 		const sortedTrophies = trophies.slice().sort((a, b) => a.getName().localeCompare(b.getName()));
@@ -351,22 +351,30 @@ export default class Welcome extends Phaser.Scene {
 		
 		//adjust font size if number of trophies is too long
 		let fontSize = '18px';
-		if (sortedTrophies.length > maxLines) {
-			fontSize = `${Math.floor((availableHeight / sortedTrophies.length) * 0.6)}px`;
+		if (sortedTrophies.length > maxLines * 2) {
+			fontSize = `${Math.floor((availableHeight / (sortedTrophies.length / 2)) * 0.6)}px`;
 		}
 	
 		let yPos = -260;
+		let leftColumn = true;
+		const columnOffset = 400;
 	
-		sortedTrophies.forEach((trophy) => {
+		sortedTrophies.forEach((trophy, index) => {
 			log(`trophy: ${trophy.getName()}`);
-			const trophyText = this.add.text(-400, yPos, `${trophy.getName()}`, {
+			const xPos = leftColumn ? -columnOffset : 0;
+			const trophyText = this.add.text(xPos, yPos, `${trophy.getName()}`, {
 				fontFamily: '"Press Start 2P"',
 				fontSize: fontSize,
 				color: '#00ffff',
-				wordWrap: { width: 800, useAdvancedWrap: true }
+				wordWrap: { width: 380, useAdvancedWrap: true }
 			}).setOrigin(0, 0);
 			popup.add(trophyText);
 			yPos += parseInt(fontSize) + 5;
+	
+			if (index === Math.floor(sortedTrophies.length / 2) - 1) {
+				yPos = -260;
+				leftColumn = false;
+			}
 		});
 	
 		const closeButton = this.add.text(0, 320, "Close", {
@@ -391,4 +399,5 @@ export default class Welcome extends Phaser.Scene {
 		popup.add([background, titleText, closeButton]);
 		popup.sendToBack(background);
 	}
+	
 }
