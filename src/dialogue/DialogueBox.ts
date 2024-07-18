@@ -20,7 +20,7 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
 			GameSounds.switchSong(this.scene, "neon-turbo-throwdown-chill");
 		}
 	
-		const rectangle_1 = scene.add.rectangle(-7, 340, 128, 128);
+		const rectangle_1 = scene.add.rectangle(-12, 340, 132, 128);
 		rectangle_1.scaleX = 10.314571568183906;
 		rectangle_1.scaleY = 2.6941724549327337;
 		rectangle_1.isStroked = true;
@@ -228,7 +228,8 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
 			fontSize: '16px',
 			color: '#ffffff',
 			padding: { x: 5, y: 5 },
-			align: 'left'
+			align: 'center',
+			wordWrap: { width: 250, useAdvancedWrap: true }
 		});
 		this.add(this.avatarName)
 		this.avatarName.setOrigin(0.5, 0.5);
@@ -290,7 +291,7 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
 		.on('pointerover', () => this.optionText3.setColor('#ff00ff'))
 		.on('pointerout', () => this.optionText3.setColor('#00ffff'));
 
-		this.optionInstructions = new Phaser.GameObjects.Text(this.scene, 300, 453, "[Click on an option]", {
+		this.optionInstructions = new Phaser.GameObjects.Text(this.scene, 300, 453, "[click on an option]", {
             fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
             fontSize: '16px',
             color: '#00ffff',
@@ -314,7 +315,7 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
 				}
             });
 
-        this.buttonText = new Phaser.GameObjects.Text(this.scene, 540, 453, 'Next', {
+        this.buttonText = new Phaser.GameObjects.Text(this.scene, 540, 453, 'next', {
             fontFamily: '"Press Start 2P"', // needs the quotes because of the 2
             fontSize: '16px',
             color: '#00ffff'
@@ -337,7 +338,7 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
 				}
 			});
 
-		this.skipButtonText = new Phaser.GameObjects.Text(this.scene, 0, 0, 'Skip Dialogue (Too Much Lore)', {
+		this.skipButtonText = new Phaser.GameObjects.Text(this.scene, 0, 0, 'skip dialogue (too much lore)', {
 			fontFamily: '"Press Start 2P"', // needs the quotes because of the 2
 			fontSize: '16px',
 			color: '#ffff00'
