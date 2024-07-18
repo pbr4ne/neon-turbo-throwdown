@@ -17,28 +17,26 @@ export class Throw extends CardType {
 
     attack(member: Member, target: Member | null, team: Team, opponentTeam: Team): boolean {
 
-        let anyOffenseSuccess = false;
+        let anyNonMiss = true;
         let membersToTarget = this.getRandomAliveMembers(opponentTeam, target, this.getNumTargets() - 1);
 
         if (target) {
             if(this.attackMember(member, target, team, opponentTeam, true)) {
-                anyOffenseSuccess = true;
-
                 membersToTarget.forEach((enemyMember) => {
                     if(this.attackMember(member, enemyMember, team, opponentTeam, false)) {
-                        anyOffenseSuccess = true;
+                        anyNonMiss = true;
                     }
                 });
             }
         }
         
-        if (anyOffenseSuccess) {
+        if (anyNonMiss) {
             member.showFloatingAction(this.getName());
             GameSounds.playHit();
         } else {
             member.showFloatingAction("miss");
         }
-        return anyOffenseSuccess;
+        return anyNonMiss;
     }
 
     attackMember(member: Member, target: Member, team: Team, opponentTeam: Team, canRetaliate: boolean): boolean {

@@ -14,6 +14,8 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
 	
 		this.dialogueType = dialogueType;
 		log(`Dialogue type: ${dialogueType}  - spiritCoachDialogue: ${spiritCoachDialogue}`);
+
+		//i need this for some reason or the sound crashes. is it cuz it was already doing that sound?
 		if (!spiritCoachDialogue) {
 			GameSounds.switchSong(this.scene, "neon-turbo-throwdown-chill");
 		}
