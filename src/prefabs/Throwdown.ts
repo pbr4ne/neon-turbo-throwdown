@@ -43,6 +43,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
     private scoreText!: Phaser.GameObjects.Text;
     private forfeitImage!: Phaser.GameObjects.Image;
     private idleModeImage!: Phaser.GameObjects.Image;
+    private idleModeText!: Phaser.GameObjects.Text;
     private coachCornerImage!: Phaser.GameObjects.Image;
     private difficultyImage!: Phaser.GameObjects.Image;
     private cardSlot1!: Phaser.GameObjects.Image;
@@ -91,6 +92,12 @@ export default class Throwdown extends Phaser.GameObjects.Container {
             .on('pointerdown', () => {
                 this.switchIdleMode();
             });
+
+        this.idleModeText = this.scene.add.text(77, 456, "", {
+            fontFamily: '"Press Start 2P"',
+            fontSize: '18px',
+            color: '#ff00ff'
+        }).setOrigin(0.5, 0.5);
 
 		this.coachCornerImage = this.scene.add.image(1625, 193, "coach-corner");
 		this.difficultyImage = this.scene.add.image(1747, 411, "difficulty-" + this.coach.getDifficulty() );
@@ -169,13 +176,37 @@ export default class Throwdown extends Phaser.GameObjects.Container {
             loop: true
         });
         this.automationTimer.paused = !Library.getIdleMode();
-	}
+
+        this.scene.time.addEvent({
+            delay: 100,
+            callback: () => {
+                if (this.automationTimer.paused) {
+                    this.idleModeText.setText("");
+                } else {
+                    const remainingTime = this.automationTimer.getRemaining();
+                    const delay = Library.getIdleClickDelay();
+                    if (delay <= 100) {
+                        this.idleModeText.setText("turbin'");
+                    } else if (delay <= 1000) {
+                        this.idleModeText.setText((remainingTime / 1000).toFixed(1) + "s");
+                    } else {
+                        this.idleModeText.setText(Math.ceil(remainingTime / 1000).toString() + "s");
+                    }
+                }
+            },
+            callbackScope: this,
+            loop: true
+        });
+    }
 
     private switchIdleMode() {
         Library.setIdleMode(!Library.getIdleMode());
         this.idleModeImage.setTexture(Library.getIdleMode() ? "switch-active" : "switch-idle");
         if (this.automationTimer) {
             this.automationTimer.paused = !Library.getIdleMode();
+            if (!this.automationTimer.paused) {
+                this.runAutomation();
+            }
         }
     }
 

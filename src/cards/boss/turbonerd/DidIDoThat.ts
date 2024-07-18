@@ -13,7 +13,7 @@ export class DidIDoThat extends TurbonerdCard {
     protected numTargetsMin: number = 1;
     protected numTargetsMax: number = 3;
     protected damageMin: number = 2;
-    protected damageMax: number = 4;
+    protected damageMax: number = 3;
 
     constructor() {
         super(CardKeys.DID_I_DO_THAT, null, ThrowdownPhase.ATTACK);

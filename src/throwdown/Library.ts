@@ -83,7 +83,7 @@ export class Library {
         } else if (Library.hasTrophy(IdleSpeed2)) {
             delay = 1000;
         } else if (Library.hasTrophy(IdleSpeed1)) {
-            delay = 2500;
+            delay = 3000;
         } else {
             delay = 5000;
         }
