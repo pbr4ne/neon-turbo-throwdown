@@ -156,10 +156,11 @@ export default class Welcome extends Phaser.Scene {
         const background = this.add.rectangle(0, 0, 400, 200, 0x000000, 0.8).setOrigin(0.5, 0.5);
         background.setStrokeStyle(4, 0x00ffff);
     
-        const questionText = this.add.text(0, -60, "Are you sure?", {
+        const questionText = this.add.text(0, -40, "Do you want to hard reset your progress?", {
             fontFamily: '"Press Start 2P"',
             fontSize: '20px',
             color: '#ffffff',
+			wordWrap: { width: 380, useAdvancedWrap: true }
         }).setOrigin(0.5, 0.5);
     
         const yesButton = this.add.text(-80, 40, "Yes", {
