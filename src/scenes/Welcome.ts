@@ -11,6 +11,7 @@ import FloatingObjectScript from "../script-nodes/ui/FloatingObjectScript";
 import { StorageManager } from "../utilities/StorageManager";
 import { Library } from "../throwdown/Library";
 import { log } from "../utilities/GameUtils";
+import Credits from "../prefabs/Credits";
 
 export default class Welcome extends Phaser.Scene {
 
@@ -119,171 +120,7 @@ export default class Welcome extends Phaser.Scene {
 	}
 
 	private showCredits() {
-		const blockInput = this.add.rectangle(960, 540, 1920, 1080, 0x000000, 0.5).setInteractive();
-		const popup = this.add.container(960, 540);
-	
-		const background = this.add.rectangle(0, 0, 900, 700, 0x000000, 0.8).setOrigin(0.5, 0.5);
-		background.setStrokeStyle(4, 0x00ffff);
-	
-		const creditsText = this.add.text(-420, -320, "Credits:", {
-			fontFamily: '"Press Start 2P"',
-			fontSize: '20px',
-			color: '#ffffff',
-			align: 'left',
-			wordWrap: { width: 860, useAdvancedWrap: true }
-		});
-	
-		const developerText = this.add.text(-420, -270, "Code Jockey: pbrane", {
-			fontFamily: '"Press Start 2P"',
-			fontSize: '20px',
-			color: '#00ffff',
-			align: 'left',
-			wordWrap: { width: 860, useAdvancedWrap: true }
-		});
-
-		const developerLink = this.add.text(0, -270, "github", {
-			fontFamily: '"Press Start 2P"',
-			fontSize: '20px',
-			color: '#ffff00',
-		}).setInteractive({ useHandCursor: true }).on('pointerdown', () => {
-			window.open('https://github.com/pbr4ne', '_blank');
-		});
-	
-		const writerText = this.add.text(-420, -220, "Verbs & Vibes: James Funfer", {
-			fontFamily: '"Press Start 2P"',
-			fontSize: '20px',
-			color: '#00ffff',
-			align: 'left',
-			wordWrap: { width: 860, useAdvancedWrap: true }
-		});
-
-		const writerLink = this.add.text(150, -220, "author page", {
-			fontFamily: '"Press Start 2P"',
-			fontSize: '20px',
-			color: '#ffff00',
-		}).setInteractive({ useHandCursor: true }).on('pointerdown', () => {
-			window.open('https://jamesfunfer.com', '_blank');
-		});
-	
-		const uiArtistText = this.add.text(-420, -170, "Design Nerd: Blake Mann", {
-			fontFamily: '"Press Start 2P"',
-			fontSize: '20px',
-			color: '#00ffff',
-			align: 'left',
-			wordWrap: { width: 860, useAdvancedWrap: true }
-		});
-	
-		const musicText = this.add.text(-420, -120, "Throwdown Tunes: terranaut1066", {
-			fontFamily: '"Press Start 2P"',
-			fontSize: '20px',
-			color: '#00ffff',
-			align: 'left',
-			wordWrap: { width: 860, useAdvancedWrap: true }
-		});
-
-		const musicLink = this.add.text(210, -120, "youtube", {
-			fontFamily: '"Press Start 2P"',
-			fontSize: '20px',
-			color: '#ffff00',
-		}).setInteractive({ useHandCursor: true }).on('pointerdown', () => {
-			window.open('https://www.youtube.com/user/Kitchen1066', '_blank');
-		});
-
-		const artistText = this.add.text(-420, -70, "Rival Renderers: atgeaux", {
-			fontFamily: '"Press Start 2P"',
-			fontSize: '20px',
-			color: '#00ffff',
-			align: 'left',
-			wordWrap: { width: 860, useAdvancedWrap: true }
-		});
-
-		const artistLink = this.add.text(100, -70, "instagram", {
-			fontFamily: '"Press Start 2P"',
-			fontSize: '20px',
-			color: '#ffff00',
-		}).setInteractive({ useHandCursor: true }).on('pointerdown', () => {
-			window.open('https://www.instagram.com/artgeaux/', '_blank');
-		});
-
-		const testerText = this.add.text(-420, -20, "Court Testers: Julz", {
-			fontFamily: '"Press Start 2P"',
-			fontSize: '20px',
-			color: '#00ffff',
-			align: 'left',
-			wordWrap: { width: 860, useAdvancedWrap: true }
-		});
-
-		const tester1Text = this.add.text(-120, 30, "Mystic", {
-			fontFamily: '"Press Start 2P"',
-			fontSize: '20px',
-			color: '#00ffff',
-			align: 'left',
-			wordWrap: { width: 860, useAdvancedWrap: true }
-		});
-
-		const tester2Text = this.add.text(-120, 80, "Rhap", {
-			fontFamily: '"Press Start 2P"',
-			fontSize: '20px',
-			color: '#00ffff',
-			align: 'left',
-			wordWrap: { width: 860, useAdvancedWrap: true }
-		});
-
-		const tester3Text = this.add.text(-120, 130, "Zelda", {
-			fontFamily: '"Press Start 2P"',
-			fontSize: '20px',
-			color: '#00ffff',
-			align: 'left',
-			wordWrap: { width: 860, useAdvancedWrap: true }
-		});
-
-		// const tester4Text = this.add.text(-120, 180, "Court Testers:", {
-		// 	fontFamily: '"Press Start 2P"',
-		// 	fontSize: '20px',
-		// 	color: '#00ffff',
-		// 	align: 'left',
-		// 	wordWrap: { width: 860, useAdvancedWrap: true }
-		// });
-
-		// const tester5Text = this.add.text(-120, 230, "Court Testers:", {
-		// 	fontFamily: '"Press Start 2P"',
-		// 	fontSize: '20px',
-		// 	color: '#00ffff',
-		// 	align: 'left',
-		// 	wordWrap: { width: 860, useAdvancedWrap: true }
-		// });
-
-
-		const thanksText = this.add.text(-420, 180, "Special Thanks: Kakumeii", {
-			fontFamily: '"Press Start 2P"',
-			fontSize: '20px',
-			color: '#00ffff',
-			align: 'left',
-			wordWrap: { width: 860, useAdvancedWrap: true }
-		});
-	
-		const closeButton = this.add.text(0, 320, "Close", {
-			fontFamily: '"Press Start 2P"',
-			fontSize: '20px',
-			color: '#ff00ff',
-			padding: { x: 10, y: 5 }
-		}).setOrigin(0.5, 0.5).setInteractive({ useHandCursor: true });
-	
-		closeButton.on('pointerdown', () => {
-			popup.destroy();
-			blockInput.destroy();
-		});
-	
-		closeButton.on('pointerover', () => {
-			this.input.setDefaultCursor('pointer');
-		});
-	
-		closeButton.on('pointerout', () => {
-			this.input.setDefaultCursor('default');
-		});
-	
-		popup.add([background, creditsText, developerText, developerLink, writerText, writerLink, uiArtistText, musicText, musicLink, 
-			artistText, artistLink, testerText, tester1Text, tester2Text, tester3Text, thanksText, closeButton]);
+		this.add.existing(new Credits(this));
 	}
 
 	private showHardResetPopup() {
@@ -406,5 +243,4 @@ export default class Welcome extends Phaser.Scene {
 		popup.add([background, titleText, closeButton]);
 		popup.sendToBack(background);
 	}
-	
 }
