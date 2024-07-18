@@ -252,6 +252,11 @@
                 "key": "logo"
             },
             {
+                "url": "assets/images/welcome/logo-small.png",
+                "type": "image",
+                "key": "logo-small"
+            },
+            {
                 "url": "assets/images/deck/magenta.png",
                 "type": "image",
                 "key": "magenta"
@@ -293,6 +298,11 @@
                 "key": "office"
             },
             {
+                "url": "assets/images/welcome/pep-talk.png",
+                "type": "image",
+                "key": "pep-talk"
+            },
+            {
                 "url": "assets/images/players/player1.png",
                 "type": "image",
                 "key": "player1"
@@ -321,6 +331,11 @@
                 "url": "assets/images/deck/red.png",
                 "type": "image",
                 "key": "red"
+            },
+            {
+                "url": "assets/images/welcome/restart-button.png",
+                "type": "image",
+                "key": "restart-button"
             },
             {
                 "url": "assets/images/cards/ricochet.png",
