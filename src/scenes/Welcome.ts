@@ -29,6 +29,7 @@ export default class Welcome extends Phaser.Scene {
 		this.musicBtn = this.add.image(1720, 960, "music2-on");
 		this.soundBtn = this.add.image(1840, 960, "sound2-on");
 		const creditsBtn = this.add.image(100, 960, "view-credits");
+		const settingsBtn = this.add.image(1600, 952, "settings");
 
 		const floatingObjectScript = new FloatingObjectScript(logo);
 		floatingObjectScript.offset = 5;
@@ -64,6 +65,10 @@ export default class Welcome extends Phaser.Scene {
 		const pushActionScript_4 = new PushActionScript(onPointerDownScript_4);
 		const creditsSwitchImageAction = new SwitchImageActionScript(pushActionScript_4);
 
+		const onPointerDownScript_5 = new OnPointerDownScript(settingsBtn);
+		const pushActionScript_5 = new PushActionScript(onPointerDownScript_5);
+		const settingsSwitchImageAction = new SwitchImageActionScript(pushActionScript_5);
+
 		musicSwitchImageAction.onTexture = {"key":"music2-on","frame":"music2-on.png"};
 		musicSwitchImageAction.offTexture = {"key":"music2-off","frame":"music2-off.png"};
 		musicSwitchImageAction.isOn = GameSounds.musicShouldBePlaying;
@@ -79,6 +84,11 @@ export default class Welcome extends Phaser.Scene {
 		creditsSwitchImageAction.isOn = true;
 		creditsSwitchImageAction.mementoKey = "view-credits";
 
+		settingsSwitchImageAction.onTexture = {"key":"settings","frame":"settings.png"};
+		settingsSwitchImageAction.offTexture = {"key":"settings","frame":"settings.png"};
+		settingsSwitchImageAction.isOn = true;
+		settingsSwitchImageAction.mementoKey = "settings";
+
 		toggleMusicAction.callback = () => GameSounds.toggleMusic();
 		toggleEffectsAction.callback = () => GameSounds.toggleEffects();
 
@@ -88,16 +98,10 @@ export default class Welcome extends Phaser.Scene {
 		this.setButtonInteractive(this.musicBtn);
 		this.setButtonInteractive(this.soundBtn);
 		this.setButtonInteractive(creditsBtn);
+		this.setButtonInteractive(settingsBtn);
 
 		creditsBtn.on('pointerdown', this.showCredits, this);
-
-		const hardResetText = this.add.text(1710, 850, "hard reset", {
-            fontFamily: '"Press Start 2P"',
-            fontSize: '14px',
-            color: '#ffffff'
-        }).setInteractive({ useHandCursor: true });
-
-        hardResetText.on('pointerdown', this.showHardResetPopup, this);
+		settingsBtn.on('pointerdown', this.showSettings, this);
 
 		if (Library.getTrophyTypes().length > 0) {
 			const trophiesBtn = this.add.image(1000, 800, "trophies").setInteractive({ useHandCursor: true });
@@ -130,7 +134,7 @@ export default class Welcome extends Phaser.Scene {
 		this.add.existing(trophiesPopup);
 	}
 
-	private showHardResetPopup() {
+	private showSettings() {
 		const blockInput = this.add.rectangle(960, 540, 1920, 1080, 0x000000, 0.5).setInteractive();
         const popup = this.add.container(960, 540);
     
@@ -153,7 +157,7 @@ export default class Welcome extends Phaser.Scene {
         const noButton = this.add.text(80, 40, "No", {
             fontFamily: '"Press Start 2P"',
             fontSize: '20px',
-            color: '#ff0000',
+            color: '#ff00ff',
             padding: { x: 10, y: 5 }
         }).setOrigin(0.5, 0.5).setInteractive({ useHandCursor: true });
     
