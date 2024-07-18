@@ -81,6 +81,8 @@ export default class RunUpgrade extends Phaser.GameObjects.Container {
 		const thirdCard = combinedCards.pop();
 		this.numDraws++;
 	
+		this.clearCurrentCards();
+
 		if (firstCard) {
 			this.createCard(firstCard.card, firstCard.type, 758, 848, 1);
 		}
@@ -101,7 +103,7 @@ export default class RunUpgrade extends Phaser.GameObjects.Container {
 		}
 		genericCard.on('pointerdown', () => this.handleCardSelection(genericCard));
 		this.add(genericCard);
-		this.currentCards[index] = card;
+		this.currentGenericCards[index] = genericCard;
 	}
 
 	private handleCardSelection(genericCard: GenericCard) {
@@ -141,6 +143,11 @@ export default class RunUpgrade extends Phaser.GameObjects.Container {
         // Draw the next set of cards
         this.drawNextSetOfCards();
     }
+
+	private clearCurrentCards() {
+		this.currentGenericCards.forEach(genericCard => genericCard.setVisible(false));
+		this.currentGenericCards = [];
+	}
 
     private drawNextSetOfCards() {
         if (this.numDraws < 3 && this.getCardList().length >= 3) {
