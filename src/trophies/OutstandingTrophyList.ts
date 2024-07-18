@@ -27,6 +27,20 @@ import { IdleSpeed1 } from "./idle/IdleSpeed1";
 import { IdleSpeed2 } from "./idle/IdleSpeed2";
 import { IdleSpeed3 } from "./idle/IdleSpeed3";
 import { IdleSpeed4 } from "./idle/IdleSpeed4";
+import { Throw2 } from "./card/throw/Throw2";
+import { Throw3 } from "./card/throw/Throw3";
+import { Block2 } from "./card/block/Block2";
+import { Block3 } from "./card/block/Block3";
+import { Block4 } from "./card/block/Block4";
+import { Block5 } from "./card/block/Block5";
+import { Catch2 } from "./card/catch/Catch2";
+import { Catch3 } from "./card/catch/Catch3";
+import { Evade2 } from "./card/evade/Evade2";
+import { Evade3 } from "./card/evade/Evade3";
+import { Evade4 } from "./card/evade/Evade4";
+import { Throw4 } from "./card/throw/Throw4";
+import { Throw5 } from "./card/throw/Throw5";
+import { Throw6 } from "./card/throw/Throw6";
 
 export class OutstandingTrophyList {
 
@@ -62,6 +76,25 @@ export class OutstandingTrophyList {
         new IdleSpeed2(),
         new IdleSpeed3(),
         new IdleSpeed4(),
+        //card upgrades
+        //throw
+        new Throw2(),
+        new Throw3(),
+        new Throw4(),
+        new Throw5(),
+        new Throw6(),
+        //block
+        new Block2(),
+        new Block3(),
+        new Block4(),
+        new Block5(),
+        //evade
+        new Evade2(),
+        new Evade3(),
+        new Evade4(),
+        //catch
+        new Catch2(),
+        new Catch3(),
     ];
 
     public static getTrophyTypes() {
@@ -78,15 +111,22 @@ export class OutstandingTrophyList {
     }
 
     public static removeTrophy(trophy: TrophyType): void {
-        const index = OutstandingTrophyList.getTrophyTypes().indexOf(trophy);
+        const trophyKey = trophy.getKey();
+        const index = this.trophyTypes.findIndex(t => t.getKey() === trophyKey);
         if (index > -1) {
-            OutstandingTrophyList.getTrophyTypes().splice(index, 1);
+            this.trophyTypes.splice(index, 1);
         }
     }
 
     public static removeTrophies(trophyTypes: TrophyType[]): void {
         trophyTypes.forEach(trophy => {
-            OutstandingTrophyList.removeTrophy(trophy);
+            this.removeTrophy(trophy);
+        });
+    }
+
+    public static removeKnownTrophyTypes(trophyTypes: TrophyType[]): void {
+        trophyTypes.forEach(trophy => {
+            this.removeTrophy(trophy);
         });
     }
 }

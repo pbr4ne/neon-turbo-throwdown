@@ -1,5 +1,4 @@
 import { CardKeys } from "../cards/CardKeys";
-import { CardUpgrade } from "./CardUpgrade";
 import { BlackDeck } from "./cosmetic/BlackDeck";
 import { CyanDeck } from "./cosmetic/CyanDeck";
 import { RedDeck } from "./cosmetic/RedDeck";
@@ -30,6 +29,20 @@ import { IdleSpeed1 } from "./idle/IdleSpeed1";
 import { IdleSpeed2 } from "./idle/IdleSpeed2";
 import { IdleSpeed3 } from "./idle/IdleSpeed3";
 import { IdleSpeed4 } from "./idle/IdleSpeed4";
+import { Block2 } from "./card/block/Block2";
+import { Block3 } from "./card/block/Block3";
+import { Block4 } from "./card/block/Block4";
+import { Block5 } from "./card/block/Block5";
+import { Catch2 } from "./card/catch/Catch2";
+import { Catch3 } from "./card/catch/Catch3";
+import { Evade2 } from "./card/evade/Evade2";
+import { Evade3 } from "./card/evade/Evade3";
+import { Evade4 } from "./card/evade/Evade4";
+import { Throw2 } from "./card/throw/Throw2";
+import { Throw3 } from "./card/throw/Throw3";
+import { Throw4 } from "./card/throw/Throw4";
+import { Throw5 } from "./card/throw/Throw5";
+import { Throw6 } from "./card/throw/Throw6";
 
 export class TrophyFactory {
     private static trophyTypeMap: Map<TrophyKey, (cardKey?: CardKeys) => TrophyType> = new Map();
@@ -93,8 +106,27 @@ export class TrophyFactory {
         this.registerTrophyType(TrophyKey.IDLE_SPEED_3, () => new IdleSpeed3);
         this.registerTrophyType(TrophyKey.IDLE_SPEED_4, () => new IdleSpeed4);
 
+        //cards
+        //throw
+        this.registerTrophyType(TrophyKey.THROW_2, () => new Throw2);
+        this.registerTrophyType(TrophyKey.THROW_3, () => new Throw3);
+        this.registerTrophyType(TrophyKey.THROW_4, () => new Throw4);
+        this.registerTrophyType(TrophyKey.THROW_5, () => new Throw5);
+        this.registerTrophyType(TrophyKey.THROW_6, () => new Throw6);
+        //block
+        this.registerTrophyType(TrophyKey.BLOCK_2, () => new Block2);
+        this.registerTrophyType(TrophyKey.BLOCK_3, () => new Block3);
+        this.registerTrophyType(TrophyKey.BLOCK_4, () => new Block4);
+        this.registerTrophyType(TrophyKey.BLOCK_5, () => new Block5);
+        //evade
+        this.registerTrophyType(TrophyKey.EVADE_2, () => new Evade2);
+        this.registerTrophyType(TrophyKey.EVADE_3, () => new Evade3);
+        this.registerTrophyType(TrophyKey.EVADE_4, () => new Evade4);
+        //catch
+        this.registerTrophyType(TrophyKey.CATCH_2, () => new Catch2);
+        this.registerTrophyType(TrophyKey.CATCH_3, () => new Catch3);
+
         //other
-        this.registerTrophyType(TrophyKey.CARD_UPGRADE, (cardKey?: CardKeys) => new CardUpgrade(cardKey!));
         this.registerTrophyType(TrophyKey.UNKNOWN, () => new UnknownTrophy);
     }
 

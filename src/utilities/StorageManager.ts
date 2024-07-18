@@ -9,7 +9,6 @@ import { CardFactory } from '../cards/CardFactory';
 import { CardKeys } from '../cards/CardKeys';
 import { TrophyFactory } from '../trophies/TrophyFactory';
 import { TrophyKey } from '../trophies/TrophyKey';
-import { CardUpgrade } from '../trophies/CardUpgrade';
 
 
 interface GameDB extends DBSchema {
@@ -81,10 +80,6 @@ export class StorageManager {
                 log(`saving trophy type to db ${trophyType.getKey()}`);
                 const key = trophyType.getKey();
                 let cardKey: CardKeys | undefined;
-
-                if (trophyType instanceof CardUpgrade) {
-                    cardKey = (trophyType as CardUpgrade).getCardKey() ?? undefined;
-                }
 
                 await tx.store.add({ key, cardKey });
             }

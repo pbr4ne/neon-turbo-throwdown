@@ -1,4 +1,8 @@
 export enum TrophyKey {
+    //other
+    CARD_UPGRADE = "card-upgrade",
+    UNKNOWN = "unknown",
+
     //decks
     CYAN_DECK = "cyan-deck",
     YELLOW_DECK = "yellow-deck",
@@ -42,7 +46,26 @@ export enum TrophyKey {
     IDLE_SPEED_3 = "idle-speed-3",
     IDLE_SPEED_4 = "idle-speed-4",
 
-    //other
-    CARD_UPGRADE = "card-upgrade",
-    UNKNOWN = "unknown",
+    //card upgrades
+    //throw
+    THROW_2 = "turbo-throw",
+    THROW_3 = "ricochet",
+    THROW_4 = "ultra-turbo-throw",
+    THROW_5 = "ri-ricochet",
+    THROW_6 = "sniper-throw",
+
+    //block
+    BLOCK_2 = "better-block",
+    BLOCK_3 = "turbo-block",
+    BLOCK_4 = "best-block",
+    BLOCK_5 = "double-block",
+
+    //evade
+    EVADE_2 = "double-evade",
+    EVADE_3 = "turbo-evade",
+    EVADE_4 = "triple-evade",
+
+    //catch
+    CATCH_2 = "turbo-catch",
+    CATCH_3 = "big-hands",
 }

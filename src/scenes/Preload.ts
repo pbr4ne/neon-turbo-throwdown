@@ -16,6 +16,7 @@ import { CardFactory } from "../cards/CardFactory";
 import { Library } from "../throwdown/Library";
 import { TrophyFactory } from "../trophies/TrophyFactory";
 import { CardKeys } from "../cards/CardKeys";
+import { OutstandingTrophyList } from "../trophies/OutstandingTrophyList";
 /* END-USER-IMPORTS */
 
 export default class Preload extends Phaser.Scene {
@@ -99,6 +100,10 @@ export default class Preload extends Phaser.Scene {
 		}
 
 		Library.setPureDeck(CoachList.you.getBaseCards());
+		//log every trophy in outstandingtrophylist
+		log("Outstanding Trophies Before: " + OutstandingTrophyList.getTrophyTypes().map(t => t.getKey()).join(", "));
+		OutstandingTrophyList.removeTrophies(Library.getTrophyTypes());
+		log("Outstanding Trophies After: " + OutstandingTrophyList.getTrophyTypes().map(t => t.getKey()).join(", "));
 
 		//all unlocks
 		if (checkUrlParam("allTrophiesUnlocked", "true")) {

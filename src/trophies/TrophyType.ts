@@ -21,9 +21,6 @@ export abstract class TrophyType {
     }
 
     public getName(): string {
-        if (this.cardKey) {
-            return `${this.name} - ${this.cardKey}`;
-        }
         return this.name;
     }
 

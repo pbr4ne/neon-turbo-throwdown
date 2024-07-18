@@ -5,7 +5,6 @@ import { Library } from "../throwdown/Library";
 import Game from "../scenes/Game";
 import { OutstandingTrophyList } from "../trophies/OutstandingTrophyList";
 import Trophy from "./Trophy";
-import Card from "./Card";
 import { CardType } from "../cards/CardType";
 import { CoachList } from "../throwdown/CoachList";
 import Upgrade from "./Upgrade";
@@ -13,7 +12,6 @@ import { log } from "../utilities/GameUtils";
 import { StorageManager } from "../utilities/StorageManager";
 import { CardKeys } from "../cards/CardKeys";
 import { GameSounds } from "../utilities/GameSounds";
-import { CardUpgrade } from "../trophies/CardUpgrade";
 
 export default class PermUpgrade extends Phaser.GameObjects.Container {
 
@@ -82,7 +80,7 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
     }
 
     getUpgradeList() {
-        let upgradeableCards = this.getDeckToModify()
+        let upgradeableCards = Library.getPureDeck()
             .filter(card => card.getUpgrade() !== null)
             .map(card => ({ card, type: 'upgradeable' }));
 
@@ -96,7 +94,6 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
 
     private cardRound() {
         let eligibleTrophies = OutstandingTrophyList.getEligibleTrophyTypes();
-        let upgrades = this.getUpgradeList().map(item => item.card);
         this.trophiesToSelect = [];
     
         const positions = [
@@ -105,14 +102,11 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
             { x: 1162, y: 848 }
         ];
 
-        // Combine the eligible trophies and upgrades
-        const combinedItems: (TrophyType | CardType)[] = [...eligibleTrophies, ...upgrades];
-
         // Shuffle the combined array
-        Phaser.Utils.Array.Shuffle(combinedItems);
+        Phaser.Utils.Array.Shuffle(eligibleTrophies);
 
         // Select the first 3 items
-        this.trophiesToSelect = combinedItems.slice(0, 3);
+        this.trophiesToSelect = eligibleTrophies.slice(0, 3);
 
         // If there are no trophies or upgrades, finish the upgrade process
         if (this.trophiesToSelect.length <= 0) {
@@ -125,64 +119,49 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
                 const trophy = new Trophy(this.scene, item, positions[index].x, positions[index].y, "trophy");
                 trophy.on('pointerdown', () => this.handleCardSelection(trophy));
                 this.add(trophy);
-            } else {
-                const upgrade = item.getUpgrade();
-                if (upgrade === null) {
-                    log("Upgrade is null");
-                    return;
-                }
-                const upgradeCard = new Upgrade(this.scene, item, positions[index].x, positions[index].y, "trophy", false, true);
-                upgradeCard.on('pointerdown', () => this.handleCardSelection(upgradeCard));
-                this.add(upgradeCard);
             }
         });
     }
 
     private async handleCardSelection(selectedItem: Trophy | Upgrade) {
         GameSounds.playCard();
-        const deckToModify = this.getDeckToModify();
+        const deckToModify = Library.getPureDeck();
 
         if (selectedItem instanceof Trophy) {
             log("Trophy selected");
             Library.addTrophyType(selectedItem.trophyType);
             OutstandingTrophyList.removeTrophy(selectedItem.trophyType);
 
-        } else if (selectedItem instanceof Upgrade) {
-            log("Upgrade selected");
-            const upgrade = selectedItem.getCardType().getUpgrade();
-            if (upgrade === null) {
-                log("Upgrade is null");
-                return;
+            let cardKey = selectedItem.trophyType.getCardKey();
+            log("this is the list of cards in the Library pure deck that i'm going to upgrade: " + deckToModify.map(card => card.getKey()));
+            if (cardKey != null) {
+                //get all cards in deck with this key
+                let deckCards = deckToModify.filter(card => card.getKey() === cardKey!);
+                log("Found " + deckCards.length + " cards to upgrade");
+                //replace all of them with the upgraded version
+                deckCards.forEach(card => {
+                    const upgrade = card.getUpgrade();
+                    if (upgrade === null) {
+                        log("Upgrade is null");
+                        return;
+                    }
+                    const index = this.findCardTypeIndexByKey(deckToModify, cardKey!);
+                    if (index > -1) {
+                        log("Found card to remove at index " + index);
+                        log("array length was " + deckToModify.length);
+                        deckToModify.splice(index, 1);
+                    } else {
+                        log("Couldn't find card to remove");
+                    }
+                    deckToModify.push(upgrade);
+                });
             }
-            log("ADDING UPGRADE: " + upgrade);
-            const newCard = new Card(this.scene, upgrade, "playerDeck", 0, 0, "front");
-            
-            // Delete the card using the key
-            const index = this.findCardTypeIndexByKey(deckToModify, selectedItem.getCardType().getKey());
-    
-            if (index > -1) {
-                log("Found card to remove at index " + index);
-                log("array length was " + deckToModify.length);
-                deckToModify.splice(index, 1);
-            } else {
-                log("Couldn't find card to remove");
-            }
-            deckToModify.push(upgrade);
-            Library.addTrophyType(new CardUpgrade(upgrade.getKey()));
-
-            log("full deck is now: ");
-            deckToModify.forEach(card => {
-                log(card.toString());
-            });
-            //do this so you can see current modifiers on the card description
-			newCard.getCardType().setPlayer(this.player);
-            //todo - this is suspicious that i have to hide it. because it should be moved later but it stays on the screen
-            newCard.hide();
         } else {
             log("Unknown item selected");
         }
 
         await StorageManager.saveBaseDeck(deckToModify);
+        Library.setPureDeck(deckToModify);
         CoachList.you.setBaseCards(deckToModify);
     
         (this.scene.scene.get('Game') as Game).finishPermUpgrade();
@@ -191,15 +170,5 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
     findCardTypeIndexByKey(cards: CardType[], key: CardKeys): number {
         log("Finding card type index by key: " + key);
         return cards.findIndex(card => card.getKey() === key);
-    }
-
-    getDeckToModify() {
-        if (Library.getEasyMode()) {
-            log("Easy mode, returning coach deck");
-            return CoachList.you.getBaseCards();
-        } else {
-            log("Hard mode, returning pure deck");
-            return Library.getPureDeck();
-        }
     }
 }
