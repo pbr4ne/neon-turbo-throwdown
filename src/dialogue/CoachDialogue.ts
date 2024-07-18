@@ -26,6 +26,9 @@ export class CoachDialogue {
         if (this.currentIntroDialogue < this.introDialogueList.length - 1) {
             return this.introDialogueList[this.currentIntroDialogue++];
         } else {
+            if (this.currentIntroDialogue >= this.introDialogueList.length) {
+                this.currentIntroDialogue = this.introDialogueList.length - 1;
+            }
             return this.introDialogueList[this.currentIntroDialogue];
         }
     }
@@ -34,6 +37,9 @@ export class CoachDialogue {
         if (this.currentWinDialogue < this.winDialogueList.length - 1) {
             return this.winDialogueList[this.currentWinDialogue++];
         } else {
+            if (this.currentWinDialogue >= this.winDialogueList.length) {
+                this.currentWinDialogue = this.winDialogueList.length - 1;
+            }
             return this.winDialogueList[this.currentWinDialogue];
         }
     }
@@ -42,6 +48,9 @@ export class CoachDialogue {
         if (this.currentLoseDialogue < this.loseDialogueList.length - 1) {
             return this.loseDialogueList[this.currentLoseDialogue++];
         } else {
+            if (this.currentLoseDialogue >= this.loseDialogueList.length) {
+                this.currentLoseDialogue = this.loseDialogueList.length - 1;
+            }
             return this.loseDialogueList[this.currentLoseDialogue];
         }
     }

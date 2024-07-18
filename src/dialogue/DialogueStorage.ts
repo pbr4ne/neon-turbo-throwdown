@@ -27,6 +27,10 @@ export class DialogueStorage {
     public static missingDialogueStep: DialogueStep = new DialogueStep("placeholder", CoachList.you);
 
     public constructor() {
+        if (DialogueStorage.primoDialogue.getIntroDialogueList().length > 0) {
+            log("already initialized dialogues");
+            return;
+        }
         this.initializePrimoDialogue();
         this.initializeSporticusDialogue();
         this.initializeTycoonDialogue();
@@ -67,6 +71,7 @@ export class DialogueStorage {
     }
 
     public initializePrimoDialogue(): void {
+        log("Initializing Primo Dialogue");
         const primoIntroDialogue1 = new DialogueConversation();
         const primoIntroDialogue2 = new DialogueConversation();
         const primoWinDialogue1 = new DialogueConversation();
