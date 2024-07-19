@@ -524,42 +524,80 @@ export class DialogueStorage {
 
     public initializeShadowkenDialogue(): void {
         const shadowkenIntroDialogue1 = new DialogueConversation();
+        const shadowkenIntroDialogue2 = new DialogueConversation();
+        const shadowkenIntroDialogue3 = new DialogueConversation();
+
         const shadowkenWinDialogue1 = new DialogueConversation();
+        const shadowkenWinDialogue2 = new DialogueConversation();
+        const shadowkenWinDialogue3 = new DialogueConversation();
+
         const shadowkenLoseDialogue1 = new DialogueConversation();
+        const shadowkenLoseDialogue2 = new DialogueConversation();
+        const shadowkenLoseDialogue3 = new DialogueConversation();
 
         DialogueStorage.shadowkenDialogue.getIntroDialogueList().push(shadowkenIntroDialogue1);
+        DialogueStorage.shadowkenDialogue.getIntroDialogueList().push(shadowkenIntroDialogue2);
+        DialogueStorage.shadowkenDialogue.getIntroDialogueList().push(shadowkenIntroDialogue3);
+
         DialogueStorage.shadowkenDialogue.getWinDialogueList().push(shadowkenWinDialogue1);
-        DialogueStorage.shadowkenDialogue.getLoseDialogueList().push(shadowkenLoseDialogue1);
+        DialogueStorage.shadowkenDialogue.getWinDialogueList().push(shadowkenWinDialogue2);
+        DialogueStorage.shadowkenDialogue.getWinDialogueList().push(shadowkenWinDialogue3);
+
+        DialogueStorage.shadowkenDialogue.getLoseDialogueList().push(shadowkenLoseDialogue1);   
+        DialogueStorage.shadowkenDialogue.getLoseDialogueList().push(shadowkenLoseDialogue2);
+        DialogueStorage.shadowkenDialogue.getLoseDialogueList().push(shadowkenLoseDialogue3);
 
         //intro
         //1
         shadowkenIntroDialogue1.addStep("Welcome to the Mojo Dojo Throwdown Court!", CoachList.shadowken, "???");
         shadowkenIntroDialogue1.addStep(["Yeah I’ve been here a while already, thanks.", "Your vibe seems a little…confused.", "…thank you. Is this over yet?"], CoachList.you);
         shadowkenIntroDialogue1.addStep("My job is TURBO. Your job will be LOSE!", CoachList.shadowken);
+        //2
+        shadowkenIntroDialogue2.addStep("People keep asking me about Street Fighter? I don’t get it.", CoachList.shadowken);
+        //3
+        shadowkenIntroDialogue3.addStep("Come on in, I’ll play THROWBALL at you", CoachList.shadowken);
 
         //win
         //1
         shadowkenWinDialogue1.addStep("…but I came equipped with all the ninja accessories!", CoachList.shadowken);
+        //2
+        shadowkenWinDialogue2.addStep("This is all because the other coaches rejected my suggestion for a Kenergy upgrade!", CoachList.shadowken);
+        //3
+        shadowkenWinDialogue3.addStep("🎵 Any other dojo I’d be Boss 10 🎵", CoachList.shadowken);
 
         //lose
         //1
         shadowkenLoseDialogue1.addStep("Glad it’s over, I have a hair appointment anyway.", CoachList.shadowken);
+        //2
+        shadowkenLoseDialogue2.addStep("…to be honest, when I found out Turbo Throwdown wasn’t just about ninjas, I almost lost interest.", CoachList.shadowken);
+        //3
+        shadowkenLoseDialogue3.addStep("Fact: ninjas are mammals.", CoachList.shadowken);
     }
 
     public initializeBoss10Dialogue(): void {
         const boss10IntroDialogue1 = new DialogueConversation();
         const boss10IntroDialogue2 = new DialogueConversation();
         const boss10IntroDialogue3 = new DialogueConversation();
+        
         const boss10WinDialogue1 = new DialogueConversation();
         const boss10WinDialogue2 = new DialogueConversation();
+        const boss10WinDialogue3 = new DialogueConversation();
+
         const boss10LoseDialogue1 = new DialogueConversation();
+        const boss10LoseDialogue2 = new DialogueConversation();
+        const boss10LoseDialogue3 = new DialogueConversation();
 
         DialogueStorage.boss10Dialogue.getIntroDialogueList().push(boss10IntroDialogue1);
         DialogueStorage.boss10Dialogue.getIntroDialogueList().push(boss10IntroDialogue2);
         DialogueStorage.boss10Dialogue.getIntroDialogueList().push(boss10IntroDialogue3);
+
         DialogueStorage.boss10Dialogue.getWinDialogueList().push(boss10WinDialogue1);
         DialogueStorage.boss10Dialogue.getWinDialogueList().push(boss10WinDialogue2);
+        DialogueStorage.boss10Dialogue.getWinDialogueList().push(boss10WinDialogue3);
+
         DialogueStorage.boss10Dialogue.getLoseDialogueList().push(boss10LoseDialogue1);
+        DialogueStorage.boss10Dialogue.getLoseDialogueList().push(boss10LoseDialogue2);
+        DialogueStorage.boss10Dialogue.getLoseDialogueList().push(boss10LoseDialogue3);
 
         //intro
         //1
@@ -578,10 +616,16 @@ export class DialogueStorage {
         boss10WinDialogue1.addStep("How many dated references did you clock?", CoachList.boss10);
         //2
         boss10WinDialogue2.addStep("Sorry, there aren't any additional unlocks.", CoachList.boss10);
+        //3
+        boss10WinDialogue3.addStep("<<dialogue placeholder>>", CoachList.boss10);
 
         //lose
         //1
         boss10LoseDialogue1.addStep("You expected this slap-dash deckbuilder to be balanced?", CoachList.boss10);
+        //2
+        boss10LoseDialogue2.addStep("For all you know, a flag in the code is making me invincible.", CoachList.boss10);
+        //3
+        boss10LoseDialogue3.addStep("…do you like my hair?", CoachList.boss10);
     }
 
     public initializeMissingDialogue(): void {
