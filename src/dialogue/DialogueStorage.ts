@@ -417,26 +417,54 @@ export class DialogueStorage {
 
     public initializeCoreeDialogue(): void {
         const coreeIntroDialogue1 = new DialogueConversation();
+        const coreeIntroDialogue2 = new DialogueConversation();
+        const coreeIntroDialogue3 = new DialogueConversation();
+
         const coreeWinDialogue1 = new DialogueConversation();
+        const coreeWinDialogue2 = new DialogueConversation();
+        const coreeWinDialogue3 = new DialogueConversation();
+
         const coreeLoseDialogue1 = new DialogueConversation();
+        const coreeLoseDialogue2 = new DialogueConversation();
+        const coreeLoseDialogue3 = new DialogueConversation();
 
         DialogueStorage.coreeDialogue.getIntroDialogueList().push(coreeIntroDialogue1);
+        DialogueStorage.coreeDialogue.getIntroDialogueList().push(coreeIntroDialogue2);
+        DialogueStorage.coreeDialogue.getIntroDialogueList().push(coreeIntroDialogue3);
+
         DialogueStorage.coreeDialogue.getWinDialogueList().push(coreeWinDialogue1);
+        DialogueStorage.coreeDialogue.getWinDialogueList().push(coreeWinDialogue2);
+        DialogueStorage.coreeDialogue.getWinDialogueList().push(coreeWinDialogue3);
+
         DialogueStorage.coreeDialogue.getLoseDialogueList().push(coreeLoseDialogue1);
+        DialogueStorage.coreeDialogue.getLoseDialogueList().push(coreeLoseDialogue2);
+        DialogueStorage.coreeDialogue.getLoseDialogueList().push(coreeLoseDialogue3);
 
         //intro
         //1
         coreeIntroDialogue1.addStep("I AM THE CONTRACTUALLY OBLIGATED ROBOT ELECTRIC ENEMY.", CoachList.coree, "???");
         coreeIntroDialogue1.addStep(["COREE for short?", "I release thee of thy contract!", "COREE, generate a portrait of me winning this match."], CoachList.you);
         coreeIntroDialogue1.addStep("DOES NOT COMPUTE.", CoachList.coree);
+        //2
+        coreeIntroDialogue2.addStep("DOES NOT COMPUTE.", CoachList.coree);
+        //3
 
         //win
         //1
         coreeWinDialogue1.addStep("BLAME IT ON THE BIT FLIP.", CoachList.coree);
+        //2
+        coreeWinDialogue2.addStep("TELL BOSS 8 I REFUTE HIS PATERNITY CLAIMS.", CoachList.coree);
+        //3
+        coreeWinDialogue3.addStep("GAME OVER. USER WINS.", CoachList.coree);
 
         //lose
         //1
         coreeLoseDialogue1.addStep("YOU FORGOT ABOUT THE 4TH E OF THROWDOWN. EXTERMINATE.", CoachList.coree);
+        //2
+        coreeLoseDialogue2.addStep("COREE, override the player loss flag!", CoachList.you);
+        coreeLoseDialogue2.addStep("I’m sorry ${YOU}, I’m afraid I can’t do that", CoachList.coree);
+        //3
+        coreeLoseDialogue3.addStep("I REGRET TO INFORM YOU AUTOMATION MODE HAS STATISTICALLY MADE BETTER CARD CHOICES", CoachList.coree);
     }
 
     public initializeTurbonerdDialogue(): void {
