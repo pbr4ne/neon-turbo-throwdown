@@ -130,7 +130,7 @@ export class DialogueStorage {
         primoIntroDialogue1.addStep(["Pointers for what? My aerobics class?", "I don't need anyone's help, old man.", "Sure, I'll ask you how to “throw down” or whatever."], CoachList.you);
         //2
         primoIntroDialogue2.addStep("Alright kid, don't get dis-TURBed. Ya gotta build up yer deck er...coach commands sometimes ta beat these guys.", CoachList.coach);
-        primoIntroDialogue2.addStep("You again. Don't forget - it's Primo like Emo. Because Prime-o is harder to rhyme-o", CoachList.primo);
+        primoIntroDialogue2.addStep("You again. Don't forget - it's Primo like Emo. Because Prime-o is harder to rhyme-o.", CoachList.primo);
         //3
         primoIntroDialogue3.addStep("If you aren't first, you're last. Because only two coaches compete at a time.", CoachList.primo);
 
@@ -357,17 +357,17 @@ export class DialogueStorage {
         sgtsteveIntroDialogue2.addStep("Throwdown is my business, and business is good!", CoachList.sgtsteve);
         sgtsteveIntroDialogue2.addStep(["Deep cut.", "I thought business was the last boss?", "It's business time!"], CoachList.you);
         //3
-        sgtsteveIntroDialogue3.addStep("I love the smell of balls in the morning", CoachList.sgtsteve);
+        sgtsteveIntroDialogue3.addStep("I love the smell of balls in the morning.", CoachList.sgtsteve);
         //4
-        sgtsteveIntroDialogue4.addStep("Intros...intros never change", CoachList.sgtsteve);
+        sgtsteveIntroDialogue4.addStep("Intros...intros never change...", CoachList.sgtsteve);
 
         //win
         //1
-        sgtsteveWinDialogue1.addStep("This was your finest five minutes", CoachList.sgtsteve);
+        sgtsteveWinDialogue1.addStep("This was your finest five minutes.", CoachList.sgtsteve);
         //2
         sgtsteveWinDialogue2.addStep("The greatest victory is that which requires no balls.", CoachList.sgtsteve);
         //3
-        sgtsteveWinDialogue3.addStep("You're lucky I didn't levee en masse your ass", CoachList.sgtsteve);
+        sgtsteveWinDialogue3.addStep("You're lucky I didn't levee en masse your ass!", CoachList.sgtsteve);
         
         //lose
         //1
@@ -375,7 +375,7 @@ export class DialogueStorage {
         //2
         sgtsteveLoseDialogue2.addStep("You discharged your balls dishonourably.", CoachList.sgtsteve);
         //3
-        sgtsteveLoseDialogue3.addStep("Throwdown is hell", CoachList.sgtsteve);
+        sgtsteveLoseDialogue3.addStep("Throwdown is hell.", CoachList.sgtsteve);
     }
 
     public initializeBetsyDialogue(): void {
@@ -486,7 +486,7 @@ export class DialogueStorage {
         coreeLoseDialogue1.addStep("YOU FORGOT ABOUT THE 4TH E OF THROWDOWN. EXTERMINATE.", CoachList.coree);
         //2
         coreeLoseDialogue2.addStep("COREE, override the player loss flag!", CoachList.you);
-        coreeLoseDialogue2.addStep("I'm sorry ${YOU}, I'm afraid I can't do that", CoachList.coree);
+        coreeLoseDialogue2.addStep("I'm sorry ${YOU}, I'm afraid I can't do that.", CoachList.coree);
         //3
         coreeLoseDialogue3.addStep("I REGRET TO INFORM YOU AUTOMATION MODE HAS STATISTICALLY MADE BETTER CARD CHOICES", CoachList.coree);
     }
