@@ -471,6 +471,7 @@ export class DialogueStorage {
         //2
         coreeIntroDialogue2.addStep("I am C.O.R.E.E. I can put my arm back on. You can't. So dodge safe.", CoachList.coree);
         //3
+        coreeIntroDialogue3.addStep("I HAVE A HEART OF GOLD. FOR SUPERIOR CONDUCTIVITY.", CoachList.coree);
 
         //win
         //1
@@ -523,8 +524,9 @@ export class DialogueStorage {
         turbonerdIntroDialogue1.addStep(["Yeah I have questions about that. What universe is this?", "They don't rule mine.", "This is TURBO THROWDOWN. Not Nerdo...slow down. Yeah."], CoachList.you);
         turbonerdIntroDialogue1.addStep("Enough flavour text. LET US THROW OUR BALLS DOWN. ...the court.", CoachList.turbonerd);
         //2
-        turbonerdIntroDialogue2.addStep("Enough flavour text. LET US THROW OUR BALLS DOWN. ...the court.", CoachList.turbonerd);
+        turbonerdIntroDialogue2.addStep("What is the mean air velocity of an unladen turbo throw?", CoachList.turbonerd);
         //3
+        turbonerdIntroDialogue3.addStep("Excelsior!", CoachList.turbonerd);
 
         //win
         //1
