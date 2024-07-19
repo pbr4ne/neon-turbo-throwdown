@@ -163,7 +163,7 @@ export class DialogueStorage {
         //lose
         //1
         sporticusLoseDialogue1.addStep("Your team should've worn better protection! Might I suggest the Trojan method?", CoachList.sporticus);
-        sporticusLoseDialogue1.addStep("Rome wasn't thrown down in a day.", CoachList.sporticus);
+        sporticusLoseDialogue2.addStep("Rome wasn't thrown down in a day.", CoachList.sporticus);
 
 
     }
