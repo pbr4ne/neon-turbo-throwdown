@@ -99,7 +99,7 @@ export class DialogueStorage {
         primoIntroDialogue1.addStep("You step into the gym for an ordinary day of sick gains when...", CoachList.you);
         primoIntroDialogue1.addStep(["What...?", "Huh...?"], CoachList.you);
         primoIntroDialogue1.addStep("A portal appears and sucks you in!", CoachList.you);
-        primoIntroDialogue1.addStep("It still _looks_ like the local gym, but everything is strange and neon!", CoachList.you)
+        primoIntroDialogue1.addStep("It still *looks* like the local gym, but everything is strange and neon!", CoachList.you)
         primoIntroDialogue1.addStep("I am Primo Firstman. Are you here to throwdown?", CoachList.primo, "???");
         primoIntroDialogue1.addStep(["What?"], CoachList.you);
         primoIntroDialogue1.addStep("In other words, are you asking for a CHALLENGE?", CoachList.primo);
@@ -110,7 +110,8 @@ export class DialogueStorage {
         primoIntroDialogue1.addStep("I know a rookie when I see one. Come find me in the corner and I'll give you some pointers.", CoachList.coach);
         primoIntroDialogue1.addStep(["Pointers for what? My aerobics class?", "I don't need anyone's help, old man.", "Sure, I'll ask you how to “throw down” or whatever."], CoachList.you);
         //2
-        primoIntroDialogue2.addStep("You're back at the strange gym.", CoachList.you);
+        primoIntroDialogue2.addStep("Alright kid, don’t get dis-TURBed. Ya gotta build up yer deck er…coach commands sometimes ta beat these guys.", CoachList.coach);
+        primoIntroDialogue2.addStep("You again. Don’t forget - it’s Primo like Emo. Because Prime-o is harder to rhyme-o", CoachList.primo);
         //3
         primoIntroDialogue3.addStep("If you aren't first, you're last. Because only two coaches compete at a time.", CoachList.primo);
 
@@ -180,7 +181,7 @@ export class DialogueStorage {
         //2
         sporticusLoseDialogue2.addStep("Rome wasn't thrown down in a day.", CoachList.sporticus);
         //3
-        sporticusLoseDialogue3.addStep("You can't beat me! Throwdown is my Roman Empire", CoachList.sporticus);
+        sporticusLoseDialogue3.addStep("You can't beat me! Throwdown is my Roman Empire!", CoachList.sporticus);
     }
 
     public initializeTycoonDialogue(): void {  
@@ -239,12 +240,15 @@ export class DialogueStorage {
         const officeIntroDialogue3 = new DialogueConversation();
         const officeIntroDialogue4 = new DialogueConversation();
         const officeIntroDialogue5 = new DialogueConversation();
+
         const officeWinDialogue1 = new DialogueConversation();
         const officeWinDialogue2 = new DialogueConversation();
         const officeWinDialogue3 = new DialogueConversation();
+
         const officeLoseDialogue1 = new DialogueConversation();
         const officeLoseDialogue2 = new DialogueConversation();
         const officeLoseDialogue3 = new DialogueConversation();
+        const officeLoseDialogue4 = new DialogueConversation();
 
         DialogueStorage.officeDialogue.getIntroDialogueList().push(officeIntroDialogue1);
         DialogueStorage.officeDialogue.getIntroDialogueList().push(officeIntroDialogue2);
@@ -259,6 +263,7 @@ export class DialogueStorage {
         DialogueStorage.officeDialogue.getLoseDialogueList().push(officeLoseDialogue1);
         DialogueStorage.officeDialogue.getLoseDialogueList().push(officeLoseDialogue2);
         DialogueStorage.officeDialogue.getLoseDialogueList().push(officeLoseDialogue3);
+        DialogueStorage.officeDialogue.getLoseDialogueList().push(officeLoseDialogue4);
 
         //intro
         //1
@@ -278,37 +283,76 @@ export class DialogueStorage {
         //1
         officeWinDialogue1.addStep("This will reflect well in your performance review", CoachList.office);
         officeWinDialogue1.addStep(["You're not the boss of me", "Whatever, Shoulderpads.", "Thanks, Boss"], CoachList.you);
+        //2
+        officeWinDialogue2.addStep("…CCing the regional director on your kudos.", CoachList.office);
+        //3
+        officeWinDialogue3.addStep("You’ve surpassed your quarterly targets!", CoachList.office);
 
         //lose
         //1
         officeLoseDialogue1.addStep("Tsk. Not yet meeting expectations…", CoachList.office);
+        //2
+        officeLoseDialogue2.addStep("You forgot about the AGILE method. Always Give In (to) Leg Energy!", CoachList.office);
+        //3
+        officeLoseDialogue3.addStep("I can’t believe I’m still on hold with HR.", CoachList.office);
+        //4
+        officeLoseDialogue4.addStep("Expect a performance improvement plan in your inbox shortly.", CoachList.office);
     }
 
     public initializeSgtsteveDialogue(): void {
         const sgtsteveIntroDialogue1 = new DialogueConversation();
+        const sgtsteveIntroDialogue2 = new DialogueConversation();
+        const sgtsteveIntroDialogue3 = new DialogueConversation();
+        const sgtsteveIntroDialogue4 = new DialogueConversation();
+
         const sgtsteveWinDialogue1 = new DialogueConversation();
         const sgtsteveWinDialogue2 = new DialogueConversation();
+        const sgtsteveWinDialogue3 = new DialogueConversation();
+
         const sgtsteveLoseDialogue1 = new DialogueConversation();
+        const sgtsteveLoseDialogue2 = new DialogueConversation();
+        const sgtsteveLoseDialogue3 = new DialogueConversation();
 
         DialogueStorage.sgtsteveDialogue.getIntroDialogueList().push(sgtsteveIntroDialogue1);
+        DialogueStorage.sgtsteveDialogue.getIntroDialogueList().push(sgtsteveIntroDialogue2);
+        DialogueStorage.sgtsteveDialogue.getIntroDialogueList().push(sgtsteveIntroDialogue3);
+        DialogueStorage.sgtsteveDialogue.getIntroDialogueList().push(sgtsteveIntroDialogue4);
+
         DialogueStorage.sgtsteveDialogue.getWinDialogueList().push(sgtsteveWinDialogue1);
         DialogueStorage.sgtsteveDialogue.getWinDialogueList().push(sgtsteveWinDialogue2);
+        DialogueStorage.sgtsteveDialogue.getWinDialogueList().push(sgtsteveWinDialogue3);
+
         DialogueStorage.sgtsteveDialogue.getLoseDialogueList().push(sgtsteveLoseDialogue1);
+        DialogueStorage.sgtsteveDialogue.getLoseDialogueList().push(sgtsteveLoseDialogue2);
+        DialogueStorage.sgtsteveDialogue.getLoseDialogueList().push(sgtsteveLoseDialogue3);
 
         //intro
         //1
         sgtsteveIntroDialogue1.addStep("Ten-hut! Let’s see if you’re ready to enlist!", CoachList.sgtsteve, "???");
         sgtsteveIntroDialogue1.addStep(["No thanks.", "Enlist in what? The lore is a bit vague here…", "You’ll be turbo-saluting ME in no time!"], CoachList.you);
+        //2
+        sgtsteveIntroDialogue2.addStep("Throwdown is my business, and business is good!", CoachList.you);
+        sgtsteveIntroDialogue2.addStep(["Deep cut.", "I thought business was the last boss?", "It’s business time!"], CoachList.you);
+        //3
+        sgtsteveIntroDialogue3.addStep("I love the smell of balls in the morning", CoachList.sgtsteve);
+        //4
+        sgtsteveIntroDialogue4.addStep("Intros…intros never change", CoachList.sgtsteve);
 
         //win
         //1
         sgtsteveWinDialogue1.addStep("This was your finest five minutes", CoachList.sgtsteve);
         //2
         sgtsteveWinDialogue2.addStep("The greatest victory is that which requires no balls.", CoachList.sgtsteve);
+        //3
+        sgtsteveWinDialogue3.addStep("You’re lucky I didn’t levee en masse your ass", CoachList.sgtsteve);
         
         //lose
         //1
         sgtsteveLoseDialogue1.addStep("Nothing can stop the throwing of balls except other balls", CoachList.sgtsteve);
+        //2
+        sgtsteveLoseDialogue2.addStep("You discharged your balls dishonourably.", CoachList.sgtsteve);
+        //3
+        sgtsteveLoseDialogue3.addStep("Throwdown is hell", CoachList.sgtsteve);
     }
 
     public initializeBetsyDialogue(): void {
