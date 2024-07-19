@@ -158,28 +158,28 @@ export default class Welcome extends Phaser.Scene {
         const background = this.add.rectangle(0, 0, 500, 300, 0x000000, 0.8).setOrigin(0.5, 0.5);
         background.setStrokeStyle(4, 0x00ffff);
     
-		const titleText = this.add.text(0, -320, "Settings", {
+		const titleText = this.add.text(0, -120, "Settings", {
             fontFamily: '"Press Start 2P"',
-            fontSize: '24px',
-            color: '#ffffff',
+            fontSize: '20px',
+            color: '#ffff00',
             align: 'center'
         }).setOrigin(0.5, 0.5);
 
         // Add the warning message
         const warningText = this.add.text(0, 0, "*This is buggy. You might need to refresh your browser afterwards!*", {
             fontFamily: '"Press Start 2P"',
-            fontSize: '16px',
+            fontSize: '14px',
             color: '#ff00ff',
             align: 'center',
 			lineSpacing: 10,
-            wordWrap: { width: 450, useAdvancedWrap: true }
+            wordWrap: { width: 400, useAdvancedWrap: true }
         }).setOrigin(0.5, 0.5);
 
         const questionText = this.add.text(0, -80, "Do you want to hard reset your progress?", {
             fontFamily: '"Press Start 2P"',
-            fontSize: '20px',
+            fontSize: '16px',
             color: '#ffffff',
-			wordWrap: { width: 500, useAdvancedWrap: true }
+			wordWrap: { width: 450, useAdvancedWrap: true }
         }).setOrigin(0.5, 0.5);
     
         const yesButton = this.add.text(-80, 100, "Yes", {
