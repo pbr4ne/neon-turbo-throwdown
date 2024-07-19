@@ -93,7 +93,7 @@ export default class Help extends Phaser.GameObjects.Container {
         });
         this.add(helpText3);
 
-		const helpText4 = this.scene.add.text(-420, 100, `
+		const helpText4 = this.scene.add.text(-420, 110, `
             * Evasion
             \n* Envision - You gotta see victory in your brain 
             \n* Evasion again, in case you forgot`, {
