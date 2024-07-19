@@ -67,24 +67,24 @@ export class DialogueStorage {
     }
 
     public initializeFinalDialogue(): void {
-        DialogueStorage.finalDialogue.addStep("..ya did it kid! Ya finally did it! Now as per Turbo Throwdown rules, I’ll grant ya one wish!", CoachList.coach);
-        DialogueStorage.finalDialogue.addStep(["I just want to get to music bingo.", "…just answer me one question: are you just a giant floating dodgeball?", "This game kinda grew on me. When’s the next tournament?"], CoachList.you);
-        DialogueStorage.finalDialogue.addStep(`Tell you what kid. I’ll grant all three because I like ya.
-            \nOne. I’ll turbo-port ya right ta music bingo.
+        DialogueStorage.finalDialogue.addStep("...ya did it kid! Ya finally did it! Now as per Turbo Throwdown rules, I'll grant ya one wish!", CoachList.coach);
+        DialogueStorage.finalDialogue.addStep(["I just want to get to music bingo.", "...just answer me one question: are you just a giant floating dodgeball?", "This game kinda grew on me. When's the next tournament?"], CoachList.you);
+        DialogueStorage.finalDialogue.addStep(`Tell you what kid. I'll grant all three because I like ya.
+            \nOne. I'll turbo-port ya right ta music bingo.
             \nTwo. Yes.
             \nThree. The tournament is comin ta YOU!`, CoachList.coach);
-        DialogueStorage.finalDialogue.addStep(["…what do you mean? It’s over."], CoachList.you);
-        DialogueStorage.finalDialogue.addStep("It’s never over.", CoachList.boss10);
+        DialogueStorage.finalDialogue.addStep(["...what do you mean? It's over."], CoachList.you);
+        DialogueStorage.finalDialogue.addStep("It's never over.", CoachList.boss10);
         DialogueStorage.finalDialogue.addStep("You showed us what the real world is capable of. And it has horses!", CoachList.shadowken);
-        DialogueStorage.finalDialogue.addStep("I’ve already prepared the turbo-porter calculations.", CoachList.turbonerd);
+        DialogueStorage.finalDialogue.addStep("I've already prepared the turbo-porter calculations.", CoachList.turbonerd);
         DialogueStorage.finalDialogue.addStep("CHARGEUP PHASE INITIATED.", CoachList.coree);
-        DialogueStorage.finalDialogue.addStep("We’re gonne keep on rockin’ in the REAL WORLD!", CoachList.betsy);
+        DialogueStorage.finalDialogue.addStep("We're gonne keep on rockin' in the REAL WORLD!", CoachList.betsy);
         DialogueStorage.finalDialogue.addStep("Operation REALBO is about to commence.", CoachList.sgtsteve);
-        DialogueStorage.finalDialogue.addStep("I’ve submitted PTO requests on behalf of the coaches.", CoachList.office);
-        DialogueStorage.finalDialogue.addStep("…how many millions should I bring for the weekend?", CoachList.tycoon);
+        DialogueStorage.finalDialogue.addStep("I've submitted PTO requests on behalf of the coaches.", CoachList.office);
+        DialogueStorage.finalDialogue.addStep("...how many millions should I bring for the weekend?", CoachList.tycoon);
         DialogueStorage.finalDialogue.addStep("We are legion.", CoachList.sporticus);
-        DialogueStorage.finalDialogue.addStep("…I’m invited this time, right guys? …guys…???", CoachList.primo);
-        DialogueStorage.finalDialogue.addStep(["I’m closing this browser window and never re-opening it.", "What the actual F.", "I HAVE TO WARN THEM."], CoachList.you);
+        DialogueStorage.finalDialogue.addStep("...I'm invited this time, right guys? ...guys...???", CoachList.primo);
+        DialogueStorage.finalDialogue.addStep(["I'm closing this browser window and never re-opening it.", "What the actual F.", "I HAVE TO WARN THEM."], CoachList.you);
     }
 
     public initializePrimoDialogue(): void {
@@ -127,8 +127,8 @@ export class DialogueStorage {
         primoIntroDialogue1.addStep("I know a rookie when I see one. Come find me in the corner and I'll give you some pointers.", CoachList.coach);
         primoIntroDialogue1.addStep(["Pointers for what? My aerobics class?", "I don't need anyone's help, old man.", "Sure, I'll ask you how to “throw down” or whatever."], CoachList.you);
         //2
-        primoIntroDialogue2.addStep("Alright kid, don’t get dis-TURBed. Ya gotta build up yer deck er…coach commands sometimes ta beat these guys.", CoachList.coach);
-        primoIntroDialogue2.addStep("You again. Don’t forget - it’s Primo like Emo. Because Prime-o is harder to rhyme-o", CoachList.primo);
+        primoIntroDialogue2.addStep("Alright kid, don't get dis-TURBed. Ya gotta build up yer deck er...coach commands sometimes ta beat these guys.", CoachList.coach);
+        primoIntroDialogue2.addStep("You again. Don't forget - it's Primo like Emo. Because Prime-o is harder to rhyme-o", CoachList.primo);
         //3
         primoIntroDialogue3.addStep("If you aren't first, you're last. Because only two coaches compete at a time.", CoachList.primo);
 
@@ -285,33 +285,33 @@ export class DialogueStorage {
         //intro
         //1
         officeIntroDialogue1.addStep("*ring ring* This is Cheryl calling. You're going down. Town. To intern at our new office!", CoachList.office, "???");
-        officeIntroDialogue1.addStep(["I’m 37. In other words, done with unpaid internships.", "Ooo the one on 6th ave.? Nice.", "The 80s called. They want their 5 ft of shoulderpads back."], CoachList.office);
+        officeIntroDialogue1.addStep(["I'm 37. In other words, done with unpaid internships.", "Ooo the one on 6th ave.? Nice.", "The 80s called. They want their 5 ft of shoulderpads back."], CoachList.office);
         officeIntroDialogue1.addStep("But first, YOUR INTERVIEW!", CoachList.office);
         //2
-        officeIntroDialogue2.addStep("You didn’t stamp your timesheet.", CoachList.office);
+        officeIntroDialogue2.addStep("You didn't stamp your timesheet.", CoachList.office);
         //3
-        officeIntroDialogue3.addStep("…we’re ordering lunch, what do you want?", CoachList.office);
+        officeIntroDialogue3.addStep("...we're ordering lunch, what do you want?", CoachList.office);
         //4
-        officeIntroDialogue4.addStep("Let’s skip the ice-breaker!", CoachList.office);
+        officeIntroDialogue4.addStep("Let's skip the ice-breaker!", CoachList.office);
         //5
-        officeIntroDialogue5.addStep("…got time for a quick one-on-one?", CoachList.office);
+        officeIntroDialogue5.addStep("...got time for a quick one-on-one?", CoachList.office);
 
         //win
         //1
         officeWinDialogue1.addStep("This will reflect well in your performance review", CoachList.office);
         officeWinDialogue1.addStep(["You're not the boss of me", "Whatever, Shoulderpads.", "Thanks, Boss"], CoachList.you);
         //2
-        officeWinDialogue2.addStep("…CCing the regional director on your kudos.", CoachList.office);
+        officeWinDialogue2.addStep("...CCing the regional director on your kudos.", CoachList.office);
         //3
-        officeWinDialogue3.addStep("You’ve surpassed your quarterly targets!", CoachList.office);
+        officeWinDialogue3.addStep("You've surpassed your quarterly targets!", CoachList.office);
 
         //lose
         //1
-        officeLoseDialogue1.addStep("Tsk. Not yet meeting expectations…", CoachList.office);
+        officeLoseDialogue1.addStep("Tsk. Not yet meeting expectations...", CoachList.office);
         //2
         officeLoseDialogue2.addStep("You forgot about the AGILE method. Always Give In (to) Leg Energy!", CoachList.office);
         //3
-        officeLoseDialogue3.addStep("I can’t believe I’m still on hold with HR.", CoachList.office);
+        officeLoseDialogue3.addStep("I can't believe I'm still on hold with HR.", CoachList.office);
         //4
         officeLoseDialogue4.addStep("Expect a performance improvement plan in your inbox shortly.", CoachList.office);
     }
@@ -345,15 +345,15 @@ export class DialogueStorage {
 
         //intro
         //1
-        sgtsteveIntroDialogue1.addStep("Ten-hut! Let’s see if you’re ready to enlist!", CoachList.sgtsteve, "???");
-        sgtsteveIntroDialogue1.addStep(["No thanks.", "Enlist in what? The lore is a bit vague here…", "You’ll be turbo-saluting ME in no time!"], CoachList.you);
+        sgtsteveIntroDialogue1.addStep("Ten-hut! Let's see if you're ready to enlist!", CoachList.sgtsteve, "???");
+        sgtsteveIntroDialogue1.addStep(["No thanks.", "Enlist in what? The lore is a bit vague here...", "You'll be turbo-saluting ME in no time!"], CoachList.you);
         //2
         sgtsteveIntroDialogue2.addStep("Throwdown is my business, and business is good!", CoachList.you);
-        sgtsteveIntroDialogue2.addStep(["Deep cut.", "I thought business was the last boss?", "It’s business time!"], CoachList.you);
+        sgtsteveIntroDialogue2.addStep(["Deep cut.", "I thought business was the last boss?", "It's business time!"], CoachList.you);
         //3
         sgtsteveIntroDialogue3.addStep("I love the smell of balls in the morning", CoachList.sgtsteve);
         //4
-        sgtsteveIntroDialogue4.addStep("Intros…intros never change", CoachList.sgtsteve);
+        sgtsteveIntroDialogue4.addStep("Intros...intros never change", CoachList.sgtsteve);
 
         //win
         //1
@@ -361,7 +361,7 @@ export class DialogueStorage {
         //2
         sgtsteveWinDialogue2.addStep("The greatest victory is that which requires no balls.", CoachList.sgtsteve);
         //3
-        sgtsteveWinDialogue3.addStep("You’re lucky I didn’t levee en masse your ass", CoachList.sgtsteve);
+        sgtsteveWinDialogue3.addStep("You're lucky I didn't levee en masse your ass", CoachList.sgtsteve);
         
         //lose
         //1
@@ -401,13 +401,13 @@ export class DialogueStorage {
 
         //intro
         //1
-        betsyIntroDialogue1.addStep("…mic check…is this on?", CoachList.betsy, "???");
-        betsyIntroDialogue1.addStep(["I can hear you.", "Turb it up to 11!", "…wow, this gym has a great PA system!"], CoachList.you);
+        betsyIntroDialogue1.addStep("...mic check...is this on?", CoachList.betsy, "???");
+        betsyIntroDialogue1.addStep(["I can hear you.", "Turb it up to 11!", "...wow, this gym has a great PA system!"], CoachList.you);
         betsyIntroDialogue1.addStep("Welcome to the audition!", CoachList.betsy);
         //2
-        betsyIntroDialogue2.addStep("🎵 Betsy’s my name, no one else is the same!", CoachList.betsy);
+        betsyIntroDialogue2.addStep("🎵 Betsy's my name, no one else is the same!", CoachList.betsy);
         //3
-        betsyIntroDialogue3.addStep("Let’s see if this is your…FINAL THROWDOWWWWWN 🎵", CoachList.betsy);
+        betsyIntroDialogue3.addStep("Let's see if this is your...FINAL THROWDOWWWWWN 🎵", CoachList.betsy);
 
         //win
         //1
@@ -423,7 +423,7 @@ export class DialogueStorage {
 
         //lose
         //1
-        betsyLoseDialogue1.addStep("You give throwdown…a bad name! (bad name!) 🎵", CoachList.betsy);
+        betsyLoseDialogue1.addStep("You give throwdown...a bad name! (bad name!) 🎵", CoachList.betsy);
         //2
         betsyLoseDialogue2.addStep("This is gonna ruin the tour.", CoachList.betsy);
         betsyLoseDialogue2.addStep(["What tour?"], CoachList.you);
@@ -479,7 +479,7 @@ export class DialogueStorage {
         coreeLoseDialogue1.addStep("YOU FORGOT ABOUT THE 4TH E OF THROWDOWN. EXTERMINATE.", CoachList.coree);
         //2
         coreeLoseDialogue2.addStep("COREE, override the player loss flag!", CoachList.you);
-        coreeLoseDialogue2.addStep("I’m sorry ${YOU}, I’m afraid I can’t do that", CoachList.coree);
+        coreeLoseDialogue2.addStep("I'm sorry ${YOU}, I'm afraid I can't do that", CoachList.coree);
         //3
         coreeLoseDialogue3.addStep("I REGRET TO INFORM YOU AUTOMATION MODE HAS STATISTICALLY MADE BETTER CARD CHOICES", CoachList.coree);
     }
@@ -511,22 +511,22 @@ export class DialogueStorage {
 
         //intro
         //1
-        turbonerdIntroDialogue1.addStep("…if my calculations are correct, you’re the new coach around here.", CoachList.turbonerd, "???");
-        turbonerdIntroDialogue1.addStep(["…what’s it to you, NERD?", "…you needed a calculator for that?", "…did you get lost on your way to the computer lab?"], CoachList.you);
-        turbonerdIntroDialogue1.addStep("…typical insults. Haven’t you heard that nerds rule the world?", CoachList.turbonerd);
-        turbonerdIntroDialogue1.addStep(["Yeah I have questions about that. What universe is this?", "They don’t rule mine.", "This is TURBO THROWDOWN. Not Nerdo…slow down. Yeah."], CoachList.you);
-        turbonerdIntroDialogue1.addStep("Enough flavour text. LET US THROW OUR BALLS DOWN. …the court.", CoachList.turbonerd);
+        turbonerdIntroDialogue1.addStep("...if my calculations are correct, you're the new coach around here.", CoachList.turbonerd, "???");
+        turbonerdIntroDialogue1.addStep(["...what's it to you, NERD?", "...you needed a calculator for that?", "...did you get lost on your way to the computer lab?"], CoachList.you);
+        turbonerdIntroDialogue1.addStep("...typical insults. Haven't you heard that nerds rule the world?", CoachList.turbonerd);
+        turbonerdIntroDialogue1.addStep(["Yeah I have questions about that. What universe is this?", "They don't rule mine.", "This is TURBO THROWDOWN. Not Nerdo...slow down. Yeah."], CoachList.you);
+        turbonerdIntroDialogue1.addStep("Enough flavour text. LET US THROW OUR BALLS DOWN. ...the court.", CoachList.turbonerd);
         //2
-        turbonerdIntroDialogue2.addStep("Enough flavour text. LET US THROW OUR BALLS DOWN. …the court.", CoachList.turbonerd);
+        turbonerdIntroDialogue2.addStep("Enough flavour text. LET US THROW OUR BALLS DOWN. ...the court.", CoachList.turbonerd);
         //3
 
         //win
         //1
         turbonerdWinDialogue1.addStep("You have won my grudging respect. But beware! Your mind is strong, but the final coach may test its limits", CoachList.turbonerd);
-        turbonerdWinDialogue1.addStep(["…are they really smart?"], CoachList.you);
+        turbonerdWinDialogue1.addStep(["...are they really smart?"], CoachList.you);
         turbonerdWinDialogue1.addStep("More like really meta.", CoachList.turbonerd);
         //2
-        turbonerdWinDialogue2.addStep("…that was worse than a turbo-wedgie!", CoachList.turbonerd);
+        turbonerdWinDialogue2.addStep("...that was worse than a turbo-wedgie!", CoachList.turbonerd);
         //3
         turbonerdWinDialogue3.addStep("while(currentDialogueNum >= lastTurboNerdDialogue) { return win3phrase; }", CoachList.turbonerd);
 
@@ -534,9 +534,9 @@ export class DialogueStorage {
         //1
         turbonerdLoseDialogue1.addStep("Too much Fortnite and not enough Slay the Spire!", CoachList.turbonerd);
         //2
-        turbonerdLoseDialogue2.addStep("…if you see COREE, tell them I set their server room up nice.", CoachList.turbonerd);
+        turbonerdLoseDialogue2.addStep("...if you see COREE, tell them I set their server room up nice.", CoachList.turbonerd);
         //3
-        turbonerdLoseDialogue3.addStep("Another epic loss! …I could point you to the source code if you want the proverbial cheat codes?", CoachList.turbonerd);
+        turbonerdLoseDialogue3.addStep("Another epic loss! ...I could point you to the source code if you want the proverbial cheat codes?", CoachList.turbonerd);
     }
 
     public initializeShadowkenDialogue(): void {
@@ -567,26 +567,26 @@ export class DialogueStorage {
         //intro
         //1
         shadowkenIntroDialogue1.addStep("Welcome to the Mojo Dojo Throwdown Court!", CoachList.shadowken, "???");
-        shadowkenIntroDialogue1.addStep(["Yeah I’ve been here a while already, thanks.", "Your vibe seems a little…confused.", "…thank you. Is this over yet?"], CoachList.you);
+        shadowkenIntroDialogue1.addStep(["Yeah I've been here a while already, thanks.", "Your vibe seems a little...confused.", "...thank you. Is this over yet?"], CoachList.you);
         shadowkenIntroDialogue1.addStep("My job is TURBO. Your job will be LOSE!", CoachList.shadowken);
         //2
-        shadowkenIntroDialogue2.addStep("People keep asking me about Street Fighter? I don’t get it.", CoachList.shadowken);
+        shadowkenIntroDialogue2.addStep("People keep asking me about Street Fighter? I don't get it.", CoachList.shadowken);
         //3
-        shadowkenIntroDialogue3.addStep("Come on in, I’ll play THROWBALL at you", CoachList.shadowken);
+        shadowkenIntroDialogue3.addStep("Come on in, I'll play THROWBALL at you", CoachList.shadowken);
 
         //win
         //1
-        shadowkenWinDialogue1.addStep("…but I came equipped with all the ninja accessories!", CoachList.shadowken);
+        shadowkenWinDialogue1.addStep("...but I came equipped with all the ninja accessories!", CoachList.shadowken);
         //2
         shadowkenWinDialogue2.addStep("This is all because the other coaches rejected my suggestion for a Kenergy upgrade!", CoachList.shadowken);
         //3
-        shadowkenWinDialogue3.addStep("🎵 Any other dojo I’d be Boss 10 🎵", CoachList.shadowken);
+        shadowkenWinDialogue3.addStep("🎵 Any other dojo I'd be Boss 10 🎵", CoachList.shadowken);
 
         //lose
         //1
-        shadowkenLoseDialogue1.addStep("Glad it’s over, I have a hair appointment anyway.", CoachList.shadowken);
+        shadowkenLoseDialogue1.addStep("Glad it's over, I have a hair appointment anyway.", CoachList.shadowken);
         //2
-        shadowkenLoseDialogue2.addStep("…to be honest, when I found out Turbo Throwdown wasn’t just about ninjas, I almost lost interest.", CoachList.shadowken);
+        shadowkenLoseDialogue2.addStep("...to be honest, when I found out Turbo Throwdown wasn't just about ninjas, I almost lost interest.", CoachList.shadowken);
         //3
         shadowkenLoseDialogue3.addStep("Fact: ninjas are mammals.", CoachList.shadowken);
     }
@@ -619,7 +619,7 @@ export class DialogueStorage {
         //intro
         //1
         boss10IntroDialogue1.addStep("So you've arrived.", CoachList.boss10, "???");
-        boss10IntroDialogue1.addStep(["Are you the last boss?", "…I’ve arrived to THROW. DOWN.", "Let’s wrap this up, I’m late for music bingo."], CoachList.you);
+        boss10IntroDialogue1.addStep(["Are you the last boss?", "...I've arrived to THROW. DOWN.", "Let's wrap this up, I'm late for music bingo."], CoachList.you);
         boss10IntroDialogue1.addStep("Fun fact - my responses are fixed. So is this game. You can't win.", CoachList.boss10);
         boss10IntroDialogue1.addStep(["Game?", "Game?", "Game?"], CoachList.you);
         boss10IntroDialogue1.addStep("It's all just a game. One that you're about to lose, PLAYER.", CoachList.boss10);
@@ -642,7 +642,7 @@ export class DialogueStorage {
         //2
         boss10LoseDialogue2.addStep("For all you know, a flag in the code is making me invincible.", CoachList.boss10);
         //3
-        boss10LoseDialogue3.addStep("…do you like my hair?", CoachList.boss10);
+        boss10LoseDialogue3.addStep("...do you like my hair?", CoachList.boss10);
     }
 
     public initializeMissingDialogue(): void {
