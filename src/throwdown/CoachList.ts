@@ -5,6 +5,10 @@ import { CardKeys } from "../cards/CardKeys";
 import { CoachKeys } from "./CoachKeys";
 import { IncreaseHP1 } from "../trophies/member/IncreaseHP1";
 import { IncreaseHP2 } from "../trophies/member/IncreaseHP2";
+import { HealthRegen1 } from "../trophies/member/HealthRegen1";
+import { HealthRegen2 } from "../trophies/member/HealthRegen2";
+import { HealthRegen3 } from "../trophies/member/HealthRegen3";
+import { Resurrect1 } from "../trophies/member/Resurrect1";
 
 export class CoachList {
 
@@ -66,6 +70,10 @@ export class CoachList {
         this.boss10.setTrophyTypes([
             new IncreaseHP1(),
             new IncreaseHP2(),
+            new HealthRegen1(),
+            new HealthRegen2(),
+            new HealthRegen3(),
+            new Resurrect1(),
         ]);
 
         log("SETTING UP COACH DECKS");
