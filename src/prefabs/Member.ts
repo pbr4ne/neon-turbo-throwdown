@@ -545,7 +545,7 @@ export default class Member extends Phaser.GameObjects.Container {
         const baseOffset = -35;
         const yOffset = incrementIndex * baseOffset;
     
-        let fontSize = '16px';
+        let fontSize = '24px';
         if (large) {
             fontSize = '36px';
         }
@@ -554,8 +554,6 @@ export default class Member extends Phaser.GameObjects.Container {
             fontFamily: '"Press Start 2P"',
             fontSize,
             color: color,
-            stroke: color,
-            strokeThickness: 1
         }).setOrigin(0.5);
     
         this.scene.add.tween({
