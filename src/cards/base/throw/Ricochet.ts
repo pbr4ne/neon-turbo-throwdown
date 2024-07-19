@@ -9,7 +9,7 @@ export class Ricochet extends TurboThrow {
     }
 
     getName(): string {
-        return "ricochet";
+        return "rico chet";
     }
 
     getIcon(): string {
