@@ -357,26 +357,62 @@ export class DialogueStorage {
 
     public initializeBetsyDialogue(): void {
         const betsyIntroDialogue1 = new DialogueConversation();
+        const betsyIntroDialogue2 = new DialogueConversation();
+        const betsyIntroDialogue3 = new DialogueConversation();
+
         const betsyWinDialogue1 = new DialogueConversation();
+        const betsyWinDialogue2 = new DialogueConversation();
+        const betsyWinDialogue3 = new DialogueConversation();
+        const betsyWinDialogue4 = new DialogueConversation();
+        const betsyWinDialogue5 = new DialogueConversation();
+
         const betsyLoseDialogue1 = new DialogueConversation();
+        const betsyLoseDialogue2 = new DialogueConversation();
+        const betsyLoseDialogue3 = new DialogueConversation();
 
         DialogueStorage.betsyDialogue.getIntroDialogueList().push(betsyIntroDialogue1);
+        DialogueStorage.betsyDialogue.getIntroDialogueList().push(betsyIntroDialogue2);
+        DialogueStorage.betsyDialogue.getIntroDialogueList().push(betsyIntroDialogue3);
+
         DialogueStorage.betsyDialogue.getWinDialogueList().push(betsyWinDialogue1);
+        DialogueStorage.betsyDialogue.getWinDialogueList().push(betsyWinDialogue2);
+        DialogueStorage.betsyDialogue.getWinDialogueList().push(betsyWinDialogue3);
+
         DialogueStorage.betsyDialogue.getLoseDialogueList().push(betsyLoseDialogue1);
+        DialogueStorage.betsyDialogue.getLoseDialogueList().push(betsyLoseDialogue2);
+        DialogueStorage.betsyDialogue.getLoseDialogueList().push(betsyLoseDialogue3);
 
         //intro
         //1
         betsyIntroDialogue1.addStep("…mic check…is this on?", CoachList.betsy, "???");
         betsyIntroDialogue1.addStep(["I can hear you.", "Turb it up to 11!", "…wow, this gym has a great PA system!"], CoachList.you);
         betsyIntroDialogue1.addStep("Welcome to the audition!", CoachList.betsy);
+        //2
+        betsyIntroDialogue2.addStep("🎵 Betsy’s my name, no one else is the same!", CoachList.betsy);
+        //3
+        betsyIntroDialogue3.addStep("Let’s see if this is your…FINAL THROWDOWWWWWN 🎵", CoachList.betsy);
 
         //win
         //1
         betsyWinDialogue1.addStep("That performance took my breath away!", CoachList.betsy);
+        //2
+        betsyWinDialogue2.addStep("You rocked me like a hurricane!", CoachList.betsy);
+        //3
+        betsyWinDialogue3.addStep("When I think about you I turb myself!", CoachList.betsy);
+        //4
+        betsyWinDialogue4.addStep("You can throw your own wayyyyyy 🎵", CoachList.betsy);
+        //5
+        betsyWinDialogue5.addStep("Goodnight, Throwdown! There will be no encore.", CoachList.betsy);
 
         //lose
         //1
-        betsyLoseDialogue1.addStep("You give throwdown…a bad name! (bad name!)", CoachList.betsy);
+        betsyLoseDialogue1.addStep("You give throwdown…a bad name! (bad name!) 🎵", CoachList.betsy);
+        //2
+        betsyLoseDialogue2.addStep("This is gonna ruin the tour.", CoachList.betsy);
+        betsyLoseDialogue2.addStep(["What tour?"], CoachList.you);
+        betsyLoseDialogue2.addStep("The WORLD tour!", CoachList.betsy);
+        //3
+        betsyLoseDialogue3.addStep("Your turbs are out of sync!", CoachList.betsy);
     }
 
     public initializeCoreeDialogue(): void {
