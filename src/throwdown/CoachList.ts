@@ -15,16 +15,16 @@ export class CoachList {
     public static you = new Coach("You", CoachKeys.YOU, 0, false, "", "", "neon-turbo-throwdown");
     public static coach = new Coach("Coach", CoachKeys.COACH, 0, false, "", "", "neon-turbo-throwdown");
     public static spirit = new Coach("Spirit Coach", CoachKeys.SPIRIT , 0, false, "", "", "neon-turbo-throwdown");
-    public static primo = new Coach("Primo Firstman", CoachKeys.PRIMO, 0, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
-    public static sporticus = new Coach("Sporticus", CoachKeys.SPORTICUS, 1, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
-    public static tycoon = new Coach("Throwdown Tycoon", CoachKeys.TYCOON, 1, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
-    public static office = new Coach("Office Boss", CoachKeys.OFFICE, 2, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
-    public static sgtsteve = new Coach("Sgt. Steve", CoachKeys.SGT_STEVE, 2, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
-    public static betsy = new Coach("Betsy and the Nets", CoachKeys.BETSY, 2, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown");
-    public static coree = new Coach("C.O.R.E.E.", CoachKeys.COREE, 3, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
-    public static turbonerd = new Coach("Turbo Nerd", CoachKeys.TURBO_NERD, 3, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
-    public static shadowken = new Coach("Shadow Ken", CoachKeys.SHADOW_KEN, 3, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
-    public static boss10 = new Coach("Boss #10", CoachKeys.BOSS_10, 4, true, "VICTORY!", "FAILURE!", "neon-turbo-throwdown-hard");
+    public static primo = new Coach("Primo Firstman", CoachKeys.PRIMO, 0, true, "VICTORY!", "LOSE!", "neon-turbo-throwdown");
+    public static sporticus = new Coach("Sporticus", CoachKeys.SPORTICUS, 1, true, "VICTORY!", "SACKED!", "neon-turbo-throwdown");
+    public static tycoon = new Coach("Throwdown Tycoon", CoachKeys.TYCOON, 1, true, "VICTORY!", "BANKRUPT!", "neon-turbo-throwdown");
+    public static office = new Coach("Office Boss", CoachKeys.OFFICE, 2, true, "VICTORY!", "DOWNSIZED!", "neon-turbo-throwdown");
+    public static sgtsteve = new Coach("Sgt. Steve", CoachKeys.SGT_STEVE, 2, true, "VICTORY!", "SNIPED!", "neon-turbo-throwdown");
+    public static betsy = new Coach("Betsy and the Nets", CoachKeys.BETSY, 2, true, "VICTORY!", "THUNDERSTRUCK!", "neon-turbo-throwdown");
+    public static coree = new Coach("C.O.R.E.E.", CoachKeys.COREE, 3, true, "VICTORY!", "01101000 01100001 01101000 01100001", "neon-turbo-throwdown-hard");
+    public static turbonerd = new Coach("Turbo Nerd", CoachKeys.TURBO_NERD, 3, true, "VICTORY!", "OUTSMARTED!", "neon-turbo-throwdown-hard");
+    public static shadowken = new Coach("Shadow Ken", CoachKeys.SHADOW_KEN, 3, true, "VICTORY!", "SUBLIME!", "neon-turbo-throwdown-hard");
+    public static boss10 = new Coach("Boss #10", CoachKeys.BOSS_10, 4, true, "VICTORY!", "JAMMED!", "neon-turbo-throwdown-hard");
 
     public static setupCoachDecks() {
         log("SETTING UP COACH TROPHIES");
