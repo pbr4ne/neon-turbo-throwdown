@@ -92,9 +92,11 @@ export class DialogueStorage {
         const primoIntroDialogue1 = new DialogueConversation();
         const primoIntroDialogue2 = new DialogueConversation();
         const primoIntroDialogue3 = new DialogueConversation();
+
         const primoWinDialogue1 = new DialogueConversation();
         const primoWinDialogue2 = new DialogueConversation();
         const primoWinDialogue3 = new DialogueConversation();
+
         const primoLoseDialogue1 = new DialogueConversation();
         const primoLoseDialogue2 = new DialogueConversation();
         const primoLoseDialogue3 = new DialogueConversation();
@@ -135,7 +137,7 @@ export class DialogueStorage {
         //win
         //1
         primoWinDialogue1.addStep("Waaaah! I got turbo-thrashed!", CoachList.primo);
-        primoWinDialogue1.addStep(["More like Primo WORSTman.", "Yayyyy can I go home now?"], CoachList.you);
+        primoWinDialogue1.addStep(["More like Primo WORSTman.", "Yayyyy, can I go home now?"], CoachList.you);
         primoWinDialogue1.addStep("Ya did it, kid! Only 9 more gym bosses to go!", CoachList.coach);
         primoWinDialogue1.addStep(["Nine?", "I told you, I'm not a kid.", "TURBO-SLICED!!!!"], CoachList.you);
         //2
@@ -156,9 +158,11 @@ export class DialogueStorage {
         const sporticusIntroDialogue1 = new DialogueConversation();
         const sporticusIntroDialogue2 = new DialogueConversation();
         const sporticusIntroDialogue3 = new DialogueConversation();
+
         const sporticusWinDialogue1 = new DialogueConversation();
         const sporticusWinDialogue2 = new DialogueConversation();
         const sporticusWinDialogue3 = new DialogueConversation();
+
         const sporticusLoseDialogue1 = new DialogueConversation();
         const sporticusLoseDialogue2 = new DialogueConversation();
         const sporticusLoseDialogue3 = new DialogueConversation();
@@ -205,9 +209,11 @@ export class DialogueStorage {
         const tycoonIntroDialogue1 = new DialogueConversation();
         const tycoonIntroDialogue2 = new DialogueConversation();
         const tycoonIntroDialogue3 = new DialogueConversation();
+
         const tycoonWinDialogue1 = new DialogueConversation();
         const tycoonWinDialogue2 = new DialogueConversation();
         const tycoonWinDialogue3 = new DialogueConversation();
+
         const tycoonLoseDialogue1 = new DialogueConversation();
         const tycoonLoseDialogue2 = new DialogueConversation();
         const tycoonLoseDialogue3 = new DialogueConversation();
@@ -348,7 +354,7 @@ export class DialogueStorage {
         sgtsteveIntroDialogue1.addStep("Ten-hut! Let's see if you're ready to enlist!", CoachList.sgtsteve, "???");
         sgtsteveIntroDialogue1.addStep(["No thanks.", "Enlist in what? The lore is a bit vague here...", "You'll be turbo-saluting ME in no time!"], CoachList.you);
         //2
-        sgtsteveIntroDialogue2.addStep("Throwdown is my business, and business is good!", CoachList.you);
+        sgtsteveIntroDialogue2.addStep("Throwdown is my business, and business is good!", CoachList.sgtsteve);
         sgtsteveIntroDialogue2.addStep(["Deep cut.", "I thought business was the last boss?", "It's business time!"], CoachList.you);
         //3
         sgtsteveIntroDialogue3.addStep("I love the smell of balls in the morning", CoachList.sgtsteve);
@@ -427,7 +433,7 @@ export class DialogueStorage {
         //2
         betsyLoseDialogue2.addStep("This is gonna ruin the tour.", CoachList.betsy);
         betsyLoseDialogue2.addStep(["What tour?"], CoachList.you);
-        betsyLoseDialogue2.addStep("The WORLD tour!", CoachList.betsy);
+        betsyLoseDialogue2.addStep("The WORLD throwdown tour!", CoachList.betsy);
         //3
         betsyLoseDialogue3.addStep("Your turbs are out of sync!", CoachList.betsy);
     }
@@ -463,7 +469,7 @@ export class DialogueStorage {
         coreeIntroDialogue1.addStep(["COREE for short?", "I release thee of thy contract!", "COREE, generate a portrait of me winning this match."], CoachList.you);
         coreeIntroDialogue1.addStep("DOES NOT COMPUTE.", CoachList.coree);
         //2
-        coreeIntroDialogue2.addStep("DOES NOT COMPUTE.", CoachList.coree);
+        coreeIntroDialogue2.addStep("I am C.O.R.E.E. I can put my arm back on. You can't. So dodge safe.", CoachList.coree);
         //3
 
         //win
