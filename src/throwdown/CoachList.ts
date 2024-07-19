@@ -162,13 +162,13 @@ export class CoachList {
         ]);
 
         this.sgtsteve.setBaseCards([
+            CardFactory.createCardType(CardKeys.THROW_2),
+            CardFactory.createCardType(CardKeys.THROW_3),
             CardFactory.createCardType(CardKeys.THROW_4),
+            CardFactory.createCardType(CardKeys.THROW_5),
+            CardFactory.createCardType(CardKeys.THROW_6),
             CardFactory.createCardType(CardKeys.BLOCK_4),
             CardFactory.createCardType(CardKeys.EVADE_4),
-            CardFactory.createCardType(CardKeys.THROW_2),
-            CardFactory.createCardType(CardKeys.THROW_2),
-            CardFactory.createCardType(CardKeys.THROW_6),
-            CardFactory.createCardType(CardKeys.THROW_6),
             CardFactory.createCardType(CardKeys.BLOCK_2),
             CardFactory.createCardType(CardKeys.EVADE_3),
             CardFactory.createCardType(CardKeys.CATCH_2),
@@ -179,14 +179,14 @@ export class CoachList {
         ]);
 
         this.betsy.setBaseCards([
-            CardFactory.createCardType(CardKeys.THROW_5),
-            CardFactory.createCardType(CardKeys.THROW_5),
+            CardFactory.createCardType(CardKeys.THROW_3),
+            CardFactory.createCardType(CardKeys.THROW_3),
             CardFactory.createCardType(CardKeys.THROW_4),
+            CardFactory.createCardType(CardKeys.THROW_5),
+            CardFactory.createCardType(CardKeys.THROW_5),
             CardFactory.createCardType(CardKeys.BLOCK_5),
             CardFactory.createCardType(CardKeys.EVADE_2),
             CardFactory.createCardType(CardKeys.CATCH_3),
-            CardFactory.createCardType(CardKeys.THROW_3),
-            CardFactory.createCardType(CardKeys.THROW_3),
             CardFactory.createCardType(CardKeys.EVADE_3),
             CardFactory.createCardType(CardKeys.EVADE_3),
             CardFactory.createCardType(CardKeys.DEAD_OR_ALIVE),
@@ -199,14 +199,14 @@ export class CoachList {
 
         this.coree.setBaseCards([
             CardFactory.createCardType(CardKeys.THROW_4),
+            CardFactory.createCardType(CardKeys.THROW_4),
+            CardFactory.createCardType(CardKeys.THROW_5),
+            CardFactory.createCardType(CardKeys.THROW_6),
+            CardFactory.createCardType(CardKeys.THROW_6),
             CardFactory.createCardType(CardKeys.BLOCK_3),
             CardFactory.createCardType(CardKeys.EVADE_4),
-            CardFactory.createCardType(CardKeys.THROW_3),
-            CardFactory.createCardType(CardKeys.THROW_3),
             CardFactory.createCardType(CardKeys.BLOCK_2),
             CardFactory.createCardType(CardKeys.EVADE_2),
-            CardFactory.createCardType(CardKeys.THROW_6),
-            CardFactory.createCardType(CardKeys.THROW_6),
             CardFactory.createCardType(CardKeys.CATCH_2),
             CardFactory.createCardType(CardKeys.F7),
             CardFactory.createCardType(CardKeys.F7),
@@ -217,15 +217,15 @@ export class CoachList {
         ]);
 
         this.turbonerd.setBaseCards([
-            CardFactory.createCardType(CardKeys.BLOCK_4),
-            CardFactory.createCardType(CardKeys.THROW_6),
-            CardFactory.createCardType(CardKeys.THROW_6),
-            CardFactory.createCardType(CardKeys.THROW_6),
-            CardFactory.createCardType(CardKeys.THROW_6),
-            CardFactory.createCardType(CardKeys.BLOCK_4),
-            CardFactory.createCardType(CardKeys.EVADE_4),
-            CardFactory.createCardType(CardKeys.EVADE_4),
             CardFactory.createCardType(CardKeys.THROW_5),
+            CardFactory.createCardType(CardKeys.THROW_5),
+            CardFactory.createCardType(CardKeys.THROW_5),
+            CardFactory.createCardType(CardKeys.THROW_6),
+            CardFactory.createCardType(CardKeys.THROW_6),
+            CardFactory.createCardType(CardKeys.BLOCK_4),
+            CardFactory.createCardType(CardKeys.BLOCK_4),
+            CardFactory.createCardType(CardKeys.EVADE_4),
+            CardFactory.createCardType(CardKeys.EVADE_4),
             CardFactory.createCardType(CardKeys.CATCH_3),
             CardFactory.createCardType(CardKeys.DID_I_DO_THAT),
             CardFactory.createCardType(CardKeys.DID_I_DO_THAT),
@@ -234,15 +234,15 @@ export class CoachList {
         ]);
 
         this.shadowken.setBaseCards([
+            CardFactory.createCardType(CardKeys.THROW_5),
+            CardFactory.createCardType(CardKeys.THROW_5),
+            CardFactory.createCardType(CardKeys.THROW_6),
             CardFactory.createCardType(CardKeys.THROW_6),
             CardFactory.createCardType(CardKeys.BLOCK_5),
-            CardFactory.createCardType(CardKeys.THROW_6),
-            CardFactory.createCardType(CardKeys.THROW_5),
             CardFactory.createCardType(CardKeys.BLOCK_5),
             CardFactory.createCardType(CardKeys.BLOCK_4),
             CardFactory.createCardType(CardKeys.EVADE_4),
             CardFactory.createCardType(CardKeys.EVADE_3),
-            CardFactory.createCardType(CardKeys.THROW_5),
             CardFactory.createCardType(CardKeys.CATCH_3),
             CardFactory.createCardType(CardKeys.SMOKE_BOMB),
             CardFactory.createCardType(CardKeys.SMOKE_BOMB),
