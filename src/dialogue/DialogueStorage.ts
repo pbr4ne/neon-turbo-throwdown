@@ -61,13 +61,30 @@ export class DialogueStorage {
     }
 
     public initializeSpiritDialogue(): void {
-        DialogueStorage.firstSpiritDialogue.addStep("My child. Do not despair. Choose a consolationnn I mean participation trophy and continue thy quest.", CoachList.spirit, "???");
+        DialogueStorage.firstSpiritDialogue.addStep("My child. Do not despair. Choose a consolationnn- I mean participation trophy and continue thy quest.", CoachList.spirit, "???");
         DialogueStorage.firstSpiritDialogue.addStep(["Can I go home instead?", "How do I beat the gym bosses?", "I'm gonna turbo-slice that (insert non-offensive 80s insult here)"], CoachList.you);
         DialogueStorage.firstSpiritDialogue.addStep("All will be revealed... in time... ", CoachList.spirit);
     }
 
     public initializeFinalDialogue(): void {
-        DialogueStorage.finalDialogue.addStep("It was all a dream.", CoachList.you);
+        DialogueStorage.finalDialogue.addStep("..ya did it kid! Ya finally did it! Now as per Turbo Throwdown rules, I’ll grant ya one wish!", CoachList.coach);
+        DialogueStorage.finalDialogue.addStep(["I just want to get to music bingo.", "…just answer me one question: are you just a giant floating dodgeball?", "This game kinda grew on me. When’s the next tournament?"], CoachList.you);
+        DialogueStorage.finalDialogue.addStep(`Tell you what kid. I’ll grant all three because I like ya.
+            \nOne. I’ll turbo-port ya right ta music bingo.
+            \nTwo. Yes.
+            \nThree. The tournament is comin ta YOU!`, CoachList.coach);
+        DialogueStorage.finalDialogue.addStep(["…what do you mean? It’s over."], CoachList.you);
+        DialogueStorage.finalDialogue.addStep("It’s never over.", CoachList.boss10);
+        DialogueStorage.finalDialogue.addStep("You showed us what the real world is capable of. And it has horses!", CoachList.shadowken);
+        DialogueStorage.finalDialogue.addStep("I’ve already prepared the turbo-porter calculations.", CoachList.turbonerd);
+        DialogueStorage.finalDialogue.addStep("CHARGEUP PHASE INITIATED.", CoachList.coree);
+        DialogueStorage.finalDialogue.addStep("We’re gonne keep on rockin’ in the REAL WORLD!", CoachList.betsy);
+        DialogueStorage.finalDialogue.addStep("Operation REALBO is about to commence.", CoachList.sgtsteve);
+        DialogueStorage.finalDialogue.addStep("I’ve submitted PTO requests on behalf of the coaches.", CoachList.office);
+        DialogueStorage.finalDialogue.addStep("…how many millions should I bring for the weekend?", CoachList.tycoon);
+        DialogueStorage.finalDialogue.addStep("We are legion.", CoachList.sporticus);
+        DialogueStorage.finalDialogue.addStep("…I’m invited this time, right guys? …guys…???", CoachList.primo);
+        DialogueStorage.finalDialogue.addStep(["I’m closing this browser window and never re-opening it.", "What the actual F.", "I HAVE TO WARN THEM."], CoachList.you);
     }
 
     public initializePrimoDialogue(): void {
