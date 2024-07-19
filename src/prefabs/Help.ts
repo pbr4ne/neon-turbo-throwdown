@@ -7,14 +7,14 @@ export default class Help extends Phaser.GameObjects.Container {
         const blockInput = this.scene.add.rectangle(0, 0, 1920, 1080, 0x000000, 0.5).setOrigin(0.5, 0.5).setInteractive();
         this.add(blockInput);
 
-        const background = this.scene.add.rectangle(0, 0, 900, 700, 0x000000, 0.8).setOrigin(0.5, 0.5);
+        const background = this.scene.add.rectangle(0, 0, 900, 800, 0x000000, 0.8).setOrigin(0.5, 0.5);
         background.setStrokeStyle(4, 0x00ffff);
         this.add(background);
 
-		const coachImage = this.scene.add.image(330, -180, "coach")
+		const coachImage = this.scene.add.image(330, -230, "coach")
 		this.add(coachImage);
 
-        const creditsText = this.scene.add.text(-420, -320, "Here, watch this tutor-reel:", {
+        const creditsText = this.scene.add.text(-420, -370, "Here, watch this tutor-reel:", {
             fontFamily: '"Press Start 2P"',
             fontSize: '30px',
             color: '#ffffff',
@@ -23,7 +23,7 @@ export default class Help extends Phaser.GameObjects.Container {
         });
         this.add(creditsText);
 
-        const helpText1 = this.scene.add.text(-420, -280, `\nDraw 5 cards, then select a card, assign it to a player, and if it's an attack, select an opponent. When you're ready, THROW DOWN!`, {
+        const helpText1 = this.scene.add.text(-420, -330, `\nDraw 5 cards, then select a card, assign it to a player, and if it's an attack, select an opponent. When you're ready, THROW DOWN!`, {
             fontFamily: '"Press Start 2P"',
             fontSize: '20px',
             color: '#00ffff',
@@ -33,7 +33,7 @@ export default class Help extends Phaser.GameObjects.Container {
         });
         this.add(helpText1);
 
-        const helpText1post = this.scene.add.text(-420, -100, `Your initial deck has:`, {
+        const helpText1post = this.scene.add.text(-420, -150, `Your initial deck has:`, {
             fontFamily: '"Press Start 2P"',
             fontSize: '20px',
             color: '#00ffff',
@@ -55,7 +55,7 @@ export default class Help extends Phaser.GameObjects.Container {
         ];
         
         let xPos = -420;
-        const yPos = -65;
+        const yPos = -115;
         
         textParts.forEach(part => {
             const text = this.scene.add.text(xPos, yPos, part.text, {
@@ -74,7 +74,7 @@ export default class Help extends Phaser.GameObjects.Container {
             xPos += text.width;
         });
 
-        const helpText2b = this.scene.add.text(-420, -30, `Test them out and see what they do!`, {
+        const helpText2b = this.scene.add.text(-420, -80, `Test them out and see what they do!`, {
             fontFamily: '"Press Start 2P"',
             fontSize: '20px',
             color: '#00ffff',
@@ -83,7 +83,16 @@ export default class Help extends Phaser.GameObjects.Container {
         });
         this.add(helpText2b);
 
-		const helpText3 = this.scene.add.text(-420, 40, `Alright kid, that's the tutor-reel. And if you're not sure what to do out there, just remember the three rules of Throwdown:`, {
+        const helpText2c = this.scene.add.text(-420, -30, `Try out idle mode if you want your players to make their own decisions!`, {
+            fontFamily: '"Press Start 2P"',
+            fontSize: '20px',
+            color: '#00ffff',
+            align: 'left',
+            wordWrap: { width: 860, useAdvancedWrap: true }
+        });
+        this.add(helpText2c);
+
+		const helpText3 = this.scene.add.text(-420, 50, `Alright kid, that's the tutor-reel. And if you're not sure what to do out there, just remember the three rules of Throwdown:`, {
             fontFamily: '"Press Start 2P"',
             fontSize: '20px',
             color: '#00ffff',
@@ -93,7 +102,7 @@ export default class Help extends Phaser.GameObjects.Container {
         });
         this.add(helpText3);
 
-		const helpText4 = this.scene.add.text(-420, 110, `
+		const helpText4 = this.scene.add.text(-420, 120, `
             * Evasion
             \n* Envision - You gotta see victory in your brain 
             \n* Evasion again, in case you forgot`, {
