@@ -125,7 +125,7 @@ export class DialogueStorage {
         primoIntroDialogue1.addStep(["Throwdown as in... fight?", "I'm just here for sick gains, bro.", "Prepare to be TURBO THRASHED!"], CoachList.you);
         primoIntroDialogue1.addStep("Hahahahaha. Then prepare your team and let us BEGIN.", CoachList.primo);
         primoIntroDialogue1.addStep("Hey kid, wait!", CoachList.coach);
-        primoIntroDialogue1.addStep(["Who?", "What?", "I'm 37"], CoachList.you);
+        primoIntroDialogue1.addStep(["Who?", "What?", "I'm 37."], CoachList.you);
         primoIntroDialogue1.addStep("I know a rookie when I see one. Come find me in the corner and I'll give you some pointers.", CoachList.coach);
         primoIntroDialogue1.addStep(["Pointers for what? My aerobics class?", "I don't need anyone's help, old man.", "Sure, I'll ask you how to “throw down” or whatever."], CoachList.you);
         //2

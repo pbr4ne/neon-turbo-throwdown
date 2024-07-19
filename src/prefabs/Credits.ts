@@ -25,7 +25,7 @@ export default class Credits extends Phaser.GameObjects.Container {
             { title: "Design Nerd:", text: "Blake Mann", linkText: "", link: "" },
             { title: "Gam Design:", text: "pbrane, James Funfer, Travis", linkText: "", link: "" },
             { title: "Throwdown Tunes:", text: "terranaut1066", linkText: "youtube", link: "https://www.youtube.com/user/Kitchen1066" },
-            { title: "Rival Renderers:", text: "atgeaux", linkText: "instagram", link: "https://www.instagram.com/artgeaux/" },
+            { title: "Rival Renderers:", text: "artgeaux", linkText: "instagram", link: "https://www.instagram.com/artgeaux/" },
             { title: "", text: "David Baumgart", linkText: "portfolio", link: "https://davidportfolio.com" },
             { title: "", text: "pbrane", linkText: "", link: "" },
             { title: "Court Testers:", text: "Julz", text2: "Mystic", linkText: "", link: "" },
