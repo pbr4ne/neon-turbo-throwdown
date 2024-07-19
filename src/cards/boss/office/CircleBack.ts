@@ -48,7 +48,7 @@ export class CircleBack extends OfficeCard {
     }
 
     getDescription(): string {
-        return "1 Evade, 1 damage.";
+        return "1 evade and 1 throw (1 damage)";
     }
 
     getOverrideDamage(): number {
