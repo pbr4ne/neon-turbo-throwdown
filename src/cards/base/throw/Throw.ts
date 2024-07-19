@@ -22,9 +22,9 @@ export class Throw extends CardType {
         let membersToTarget = this.getRandomAliveMembers(opponentTeam, target, this.getNumTargets() - 1);
 
         if (target) {
-            if(this.attackMember(member, target, team, opponentTeam, true, overrideDamage)) {
+            if(this.attackMember(member, target, team, opponentTeam, true, true, overrideDamage)) {
                 membersToTarget.forEach((enemyMember) => {
-                    if(this.attackMember(member, enemyMember, team, opponentTeam, false)) {
+                    if(this.attackMember(member, enemyMember, team, opponentTeam, false, false)) {
                         anyNonMiss = true;
                     }
                 });
@@ -40,7 +40,7 @@ export class Throw extends CardType {
         return anyNonMiss;
     }
 
-    attackMember(member: Member, target: Member, team: Team, opponentTeam: Team, canRetaliate: boolean, overrideDamage?: number): boolean {
+    attackMember(member: Member, target: Member, team: Team, opponentTeam: Team, originalHit: boolean, canRetaliate: boolean, overrideDamage?: number): boolean {
         if (this.getChanceToOffend(team) >= Math.random()) {
             const targetCard = target.getAssignedCard();
             let defenseSuccess = false;
@@ -50,7 +50,17 @@ export class Throw extends CardType {
             }
             if (!defenseSuccess) {
                 //reduce their HP if they failed to defend
-                target.reduceHP(overrideDamage ? overrideDamage : this.getRicochetDamage());
+                let damage;
+                if (originalHit) {
+                    damage = this.getOffenseDamage(member, target, team);
+                    if (overrideDamage) {
+                        damage = overrideDamage;
+                    }
+                } else {
+                    damage = this.getRicochetDamage();
+                }
+
+                target.reduceHP(damage);
                 return true;
             }
         }
