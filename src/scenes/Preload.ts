@@ -21,7 +21,7 @@ export default class Preload extends Phaser.Scene {
 	editorCreate(): void {
 		const loadingText = this.add.text(831.5, 509, "Turbocharging...", {
 			color: "#ff00ff",
-			fontFamily: '"Press Start 2P"',
+			fontFamily: '"Courier New", monospace',
 			fontSize: "25px",
 			strokeThickness: 2,
 			stroke: "#ff00ff"
@@ -114,10 +114,25 @@ export default class Preload extends Phaser.Scene {
 	}
 
 	create() {
-		if (checkUrlParam("skipWelcome", "true")) {
-			this.scene.start("Game")
-		} else {
-			this.scene.start("Welcome");
-		}
+		this.loadFonts(() => {
+			if (checkUrlParam("skipWelcome", "true")) {
+				this.scene.start("Game");
+			} else {
+				this.scene.start("Welcome");
+			}
+		});
+	}
+
+	private loadFonts(callback: () => void) {
+		WebFont.load({
+			google: {
+				families: ['Press Start 2P']
+			},
+			active: callback,
+			inactive: () => {
+				console.error('Failed to load fonts');
+				callback();
+			}
+		});
 	}
 }
