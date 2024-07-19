@@ -467,6 +467,13 @@
             },
             {
                 "url": [
+                    "assets/audio/sound_itsneverover.mp3"
+                ],
+                "type": "audio",
+                "key": "sound_itsneverover"
+            },
+            {
+                "url": [
                     "assets/audio/sound_lose.mp3"
                 ],
                 "type": "audio",

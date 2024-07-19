@@ -13,13 +13,16 @@ export class GameSounds {
     static debuffSound: Phaser.Sound.WebAudioSound;
     static buffSound: Phaser.Sound.WebAudioSound;
     static dodgeSound: Phaser.Sound.WebAudioSound;
+    static itsNeverOverSound: Phaser.Sound.WebAudioSound;
     static effectsEnabled: boolean = true;
     static musicShouldBePlaying: boolean = true;
     static currentSongKey: string | null = null;
     static fadeDuration: number = 1000; // ms
 
     static init(scene: Phaser.Scene) {
-        if (GameSounds.hitSound && GameSounds.blockSound && GameSounds.buttonSound && GameSounds.cardSound && GameSounds.healSound && GameSounds.winSound && GameSounds.loseSound) {
+        if (GameSounds.hitSound && GameSounds.blockSound && GameSounds.buttonSound && GameSounds.cardSound 
+            && GameSounds.healSound && GameSounds.winSound && GameSounds.loseSound && GameSounds.catchSound 
+            && GameSounds.debuffSound && GameSounds.buffSound && GameSounds.dodgeSound && GameSounds.itsNeverOverSound) {
             return;
         }
 
@@ -34,6 +37,7 @@ export class GameSounds {
         GameSounds.debuffSound = scene.sound.add("sound_debuff") as Phaser.Sound.WebAudioSound;
         GameSounds.buffSound = scene.sound.add("sound_buff") as Phaser.Sound.WebAudioSound;
         GameSounds.dodgeSound = scene.sound.add("sound_dodge") as Phaser.Sound.WebAudioSound;
+        GameSounds.itsNeverOverSound = scene.sound.add("sound_itsneverover") as Phaser.Sound.WebAudioSound;
     }
 
     static toggleMusic() {
@@ -118,6 +122,12 @@ export class GameSounds {
     static playDodge() {
         if (GameSounds.effectsEnabled && GameSounds.dodgeSound) {
             GameSounds.dodgeSound.play({ volume: 0.2 });
+        }
+    }
+
+    static playItsNeverOver() {
+        if (GameSounds.effectsEnabled && GameSounds.itsNeverOverSound) {
+            GameSounds.itsNeverOverSound.play({ volume: 0.5 });
         }
     }
 

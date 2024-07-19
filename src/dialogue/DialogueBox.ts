@@ -182,6 +182,11 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
 			this.buttonText.setVisible(true);
 			this.skipButton.setVisible(true);
 			this.skipButtonText.setVisible(true);
+
+			if(text === "It's never over.") {
+				GameSounds.playItsNeverOver();
+			}
+
 		} else if (Array.isArray(text)) {
 			
 			this.optionText1.setText(`1. ${text[0]}`);
