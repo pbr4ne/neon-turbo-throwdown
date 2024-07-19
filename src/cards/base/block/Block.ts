@@ -23,7 +23,7 @@ export class Block extends CardType {
 
     defense(member: Member, attacker: Member, team: Team, opponentTeam: Team, canRetaliate: boolean, overrideName?: string): boolean {
         let defenseSuccess = false;
-        if (this.getCurrentNumDefends() <= this.getNumDefends() && this.getChanceToDefend() >= Math.random()) {
+        if (this.getCurrentNumDefends() < this.getNumDefends() && this.getChanceToDefend() >= Math.random()) {
             member.showFloatingAction(overrideName ? overrideName : this.getName());
 
             if (canRetaliate) {
