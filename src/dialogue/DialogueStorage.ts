@@ -371,7 +371,7 @@ export class DialogueStorage {
         
         //lose
         //1
-        sgtsteveLoseDialogue1.addStep("Nothing can stop the throwing of balls except other balls", CoachList.sgtsteve);
+        sgtsteveLoseDialogue1.addStep("Nothing can stop the throwing of balls except other balls.", CoachList.sgtsteve);
         //2
         sgtsteveLoseDialogue2.addStep("You discharged your balls dishonourably.", CoachList.sgtsteve);
         //3

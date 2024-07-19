@@ -21,7 +21,7 @@ export class CoachList {
     public static office = new Coach("Office Boss", CoachKeys.OFFICE, 2, true, "VICTORY!", "DOWNSIZED!", "neon-turbo-throwdown");
     public static sgtsteve = new Coach("Sgt. Steve", CoachKeys.SGT_STEVE, 2, true, "VICTORY!", "SNIPED!", "neon-turbo-throwdown");
     public static betsy = new Coach("Betsy and the Nets", CoachKeys.BETSY, 2, true, "VICTORY!", "THUNDERSTRUCK!", "neon-turbo-throwdown");
-    public static coree = new Coach("C.O.R.E.E.", CoachKeys.COREE, 3, true, "VICTORY!", "01101000 01100001 01101000 01100001", "neon-turbo-throwdown-hard");
+    public static coree = new Coach("C.O.R.E.E.", CoachKeys.COREE, 3, true, "VICTORY!", "01101100 01101111 01101100", "neon-turbo-throwdown-hard");
     public static turbonerd = new Coach("Turbo Nerd", CoachKeys.TURBO_NERD, 3, true, "VICTORY!", "OUTSMARTED!", "neon-turbo-throwdown-hard");
     public static shadowken = new Coach("Shadow Ken", CoachKeys.SHADOW_KEN, 3, true, "VICTORY!", "SUBLIME!", "neon-turbo-throwdown-hard");
     public static boss10 = new Coach("Boss #10", CoachKeys.BOSS_10, 4, true, "VICTORY!", "JAMMED!", "neon-turbo-throwdown-hard");
