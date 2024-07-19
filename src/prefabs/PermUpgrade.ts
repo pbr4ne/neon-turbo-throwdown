@@ -12,6 +12,7 @@ import { log } from "../utilities/GameUtils";
 import { StorageManager } from "../utilities/StorageManager";
 import { CardKeys } from "../cards/CardKeys";
 import { GameSounds } from "../utilities/GameSounds";
+import HelpPermUpgrade from "./HelpPermUpgrade";
 
 export default class PermUpgrade extends Phaser.GameObjects.Container {
 
@@ -50,6 +51,17 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
 
         this.pointerImage = this.scene.add.image(1300, 850, "pointer");
 
+        this.helpBtn = this.scene.add.image(1840, 1020, "help");
+        this.helpBtn.setInteractive({ useHandCursor: true })
+            .on('pointerover', () => {
+                this.scene.input.setDefaultCursor('pointer');
+            })
+            .on('pointerout', () => {
+                this.scene.input.setDefaultCursor('default');
+            
+            })
+            .on('pointerdown', this.showHelp, this);
+
         scene.add.existing(this);
 
         this.cardRound();
@@ -66,6 +78,12 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
     private selectCardImage: Phaser.GameObjects.Image | null = null;
     private pointerImage: Phaser.GameObjects.Image | null = null;
     private trophiesToSelect: (TrophyType | CardType)[] = [];
+    private helpBtn: Phaser.GameObjects.Image | null = null;
+
+    private showHelp() {
+		const helpPopup = new HelpPermUpgrade(this.scene);
+		this.scene.add.existing(helpPopup);
+	}
 
     destroyEverything() {
         this.courtImage?.destroy();
@@ -77,6 +95,7 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
         this.coachName?.destroy();
         this.selectCardImage?.destroy();
         this.pointerImage?.destroy();
+        this.helpBtn?.destroy();
     }
 
     private cardRound() {
