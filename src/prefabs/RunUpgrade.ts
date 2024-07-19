@@ -9,6 +9,7 @@ import { CoachList } from "../throwdown/CoachList";
 import { log } from "../utilities/GameUtils";
 import Upgrade from "./Upgrade";
 import { GameSounds } from "../utilities/GameSounds";
+import HelpRunUpgrade from "./HelpRunUpgrade";
 
 export default class RunUpgrade extends Phaser.GameObjects.Container {
 
@@ -37,10 +38,22 @@ export default class RunUpgrade extends Phaser.GameObjects.Container {
 			this.drawNextSetOfCards();
 		});
 
-		this.skipButtonBackground.setDepth(0);
-		this.skipButton.setDepth(1);
+		//this.skipButtonBackground.setDepth(0);
+		//this.skipButton.setDepth(1);
+        this.scene.add.existing(this.skipButton);
 
         this.cardListToChooseFrom = this.getCardList();
+
+        this.helpBtn = this.scene.add.image(1840, 1020, "help");
+        this.helpBtn.setInteractive({ useHandCursor: true })
+            .on('pointerover', () => {
+                this.scene.input.setDefaultCursor('pointer');
+            })
+            .on('pointerout', () => {
+                this.scene.input.setDefaultCursor('default');
+            
+            })
+            .on('pointerdown', this.showHelp, this);
 
         this.cardRound();
     }
@@ -55,12 +68,19 @@ export default class RunUpgrade extends Phaser.GameObjects.Container {
     private skipButton!: Phaser.GameObjects.Text;
 	private skipButtonBackground!: Phaser.GameObjects.Rectangle;
     private cardListToChooseFrom: { card: CardType, type: string }[] = [];
+    private helpBtn: Phaser.GameObjects.Image | null = null;
+
+    private showHelp() {
+		const helpPopup = new HelpRunUpgrade(this.scene);
+		this.scene.add.existing(helpPopup);
+	}
 
     destroyEverything() {
         this.selectCardImage?.destroy();
         this.pointerImage?.destroy();
         this.skipButton?.destroy();
 		this.skipButtonBackground?.destroy();
+        this.helpBtn?.destroy();
     }
 
     getCardList() {
