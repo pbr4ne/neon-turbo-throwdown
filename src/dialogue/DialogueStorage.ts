@@ -469,12 +469,28 @@ export class DialogueStorage {
 
     public initializeTurbonerdDialogue(): void {
         const turbonerdIntroDialogue1 = new DialogueConversation();
+        const turbonerdIntroDialogue2 = new DialogueConversation();
+        const turbonerdIntroDialogue3 = new DialogueConversation();
+
         const turbonerdWinDialogue1 = new DialogueConversation();
+        const turbonerdWinDialogue2 = new DialogueConversation();
+        const turbonerdWinDialogue3 = new DialogueConversation();
+
         const turbonerdLoseDialogue1 = new DialogueConversation();
+        const turbonerdLoseDialogue2 = new DialogueConversation();
+        const turbonerdLoseDialogue3 = new DialogueConversation();
 
         DialogueStorage.turbonerdDialogue.getIntroDialogueList().push(turbonerdIntroDialogue1);
+        DialogueStorage.turbonerdDialogue.getIntroDialogueList().push(turbonerdIntroDialogue2);
+        DialogueStorage.turbonerdDialogue.getIntroDialogueList().push(turbonerdIntroDialogue3);
+
         DialogueStorage.turbonerdDialogue.getWinDialogueList().push(turbonerdWinDialogue1);
+        DialogueStorage.turbonerdDialogue.getWinDialogueList().push(turbonerdWinDialogue2);
+        DialogueStorage.turbonerdDialogue.getWinDialogueList().push(turbonerdWinDialogue3);
+
         DialogueStorage.turbonerdDialogue.getLoseDialogueList().push(turbonerdLoseDialogue1);
+        DialogueStorage.turbonerdDialogue.getLoseDialogueList().push(turbonerdLoseDialogue2);
+        DialogueStorage.turbonerdDialogue.getLoseDialogueList().push(turbonerdLoseDialogue3);
 
         //intro
         //1
@@ -483,16 +499,27 @@ export class DialogueStorage {
         turbonerdIntroDialogue1.addStep("…typical insults. Haven’t you heard that nerds rule the world?", CoachList.turbonerd);
         turbonerdIntroDialogue1.addStep(["Yeah I have questions about that. What universe is this?", "They don’t rule mine.", "This is TURBO THROWDOWN. Not Nerdo…slow down. Yeah."], CoachList.you);
         turbonerdIntroDialogue1.addStep("Enough flavour text. LET US THROW OUR BALLS DOWN. …the court.", CoachList.turbonerd);
+        //2
+        turbonerdIntroDialogue2.addStep("Enough flavour text. LET US THROW OUR BALLS DOWN. …the court.", CoachList.turbonerd);
+        //3
 
         //win
         //1
         turbonerdWinDialogue1.addStep("You have won my grudging respect. But beware! Your mind is strong, but the final coach may test its limits", CoachList.turbonerd);
         turbonerdWinDialogue1.addStep(["…are they really smart?"], CoachList.you);
         turbonerdWinDialogue1.addStep("More like really meta.", CoachList.turbonerd);
+        //2
+        turbonerdWinDialogue2.addStep("…that was worse than a turbo-wedgie!", CoachList.turbonerd);
+        //3
+        turbonerdWinDialogue3.addStep("while(currentDialogueNum >= lastTurboNerdDialogue) { return win3phrase; }", CoachList.turbonerd);
 
         //lose
         //1
         turbonerdLoseDialogue1.addStep("Too much Fortnite and not enough Slay the Spire!", CoachList.turbonerd);
+        //2
+        turbonerdLoseDialogue2.addStep("…if you see COREE, tell them I set their server room up nice.", CoachList.turbonerd);
+        //3
+        turbonerdLoseDialogue3.addStep("Another epic loss! …I could point you to the source code if you want the proverbial cheat codes?", CoachList.turbonerd);
     }
 
     public initializeShadowkenDialogue(): void {
