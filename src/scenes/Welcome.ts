@@ -32,7 +32,9 @@ export default class Welcome extends Phaser.Scene {
 			playBtn = this.add.image(1000, 680, "start-button");
 		} else {
 			logo = this.add.image(1000, 200, "logo-small");
-			this.add.image(1000, 400, "pep-talk");
+			if(!Library.getWon()) {
+				this.add.image(1000, 400, "pep-talk");
+			}
 			playBtn = this.add.image(1000, 630, "restart-button");
 			this.add.text(1000, 670, "maintain your unlocks", {
 				fontFamily: '"Press Start 2P"',

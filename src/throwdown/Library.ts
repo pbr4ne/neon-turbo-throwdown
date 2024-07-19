@@ -15,6 +15,7 @@ export class Library {
     private static pureDeck: CardType[] = [];
     private static easyMode: boolean = false;
     private static idleMode: boolean = false;
+    private static won = false;
 
     public static getNumRuns() {
         return this.numRuns;
@@ -57,6 +58,14 @@ export class Library {
 
     public static getIdleMode() {
         return this.idleMode;
+    }
+
+    public static setWon(won: boolean) {
+        this.won = won;
+    }
+
+    public static getWon() {
+        return this.won;
     }
 
     public static addTrophyType(trophyType: TrophyType) {

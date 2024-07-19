@@ -117,6 +117,7 @@ export default class Game extends Phaser.Scene {
         } else if (type === "final") {
             this.throwdown.destroy();
             Library.incrementNumRuns();
+            Library.setWon(true);
             this.scene.start('Welcome');
         }
 
