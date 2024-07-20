@@ -61,7 +61,7 @@ export class DialogueStorage {
     }
 
     public initializeSpiritDialogue(): void {
-        DialogueStorage.firstSpiritDialogue.addStep("My child. Do not despair. Choose a consolationnn- I mean participation trophy and continue thy quest.", CoachList.spirit, "???");
+        DialogueStorage.firstSpiritDialogue.addStep("My child. Do not despair. Choose a consolationnn- I mean participation trophy and continue thy quest. It will help you do better on your next throwdown.", CoachList.spirit, "???");
         DialogueStorage.firstSpiritDialogue.addStep(["Can I go home instead?", "How do I beat the gym bosses?", "I'm gonna turbo-slice that (insert non-offensive 80s insult here)"], CoachList.you);
         DialogueStorage.firstSpiritDialogue.addStep("All will be revealed... in time... ", CoachList.spirit);
     }
@@ -126,8 +126,8 @@ export class DialogueStorage {
         primoIntroDialogue1.addStep("Hahahahaha. Then prepare your team and let us BEGIN.", CoachList.primo);
         primoIntroDialogue1.addStep("Hey kid, wait!", CoachList.coach);
         primoIntroDialogue1.addStep(["Who?", "What?", "I'm 37."], CoachList.you);
-        primoIntroDialogue1.addStep("I know a rookie when I see one. Come find me in the corner and I'll give you some pointers.", CoachList.coach);
-        primoIntroDialogue1.addStep(["Pointers for what? My aerobics class?", "I don't need anyone's help, old man.", "Sure, I'll ask you how to “throw down” or whatever."], CoachList.you);
+        primoIntroDialogue1.addStep("I know a rookie when I see one. Come ask for *help* in the bottom right corner of the screen and I'll give you some pointers.", CoachList.coach);
+        primoIntroDialogue1.addStep(["Pointers for what? My aerobics class?", "I don't need anyone's help, old man.", "Sure, I'll ask you how to “throw down” or whatever. Wait... screen?"], CoachList.you);
         //2
         primoIntroDialogue2.addStep("Alright kid, don't get dis-TURBed. Ya gotta build up yer deck er...coach commands sometimes ta beat these guys.", CoachList.coach);
         primoIntroDialogue2.addStep("You again. Don't forget - it's Primo like Emo. Because Prime-o is harder to rhyme-o.", CoachList.primo);
