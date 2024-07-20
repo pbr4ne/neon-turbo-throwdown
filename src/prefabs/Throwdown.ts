@@ -67,10 +67,10 @@ export default class Throwdown extends Phaser.GameObjects.Container {
 
     private automationTimer!: Phaser.Time.TimerEvent; 
 
-	render() {
-
-		this.scoreImage = this.scene.add.image(80, 110, "score");
-		this.forfeitImage = this.scene.add.image(77, 243, "forfeit")
+    render() {
+    
+        this.scoreImage = this.scene.add.image(80, 110, "score");
+        this.forfeitImage = this.scene.add.image(77, 243, "forfeit")
             .setInteractive({ useHandCursor: true })
             .on('pointerover', () => {
                 this.scene.input.setDefaultCursor('pointer');
@@ -101,8 +101,8 @@ export default class Throwdown extends Phaser.GameObjects.Container {
             color: '#ff00ff'
         }).setOrigin(0.5, 0.5);
 
-		this.coachCornerImage = this.scene.add.image(1625, 193, "coach-corner");
-		this.difficultyImage = this.scene.add.image(1747, 411, "difficulty-" + this.coach.getDifficulty() );
+        this.coachCornerImage = this.scene.add.image(1625, 193, "coach-corner");
+        this.difficultyImage = this.scene.add.image(1747, 411, "difficulty-" + this.coach.getDifficulty() );
         if (this.coach.getDifficulty() == 4) {
             this.coachCornerImage.setTexture("coach-corner-boss");
         }
@@ -112,7 +112,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
         this.cardSlot4 = this.scene.add.image(1162, 848, "empty");
         this.cardSlot5 = this.scene.add.image(1364, 848, "empty");
 
-		this.playerLayer = this.scene.add.layer();
+        this.playerLayer = this.scene.add.layer();
 
         let fontSize = "18px";
         if (this.coach == CoachList.betsy) {
@@ -120,17 +120,17 @@ export default class Throwdown extends Phaser.GameObjects.Container {
         }
 
         this.coachName = new Phaser.GameObjects.Text(this.scene, 1740, 340, this.coach.getName(), {
-			fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
-			fontSize,
-			color: '#000000',
+            fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
+            fontSize,
+            color: '#000000',
             stroke: '#000000',
             strokeThickness: 1,
-			padding: { x: 5, y: 5 },
-			align: 'left'
-		});
-		this.playerLayer.add(this.coachName);
-		this.coachName.setOrigin(0.5, 0.5);
-
+            padding: { x: 5, y: 5 },
+            align: 'left'
+        });
+        this.playerLayer.add(this.coachName);
+        this.coachName.setOrigin(0.5, 0.5);
+    
         this.scoreText = new Phaser.GameObjects.Text(this.scene, 150, 68, Library.getNumRuns().toString(), {
             fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
             fontSize: "64px",
@@ -150,7 +150,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
         this.pointerImage = this.scene.add.image(265, 875, "pointer");
         this.pointerImage2 = this.scene.add.image(265, 875, "pointer");
         this.pointerImage3 = this.scene.add.image(265, 875, "pointer");
-        
+
         this.helpBtn = this.scene.add.image(1840, 1020, "help");
         this.helpBtn.setInteractive({ useHandCursor: true })
             .on('pointerover', () => {
@@ -161,27 +161,42 @@ export default class Throwdown extends Phaser.GameObjects.Container {
             
             })
             .on('pointerdown', this.showHelp, this);
-
+    
+        if(this.coach?.getDifficulty() == 0) {
+            this.scene.tweens.add({
+                targets: this.helpBtn,
+                scaleX: 1.5,
+                scaleY: 1.5,
+                duration: 500,
+                yoyo: true,
+                repeat: 4,
+                ease: 'Sine.easeInOut',
+                onComplete: () => {
+                    this.helpBtn?.setScale(1);
+                }
+            });
+        }
+    
         this.hideAllInstructions();
-
-		this.playerLayer.add(this.player);
-		this.playerLayer.add(this.boss);
-
+    
+        this.playerLayer.add(this.player);
+        this.playerLayer.add(this.boss);
+    
         log("Throwdown render - initialize player deck - " + CoachList.you.getBaseCards().length);
         CoachList.you.getBaseCards().forEach(card => log(card.getName()));
         this.player.deck.initializeDeck(CoachList.you.getBaseCards(), this.player, this.player);
         this.player.deck.arrangeCardPositions(100, 840);
-
+    
         this.boss.deck.initializeDeck(this.coach.getBaseCards(), this.boss, this.player);
-
+    
         this.player.createEndTurnButton();
-
+    
         if (this.coach.getSong()) {
             GameSounds.switchSong(this.scene, this.coach.getSong());
         }
-
+    
         this.startGameLoop();
-
+    
         this.automationTimer = this.scene.time.addEvent({
             delay: Library.getIdleClickDelay(),
             callback: this.runAutomation,
@@ -189,7 +204,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
             loop: true
         });
         this.automationTimer.paused = !Library.getIdleMode();
-
+    
         this.scene.time.addEvent({
             delay: 100,
             callback: () => {
