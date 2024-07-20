@@ -260,7 +260,7 @@ export default abstract class Team extends Phaser.GameObjects.Container {
                 }
             }
         }
-        await this.pause(Library.getIdleTurnDelay()); 
+        await this.pause(Library.getIdleTurnDelay()/2); 
     }
     
     pause(ms: number) {
