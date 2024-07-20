@@ -4,6 +4,9 @@ import { log } from '../utilities/GameUtils';
 import { TrophyKey } from '../trophies/TrophyKey';
 
 export default class Trophies extends Phaser.GameObjects.Container {
+    private tooltipImage: Phaser.GameObjects.Image;
+    private tooltipText: Phaser.GameObjects.Text;
+
     constructor(scene: Phaser.Scene) {
         super(scene, 960, 540);
 
@@ -107,6 +110,19 @@ export default class Trophies extends Phaser.GameObjects.Container {
         let leftColumn = true;
         const columnOffset = 400;
 
+        this.tooltipImage = this.scene.add.image(0, 0, 'tooltip').setVisible(false);
+        this.tooltipText = this.scene.add.text(0, 0, '', {
+            fontFamily: '"Press Start 2P"',
+            fontSize: '16px',
+            color: '#ffff00',
+            lineSpacing: 15,
+            padding: { x: 5, y: 5 },
+            align: 'left',
+            wordWrap: { width: 350, useAdvancedWrap: true }
+        }).setVisible(false);
+        this.add(this.tooltipImage);
+        this.add(this.tooltipText);
+
         sortedTrophies.forEach((trophy, index) => {
             log(`trophy: ${trophy.getName()}`);
             const xPos = leftColumn ? -columnOffset : 0;
@@ -117,6 +133,11 @@ export default class Trophies extends Phaser.GameObjects.Container {
                 wordWrap: { width: 380, useAdvancedWrap: true }
             }).setOrigin(0, 0);
             this.add(trophyText);
+
+            trophyText.setInteractive({ useHandCursor: true });
+            trophyText.on('pointerover', () => this.showTooltip(trophy.getDescription(), trophyText));
+            trophyText.on('pointerout', () => this.hideTooltip());
+
             yPos += parseInt(fontSize) + 5;
 
             if (index === Math.floor(sortedTrophies.length / 2) - 1) {
@@ -145,5 +166,32 @@ export default class Trophies extends Phaser.GameObjects.Container {
         });
 
         this.add(closeButton);
+    }
+
+    private showTooltip(description: string, trophyText: Phaser.GameObjects.Text) {
+        this.tooltipText.setText(description);
+        let fontSize = 16;
+
+        while (this.tooltipText.height + 90 > this.tooltipImage.height) {
+            fontSize--;
+            this.tooltipText.setStyle({ fontSize: `${fontSize}px` });
+        }
+
+        const x = trophyText.x + trophyText.width / 2;
+        const y = trophyText.y - this.tooltipText.height - 10;
+
+        this.tooltipImage.setPosition(x, y);
+        this.tooltipText.setPosition(x - 170, y - 80);
+
+        this.tooltipImage.setVisible(true);
+        this.tooltipText.setVisible(true);
+
+        this.bringToTop(this.tooltipImage);
+        this.bringToTop(this.tooltipText);
+    }
+
+    private hideTooltip() {
+        this.tooltipImage.setVisible(false);
+        this.tooltipText.setVisible(false);
     }
 }
