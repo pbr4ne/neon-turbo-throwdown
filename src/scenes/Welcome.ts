@@ -12,6 +12,7 @@ import { Library } from "../throwdown/Library";
 import Credits from '../prefabs/Credits';
 import Trophies from '../prefabs/Trophies';
 import Settings from '../prefabs/Settings';
+import TextFactory from "../utilities/TextUtils";
 
 export default class Welcome extends Phaser.Scene {
 
@@ -35,11 +36,7 @@ export default class Welcome extends Phaser.Scene {
 				this.add.image(1000, 400, "pep-talk");
 			}
 			playBtn = this.add.image(1000, 630, "restart-button");
-			this.add.text(1000, 670, "maintain your unlocks", {
-				fontFamily: '"Press Start 2P"',
-				fontSize: '12px',
-				color: '#ffffff',
-			}).setOrigin(0.5, 0.5);
+			TextFactory.createText(this, 1000, 670, "maintain your unlocks", { fontSize: '12px'});
 		}
 
 		this.musicBtn = this.add.image(1720, 960, "music2-on");
@@ -153,5 +150,5 @@ export default class Welcome extends Phaser.Scene {
 	private showSettings() {
 		const settingsPopup = new Settings(this);
 		this.add.existing(settingsPopup);
-    }
+	}
 }
