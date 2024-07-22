@@ -7,6 +7,7 @@ import { log } from "../utilities/GameUtils";
 import { GameSounds } from "../utilities/GameSounds";
 import { Library } from "../throwdown/Library";
 import TextFactory from "../utilities/TextUtils";
+import { Colours } from "../utilities/Colours";
 
 export default class DialogueBox extends Phaser.GameObjects.Container {
 
@@ -51,7 +52,7 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
         rectangle_1.scaleX = 10.314571568183906;
         rectangle_1.scaleY = 2.6941724549327337;
         rectangle_1.isStroked = true;
-        rectangle_1.strokeColor = spiritCoachDialogue ? 0x00ffff : 0xff00ff;
+        rectangle_1.strokeColor = spiritCoachDialogue ? Colours.CYAN_HEX : Colours.MAGENTA_HEX;
         this.add(rectangle_1);
     }
 
@@ -71,7 +72,7 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
 
             this.idleModeText = TextFactory.createText(this.scene, 135, 920, "(for next combat)", {
                 fontSize: '14px',
-                color: '#ffff00',
+                color: Colours.YELLOW_STRING,
                 align: 'center'
             });
             this.idleModeText.setOrigin(0.5, 0.5);
@@ -107,8 +108,8 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
         this.scene.add.image(953, 443, "court-cyan");
         this.scene.add.existing(new Phaser.GameObjects.Image(this.scene, 1855, 78, "spirit").setOrigin(1, 0).setScale(1.2));
         this.coachName = TextFactory.createText(this.scene, 1720, 340, "Turbovoid", {
-            color: '#000000',
-            stroke: '#000000',
+            color: Colours.BLACK_STRING,
+            stroke: Colours.BLACK_STRING,
             strokeThickness: 1,
             padding: { x: 5, y: 5 },
         });
@@ -153,7 +154,17 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
     }
 
     hideAllTextAreas() {
-        const elements = [this.dialogueText, this.optionText1, this.optionText2, this.optionText3, this.optionInstructions, this.nextButton, this.buttonText, this.skipButton, this.skipButtonText];
+        const elements = [
+            this.dialogueText,
+            this.optionText1,
+            this.optionText2,
+            this.optionText3,
+            this.optionInstructions,
+            this.nextButton,
+            this.buttonText,
+            this.skipButton,
+            this.skipButtonText
+        ];
         elements.forEach(element => element.setVisible(false));
     }
 
@@ -197,20 +208,20 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
 
     destroyEverything() {
         const elements = [
-			this.dialogueText,
-			this.optionText1,
-			this.optionText2,
-			this.optionText3,
-			this.optionInstructions,
-			this.nextButton,
-			this.buttonText,
-			this.avatar,
-			this.avatarName,
-			this.skipButton,
-			this.skipButtonText,
-			this.idleModeImage,
-			this.idleModeText
-		];
+            this.dialogueText,
+            this.optionText1,
+            this.optionText2,
+            this.optionText3,
+            this.optionInstructions,
+            this.nextButton,
+            this.buttonText,
+            this.avatar,
+            this.avatarName,
+            this.skipButton,
+            this.skipButtonText,
+            this.idleModeImage,
+            this.idleModeText
+        ];
         elements.forEach(element => element?.destroy());
     }
 
@@ -227,7 +238,7 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
 
         this.dialogueText = TextFactory.createText(this.scene, -630, 200, "", {
             fontSize: '18px',
-            color: '#00ffff',
+            color: Colours.CYAN_STRING,
             lineSpacing: 15,
             wordWrap: { width: 1100, useAdvancedWrap: true }
         });
@@ -239,7 +250,7 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
 
         this.optionInstructions = TextFactory.createText(this.scene, 300, 453, "[click on an option]", {
             fontSize: '16px',
-            color: '#00ffff',
+            color: Colours.CYAN_STRING,
         });
         this.add(this.optionInstructions);
 
@@ -252,60 +263,60 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
     private createOptionText(x: number, y: number): Phaser.GameObjects.Text {
         const text = TextFactory.createText(this.scene, x, y, "", {
             fontSize: '18px',
-            color: '#00ffff',
+            color: Colours.CYAN_STRING,
             wordWrap: { width: 1200, useAdvancedWrap: true }
         });
         this.add(text);
         text.setInteractive({ useHandCursor: true })
             .on('pointerdown', () => this.handleNextButtonClick())
-            .on('pointerover', () => text.setColor('#ff00ff'))
-            .on('pointerout', () => text.setColor('#00ffff'));
+            .on('pointerover', () => text.setColor(Colours.MAGENTA_STRING))
+            .on('pointerout', () => text.setColor(Colours.CYAN_STRING));
         return text;
     }
 
     private createNextButton() {
-        this.nextButton = this.scene.add.rectangle(1500, 995, 125, 50, 0x000000, 0);
-        this.nextButton.setStrokeStyle(2, 0x00ffff);
+        this.nextButton = this.scene.add.rectangle(1500, 995, 125, 50, Colours.BLACK_HEX, 0);
+        this.nextButton.setStrokeStyle(2, Colours.CYAN_HEX);
         this.nextButton.setInteractive({ useHandCursor: true })
             .on('pointerdown', () => this.handleNextButtonClick())
             .on('pointerover', () => {
-                this.nextButton.setStrokeStyle(2, 0xff00ff);
-                this.buttonText.setColor('#ff00ff');
+                this.nextButton.setStrokeStyle(2, Colours.MAGENTA_HEX);
+                this.buttonText.setColor(Colours.MAGENTA_STRING);
             })
             .on('pointerout', () => {
                 if (this.nextButton && this.buttonText) {
-                    this.nextButton.setStrokeStyle(2, 0x00ffff);
-                    this.buttonText.setColor('#00ffff');
+                    this.nextButton.setStrokeStyle(2, Colours.CYAN_HEX);
+                    this.buttonText.setColor(Colours.CYAN_STRING);
                 }
             });
 
         this.buttonText = TextFactory.createText(this.scene, 540, 453, 'next', {
             fontSize: '16px',
-            color: '#00ffff'
+            color: Colours.CYAN_STRING
         });
         this.buttonText.setOrigin(0.5, 0.5);
         this.add(this.buttonText);
     }
 
     private createSkipButton() {
-        this.skipButton = this.scene.add.rectangle(-700, -480, 500, 50, 0x000000, 0);
-        this.skipButton.setStrokeStyle(2, 0xffff00);
+        this.skipButton = this.scene.add.rectangle(-700, -480, 500, 50, Colours.BLACK_HEX, 0);
+        this.skipButton.setStrokeStyle(2, Colours.YELLOW_HEX);
         this.skipButton.setInteractive({ useHandCursor: true })
             .on('pointerdown', () => this.handleSkipButtonClick())
             .on('pointerover', () => {
-                this.skipButton.setStrokeStyle(2, 0xff00ff);
-                this.skipButtonText.setColor('#ff00ff');
+                this.skipButton.setStrokeStyle(2, Colours.MAGENTA_HEX);
+                this.skipButtonText.setColor(Colours.MAGENTA_STRING);
             })
             .on('pointerout', () => {
                 if (this.skipButton && this.skipButtonText) {
-                    this.skipButton.setStrokeStyle(2, 0xffff00);
-                    this.skipButtonText.setColor('#ffff00');
+                    this.skipButton.setStrokeStyle(2, Colours.YELLOW_HEX);
+                    this.skipButtonText.setColor(Colours.YELLOW_STRING);
                 }
             });
 
         this.skipButtonText = TextFactory.createText(this.scene, 0, 0, 'skip dialogue (too much lore)', {
             fontSize: '16px',
-            color: '#ffff00'
+            color: Colours.YELLOW_STRING
         });
         this.skipButtonText.setOrigin(0.5, 0.5);
         this.skipButtonText.setPosition(this.skipButton.x, this.skipButton.y);
