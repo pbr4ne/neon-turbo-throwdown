@@ -36,7 +36,8 @@ export default class Welcome extends Phaser.Scene {
 				this.add.image(1000, 400, "pep-talk");
 			}
 			playBtn = this.add.image(1000, 630, "restart-button");
-			TextFactory.createText(this, 1000, 670, "maintain your unlocks", { fontSize: '12px'});
+			const unlockText = TextFactory.createText(this, 1000, 670, "maintain your unlocks", { fontSize: '12px'});
+			unlockText.setOrigin(0.5, 0.5);
 		}
 
 		this.musicBtn = this.add.image(1720, 960, "music2-on");

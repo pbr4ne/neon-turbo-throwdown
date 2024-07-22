@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import TextFactory from '../utilities/TextUtils';
 
 export default class Credits extends Phaser.GameObjects.Container {
     constructor(scene: Phaser.Scene) {
@@ -11,12 +12,11 @@ export default class Credits extends Phaser.GameObjects.Container {
         background.setStrokeStyle(4, 0x00ffff);
         this.add(background);
 
-        const titleText = this.scene.add.text(0, -320, "Credits", {
-            fontFamily: '"Press Start 2P"',
+        const titleText = TextFactory.createText(this.scene, 0, -320, "Credits", {
             fontSize: '20px',
-            color: '#ffffff',
-            align: 'center'
-        }).setOrigin(0.5, 0.5);
+            color: '#ffffff'
+        });
+        titleText.setOrigin(0.5, 0.5);
         this.add(titleText);
 
         const creditEntries = [
@@ -39,55 +39,49 @@ export default class Credits extends Phaser.GameObjects.Container {
         const linkX = 200;
 
         creditEntries.forEach(entry => {
-            const titleText = this.scene.add.text(titleX, yPos, entry.title, {
-                fontFamily: '"Press Start 2P"',
-                fontSize: '18px', 
-                color: '#ff00ff', 
-                align: 'left',
-                wordWrap: { width: 860, useAdvancedWrap: true }
+            const titleText = TextFactory.createText(this.scene, titleX, yPos, entry.title, {
+                fontSize: '18px',
+                color: '#ff00ff'
             });
+            titleText.setOrigin(0, 0);
             this.add(titleText);
 
-            const entryText = this.scene.add.text(textX, yPos, entry.text, {
-                fontFamily: '"Press Start 2P"',
-                fontSize: '18px', 
-                color: '#00ffff',
-                align: 'left',
-                wordWrap: { width: 860, useAdvancedWrap: true }
+            const entryText = TextFactory.createText(this.scene, textX, yPos, entry.text, {
+                fontSize: '18px',
+                color: '#00ffff'
             });
+            entryText.setOrigin(0, 0);
             this.add(entryText);
 
             if (entry.linkText && entry.link) {
-                const linkText = this.scene.add.text(linkX, yPos, entry.linkText, {
-                    fontFamily: '"Press Start 2P"',
+                const linkText = TextFactory.createText(this.scene, linkX, yPos, entry.linkText, {
                     fontSize: '18px',
-                    color: '#ffff00',
-                    align: 'left'
-                }).setInteractive({ useHandCursor: true }).on('pointerdown', () => {
+                    color: '#ffff00'
+                });
+                linkText.setInteractive({ useHandCursor: true }).on('pointerdown', () => {
                     window.open(entry.link, '_blank');
                 });
+                linkText.setOrigin(0, 0);
                 this.add(linkText);
             }
 
             if (entry.text2) {
-                const entryText2 = this.scene.add.text(linkX, yPos, entry.text2, {
-                    fontFamily: '"Press Start 2P"',
+                const entryText2 = TextFactory.createText(this.scene, linkX, yPos, entry.text2, {
                     fontSize: '18px',
-                    color: '#00ffff',
-                    align: 'left',
-                    wordWrap: { width: 860, useAdvancedWrap: true }
+                    color: '#00ffff'
                 });
+                entryText2.setOrigin(0, 0);
                 this.add(entryText2);
             }
             yPos += 50;
         });
 
-        const closeButton = this.scene.add.text(0, 320, "Close", {
-            fontFamily: '"Press Start 2P"',
-            fontSize: '18px', 
+        const closeButton = TextFactory.createText(this.scene, 0, 320, "Close", {
+            fontSize: '18px',
             color: '#ff00ff',
             padding: { x: 10, y: 5 }
-        }).setOrigin(0.5, 0.5).setInteractive({ useHandCursor: true });
+        });
+        closeButton.setInteractive({ useHandCursor: true });
 
         closeButton.on('pointerdown', () => {
             this.destroy();
@@ -101,6 +95,7 @@ export default class Credits extends Phaser.GameObjects.Container {
             this.scene.input.setDefaultCursor('default');
         });
 
+        closeButton.setOrigin(0.5, 0.5);
         this.add(closeButton);
     }
 }
