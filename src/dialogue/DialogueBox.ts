@@ -9,28 +9,53 @@ import { Library } from "../throwdown/Library";
 import TextFactory from "../utilities/TextUtils";
 
 export default class DialogueBox extends Phaser.GameObjects.Container {
+
+	private dialogueType: string;
+    private dialogueConversation!: DialogueConversation;
+    private dialogueText!: Phaser.GameObjects.Text;
+    private nextButton!: Phaser.GameObjects.Rectangle;
+    private buttonText!: Phaser.GameObjects.Text;
+    private optionText1!: Phaser.GameObjects.Text;
+    private optionText2!: Phaser.GameObjects.Text;
+    private optionText3!: Phaser.GameObjects.Text;
+    private optionInstructions!: Phaser.GameObjects.Text;
+    private avatar!: Phaser.GameObjects.Image;
+    private avatarName!: Phaser.GameObjects.Text;
+    private skipButton!: Phaser.GameObjects.Rectangle;
+    private skipButtonText!: Phaser.GameObjects.Text;
+    private idleModeImage!: Phaser.GameObjects.Image;
+    private idleModeText!: Phaser.GameObjects.Text;
+    private coachName!: Phaser.GameObjects.Text;
+
     constructor(scene: Phaser.Scene, x: number, y: number, coach: Coach, dialogueType: string, initialDialogue: boolean, spiritCoachDialogue: boolean) {
         super(scene, x ?? 960, y ?? 542);
 
         this.dialogueType = dialogueType;
         log(`Dialogue type: ${dialogueType}  - spiritCoachDialogue: ${spiritCoachDialogue}`);
 
-        //i need this for some reason or the sound crashes. is it cuz it was already doing that sound?
         if (!spiritCoachDialogue) {
             GameSounds.switchSong(this.scene, "neon-turbo-throwdown-chill");
         }
 
+        this.createDialogueBackground(scene, spiritCoachDialogue);
+        this.createIdleModeElements(initialDialogue);
+        this.setupDialogueConversation(coach, dialogueType);
+
+        if (this.dialogueConversation) {
+            this.generateDialogue();
+        }
+    }
+
+    private createDialogueBackground(scene: Phaser.Scene, spiritCoachDialogue: boolean) {
         const rectangle_1 = scene.add.rectangle(-12, 340, 132, 128);
         rectangle_1.scaleX = 10.314571568183906;
         rectangle_1.scaleY = 2.6941724549327337;
         rectangle_1.isStroked = true;
-        if (spiritCoachDialogue) {
-            rectangle_1.strokeColor = 0x00ffff;
-        } else {
-            rectangle_1.strokeColor = 0xff00ff
-        }
+        rectangle_1.strokeColor = spiritCoachDialogue ? 0x00ffff : 0xff00ff;
         this.add(rectangle_1);
+    }
 
+    private createIdleModeElements(initialDialogue: boolean) {
         if (!initialDialogue) {
             this.idleModeImage = this.scene.add.image(135, 840, Library.getIdleMode() ? "switch-active" : "switch-idle")
                 .setInteractive({ useHandCursor: true })
@@ -51,67 +76,44 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
             });
             this.idleModeText.setOrigin(0.5, 0.5);
         }
+    }
 
+    private setupDialogueConversation(coach: Coach, dialogueType: string) {
         this.dialogueConversation = DialogueStorage.missingDialogueConversation;
 
-        if (dialogueType === "intro") {
-            const convo = coach.getDialogue()?.getAndIncrementIntroDialogue();
-            if (convo != null) {
-                this.dialogueConversation = convo;
-            }
-        } else if (dialogueType === "win") {
-            const convo = coach.getDialogue()?.getAndIncrementWinDialogue();
-            if (convo != null) {
-                this.dialogueConversation = convo;
-            }
-        } else if (dialogueType === "lose") {
-            const convo = coach.getDialogue()?.getAndIncrementLoseDialogue();
-            if (convo != null) {
-                this.dialogueConversation = convo;
-            }
-        } else if (dialogueType === "initialLose") {
-            log('initialLose dialogue!');
-            this.dialogueConversation = DialogueStorage.firstSpiritDialogue;
-            this.scene.add.image(1625, 193, "coach-corner-spirit");
-
-            this.scene.add.image(953, 443, "court-cyan");
-
-            this.scene.add.existing(new Phaser.GameObjects.Image(scene, 1855, 78, "spirit")
-                .setOrigin(1, 0)
-                .setScale(1.2));
-
-            this.coachName = TextFactory.createText(this.scene, 1720, 340, "Turbovoid", {
-                color: '#000000',
-                stroke: '#000000',
-                strokeThickness: 1,
-                padding: { x: 5, y: 5 },
-            });
-            this.coachName.setOrigin(0.5, 0.5);
-        } else if (dialogueType === "final") {
-            this.dialogueConversation = DialogueStorage.finalDialogue;
-        }
-
-        if (this.dialogueConversation) {
-            this.generateDialogue();
+        switch (dialogueType) {
+            case "intro":
+                this.dialogueConversation = coach.getDialogue()?.getAndIncrementIntroDialogue() || this.dialogueConversation;
+                break;
+            case "win":
+                this.dialogueConversation = coach.getDialogue()?.getAndIncrementWinDialogue() || this.dialogueConversation;
+                break;
+            case "lose":
+                this.dialogueConversation = coach.getDialogue()?.getAndIncrementLoseDialogue() || this.dialogueConversation;
+                break;
+            case "initialLose":
+                log('initialLose dialogue!');
+                this.dialogueConversation = DialogueStorage.firstSpiritDialogue;
+                this.createSpiritDialogueScene();
+                break;
+            case "final":
+                this.dialogueConversation = DialogueStorage.finalDialogue;
+                break;
         }
     }
 
-    private dialogueType: string;
-    private dialogueConversation!: DialogueConversation;
-    private dialogueText!: Phaser.GameObjects.Text;
-    private nextButton!: Phaser.GameObjects.Rectangle;
-    private buttonText!: Phaser.GameObjects.Text;
-    private optionText1!: Phaser.GameObjects.Text;
-    private optionText2!: Phaser.GameObjects.Text;
-    private optionText3!: Phaser.GameObjects.Text;
-    private optionInstructions!: Phaser.GameObjects.Text;
-    private avatar!: Phaser.GameObjects.Image;
-    private avatarName!: Phaser.GameObjects.Text;
-    private skipButton!: Phaser.GameObjects.Rectangle;
-    private skipButtonText!: Phaser.GameObjects.Text;
-    private idleModeImage!: Phaser.GameObjects.Image;
-    private idleModeText!: Phaser.GameObjects.Text;
-    private coachName!: Phaser.GameObjects.Text;
+    private createSpiritDialogueScene() {
+        this.scene.add.image(1625, 193, "coach-corner-spirit");
+        this.scene.add.image(953, 443, "court-cyan");
+        this.scene.add.existing(new Phaser.GameObjects.Image(this.scene, 1855, 78, "spirit").setOrigin(1, 0).setScale(1.2));
+        this.coachName = TextFactory.createText(this.scene, 1720, 340, "Turbovoid", {
+            color: '#000000',
+            stroke: '#000000',
+            strokeThickness: 1,
+            padding: { x: 5, y: 5 },
+        });
+        this.coachName.setOrigin(0.5, 0.5);
+    }
 
     private switchIdleMode() {
         Library.setIdleMode(!Library.getIdleMode());
@@ -127,13 +129,11 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
         }
 
         this.initializeTextAreas();
-
         this.renderText(step!);
     }
 
     handleNextButtonClick() {
         log("Next button clicked");
-        // Logic to advance the dialogue
         var next = this.dialogueConversation.nextStep();
         var step = this.dialogueConversation.getCurrentStep();
 
@@ -153,15 +153,8 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
     }
 
     hideAllTextAreas() {
-        this.dialogueText.setVisible(false);
-        this.optionText1.setVisible(false);
-        this.optionText2.setVisible(false);
-        this.optionText3.setVisible(false);
-        this.optionInstructions.setVisible(false);
-        this.nextButton.setVisible(false);
-        this.buttonText.setVisible(false);
-        this.skipButton.setVisible(false);
-        this.skipButtonText.setVisible(false);
+        const elements = [this.dialogueText, this.optionText1, this.optionText2, this.optionText3, this.optionInstructions, this.nextButton, this.buttonText, this.skipButton, this.skipButtonText];
+        elements.forEach(element => element.setVisible(false));
     }
 
     renderText(step: DialogueStep) {
@@ -184,7 +177,6 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
             }
 
         } else if (Array.isArray(text)) {
-
             this.optionText1.setText(`1. ${text[0]}`);
             this.optionText1.setVisible(true);
             this.optionInstructions.setVisible(true);
@@ -204,26 +196,27 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
     }
 
     destroyEverything() {
-        this.dialogueText.destroy();
-        this.optionText1.destroy();
-        this.optionText2.destroy();
-        this.optionText3.destroy();
-        this.optionInstructions.destroy();
-        this.nextButton.destroy();
-        this.buttonText.destroy();
-        this.avatar.destroy();
-        this.avatarName.destroy();
-        this.skipButton.destroy();
-        this.skipButtonText.destroy();
-        this.idleModeImage?.destroy();
-        this.idleModeText?.destroy();
+        const elements = [
+			this.dialogueText,
+			this.optionText1,
+			this.optionText2,
+			this.optionText3,
+			this.optionInstructions,
+			this.nextButton,
+			this.buttonText,
+			this.avatar,
+			this.avatarName,
+			this.skipButton,
+			this.skipButtonText,
+			this.idleModeImage,
+			this.idleModeText
+		];
+        elements.forEach(element => element?.destroy());
     }
 
     initializeTextAreas() {
-        //avatar
         this.avatar = this.scene.add.image(1760, 850, 'you');
 
-        //avatar name
         this.avatarName = TextFactory.createText(this.scene, 800, 430, "", {
             fontSize: '16px',
             align: 'center',
@@ -232,7 +225,6 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
         this.avatarName.setOrigin(0.5, 0.5);
         this.add(this.avatarName);
 
-        //single text
         this.dialogueText = TextFactory.createText(this.scene, -630, 200, "", {
             fontSize: '18px',
             color: '#00ffff',
@@ -241,41 +233,9 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
         });
         this.add(this.dialogueText);
 
-        //option text 1
-        this.optionText1 = TextFactory.createText(this.scene, -630, 200, "", {
-            fontSize: '18px',
-            color: '#00ffff',
-            wordWrap: { width: 1200, useAdvancedWrap: true }
-        });
-        this.add(this.optionText1);
-        this.optionText1.setInteractive({ useHandCursor: true })
-            .on('pointerdown', () => this.handleNextButtonClick())
-            .on('pointerover', () => this.optionText1.setColor('#ff00ff'))
-            .on('pointerout', () => this.optionText1.setColor('#00ffff'));
-
-        //option text 2
-        this.optionText2 = TextFactory.createText(this.scene, -630, 250, "", {
-            fontSize: '18px',
-            color: '#00ffff',
-            wordWrap: { width: 1200, useAdvancedWrap: true }
-        });
-        this.add(this.optionText2);
-        this.optionText2.setInteractive({ useHandCursor: true })
-            .on('pointerdown', () => this.handleNextButtonClick())
-            .on('pointerover', () => this.optionText2.setColor('#ff00ff'))
-            .on('pointerout', () => this.optionText2.setColor('#00ffff'));
-
-        //option text 3
-        this.optionText3 = TextFactory.createText(this.scene, -630, 300, "", {
-            fontSize: '18px',
-            color: '#00ffff',
-            wordWrap: { width: 1200, useAdvancedWrap: true }
-        });
-        this.add(this.optionText3);
-        this.optionText3.setInteractive({ useHandCursor: true })
-            .on('pointerdown', () => this.handleNextButtonClick())
-            .on('pointerover', () => this.optionText3.setColor('#ff00ff'))
-            .on('pointerout', () => this.optionText3.setColor('#00ffff'));
+        this.optionText1 = this.createOptionText(-630, 200);
+        this.optionText2 = this.createOptionText(-630, 250);
+        this.optionText3 = this.createOptionText(-630, 300);
 
         this.optionInstructions = TextFactory.createText(this.scene, 300, 453, "[click on an option]", {
             fontSize: '16px',
@@ -283,6 +243,27 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
         });
         this.add(this.optionInstructions);
 
+        this.createNextButton();
+        this.createSkipButton();
+
+        this.hideAllTextAreas();
+    }
+
+    private createOptionText(x: number, y: number): Phaser.GameObjects.Text {
+        const text = TextFactory.createText(this.scene, x, y, "", {
+            fontSize: '18px',
+            color: '#00ffff',
+            wordWrap: { width: 1200, useAdvancedWrap: true }
+        });
+        this.add(text);
+        text.setInteractive({ useHandCursor: true })
+            .on('pointerdown', () => this.handleNextButtonClick())
+            .on('pointerover', () => text.setColor('#ff00ff'))
+            .on('pointerout', () => text.setColor('#00ffff'));
+        return text;
+    }
+
+    private createNextButton() {
         this.nextButton = this.scene.add.rectangle(1500, 995, 125, 50, 0x000000, 0);
         this.nextButton.setStrokeStyle(2, 0x00ffff);
         this.nextButton.setInteractive({ useHandCursor: true })
@@ -304,7 +285,9 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
         });
         this.buttonText.setOrigin(0.5, 0.5);
         this.add(this.buttonText);
+    }
 
+    private createSkipButton() {
         this.skipButton = this.scene.add.rectangle(-700, -480, 500, 50, 0x000000, 0);
         this.skipButton.setStrokeStyle(2, 0xffff00);
         this.skipButton.setInteractive({ useHandCursor: true })
@@ -328,7 +311,5 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
         this.skipButtonText.setPosition(this.skipButton.x, this.skipButton.y);
         this.add(this.skipButton);
         this.add(this.skipButtonText);
-
-        this.hideAllTextAreas();
     }
 }
