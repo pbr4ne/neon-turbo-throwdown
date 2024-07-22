@@ -8,11 +8,10 @@ import { PushActionScript } from "@phaserjs/editor-scripts-simple-animations";
 import { CallbackActionScript } from "@phaserjs/editor-scripts-core";
 import SwitchImageActionScript from "../script-nodes/ui/SwitchImageActionScript";
 import FloatingObjectScript from "../script-nodes/ui/FloatingObjectScript";
-import { StorageManager } from "../utilities/StorageManager";
 import { Library } from "../throwdown/Library";
-import { log } from "../utilities/GameUtils";
 import Credits from '../prefabs/Credits';
 import Trophies from '../prefabs/Trophies';
+import Settings from '../prefabs/Settings';
 
 export default class Welcome extends Phaser.Scene {
 
@@ -152,62 +151,7 @@ export default class Welcome extends Phaser.Scene {
 	}
 
 	private showSettings() {
-		const blockInput = this.add.rectangle(960, 540, 1920, 1080, 0x000000, 0.5).setInteractive();
-        const popup = this.add.container(960, 540);
-    
-        const background = this.add.rectangle(0, 0, 500, 300, 0x000000, 0.8).setOrigin(0.5, 0.5);
-        background.setStrokeStyle(4, 0x00ffff);
-    
-		const titleText = this.add.text(0, -120, "Settings", {
-            fontFamily: '"Press Start 2P"',
-            fontSize: '20px',
-            color: '#ffff00',
-            align: 'center'
-        }).setOrigin(0.5, 0.5);
-
-        // Add the warning message
-        const warningText = this.add.text(0, 0, "*This is buggy. You might need to refresh your browser afterwards!*", {
-            fontFamily: '"Press Start 2P"',
-            fontSize: '14px',
-            color: '#ff00ff',
-            align: 'center',
-			lineSpacing: 10,
-            wordWrap: { width: 400, useAdvancedWrap: true }
-        }).setOrigin(0.5, 0.5);
-
-        const questionText = this.add.text(0, -80, "Do you want to hard reset your progress?", {
-            fontFamily: '"Press Start 2P"',
-            fontSize: '16px',
-            color: '#ffffff',
-			wordWrap: { width: 450, useAdvancedWrap: true }
-        }).setOrigin(0.5, 0.5);
-    
-        const yesButton = this.add.text(-80, 100, "Yes", {
-            fontFamily: '"Press Start 2P"',
-            fontSize: '20px',
-            color: '#00ffff',
-            padding: { x: 10, y: 5 }
-        }).setOrigin(0.5, 0.5).setInteractive({ useHandCursor: true });
-    
-        const noButton = this.add.text(80, 100, "No", {
-            fontFamily: '"Press Start 2P"',
-            fontSize: '20px',
-            color: '#ff00ff',
-            padding: { x: 10, y: 5 }
-        }).setOrigin(0.5, 0.5).setInteractive({ useHandCursor: true });
-    
-        yesButton.on('pointerdown', async () => {
-            await StorageManager.clearAllData();
-			this.scene.start("Preload");
-            popup.destroy();
-			blockInput.destroy();
-        });
-    
-        noButton.on('pointerdown', () => {
-            popup.destroy();
-			blockInput.destroy();
-        });
-    
-        popup.add([background, questionText, titleText, warningText, yesButton, noButton]);
+		const settingsPopup = new Settings(this);
+		this.add.existing(settingsPopup);
     }
 }
