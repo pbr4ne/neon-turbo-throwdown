@@ -1,125 +1,99 @@
 import Phaser from "phaser";
+import TextFactory from "../utilities/TextUtils";
+import { Colours } from "../utilities/Colours";
 
 export default class Help extends Phaser.GameObjects.Container {
     constructor(scene: Phaser.Scene) {
         super(scene, 960, 540);
 
-        const blockInput = this.scene.add.rectangle(0, 0, 1920, 1080, 0x000000, 0.5).setOrigin(0.5, 0.5).setInteractive();
+        const blockInput = this.scene.add.rectangle(0, 0, 1920, 1080, Colours.BLACK_HEX, 0.5).setOrigin(0.5, 0.5).setInteractive();
         this.add(blockInput);
 
-        const background = this.scene.add.rectangle(0, 0, 900, 800, 0x000000, 0.8).setOrigin(0.5, 0.5);
-        background.setStrokeStyle(4, 0x00ffff);
+        const background = this.scene.add.rectangle(0, 0, 900, 800, Colours.BLACK_HEX, 0.8).setOrigin(0.5, 0.5);
+        background.setStrokeStyle(4, Colours.CYAN_HEX);
         this.add(background);
 
-		const coachImage = this.scene.add.image(330, -230, "coach")
-		this.add(coachImage);
+        const coachImage = this.scene.add.image(330, -230, "coach");
+        this.add(coachImage);
 
-        const creditsText = this.scene.add.text(-420, -370, "Here, watch this tutor-reel:", {
-            fontFamily: '"Press Start 2P"',
+        const creditsText = TextFactory.createText(this.scene, -420, -370, "Here, watch this tutor-reel:", {
             fontSize: '30px',
-            color: '#ffffff',
-            align: 'left',
+            color: Colours.WHITE_STRING,
             wordWrap: { width: 860, useAdvancedWrap: true }
         });
         this.add(creditsText);
 
-        const helpText1 = this.scene.add.text(-420, -330, `\nDraw 5 cards, then select a card, assign it to a player, and if it's an attack, select an opponent. When you're ready, THROW DOWN!`, {
-            fontFamily: '"Press Start 2P"',
-            fontSize: '20px',
-            color: '#00ffff',
-            align: 'left',
-			lineSpacing: 5,
+        const helpText1 = TextFactory.createText(this.scene, -420, -330, `\nDraw 5 cards, then select a card, assign it to a player, and if it's an attack, select an opponent. When you're ready, THROW DOWN!`, {
+            color: Colours.CYAN_STRING,
+            lineSpacing: 5,
             wordWrap: { width: 680, useAdvancedWrap: true }
         });
         this.add(helpText1);
 
-        const helpText1post = this.scene.add.text(-420, -150, `Your initial deck has:`, {
-            fontFamily: '"Press Start 2P"',
-            fontSize: '20px',
-            color: '#00ffff',
-            align: 'left',
+        const helpText1post = TextFactory.createText(this.scene, -420, -150, `Your initial deck has:`, {
+            color: Colours.CYAN_STRING,
             wordWrap: { width: 860, useAdvancedWrap: true }
         });
-
         this.add(helpText1post);
 
-		const textParts = [
-            { text: 'THROW', color: '#ff00ff' },
-            { text: ', ', color: '#00ffff' },
-            { text: 'BLOCK', color: '#ff00ff' },
-            { text: ', ', color: '#00ffff' },
-            { text: 'EVADE', color: '#ff00ff' },
-            { text: ', and ', color: '#00ffff' },
-            { text: 'CATCH', color: '#ff00ff' },
-            { text: 'cards.', color: '#00ffff' }
+        const textParts = [
+            { text: 'THROW', color: Colours.MAGENTA_STRING },
+            { text: ', ', color: Colours.CYAN_STRING },
+            { text: 'BLOCK', color: Colours.MAGENTA_STRING },
+            { text: ', ', color: Colours.CYAN_STRING },
+            { text: 'EVADE', color: Colours.MAGENTA_STRING },
+            { text: ', and ', color: Colours.CYAN_STRING },
+            { text: 'CATCH', color: Colours.MAGENTA_STRING },
+            { text: 'cards.', color: Colours.CYAN_STRING }
         ];
-        
+
         let xPos = -420;
         const yPos = -115;
-        
+
         textParts.forEach(part => {
-            const text = this.scene.add.text(xPos, yPos, part.text, {
-                fontFamily: '"Press Start 2P"',
-                fontSize: '20px',
+            const text = TextFactory.createText(this.scene, xPos, yPos, part.text, {
                 color: part.color,
-                align: 'left',
                 lineSpacing: 5,
                 wordWrap: { width: 860, useAdvancedWrap: true }
             }).setOrigin(0, 0);
             this.add(text);
-        
+
             if (part.text === ", " || part.text === ", and " || part.text == "CATCH") {
                 xPos += 15;
             }
             xPos += text.width;
         });
 
-        const helpText2b = this.scene.add.text(-420, -80, `Test them out and see what they do!`, {
-            fontFamily: '"Press Start 2P"',
-            fontSize: '20px',
-            color: '#00ffff',
-            align: 'left',
+        const helpText2b = TextFactory.createText(this.scene, -420, -80, `Test them out and see what they do!`, {
+            color: Colours.CYAN_STRING,
             wordWrap: { width: 860, useAdvancedWrap: true }
         });
         this.add(helpText2b);
 
-        const helpText2c = this.scene.add.text(-420, -30, `Try out idle mode if you want your players to make their own decisions!`, {
-            fontFamily: '"Press Start 2P"',
-            fontSize: '20px',
-            color: '#00ffff',
-            align: 'left',
+        const helpText2c = TextFactory.createText(this.scene, -420, -30, `Try out idle mode if you want your players to make their own decisions!`, {
+            color: Colours.CYAN_STRING,
             wordWrap: { width: 860, useAdvancedWrap: true }
         });
         this.add(helpText2c);
 
-		const helpText3 = this.scene.add.text(-420, 50, `Alright kid, that's the tutor-reel. And if you're not sure what to do out there, just remember the three rules of Throwdown:`, {
-            fontFamily: '"Press Start 2P"',
-            fontSize: '20px',
-            color: '#00ffff',
-            align: 'left',
+        const helpText3 = TextFactory.createText(this.scene, -420, 50, `Alright kid, that's the tutor-reel. And if you're not sure what to do out there, just remember the three rules of Throwdown:`, {
+            color: Colours.CYAN_STRING,
             lineSpacing: 5,
             wordWrap: { width: 860, useAdvancedWrap: true }
         });
         this.add(helpText3);
 
-		const helpText4 = this.scene.add.text(-420, 120, `
+        const helpText4 = TextFactory.createText(this.scene, -420, 120, `
             * Evasion
             \n* Envision - You gotta see victory in your brain 
             \n* Evasion again, in case you forgot`, {
-            fontFamily: '"Press Start 2P"',
-            fontSize: '20px',
-            color: '#ffff00',
-            align: 'left',
+            color: Colours.YELLOW_STRING,
             wordWrap: { width: 860, useAdvancedWrap: true }
         });
         this.add(helpText4);
 
-		
-
-        const closeButton = this.scene.add.text(0, 320, "Close", {
-            fontFamily: '"Press Start 2P"',
-            fontSize: '20px',
-            color: '#ff00ff',
+        const closeButton = TextFactory.createText(this.scene, 0, 320, "Close", {
+            color: Colours.MAGENTA_STRING,
             padding: { x: 10, y: 5 }
         }).setOrigin(0.5, 0.5).setInteractive({ useHandCursor: true });
 
