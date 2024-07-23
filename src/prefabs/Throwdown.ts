@@ -15,6 +15,8 @@ import { HealStrategy1 } from "../trophies/idle/HealStrategy1";
 import { DefensiveStrategy1 } from "../trophies/idle/DefensiveStrategy1";
 import { OffensiveStrategy1 } from "../trophies/idle/OffensiveStrategy1";
 import HelpThrowdown from "./HelpThrowdown";
+import TextFactory from "../utilities/TextUtils";
+import { Colours } from "../utilities/Colours";
 
 export default class Throwdown extends Phaser.GameObjects.Container {
 
@@ -68,41 +70,21 @@ export default class Throwdown extends Phaser.GameObjects.Container {
     private automationTimer!: Phaser.Time.TimerEvent; 
 
     render() {
-    
         this.scoreImage = this.scene.add.image(80, 110, "score");
-        this.forfeitImage = this.scene.add.image(77, 243, "forfeit")
-            .setInteractive({ useHandCursor: true })
-            .on('pointerover', () => {
-                this.scene.input.setDefaultCursor('pointer');
-            })
-            .on('pointerout', () => {
-                this.scene.input.setDefaultCursor('default');
-            })
-            .on('pointerdown', () => {
-                Library.incrementNumRuns();
-                this.scene.scene.start('Preload');
-            });
+        this.forfeitImage = this.createInteractiveImage(77, 243, "forfeit", () => {
+            Library.incrementNumRuns();
+            this.scene.scene.start('Preload');
+        });
 
-        this.idleModeImage = this.scene.add.image(77, 376, Library.getIdleMode() ? "switch-active" : "switch-idle")
-        .setInteractive({ useHandCursor: true })
-            .on('pointerover', () => {
-                this.scene.input.setDefaultCursor('pointer');
-            })
-            .on('pointerout', () => {
-                this.scene.input.setDefaultCursor('default');
-            })
-            .on('pointerdown', () => {
-                this.switchIdleMode();
-            });
+        this.idleModeImage = this.createInteractiveImage(77, 376, Library.getIdleMode() ? "switch-active" : "switch-idle", this.switchIdleMode.bind(this));
 
-        this.idleModeText = this.scene.add.text(77, 456, "", {
-            fontFamily: '"Press Start 2P"',
+        this.idleModeText = TextFactory.createText(this.scene, 77, 456, "", {
             fontSize: '18px',
-            color: '#ff00ff'
+            color: Colours.MAGENTA_STRING
         }).setOrigin(0.5, 0.5);
 
         this.coachCornerImage = this.scene.add.image(1625, 193, "coach-corner");
-        this.difficultyImage = this.scene.add.image(1747, 411, "difficulty-" + this.coach.getDifficulty() );
+        this.difficultyImage = this.scene.add.image(1747, 411, "difficulty-" + this.coach.getDifficulty());
         if (this.coach.getDifficulty() == 4) {
             this.coachCornerImage.setTexture("coach-corner-boss");
         }
@@ -119,23 +101,20 @@ export default class Throwdown extends Phaser.GameObjects.Container {
             fontSize = "16px";
         }
 
-        this.coachName = new Phaser.GameObjects.Text(this.scene, 1740, 340, this.coach.getName(), {
-            fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
+        this.coachName = TextFactory.createText(this.scene, 1740, 340, this.coach.getName(), {
             fontSize,
-            color: '#000000',
-            stroke: '#000000',
+            color: Colours.BLACK_STRING,
+            stroke: Colours.BLACK_STRING,
             strokeThickness: 1,
             padding: { x: 5, y: 5 },
             align: 'left'
-        });
+        }).setOrigin(0.5, 0.5);
         this.playerLayer.add(this.coachName);
-        this.coachName.setOrigin(0.5, 0.5);
     
-        this.scoreText = new Phaser.GameObjects.Text(this.scene, 150, 68, Library.getNumRuns().toString(), {
-            fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
+        this.scoreText = TextFactory.createText(this.scene, 150, 68, Library.getNumRuns().toString(), {
             fontSize: "64px",
-            color: '#ffff00',
-            stroke: '#ffff00',
+            color: Colours.YELLOW_STRING,
+            stroke: Colours.YELLOW_STRING,
             strokeThickness: 1,
             padding: { x: 5, y: 5 },
             align: 'left'
@@ -151,30 +130,10 @@ export default class Throwdown extends Phaser.GameObjects.Container {
         this.pointerImage2 = this.scene.add.image(265, 875, "pointer");
         this.pointerImage3 = this.scene.add.image(265, 875, "pointer");
 
-        this.helpBtn = this.scene.add.image(1840, 1020, "help");
-        this.helpBtn.setInteractive({ useHandCursor: true })
-            .on('pointerover', () => {
-                this.scene.input.setDefaultCursor('pointer');
-            })
-            .on('pointerout', () => {
-                this.scene.input.setDefaultCursor('default');
-            
-            })
-            .on('pointerdown', this.showHelp, this);
+        this.helpBtn = this.createInteractiveImage(1840, 1020, "help", this.showHelp.bind(this));
     
-        if(this.coach?.getDifficulty() == 0) {
-            this.scene.tweens.add({
-                targets: this.helpBtn,
-                scaleX: 1.5,
-                scaleY: 1.5,
-                duration: 500,
-                yoyo: true,
-                repeat: 4,
-                ease: 'Sine.easeInOut',
-                onComplete: () => {
-                    this.helpBtn?.setScale(1);
-                }
-            });
+        if (this.coach?.getDifficulty() == 0) {
+            this.animateHelpButton();
         }
     
         this.hideAllInstructions();
@@ -225,6 +184,19 @@ export default class Throwdown extends Phaser.GameObjects.Container {
             callbackScope: this,
             loop: true
         });
+    }
+
+    private createInteractiveImage(x: number, y: number, texture: string, callback: () => void): Phaser.GameObjects.Image {
+        const image = this.scene.add.image(x, y, texture)
+            .setInteractive({ useHandCursor: true })
+            .on('pointerover', () => {
+                this.scene.input.setDefaultCursor('pointer');
+            })
+            .on('pointerout', () => {
+                this.scene.input.setDefaultCursor('default');
+            })
+            .on('pointerdown', callback);
+        return image;
     }
 
     private showHelp() {
@@ -297,7 +269,6 @@ export default class Throwdown extends Phaser.GameObjects.Container {
         const poppedUpCardKey = this.player.hand.getPoppedUpCard()?.getCardType().getKey();
         
         //ai heal
-        log(`${Library.getTrophyTypes()}`);
         if(Library.hasTrophy(HealStrategy1)) {
             const healingCards = [CardKeys.F7, CardKeys.LEVEL_SET, CardKeys.SOLDIER_ON, CardKeys.SUPPLY_AND_DEMAND];
             
@@ -683,5 +654,20 @@ export default class Throwdown extends Phaser.GameObjects.Container {
 
         this.currentStep = 0;
         this.nextStep();
+    }
+
+    private animateHelpButton() {
+        this.scene.tweens.add({
+            targets: this.helpBtn,
+            scaleX: 1.5,
+            scaleY: 1.5,
+            duration: 500,
+            yoyo: true,
+            repeat: 4,
+            ease: 'Sine.easeInOut',
+            onComplete: () => {
+                this.helpBtn?.setScale(1);
+            }
+        });
     }
 }
