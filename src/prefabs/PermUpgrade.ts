@@ -13,54 +13,40 @@ import { StorageManager } from "../utilities/StorageManager";
 import { CardKeys } from "../cards/CardKeys";
 import { GameSounds } from "../utilities/GameSounds";
 import HelpPermUpgrade from "./HelpPermUpgrade";
+import TextFactory from "../utilities/TextUtils";
+import { Colours } from "../utilities/Colours";
 
 export default class PermUpgrade extends Phaser.GameObjects.Container {
 
     constructor(scene: Phaser.Scene, player: Player) {
         super(scene);
 
-        this.spiritCornerImage = this.scene.add.image(1625, 193, "coach-corner-spirit");
+        this.spiritCornerImage = this.createImage(1625, 193, "coach-corner-spirit");
+        this.courtImage = this.createImage(953, 443, "court-cyan", -10);
 
-        this.courtImage = this.scene.add.image(953, 443, "court-cyan");
-        this.courtImage.setDepth(-10);
-
-        this.spiritCoachImage = new Phaser.GameObjects.Image(scene, 1855, 78, "spirit")
-            .setOrigin(1, 0)
-            .setScale(1.2);
+        this.spiritCoachImage = this.createImage(1855, 78, "spirit", 0, 1.2).setOrigin(1, 0);
         this.add(this.spiritCoachImage);
 
-        this.coachName = new Phaser.GameObjects.Text(this.scene, 1720, 340, "Turbovoid", {
-            fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
+        this.coachName = TextFactory.createText(this.scene, 1720, 340, "Turbovoid", {
             fontSize: '20px',
-            color: '#000000',
-            stroke: '#000000',
+            color: Colours.BLACK_STRING,
+            stroke: Colours.BLACK_STRING,
             strokeThickness: 1,
             padding: { x: 5, y: 5 },
             align: 'left'
-        });
+        }).setOrigin(0.5, 0.5);
         this.scene.add.existing(this.coachName);
-        this.coachName.setOrigin(0.5, 0.5);
 
         this.player = player;
-        
-        this.selectCardImage = scene.add.image(960, 1020, "select-trophy");
 
-        this.cardSlot1 = scene.add.image(758, 848, "empty");
-        this.cardSlot2 = scene.add.image(960, 848, "empty");
-        this.cardSlot3 = scene.add.image(1162, 848, "empty");
+        this.selectCardImage = this.createImage(960, 1020, "select-trophy");
+        this.cardSlot1 = this.createImage(758, 848, "empty");
+        this.cardSlot2 = this.createImage(960, 848, "empty");
+        this.cardSlot3 = this.createImage(1162, 848, "empty");
 
-        this.pointerImage = this.scene.add.image(1300, 850, "pointer");
+        this.pointerImage = this.createImage(1300, 850, "pointer");
 
-        this.helpBtn = this.scene.add.image(1840, 1020, "help");
-        this.helpBtn.setInteractive({ useHandCursor: true })
-            .on('pointerover', () => {
-                this.scene.input.setDefaultCursor('pointer');
-            })
-            .on('pointerout', () => {
-                this.scene.input.setDefaultCursor('default');
-            
-            })
-            .on('pointerdown', this.showHelp, this);
+        this.helpBtn = this.createImage(1840, 1020, "help", 0, 1, true, this.showHelp);
 
         scene.add.existing(this);
 
@@ -72,18 +58,32 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
     private spiritCornerImage: Phaser.GameObjects.Image;
     private spiritCoachImage: Phaser.GameObjects.Image;
     private coachName: Phaser.GameObjects.Text;
-    private cardSlot1!: Phaser.GameObjects.Image;
-    private cardSlot2!: Phaser.GameObjects.Image;
-    private cardSlot3!: Phaser.GameObjects.Image;
+    private cardSlot1: Phaser.GameObjects.Image;
+    private cardSlot2: Phaser.GameObjects.Image;
+    private cardSlot3: Phaser.GameObjects.Image;
     private selectCardImage: Phaser.GameObjects.Image | null = null;
     private pointerImage: Phaser.GameObjects.Image | null = null;
     private trophiesToSelect: (TrophyType | CardType)[] = [];
     private helpBtn: Phaser.GameObjects.Image | null = null;
 
+    private createImage(x: number, y: number, texture: string, depth: number = 0, scale: number = 1, interactive: boolean = false, callback?: () => void): Phaser.GameObjects.Image {
+        const image = this.scene.add.image(x, y, texture).setDepth(depth).setScale(scale);
+        if (interactive) {
+            image.setInteractive({ useHandCursor: true })
+                .on('pointerover', () => this.scene.input.setDefaultCursor('pointer'))
+                .on('pointerout', () => this.scene.input.setDefaultCursor('default'));
+            if (callback) {
+                image.on('pointerdown', callback, this);
+            }
+        }
+        this.add(image);
+        return image;
+    }
+
     private showHelp() {
-		const helpPopup = new HelpPermUpgrade(this.scene);
-		this.scene.add.existing(helpPopup);
-	}
+        const helpPopup = new HelpPermUpgrade(this.scene);
+        this.scene.add.existing(helpPopup);
+    }
 
     destroyEverything() {
         this.courtImage?.destroy();
@@ -99,22 +99,18 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
     }
 
     private cardRound() {
-        let eligibleTrophies = OutstandingTrophyList.getEligibleTrophyTypes();
+        const eligibleTrophies = OutstandingTrophyList.getEligibleTrophyTypes();
         this.trophiesToSelect = [];
-    
+
         const positions = [
             { x: 758, y: 848 },
             { x: 960, y: 848 },
             { x: 1162, y: 848 }
         ];
 
-        // Shuffle the combined array
         Phaser.Utils.Array.Shuffle(eligibleTrophies);
-
-        // Select the first 3 items
         this.trophiesToSelect = eligibleTrophies.slice(0, 3);
 
-        // If there are no trophies or upgrades, finish the upgrade process
         if (this.trophiesToSelect.length <= 0) {
             this.finalizeDeck(Library.getPureDeck());
             (this.scene.scene.get('Game') as Game).finishPermUpgrade();
@@ -139,13 +135,11 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
             Library.addTrophyType(selectedItem.trophyType);
             OutstandingTrophyList.removeTrophy(selectedItem.trophyType);
 
-            let cardKey = selectedItem.trophyType.getCardKey();
+            const cardKey = selectedItem.trophyType.getCardKey();
             log("this is the list of cards in the Library pure deck that i'm going to upgrade: " + deckToModify.map(card => card.getKey()));
             if (cardKey != null) {
-                //get all cards in deck with this key
-                let deckCards = deckToModify.filter(card => card.getKey() === cardKey!);
+                const deckCards = deckToModify.filter(card => card.getKey() === cardKey!);
                 log("Found " + deckCards.length + " cards to upgrade");
-                //replace all of them with the upgraded version
                 deckCards.forEach(card => {
                     const upgrade = card.getUpgrade();
                     if (upgrade === null) {
@@ -168,18 +162,17 @@ export default class PermUpgrade extends Phaser.GameObjects.Container {
         }
 
         this.finalizeDeck(deckToModify);
-    
         (this.scene.scene.get('Game') as Game).finishPermUpgrade();
     }
 
-    async finalizeDeck(deckToModify: CardType[]) {
+    private async finalizeDeck(deckToModify: CardType[]) {
         await StorageManager.saveBaseDeck(deckToModify);
         Library.setPureDeck(deckToModify);
         log("this is the list of cards in the Library pure deck after the upgrade: " + deckToModify.map(card => card.getKey()));
         CoachList.you.setBaseCards(deckToModify);
     }
-    
-    findCardTypeIndexByKey(cards: CardType[], key: CardKeys): number {
+
+    private findCardTypeIndexByKey(cards: CardType[], key: CardKeys): number {
         log("Finding card type index by key: " + key);
         return cards.findIndex(card => card.getKey() === key);
     }
