@@ -9,6 +9,8 @@ import { WhiteDeck } from "../trophies/cosmetic/WhiteDeck";
 import { YellowDeck } from "../trophies/cosmetic/YellowDeck";
 import { CyanDeck } from "../trophies/cosmetic/CyanDeck";
 import GenericCard from "./GenericCard";
+import TextFactory from "../utilities/TextUtils";
+import { Colours } from "../utilities/Colours";
 
 export default class Card extends GenericCard {
     public cardType: CardType;
@@ -47,25 +49,21 @@ export default class Card extends GenericCard {
     
         this.tooltipImage = new Phaser.GameObjects.Image(scene, 0, -205, 'tooltip');
     
-        this.assignedMemberText = new Phaser.GameObjects.Text(scene, 30, -90, "", {
-            fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
+        this.assignedMemberText = TextFactory.createText(scene, 30, -90, "", {
             fontSize: '24px',
-            color: '#000000',
-            padding: { x: 5, y: 5 },
+            color: Colours.BLACK_STRING,
             align: 'center'
         });
         this.assignedMemberText.setOrigin(0.5, 0.5);
     
         let cardName = this.cardType.getName();
-        if (cardName == "ricochet") {
+        if (cardName === "ricochet") {
             cardName = "rico chet";
         }
 
-        this.nameText = new Phaser.GameObjects.Text(scene, 0, 64, cardName, {
-            fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
+        this.nameText = TextFactory.createText(scene, 0, 64, cardName, {
             fontSize: '14px',
-            color: '#ffff00',
-            padding: { x: 5, y: 5 },
+            color: Colours.YELLOW_STRING,
             align: 'center',
             wordWrap: { width: 100, useAdvancedWrap: true }
         });
@@ -78,13 +76,10 @@ export default class Card extends GenericCard {
     
         let fontSize = 16;
     
-        this.tooltipText = new Phaser.GameObjects.Text(scene, -170, -285, description, {
-            fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
+        this.tooltipText = TextFactory.createText(scene, -170, -285, description, {
             fontSize: '16px',
-            color: '#00ffff',
+            color: Colours.CYAN_STRING,
             lineSpacing: 15,
-            padding: { x: 5, y: 5 },
-            align: 'left',
             wordWrap: { width: 350, useAdvancedWrap: true }
         });
         this.tooltipText.setOrigin(0, 0);
@@ -99,7 +94,16 @@ export default class Card extends GenericCard {
         this.setSize(this.cardImage.width, this.cardImage.height);
         this.setInteractive(new Phaser.Geom.Rectangle(0, 0, this.cardImage.width, this.cardImage.height), Phaser.Geom.Rectangle.Contains);
     
-        const elements = [this.cardImage, this.ringSelectedImage, this.ringAssignedImage, this.assignedMemberText, this.nameText, this.iconImage, this.tooltipImage, this.tooltipText];
+        const elements = [
+            this.cardImage,
+            this.ringSelectedImage,
+            this.ringAssignedImage,
+            this.assignedMemberText,
+            this.nameText,
+            this.iconImage,
+            this.tooltipImage,
+            this.tooltipText
+        ];
         if (this.coachImage) {
             elements.push(this.coachImage);
         }
@@ -107,7 +111,6 @@ export default class Card extends GenericCard {
     
         this.renderForState(); 
     }
-    
 
     changeState(cardState: string): void {
         this.cardState = cardState;
@@ -133,14 +136,12 @@ export default class Card extends GenericCard {
     renderForState(): void {
         this.clearCard();
         
-        //log(`rendering for state: ${this.toString()}`);
         switch (this.cardState) {
             case "playerDeck":
                 this.setTexture(this.getDeckBackTexture());
                 this.cardImage.setVisible(true);
                 this.on('pointerover', () => { 
                     this.scene.input.setDefaultCursor('pointer'); 
-                   // log(`mouse over ${this.toString()}`)
                 });
                 this.on('pointerout', () => { 
                     this.scene.input.setDefaultCursor('default'); 
@@ -161,12 +162,10 @@ export default class Card extends GenericCard {
                 this.on('pointerover', () => { 
                     this.scene.input.setDefaultCursor('pointer'); 
     
-                    // Update tooltip text
                     this.updateTooltipText();
     
                     this.tooltipImage.setVisible(true);
                     this.tooltipText.setVisible(true);
-                    //log(`mouse over ${this.toString()}`)
                 });
                 this.on('pointerout', () => { 
                     this.scene.input.setDefaultCursor('default'); 
