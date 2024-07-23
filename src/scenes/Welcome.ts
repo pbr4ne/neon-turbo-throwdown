@@ -38,6 +38,9 @@ export default class Welcome extends Phaser.Scene {
 			playBtn = this.add.image(1000, 630, "restart-button");
 			const unlockText = TextFactory.createText(this, 1000, 670, "maintain your unlocks", { fontSize: '12px'});
 			unlockText.setOrigin(0.5, 0.5);
+
+			const trophiesBtn = this.add.image(1000, 500, "trophies").setInteractive({ useHandCursor: true });
+			trophiesBtn.on('pointerdown', this.showTrophies, this);
 		}
 
 		this.musicBtn = this.add.image(1720, 960, "music2-on");
@@ -116,11 +119,6 @@ export default class Welcome extends Phaser.Scene {
 
 		creditsBtn.on('pointerdown', this.showCredits, this);
 		settingsBtn.on('pointerdown', this.showSettings, this);
-
-		if (Library.getTrophyTypes().length > 0) {
-			const trophiesBtn = this.add.image(1000, 500, "trophies").setInteractive({ useHandCursor: true });
-			trophiesBtn.on('pointerdown', this.showTrophies, this);
-		}
 	}
 
 	private setButtonInteractive(button: Phaser.GameObjects.Image) {
