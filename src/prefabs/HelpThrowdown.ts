@@ -2,7 +2,7 @@ import Phaser from "phaser";
 import TextFactory from "../utilities/TextUtils";
 import { Colours } from "../utilities/Colours";
 
-export default class Help extends Phaser.GameObjects.Container {
+export default class HelpThrowdown extends Phaser.GameObjects.Container {
     constructor(scene: Phaser.Scene) {
         super(scene, 960, 540);
 

@@ -14,7 +14,7 @@ import { CardKeys } from "../cards/CardKeys";
 import { HealStrategy1 } from "../trophies/idle/HealStrategy1";
 import { DefensiveStrategy1 } from "../trophies/idle/DefensiveStrategy1";
 import { OffensiveStrategy1 } from "../trophies/idle/OffensiveStrategy1";
-import Help from "./Help";
+import HelpThrowdown from "./HelpThrowdown";
 
 export default class Throwdown extends Phaser.GameObjects.Container {
 
@@ -228,7 +228,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
     }
 
     private showHelp() {
-		const helpPopup = new Help(this.scene);
+		const helpPopup = new HelpThrowdown(this.scene);
 		this.scene.add.existing(helpPopup);
 	}
 
