@@ -9,14 +9,16 @@ import PermUpgrade from "../prefabs/PermUpgrade";
 import Throwdown from "../prefabs/Throwdown";
 import { checkUrlParam, getUrlParam, log } from "../utilities/GameUtils";
 import { Library } from "../throwdown/Library";
+import BaseScene from "./BaseScene";
 
-export default class Game extends Phaser.Scene {
+export default class Game extends BaseScene {
 
 	constructor() {
 		super("Game");
 	}
 
 	editorCreate(): void {
+        super.create();
 
 		let courtImage = this.add.image(953, 443, "court");
         courtImage.setDepth(-20);

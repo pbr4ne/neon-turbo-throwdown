@@ -16,8 +16,9 @@ const game = new Phaser.Game({
     },
     scene: [Preload, Welcome, Game],
     transparent: true,
+    input: {
+        activePointers: 3,
+    }
 });
 
 game.scene.start("Preload");
-
-

@@ -13,8 +13,9 @@ import Credits from '../prefabs/Credits';
 import Trophies from '../prefabs/Trophies';
 import Settings from '../prefabs/Settings';
 import TextFactory from "../utilities/TextUtils";
+import BaseScene from "./BaseScene";
 
-export default class Welcome extends Phaser.Scene {
+export default class Welcome extends BaseScene {
 
 	private musicBtn?: Phaser.GameObjects.Image;
 	private soundBtn?: Phaser.GameObjects.Image;
@@ -24,6 +25,8 @@ export default class Welcome extends Phaser.Scene {
 	}
 
 	editorCreate(): void {
+		super.create();
+		
 		let playBtn;
 		let logo;
 
