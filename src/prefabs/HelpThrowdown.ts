@@ -3,8 +3,12 @@ import TextFactory from "../utilities/TextUtils";
 import { Colours } from "../utilities/Colours";
 
 export default class HelpThrowdown extends Phaser.GameObjects.Container {
-    constructor(scene: Phaser.Scene) {
+    private onCloseCallback: () => void;
+
+    constructor(scene: Phaser.Scene, onCloseCallback: () => void) {
         super(scene, 960, 540);
+
+        this.onCloseCallback = onCloseCallback;
 
         this.createBackground(scene);
         this.createText(scene);
@@ -82,6 +86,7 @@ export default class HelpThrowdown extends Phaser.GameObjects.Container {
 
         closeButton.on('pointerdown', () => {
             this.destroy();
+            this.onCloseCallback();
         });
 
         closeButton.on('pointerover', () => {

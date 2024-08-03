@@ -68,6 +68,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
 	private gameStatePopup!: GameStatePopup;
 
     private automationTimer!: Phaser.Time.TimerEvent; 
+    private wasIdleModeRunning: boolean = false;
 
     render() {
         this.scoreImage = this.scene.add.image(80, 110, "score");
@@ -200,9 +201,18 @@ export default class Throwdown extends Phaser.GameObjects.Container {
     }
 
     private showHelp() {
-		const helpPopup = new HelpThrowdown(this.scene);
-		this.scene.add.existing(helpPopup);
-	}
+        this.wasIdleModeRunning = !this.automationTimer.paused;
+        this.automationTimer.paused = true;
+
+        const helpPopup = new HelpThrowdown(this.scene, this.resumeIdleMode.bind(this));
+        this.scene.add.existing(helpPopup);
+    }
+
+    private resumeIdleMode() {
+        if (this.wasIdleModeRunning) {
+            this.automationTimer.paused = false;
+        }
+    }
 
     private switchIdleMode() {
         Library.setIdleMode(!Library.getIdleMode());
