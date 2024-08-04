@@ -50,16 +50,7 @@ export default class Game extends BaseScene {
             this.currentCoach = CoachList.primo;
         }
 
-        CoachList.primo.setDialogue(DialogueStorage.primoDialogue);
-        CoachList.sporticus.setDialogue(DialogueStorage.sporticusDialogue);
-        CoachList.tycoon.setDialogue(DialogueStorage.tycoonDialogue);
-        CoachList.office.setDialogue(DialogueStorage.officeDialogue);
-        CoachList.sgtsteve.setDialogue(DialogueStorage.sgtsteveDialogue);
-        CoachList.betsy.setDialogue(DialogueStorage.betsyDialogue);
-        CoachList.coree.setDialogue(DialogueStorage.coreeDialogue);
-        CoachList.turbonerd.setDialogue(DialogueStorage.turbonerdDialogue);
-        CoachList.shadowken.setDialogue(DialogueStorage.shadowkenDialogue);
-        CoachList.boss10.setDialogue(DialogueStorage.boss10Dialogue);
+        
     
         if (checkUrlParam("skipIntro", "true")) {
             this.throwdown = new Throwdown(this, this.currentCoach, this.player);
@@ -105,7 +96,7 @@ export default class Game extends BaseScene {
             this.throwdown.destroy();
             Library.incrementNumRuns();
             Library.setWon(true);
-            this.scene.start('Welcome');
+            this.scene.start('Init');
         }
 
         DialogueStorage.saveDialogues();
@@ -152,6 +143,6 @@ export default class Game extends BaseScene {
         this.permUpgrade?.destroyEverything();
         this.permUpgrade?.destroy();
 
-        this.scene.start('Welcome');
+        this.scene.start('Init');
     }
 }

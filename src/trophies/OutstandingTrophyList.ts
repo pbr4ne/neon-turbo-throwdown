@@ -44,58 +44,62 @@ import { Throw6 } from "./card/throw/Throw6";
 
 export class OutstandingTrophyList {
 
-    private static trophyTypes: TrophyType[] = [
-        //cosmetic
-        new CyanDeck(),
-        new YellowDeck(),
-        new WhiteDeck(),
-        new BlackDeck(),
-        new RedDeck(),
-        //health
-        new IncreaseHP1(),
-        new IncreaseHP2(),
-        new HealthRegen1(),
-        new HealthRegen2(),
-        new HealthRegen3(),
-        new Resurrect1(),
-        //insight
-        new SeeCards1(),
-        new SeeCards2(),
-        new SeeCards3(),
-        new SeeCards4(),
-        new SeeTargets1(),
-        new SeeTargets2(),
-        new SeeTargets3(),
-        new SeeTargets4(),
-        new SeeHealth1(),
-        new SeeHealth2(),
-        new SeeHealth3(),
-        new SeeHealth4(),
-        //idle
-        new IdleSpeed1(),
-        new IdleSpeed2(),
-        new IdleSpeed3(),
-        new IdleSpeed4(),
-        //card upgrades
-        //throw
-        new Throw2(),
-        new Throw3(),
-        new Throw4(),
-        new Throw5(),
-        new Throw6(),
-        //block
-        new Block2(),
-        new Block3(),
-        new Block4(),
-        new Block5(),
-        //evade
-        new Evade2(),
-        new Evade3(),
-        new Evade4(),
-        //catch
-        new Catch2(),
-        new Catch3(),
-    ];
+    private static trophyTypes: TrophyType[] = [];
+
+    public static resetTrophyTypes() {
+        this.trophyTypes = [
+            //cosmetic
+            new CyanDeck(),
+            new YellowDeck(),
+            new WhiteDeck(),
+            new BlackDeck(),
+            new RedDeck(),
+            //health
+            new IncreaseHP1(),
+            new IncreaseHP2(),
+            new HealthRegen1(),
+            new HealthRegen2(),
+            new HealthRegen3(),
+            new Resurrect1(),
+            //insight
+            new SeeCards1(),
+            new SeeCards2(),
+            new SeeCards3(),
+            new SeeCards4(),
+            new SeeTargets1(),
+            new SeeTargets2(),
+            new SeeTargets3(),
+            new SeeTargets4(),
+            new SeeHealth1(),
+            new SeeHealth2(),
+            new SeeHealth3(),
+            new SeeHealth4(),
+            //idle
+            new IdleSpeed1(),
+            new IdleSpeed2(),
+            new IdleSpeed3(),
+            new IdleSpeed4(),
+            //card upgrades
+            //throw
+            new Throw2(),
+            new Throw3(),
+            new Throw4(),
+            new Throw5(),
+            new Throw6(),
+            //block
+            new Block2(),
+            new Block3(),
+            new Block4(),
+            new Block5(),
+            //evade
+            new Evade2(),
+            new Evade3(),
+            new Evade4(),
+            //catch
+            new Catch2(),
+            new Catch3(),
+        ];
+    };
 
     public static getTrophyTypes() {
         return this.trophyTypes;

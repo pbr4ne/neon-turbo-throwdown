@@ -74,7 +74,7 @@ export default class Throwdown extends Phaser.GameObjects.Container {
         this.scoreImage = this.scene.add.image(80, 110, "score");
         this.forfeitImage = this.createInteractiveImage(77, 243, "forfeit", () => {
             Library.incrementNumRuns();
-            this.scene.scene.start('Preload');
+            this.scene.scene.start('Init');
         });
 
         this.idleModeImage = this.createInteractiveImage(77, 376, Library.getIdleMode() ? "switch-active" : "switch-idle", this.switchIdleMode.bind(this));

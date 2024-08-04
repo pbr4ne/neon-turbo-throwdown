@@ -7,6 +7,8 @@ import { IdleSpeed1 } from "../trophies/idle/IdleSpeed1";
 import { IdleSpeed2 } from "../trophies/idle/IdleSpeed2";
 import { IdleSpeed3 } from "../trophies/idle/IdleSpeed3";
 import { IdleSpeed4 } from "../trophies/idle/IdleSpeed4";
+import { CardFactory } from "../cards/CardFactory";
+import { CardKeys } from "../cards/CardKeys";
 
 export class Library {
 
@@ -44,12 +46,23 @@ export class Library {
         this.pureDeck = [...pureDeck];
     }
 
-    public static setEasyMode(easyMode: boolean) {
-        this.easyMode = easyMode;
+    public static resetPureDeck() {
+        this.pureDeck = [
+            CardFactory.createCardType(CardKeys.THROW_1),
+            CardFactory.createCardType(CardKeys.THROW_1),
+            CardFactory.createCardType(CardKeys.THROW_1),
+            CardFactory.createCardType(CardKeys.THROW_1),
+            CardFactory.createCardType(CardKeys.THROW_1),
+            CardFactory.createCardType(CardKeys.EVADE_1),
+            CardFactory.createCardType(CardKeys.EVADE_1),
+            CardFactory.createCardType(CardKeys.BLOCK_1),
+            CardFactory.createCardType(CardKeys.BLOCK_1),
+            CardFactory.createCardType(CardKeys.CATCH_1)
+        ];
     }
 
-    public static getEasyMode() {
-        return this.easyMode;
+    public static resetTrophyTypes() {
+        this.trophyTypes = [];
     }
 
     public static setIdleMode(idleMode: boolean) {

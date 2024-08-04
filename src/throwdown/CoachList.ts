@@ -76,25 +76,7 @@ export class CoachList {
             new Resurrect1(),
         ]);
 
-        log("SETTING UP COACH DECKS");
-        this.you.setBaseCards([
-            CardFactory.createCardType(CardKeys.THROW_1),
-            CardFactory.createCardType(CardKeys.THROW_1),
-            CardFactory.createCardType(CardKeys.THROW_1),
-            CardFactory.createCardType(CardKeys.THROW_1),
-            CardFactory.createCardType(CardKeys.THROW_1),
-            CardFactory.createCardType(CardKeys.EVADE_1),
-            CardFactory.createCardType(CardKeys.EVADE_1),
-            CardFactory.createCardType(CardKeys.BLOCK_1),
-            CardFactory.createCardType(CardKeys.BLOCK_1),
-            CardFactory.createCardType(CardKeys.CATCH_1),
-            //testers
-            // CardFactory.createCardType(CardKeys.NINJA_STAR),
-            // CardFactory.createCardType(CardKeys.NINJA_STAR),
-            // CardFactory.createCardType(CardKeys.NINJA_STAR),
-            // CardFactory.createCardType(CardKeys.NINJA_STAR),
-        ]);
-        
+        log("SETTING UP COACH DECKS");      
         this.primo.setBaseCards([
             CardFactory.createCardType(CardKeys.THROW_1),
             CardFactory.createCardType(CardKeys.THROW_1),

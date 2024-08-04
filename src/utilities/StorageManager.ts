@@ -150,14 +150,14 @@ export class StorageManager {
         }
     }
 
-    public static async loadBaseDeck(): Promise<CardType[]> {
+    public static async loadPureDeck(): Promise<CardType[]> {
         if (this.db) {
             const cardRecords = await this.db.getAll('baseDeck');
             const cardTypes = cardRecords.map(cardStored => CardFactory.createCardType(cardStored.key));
             log(`loaded card types from db: ${cardTypes}`);
             if (cardTypes.length > 0) {
-                log(`overriding base cards from save`);
-                CoachList.you.setBaseCards(cardTypes);
+                log(`overriding pure deck from save`);
+                Library.setPureDeck(cardTypes);
             }
             return cardTypes;
         }

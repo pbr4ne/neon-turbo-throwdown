@@ -2,21 +2,29 @@ import Phaser from "phaser";
 import { StorageManager } from "../utilities/StorageManager";
 import TextFactory from "../utilities/TextUtils";
 import { Colours } from "../utilities/Colours";
+import { Library } from "../throwdown/Library";
+import { OutstandingTrophyList } from "../trophies/OutstandingTrophyList";
+import { DialogueStorage } from "../dialogue/DialogueStorage";
 
 export default class Settings extends Phaser.GameObjects.Container {
+    private styleElement: HTMLStyleElement;
+
     constructor(scene: Phaser.Scene) {
         super(scene, 960, 540);
 
         this.createBackground(scene);
         this.createText(scene);
         this.createButtons(scene);
+
+        this.styleElement = document.createElement('style');
+        document.head.appendChild(this.styleElement);
     }
 
     private createBackground(scene: Phaser.Scene) {
         const blockInput = scene.add.rectangle(0, 0, 1920, 1080, Colours.BLACK_HEX, 0.5).setOrigin(0.5, 0.5).setInteractive();
         this.add(blockInput);
 
-        const background = scene.add.rectangle(0, 0, 500, 300, Colours.BLACK_HEX, 0.8).setOrigin(0.5, 0.5);
+        const background = scene.add.rectangle(0, 0, 500, 400, Colours.BLACK_HEX, 0.8).setOrigin(0.5, 0.5);
         background.setStrokeStyle(4, Colours.CYAN_HEX);
         this.add(background);
     }
@@ -24,8 +32,6 @@ export default class Settings extends Phaser.GameObjects.Container {
     private createText(scene: Phaser.Scene) {
         const texts = [
             { x: 0, y: -120, text: "Settings", fontSize: '20px', color: Colours.YELLOW_STRING },
-            { x: 0, y: 0, text: "*This is buggy. You might need to refresh your browser afterwards!*", fontSize: '14px', color: Colours.MAGENTA_STRING, lineSpacing: 10, wordWrap: { width: 400, useAdvancedWrap: true } },
-            { x: 0, y: -80, text: "Do you want to hard reset your progress?", fontSize: '16px', color: Colours.WHITE_STRING, wordWrap: { width: 450, useAdvancedWrap: true } }
         ];
 
         texts.forEach(config => {
@@ -33,29 +39,31 @@ export default class Settings extends Phaser.GameObjects.Container {
                 fontSize: config.fontSize,
                 color: config.color,
                 align: 'center',
-                lineSpacing: config.lineSpacing,
-                wordWrap: config.wordWrap
             }).setOrigin(0.5, 0.5);
             this.add(text);
         });
     }
 
     private createButtons(scene: Phaser.Scene) {
-        const yesButton = this.createButton(scene, -80, 100, "Yes", Colours.CYAN_STRING, async () => {
+        const hardResetButton = this.createButton(scene, 0, 0, "Hard reset", Colours.RED_STRING, true, async () => {
             await StorageManager.clearAllData();
-            this.scene.scene.start("Preload");
+            Library.resetPureDeck();
+            Library.setNumRuns(0);
+            OutstandingTrophyList.resetTrophyTypes();
+            DialogueStorage.loadDialogues();
+            this.scene.scene.start("Init");
             this.destroy();
         });
 
-        const noButton = this.createButton(scene, 80, 100, "No", Colours.MAGENTA_STRING, () => {
+        const closeButton = this.createButton(scene, 0, 150, "Close", Colours.CYAN_STRING, false, () => {
             this.destroy();
         });
 
-        this.add(yesButton);
-        this.add(noButton);
+        this.add(hardResetButton);
+        this.add(closeButton);
     }
 
-    private createButton(scene: Phaser.Scene, x: number, y: number, text: string, color: string, callback: () => void) {
+    private createButton(scene: Phaser.Scene, x: number, y: number, text: string, color: string, border: boolean, callback: () => void): Phaser.GameObjects.Text {
         const button = TextFactory.createText(scene, x, y, text, {
             fontSize: '20px',
             color: color,
@@ -71,6 +79,14 @@ export default class Settings extends Phaser.GameObjects.Container {
         button.on('pointerout', () => {
             scene.input.setDefaultCursor('default');
         });
+
+        if (border) {
+            const buttonBackground = scene.add.rectangle(x, y, button.width + 20, button.height + 10, Colours.BLACK_HEX, 0.8).setOrigin(0.5, 0.5);
+            buttonBackground.setStrokeStyle(2, Colours.WHITE_HEX);
+            this.add(buttonBackground);
+        }
+
+        this.add(button);
 
         return button;
     }

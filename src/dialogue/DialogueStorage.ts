@@ -58,6 +58,17 @@ export class DialogueStorage {
         this.warnIfMissingDialogue(DialogueStorage.turbonerdDialogue, CoachKeys.TURBO_NERD);
         this.warnIfMissingDialogue(DialogueStorage.shadowkenDialogue, CoachKeys.SHADOW_KEN);
         this.warnIfMissingDialogue(DialogueStorage.boss10Dialogue, CoachKeys.BOSS_10);
+
+        CoachList.primo.setDialogue(DialogueStorage.primoDialogue);
+        CoachList.sporticus.setDialogue(DialogueStorage.sporticusDialogue);
+        CoachList.tycoon.setDialogue(DialogueStorage.tycoonDialogue);
+        CoachList.office.setDialogue(DialogueStorage.officeDialogue);
+        CoachList.sgtsteve.setDialogue(DialogueStorage.sgtsteveDialogue);
+        CoachList.betsy.setDialogue(DialogueStorage.betsyDialogue);
+        CoachList.coree.setDialogue(DialogueStorage.coreeDialogue);
+        CoachList.turbonerd.setDialogue(DialogueStorage.turbonerdDialogue);
+        CoachList.shadowken.setDialogue(DialogueStorage.shadowkenDialogue);
+        CoachList.boss10.setDialogue(DialogueStorage.boss10Dialogue);
     }
 
     public initializeSpiritDialogue(): void {
