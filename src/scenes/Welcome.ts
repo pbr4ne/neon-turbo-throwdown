@@ -42,8 +42,10 @@ export default class Welcome extends BaseScene {
 			const unlockText = TextFactory.createText(this, 1000, 670, "maintain your unlocks", { fontSize: '12px'});
 			unlockText.setOrigin(0.5, 0.5);
 
-			const trophiesBtn = this.add.image(1000, 500, "trophies").setInteractive({ useHandCursor: true });
-			trophiesBtn.on('pointerdown', this.showTrophies, this);
+			if (Library.getTrophyTypes().length > 0) {
+				const trophiesBtn = this.add.image(1000, 500, "trophies").setInteractive({ useHandCursor: true });
+				trophiesBtn.on('pointerdown', this.showTrophies, this);
+			}
 		}
 
 		this.musicBtn = this.add.image(1720, 960, "music2-on");
