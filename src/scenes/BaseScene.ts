@@ -18,15 +18,16 @@ export default class BaseScene extends Phaser.Scene {
     }
 
     create() {
-        this.input.addPointer(5);
+        // todo - this causes some weird issues (clicking too fast on desktop makes the screen disappear)
+        // this.input.addPointer(5);
 
-        this.originalZoom = this.cameras.main.zoom;
-        this.originalScrollX = this.cameras.main.scrollX;
-        this.originalScrollY = this.cameras.main.scrollY;
+        // this.originalZoom = this.cameras.main.zoom;
+        // this.originalScrollX = this.cameras.main.scrollX;
+        // this.originalScrollY = this.cameras.main.scrollY;
 
-        this.input.on('pointerdown', this.onPointerDown, this);
-        this.input.on('pointermove', this.onPointerMove, this);
-        this.input.on('pointerup', this.onPointerUp, this);
+        // this.input.on('pointerdown', this.onPointerDown, this);
+        // this.input.on('pointermove', this.onPointerMove, this);
+        // this.input.on('pointerup', this.onPointerUp, this);
     }
 
     private onPointerDown(pointer: Phaser.Input.Pointer) {
