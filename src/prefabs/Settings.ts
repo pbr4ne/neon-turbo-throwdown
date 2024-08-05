@@ -5,8 +5,18 @@ import { Colours } from "../utilities/Colours";
 import { Library } from "../throwdown/Library";
 import { OutstandingTrophyList } from "../trophies/OutstandingTrophyList";
 import { DialogueStorage } from "../dialogue/DialogueStorage";
+import { log } from "../utilities/GameUtils";
+
+declare global {
+    interface Window {
+        scanLines: boolean;
+    }
+}
+
+window.scanLines = window.scanLines !== undefined ? window.scanLines : true;
 
 export default class Settings extends Phaser.GameObjects.Container {
+    private scanLinesButton: Phaser.GameObjects.Text | null = null;
     private styleElement: HTMLStyleElement;
 
     constructor(scene: Phaser.Scene) {
@@ -16,8 +26,16 @@ export default class Settings extends Phaser.GameObjects.Container {
         this.createText(scene);
         this.createButtons(scene);
 
-        this.styleElement = document.createElement('style');
-        document.head.appendChild(this.styleElement);
+        this.styleElement = document.getElementById('scanline-style') as HTMLStyleElement;
+        if (!this.styleElement) {
+            this.styleElement = document.createElement('style');
+            this.styleElement.id = 'scanline-style';
+            document.head.appendChild(this.styleElement);
+        }
+
+        this.updateScanlines();
+
+        scene.events.on(Phaser.Scenes.Events.RESUME, this.updateScanlines, this);
     }
 
     private createBackground(scene: Phaser.Scene) {
@@ -55,11 +73,16 @@ export default class Settings extends Phaser.GameObjects.Container {
             this.destroy();
         });
 
+        this.scanLinesButton = this.createButton(scene, 0, 60, window.scanLines ? "Turn off scanlines" : "Turn on scanlines", Colours.MAGENTA_STRING, true, () => {
+            this.toggleScanlines();
+        });
+
         const closeButton = this.createButton(scene, 0, 150, "Close", Colours.CYAN_STRING, false, () => {
             this.destroy();
         });
 
         this.add(hardResetButton);
+        this.add(this.scanLinesButton);
         this.add(closeButton);
     }
 
@@ -89,5 +112,41 @@ export default class Settings extends Phaser.GameObjects.Container {
         this.add(button);
 
         return button;
+    }
+
+    private toggleScanlines() {
+        window.scanLines = !window.scanLines;
+        this.updateScanlines();
+        this.scanLinesButton!.setText(window.scanLines ? "Turn off scanlines" : "Turn on scanlines");
+    }
+
+    private updateScanlines() {
+        if (window.scanLines) {
+            this.turnOnScanlines();
+        } else {
+            this.turnOffScanlines();
+        }
+    }
+
+    private turnOffScanlines() {
+        log("turn off scanlines");
+        this.styleElement.innerHTML = `
+            body::after {
+                background: none !important;
+            }
+        `;
+    }
+
+    private turnOnScanlines() {
+        log("turn on scanlines");
+        this.styleElement.innerHTML = `
+            body::after {
+                background: linear-gradient(0deg, #000 50%, #fff 50%);
+                background-size: 1px 0.5%;
+                z-index: 2;
+                mix-blend-mode: overlay;
+                opacity: 0.5;
+            }
+        `;
     }
 }
