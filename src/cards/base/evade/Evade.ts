@@ -8,7 +8,7 @@ import { ThrowdownPhase } from "../../../throwdown/ThrowdownPhase";
 
 export class Evade extends CardType {
     protected chanceToDefend : number = 0.75;
-    protected currentNumDefends: number = 1;
+    protected currentNumDefends: number = 0;
     protected numDefends = 1;
 
     constructor(key: CardKeys = CardKeys.EVADE_1, upgradeKey: CardKeys | null = CardKeys.EVADE_2) {
@@ -22,7 +22,7 @@ export class Evade extends CardType {
 
     defense(member: Member, attacker: Member, team: Team, opponentTeam: Team, canRetaliate: boolean, overrideName?: string): boolean {
         let defenseSuccess = false;
-        if (this.getCurrentNumDefends() <= this.getNumDefends() && this.getChanceToDefend() >= Math.random()) {
+        if (this.getCurrentNumDefends() < this.getNumDefends() && this.getChanceToDefend() >= Math.random()) {
             member.showFloatingAction(overrideName ? overrideName : this.getName());
             defenseSuccess = true;
         }
