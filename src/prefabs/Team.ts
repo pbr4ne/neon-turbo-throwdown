@@ -1,10 +1,4 @@
-
-// You can write more code here
-
-/* START OF COMPILED CODE */
-
 import Phaser from "phaser";
-/* START-USER-IMPORTS */
 import Card from "./Card";
 import Deck from "./Deck";
 import Hand from "./Hand";
@@ -23,23 +17,19 @@ import { HealthRegen3 } from "../trophies/member/HealthRegen3";
 import { HealthRegen2 } from "../trophies/member/HealthRegen2";
 import { TrophyType } from "../trophies/TrophyType";
 import Boss from "./Boss";
-/* END-USER-IMPORTS */
 
 export default abstract class Team extends Phaser.GameObjects.Container {
 
 	constructor(scene: Phaser.Scene, visibleCards: boolean) {
 		super(scene);
 
-		/* START-USER-CTR-CODE */
 		this.visibleCards = visibleCards;
 		this.members = [];
         this.deck = new Deck(scene, visibleCards);
         this.discardPile = new Deck(scene, false);
         this.hand = new Hand(scene, 5, visibleCards);
-      	/* END-USER-CTR-CODE */
 	}
 
-	/* START-USER-CODE */
 	public deck!: Deck;
     public discardPile!: Deck;
     public hand!: Hand;
@@ -274,9 +264,4 @@ export default abstract class Team extends Phaser.GameObjects.Container {
     toString(): string {
         return this instanceof Player ? "Player" : "Boss";
     }
-	/* END-USER-CODE */
 }
-
-/* END OF COMPILED CODE */
-
-// You can write more code here

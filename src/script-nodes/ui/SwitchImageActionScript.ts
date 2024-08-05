@@ -1,29 +1,18 @@
 
-// You can write more code here
-
-/* START OF COMPILED CODE */
-
 import { SpriteScript } from "@phaserjs/editor-scripts-core";
 import { ScriptNode } from "@phaserjs/editor-scripts-core";
 import Phaser from "phaser";
-/* START-USER-IMPORTS */
-/* END-USER-IMPORTS */
 
 export default class SwitchImageActionScript extends SpriteScript {
 
 	constructor(parent: ScriptNode | Phaser.GameObjects.GameObject | Phaser.Scene) {
 		super(parent);
-
-		/* START-USER-CTR-CODE */
-		/* END-USER-CTR-CODE */
 	}
 
 	public onTexture!: {key:string,frame?:string|number};
 	public offTexture!: {key:string,frame?:string|number};
 	public isOn: boolean = true;
 	public mementoKey: string = "";
-
-	/* START-USER-CODE */
 
 	private static _memento = new Map<string, boolean>();
 
@@ -60,10 +49,4 @@ export default class SwitchImageActionScript extends SpriteScript {
 
 		this.gameObject.setTexture(tex.key, tex.frame);
 	}
-
-	/* END-USER-CODE */
 }
-
-/* END OF COMPILED CODE */
-
-// You can write more code here

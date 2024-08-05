@@ -1,10 +1,4 @@
-
-// You can write more code here
-
-/* START OF COMPILED CODE */
-
 import Phaser from "phaser";
-/* START-USER-IMPORTS */
 import Game from "../scenes/Game";
 import Member from "./Member";
 import Team from "./Team";
@@ -12,22 +6,18 @@ import FloatingObjectScript from "../script-nodes/ui/FloatingObjectScript";
 import { GameSteps } from '../throwdown/GameSteps';
 import { log } from "../utilities/GameUtils";
 import { CoachList } from "../throwdown/CoachList";
-/* END-USER-IMPORTS */
 
 export default class Player extends Team {
 
 	constructor(scene: Phaser.Scene) {
 		super(scene, true);
 
-		/* START-USER-CTR-CODE */
         this.add(this.deck);
         this.deck.on("deckClicked", this.onDeckClick.bind(this));
 
         this.createEndTurnButton();
-		/* END-USER-CTR-CODE */
 	}
 
-	/* START-USER-CODE */
 	public throwdownButton!: Phaser.GameObjects.Image;
     private currentMember: Member | null = null;
 
@@ -145,8 +135,4 @@ export default class Player extends Team {
     getUnassignedMembers(): Member[] {
         return this.getAliveMembers().filter(member => member.getAssignedCard() == null);
     }
-    
-	/* END-USER-CODE */
 }
-
-/* END OF COMPILED CODE */
