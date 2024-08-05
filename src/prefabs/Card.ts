@@ -117,6 +117,13 @@ export default class Card extends GenericCard {
         this.renderForState();
     }
 
+    reAddToScene(): void {
+        if (this.scene) {
+            this.scene.children.remove(this);
+            this.scene.children.add(this);
+        }
+    }
+
     getDeckBackTexture(): string {
         if (Library.hasTrophy(RedDeck)) {
             return "red";
