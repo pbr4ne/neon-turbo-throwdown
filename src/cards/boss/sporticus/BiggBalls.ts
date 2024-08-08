@@ -35,7 +35,7 @@ export class BiggBalls extends SporticusCard {
 
     getDescription(): string {
         const chancePercentage = this.getNicePercentage(this.getChance());
-        return `Your balls are ${chancePercentage}% harder to catch for the remainder of the fight.`;
+        return `Your balls are ${chancePercentage}% harder to catch for the remainder of the match.`;
     }
 
     getChance(): number {

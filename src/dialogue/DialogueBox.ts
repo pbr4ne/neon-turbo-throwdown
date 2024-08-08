@@ -70,7 +70,7 @@ export default class DialogueBox extends Phaser.GameObjects.Container {
                     this.switchIdleMode();
                 });
 
-            this.idleModeText = TextFactory.createText(this.scene, 135, 920, "(for next combat)", {
+            this.idleModeText = TextFactory.createText(this.scene, 135, 920, "(for next match)", {
                 fontSize: '14px',
                 color: Colours.YELLOW_STRING,
                 align: 'center'
