@@ -302,7 +302,7 @@ export class DialogueStorage {
         //intro
         //1
         officeIntroDialogue1.addStep("*ring ring* This is Cheryl calling. You're going down. Town. To intern at our new office!", CoachList.office, "???");
-        officeIntroDialogue1.addStep(["I'm 37. In other words, done with unpaid internships.", "Ooo the one on 6th ave.? Nice.", "The 80s called. They want their 5 ft of shoulderpads back."], CoachList.office);
+        officeIntroDialogue1.addStep(["I'm 37. In other words, done with unpaid internships.", "Ooo the one on 6th ave? Nice.", "The 80s called. They want their 5 ft of shoulderpads back."], CoachList.office);
         officeIntroDialogue1.addStep("But first, YOUR INTERVIEW!", CoachList.office);
         //2
         officeIntroDialogue2.addStep("You didn't stamp your timesheet.", CoachList.office);
