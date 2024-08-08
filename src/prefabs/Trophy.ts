@@ -25,7 +25,12 @@ export default class Trophy extends GenericCard {
 
         this.trophyType = trophyType;
 
-        this.nameText = TextFactory.createText(scene, 5, 64, this.trophyType.getName(), {
+        let trophyName = this.trophyType.getName();
+        if (trophyName === "ricochet") {
+            trophyName = "rico chet";
+        }
+
+        this.nameText = TextFactory.createText(scene, 5, 64, trophyName, {
             fontSize: '14px',
             color: Colours.YELLOW_STRING,
             align: 'center',
