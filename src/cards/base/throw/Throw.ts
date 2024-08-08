@@ -53,7 +53,7 @@ export class Throw extends CardType {
                 //reduce their HP if they failed to defend
                 let damage;
                 if (originalHit) {
-                    damage = this.getOffenseDamage(member, target, team);
+                    damage = this.getOffenseDamage(member, target, opponentTeam);
                     if (overrideDamage) {
                         damage = overrideDamage;
                     }
