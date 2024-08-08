@@ -116,7 +116,7 @@ export class Library {
     public static getIdleTurnDelay(): number{
         //don't make the battle faster when not in idle mode
         if (!Library.getIdleMode()) {
-            return 500;
+            return 675;
         }
         let delay;
         if (Library.hasTrophy(IdleSpeed4)) {

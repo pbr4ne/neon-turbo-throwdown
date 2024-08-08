@@ -213,6 +213,7 @@ export default abstract class Team extends Phaser.GameObjects.Container {
 
     async executeSpecialPhase() {
         log("Executing Special Phase");
+        await this.pause(Library.getIdleTurnDelay()/2); 
         this.resurrectPhase();
         this.healPhase();
         for (const member of this.members) {
@@ -223,9 +224,9 @@ export default abstract class Team extends Phaser.GameObjects.Container {
                 const cardType = card.getCardType();
                 log(cardType.getPhase());
                 if (cardType.getPhase() == ThrowdownPhase.SPECIAL) {
-                    await this.pause(Library.getIdleTurnDelay()); 
                     cardType.special(member, target, this, this.opponent); 
                     log(`SPECIAL: ${member}`);
+                    await this.pause(Library.getIdleTurnDelay()); 
                 } else {
                     log(`No special for ${cardType.getName()}`);
                 }
@@ -243,14 +244,14 @@ export default abstract class Team extends Phaser.GameObjects.Container {
                 const cardType = card.getCardType();
                 if (cardType.getPhase() == ThrowdownPhase.ATTACK) {
                     //member.drawTargetArc(target, true, this);
-                    await this.pause(Library.getIdleTurnDelay()); 
                     card.getCardType().attack(member, target, this, this.opponent); 
                     log(`OFFENSE: ${member} attacks ${target}`);
                     member.setIntendedTarget(null);
+                    await this.pause(Library.getIdleTurnDelay()); 
                 }
             }
         }
-        await this.pause(Library.getIdleTurnDelay()/2); 
+        
     }
     
     pause(ms: number) {
