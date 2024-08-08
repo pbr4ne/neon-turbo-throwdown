@@ -35,7 +35,7 @@ export class Monocle extends TycoonCard {
 
     getDescription(): string {
         const chancePercentage = this.getNicePercentage(this.getChance());
-        return `${chancePercentage}% throw effectiveness for the combat.`;
+        return `+${chancePercentage}% team throw effectiveness for the combat.`;
     }
 
     getChance(): number {
