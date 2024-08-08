@@ -18,11 +18,12 @@ export class Throw extends CardType {
 
     attack(member: Member, target: Member | null, team: Team, opponentTeam: Team, overrideName?: string, overrideDamage?: number): boolean {
 
-        let anyNonMiss = true;
+        let anyNonMiss = false;
         let membersToTarget = this.getRandomAliveMembers(opponentTeam, target, this.getNumTargets() - 1);
 
         if (target) {
             if(this.attackMember(member, target, team, opponentTeam, true, true, overrideDamage)) {
+                anyNonMiss = true;
                 membersToTarget.forEach((enemyMember) => {
                     if(this.attackMember(member, enemyMember, team, opponentTeam, false, false)) {
                         anyNonMiss = true;
@@ -61,8 +62,8 @@ export class Throw extends CardType {
                 }
 
                 target.reduceHP(damage);
-                return true;
             }
+            return true;
         }
         return false;
     }
