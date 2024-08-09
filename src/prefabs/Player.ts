@@ -58,7 +58,7 @@ export default class Player extends Team {
         });
     }
 
-    onDeckClick() {
+    async onDeckClick() {
         super.onDeckClick();
         var currentStep = this.throwdown.getCurrentStep();
         if (currentStep == GameSteps.DRAW_CARDS && this.hand.getCards().length == 5) {

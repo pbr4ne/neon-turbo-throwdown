@@ -58,7 +58,7 @@ export default abstract class Team extends Phaser.GameObjects.Container {
         return this.modifiers;
     }
 
-    onDeckClick() {
+    async onDeckClick() {
         if (this.throwdown.getCurrentStep() != GameSteps.DRAW_CARDS) {
             log("can't draw cards now");
             return;
@@ -77,6 +77,9 @@ export default abstract class Team extends Phaser.GameObjects.Container {
                     this.hand.handleCardClick(topCard, this.members);
                 });
             }
+
+            await this.pause(50);
+            this.onDeckClick();
         }
     }
 
