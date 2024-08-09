@@ -58,6 +58,17 @@ export class DialogueStorage {
         this.warnIfMissingDialogue(DialogueStorage.turbonerdDialogue, CoachKeys.TURBO_NERD);
         this.warnIfMissingDialogue(DialogueStorage.shadowkenDialogue, CoachKeys.SHADOW_KEN);
         this.warnIfMissingDialogue(DialogueStorage.boss10Dialogue, CoachKeys.BOSS_10);
+
+        CoachList.primo.setDialogue(DialogueStorage.primoDialogue);
+        CoachList.sporticus.setDialogue(DialogueStorage.sporticusDialogue);
+        CoachList.tycoon.setDialogue(DialogueStorage.tycoonDialogue);
+        CoachList.office.setDialogue(DialogueStorage.officeDialogue);
+        CoachList.sgtsteve.setDialogue(DialogueStorage.sgtsteveDialogue);
+        CoachList.betsy.setDialogue(DialogueStorage.betsyDialogue);
+        CoachList.coree.setDialogue(DialogueStorage.coreeDialogue);
+        CoachList.turbonerd.setDialogue(DialogueStorage.turbonerdDialogue);
+        CoachList.shadowken.setDialogue(DialogueStorage.shadowkenDialogue);
+        CoachList.boss10.setDialogue(DialogueStorage.boss10Dialogue);
     }
 
     public initializeSpiritDialogue(): void {
@@ -291,7 +302,7 @@ export class DialogueStorage {
         //intro
         //1
         officeIntroDialogue1.addStep("*ring ring* This is Cheryl calling. You're going down. Town. To intern at our new office!", CoachList.office, "???");
-        officeIntroDialogue1.addStep(["I'm 37. In other words, done with unpaid internships.", "Ooo the one on 6th ave.? Nice.", "The 80s called. They want their 5 ft of shoulderpads back."], CoachList.office);
+        officeIntroDialogue1.addStep(["I'm 37. In other words, done with unpaid internships.", "Ooo the one on 6th ave? Nice.", "The 80s called. They want their 5 ft of shoulderpads back."], CoachList.office);
         officeIntroDialogue1.addStep("But first, YOUR INTERVIEW!", CoachList.office);
         //2
         officeIntroDialogue2.addStep("You didn't stamp your timesheet.", CoachList.office);
@@ -304,7 +315,7 @@ export class DialogueStorage {
 
         //win
         //1
-        officeWinDialogue1.addStep("This will reflect well in your performance review", CoachList.office);
+        officeWinDialogue1.addStep("This will reflect well in your performance review.", CoachList.office);
         officeWinDialogue1.addStep(["You're not the boss of me", "Whatever, Shoulderpads.", "Thanks, Boss"], CoachList.you);
         //2
         officeWinDialogue2.addStep("...CCing the regional director on your kudos.", CoachList.office);

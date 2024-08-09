@@ -1,1 +1,1 @@
-game-paused The pause button emits this event when is pressed.
+deck-clicked Emitted when the deck is clicked.

@@ -1,72 +1,51 @@
 import Phaser from "phaser";
+import TextFactory from "../utilities/TextUtils";
+import { Colours } from "../utilities/Colours";
 
 export default class HelpPermUpgrade extends Phaser.GameObjects.Container {
     constructor(scene: Phaser.Scene) {
         super(scene, 960, 540);
 
-        const blockInput = this.scene.add.rectangle(0, 0, 1920, 1080, 0x000000, 0.5).setOrigin(0.5, 0.5).setInteractive();
+        this.createBackground(scene);
+        this.createText(scene);
+        this.createCloseButton(scene);
+    }
+
+    private createBackground(scene: Phaser.Scene) {
+        const blockInput = scene.add.rectangle(0, 0, 1920, 1080, Colours.BLACK_HEX, 0.5).setOrigin(0.5, 0.5).setInteractive();
         this.add(blockInput);
 
-        const background = this.scene.add.rectangle(0, 0, 800, 700, 0x000000, 0.8).setOrigin(0.5, 0.5);
-        background.setStrokeStyle(4, 0x00ffff);
+        const background = scene.add.rectangle(0, 0, 800, 700, Colours.BLACK_HEX, 0.8).setOrigin(0.5, 0.5);
+        background.setStrokeStyle(4, Colours.CYAN_HEX);
         this.add(background);
 
-		const coachImage = this.scene.add.image(270, -180, "spirit")
-		this.add(coachImage);
+        const coachImage = scene.add.image(270, -180, "spirit");
+        this.add(coachImage);
+    }
 
-        const creditsText = this.scene.add.text(-370, -320, "Help from the Turbovoid:", {
-            fontFamily: '"Press Start 2P"',
-            fontSize: '30px',
-            color: '#00ffff',
-            align: 'left',
-            wordWrap: { width: 760, useAdvancedWrap: true }
+    private createText(scene: Phaser.Scene) {
+        const textConfigs = [
+            { x: -370, y: -320, text: "Help from the Turbovoid:", fontSize: '30px', wordWrapWidth: 760 },
+            { x: -370, y: -230, text: `You will lose your current deck to the vast infiniteness of the turbovoid.`, wordWrapWidth: 560 },
+            { x: -370, y: -70, text: `These participation trophies are permanent upgrades to your starting deck, your players or your vibes.`, wordWrapWidth: 680 },
+            { x: -370, y: 115, text: `...were you waiting for something?`, wordWrapWidth: 760 },
+            { x: -370, y: 175, text: `Oh. We don't say the Throwdown catchphrase in the Turbovoid.`, wordWrapWidth: 760 }
+        ];
+
+        textConfigs.forEach(config => {
+            const text = TextFactory.createText(scene, config.x, config.y, config.text, {
+                fontSize: config.fontSize || '20px',
+                color: Colours.CYAN_STRING,
+                lineSpacing: 5,
+                wordWrap: { width: config.wordWrapWidth, useAdvancedWrap: true }
+            });
+            this.add(text);
         });
-        this.add(creditsText);
+    }
 
-		const helpText2 = this.scene.add.text(-370, -230, `You will lose your current deck to the vast infiniteness of the turbovoid.`, {
-            fontFamily: '"Press Start 2P"',
-            fontSize: '20px',
-            color: '#00ffff',
-            align: 'left',
-			lineSpacing: 5,
-            wordWrap: { width: 560, useAdvancedWrap: true }
-        });
-        this.add(helpText2);
-
-        const helpText1 = this.scene.add.text(-370, -70, `These participation trophies are permanent upgrades to your starting deck, your players or your vibes.`, {
-            fontFamily: '"Press Start 2P"',
-            fontSize: '20px',
-            color: '#00ffff',
-            align: 'left',
-			lineSpacing: 5,
-            wordWrap: { width: 680, useAdvancedWrap: true }
-        });
-        this.add(helpText1);
-
-		const helpText5 = this.scene.add.text(-370, 115, `...Were you waiting for something?`, {
-            fontFamily: '"Press Start 2P"',
-            fontSize: '20px',
-            color: '#00ffff',
-            align: 'left',
-            lineSpacing: 5,
-            wordWrap: { width: 760, useAdvancedWrap: true }
-        });
-        this.add(helpText5);
-
-		const helpText3 = this.scene.add.text(-370, 175, `Oh. We don't say the Throwdown catchphrase in the Turbovoid.`, {
-            fontFamily: '"Press Start 2P"',
-            fontSize: '20px',
-            color: '#00ffff',
-            align: 'left',
-            lineSpacing: 5,
-            wordWrap: { width: 760, useAdvancedWrap: true }
-        });
-        this.add(helpText3);
-
-        const closeButton = this.scene.add.text(0, 320, "Close", {
-            fontFamily: '"Press Start 2P"',
-            fontSize: '20px',
-            color: '#ff00ff',
+    private createCloseButton(scene: Phaser.Scene) {
+        const closeButton = TextFactory.createText(scene, 0, 320, "Close", {
+            color: Colours.MAGENTA_STRING,
             padding: { x: 10, y: 5 }
         }).setOrigin(0.5, 0.5).setInteractive({ useHandCursor: true });
 
@@ -75,13 +54,14 @@ export default class HelpPermUpgrade extends Phaser.GameObjects.Container {
         });
 
         closeButton.on('pointerover', () => {
-            this.scene.input.setDefaultCursor('pointer');
+            scene.input.setDefaultCursor('pointer');
         });
 
         closeButton.on('pointerout', () => {
-            this.scene.input.setDefaultCursor('default');
+            scene.input.setDefaultCursor('default');
         });
 
         this.add(closeButton);
     }
 }
+

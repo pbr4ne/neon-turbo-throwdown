@@ -34,7 +34,7 @@ export class BLockOfAges extends BetsyCard {
     }
 
     getDescription(): string {
-        return `Increase all block by ${this.getNumTurns()} this combat.`;
+        return `Increase all block by ${this.getNumTurns()} this match.`;
     }
 
     getNumTurns(): number {

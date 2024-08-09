@@ -1,16 +1,8 @@
-
-// You can write more code here
-
-/* START OF COMPILED CODE */
-
-/* START-USER-IMPORTS */
 import Card from "./Card";
 import { CardType } from "../cards/CardType";
 import Team from "./Team";
 import Player from "./Player";
 import { log } from "../utilities/GameUtils";
-import Game from "../scenes/Game";
-/* END-USER-IMPORTS */
 
 export default class Deck extends Phaser.GameObjects.Container {
     private cards: Card[];
@@ -62,6 +54,8 @@ export default class Deck extends Phaser.GameObjects.Container {
         this.cards.forEach((card, index) => {
             card.setPosition(x + index * offset, y + index * offset);
             this.add(card);
+            //so it's drawn overtop of the previous cards
+            card.reAddToScene();
         });
 
         this.updateTopCardInteraction();

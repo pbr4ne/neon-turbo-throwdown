@@ -2,6 +2,7 @@ import Phaser from "phaser";
 import Game from "./scenes/Game";
 import Preload from "./scenes/Preload";
 import Welcome from "./scenes/Welcome";
+import Init from "./scenes/Init";
 
 const game = new Phaser.Game({
     width: 1920,
@@ -14,10 +15,11 @@ const game = new Phaser.Game({
     physics: {
         default: "arcade",
     },
-    scene: [Preload, Welcome, Game],
+    scene: [Preload, Init, Welcome, Game],
     transparent: true,
+    input: {
+        activePointers: 3,
+    }
 });
 
 game.scene.start("Preload");
-
-

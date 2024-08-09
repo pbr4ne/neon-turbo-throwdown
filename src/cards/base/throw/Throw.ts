@@ -18,11 +18,12 @@ export class Throw extends CardType {
 
     attack(member: Member, target: Member | null, team: Team, opponentTeam: Team, overrideName?: string, overrideDamage?: number): boolean {
 
-        let anyNonMiss = true;
+        let anyNonMiss = false;
         let membersToTarget = this.getRandomAliveMembers(opponentTeam, target, this.getNumTargets() - 1);
 
         if (target) {
             if(this.attackMember(member, target, team, opponentTeam, true, true, overrideDamage)) {
+                anyNonMiss = true;
                 membersToTarget.forEach((enemyMember) => {
                     if(this.attackMember(member, enemyMember, team, opponentTeam, false, false)) {
                         anyNonMiss = true;
@@ -52,7 +53,7 @@ export class Throw extends CardType {
                 //reduce their HP if they failed to defend
                 let damage;
                 if (originalHit) {
-                    damage = this.getOffenseDamage(member, target, team);
+                    damage = this.getOffenseDamage(member, target, opponentTeam);
                     if (overrideDamage) {
                         damage = overrideDamage;
                     }
@@ -61,8 +62,8 @@ export class Throw extends CardType {
                 }
 
                 target.reduceHP(damage);
-                return true;
             }
+            return true;
         }
         return false;
     }
@@ -85,12 +86,17 @@ export class Throw extends CardType {
 
     getDescription(): string {
         const chancePercentage = this.getNicePercentage(this.getChanceToOffend());
-        const description = `Target 1 enemy for ${this.getOffenseDamage()} damage. ${chancePercentage}% effective.`
+        
+        let description = `Target 1 enemy for ${this.getOffenseDamage()} damage. ${chancePercentage}% effective.`;
+        
         if (this.getNumTargets() > 1) {
-            return description + ` Ricochets to ${this.getNumTargets() - 1} additional random target(s) for ${this.getRicochetDamage()} damage.`;
+            const additionalTargets = this.getNumTargets() - 1;
+            description += ` Ricochet to ${additionalTargets} additional random target${additionalTargets !== 1 ? 's' : ''} for ${this.getRicochetDamage()} damage.`;
         }
+    
         return description;
     }
+    
 
     getChanceToOffend(team?: Team): number {
         const modifiers = team?.getModifiers() || this.getPlayer()?.getModifiers();

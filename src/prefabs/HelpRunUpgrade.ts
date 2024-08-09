@@ -1,108 +1,55 @@
 import Phaser from "phaser";
+import TextFactory from "../utilities/TextUtils";
+import { Colours } from "../utilities/Colours";
 
 export default class HelpRunUpgrade extends Phaser.GameObjects.Container {
     constructor(scene: Phaser.Scene) {
         super(scene, 960, 540);
 
-        const blockInput = this.scene.add.rectangle(0, 0, 1920, 1080, 0x000000, 0.5).setOrigin(0.5, 0.5).setInteractive();
+        this.createBackground(scene);
+        this.createTexts(scene);
+        this.createCloseButton(scene);
+    }
+
+    private createBackground(scene: Phaser.Scene) {
+        const blockInput = scene.add.rectangle(0, 0, 1920, 1080, Colours.BLACK_HEX, 0.5).setOrigin(0.5, 0.5).setInteractive();
         this.add(blockInput);
 
-        const background = this.scene.add.rectangle(0, 0, 900, 700, 0x000000, 0.8).setOrigin(0.5, 0.5);
-        background.setStrokeStyle(4, 0x00ffff);
+        const background = scene.add.rectangle(0, 0, 900, 700, Colours.BLACK_HEX, 0.8).setOrigin(0.5, 0.5);
+        background.setStrokeStyle(4, Colours.CYAN_HEX);
         this.add(background);
 
-		const coachImage = this.scene.add.image(330, -180, "coach")
-		this.add(coachImage);
+        const coachImage = scene.add.image(330, -180, "coach");
+        this.add(coachImage);
+    }
 
-        const creditsText = this.scene.add.text(-420, -320, "Here, watch this tutor-reel:", {
-            fontFamily: '"Press Start 2P"',
-            fontSize: '30px',
-            color: '#ffffff',
-            align: 'left',
-            wordWrap: { width: 860, useAdvancedWrap: true }
+    private createTexts(scene: Phaser.Scene) {
+        const texts = [
+            { x: -420, y: -320, text: "Here, watch this tutor-reel:", fontSize: '30px', color: Colours.WHITE_STRING, wordWrap: { width: 860, useAdvancedWrap: true } },
+            { x: -420, y: -260, text: "You beat that coach!", color: Colours.CYAN_STRING, wordWrap: { width: 680, useAdvancedWrap: true } },
+            { x: -420, y: -200, text: "Now you can yoink cards from their deck to add to yours, OR upgrade some of your own.", color: Colours.CYAN_STRING, wordWrap: { width: 680, useAdvancedWrap: true } },
+            { x: -420, y: -100, text: "Watch out kid, because when you die,", color: Colours.CYAN_STRING, wordWrap: { width: 680, useAdvancedWrap: true } },
+            { x: -325, y: -75, text: "you die in real life!", color: Colours.MAGENTA_STRING, wordWrap: { width: 860, useAdvancedWrap: true } },
+            { x: -420, y: -35, text: "I mean... you lose all of the cards you nabbed. But don't worry, you'll get a little something to help you out on your next attempt.", color: Colours.CYAN_STRING, wordWrap: { width: 860, useAdvancedWrap: true } },
+            { x: -420, y: 115, text: "Say it with me, kid!", color: Colours.CYAN_STRING, wordWrap: { width: 860, useAdvancedWrap: true } },
+            { x: -420, y: 155, text: "* Evasion\n* Envision\n* Evasion again", color: Colours.YELLOW_STRING, wordWrap: { width: 860, useAdvancedWrap: true } }
+        ];
+
+        texts.forEach(config => {
+            const text = TextFactory.createText(scene, config.x, config.y, config.text, {
+                fontSize: config.fontSize || '20px',
+                color: config.color,
+                lineSpacing: 5,
+                wordWrap: config.wordWrap
+            });
+            this.add(text);
         });
-        this.add(creditsText);
+    }
 
-        const helpText1 = this.scene.add.text(-420, -260, `You beat that coach!`, {
-            fontFamily: '"Press Start 2P"',
+    private createCloseButton(scene: Phaser.Scene) {
+        const closeButton = TextFactory.createText(scene, 0, 320, "Close", {
             fontSize: '20px',
-            color: '#00ffff',
-            align: 'left',
-			lineSpacing: 5,
-            wordWrap: { width: 680, useAdvancedWrap: true }
-        });
-        this.add(helpText1);
-
-		const helpText2 = this.scene.add.text(-420, -200, `Now you can yoink cards from their deck to add to yours, OR upgrade some of your own.`, {
-            fontFamily: '"Press Start 2P"',
-            fontSize: '20px',
-            color: '#00ffff',
-            align: 'left',
-			lineSpacing: 5,
-            wordWrap: { width: 680, useAdvancedWrap: true }
-        });
-        this.add(helpText2);
-
-		const helpText2b = this.scene.add.text(-420, -100, `Watch out kid, because when you die,`, {
-            fontFamily: '"Press Start 2P"',
-            fontSize: '20px',
-            color: '#00ffff',
-            align: 'left',
-			lineSpacing: 5,
-            wordWrap: { width: 680, useAdvancedWrap: true }
-        });
-        this.add(helpText2b);
-
-        const helpText1post = this.scene.add.text(-325, -75, `you die in real life!`, {
-            fontFamily: '"Press Start 2P"',
-            fontSize: '20px',
-            color: '#ff00ff',
-            align: 'left',
-            wordWrap: { width: 860, useAdvancedWrap: true }
-        });
-
-        this.add(helpText1post);
-
-		const helpText2c = this.scene.add.text(-420, -35, `I mean... you lose all of the cards you nabbed. But don't worry, you'll get a little something to help you out on your next attempt.`, {
-            fontFamily: '"Press Start 2P"',
-            fontSize: '20px',
-            color: '#00ffff',
-            align: 'left',
-			lineSpacing: 5,
-            wordWrap: { width: 860, useAdvancedWrap: true }
-        });
-
-        this.add(helpText2c);
-		
-
-		const helpText3 = this.scene.add.text(-420, 115, `Say it with me, kid!`, {
-            fontFamily: '"Press Start 2P"',
-            fontSize: '20px',
-            color: '#00ffff',
-            align: 'left',
-            lineSpacing: 5,
-            wordWrap: { width: 860, useAdvancedWrap: true }
-        });
-        this.add(helpText3);
-
-		const helpText4 = this.scene.add.text(-420, 155, `
-            * Evasion
-            \n* Envision
-            \n* Evasion again`, {
-            fontFamily: '"Press Start 2P"',
-            fontSize: '20px',
-            color: '#ffff00',
-            align: 'left',
-            wordWrap: { width: 860, useAdvancedWrap: true }
-        });
-        this.add(helpText4);
-
-		
-
-        const closeButton = this.scene.add.text(0, 320, "Close", {
-            fontFamily: '"Press Start 2P"',
-            fontSize: '20px',
-            color: '#ff00ff',
+            color: Colours.MAGENTA_STRING,
             padding: { x: 10, y: 5 }
         }).setOrigin(0.5, 0.5).setInteractive({ useHandCursor: true });
 
@@ -111,11 +58,11 @@ export default class HelpRunUpgrade extends Phaser.GameObjects.Container {
         });
 
         closeButton.on('pointerover', () => {
-            this.scene.input.setDefaultCursor('pointer');
+            scene.input.setDefaultCursor('pointer');
         });
 
         closeButton.on('pointerout', () => {
-            this.scene.input.setDefaultCursor('default');
+            scene.input.setDefaultCursor('default');
         });
 
         this.add(closeButton);

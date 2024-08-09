@@ -1,11 +1,9 @@
 {
-    "id": "343cd187-34b1-4df7-9aec-75fdad2977ba",
+    "id": "ea9d54d7-4329-4b27-953c-49ad3bb57e11",
     "sceneType": "PREFAB",
     "settings": {
         "exportClass": true,
         "autoImport": true,
-        "prefabObjDisplayFmt": "Open URL \"${url}\"",
-        "displayName": "Open URL Action",
         "preloadMethodName": "",
         "preloadPackFiles": [],
         "createMethodName": "",
@@ -15,9 +13,14 @@
     },
     "displayList": [
         {
-            "type": "ScriptNode",
-            "id": "aec327f5-9205-4cd0-8a59-20515309e49a",
-            "label": "scriptnode_1"
+            "type": "Image",
+            "id": "bd05bb08-73b6-46e1-ac73-d17a5adb0cd7",
+            "label": "settings",
+            "texture": {
+                "key": "settings"
+            },
+            "x": 78,
+            "y": 67
         }
     ],
     "plainObjects": [],
@@ -26,17 +29,5 @@
         "url": "https://phasereditor2d.com",
         "contentType": "phasereditor2d.core.scene.SceneContentType",
         "version": 5
-    },
-    "prefabProperties": [
-        {
-            "name": "url",
-            "label": "URL",
-            "tooltip": "The url to open.",
-            "defValue": "",
-            "customDefinition": false,
-            "type": {
-                "id": "string"
-            }
-        }
-    ]
+    }
 }

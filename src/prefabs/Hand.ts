@@ -1,16 +1,9 @@
-
-// You can write more code here
-
-/* START OF COMPILED CODE */
-
 import Card from "./Card";
 import Game from "../scenes/Game";
 import Member from "./Member";
 import { GameSteps } from '../throwdown/GameSteps';
 import { log } from "../utilities/GameUtils";
 import { GameSounds } from "../utilities/GameSounds";
-/* START-USER-IMPORTS */
-/* END-USER-IMPORTS */
 
 export default class Hand {
     private scene: Phaser.Scene;
@@ -18,7 +11,6 @@ export default class Hand {
     private cardsInPlay: Card[];
     private maxCards: number;
     private poppedUpCard: Card | null;
-    private selectedCard: Card | null;
     private renderOnScreen: boolean;
 
     constructor(scene: Phaser.Scene, maxCards: number = 5, renderOnScreen: boolean = true) {
@@ -27,7 +19,6 @@ export default class Hand {
         this.cardsInPlay = [];
         this.maxCards = maxCards;
         this.poppedUpCard = null;
-        this.selectedCard = null;
         this.renderOnScreen = renderOnScreen;
     }
 
@@ -51,11 +42,9 @@ export default class Hand {
     }
 
     arrangeCardPositions() {
-        const screenWidth = this.scene.scale.width;
         const screenHeight = this.scene.scale.height;
         const cardSpacing = 20;
         const cardWidth = 182;
-        const totalWidth = this.cards.length * cardWidth + (this.cards.length - 1) * cardSpacing;
         let startX = 556;
         if (!this.renderOnScreen) {
             startX = 3000;
@@ -96,14 +85,12 @@ export default class Hand {
             this.poppedUpCard.togglePopUp();
             if (this.poppedUpCard === card) {
                 this.poppedUpCard = null;
-                this.selectedCard = null;
                 return;
             }
         }
         card.togglePopUp();
 
         this.poppedUpCard = card;
-        this.selectedCard = card;
 
         if (currentStep === GameSteps.SELECT_CARD) {
             (this.scene.scene.get('Game') as Game).throwdown.nextStep();

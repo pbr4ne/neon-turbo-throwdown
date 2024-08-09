@@ -9,14 +9,16 @@ import PermUpgrade from "../prefabs/PermUpgrade";
 import Throwdown from "../prefabs/Throwdown";
 import { checkUrlParam, getUrlParam, log } from "../utilities/GameUtils";
 import { Library } from "../throwdown/Library";
+import BaseScene from "./BaseScene";
 
-export default class Game extends Phaser.Scene {
+export default class Game extends BaseScene {
 
 	constructor() {
 		super("Game");
 	}
 
 	editorCreate(): void {
+        super.create();
 
 		let courtImage = this.add.image(953, 443, "court");
         courtImage.setDepth(-20);
@@ -30,13 +32,12 @@ export default class Game extends Phaser.Scene {
     private runUpgrade!: RunUpgrade;
     private permUpgrade!: PermUpgrade;
     private currentCoach: Coach = CoachList.primo;
-    private cardDescription!: Phaser.GameObjects.Text;
     public throwdown!: Throwdown;
 
-	create() {
-		this.editorCreate();
+    create() {
+        this.editorCreate();
 
-		this.dialogLayer = this.add.layer();
+        this.dialogLayer = this.add.layer();
 
         this.player = new Player(this);
         this.player.addMembers();
@@ -49,37 +50,14 @@ export default class Game extends Phaser.Scene {
             this.currentCoach = CoachList.primo;
         }
 
-        CoachList.primo.setDialogue(DialogueStorage.primoDialogue);
-        CoachList.sporticus.setDialogue(DialogueStorage.sporticusDialogue);
-        CoachList.tycoon.setDialogue(DialogueStorage.tycoonDialogue);
-        CoachList.office.setDialogue(DialogueStorage.officeDialogue);
-        CoachList.sgtsteve.setDialogue(DialogueStorage.sgtsteveDialogue);
-        CoachList.betsy.setDialogue(DialogueStorage.betsyDialogue);
-        CoachList.coree.setDialogue(DialogueStorage.coreeDialogue);
-        CoachList.turbonerd.setDialogue(DialogueStorage.turbonerdDialogue);
-        CoachList.shadowken.setDialogue(DialogueStorage.shadowkenDialogue);
-        CoachList.boss10.setDialogue(DialogueStorage.boss10Dialogue);
-
-        this.cardDescription = new Phaser.GameObjects.Text(this, 1500, 740, "", {
-			fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
-			fontSize: '16px',
-			color: '#00ffff',
-			padding: { x: 5, y: 5 },
-			align: 'left'
-		});
-        this.cardDescription.setWordWrapWidth(400);
-		this.dialogLayer.add(this.cardDescription);
-
+        
+    
         if (checkUrlParam("skipIntro", "true")) {
             this.throwdown = new Throwdown(this, this.currentCoach, this.player);
             this.player.setThrowdown(this.throwdown);
         } else {
             this.doDialogue(this.currentCoach, "intro", true);
         }
-    }
-
-    setCardDescription(description: string) {
-        this.cardDescription.setText(description);
     }
 
     doDialogue(coach: Coach, type: string, initial: boolean = false, spiritCoachDialogue: boolean = false) {
@@ -118,7 +96,7 @@ export default class Game extends Phaser.Scene {
             this.throwdown.destroy();
             Library.incrementNumRuns();
             Library.setWon(true);
-            this.scene.start('Welcome');
+            this.scene.start('Init');
         }
 
         DialogueStorage.saveDialogues();
@@ -165,6 +143,6 @@ export default class Game extends Phaser.Scene {
         this.permUpgrade?.destroyEverything();
         this.permUpgrade?.destroy();
 
-        this.scene.start('Welcome');
+        this.scene.start('Init');
     }
 }

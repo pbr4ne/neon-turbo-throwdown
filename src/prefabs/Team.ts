@@ -1,10 +1,4 @@
-
-// You can write more code here
-
-/* START OF COMPILED CODE */
-
 import Phaser from "phaser";
-/* START-USER-IMPORTS */
 import Card from "./Card";
 import Deck from "./Deck";
 import Hand from "./Hand";
@@ -23,23 +17,19 @@ import { HealthRegen3 } from "../trophies/member/HealthRegen3";
 import { HealthRegen2 } from "../trophies/member/HealthRegen2";
 import { TrophyType } from "../trophies/TrophyType";
 import Boss from "./Boss";
-/* END-USER-IMPORTS */
 
 export default abstract class Team extends Phaser.GameObjects.Container {
 
 	constructor(scene: Phaser.Scene, visibleCards: boolean) {
 		super(scene);
 
-		/* START-USER-CTR-CODE */
 		this.visibleCards = visibleCards;
 		this.members = [];
         this.deck = new Deck(scene, visibleCards);
         this.discardPile = new Deck(scene, false);
         this.hand = new Hand(scene, 5, visibleCards);
-      	/* END-USER-CTR-CODE */
 	}
 
-	/* START-USER-CODE */
 	public deck!: Deck;
     public discardPile!: Deck;
     public hand!: Hand;
@@ -68,7 +58,7 @@ export default abstract class Team extends Phaser.GameObjects.Container {
         return this.modifiers;
     }
 
-    onDeckClick() {
+    async onDeckClick() {
         if (this.throwdown.getCurrentStep() != GameSteps.DRAW_CARDS) {
             log("can't draw cards now");
             return;
@@ -87,6 +77,9 @@ export default abstract class Team extends Phaser.GameObjects.Container {
                     this.hand.handleCardClick(topCard, this.members);
                 });
             }
+
+            await this.pause(50);
+            this.onDeckClick();
         }
     }
 
@@ -122,7 +115,7 @@ export default abstract class Team extends Phaser.GameObjects.Container {
                 this.deck.addCard(freshCard);
             }
         }
-        //this.deck.shuffle();
+        this.deck.shuffle();
         //log the size of the deck
         log(`CURRENT ${this} DISCARD PILE SIZE AFTER RECOMBINE: ${this.discardPile.getCards().length}`);
         log(`CURRENT ${this} DECK SIZE AFTER RECOMBINE: ${this.deck.getCards().length}`);
@@ -209,22 +202,26 @@ export default abstract class Team extends Phaser.GameObjects.Container {
             numToHeal = 3;
         } else if (this.hasTrophy(HealthRegen2)) {
             numToHeal = 2;
-        }
-        else if(this.hasTrophy(HealthRegen1)) {
+        } else if (this.hasTrophy(HealthRegen1)) {
             numToHeal = 1;
         }
 
-        this.getMostInjuredMembers(numToHeal).forEach(member => {
+        const membersToHeal = this.getMostInjuredMembers(numToHeal);
+    
+        for (const member of membersToHeal) {
             member.showFloatingAction("health regen!");
             member.increaseHP(1);
-            this.pause(Library.getIdleTurnDelay());
-        });
+            await this.pause(Library.getIdleTurnDelay());
+        }
     }
 
     async executeSpecialPhase() {
         log("Executing Special Phase");
-        this.resurrectPhase();
-        this.healPhase();
+        if (this instanceof Player) {
+            await this.pause(Library.getIdleTurnDelay()/2); 
+        }
+        await this.resurrectPhase();
+        await this.healPhase();
         for (const member of this.members) {
             const card = member.getAssignedCard();
             const target = member.getIntendedTarget();
@@ -233,9 +230,9 @@ export default abstract class Team extends Phaser.GameObjects.Container {
                 const cardType = card.getCardType();
                 log(cardType.getPhase());
                 if (cardType.getPhase() == ThrowdownPhase.SPECIAL) {
-                    await this.pause(Library.getIdleTurnDelay()); 
                     cardType.special(member, target, this, this.opponent); 
                     log(`SPECIAL: ${member}`);
+                    await this.pause(Library.getIdleTurnDelay()); 
                 } else {
                     log(`No special for ${cardType.getName()}`);
                 }
@@ -253,14 +250,14 @@ export default abstract class Team extends Phaser.GameObjects.Container {
                 const cardType = card.getCardType();
                 if (cardType.getPhase() == ThrowdownPhase.ATTACK) {
                     //member.drawTargetArc(target, true, this);
-                    await this.pause(Library.getIdleTurnDelay()); 
                     card.getCardType().attack(member, target, this, this.opponent); 
                     log(`OFFENSE: ${member} attacks ${target}`);
                     member.setIntendedTarget(null);
+                    await this.pause(Library.getIdleTurnDelay()); 
                 }
             }
         }
-        await this.pause(Library.getIdleTurnDelay()/2); 
+        
     }
     
     pause(ms: number) {
@@ -274,9 +271,4 @@ export default abstract class Team extends Phaser.GameObjects.Container {
     toString(): string {
         return this instanceof Player ? "Player" : "Boss";
     }
-	/* END-USER-CODE */
 }
-
-/* END OF COMPILED CODE */
-
-// You can write more code here

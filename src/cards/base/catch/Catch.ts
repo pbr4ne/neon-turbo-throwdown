@@ -4,15 +4,13 @@ import Team from "../../../prefabs/Team";
 import { GameSounds } from "../../../utilities/GameSounds";
 import { log } from "../../../utilities/GameUtils";
 import { CardKeys } from "../../CardKeys";
-import Player from "../../../prefabs/Player";
-import { CoachList } from "../../../throwdown/CoachList";
 import { ThrowdownPhase } from "../../../throwdown/ThrowdownPhase";
 
 export class Catch extends CardType {
     protected chanceToDefend : number = 0.50;
     protected defenseDamage: number = 2;
     protected ricochetDamage: number = 1;
-    protected currentNumDefends: number = 1;
+    protected currentNumDefends: number = 0;
     protected reboundTargets: number = 1;
     protected numDefends = 1;
 
@@ -27,7 +25,7 @@ export class Catch extends CardType {
 
     defense(member: Member, attacker: Member, team: Team, opponentTeam: Team, canRetaliate: boolean, overrideName?: string): boolean {
         let defenseSuccess = false;
-        if (this.getCurrentNumDefends() <= this.getNumDefends() && this.getChanceToDefend(team) >= Math.random()) {
+        if (this.getCurrentNumDefends() < this.getNumDefends() && this.getChanceToDefend(team) >= Math.random()) {
             member.showFloatingAction(overrideName ? overrideName : this.getName());
 
             if (canRetaliate) {
@@ -95,9 +93,11 @@ export class Catch extends CardType {
 
     getDescription(): string {
         const niceChanceToDefend = this.getNicePercentage(this.getChanceToDefend());
-        let description = `Catches ${this.getNumDefends()} attack(s). ${niceChanceToDefend}% effective. If successful, rebound ${this.getDefenseDamage()} damage to attacker.`;
+        let description = `Catch ${this.getNumDefends()} attack${this.getNumDefends() !== 1 ? 's' : ''}. ${niceChanceToDefend}% effective. If successful, rebound ${this.getDefenseDamage()} damage to attacker.`;
+
         if (this.getReboundTargets() > 1) {
-            description += ` Also deals ${this.getRicochetDamage()} damage to ${this.getReboundTargets() - 1} random enem(ies).`;
+            const numEnemies = this.getReboundTargets() - 1;
+            description += ` Also deal ${this.getRicochetDamage()} damage to ${numEnemies} random ${numEnemies > 1 ? 'enemies' : 'enemy'}.`;
         }
         return description;
     }

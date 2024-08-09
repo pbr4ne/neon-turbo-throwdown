@@ -1,10 +1,4 @@
-
-// You can write more code here
-
-/* START OF COMPILED CODE */
-
 import Phaser from "phaser";
-/* START-USER-IMPORTS */
 import Member from "./Member";
 import Player from "./Player";
 import Team from "./Team";
@@ -12,7 +6,6 @@ import { Coach } from "../throwdown/Coach";
 import { CardType } from "../cards/CardType";
 import FloatingObjectScript from "../script-nodes/ui/FloatingObjectScript";
 import { log } from "../utilities/GameUtils";
-/* END-USER-IMPORTS */
 
 export default class Boss extends Team {
 
@@ -20,12 +13,10 @@ export default class Boss extends Team {
         super(scene, false);
 
         this.coach = coach;
-        /* START-USER-CTR-CODE */
         const bossImage = new Phaser.GameObjects.Image(scene, 1855, 78, coach.getAvatar())
             .setOrigin(1, 0)
             .setScale(1.2);
         this.add(bossImage);
-        /* END-USER-CTR-CODE */
     }
 
     private coach: Coach;
@@ -56,9 +47,7 @@ export default class Boss extends Team {
             }
         });
     }
-
-    /* START-USER-CODE */
-    
+  
     assignRandomCardsToMembers() {
         this.members.forEach(member => {
             if (member.getHP() <= 0) {
@@ -126,9 +115,4 @@ export default class Boss extends Team {
         }
         return null;
     }
-    /* END-USER-CODE */
 }
-
-/* END OF COMPILED CODE */
-
-// You can write more code here

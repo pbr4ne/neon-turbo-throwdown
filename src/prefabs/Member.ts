@@ -2,14 +2,11 @@ import Phaser from "phaser";
 import Card from "./Card";
 import Team from "./Team";
 import Game from "../scenes/Game";
-import { GameSteps } from "../throwdown/GameSteps";
-import { checkUrlParam, log } from "../utilities/GameUtils";
 import Boss from "./Boss";
+import Player from "./Player";
 import { Coach } from "../throwdown/Coach";
-import { TrophyType } from "../trophies/TrophyType";
-import { CoachList } from "../throwdown/CoachList";
 import { Library } from "../throwdown/Library";
-
+import { TrophyType } from "../trophies/TrophyType";
 import { SeeCards1 } from "../trophies/insight/SeeCards1";
 import { SeeCards2 } from "../trophies/insight/SeeCards2";
 import { SeeCards3 } from "../trophies/insight/SeeCards3";
@@ -18,17 +15,16 @@ import { SeeTargets1 } from "../trophies/insight/SeeTargets1";
 import { SeeTargets2 } from "../trophies/insight/SeeTargets2";
 import { SeeTargets3 } from "../trophies/insight/SeeTargets3";
 import { SeeTargets4 } from "../trophies/insight/SeeTargets4";
-import Player from "./Player";
 import { IncreaseHP1 } from "../trophies/member/IncreaseHP1";
 import { IncreaseHP2 } from "../trophies/member/IncreaseHP2";
-import { HealthRegen1 } from "../trophies/member/HealthRegen1";
-import { HealthRegen2 } from "../trophies/member/HealthRegen2";
-import { HealthRegen3 } from "../trophies/member/HealthRegen3";
-import { Resurrect1 } from "../trophies/member/Resurrect1";
 import { SeeHealth1 } from "../trophies/insight/SeeHealth1";
 import { SeeHealth2 } from "../trophies/insight/SeeHealth2";
 import { SeeHealth3 } from "../trophies/insight/SeeHealth3";
 import { SeeHealth4 } from "../trophies/insight/SeeHealth4";
+import { GameSteps } from "../throwdown/GameSteps";
+import { checkUrlParam, log } from "../utilities/GameUtils";
+import TextFactory from "../utilities/TextUtils";
+import { Colours } from "../utilities/Colours";
 
 export default class Member extends Phaser.GameObjects.Container {
     public sprite: Phaser.GameObjects.Sprite;
@@ -51,6 +47,9 @@ export default class Member extends Phaser.GameObjects.Container {
     private targetArc: Phaser.GameObjects.Graphics | null = null;
     private tooltipText: Phaser.GameObjects.Text;
     private tooltipImage: Phaser.GameObjects.Image;
+    private tooltipMinHeight: number = 236;
+    private tooltipMinWidth: number = 391;
+    private initialTooltipY: number;
 
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string, visibleMove: boolean, team: Team, coach: Coach, number: number, flip: boolean = false, bracketOffset: number = 0) {
         super(scene, x, y);
@@ -101,54 +100,47 @@ export default class Member extends Phaser.GameObjects.Container {
         this.add(this.assignedBlock);
         this.assignedBlock.setVisible(false);
 
-        this.assignedBlockText = new Phaser.GameObjects.Text(scene, assignedBlockX, 150 - bracketOffset, "", {
-            fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
+        this.assignedBlockText = TextFactory.createText(scene, assignedBlockX, 150 - bracketOffset, "", {
             fontSize: '14px',
-            color: '#000000',
+            color: Colours.BLACK_STRING,
             padding: { x: 5, y: 5 },
             align: 'center'
         });
         this.assignedBlockText.setOrigin(0.5, 0.5);
         this.add(this.assignedBlockText);
 
-        this.assignedText = new Phaser.GameObjects.Text(scene, 0, 150 - bracketOffset, "", {
-            fontFamily: '"Press Start 2P"', //needs the quotes because of the 2
+        this.assignedText = TextFactory.createText(scene, 0, 150 - bracketOffset, "", {
             fontSize: '14px',
-            color: '#ffff00',
+            color: Colours.YELLOW_STRING,
             padding: { x: 5, y: 5 },
             align: 'center',
             wordWrap: { width: 100, useAdvancedWrap: true }
         });
         this.assignedText.setOrigin(0.5, 0.5);
-        //this.assignedText.setWordWrapWidth(100);
         this.add(this.assignedText);
 
         this.healthBar = new Phaser.GameObjects.Graphics(scene);
         this.add(this.healthBar);
         this.healthBar.setVisible(false);
-        this.questionMark = this.scene.add.text(
-            0, 
-            0, 
-            '?', {
-                fontFamily: '"Press Start 2P"',
-                fontSize: '12px',
-                color: '#ff005a',
-                align: 'center'
-            }
-        ).setOrigin(0.5);
+        this.questionMark = TextFactory.createText(this.scene, 0, 0, '?', {
+            fontSize: '12px',
+            color: Colours.RED_STRING,
+            align: 'center'
+        }).setOrigin(0.5);
         this.add(this.questionMark);
         this.questionMark.setVisible(false);
         this.updateHealthBar();
 
+        this.tooltipMinHeight = 236;
+        this.tooltipMinWidth = 391;
         this.tooltipImage = new Phaser.GameObjects.Image(scene, 0, 225, 'tooltip');
         this.tooltipImage.setFlipY(true);
+        this.tooltipImage.setDisplaySize(this.tooltipMinWidth, this.tooltipMinHeight);
+        this.initialTooltipY = this.tooltipImage.y;
 
-        let fontSize = 16;
-
-        this.tooltipText = new Phaser.GameObjects.Text(scene, -170, 160, "test", { 
-            fontFamily: '"Press Start 2P"',
+        this.tooltipText = TextFactory.createText(scene, -170, 160, "test", {
             fontSize: '16px',
-            color: '#00ffff',
+            color: Colours.CYAN_STRING,
             lineSpacing: 15,
             padding: { x: 5, y: 5 },
             align: 'left',
@@ -157,11 +149,6 @@ export default class Member extends Phaser.GameObjects.Container {
         this.tooltipText.setOrigin(0, 0);
         this.tooltipText.setVisible(false);
         this.tooltipImage.setVisible(false);
-
-        while (this.tooltipText.height + 90 > this.tooltipImage.height) {
-            fontSize--;
-            this.tooltipText.setStyle({ fontSize: `${fontSize}px` });
-        }
 
         this.add([this.tooltipImage, this.tooltipText]);
     
@@ -206,13 +193,26 @@ export default class Member extends Phaser.GameObjects.Container {
         }
 
         this.tooltipText.setText(description);
-        
-        let fontSize = 16;
     
-        while (this.tooltipText.height + 90 > this.tooltipImage.height) {
-            fontSize--;
-            this.tooltipText.setStyle({ fontSize: `${fontSize}px` });
-        }
+        let fontSize = 16;
+        this.tooltipText.setStyle({ fontSize: `${fontSize}px` });
+    
+        let requiredWidth = Math.max(this.tooltipText.width + 40, this.tooltipMinWidth);
+        let requiredHeight = Math.max(this.tooltipText.height + 90, this.tooltipMinHeight);
+    
+        this.tooltipImage.setDisplaySize(requiredWidth, requiredHeight);
+    
+        this.tooltipImage.setPosition(
+            this.tooltipImage.x, 
+            this.initialTooltipY - (this.tooltipMinHeight - requiredHeight) / 2
+        );
+    
+        this.tooltipText.setOrigin(0, 0);
+    
+        this.tooltipText.setPosition(
+            this.tooltipImage.x - requiredWidth / 2 + 30,
+            this.tooltipImage.y - requiredHeight / 2 + 55
+        );
     }
 
     showAssignedStuff() {
@@ -274,7 +274,7 @@ export default class Member extends Phaser.GameObjects.Container {
             const currentHP = this.hp < 0 ? 0 : this.hp;
             const currentHealthWidth = (currentHP / this.maxHP) * healthBarWidth;
     
-            this.healthBar.fillStyle(0xff005a, 1);
+            this.healthBar.fillStyle(Colours.RED_HEX, 1);
             this.healthBar.fillRect(-healthBarWidth / 2, healthBarY, currentHealthWidth, healthBarHeight);
         } else {
             this.questionMark.setPosition(0, healthBarY + 2.5);
@@ -282,7 +282,7 @@ export default class Member extends Phaser.GameObjects.Container {
     
         const capWidth = 2;
         const capHeight = healthBarHeight + 2; 
-        this.healthBar.fillStyle(0xffffff, 1);
+        this.healthBar.fillStyle(Colours.WHITE_HEX, 1);
         this.healthBar.fillRect(-healthBarWidth / 2 - capWidth, healthBarY - 1, capWidth, capHeight);
         this.healthBar.fillRect(healthBarWidth / 2, healthBarY - 1, capWidth, capHeight);
     }
@@ -339,13 +339,13 @@ export default class Member extends Phaser.GameObjects.Container {
         const endX = target.x;
         const endY = target.y;
     
-        let lineColour = 0xffff00;
+        let lineColour = Colours.YELLOW_HEX;
         let offsetX = 0;
         let offsetY = 0;
         let controlYOffset = -50;
     
         if (team && team instanceof Boss) {
-            lineColour = 0x00ffff;
+            lineColour = Colours.CYAN_HEX;
             offsetX = 10;
             offsetY = 10;
             controlYOffset = -100;
@@ -392,9 +392,6 @@ export default class Member extends Phaser.GameObjects.Container {
         this.targetArc.fillCircle(endX, endY, circleRadius);
     }
     
-    
-     
-
     clearTargetArc() {
         if (this.targetArc) {
             this.targetArc.clear();
@@ -505,7 +502,7 @@ export default class Member extends Phaser.GameObjects.Container {
             this.off("pointerdown");
         }
         this.updateHealthBar();
-        this.showFloatingAction((amount * -1).toString(), "#ff005a", true, 1);
+        this.showFloatingAction((amount * -1).toString(), Colours.RED_STRING, true, 1);
     }
 
     increaseHP(amount: number) {
@@ -537,7 +534,7 @@ export default class Member extends Phaser.GameObjects.Container {
         this.showFloatingAction(`+${displayAmount}`, "#00ff00", true, 1);
     }
 
-    showFloatingAction(action: string, color: string = '#ffffff', large: boolean = false, incrementIndex: number = 0) {
+    showFloatingAction(action: string, color: string = Colours.WHITE_STRING, large: boolean = false, incrementIndex: number = 0) {
         log(`${this} shows floating action: ${action}`);
         if (!this.scene) {
             return;
@@ -550,10 +547,9 @@ export default class Member extends Phaser.GameObjects.Container {
             fontSize = '36px';
         }
 
-        const actionText = this.scene.add.text(this.x, this.y - this.sprite.height / 2 + yOffset, action, {
-            fontFamily: '"Press Start 2P"',
+        const actionText = TextFactory.createText(this.scene, this.x, this.y - this.sprite.height / 2 + yOffset, action, {
             fontSize,
-            color: color,
+            color,
         }).setOrigin(0.5);
     
         this.scene.add.tween({

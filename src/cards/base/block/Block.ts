@@ -9,7 +9,7 @@ import { ThrowdownPhase } from "../../../throwdown/ThrowdownPhase";
 export class Block extends CardType {
     protected chanceToDefend : number = 0.50;
     protected defenseDamage: number = 1;
-    protected currentNumDefends: number = 1;
+    protected currentNumDefends: number = 0;
     protected numDefends = 1;
 
     constructor(key: CardKeys = CardKeys.BLOCK_1, upgradeKey: CardKeys | null = CardKeys.BLOCK_2) {
@@ -86,6 +86,6 @@ export class Block extends CardType {
 
     getDescription(): string {
         const niceChanceToDefend = this.getNicePercentage(this.getChanceToDefend());
-        return `Blocks ${this.getNumDefends()} attack(s). ${niceChanceToDefend}% effective. If successful, rebound ${this.getDefenseDamage()} damage.`;
+        return `Block ${this.getNumDefends()} attack${this.getNumDefends() !== 1 ? 's' : ''}. ${niceChanceToDefend}% effective. If successful, rebound ${this.getDefenseDamage()} damage.`;
     }
 }

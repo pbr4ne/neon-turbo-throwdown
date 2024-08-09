@@ -63,40 +63,26 @@ export default class Preload extends Phaser.Scene {
 		CardFactory.registerCardTypes();
 		TrophyFactory.registerTrophyTypes();
 
-		//if (checkUrlParam("enableSaveLoad", "true")) {
-			await StorageManager.initializeDB();
-			await StorageManager.loadTrophyTypes();
-			await StorageManager.loadRunCount();	
-			await DialogueStorage.loadDialogues();
-		//}
+		await StorageManager.initializeDB();
+		await StorageManager.loadTrophyTypes();
+		await StorageManager.loadRunCount();	
+		await DialogueStorage.loadDialogues();
+		await StorageManager.loadPureDeck();
+
+		if(Library.getPureDeck().length === 0) {
+			Library.resetPureDeck();
+		}
 
 		new DialogueStorage();
         CoachList.setupCoachDecks();
 
-		//if (checkUrlParam("enableSaveLoad", "true")) {
-			await StorageManager.loadBaseDeck();
-		//}
-
-		if (checkUrlParam("mode", "easy")) {
-			Library.setEasyMode(true);
-		}
-
-		if (checkUrlParam("idleMode", "true")) {
-			Library.setIdleMode(true);
-		}
-
-		//set your base cards to the 'pure' deck for this permrun
-		//CoachList.you.setBaseCards(Library.getPureDeck());
-		Library.setPureDeck(CoachList.you.getBaseCards());
-		//log every trophy in outstandingtrophylist
-		log("Outstanding Trophies Before: " + OutstandingTrophyList.getTrophyTypes().map(t => t.getKey()).join(", "));
+		OutstandingTrophyList.resetTrophyTypes();
 		OutstandingTrophyList.removeTrophies(Library.getTrophyTypes());
-		log("Outstanding Trophies After: " + OutstandingTrophyList.getTrophyTypes().map(t => t.getKey()).join(", "));
 
 		//all unlocks
 		if (checkUrlParam("allTrophiesUnlocked", "true")) {
 			Library.setTrophyTypes(TrophyFactory.getAllTrophyTypes());
-			CoachList.you.setBaseCards([
+			Library.setPureDeck([
 				CardFactory.createCardType(CardKeys.THROW_6),
 				CardFactory.createCardType(CardKeys.THROW_6),
 				CardFactory.createCardType(CardKeys.THROW_6),
@@ -115,11 +101,7 @@ export default class Preload extends Phaser.Scene {
 
 	create() {
 		this.loadFonts(() => {
-			if (checkUrlParam("skipWelcome", "true")) {
-				this.scene.start("Game");
-			} else {
-				this.scene.start("Welcome");
-			}
+			this.scene.start("Init");
 		});
 	}
 
