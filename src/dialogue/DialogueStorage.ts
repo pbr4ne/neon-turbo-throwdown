@@ -315,7 +315,7 @@ export class DialogueStorage {
 
         //win
         //1
-        officeWinDialogue1.addStep("This will reflect well in your performance review", CoachList.office);
+        officeWinDialogue1.addStep("This will reflect well in your performance review.", CoachList.office);
         officeWinDialogue1.addStep(["You're not the boss of me", "Whatever, Shoulderpads.", "Thanks, Boss"], CoachList.you);
         //2
         officeWinDialogue2.addStep("...CCing the regional director on your kudos.", CoachList.office);
