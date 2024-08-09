@@ -202,23 +202,26 @@ export default abstract class Team extends Phaser.GameObjects.Container {
             numToHeal = 3;
         } else if (this.hasTrophy(HealthRegen2)) {
             numToHeal = 2;
-        }
-        else if(this.hasTrophy(HealthRegen1)) {
+        } else if (this.hasTrophy(HealthRegen1)) {
             numToHeal = 1;
         }
 
-        this.getMostInjuredMembers(numToHeal).forEach(member => {
+        const membersToHeal = this.getMostInjuredMembers(numToHeal);
+    
+        for (const member of membersToHeal) {
             member.showFloatingAction("health regen!");
             member.increaseHP(1);
-            this.pause(Library.getIdleTurnDelay());
-        });
+            await this.pause(Library.getIdleTurnDelay());
+        }
     }
 
     async executeSpecialPhase() {
         log("Executing Special Phase");
-        await this.pause(Library.getIdleTurnDelay()/2); 
-        this.resurrectPhase();
-        this.healPhase();
+        if (this instanceof Player) {
+            await this.pause(Library.getIdleTurnDelay()/2); 
+        }
+        await this.resurrectPhase();
+        await this.healPhase();
         for (const member of this.members) {
             const card = member.getAssignedCard();
             const target = member.getIntendedTarget();
