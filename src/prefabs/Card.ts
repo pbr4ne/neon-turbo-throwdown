@@ -27,6 +27,9 @@ export default class Card extends GenericCard {
     private cardState: string;
     private order: number = 1;
     private static currentOrder: number = 1;
+    private tooltipMinHeight: number = 236;
+    private tooltipMinWidth: number = 391;
+    private initialTooltipY: number;
 
     constructor(scene: Phaser.Scene, cardType: CardType, cardState: string, x?: number, y?: number, texture?: string, toAdd?: boolean) {
         super(scene, x ?? 0, y ?? 0);
@@ -47,7 +50,11 @@ export default class Card extends GenericCard {
             this.iconImage = new Phaser.GameObjects.Image(scene, 0, -30, this.cardType.getIcon());
         }
     
-        this.tooltipImage = new Phaser.GameObjects.Image(scene, 0, -205, 'tooltip');
+        this.tooltipMinHeight = 236;
+        this.tooltipMinWidth = 391;
+        this.tooltipImage = new Phaser.GameObjects.Image(scene, 0, -215, 'tooltip');
+        this.tooltipImage.setDisplaySize(this.tooltipMinWidth, this.tooltipMinHeight);
+        this.initialTooltipY = this.tooltipImage.y;
     
         this.assignedMemberText = TextFactory.createText(scene, 30, -90, "", {
             fontSize: '24px',
@@ -73,21 +80,16 @@ export default class Card extends GenericCard {
         if (toAdd) {
             description = `Add one ${this.cardType.getName()} to your deck (${description})`;
         }
-    
-        let fontSize = 16;
-    
-        this.tooltipText = TextFactory.createText(scene, -170, -285, description, {
+ 
+        this.tooltipText = TextFactory.createText(scene, 0, 0, description, {
             fontSize: '16px',
             color: Colours.CYAN_STRING,
             lineSpacing: 15,
             wordWrap: { width: 350, useAdvancedWrap: true }
         });
-        this.tooltipText.setOrigin(0, 0);
+        this.tooltipText.setOrigin(0.5, 0.5);
     
-        while (this.tooltipText.height + 90 > this.tooltipImage.height) {
-            fontSize--;
-            this.tooltipText.setStyle({ fontSize: `${fontSize}px` });
-        }
+        this.updateTooltipText();
     
         this.add([this.tooltipImage, this.tooltipText]);
     
@@ -202,11 +204,24 @@ export default class Card extends GenericCard {
         this.tooltipText.setText(description);
     
         let fontSize = 16;
+        this.tooltipText.setStyle({ fontSize: `${fontSize}px` });
     
-        while (this.tooltipText.height + 90 > this.tooltipImage.height) {
-            fontSize--;
-            this.tooltipText.setStyle({ fontSize: `${fontSize}px` });
-        }
+        let requiredWidth = Math.max(this.tooltipText.width + 40, this.tooltipMinWidth);
+        let requiredHeight = Math.max(this.tooltipText.height + 90, this.tooltipMinHeight);
+    
+        this.tooltipImage.setDisplaySize(requiredWidth, requiredHeight);
+    
+        this.tooltipImage.setPosition(
+            this.tooltipImage.x, 
+            this.initialTooltipY + (this.tooltipMinHeight - requiredHeight) / 2
+        );
+    
+        this.tooltipText.setOrigin(0, 0);
+    
+        this.tooltipText.setPosition(
+            this.tooltipImage.x - requiredWidth / 2 + 30,
+            this.tooltipImage.y - requiredHeight / 2 + 30
+        );
     }
 
     clearCard() {

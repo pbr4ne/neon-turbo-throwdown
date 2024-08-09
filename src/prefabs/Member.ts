@@ -47,6 +47,9 @@ export default class Member extends Phaser.GameObjects.Container {
     private targetArc: Phaser.GameObjects.Graphics | null = null;
     private tooltipText: Phaser.GameObjects.Text;
     private tooltipImage: Phaser.GameObjects.Image;
+    private tooltipMinHeight: number = 236;
+    private tooltipMinWidth: number = 391;
+    private initialTooltipY: number;
 
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string, visibleMove: boolean, team: Team, coach: Coach, number: number, flip: boolean = false, bracketOffset: number = 0) {
         super(scene, x, y);
@@ -128,10 +131,12 @@ export default class Member extends Phaser.GameObjects.Container {
         this.questionMark.setVisible(false);
         this.updateHealthBar();
 
+        this.tooltipMinHeight = 236;
+        this.tooltipMinWidth = 391;
         this.tooltipImage = new Phaser.GameObjects.Image(scene, 0, 225, 'tooltip');
         this.tooltipImage.setFlipY(true);
-
-        let fontSize = 16;
+        this.tooltipImage.setDisplaySize(this.tooltipMinWidth, this.tooltipMinHeight);
+        this.initialTooltipY = this.tooltipImage.y;
 
         this.tooltipText = TextFactory.createText(scene, -170, 160, "test", {
             fontSize: '16px',
@@ -144,11 +149,6 @@ export default class Member extends Phaser.GameObjects.Container {
         this.tooltipText.setOrigin(0, 0);
         this.tooltipText.setVisible(false);
         this.tooltipImage.setVisible(false);
-
-        while (this.tooltipText.height + 90 > this.tooltipImage.height) {
-            fontSize--;
-            this.tooltipText.setStyle({ fontSize: `${fontSize}px` });
-        }
 
         this.add([this.tooltipImage, this.tooltipText]);
     
@@ -193,13 +193,26 @@ export default class Member extends Phaser.GameObjects.Container {
         }
 
         this.tooltipText.setText(description);
-        
-        let fontSize = 16;
     
-        while (this.tooltipText.height + 90 > this.tooltipImage.height) {
-            fontSize--;
-            this.tooltipText.setStyle({ fontSize: `${fontSize}px` });
-        }
+        let fontSize = 16;
+        this.tooltipText.setStyle({ fontSize: `${fontSize}px` });
+    
+        let requiredWidth = Math.max(this.tooltipText.width + 40, this.tooltipMinWidth);
+        let requiredHeight = Math.max(this.tooltipText.height + 90, this.tooltipMinHeight);
+    
+        this.tooltipImage.setDisplaySize(requiredWidth, requiredHeight);
+    
+        this.tooltipImage.setPosition(
+            this.tooltipImage.x, 
+            this.initialTooltipY - (this.tooltipMinHeight - requiredHeight) / 2
+        );
+    
+        this.tooltipText.setOrigin(0, 0);
+    
+        this.tooltipText.setPosition(
+            this.tooltipImage.x - requiredWidth / 2 + 30,
+            this.tooltipImage.y - requiredHeight / 2 + 55
+        );
     }
 
     showAssignedStuff() {
