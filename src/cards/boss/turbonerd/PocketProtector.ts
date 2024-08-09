@@ -50,7 +50,7 @@ export class PocketProtector extends TurbonerdCard {
     }
 
     getIcon(): string {
-        return "unknown";
+        return "block";
     }
 
     getChanceToDefend(team?: Team): number {
