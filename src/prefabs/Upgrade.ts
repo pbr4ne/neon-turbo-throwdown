@@ -10,6 +10,9 @@ export default class Upgrade extends GenericCard {
     private tooltipText: Phaser.GameObjects.Text;
     private iconImage?: Phaser.GameObjects.Image;
     private tooltipImage: Phaser.GameObjects.Image;
+    private tooltipMinHeight: number = 236;
+    private tooltipMinWidth: number = 391;
+    private initialTooltipY: number;
 
     constructor(scene: Phaser.Scene, cardType: CardType, x?: number, y?: number, texture?: string, showIcon: boolean = true, permanent: boolean = false) {
         super(scene, x ?? 155, y ?? 139, texture);
@@ -45,14 +48,31 @@ export default class Upgrade extends GenericCard {
             align: 'left',
             wordWrap: { width: 350, useAdvancedWrap: true }
         });
-        this.tooltipText.setOrigin(0.5, 0);
-        this.tooltipText.setVisible(false);
+        this.tooltipMinHeight = 236;
+        this.tooltipMinWidth = 391;
+        this.tooltipImage = new Phaser.GameObjects.Image(scene, 0, -215, 'tooltip');
+        this.tooltipImage.setDisplaySize(this.tooltipMinWidth, this.tooltipMinHeight);
+        this.initialTooltipY = this.tooltipImage.y;
 
         let fontSize = 16;
-        while (this.tooltipText.height + 90 > this.tooltipImage.height) {
-            fontSize--;
-            this.tooltipText.setStyle({ fontSize: `${fontSize}px` });
-        }
+        this.tooltipText.setStyle({ fontSize: `${fontSize}px` });
+    
+        let requiredWidth = Math.max(this.tooltipText.width + 40, this.tooltipMinWidth);
+        let requiredHeight = Math.max(this.tooltipText.height + 110, this.tooltipMinHeight);
+    
+        this.tooltipImage.setDisplaySize(requiredWidth, requiredHeight);
+    
+        this.tooltipImage.setPosition(
+            this.tooltipImage.x, 
+            this.initialTooltipY + (this.tooltipMinHeight - requiredHeight) / 2
+        );
+    
+        this.tooltipText.setOrigin(0, 0);
+    
+        this.tooltipText.setPosition(
+            this.tooltipImage.x - requiredWidth / 2 + 30,
+            this.tooltipImage.y - requiredHeight / 2 + 30
+        );
 
         this.setSize(this.upgradeImage.width, this.upgradeImage.height);
         this.setInteractive(new Phaser.Geom.Rectangle(0, 0, this.upgradeImage.width, this.upgradeImage.height), Phaser.Geom.Rectangle.Contains);
