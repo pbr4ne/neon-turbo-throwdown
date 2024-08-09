@@ -93,11 +93,11 @@ export class Catch extends CardType {
 
     getDescription(): string {
         const niceChanceToDefend = this.getNicePercentage(this.getChanceToDefend());
-        let description = `Catches ${this.getNumDefends()} attack(s). ${niceChanceToDefend}% effective. If successful, rebound ${this.getDefenseDamage()} damage to attacker.`;
+        let description = `Catch ${this.getNumDefends()} attack${this.getNumDefends() !== 1 ? 's' : ''}. ${niceChanceToDefend}% effective. If successful, rebound ${this.getDefenseDamage()} damage to attacker.`;
+
         if (this.getReboundTargets() > 1) {
             const numEnemies = this.getReboundTargets() - 1;
-            const enemyString = numEnemies > 1 ? "enemies" : "enemy";
-            description += ` Also deals ${this.getRicochetDamage()} damage to ${numEnemies} random ${enemyString}.`;
+            description += ` Also deal ${this.getRicochetDamage()} damage to ${numEnemies} random ${numEnemies > 1 ? 'enemies' : 'enemy'}.`;
         }
         return description;
     }

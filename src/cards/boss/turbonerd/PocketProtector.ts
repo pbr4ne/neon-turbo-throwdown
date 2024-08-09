@@ -88,6 +88,7 @@ export class PocketProtector extends TurbonerdCard {
 
     getDescription(): string {
         const niceChanceToDefend = this.getNicePercentage(this.getChanceToDefend());
-        return `Blocks ${this.getNumDefends()} attack(s). ${niceChanceToDefend}% effective. If successful, rebound ${this.getDefenseDamage()} damage.`;
+        
+        return `Block ${this.getNumDefends()} attack${this.getNumDefends() !== 1 ? 's' : ''}. ${niceChanceToDefend}% effective. If successful, rebound ${this.getDefenseDamage()} damage.`;
     }
 }
