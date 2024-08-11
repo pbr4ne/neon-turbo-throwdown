@@ -8,7 +8,7 @@ export default class Credits extends Phaser.GameObjects.Container {
         const blockInput = this.scene.add.rectangle(0, 0, 1920, 1080, 0x000000, 0.5).setInteractive().setOrigin(0.5, 0.5);
         this.add(blockInput);
 
-        const background = this.scene.add.rectangle(0, 0, 900, 700, 0x000000, 0.8).setOrigin(0.5, 0.5);
+        const background = this.scene.add.rectangle(0, 0, 900, 750, 0x000000, 0.8).setOrigin(0.5, 0.5);
         background.setStrokeStyle(4, 0x00ffff);
         this.add(background);
 
@@ -21,6 +21,8 @@ export default class Credits extends Phaser.GameObjects.Container {
 
         const creditEntries = [
             { title: "Code Jockey:", text: "pbrane", linkText: "github", link: "https://github.com/pbr4ne" },
+            { title: "", text: "", linkText: "itch.io", link: "https://pbrane.itch.io/" },
+            { title: "", text: "", linkText: "plaza", link: "https://plaza.dsolver.ca/m/pbrane_dev" },
             { title: "Verbs & Turbs:", text: "James Funfer", linkText: "author page", link: "https://jamesfunfer.com" },
             { title: "Design Nerd:", text: "Blake Mann", linkText: "", link: "" },
             { title: "Gam Design:", text: "pbrane, James Funfer, Travis", linkText: "", link: "" },
@@ -38,6 +40,7 @@ export default class Credits extends Phaser.GameObjects.Container {
         const textX = -100;
         const linkX = 200;
 
+        let index = 0;
         creditEntries.forEach(entry => {
             const titleText = TextFactory.createText(this.scene, titleX, yPos, entry.title, {
                 fontSize: '18px',
@@ -73,10 +76,15 @@ export default class Credits extends Phaser.GameObjects.Container {
                 entryText2.setOrigin(0, 0);
                 this.add(entryText2);
             }
-            yPos += 50;
+            if (index < 2) {
+                yPos += 30;
+            } else {
+                yPos += 50;
+            }
+            index++;
         });
 
-        const closeButton = TextFactory.createText(this.scene, 0, 320, "Close", {
+        const closeButton = TextFactory.createText(this.scene, 0, 350, "Close", {
             fontSize: '18px',
             color: '#ff00ff',
             padding: { x: 10, y: 5 }
